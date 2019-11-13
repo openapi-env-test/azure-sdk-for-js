@@ -273,7 +273,7 @@
       "output": {
         ".html": {
           "relative_path": "api/cosmosdb.html",
-          "hash": "6YbsyCQ9mlArZmKAfNc4yQ=="
+          "hash": "1Kz4mhyZtgoUEmeB/np4WA=="
         }
       },
       "is_incremental": false,
@@ -540,7 +540,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "vvFx+vJYjDzi0Rnz2QfffA=="
+          "hash": "AoUpLPp/+SZixLNmadmNoA=="
         }
       },
       "is_incremental": false,
@@ -1232,6 +1232,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "api/storagecache.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/storagecache.html",
+          "hash": "49GBzRyXUKaXrEIbg2nAog=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "api/storageimportexport.md",
       "output": {
         ".html": {
@@ -1344,7 +1356,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "DIaAaPNyaU9m9Gx5NfW8tQ=="
+          "hash": "MbLEoXTu+9EHWoCGqE3u5g=="
         }
       },
       "is_incremental": false,
@@ -1432,7 +1444,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 115,
+          "total_file_count": 116,
           "skipped_file_count": 0
         }
       }

@@ -75,26 +75,32 @@
 <p>For your convenience, each service has a separate set of libraries that you can choose to use instead of one, large Azure package. To get started with a specific library, see the <strong>README.md</strong> file located in the library's project folder. You can find service libraries in the <code>/sdk</code> directory.</p>
 <p>Each service might have a number of libraries available from each of the following categories:</p>
 <ul>
-<li><a href="#Client-July-2019-Preview">Client - July 2019 Preview</a></li>
-<li><a href="#Client-Stable">Client - Stable</a></li>
+<li><a href="#Client-November-2019-Releases">Client - November 2019 Releases</a></li>
+<li><a href="#Client-Previous-Versions">Client - Previous Versions</a></li>
 <li><a href="#Management">Management</a></li>
 </ul>
-<h3 id="client-july-2019-preview">Client: July 2019 Preview</h3>
-<p>New wave of packages that we are currently releasing in <strong>Preview</strong> and are released under the <code>npm</code> release named <code>next</code>. These libraries allow you to use and consume existing resources and interact with them. These libraries share a number of core functionalities such as retries, logging, transport protocols, authentication protocols, etc. Learn more about these libraries by reading <a href="https://azure.github.io/azure-sdk/typescript/guidelines/">the guidelines</a> that they follow.</p>
-<p>The libraries released in July preview:</p>
+<h3 id="client-november-2019-releases">Client: November 2019 Releases</h3>
+<p>New wave of packages that we are announcing as <strong>GA</strong> and several that are currently releasing in <strong>preview</strong> on <code>npm</code>. These libraries allow you to use and consume existing resources and interact with them. These libraries share a number of core functionalities found in the Azure Core package such as retries, logging, transport protocols, authentication protocols, etc. Learn more about these libraries by reading <a href="https://azure.github.io/azure-sdk/typescript/guidelines/">the guidelines</a> that they follow.</p>
+<p>The libraries released in the November 2019 GA release:</p>
 <ul>
-<li><a href="https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-blob">@azure/storage-blob@next</a></li>
-<li><a href="https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-queue">@azure/storage-queue@next</a></li>
+<li><a href="https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-blob">@azure/storage-blob</a></li>
+<li><a href="https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-queue">@azure/storage-queue</a></li>
+<li><a href="https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-keys">@azure/keyvault-keys</a></li>
+<li><a href="https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-secrets">@azure/keyvault-secrets</a></li>
+<li><a href="https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/identity/identity">@azure/identity</a></li>
+</ul>
+<p>The libraries released in the November 2019 preview:</p>
+<ul>
 <li><a href="https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-file-share">@azure/storage-file-share@next</a></li>
-<li><a href="https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-keys">@azure/keyvault-keys@next</a></li>
-<li><a href="https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-secrets">@azure/keyvault-secrets@next</a></li>
 <li><a href="https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/eventhub/event-hubs">@azure/event-hubs@next</a></li>
+<li><a href="https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-certificates">@azure/keyvault-certificates@next</a></li>
+<li><a href="https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/appconfiguration/app-configuration">@azure/app-configuration@next</a></li>
 </ul>
 <blockquote>
-<p>NOTE: If you need to ensure your code is ready for production use one of the stable libraries.</p>
+<p>NOTE: If you need to ensure your code is ready for production use one of the stable, non-preview libraries.</p>
 </blockquote>
-<h3 id="client-stable">Client: Stable</h3>
-<p>Last stable versions of packages that have been provided for usage with Azure and are production-ready. These libraries provide you with similar functionalities to the Preview ones as they allow you to use and consume existing resources and interact with them, for example: upload a blob.</p>
+<h3 id="client-previous-versions">Client: Previous Versions</h3>
+<p>Last stable versions of packages that have been provided for usage with Azure and are production-ready. These libraries provide you with similar functionalities to the Preview ones as they allow you to use and consume existing resources and interact with them, for example: upload a blob. They might not implement the <a href="https://azure.github.io/azure-sdk/typescript_introduction.html">guidelines</a> or have the same feature set as the Novemeber releases. They do however offer wider coverage of services.</p>
 <h3 id="management">Management</h3>
 <p>Libraries which enable you to provision specific resources. They are responsible for directly mirroring and consuming Azure service's REST endpoints. You can recognize these libraries by <code>mgmt</code> or <code>arm</code> in their package names.</p>
 <h2 id="need-help">Need help?</h2>
