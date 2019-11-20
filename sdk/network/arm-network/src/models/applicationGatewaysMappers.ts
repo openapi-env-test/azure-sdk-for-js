@@ -62,6 +62,7 @@ export {
   AzureFirewallApplicationRuleProtocol,
   AzureFirewallFqdnTag,
   AzureFirewallIPConfiguration,
+  AzureFirewallIpGroups,
   AzureFirewallNatRCAction,
   AzureFirewallNatRule,
   AzureFirewallNatRuleCollection,

@@ -2860,6 +2860,22 @@ export interface AzureFirewallPublicIPAddress {
 }
 
 /**
+ * An interface representing AzureFirewallIpGroups.
+ */
+export interface AzureFirewallIpGroups {
+  /**
+   * Resource ID.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly id?: string;
+  /**
+   * The iteration number.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly changeNumber?: string;
+}
+
+/**
  * IP addresses associated with azure firewall.
  */
 export interface HubIPAddresses {
@@ -3189,6 +3205,11 @@ export interface AzureFirewall extends Resource {
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly hubIpAddresses?: HubIPAddresses;
+  /**
+   * IpGroups associated with AzureFirewall.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly ipGroups?: AzureFirewallIpGroups[];
   /**
    * The Azure Firewall Resource SKU.
    */

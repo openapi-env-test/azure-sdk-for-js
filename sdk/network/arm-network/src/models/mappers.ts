@@ -4812,6 +4812,30 @@ export const AzureFirewallPublicIPAddress: msRest.CompositeMapper = {
   }
 };
 
+export const AzureFirewallIpGroups: msRest.CompositeMapper = {
+  serializedName: "AzureFirewallIpGroups",
+  type: {
+    name: "Composite",
+    className: "AzureFirewallIpGroups",
+    modelProperties: {
+      id: {
+        readOnly: true,
+        serializedName: "id",
+        type: {
+          name: "String"
+        }
+      },
+      changeNumber: {
+        readOnly: true,
+        serializedName: "changeNumber",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const HubIPAddresses: msRest.CompositeMapper = {
   serializedName: "HubIPAddresses",
   type: {
@@ -5460,6 +5484,19 @@ export const AzureFirewall: msRest.CompositeMapper = {
         type: {
           name: "Composite",
           className: "HubIPAddresses"
+        }
+      },
+      ipGroups: {
+        readOnly: true,
+        serializedName: "properties.ipGroups",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "AzureFirewallIpGroups"
+            }
+          }
         }
       },
       sku: {
