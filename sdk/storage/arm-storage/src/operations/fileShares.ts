@@ -361,17 +361,13 @@ const createOperationSpec: msRest.OperationSpec = {
   ],
   requestBody: {
     parameterPath: {
-      metadata: [
+      properties: [
         "options",
-        "metadata"
-      ],
-      shareQuota: [
-        "options",
-        "shareQuota"
+        "properties"
       ]
     },
     mapper: {
-      ...Mappers.FileShare,
+      ...Mappers.FileShareCreateParameters,
       required: true
     }
   },
@@ -406,17 +402,13 @@ const updateOperationSpec: msRest.OperationSpec = {
   ],
   requestBody: {
     parameterPath: {
-      metadata: [
+      properties: [
         "options",
-        "metadata"
-      ],
-      shareQuota: [
-        "options",
-        "shareQuota"
+        "properties"
       ]
     },
     mapper: {
-      ...Mappers.FileShare,
+      ...Mappers.FileShareUpdateParameters,
       required: true
     }
   },
