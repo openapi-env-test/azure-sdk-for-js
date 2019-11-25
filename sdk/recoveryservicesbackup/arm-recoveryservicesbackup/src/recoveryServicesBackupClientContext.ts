@@ -13,11 +13,12 @@ import * as msRest from "@azure/ms-rest-js";
 import * as msRestAzure from "@azure/ms-rest-azure-js";
 
 const packageName = "@azure/arm-recoveryservicesbackup";
-const packageVersion = "0.1.0";
+const packageVersion = "4.1.0";
 
 export class RecoveryServicesBackupClientContext extends msRestAzure.AzureServiceClient {
   credentials: msRest.ServiceClientCredentials;
   subscriptionId: string;
+  apiVersion?: string;
 
   /**
    * Initializes a new instance of the RecoveryServicesBackupClient class.
@@ -43,6 +44,7 @@ export class RecoveryServicesBackupClientContext extends msRestAzure.AzureServic
 
     super(credentials, options);
 
+    this.apiVersion = '2019-05-13';
     this.acceptLanguage = 'en-US';
     this.longRunningOperationRetryTimeout = 30;
     this.baseUri = options.baseUri || this.baseUri || "https://management.azure.com";

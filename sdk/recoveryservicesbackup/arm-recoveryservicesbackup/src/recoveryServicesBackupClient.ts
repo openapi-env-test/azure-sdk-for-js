@@ -17,44 +17,22 @@ import { RecoveryServicesBackupClientContext } from "./recoveryServicesBackupCli
 
 class RecoveryServicesBackupClient extends RecoveryServicesBackupClientContext {
   // Operation groups
-  protectionIntent: operations.ProtectionIntentOperations;
-  backupStatus: operations.BackupStatus;
-  featureSupport: operations.FeatureSupport;
-  backupJobs: operations.BackupJobs;
-  jobDetails: operations.JobDetails;
-  exportJobsOperationResults: operations.ExportJobsOperationResults;
-  jobs: operations.Jobs;
-  backupPolicies: operations.BackupPolicies;
-  backupProtectedItems: operations.BackupProtectedItems;
-  backupProtectionIntent: operations.BackupProtectionIntent;
-  backupUsageSummaries: operations.BackupUsageSummaries;
-  operation: operations.Operation;
   backupResourceVaultConfigs: operations.BackupResourceVaultConfigs;
-  backupEngines: operations.BackupEngines;
-  protectionContainerRefreshOperationResults: operations.ProtectionContainerRefreshOperationResults;
-  protectableContainers: operations.ProtectableContainers;
-  protectionContainers: operations.ProtectionContainers;
-  backupWorkloadItems: operations.BackupWorkloadItems;
-  protectionContainerOperationResults: operations.ProtectionContainerOperationResults;
   protectedItems: operations.ProtectedItems;
-  backups: operations.Backups;
   protectedItemOperationResults: operations.ProtectedItemOperationResults;
-  protectedItemOperationStatuses: operations.ProtectedItemOperationStatuses;
   recoveryPoints: operations.RecoveryPoints;
-  itemLevelRecoveryConnections: operations.ItemLevelRecoveryConnections;
   restores: operations.Restores;
-  jobCancellations: operations.JobCancellations;
-  jobOperationResults: operations.JobOperationResults;
-  backupOperationResults: operations.BackupOperationResults;
-  backupOperationStatuses: operations.BackupOperationStatuses;
+  backupPolicies: operations.BackupPolicies;
   protectionPolicies: operations.ProtectionPolicies;
   protectionPolicyOperationResults: operations.ProtectionPolicyOperationResults;
-  protectionPolicyOperationStatuses: operations.ProtectionPolicyOperationStatuses;
-  backupProtectableItems: operations.BackupProtectableItems;
-  backupProtectionContainers: operations.BackupProtectionContainers;
-  securityPINs: operations.SecurityPINs;
-  backupResourceStorageConfigs: operations.BackupResourceStorageConfigs;
-  operations: operations.Operations;
+  backupJobs: operations.BackupJobs;
+  jobDetails: operations.JobDetails;
+  jobCancellations: operations.JobCancellations;
+  jobOperationResults: operations.JobOperationResults;
+  exportJobsOperationResults: operations.ExportJobsOperationResults;
+  jobs: operations.Jobs;
+  backupProtectedItems: operations.BackupProtectedItems;
+  operation: operations.Operation;
 
   /**
    * Initializes a new instance of the RecoveryServicesBackupClient class.
@@ -64,44 +42,22 @@ class RecoveryServicesBackupClient extends RecoveryServicesBackupClientContext {
    */
   constructor(credentials: msRest.ServiceClientCredentials, subscriptionId: string, options?: Models.RecoveryServicesBackupClientOptions) {
     super(credentials, subscriptionId, options);
-    this.protectionIntent = new operations.ProtectionIntentOperations(this);
-    this.backupStatus = new operations.BackupStatus(this);
-    this.featureSupport = new operations.FeatureSupport(this);
-    this.backupJobs = new operations.BackupJobs(this);
-    this.jobDetails = new operations.JobDetails(this);
-    this.exportJobsOperationResults = new operations.ExportJobsOperationResults(this);
-    this.jobs = new operations.Jobs(this);
-    this.backupPolicies = new operations.BackupPolicies(this);
-    this.backupProtectedItems = new operations.BackupProtectedItems(this);
-    this.backupProtectionIntent = new operations.BackupProtectionIntent(this);
-    this.backupUsageSummaries = new operations.BackupUsageSummaries(this);
-    this.operation = new operations.Operation(this);
     this.backupResourceVaultConfigs = new operations.BackupResourceVaultConfigs(this);
-    this.backupEngines = new operations.BackupEngines(this);
-    this.protectionContainerRefreshOperationResults = new operations.ProtectionContainerRefreshOperationResults(this);
-    this.protectableContainers = new operations.ProtectableContainers(this);
-    this.protectionContainers = new operations.ProtectionContainers(this);
-    this.backupWorkloadItems = new operations.BackupWorkloadItems(this);
-    this.protectionContainerOperationResults = new operations.ProtectionContainerOperationResults(this);
     this.protectedItems = new operations.ProtectedItems(this);
-    this.backups = new operations.Backups(this);
     this.protectedItemOperationResults = new operations.ProtectedItemOperationResults(this);
-    this.protectedItemOperationStatuses = new operations.ProtectedItemOperationStatuses(this);
     this.recoveryPoints = new operations.RecoveryPoints(this);
-    this.itemLevelRecoveryConnections = new operations.ItemLevelRecoveryConnections(this);
     this.restores = new operations.Restores(this);
-    this.jobCancellations = new operations.JobCancellations(this);
-    this.jobOperationResults = new operations.JobOperationResults(this);
-    this.backupOperationResults = new operations.BackupOperationResults(this);
-    this.backupOperationStatuses = new operations.BackupOperationStatuses(this);
+    this.backupPolicies = new operations.BackupPolicies(this);
     this.protectionPolicies = new operations.ProtectionPolicies(this);
     this.protectionPolicyOperationResults = new operations.ProtectionPolicyOperationResults(this);
-    this.protectionPolicyOperationStatuses = new operations.ProtectionPolicyOperationStatuses(this);
-    this.backupProtectableItems = new operations.BackupProtectableItems(this);
-    this.backupProtectionContainers = new operations.BackupProtectionContainers(this);
-    this.securityPINs = new operations.SecurityPINs(this);
-    this.backupResourceStorageConfigs = new operations.BackupResourceStorageConfigs(this);
-    this.operations = new operations.Operations(this);
+    this.backupJobs = new operations.BackupJobs(this);
+    this.jobDetails = new operations.JobDetails(this);
+    this.jobCancellations = new operations.JobCancellations(this);
+    this.jobOperationResults = new operations.JobOperationResults(this);
+    this.exportJobsOperationResults = new operations.ExportJobsOperationResults(this);
+    this.jobs = new operations.Jobs(this);
+    this.backupProtectedItems = new operations.BackupProtectedItems(this);
+    this.operation = new operations.Operation(this);
   }
 }
 

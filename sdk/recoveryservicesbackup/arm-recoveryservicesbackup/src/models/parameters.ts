@@ -20,57 +20,11 @@ export const acceptLanguage: msRest.OperationParameter = {
     }
   }
 };
-export const apiVersion0: msRest.OperationQueryParameter = {
+export const apiVersion: msRest.OperationQueryParameter = {
   parameterPath: "apiVersion",
   mapper: {
     required: true,
-    isConstant: true,
     serializedName: "api-version",
-    defaultValue: '2017-07-01',
-    type: {
-      name: "String"
-    }
-  }
-};
-export const apiVersion1: msRest.OperationQueryParameter = {
-  parameterPath: "apiVersion",
-  mapper: {
-    required: true,
-    isConstant: true,
-    serializedName: "api-version",
-    defaultValue: '2016-12-01',
-    type: {
-      name: "String"
-    }
-  }
-};
-export const apiVersion2: msRest.OperationQueryParameter = {
-  parameterPath: "apiVersion",
-  mapper: {
-    required: true,
-    isConstant: true,
-    serializedName: "api-version",
-    defaultValue: '2016-08-10',
-    type: {
-      name: "String"
-    }
-  }
-};
-export const azureRegion: msRest.OperationURLParameter = {
-  parameterPath: "azureRegion",
-  mapper: {
-    required: true,
-    serializedName: "azureRegion",
-    type: {
-      name: "String"
-    }
-  }
-};
-export const backupEngineName: msRest.OperationURLParameter = {
-  parameterPath: "backupEngineName",
-  mapper: {
-    required: true,
-    serializedName: "backupEngineName",
     type: {
       name: "String"
     }
@@ -103,16 +57,6 @@ export const filter: msRest.OperationQueryParameter = {
   ],
   mapper: {
     serializedName: "$filter",
-    type: {
-      name: "String"
-    }
-  }
-};
-export const intentObjectName: msRest.OperationURLParameter = {
-  parameterPath: "intentObjectName",
-  mapper: {
-    required: true,
-    serializedName: "intentObjectName",
     type: {
       name: "String"
     }
