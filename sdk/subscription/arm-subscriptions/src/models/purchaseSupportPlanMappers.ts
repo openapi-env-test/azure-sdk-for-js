@@ -7,11 +7,8 @@
  */
 
 export {
-  AdPrincipal,
   ErrorResponse,
-  ModernSubscriptionCreationParameters,
-  SubscriptionCreationParameters,
-  SubscriptionCreationResult,
-  SubscriptionFactoryCreateSubscriptionHeaders,
-  SubscriptionFactoryCreateSubscriptionInEnrollmentAccountHeaders
+  PurchaseSupportPlanPostHeaders,
+  PurchaseSupportResponseResult,
+  SupportPlanName
 } from "../models/mappers";

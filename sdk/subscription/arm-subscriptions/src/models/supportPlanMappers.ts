@@ -7,14 +7,9 @@
  */
 
 export {
-  CanceledSubscriptionId,
-  CloudError,
+  BaseResource,
+  DefaultSupportPlanResponseResult,
   ErrorResponse,
-  Location,
-  LocationListResult,
-  RenamedSubscriptionId,
-  Subscription,
-  SubscriptionListResult,
-  SubscriptionName,
-  SubscriptionPolicies
+  ProxyResource,
+  SupportPlanResponseResult
 } from "../models/mappers";

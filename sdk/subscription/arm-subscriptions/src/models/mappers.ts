@@ -34,40 +34,6 @@ export const ErrorResponse: msRest.CompositeMapper = {
   }
 };
 
-export const CanceledSubscriptionId: msRest.CompositeMapper = {
-  serializedName: "CanceledSubscriptionId",
-  type: {
-    name: "Composite",
-    className: "CanceledSubscriptionId",
-    modelProperties: {
-      value: {
-        readOnly: true,
-        serializedName: "value",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const RenamedSubscriptionId: msRest.CompositeMapper = {
-  serializedName: "RenamedSubscriptionId",
-  type: {
-    name: "Composite",
-    className: "RenamedSubscriptionId",
-    modelProperties: {
-      value: {
-        readOnly: true,
-        serializedName: "value",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
 export const SubscriptionName: msRest.CompositeMapper = {
   serializedName: "SubscriptionName",
   type: {
@@ -76,6 +42,167 @@ export const SubscriptionName: msRest.CompositeMapper = {
     modelProperties: {
       subscriptionName: {
         serializedName: "subscriptionName",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const OperationName: msRest.CompositeMapper = {
+  serializedName: "operationName",
+  type: {
+    name: "Composite",
+    className: "OperationName",
+    modelProperties: {
+      value: {
+        readOnly: true,
+        serializedName: "value",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const ProxyResource: msRest.CompositeMapper = {
+  serializedName: "ProxyResource",
+  type: {
+    name: "Composite",
+    className: "ProxyResource",
+    modelProperties: {
+      id: {
+        readOnly: true,
+        serializedName: "id",
+        type: {
+          name: "String"
+        }
+      },
+      name: {
+        readOnly: true,
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      type: {
+        readOnly: true,
+        serializedName: "type",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const DefaultSupportPlanResponseResult: msRest.CompositeMapper = {
+  serializedName: "DefaultSupportPlanResponseResult",
+  type: {
+    name: "Composite",
+    className: "DefaultSupportPlanResponseResult",
+    modelProperties: {
+      ...ProxyResource.type.modelProperties,
+      planType: {
+        serializedName: "properties.planType",
+        type: {
+          name: "String"
+        }
+      },
+      endDate: {
+        serializedName: "properties.endDate",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const SupportPlanResponseResult: msRest.CompositeMapper = {
+  serializedName: "SupportPlanResponseResult",
+  type: {
+    name: "Composite",
+    className: "SupportPlanResponseResult",
+    modelProperties: {
+      value: {
+        readOnly: true,
+        serializedName: "value",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "DefaultSupportPlanResponseResult"
+            }
+          }
+        }
+      },
+      nextLink: {
+        readOnly: true,
+        serializedName: "nextLink",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const OperationStatusResponseResult: msRest.CompositeMapper = {
+  serializedName: "OperationStatusResponseResult",
+  type: {
+    name: "Composite",
+    className: "OperationStatusResponseResult",
+    modelProperties: {
+      planType: {
+        serializedName: "planType",
+        type: {
+          name: "String"
+        }
+      },
+      endDate: {
+        serializedName: "endDate",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const SupportPlanName: msRest.CompositeMapper = {
+  serializedName: "SupportPlanName",
+  type: {
+    name: "Composite",
+    className: "SupportPlanName",
+    modelProperties: {
+      planType: {
+        serializedName: "planType",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const PurchaseSupportResponseResult: msRest.CompositeMapper = {
+  serializedName: "PurchaseSupportResponseResult",
+  type: {
+    name: "Composite",
+    className: "PurchaseSupportResponseResult",
+    modelProperties: {
+      planType: {
+        serializedName: "planType",
+        type: {
+          name: "String"
+        }
+      },
+      endDate: {
+        serializedName: "endDate",
         type: {
           name: "String"
         }
@@ -163,415 +290,11 @@ export const OperationListResult: msRest.CompositeMapper = {
   }
 };
 
-export const SubscriptionCreationResult: msRest.CompositeMapper = {
-  serializedName: "SubscriptionCreationResult",
+export const GetOperationStatusGetHeaders: msRest.CompositeMapper = {
+  serializedName: "getoperationstatus-get-headers",
   type: {
     name: "Composite",
-    className: "SubscriptionCreationResult",
-    modelProperties: {
-      subscriptionLink: {
-        serializedName: "subscriptionLink",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const AdPrincipal: msRest.CompositeMapper = {
-  serializedName: "AdPrincipal",
-  type: {
-    name: "Composite",
-    className: "AdPrincipal",
-    modelProperties: {
-      objectId: {
-        required: true,
-        serializedName: "objectId",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const ModernSubscriptionCreationParameters: msRest.CompositeMapper = {
-  serializedName: "ModernSubscriptionCreationParameters",
-  type: {
-    name: "Composite",
-    className: "ModernSubscriptionCreationParameters",
-    modelProperties: {
-      displayName: {
-        required: true,
-        serializedName: "displayName",
-        type: {
-          name: "String"
-        }
-      },
-      billingProfileId: {
-        required: true,
-        serializedName: "billingProfileId",
-        type: {
-          name: "String"
-        }
-      },
-      skuId: {
-        required: true,
-        serializedName: "skuId",
-        type: {
-          name: "String"
-        }
-      },
-      costCenter: {
-        serializedName: "costCenter",
-        type: {
-          name: "String"
-        }
-      },
-      owner: {
-        serializedName: "owner",
-        type: {
-          name: "Composite",
-          className: "AdPrincipal"
-        }
-      },
-      managementGroupId: {
-        serializedName: "managementGroupId",
-        type: {
-          name: "String"
-        }
-      },
-      additionalParameters: {
-        serializedName: "additionalParameters",
-        type: {
-          name: "Dictionary",
-          value: {
-            type: {
-              name: "Object"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
-export const SubscriptionOperation: msRest.CompositeMapper = {
-  serializedName: "SubscriptionOperation",
-  type: {
-    name: "Composite",
-    className: "SubscriptionOperation",
-    modelProperties: {
-      id: {
-        readOnly: true,
-        serializedName: "id",
-        type: {
-          name: "String"
-        }
-      },
-      status: {
-        serializedName: "status",
-        type: {
-          name: "String"
-        }
-      },
-      statusDetail: {
-        serializedName: "statusDetail",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const SubscriptionOperationListResult: msRest.CompositeMapper = {
-  serializedName: "SubscriptionOperationListResult",
-  type: {
-    name: "Composite",
-    className: "SubscriptionOperationListResult",
-    modelProperties: {
-      value: {
-        serializedName: "value",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "SubscriptionOperation"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
-export const SubscriptionCreationParameters: msRest.CompositeMapper = {
-  serializedName: "SubscriptionCreationParameters",
-  type: {
-    name: "Composite",
-    className: "SubscriptionCreationParameters",
-    modelProperties: {
-      displayName: {
-        serializedName: "displayName",
-        type: {
-          name: "String"
-        }
-      },
-      owners: {
-        serializedName: "owners",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "AdPrincipal"
-            }
-          }
-        }
-      },
-      offerType: {
-        serializedName: "offerType",
-        type: {
-          name: "String"
-        }
-      },
-      additionalParameters: {
-        serializedName: "additionalParameters",
-        type: {
-          name: "Dictionary",
-          value: {
-            type: {
-              name: "Object"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
-export const Location: msRest.CompositeMapper = {
-  serializedName: "Location",
-  type: {
-    name: "Composite",
-    className: "Location",
-    modelProperties: {
-      id: {
-        readOnly: true,
-        serializedName: "id",
-        type: {
-          name: "String"
-        }
-      },
-      subscriptionId: {
-        readOnly: true,
-        serializedName: "subscriptionId",
-        type: {
-          name: "String"
-        }
-      },
-      name: {
-        readOnly: true,
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      displayName: {
-        readOnly: true,
-        serializedName: "displayName",
-        type: {
-          name: "String"
-        }
-      },
-      latitude: {
-        readOnly: true,
-        serializedName: "latitude",
-        type: {
-          name: "String"
-        }
-      },
-      longitude: {
-        readOnly: true,
-        serializedName: "longitude",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const SubscriptionPolicies: msRest.CompositeMapper = {
-  serializedName: "SubscriptionPolicies",
-  type: {
-    name: "Composite",
-    className: "SubscriptionPolicies",
-    modelProperties: {
-      locationPlacementId: {
-        readOnly: true,
-        serializedName: "locationPlacementId",
-        type: {
-          name: "String"
-        }
-      },
-      quotaId: {
-        readOnly: true,
-        serializedName: "quotaId",
-        type: {
-          name: "String"
-        }
-      },
-      spendingLimit: {
-        readOnly: true,
-        serializedName: "spendingLimit",
-        type: {
-          name: "Enum",
-          allowedValues: [
-            "On",
-            "Off",
-            "CurrentPeriodOff"
-          ]
-        }
-      }
-    }
-  }
-};
-
-export const Subscription: msRest.CompositeMapper = {
-  serializedName: "Subscription",
-  type: {
-    name: "Composite",
-    className: "Subscription",
-    modelProperties: {
-      id: {
-        readOnly: true,
-        serializedName: "id",
-        type: {
-          name: "String"
-        }
-      },
-      subscriptionId: {
-        readOnly: true,
-        serializedName: "subscriptionId",
-        type: {
-          name: "String"
-        }
-      },
-      displayName: {
-        readOnly: true,
-        serializedName: "displayName",
-        type: {
-          name: "String"
-        }
-      },
-      state: {
-        readOnly: true,
-        serializedName: "state",
-        type: {
-          name: "Enum",
-          allowedValues: [
-            "Enabled",
-            "Warned",
-            "PastDue",
-            "Disabled",
-            "Deleted"
-          ]
-        }
-      },
-      subscriptionPolicies: {
-        serializedName: "subscriptionPolicies",
-        type: {
-          name: "Composite",
-          className: "SubscriptionPolicies"
-        }
-      },
-      authorizationSource: {
-        serializedName: "authorizationSource",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const TenantIdDescription: msRest.CompositeMapper = {
-  serializedName: "TenantIdDescription",
-  type: {
-    name: "Composite",
-    className: "TenantIdDescription",
-    modelProperties: {
-      id: {
-        readOnly: true,
-        serializedName: "id",
-        type: {
-          name: "String"
-        }
-      },
-      tenantId: {
-        readOnly: true,
-        serializedName: "tenantId",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const SubscriptionOperationGetHeaders: msRest.CompositeMapper = {
-  serializedName: "subscriptionoperation-get-headers",
-  type: {
-    name: "Composite",
-    className: "SubscriptionOperationGetHeaders",
-    modelProperties: {
-      location: {
-        serializedName: "location",
-        type: {
-          name: "String"
-        }
-      },
-      retryAfter: {
-        serializedName: "retry-after",
-        type: {
-          name: "Number"
-        }
-      }
-    }
-  }
-};
-
-export const SubscriptionFactoryCreateSubscriptionHeaders: msRest.CompositeMapper = {
-  serializedName: "subscriptionfactory-createsubscription-headers",
-  type: {
-    name: "Composite",
-    className: "SubscriptionFactoryCreateSubscriptionHeaders",
-    modelProperties: {
-      location: {
-        serializedName: "location",
-        type: {
-          name: "String"
-        }
-      },
-      retryAfter: {
-        serializedName: "retry-after",
-        type: {
-          name: "Number"
-        }
-      }
-    }
-  }
-};
-
-export const SubscriptionFactoryCreateSubscriptionInEnrollmentAccountHeaders: msRest.CompositeMapper = {
-  serializedName: "subscriptionfactory-createsubscriptioninenrollmentaccount-headers",
-  type: {
-    name: "Composite",
-    className: "SubscriptionFactoryCreateSubscriptionInEnrollmentAccountHeaders",
+    className: "GetOperationStatusGetHeaders",
     modelProperties: {
       location: {
         serializedName: "location",
@@ -589,78 +312,20 @@ export const SubscriptionFactoryCreateSubscriptionInEnrollmentAccountHeaders: ms
   }
 };
 
-export const LocationListResult: msRest.CompositeMapper = {
-  serializedName: "LocationListResult",
+export const PurchaseSupportPlanPostHeaders: msRest.CompositeMapper = {
+  serializedName: "purchasesupportplan-post-headers",
   type: {
     name: "Composite",
-    className: "LocationListResult",
+    className: "PurchaseSupportPlanPostHeaders",
     modelProperties: {
-      value: {
-        serializedName: "",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "Location"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
-export const SubscriptionListResult: msRest.CompositeMapper = {
-  serializedName: "SubscriptionListResult",
-  type: {
-    name: "Composite",
-    className: "SubscriptionListResult",
-    modelProperties: {
-      value: {
-        serializedName: "",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "Subscription"
-            }
-          }
-        }
-      },
-      nextLink: {
-        required: true,
-        serializedName: "nextLink",
+      location: {
+        serializedName: "location",
         type: {
           name: "String"
         }
-      }
-    }
-  }
-};
-
-export const TenantListResult: msRest.CompositeMapper = {
-  serializedName: "TenantListResult",
-  type: {
-    name: "Composite",
-    className: "TenantListResult",
-    modelProperties: {
-      value: {
-        serializedName: "",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "TenantIdDescription"
-            }
-          }
-        }
       },
-      nextLink: {
-        required: true,
-        serializedName: "nextLink",
+      retryAfter: {
+        serializedName: "retry-after",
         type: {
           name: "String"
         }

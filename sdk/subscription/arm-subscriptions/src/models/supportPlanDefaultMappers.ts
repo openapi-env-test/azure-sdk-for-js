@@ -7,7 +7,8 @@
  */
 
 export {
-  CloudError,
-  TenantIdDescription,
-  TenantListResult
+  BaseResource,
+  DefaultSupportPlanResponseResult,
+  ErrorResponse,
+  ProxyResource
 } from "../models/mappers";
