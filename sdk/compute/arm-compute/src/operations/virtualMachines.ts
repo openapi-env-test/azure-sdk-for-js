@@ -198,7 +198,10 @@ export class VirtualMachines {
   }
 
   /**
-   * Sets the state of the virtual machine to generalized.
+   * Sets the OS state of the virtual machine to generalized. It is recommended to sysprep the
+   * virtual machine before performing this operation. For more details, please refer to [Create a
+   * managed image of a generalized VM in
+   * Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/capture-image-resource).
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param [options] The optional parameters
