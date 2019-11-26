@@ -494,7 +494,6 @@ export interface Volume extends BaseResource {
   /**
    * usageThreshold. Maximum storage quota allowed for a file system in bytes. This is a soft quota
    * used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB. Specified in bytes.
-   * Default value: 107374182400.
    */
   usageThreshold: number;
   /**

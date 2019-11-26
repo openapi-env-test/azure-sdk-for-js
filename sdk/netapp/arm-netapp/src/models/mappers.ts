@@ -508,10 +508,6 @@ export const CapacityPool: msRest.CompositeMapper = {
       size: {
         required: true,
         serializedName: "properties.size",
-        constraints: {
-          InclusiveMaximum: 549755813888000,
-          InclusiveMinimum: 4398046511104
-        },
         type: {
           name: "Number"
         }
@@ -803,11 +799,6 @@ export const Volume: msRest.CompositeMapper = {
       usageThreshold: {
         required: true,
         serializedName: "properties.usageThreshold",
-        defaultValue: 107374182400,
-        constraints: {
-          InclusiveMaximum: 109951162777600,
-          InclusiveMinimum: 107374182400
-        },
         type: {
           name: "Number"
         }
