@@ -3511,7 +3511,7 @@ export interface JobsListOptionalParams extends msRest.RequestOptionsBase {
    */
   filter?: string;
   /**
-   * Specifies the key by which the result collection should be ordered.
+   * Specifies the by which the result collection should be ordered.
    */
   orderby?: string;
 }
