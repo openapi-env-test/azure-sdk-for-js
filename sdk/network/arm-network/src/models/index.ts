@@ -67,11 +67,11 @@ export interface ApplicationGatewayOnDemandProbe {
    */
   match?: ApplicationGatewayProbeHealthResponseMatch;
   /**
-   * Reference of backend pool of application gateway to which probe request will be sent.
+   * Reference to backend pool of application gateway to which probe request will be sent.
    */
   backendAddressPool?: SubResource;
   /**
-   * Reference of backend http setting of application gateway to be used for test probe.
+   * Reference to backend http setting of application gateway to be used for test probe.
    */
   backendHttpSettings?: SubResource;
 }
@@ -81,7 +81,7 @@ export interface ApplicationGatewayOnDemandProbe {
  */
 export interface NetworkInterfaceTapConfiguration extends SubResource {
   /**
-   * The reference of the Virtual Network Tap resource.
+   * The reference to the Virtual Network Tap resource.
    */
   virtualNetworkTap?: VirtualNetworkTap;
   /**
@@ -394,12 +394,12 @@ export interface NetworkInterfaceDnsSettings {
  */
 export interface NetworkInterface extends Resource {
   /**
-   * The reference of a virtual machine.
+   * The reference to a virtual machine.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly virtualMachine?: SubResource;
   /**
-   * The reference of the NetworkSecurityGroup resource.
+   * The reference to the NetworkSecurityGroup resource.
    */
   networkSecurityGroup?: NetworkSecurityGroup;
   /**
@@ -796,11 +796,11 @@ export interface IPConfiguration extends SubResource {
    */
   privateIPAllocationMethod?: IPAllocationMethod;
   /**
-   * The reference of the subnet resource.
+   * The reference to the subnet resource.
    */
   subnet?: Subnet;
   /**
-   * The reference of the public IP resource.
+   * The reference to the public IP resource.
    */
   publicIPAddress?: PublicIPAddress;
   /**
@@ -826,7 +826,7 @@ export interface IPConfiguration extends SubResource {
  */
 export interface IPConfigurationProfile extends SubResource {
   /**
-   * The reference of the subnet resource to create a container network interface ip configuration.
+   * The reference to the subnet resource to create a container network interface ip configuration.
    */
   subnet?: Subnet;
   /**
@@ -938,7 +938,7 @@ export interface Delegation extends SubResource {
    */
   serviceName?: string;
   /**
-   * Describes the actions permitted to the service upon delegation.
+   * The actions permitted to the service upon delegation.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly actions?: string[];
@@ -973,11 +973,11 @@ export interface Subnet extends SubResource {
    */
   addressPrefixes?: string[];
   /**
-   * The reference of the NetworkSecurityGroup resource.
+   * The reference to the NetworkSecurityGroup resource.
    */
   networkSecurityGroup?: NetworkSecurityGroup;
   /**
-   * The reference of the RouteTable resource.
+   * The reference to the RouteTable resource.
    */
   routeTable?: RouteTable;
   /**
@@ -1091,15 +1091,15 @@ export interface FrontendIPConfiguration extends SubResource {
    */
   privateIPAddressVersion?: IPVersion;
   /**
-   * The reference of the subnet resource.
+   * The reference to the subnet resource.
    */
   subnet?: Subnet;
   /**
-   * The reference of the Public IP resource.
+   * The reference to the Public IP resource.
    */
   publicIPAddress?: PublicIPAddress;
   /**
-   * The reference of the Public IP Prefix resource.
+   * The reference to the Public IP Prefix resource.
    */
   publicIPPrefix?: SubResource;
   /**
@@ -1315,11 +1315,11 @@ export interface NetworkInterfaceIPConfiguration extends SubResource {
    */
   virtualNetworkTaps?: VirtualNetworkTap[];
   /**
-   * The reference of ApplicationGatewayBackendAddressPool resource.
+   * The reference to ApplicationGatewayBackendAddressPool resource.
    */
   applicationGatewayBackendAddressPools?: ApplicationGatewayBackendAddressPool[];
   /**
-   * The reference of LoadBalancerBackendAddressPool resource.
+   * The reference to LoadBalancerBackendAddressPool resource.
    */
   loadBalancerBackendAddressPools?: BackendAddressPool[];
   /**
@@ -1533,7 +1533,7 @@ export interface ApplicationGatewayBackendHealthServer {
    */
   address?: string;
   /**
-   * Reference of IP configuration of backend server.
+   * Reference to IP configuration of backend server.
    */
   ipConfiguration?: NetworkInterfaceIPConfiguration;
   /**
@@ -1552,7 +1552,7 @@ export interface ApplicationGatewayBackendHealthServer {
  */
 export interface ApplicationGatewayBackendHealthHttpSettings {
   /**
-   * Reference of an ApplicationGatewayBackendHttpSettings resource.
+   * Reference to an ApplicationGatewayBackendHttpSettings resource.
    */
   backendHttpSettings?: ApplicationGatewayBackendHttpSettings;
   /**
@@ -1566,7 +1566,7 @@ export interface ApplicationGatewayBackendHealthHttpSettings {
  */
 export interface ApplicationGatewayBackendHealthOnDemand {
   /**
-   * Reference of an ApplicationGatewayBackendAddressPool resource.
+   * Reference to an ApplicationGatewayBackendAddressPool resource.
    */
   backendAddressPool?: ApplicationGatewayBackendAddressPool;
   /**
@@ -1580,7 +1580,7 @@ export interface ApplicationGatewayBackendHealthOnDemand {
  */
 export interface ApplicationGatewayBackendHealthPool {
   /**
-   * Reference of an ApplicationGatewayBackendAddressPool resource.
+   * Reference to an ApplicationGatewayBackendAddressPool resource.
    */
   backendAddressPool?: ApplicationGatewayBackendAddressPool;
   /**
@@ -1653,7 +1653,7 @@ export interface ApplicationGatewaySslPolicy {
  */
 export interface ApplicationGatewayIPConfiguration extends SubResource {
   /**
-   * Reference of the subnet resource. A subnet from where application gateway gets its private
+   * Reference to the subnet resource. A subnet from where application gateway gets its private
    * address.
    */
   subnet?: SubResource;
@@ -1802,11 +1802,11 @@ export interface ApplicationGatewayFrontendIPConfiguration extends SubResource {
    */
   privateIPAllocationMethod?: IPAllocationMethod;
   /**
-   * Reference of the subnet resource.
+   * Reference to the subnet resource.
    */
   subnet?: SubResource;
   /**
-   * Reference of the PublicIP resource.
+   * Reference to the PublicIP resource.
    */
   publicIPAddress?: SubResource;
   /**
@@ -2559,7 +2559,7 @@ export interface ApplicationGateway extends Resource {
    */
   webApplicationFirewallConfiguration?: ApplicationGatewayWebApplicationFirewallConfiguration;
   /**
-   * Reference of the FirewallPolicy resource.
+   * Reference to the FirewallPolicy resource.
    */
   firewallPolicy?: SubResource;
   /**
@@ -2787,7 +2787,7 @@ export interface AvailableDelegation {
    */
   serviceName?: string;
   /**
-   * Describes the actions permitted to the service upon delegation.
+   * The actions permitted to the service upon delegation.
    */
   actions?: string[];
 }
@@ -2824,11 +2824,12 @@ export interface AzureFirewallIPConfiguration extends SubResource {
    */
   readonly privateIPAddress?: string;
   /**
-   * Reference of the subnet resource. This resource must be named 'AzureFirewallSubnet'.
+   * Reference to the subnet resource. This resource must be named 'AzureFirewallSubnet' or
+   * 'AzureFirewallManagementSubnet'.
    */
   subnet?: SubResource;
   /**
-   * Reference of the PublicIP resource. This field is a mandatory input if subnet is not null.
+   * Reference to the PublicIP resource. This field is a mandatory input if subnet is not null.
    */
   publicIPAddress?: SubResource;
   /**
@@ -2847,6 +2848,11 @@ export interface AzureFirewallIPConfiguration extends SubResource {
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly etag?: string;
+  /**
+   * Type of the resource.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly type?: string;
 }
 
 /**
@@ -3167,6 +3173,10 @@ export interface AzureFirewall extends Resource {
    */
   ipConfigurations?: AzureFirewallIPConfiguration[];
   /**
+   * IP configuration of the Azure Firewall used for management traffic
+   */
+  managementIpConfiguration?: AzureFirewallIPConfiguration;
+  /**
    * The provisioning state of the Azure firewall resource. Possible values include: 'Succeeded',
    * 'Updating', 'Deleting', 'Failed'
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
@@ -3235,11 +3245,11 @@ export interface AzureFirewallFqdnTag extends Resource {
  */
 export interface BastionHostIPConfiguration extends SubResource {
   /**
-   * Reference of the subnet resource.
+   * Reference to the subnet resource.
    */
   subnet: SubResource;
   /**
-   * Reference of the PublicIP resource.
+   * Reference to the PublicIP resource.
    */
   publicIPAddress: SubResource;
   /**
@@ -3476,7 +3486,7 @@ export interface ExpressRouteCircuitAuthorization extends SubResource {
  */
 export interface ExpressRouteCircuitPeeringConfig {
   /**
-   * The reference of AdvertisedPublicPrefixes.
+   * The reference to AdvertisedPublicPrefixes.
    */
   advertisedPublicPrefixes?: string[];
   /**
@@ -3520,7 +3530,7 @@ export interface Ipv6ExpressRouteCircuitPeeringConfig {
    */
   microsoftPeeringConfig?: ExpressRouteCircuitPeeringConfig;
   /**
-   * The reference of the RouteFilter resource.
+   * The reference to the RouteFilter resource.
    */
   routeFilter?: SubResource;
   /**
@@ -3736,7 +3746,7 @@ export interface ExpressRouteCircuitPeering extends SubResource {
    */
   readonly lastModifiedBy?: string;
   /**
-   * The reference of the RouteFilter resource.
+   * The reference to the RouteFilter resource.
    */
   routeFilter?: SubResource;
   /**
@@ -4882,7 +4892,7 @@ export interface LoadBalancingRule extends SubResource {
    */
   backendAddressPool?: SubResource;
   /**
-   * The reference of the load balancer probe used by the load balancing rule.
+   * The reference to the load balancer probe used by the load balancing rule.
    */
   probe?: SubResource;
   /**
@@ -5620,11 +5630,11 @@ export interface TopologyParameters {
    */
   targetResourceGroupName?: string;
   /**
-   * The reference of the Virtual Network resource.
+   * The reference to the Virtual Network resource.
    */
   targetVirtualNetwork?: SubResource;
   /**
-   * The reference of the Subnet resource.
+   * The reference to the Subnet resource.
    */
   targetSubnet?: SubResource;
 }
@@ -5882,7 +5892,7 @@ export interface SecurityGroupViewResult {
 }
 
 /**
- * Describes the storage location for a packet capture session.
+ * The storage location for a packet capture session.
  */
 export interface PacketCaptureStorageLocation {
   /**
@@ -5961,7 +5971,7 @@ export interface PacketCaptureParameters {
    */
   timeLimitInSeconds?: number;
   /**
-   * Describes the storage location for a packet capture session.
+   * The storage location for a packet capture session.
    */
   storageLocation: PacketCaptureStorageLocation;
   /**
@@ -5991,7 +6001,7 @@ export interface PacketCapture {
    */
   timeLimitInSeconds?: number;
   /**
-   * Describes the storage location for a packet capture session.
+   * The storage location for a packet capture session.
    */
   storageLocation: PacketCaptureStorageLocation;
   /**
@@ -6036,7 +6046,7 @@ export interface PacketCaptureResult {
    */
   timeLimitInSeconds?: number;
   /**
-   * Describes the storage location for a packet capture session.
+   * The storage location for a packet capture session.
    */
   storageLocation: PacketCaptureStorageLocation;
   /**
@@ -6317,7 +6327,7 @@ export interface ConnectivityDestination {
 }
 
 /**
- * Describes the HTTP header.
+ * The HTTP header.
  */
 export interface HTTPHeader {
   /**
@@ -6363,11 +6373,11 @@ export interface ProtocolConfiguration {
  */
 export interface ConnectivityParameters {
   /**
-   * Describes the source of the connection.
+   * The source of the connection.
    */
   source: ConnectivitySource;
   /**
-   * Describes the destination of connection.
+   * The destination of connection.
    */
   destination: ConnectivityDestination;
   /**
@@ -7785,7 +7795,7 @@ export interface UsageName {
 }
 
 /**
- * Describes network resource usage.
+ * The network resource usage.
  */
 export interface Usage {
   /**
@@ -7844,13 +7854,13 @@ export interface VirtualNetworkPeering extends SubResource {
    */
   useRemoteGateways?: boolean;
   /**
-   * The reference of the remote virtual network. The remote virtual network can be in the same or
+   * The reference to the remote virtual network. The remote virtual network can be in the same or
    * different region (preview). See here to register for the preview and learn more
    * (https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-create-peering).
    */
   remoteVirtualNetwork?: SubResource;
   /**
-   * The reference of the remote virtual network address space.
+   * The reference to the remote virtual network address space.
    */
   remoteAddressSpace?: AddressSpace;
   /**
@@ -8109,11 +8119,11 @@ export interface VirtualNetworkGatewayIPConfiguration extends SubResource {
    */
   privateIPAllocationMethod?: IPAllocationMethod;
   /**
-   * The reference of the subnet resource.
+   * The reference to the subnet resource.
    */
   subnet?: SubResource;
   /**
-   * The reference of the public IP resource.
+   * The reference to the public IP resource.
    */
   publicIPAddress?: SubResource;
   /**
@@ -8260,7 +8270,7 @@ export interface IpsecPolicy {
  */
 export interface VpnClientConfiguration {
   /**
-   * The reference of the address space resource which represents Address space for P2S VpnClient.
+   * The reference to the address space resource which represents Address space for P2S VpnClient.
    */
   vpnClientAddressPool?: AddressSpace;
   /**
@@ -8441,17 +8451,17 @@ export interface VirtualNetworkGateway extends Resource {
    */
   activeActive?: boolean;
   /**
-   * The reference of the LocalNetworkGateway resource which represents local network site having
+   * The reference to the LocalNetworkGateway resource which represents local network site having
    * default routes. Assign Null value in case of removing existing default site setting.
    */
   gatewayDefaultSite?: SubResource;
   /**
-   * The reference of the VirtualNetworkGatewaySku resource which represents the SKU selected for
+   * The reference to the VirtualNetworkGatewaySku resource which represents the SKU selected for
    * Virtual network gateway.
    */
   sku?: VirtualNetworkGatewaySku;
   /**
-   * The reference of the VpnClientConfiguration resource which represents the P2S VpnClient
+   * The reference to the VpnClientConfiguration resource which represents the P2S VpnClient
    * configurations.
    */
   vpnClientConfiguration?: VpnClientConfiguration;
@@ -8460,7 +8470,7 @@ export interface VirtualNetworkGateway extends Resource {
    */
   bgpSettings?: BgpSettings;
   /**
-   * The reference of the address space resource which represents the custom routes address space
+   * The reference to the address space resource which represents the custom routes address space
    * specified by the customer for virtual network gateway and VpnClient.
    */
   customRoutes?: AddressSpace;
@@ -9767,7 +9777,7 @@ export interface AadAuthenticationParameters {
  */
 export interface P2SConnectionConfiguration extends SubResource {
   /**
-   * The reference of the address space resource which represents Address space for P2S VpnClient.
+   * The reference to the address space resource which represents Address space for P2S VpnClient.
    */
   vpnClientAddressPool?: AddressSpace;
   /**
@@ -9996,13 +10006,11 @@ export interface P2SVpnConnectionHealth {
  */
 export interface PolicySettings {
   /**
-   * Describes if the policy is in enabled state or disabled state. Possible values include:
-   * 'Disabled', 'Enabled'
+   * The state of the policy. Possible values include: 'Disabled', 'Enabled'
    */
   state?: WebApplicationFirewallEnabledState;
   /**
-   * Describes if it is in detection mode or prevention mode at policy level. Possible values
-   * include: 'Prevention', 'Detection'
+   * The mode of the policy. Possible values include: 'Prevention', 'Detection'
    */
   mode?: WebApplicationFirewallMode;
   /**
@@ -10029,7 +10037,7 @@ export interface MatchVariable {
    */
   variableName: WebApplicationFirewallMatchVariable;
   /**
-   * Describes field of the matchVariable collection.
+   * The selector of match variable.
    */
   selector?: string;
 }
@@ -10043,13 +10051,13 @@ export interface MatchCondition {
    */
   matchVariables: MatchVariable[];
   /**
-   * Describes operator to be matched. Possible values include: 'IPMatch', 'Equal', 'Contains',
+   * The operator to be matched. Possible values include: 'IPMatch', 'Equal', 'Contains',
    * 'LessThan', 'GreaterThan', 'LessThanOrEqual', 'GreaterThanOrEqual', 'BeginsWith', 'EndsWith',
    * 'Regex', 'GeoMatch'
    */
   operator: WebApplicationFirewallOperator;
   /**
-   * Describes if this is negate condition or not.
+   * Whether this is negate condition or not.
    */
   negationConditon?: boolean;
   /**
@@ -10077,12 +10085,12 @@ export interface WebApplicationFirewallCustomRule {
    */
   readonly etag?: string;
   /**
-   * Describes priority of the rule. Rules with a lower value will be evaluated before rules with a
-   * higher value.
+   * Priority of the rule. Rules with a lower value will be evaluated before rules with a higher
+   * value.
    */
   priority: number;
   /**
-   * Describes type of rule. Possible values include: 'MatchRule', 'Invalid'
+   * The rule type. Possible values include: 'MatchRule', 'Invalid'
    */
   ruleType: WebApplicationFirewallRuleType;
   /**
@@ -10126,8 +10134,8 @@ export interface ManagedRuleOverride {
    */
   ruleId: string;
   /**
-   * Describes the state of the managed rule. Defaults to Disabled if not specified. Possible
-   * values include: 'Disabled'
+   * The state of the managed rule. Defaults to Disabled if not specified. Possible values include:
+   * 'Disabled'
    */
   state?: ManagedRuleEnabledState;
 }
@@ -10137,7 +10145,7 @@ export interface ManagedRuleOverride {
  */
 export interface ManagedRuleGroupOverride {
   /**
-   * Describes the managed rule group to override.
+   * The managed rule group to override.
    */
   ruleGroupName: string;
   /**
@@ -10170,11 +10178,11 @@ export interface ManagedRuleSet {
  */
 export interface ManagedRulesDefinition {
   /**
-   * Describes the Exclusions that are applied on the policy.
+   * The Exclusions that are applied on the policy.
    */
   exclusions?: OwaspCrsExclusionEntry[];
   /**
-   * Describes the ruleSets that are associated with the policy.
+   * The managed rule sets that are associated with the policy.
    */
   managedRuleSets: ManagedRuleSet[];
 }
@@ -10184,11 +10192,11 @@ export interface ManagedRulesDefinition {
  */
 export interface WebApplicationFirewallPolicy extends Resource {
   /**
-   * Describes policySettings for policy.
+   * The PolicySettings for policy.
    */
   policySettings?: PolicySettings;
   /**
-   * Describes custom rules inside the policy.
+   * The custom rules inside the policy.
    */
   customRules?: WebApplicationFirewallCustomRule[];
   /**

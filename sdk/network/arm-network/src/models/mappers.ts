@@ -4791,6 +4791,13 @@ export const AzureFirewallIPConfiguration: msRest.CompositeMapper = {
         type: {
           name: "String"
         }
+      },
+      type: {
+        readOnly: true,
+        serializedName: "type",
+        type: {
+          name: "String"
+        }
       }
     }
   }
@@ -5425,6 +5432,13 @@ export const AzureFirewall: msRest.CompositeMapper = {
               className: "AzureFirewallIPConfiguration"
             }
           }
+        }
+      },
+      managementIpConfiguration: {
+        serializedName: "properties.managementIpConfiguration",
+        type: {
+          name: "Composite",
+          className: "AzureFirewallIPConfiguration"
         }
       },
       provisioningState: {
