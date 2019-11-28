@@ -30,7 +30,6 @@ class SqlManagementClient extends SqlManagementClientContext {
   elasticPools: operations.ElasticPools;
   recommendedElasticPools: operations.RecommendedElasticPools;
   replicationLinks: operations.ReplicationLinks;
-  serverAzureADAdministrators: operations.ServerAzureADAdministrators;
   serverCommunicationLinks: operations.ServerCommunicationLinks;
   serviceObjectives: operations.ServiceObjectives;
   elasticPoolActivities: operations.ElasticPoolActivities;
@@ -103,6 +102,9 @@ class SqlManagementClient extends SqlManagementClientContext {
   managedDatabases: operations.ManagedDatabases;
   privateEndpointConnections: operations.PrivateEndpointConnections;
   privateLinkResources: operations.PrivateLinkResources;
+  serverAzureADAdministrators: operations.ServerAzureADAdministrators;
+  workloadGroups: operations.WorkloadGroups;
+  workloadClassifiers: operations.WorkloadClassifiers;
 
   /**
    * Initializes a new instance of the SqlManagementClient class.
@@ -125,7 +127,6 @@ class SqlManagementClient extends SqlManagementClientContext {
     this.elasticPools = new operations.ElasticPools(this);
     this.recommendedElasticPools = new operations.RecommendedElasticPools(this);
     this.replicationLinks = new operations.ReplicationLinks(this);
-    this.serverAzureADAdministrators = new operations.ServerAzureADAdministrators(this);
     this.serverCommunicationLinks = new operations.ServerCommunicationLinks(this);
     this.serviceObjectives = new operations.ServiceObjectives(this);
     this.elasticPoolActivities = new operations.ElasticPoolActivities(this);
@@ -198,6 +199,9 @@ class SqlManagementClient extends SqlManagementClientContext {
     this.managedDatabases = new operations.ManagedDatabases(this);
     this.privateEndpointConnections = new operations.PrivateEndpointConnections(this);
     this.privateLinkResources = new operations.PrivateLinkResources(this);
+    this.serverAzureADAdministrators = new operations.ServerAzureADAdministrators(this);
+    this.workloadGroups = new operations.WorkloadGroups(this);
+    this.workloadClassifiers = new operations.WorkloadClassifiers(this);
   }
 }
 

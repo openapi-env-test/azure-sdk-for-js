@@ -850,24 +850,6 @@ export interface ReplicationLink extends ProxyResource {
 }
 
 /**
- * An server Active Directory Administrator.
- */
-export interface ServerAzureADAdministrator extends ProxyResource {
-  /**
-   * The server administrator login value.
-   */
-  login: string;
-  /**
-   * The server administrator Sid (Secure ID).
-   */
-  sid: string;
-  /**
-   * The server Active Directory Administrator tenant id.
-   */
-  tenantId: string;
-}
-
-/**
  * Server communication link.
  */
 export interface ServerCommunicationLink extends ProxyResource {
@@ -2308,7 +2290,7 @@ export interface ExtendedDatabaseBlobAuditingPolicy extends ProxyResource {
   state: BlobAuditingPolicyState;
   /**
    * Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state
-   * is Enabled, storageEndpoint is required.
+   * is Enabled, storageEndpoint or isAzureMonitorTargetEnabled is required.
    */
   storageEndpoint?: string;
   /**
@@ -2418,6 +2400,12 @@ export interface ExtendedDatabaseBlobAuditingPolicy extends ProxyResource {
    * or [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)
    */
   isAzureMonitorTargetEnabled?: boolean;
+  /**
+   * Specifies the amount of time in milliseconds that can elapse before audit actions are forced
+   * to be processed.
+   * The default minimum value is 1000 (1 second). The maximum is 2,147,483,647.
+   */
+  queueDelayMs?: number;
 }
 
 /**
@@ -2435,7 +2423,7 @@ export interface ExtendedServerBlobAuditingPolicy extends ProxyResource {
   state: BlobAuditingPolicyState;
   /**
    * Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state
-   * is Enabled, storageEndpoint is required.
+   * is Enabled, storageEndpoint or isAzureMonitorTargetEnabled is required.
    */
   storageEndpoint?: string;
   /**
@@ -2545,6 +2533,12 @@ export interface ExtendedServerBlobAuditingPolicy extends ProxyResource {
    * or [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)
    */
   isAzureMonitorTargetEnabled?: boolean;
+  /**
+   * Specifies the amount of time in milliseconds that can elapse before audit actions are forced
+   * to be processed.
+   * The default minimum value is 1000 (1 second). The maximum is 2,147,483,647.
+   */
+  queueDelayMs?: number;
 }
 
 /**
@@ -2558,7 +2552,7 @@ export interface ServerBlobAuditingPolicy extends ProxyResource {
   state: BlobAuditingPolicyState;
   /**
    * Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state
-   * is Enabled, storageEndpoint is required.
+   * is Enabled, storageEndpoint or isAzureMonitorTargetEnabled is required.
    */
   storageEndpoint?: string;
   /**
@@ -2668,6 +2662,12 @@ export interface ServerBlobAuditingPolicy extends ProxyResource {
    * or [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)
    */
   isAzureMonitorTargetEnabled?: boolean;
+  /**
+   * Specifies the amount of time in milliseconds that can elapse before audit actions are forced
+   * to be processed.
+   * The default minimum value is 1000 (1 second). The maximum is 2,147,483,647.
+   */
+  queueDelayMs?: number;
 }
 
 /**
@@ -2686,7 +2686,7 @@ export interface DatabaseBlobAuditingPolicy extends ProxyResource {
   state: BlobAuditingPolicyState;
   /**
    * Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state
-   * is Enabled, storageEndpoint is required.
+   * is Enabled, storageEndpoint or isAzureMonitorTargetEnabled is required.
    */
   storageEndpoint?: string;
   /**
@@ -2796,6 +2796,12 @@ export interface DatabaseBlobAuditingPolicy extends ProxyResource {
    * or [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)
    */
   isAzureMonitorTargetEnabled?: boolean;
+  /**
+   * Specifies the amount of time in milliseconds that can elapse before audit actions are forced
+   * to be processed.
+   * The default minimum value is 1000 (1 second). The maximum is 2,147,483,647.
+   */
+  queueDelayMs?: number;
 }
 
 /**
@@ -5747,6 +5753,84 @@ export interface PrivateLinkResource extends ProxyResource {
 }
 
 /**
+ * Azure Active Directory administrator.
+ */
+export interface ServerAzureADAdministrator extends ProxyResource {
+  /**
+   * Login name of the server administrator.
+   */
+  login: string;
+  /**
+   * SID (object ID) of the server administrator.
+   */
+  sid: string;
+  /**
+   * Tenant ID of the administrator.
+   */
+  tenantId?: string;
+}
+
+/**
+ * Workload group operations for a data warehouse
+ */
+export interface WorkloadGroup extends ProxyResource {
+  /**
+   * The workload group minimum percentage resource.
+   */
+  minResourcePercent: number;
+  /**
+   * The workload group cap percentage resource.
+   */
+  maxResourcePercent: number;
+  /**
+   * The workload group request minimum grant percentage.
+   */
+  minResourcePercentPerRequest: number;
+  /**
+   * The workload group request maximum grant percentage.
+   */
+  maxResourcePercentPerRequest?: number;
+  /**
+   * The workload group importance level.
+   */
+  importance?: string;
+  /**
+   * The workload group query execution timeout.
+   */
+  queryExecutionTimeout?: number;
+}
+
+/**
+ * Workload classifier operations for a data warehouse
+ */
+export interface WorkloadClassifier extends ProxyResource {
+  /**
+   * The workload classifier member name.
+   */
+  memberName: string;
+  /**
+   * The workload classifier label.
+   */
+  label?: string;
+  /**
+   * The workload classifier context.
+   */
+  context?: string;
+  /**
+   * The workload classifier start time for classification.
+   */
+  startTime?: string;
+  /**
+   * The workload classifier end time for classification.
+   */
+  endTime?: string;
+  /**
+   * The workload classifier importance.
+   */
+  importance?: string;
+}
+
+/**
  * Optional Parameters.
  */
 export interface DatabasesFailoverOptionalParams extends msRest.RequestOptionsBase {
@@ -6252,14 +6336,6 @@ export interface RecommendedElasticPoolListMetricsResult extends Array<Recommend
  * @extends Array<ReplicationLink>
  */
 export interface ReplicationLinkListResult extends Array<ReplicationLink> {
-}
-
-/**
- * @interface
- * The response to a list Active Directory Administrators request.
- * @extends Array<ServerAzureADAdministrator>
- */
-export interface ServerAdministratorListResult extends Array<ServerAzureADAdministrator> {
 }
 
 /**
@@ -6969,6 +7045,45 @@ export interface PrivateEndpointConnectionListResult extends Array<PrivateEndpoi
  * @extends Array<PrivateLinkResource>
  */
 export interface PrivateLinkResourceListResult extends Array<PrivateLinkResource> {
+  /**
+   * Link to retrieve next page of results.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly nextLink?: string;
+}
+
+/**
+ * @interface
+ * A list of active directory administrators.
+ * @extends Array<ServerAzureADAdministrator>
+ */
+export interface AdministratorListResult extends Array<ServerAzureADAdministrator> {
+  /**
+   * Link to retrieve next page of results.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly nextLink?: string;
+}
+
+/**
+ * @interface
+ * A list of workload groups.
+ * @extends Array<WorkloadGroup>
+ */
+export interface WorkloadGroupListResult extends Array<WorkloadGroup> {
+  /**
+   * Link to retrieve next page of results.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly nextLink?: string;
+}
+
+/**
+ * @interface
+ * A list of workload classifiers for a workload group.
+ * @extends Array<WorkloadClassifier>
+ */
+export interface WorkloadClassifierListResult extends Array<WorkloadClassifier> {
   /**
    * Link to retrieve next page of results.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
@@ -8924,126 +9039,6 @@ export type ReplicationLinksListByDatabaseResponse = ReplicationLinkListResult &
        * The response body as parsed JSON or XML
        */
       parsedBody: ReplicationLinkListResult;
-    };
-};
-
-/**
- * Contains response data for the createOrUpdate operation.
- */
-export type ServerAzureADAdministratorsCreateOrUpdateResponse = ServerAzureADAdministrator & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: ServerAzureADAdministrator;
-    };
-};
-
-/**
- * Contains response data for the deleteMethod operation.
- */
-export type ServerAzureADAdministratorsDeleteMethodResponse = ServerAzureADAdministrator & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: ServerAzureADAdministrator;
-    };
-};
-
-/**
- * Contains response data for the get operation.
- */
-export type ServerAzureADAdministratorsGetResponse = ServerAzureADAdministrator & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: ServerAzureADAdministrator;
-    };
-};
-
-/**
- * Contains response data for the listByServer operation.
- */
-export type ServerAzureADAdministratorsListByServerResponse = ServerAdministratorListResult & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: ServerAdministratorListResult;
-    };
-};
-
-/**
- * Contains response data for the beginCreateOrUpdate operation.
- */
-export type ServerAzureADAdministratorsBeginCreateOrUpdateResponse = ServerAzureADAdministrator & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: ServerAzureADAdministrator;
-    };
-};
-
-/**
- * Contains response data for the beginDeleteMethod operation.
- */
-export type ServerAzureADAdministratorsBeginDeleteMethodResponse = ServerAzureADAdministrator & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: ServerAzureADAdministrator;
     };
 };
 
@@ -15484,5 +15479,305 @@ export type PrivateLinkResourcesListByServerNextResponse = PrivateLinkResourceLi
        * The response body as parsed JSON or XML
        */
       parsedBody: PrivateLinkResourceListResult;
+    };
+};
+
+/**
+ * Contains response data for the get operation.
+ */
+export type ServerAzureADAdministratorsGetResponse = ServerAzureADAdministrator & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: ServerAzureADAdministrator;
+    };
+};
+
+/**
+ * Contains response data for the createOrUpdate operation.
+ */
+export type ServerAzureADAdministratorsCreateOrUpdateResponse = ServerAzureADAdministrator & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: ServerAzureADAdministrator;
+    };
+};
+
+/**
+ * Contains response data for the listByServer operation.
+ */
+export type ServerAzureADAdministratorsListByServerResponse = AdministratorListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: AdministratorListResult;
+    };
+};
+
+/**
+ * Contains response data for the beginCreateOrUpdate operation.
+ */
+export type ServerAzureADAdministratorsBeginCreateOrUpdateResponse = ServerAzureADAdministrator & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: ServerAzureADAdministrator;
+    };
+};
+
+/**
+ * Contains response data for the listByServerNext operation.
+ */
+export type ServerAzureADAdministratorsListByServerNextResponse = AdministratorListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: AdministratorListResult;
+    };
+};
+
+/**
+ * Contains response data for the get operation.
+ */
+export type WorkloadGroupsGetResponse = WorkloadGroup & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: WorkloadGroup;
+    };
+};
+
+/**
+ * Contains response data for the createOrUpdate operation.
+ */
+export type WorkloadGroupsCreateOrUpdateResponse = WorkloadGroup & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: WorkloadGroup;
+    };
+};
+
+/**
+ * Contains response data for the listByDatabase operation.
+ */
+export type WorkloadGroupsListByDatabaseResponse = WorkloadGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: WorkloadGroupListResult;
+    };
+};
+
+/**
+ * Contains response data for the beginCreateOrUpdate operation.
+ */
+export type WorkloadGroupsBeginCreateOrUpdateResponse = WorkloadGroup & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: WorkloadGroup;
+    };
+};
+
+/**
+ * Contains response data for the listByDatabaseNext operation.
+ */
+export type WorkloadGroupsListByDatabaseNextResponse = WorkloadGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: WorkloadGroupListResult;
+    };
+};
+
+/**
+ * Contains response data for the get operation.
+ */
+export type WorkloadClassifiersGetResponse = WorkloadClassifier & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: WorkloadClassifier;
+    };
+};
+
+/**
+ * Contains response data for the createOrUpdate operation.
+ */
+export type WorkloadClassifiersCreateOrUpdateResponse = WorkloadClassifier & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: WorkloadClassifier;
+    };
+};
+
+/**
+ * Contains response data for the listByWorkloadGroup operation.
+ */
+export type WorkloadClassifiersListByWorkloadGroupResponse = WorkloadClassifierListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: WorkloadClassifierListResult;
+    };
+};
+
+/**
+ * Contains response data for the beginCreateOrUpdate operation.
+ */
+export type WorkloadClassifiersBeginCreateOrUpdateResponse = WorkloadClassifier & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: WorkloadClassifier;
+    };
+};
+
+/**
+ * Contains response data for the listByWorkloadGroupNext operation.
+ */
+export type WorkloadClassifiersListByWorkloadGroupNextResponse = WorkloadClassifierListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: WorkloadClassifierListResult;
     };
 };

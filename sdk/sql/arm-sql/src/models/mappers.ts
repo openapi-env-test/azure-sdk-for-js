@@ -1330,47 +1330,6 @@ export const ReplicationLink: msRest.CompositeMapper = {
   }
 };
 
-export const ServerAzureADAdministrator: msRest.CompositeMapper = {
-  serializedName: "ServerAzureADAdministrator",
-  type: {
-    name: "Composite",
-    className: "ServerAzureADAdministrator",
-    modelProperties: {
-      ...ProxyResource.type.modelProperties,
-      administratorType: {
-        required: true,
-        isConstant: true,
-        serializedName: "properties.administratorType",
-        defaultValue: 'ActiveDirectory',
-        type: {
-          name: "String"
-        }
-      },
-      login: {
-        required: true,
-        serializedName: "properties.login",
-        type: {
-          name: "String"
-        }
-      },
-      sid: {
-        required: true,
-        serializedName: "properties.sid",
-        type: {
-          name: "Uuid"
-        }
-      },
-      tenantId: {
-        required: true,
-        serializedName: "properties.tenantId",
-        type: {
-          name: "Uuid"
-        }
-      }
-    }
-  }
-};
-
 export const ServerCommunicationLink: msRest.CompositeMapper = {
   serializedName: "ServerCommunicationLink",
   type: {
@@ -3691,6 +3650,12 @@ export const ExtendedDatabaseBlobAuditingPolicy: msRest.CompositeMapper = {
         type: {
           name: "Boolean"
         }
+      },
+      queueDelayMs: {
+        serializedName: "properties.queueDelayMs",
+        type: {
+          name: "Number"
+        }
       }
     }
   }
@@ -3766,6 +3731,12 @@ export const ExtendedServerBlobAuditingPolicy: msRest.CompositeMapper = {
         type: {
           name: "Boolean"
         }
+      },
+      queueDelayMs: {
+        serializedName: "properties.queueDelayMs",
+        type: {
+          name: "Number"
+        }
       }
     }
   }
@@ -3834,6 +3805,12 @@ export const ServerBlobAuditingPolicy: msRest.CompositeMapper = {
         serializedName: "properties.isAzureMonitorTargetEnabled",
         type: {
           name: "Boolean"
+        }
+      },
+      queueDelayMs: {
+        serializedName: "properties.queueDelayMs",
+        type: {
+          name: "Number"
         }
       }
     }
@@ -3910,6 +3887,12 @@ export const DatabaseBlobAuditingPolicy: msRest.CompositeMapper = {
         serializedName: "properties.isAzureMonitorTargetEnabled",
         type: {
           name: "Boolean"
+        }
+      },
+      queueDelayMs: {
+        serializedName: "properties.queueDelayMs",
+        type: {
+          name: "Number"
         }
       }
     }
@@ -8418,6 +8401,144 @@ export const PrivateLinkResource: msRest.CompositeMapper = {
   }
 };
 
+export const ServerAzureADAdministrator: msRest.CompositeMapper = {
+  serializedName: "ServerAzureADAdministrator",
+  type: {
+    name: "Composite",
+    className: "ServerAzureADAdministrator",
+    modelProperties: {
+      ...ProxyResource.type.modelProperties,
+      administratorType: {
+        required: true,
+        isConstant: true,
+        serializedName: "properties.administratorType",
+        defaultValue: 'ActiveDirectory',
+        type: {
+          name: "String"
+        }
+      },
+      login: {
+        required: true,
+        serializedName: "properties.login",
+        type: {
+          name: "String"
+        }
+      },
+      sid: {
+        required: true,
+        serializedName: "properties.sid",
+        type: {
+          name: "Uuid"
+        }
+      },
+      tenantId: {
+        serializedName: "properties.tenantId",
+        type: {
+          name: "Uuid"
+        }
+      }
+    }
+  }
+};
+
+export const WorkloadGroup: msRest.CompositeMapper = {
+  serializedName: "WorkloadGroup",
+  type: {
+    name: "Composite",
+    className: "WorkloadGroup",
+    modelProperties: {
+      ...ProxyResource.type.modelProperties,
+      minResourcePercent: {
+        required: true,
+        serializedName: "properties.minResourcePercent",
+        type: {
+          name: "Number"
+        }
+      },
+      maxResourcePercent: {
+        required: true,
+        serializedName: "properties.maxResourcePercent",
+        type: {
+          name: "Number"
+        }
+      },
+      minResourcePercentPerRequest: {
+        required: true,
+        serializedName: "properties.minResourcePercentPerRequest",
+        type: {
+          name: "Number"
+        }
+      },
+      maxResourcePercentPerRequest: {
+        serializedName: "properties.maxResourcePercentPerRequest",
+        type: {
+          name: "Number"
+        }
+      },
+      importance: {
+        serializedName: "properties.importance",
+        type: {
+          name: "String"
+        }
+      },
+      queryExecutionTimeout: {
+        serializedName: "properties.queryExecutionTimeout",
+        type: {
+          name: "Number"
+        }
+      }
+    }
+  }
+};
+
+export const WorkloadClassifier: msRest.CompositeMapper = {
+  serializedName: "WorkloadClassifier",
+  type: {
+    name: "Composite",
+    className: "WorkloadClassifier",
+    modelProperties: {
+      ...ProxyResource.type.modelProperties,
+      memberName: {
+        required: true,
+        serializedName: "properties.memberName",
+        type: {
+          name: "String"
+        }
+      },
+      label: {
+        serializedName: "properties.label",
+        type: {
+          name: "String"
+        }
+      },
+      context: {
+        serializedName: "properties.context",
+        type: {
+          name: "String"
+        }
+      },
+      startTime: {
+        serializedName: "properties.startTime",
+        type: {
+          name: "String"
+        }
+      },
+      endTime: {
+        serializedName: "properties.endTime",
+        type: {
+          name: "String"
+        }
+      },
+      importance: {
+        serializedName: "properties.importance",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const RecoverableDatabaseListResult: msRest.CompositeMapper = {
   serializedName: "RecoverableDatabaseListResult",
   type: {
@@ -8726,28 +8847,6 @@ export const ReplicationLinkListResult: msRest.CompositeMapper = {
             type: {
               name: "Composite",
               className: "ReplicationLink"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
-export const ServerAdministratorListResult: msRest.CompositeMapper = {
-  serializedName: "ServerAdministratorListResult",
-  type: {
-    name: "Composite",
-    className: "ServerAdministratorListResult",
-    modelProperties: {
-      value: {
-        serializedName: "",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "ServerAzureADAdministrator"
             }
           }
         }
@@ -10417,6 +10516,96 @@ export const PrivateLinkResourceListResult: msRest.CompositeMapper = {
             type: {
               name: "Composite",
               className: "PrivateLinkResource"
+            }
+          }
+        }
+      },
+      nextLink: {
+        readOnly: true,
+        serializedName: "nextLink",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const AdministratorListResult: msRest.CompositeMapper = {
+  serializedName: "AdministratorListResult",
+  type: {
+    name: "Composite",
+    className: "AdministratorListResult",
+    modelProperties: {
+      value: {
+        readOnly: true,
+        serializedName: "",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "ServerAzureADAdministrator"
+            }
+          }
+        }
+      },
+      nextLink: {
+        readOnly: true,
+        serializedName: "nextLink",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const WorkloadGroupListResult: msRest.CompositeMapper = {
+  serializedName: "WorkloadGroupListResult",
+  type: {
+    name: "Composite",
+    className: "WorkloadGroupListResult",
+    modelProperties: {
+      value: {
+        readOnly: true,
+        serializedName: "",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "WorkloadGroup"
+            }
+          }
+        }
+      },
+      nextLink: {
+        readOnly: true,
+        serializedName: "nextLink",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const WorkloadClassifierListResult: msRest.CompositeMapper = {
+  serializedName: "WorkloadClassifierListResult",
+  type: {
+    name: "Composite",
+    className: "WorkloadClassifierListResult",
+    modelProperties: {
+      value: {
+        readOnly: true,
+        serializedName: "",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "WorkloadClassifier"
             }
           }
         }
