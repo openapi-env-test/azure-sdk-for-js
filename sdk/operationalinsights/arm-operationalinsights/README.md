@@ -9,7 +9,7 @@ This package contains an isomorphic SDK for OperationalInsightsManagementClient.
 
 ### How to Install
 
-```
+```bash
 npm install @azure/arm-operationalinsights
 ```
 
@@ -19,13 +19,13 @@ npm install @azure/arm-operationalinsights
 
 ##### Install @azure/ms-rest-nodeauth
 
-```
+```bash
 npm install @azure/ms-rest-nodeauth
 ```
 
 ##### Sample code
 
-```ts
+```typescript
 import * as msRest from "@azure/ms-rest-js";
 import * as msRestAzure from "@azure/ms-rest-azure-js";
 import * as msRestNodeAuth from "@azure/ms-rest-nodeauth";
@@ -34,10 +34,11 @@ const subscriptionId = process.env["AZURE_SUBSCRIPTION_ID"];
 
 msRestNodeAuth.interactiveLogin().then((creds) => {
   const client = new OperationalInsightsManagementClient(creds, subscriptionId);
+  const subscriptionId = "testsubscriptionId";
   const resourceGroupName = "testresourceGroupName";
   const workspaceName = "testworkspaceName";
   const linkedServiceName = "testlinkedServiceName";
-  client.linkedServices.get(resourceGroupName, workspaceName, linkedServiceName).then((result) => {
+  client.linkedServices.get(subscriptionId, resourceGroupName, workspaceName, linkedServiceName).then((result) => {
     console.log("The result is:");
     console.log(result);
   });
@@ -50,7 +51,7 @@ msRestNodeAuth.interactiveLogin().then((creds) => {
 
 ##### Install @azure/ms-rest-browserauth
 
-```
+```bash
 npm install @azure/ms-rest-browserauth
 ```
 
@@ -80,10 +81,11 @@ See https://github.com/Azure/ms-rest-browserauth to learn how to authenticate to
           authManager.login();
         }
         const client = new Azure.ArmOperationalinsights.OperationalInsightsManagementClient(res.creds, subscriptionId);
+        const subscriptionId = "testsubscriptionId";
         const resourceGroupName = "testresourceGroupName";
         const workspaceName = "testworkspaceName";
         const linkedServiceName = "testlinkedServiceName";
-        client.linkedServices.get(resourceGroupName, workspaceName, linkedServiceName).then((result) => {
+        client.linkedServices.get(subscriptionId, resourceGroupName, workspaceName, linkedServiceName).then((result) => {
           console.log("The result is:");
           console.log(result);
         }).catch((err) => {
@@ -101,5 +103,4 @@ See https://github.com/Azure/ms-rest-browserauth to learn how to authenticate to
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
 
-
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Foperationalinsights%2Farm-operationalinsights%2FREADME.png)
+![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/operationalinsights/arm-operationalinsights/README.png)
