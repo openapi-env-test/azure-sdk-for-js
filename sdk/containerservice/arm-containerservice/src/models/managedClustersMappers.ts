@@ -31,6 +31,7 @@ export {
   ManagedClusterAADProfile,
   ManagedClusterAccessProfile,
   ManagedClusterAddonProfile,
+  ManagedClusterAddonProfileIdentity,
   ManagedClusterAgentPoolProfile,
   ManagedClusterAgentPoolProfileProperties,
   ManagedClusterAPIServerAccessProfile,
@@ -58,5 +59,6 @@ export {
   Resource,
   ResourceReference,
   SubResource,
-  TagsObject
+  TagsObject,
+  UserAssignedIdentity
 } from "../models/mappers";
