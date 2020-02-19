@@ -157,45 +157,6 @@ export class Jobs {
   }
 
   /**
-   * Book shipment pick up.
-   * @param resourceGroupName The Resource Group Name
-   * @param jobName The name of the job Resource within the specified resource group. job names must
-   * be between 3 and 24 characters in length and use any alphanumeric and underscore only
-   * @param shipmentPickUpRequest Details of shipment pick up request.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.JobsBookShipmentPickUpResponse>
-   */
-  bookShipmentPickUp(resourceGroupName: string, jobName: string, shipmentPickUpRequest: Models.ShipmentPickUpRequest, options?: msRest.RequestOptionsBase): Promise<Models.JobsBookShipmentPickUpResponse>;
-  /**
-   * @param resourceGroupName The Resource Group Name
-   * @param jobName The name of the job Resource within the specified resource group. job names must
-   * be between 3 and 24 characters in length and use any alphanumeric and underscore only
-   * @param shipmentPickUpRequest Details of shipment pick up request.
-   * @param callback The callback
-   */
-  bookShipmentPickUp(resourceGroupName: string, jobName: string, shipmentPickUpRequest: Models.ShipmentPickUpRequest, callback: msRest.ServiceCallback<Models.ShipmentPickUpResponse>): void;
-  /**
-   * @param resourceGroupName The Resource Group Name
-   * @param jobName The name of the job Resource within the specified resource group. job names must
-   * be between 3 and 24 characters in length and use any alphanumeric and underscore only
-   * @param shipmentPickUpRequest Details of shipment pick up request.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  bookShipmentPickUp(resourceGroupName: string, jobName: string, shipmentPickUpRequest: Models.ShipmentPickUpRequest, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ShipmentPickUpResponse>): void;
-  bookShipmentPickUp(resourceGroupName: string, jobName: string, shipmentPickUpRequest: Models.ShipmentPickUpRequest, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ShipmentPickUpResponse>, callback?: msRest.ServiceCallback<Models.ShipmentPickUpResponse>): Promise<Models.JobsBookShipmentPickUpResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        jobName,
-        shipmentPickUpRequest,
-        options
-      },
-      bookShipmentPickUpOperationSpec,
-      callback) as Promise<Models.JobsBookShipmentPickUpResponse>;
-  }
-
-  /**
    * CancelJob.
    * @param resourceGroupName The Resource Group Name
    * @param jobName The name of the job Resource within the specified resource group. job names must
@@ -457,38 +418,6 @@ const getOperationSpec: msRest.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.JobResource
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const bookShipmentPickUpOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/bookShipmentPickUp",
-  urlParameters: [
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.jobName
-  ],
-  queryParameters: [
-    Parameters.apiVersion
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "shipmentPickUpRequest",
-    mapper: {
-      ...Mappers.ShipmentPickUpRequest,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.ShipmentPickUpResponse
     },
     default: {
       bodyMapper: Mappers.CloudError

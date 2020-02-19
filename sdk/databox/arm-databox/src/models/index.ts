@@ -2304,26 +2304,6 @@ export type JobsUpdateResponse = JobResource & {
 };
 
 /**
- * Contains response data for the bookShipmentPickUp operation.
- */
-export type JobsBookShipmentPickUpResponse = ShipmentPickUpResponse & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: ShipmentPickUpResponse;
-    };
-};
-
-/**
  * Contains response data for the listCredentials operation.
  */
 export type JobsListCredentialsResponse = UnencryptedCredentialsList & {
