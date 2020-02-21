@@ -2164,9 +2164,9 @@ export type JobDeliveryType = 'NonScheduled' | 'Scheduled';
 export type OverallValidationStatus = 'AllValidToProceed' | 'InputsRevisitRequired' | 'CertainInputValidationsSkipped';
 
 /**
- * Contains response data for the list operation.
+ * Contains response data for the get operation.
  */
-export type OperationsListResponse = OperationList & {
+export type OperationsGetResponse = OperationList & {
   /**
    * The underlying HTTP response.
    */
@@ -2184,9 +2184,9 @@ export type OperationsListResponse = OperationList & {
 };
 
 /**
- * Contains response data for the listNext operation.
+ * Contains response data for the getNext operation.
  */
-export type OperationsListNextResponse = OperationList & {
+export type OperationsGetNextResponse = OperationList & {
   /**
    * The underlying HTTP response.
    */
@@ -2300,26 +2300,6 @@ export type JobsUpdateResponse = JobResource & {
        * The response body as parsed JSON or XML
        */
       parsedBody: JobResource;
-    };
-};
-
-/**
- * Contains response data for the bookShipmentPickUp operation.
- */
-export type JobsBookShipmentPickUpResponse = ShipmentPickUpResponse & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: ShipmentPickUpResponse;
     };
 };
 

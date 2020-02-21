@@ -47,8 +47,6 @@ export {
   Preferences,
   Resource,
   ShareCredentialDetails,
-  ShipmentPickUpRequest,
-  ShipmentPickUpResponse,
   ShippingAddress,
   Sku,
   TransportPreferences,
