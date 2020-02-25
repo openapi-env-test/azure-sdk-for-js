@@ -14,6 +14,7 @@ export {
   AppSkuInfo,
   AppTemplate,
   AppTemplatesResult,
+  ARMErrorResponseBody,
   BaseResource,
   ErrorDetails,
   ErrorResponseBody,

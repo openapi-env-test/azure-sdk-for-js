@@ -580,6 +580,9 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.App
     },
     202: {},
+    400: {
+      bodyMapper: Mappers.ARMErrorResponseBody
+    },
     default: {
       bodyMapper: Mappers.ErrorDetails
     }
@@ -613,6 +616,9 @@ const beginUpdateOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.App
     },
     202: {},
+    400: {
+      bodyMapper: Mappers.ARMErrorResponseBody
+    },
     default: {
       bodyMapper: Mappers.ErrorDetails
     }

@@ -109,6 +109,20 @@ export interface AppPatch {
 }
 
 /**
+ * ARM error response body.
+ */
+export interface ARMErrorResponseBody {
+  /**
+   * Gets or sets the string that describes the error in detail and provides debugging information.
+   */
+  message?: string;
+  /**
+   * Gets or sets the string that can be used to programmatically identify the error.
+   */
+  code?: string;
+}
+
+/**
  * Details of error response.
  */
 export interface ErrorResponseBody {
@@ -346,7 +360,12 @@ export type AppsGetResponse = App & {
 /**
  * Contains response data for the createOrUpdate operation.
  */
-export type AppsCreateOrUpdateResponse = App & {
+export type AppsCreateOrUpdateResponse = {
+  /**
+   * The parsed response body.
+   */
+  body: any;
+
   /**
    * The underlying HTTP response.
    */
@@ -359,14 +378,19 @@ export type AppsCreateOrUpdateResponse = App & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: App;
+      parsedBody: any;
     };
 };
 
 /**
  * Contains response data for the update operation.
  */
-export type AppsUpdateResponse = App & {
+export type AppsUpdateResponse = {
+  /**
+   * The parsed response body.
+   */
+  body: any;
+
   /**
    * The underlying HTTP response.
    */
@@ -379,7 +403,7 @@ export type AppsUpdateResponse = App & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: App;
+      parsedBody: any;
     };
 };
 
@@ -486,7 +510,12 @@ export type AppsListTemplatesResponse = AppTemplatesResult & {
 /**
  * Contains response data for the beginCreateOrUpdate operation.
  */
-export type AppsBeginCreateOrUpdateResponse = App & {
+export type AppsBeginCreateOrUpdateResponse = {
+  /**
+   * The parsed response body.
+   */
+  body: any;
+
   /**
    * The underlying HTTP response.
    */
@@ -499,14 +528,19 @@ export type AppsBeginCreateOrUpdateResponse = App & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: App;
+      parsedBody: any;
     };
 };
 
 /**
  * Contains response data for the beginUpdate operation.
  */
-export type AppsBeginUpdateResponse = App & {
+export type AppsBeginUpdateResponse = {
+  /**
+   * The parsed response body.
+   */
+  body: any;
+
   /**
    * The underlying HTTP response.
    */
@@ -519,7 +553,7 @@ export type AppsBeginUpdateResponse = App & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: App;
+      parsedBody: any;
     };
 };
 

@@ -183,6 +183,28 @@ export const AppPatch: msRest.CompositeMapper = {
   }
 };
 
+export const ARMErrorResponseBody: msRest.CompositeMapper = {
+  serializedName: "ARMErrorResponseBody",
+  type: {
+    name: "Composite",
+    className: "ARMErrorResponseBody",
+    modelProperties: {
+      message: {
+        serializedName: "message",
+        type: {
+          name: "String"
+        }
+      },
+      code: {
+        serializedName: "code",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const ErrorResponseBody: msRest.CompositeMapper = {
   serializedName: "ErrorResponseBody",
   type: {
