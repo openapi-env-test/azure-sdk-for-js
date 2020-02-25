@@ -562,17 +562,13 @@ export interface AssetFilter extends ProxyResource {
 }
 
 /**
- * The parameters to the list SAS request.
+ * An interface representing ListContainerSasInput.
  */
 export interface ListContainerSasInput {
   /**
-   * The permissions to set on the SAS URL. Possible values include: 'Read', 'ReadWrite',
-   * 'ReadWriteDelete'
+   * Possible values include: 'Read', 'ReadWrite', 'ReadWriteDelete'
    */
   permissions?: AssetContainerPermission;
-  /**
-   * The SAS URL expiration time.  This must be less than 24 hours from the current time.
-   */
   expiryTime?: Date;
 }
 
@@ -836,7 +832,7 @@ export interface ContentKeyPolicySymmetricTokenKey {
 }
 
 /**
- * Specifies a RSA key for token validation
+ * Specifies a RSA key for token validation.
  */
 export interface ContentKeyPolicyRsaTokenKey {
   /**
@@ -844,11 +840,11 @@ export interface ContentKeyPolicyRsaTokenKey {
    */
   odatatype: "#Microsoft.Media.ContentKeyPolicyRsaTokenKey";
   /**
-   * The RSA Parameter exponent
+   * The RSA Parameter exponent.
    */
   exponent: Uint8Array;
   /**
-   * The RSA Parameter modulus
+   * The RSA Parameter modulus.
    */
   modulus: Uint8Array;
 }

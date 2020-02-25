@@ -1050,6 +1050,7 @@ export const ContentKeyPolicyPlayReadyContentEncryptionKeyFromKeyIdentifier: msR
       ...ContentKeyPolicyPlayReadyContentKeyLocation.type.modelProperties,
       keyId: {
         required: true,
+        nullable: true,
         serializedName: "keyId",
         type: {
           name: "Uuid"
@@ -1353,6 +1354,7 @@ export const ContentKeyPolicySymmetricTokenKey: msRest.CompositeMapper = {
       ...ContentKeyPolicyRestrictionTokenKey.type.modelProperties,
       keyValue: {
         required: true,
+        nullable: true,
         serializedName: "keyValue",
         type: {
           name: "ByteArray"
@@ -1373,6 +1375,7 @@ export const ContentKeyPolicyRsaTokenKey: msRest.CompositeMapper = {
       ...ContentKeyPolicyRestrictionTokenKey.type.modelProperties,
       exponent: {
         required: true,
+        nullable: true,
         serializedName: "exponent",
         type: {
           name: "ByteArray"
@@ -1380,6 +1383,7 @@ export const ContentKeyPolicyRsaTokenKey: msRest.CompositeMapper = {
       },
       modulus: {
         required: true,
+        nullable: true,
         serializedName: "modulus",
         type: {
           name: "ByteArray"
