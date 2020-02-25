@@ -15,7 +15,9 @@ export {
   AppTemplate,
   AppTemplatesResult,
   BaseResource,
+  ErrorAdditionalInfo,
   ErrorDetails,
+  ErrorResponse,
   ErrorResponseBody,
   OperationInputs,
   Resource

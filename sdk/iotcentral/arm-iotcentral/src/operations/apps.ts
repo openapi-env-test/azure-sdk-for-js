@@ -581,7 +581,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     },
     202: {},
     default: {
-      bodyMapper: Mappers.ErrorDetails
+      bodyMapper: Mappers.ErrorResponse
     }
   },
   serializer
