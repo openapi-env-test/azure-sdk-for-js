@@ -169,6 +169,10 @@ export interface Cache extends BaseResource {
    */
   readonly mountAddresses?: string[];
   /**
+   * The IPv4 maximum transmission unit configured for the subnet. Default value: 1500.
+   */
+  mtu?: number;
+  /**
    * ARM provisioning state, see
    * https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property.
    * Possible values include: 'Succeeded', 'Failed', 'Cancelled', 'Creating', 'Deleting',
@@ -352,10 +356,6 @@ export interface StorageTarget extends BaseResource {
    */
   junctions?: NamespaceJunction[];
   /**
-   * Type of the Storage Target. Possible values include: 'nfs3', 'clfs', 'unknown'
-   */
-  targetType?: StorageTargetType;
-  /**
    * ARM provisioning state, see
    * https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property.
    * Possible values include: 'Succeeded', 'Failed', 'Cancelled', 'Creating', 'Deleting',
@@ -374,6 +374,10 @@ export interface StorageTarget extends BaseResource {
    * Properties when targetType is unknown.
    */
   unknown?: UnknownTarget;
+  /**
+   * Polymorphic Discriminator
+   */
+  targetType: string;
 }
 
 /**
@@ -558,14 +562,6 @@ export type FirmwareStatusType = 'available' | 'unavailable';
  * @enum {string}
  */
 export type ReasonCode = 'QuotaId' | 'NotAvailableForSubscription';
-
-/**
- * Defines values for StorageTargetType.
- * Possible values include: 'nfs3', 'clfs', 'unknown'
- * @readonly
- * @enum {string}
- */
-export type StorageTargetType = 'nfs3' | 'clfs' | 'unknown';
 
 /**
  * Contains response data for the list operation.

@@ -251,6 +251,17 @@ export const Cache: msRest.CompositeMapper = {
           }
         }
       },
+      mtu: {
+        serializedName: "properties.mtu",
+        defaultValue: 1500,
+        constraints: {
+          InclusiveMaximum: 1500,
+          InclusiveMinimum: 576
+        },
+        type: {
+          name: "Number"
+        }
+      },
       provisioningState: {
         serializedName: "properties.provisioningState",
         type: {
@@ -565,12 +576,6 @@ export const StorageTarget: msRest.CompositeMapper = {
           }
         }
       },
-      targetType: {
-        serializedName: "properties.targetType",
-        type: {
-          name: "String"
-        }
-      },
       provisioningState: {
         serializedName: "properties.provisioningState",
         type: {
@@ -596,6 +601,13 @@ export const StorageTarget: msRest.CompositeMapper = {
         type: {
           name: "Composite",
           className: "UnknownTarget"
+        }
+      },
+      targetType: {
+        required: true,
+        serializedName: "properties.targetType",
+        type: {
+          name: "String"
         }
       }
     }
