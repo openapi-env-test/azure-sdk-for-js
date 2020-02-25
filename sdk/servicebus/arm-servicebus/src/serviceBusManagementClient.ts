@@ -28,6 +28,7 @@ class ServiceBusManagementClient extends ServiceBusManagementClientContext {
   regions: operations.Regions;
   premiumMessagingRegions: operations.PremiumMessagingRegionsOperations;
   eventHubs: operations.EventHubs;
+  namespaceOperations: operations.NamespaceOperations;
 
   /**
    * Initializes a new instance of the ServiceBusManagementClient class.
@@ -49,6 +50,7 @@ class ServiceBusManagementClient extends ServiceBusManagementClientContext {
     this.regions = new operations.Regions(this);
     this.premiumMessagingRegions = new operations.PremiumMessagingRegionsOperations(this);
     this.eventHubs = new operations.EventHubs(this);
+    this.namespaceOperations = new operations.NamespaceOperations(this);
   }
 }
 

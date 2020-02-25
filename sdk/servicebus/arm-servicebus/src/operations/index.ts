@@ -19,3 +19,4 @@ export * from "./rules";
 export * from "./regions";
 export * from "./premiumMessagingRegionsOperations";
 export * from "./eventHubs";
+export * from "./namespaceOperations";

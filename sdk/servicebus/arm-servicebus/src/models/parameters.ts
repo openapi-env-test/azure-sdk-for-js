@@ -70,6 +70,16 @@ export const configName: msRest.OperationURLParameter = {
     }
   }
 };
+export const locationName: msRest.OperationURLParameter = {
+  parameterPath: "locationName",
+  mapper: {
+    required: true,
+    serializedName: "locationName",
+    type: {
+      name: "String"
+    }
+  }
+};
 export const namespaceName0: msRest.OperationURLParameter = {
   parameterPath: "namespaceName",
   mapper: {
@@ -104,6 +114,16 @@ export const nextPageLink: msRest.OperationURLParameter = {
     }
   },
   skipEncoding: true
+};
+export const operationResultId: msRest.OperationURLParameter = {
+  parameterPath: "operationResultId",
+  mapper: {
+    required: true,
+    serializedName: "operationResultId",
+    type: {
+      name: "String"
+    }
+  }
 };
 export const queueName: msRest.OperationURLParameter = {
   parameterPath: "queueName",
