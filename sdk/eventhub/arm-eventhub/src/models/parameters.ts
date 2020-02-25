@@ -77,8 +77,19 @@ export const eventHubName: msRest.OperationURLParameter = {
     required: true,
     serializedName: "eventHubName",
     constraints: {
+      MaxLength: 50,
       MinLength: 1
     },
+    type: {
+      name: "String"
+    }
+  }
+};
+export const locationName: msRest.OperationURLParameter = {
+  parameterPath: "locationName",
+  mapper: {
+    required: true,
+    serializedName: "locationName",
     type: {
       name: "String"
     }
@@ -108,6 +119,16 @@ export const nextPageLink: msRest.OperationURLParameter = {
     }
   },
   skipEncoding: true
+};
+export const operationResultId: msRest.OperationURLParameter = {
+  parameterPath: "operationResultId",
+  mapper: {
+    required: true,
+    serializedName: "operationResultId",
+    type: {
+      name: "String"
+    }
+  }
 };
 export const resourceGroupName: msRest.OperationURLParameter = {
   parameterPath: "resourceGroupName",

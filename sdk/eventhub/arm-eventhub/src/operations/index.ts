@@ -14,3 +14,4 @@ export * from "./disasterRecoveryConfigs";
 export * from "./eventHubs";
 export * from "./consumerGroups";
 export * from "./regions";
+export * from "./namespaceOperations";

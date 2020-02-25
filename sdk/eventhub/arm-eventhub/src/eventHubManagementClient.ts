@@ -23,6 +23,7 @@ class EventHubManagementClient extends EventHubManagementClientContext {
   eventHubs: operations.EventHubs;
   consumerGroups: operations.ConsumerGroups;
   regions: operations.Regions;
+  namespaceOperations: operations.NamespaceOperations;
 
   /**
    * Initializes a new instance of the EventHubManagementClient class.
@@ -39,6 +40,7 @@ class EventHubManagementClient extends EventHubManagementClientContext {
     this.eventHubs = new operations.EventHubs(this);
     this.consumerGroups = new operations.ConsumerGroups(this);
     this.regions = new operations.Regions(this);
+    this.namespaceOperations = new operations.NamespaceOperations(this);
   }
 }
 
