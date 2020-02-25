@@ -415,7 +415,7 @@ export interface ImageTagRegion {
 /**
  * Contains the possible cases for CreativeWork.
  */
-export type CreativeWorkUnion = CreativeWork | ActionUnion | MediaObjectUnion | Recipe;
+export type CreativeWorkUnion = CreativeWork | ActionUnion | MediaObjectUnion | Recipe | License;
 
 /**
  * The most generic kind of creative work, including books, movies, photographs, software programs,
@@ -492,6 +492,10 @@ export interface CreativeWork {
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly text?: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly mainEntity?: ThingUnion;
 }
 
 /**
@@ -573,6 +577,10 @@ export interface Action {
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly text?: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly mainEntity?: ThingUnion;
   /**
    * The result produced in the action.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
@@ -675,6 +683,10 @@ export interface ImageAction {
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly text?: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly mainEntity?: ThingUnion;
   /**
    * The result produced in the action.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
@@ -1230,6 +1242,10 @@ export interface MediaObject {
    */
   readonly text?: string;
   /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly mainEntity?: ThingUnion;
+  /**
    * Original URL to retrieve the source (file) for the media object (e.g., the source URL for the
    * image).
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
@@ -1341,6 +1357,10 @@ export interface ImageObject {
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly text?: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly mainEntity?: ThingUnion;
   /**
    * Original URL to retrieve the source (file) for the media object (e.g., the source URL for the
    * image).
@@ -1663,6 +1683,10 @@ export interface ImageEntityAction {
    */
   readonly text?: string;
   /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly mainEntity?: ThingUnion;
+  /**
    * The result produced in the action.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
@@ -1688,6 +1712,17 @@ export interface ImageEntityAction {
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly actionType?: string;
+  /**
+   * Information about the entity
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly data?: ThingUnion;
+  /**
+   * Indicates whether entity name or description is translated or not. Only set to true when
+   * translated.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isTranslated?: boolean;
 }
 
 /**
@@ -1775,6 +1810,10 @@ export interface ImageModuleAction {
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly text?: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly mainEntity?: ThingUnion;
   /**
    * The result produced in the action.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
@@ -1883,6 +1922,10 @@ export interface Recipe {
    */
   readonly text?: string;
   /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly mainEntity?: ThingUnion;
+  /**
    * The amount of time the food takes to cook. For example, PT25M. For information about the time
    * format, see http://en.wikipedia.org/wiki/ISO_8601#Durations.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
@@ -1987,6 +2030,10 @@ export interface ImageRecipesAction {
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly text?: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly mainEntity?: ThingUnion;
   /**
    * The result produced in the action.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
@@ -2139,6 +2186,10 @@ export interface ImageRelatedSearchesAction {
    */
   readonly text?: string;
   /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly mainEntity?: ThingUnion;
+  /**
    * The result produced in the action.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
@@ -2246,6 +2297,10 @@ export interface ImageShoppingSourcesAction {
    */
   readonly text?: string;
   /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly mainEntity?: ThingUnion;
+  /**
    * The result produced in the action.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
@@ -2276,6 +2331,86 @@ export interface ImageShoppingSourcesAction {
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly data?: AggregateOffer;
+}
+
+/**
+ * Defines the license under which the text or photo may be used.
+ */
+export interface License {
+  /**
+   * Polymorphic Discriminator
+   */
+  _type: "License";
+  /**
+   * A String identifier.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly id?: string;
+  /**
+   * The URL that returns this resource. To use the URL, append query parameters as appropriate and
+   * include the Ocp-Apim-Subscription-Key header.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly readLink?: string;
+  /**
+   * The URL to Bing's search result for this item.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly webSearchUrl?: string;
+  /**
+   * The name of the thing represented by this object.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly name?: string;
+  /**
+   * The URL to get more information about the thing represented by this object.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly url?: string;
+  /**
+   * An image of the item.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly image?: ImageObject;
+  /**
+   * A short description of the item.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly description?: string;
+  /**
+   * An alias for the item.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly alternateName?: string;
+  /**
+   * An ID that uniquely identifies this item.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly bingId?: string;
+  /**
+   * The URL to a thumbnail of the item.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly thumbnailUrl?: string;
+  /**
+   * The source of the creative work.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly provider?: ThingUnion[];
+  /**
+   * The date on which the CreativeWork was published.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly datePublished?: string;
+  /**
+   * Text content of this creative work.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly text?: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly mainEntity?: ThingUnion;
 }
 
 /**

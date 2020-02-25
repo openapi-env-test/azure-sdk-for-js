@@ -28,6 +28,7 @@ export {
   ImageTag,
   ImageTagRegion,
   Intangible,
+  License,
   MediaObject,
   NormalizedQuadrilateral,
   Offer,

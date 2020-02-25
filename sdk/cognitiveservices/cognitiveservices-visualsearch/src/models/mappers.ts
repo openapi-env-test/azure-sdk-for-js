@@ -300,6 +300,14 @@ export const CreativeWork: msRest.CompositeMapper = {
         type: {
           name: "String"
         }
+      },
+      mainEntity: {
+        readOnly: true,
+        serializedName: "mainEntity",
+        type: {
+          name: "Composite",
+          className: "Thing"
+        }
       }
     }
   }
@@ -885,7 +893,22 @@ export const ImageEntityAction: msRest.CompositeMapper = {
     uberParent: "ResponseBase",
     className: "ImageEntityAction",
     modelProperties: {
-      ...ImageAction.type.modelProperties
+      ...ImageAction.type.modelProperties,
+      data: {
+        readOnly: true,
+        serializedName: "data",
+        type: {
+          name: "Composite",
+          className: "Thing"
+        }
+      },
+      isTranslated: {
+        readOnly: true,
+        serializedName: "isTranslated",
+        type: {
+          name: "Boolean"
+        }
+      }
     }
   }
 };
@@ -1123,6 +1146,19 @@ export const ImageShoppingSourcesAction: msRest.CompositeMapper = {
   }
 };
 
+export const License: msRest.CompositeMapper = {
+  serializedName: "License",
+  type: {
+    name: "Composite",
+    polymorphicDiscriminator: ResponseBase.type.polymorphicDiscriminator,
+    uberParent: "ResponseBase",
+    className: "License",
+    modelProperties: {
+      ...CreativeWork.type.modelProperties
+    }
+  }
+};
+
 export const CropArea: msRest.CompositeMapper = {
   serializedName: "CropArea",
   type: {
@@ -1274,6 +1310,7 @@ export const discriminators = {
   'ResponseBase.ImageRecipesAction' : ImageRecipesAction,
   'ResponseBase.ImageRelatedSearchesAction' : ImageRelatedSearchesAction,
   'ResponseBase.ImageShoppingSourcesAction' : ImageShoppingSourcesAction,
+  'ResponseBase.License' : License,
   'ResponseBase.StructuredValue' : StructuredValue,
   'Properties/Item' : PropertiesItem,
   'PropertiesItem.Rating' : Rating
