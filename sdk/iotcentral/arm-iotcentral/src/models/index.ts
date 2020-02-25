@@ -16,7 +16,7 @@ export { BaseResource, CloudError };
  */
 export interface AppSkuInfo {
   /**
-   * The name of the SKU. Possible values include: 'F1', 'S1', 'ST0', 'ST1', 'ST2'
+   * The name of the SKU. Possible values include: 'ST0', 'ST1', 'ST2'
    */
   name: AppSku;
 }
@@ -317,11 +317,11 @@ export interface OperationListResult extends Array<Operation> {
 
 /**
  * Defines values for AppSku.
- * Possible values include: 'F1', 'S1', 'ST0', 'ST1', 'ST2'
+ * Possible values include: 'ST0', 'ST1', 'ST2'
  * @readonly
  * @enum {string}
  */
-export type AppSku = 'F1' | 'S1' | 'ST0' | 'ST1' | 'ST2';
+export type AppSku = 'ST0' | 'ST1' | 'ST2';
 
 /**
  * Contains response data for the get operation.
