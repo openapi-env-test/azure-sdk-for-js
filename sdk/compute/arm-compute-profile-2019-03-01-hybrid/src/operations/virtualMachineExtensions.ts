@@ -63,11 +63,11 @@ export class VirtualMachineExtensions {
    * @param vmName The name of the virtual machine where the extension should be deleted.
    * @param vmExtensionName The name of the virtual machine extension.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachineExtensionsDeleteMethodResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  deleteMethod(resourceGroupName: string, vmName: string, vmExtensionName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineExtensionsDeleteMethodResponse> {
+  deleteMethod(resourceGroupName: string, vmName: string, vmExtensionName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginDeleteMethod(resourceGroupName,vmName,vmExtensionName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachineExtensionsDeleteMethodResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -104,6 +104,38 @@ export class VirtualMachineExtensions {
       },
       getOperationSpec,
       callback) as Promise<Models.VirtualMachineExtensionsGetResponse>;
+  }
+
+  /**
+   * The operation to get all extensions of a Virtual Machine.
+   * @param resourceGroupName The name of the resource group.
+   * @param vmName The name of the virtual machine containing the extension.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.VirtualMachineExtensionsListResponse>
+   */
+  list(resourceGroupName: string, vmName: string, options?: Models.VirtualMachineExtensionsListOptionalParams): Promise<Models.VirtualMachineExtensionsListResponse>;
+  /**
+   * @param resourceGroupName The name of the resource group.
+   * @param vmName The name of the virtual machine containing the extension.
+   * @param callback The callback
+   */
+  list(resourceGroupName: string, vmName: string, callback: msRest.ServiceCallback<Models.VirtualMachineExtensionsListResult>): void;
+  /**
+   * @param resourceGroupName The name of the resource group.
+   * @param vmName The name of the virtual machine containing the extension.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  list(resourceGroupName: string, vmName: string, options: Models.VirtualMachineExtensionsListOptionalParams, callback: msRest.ServiceCallback<Models.VirtualMachineExtensionsListResult>): void;
+  list(resourceGroupName: string, vmName: string, options?: Models.VirtualMachineExtensionsListOptionalParams | msRest.ServiceCallback<Models.VirtualMachineExtensionsListResult>, callback?: msRest.ServiceCallback<Models.VirtualMachineExtensionsListResult>): Promise<Models.VirtualMachineExtensionsListResponse> {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        vmName,
+        options
+      },
+      listOperationSpec,
+      callback) as Promise<Models.VirtualMachineExtensionsListResponse>;
   }
 
   /**
@@ -202,6 +234,32 @@ const getOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
+const listOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.vmName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.expand0,
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {
+      bodyMapper: Mappers.VirtualMachineExtensionsListResult
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
 const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
   httpMethod: "PUT",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}",
@@ -287,9 +345,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     204: {},
     default: {

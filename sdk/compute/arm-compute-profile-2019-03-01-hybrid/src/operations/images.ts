@@ -58,11 +58,11 @@ export class Images {
    * @param resourceGroupName The name of the resource group.
    * @param imageName The name of the image.
    * @param [options] The optional parameters
-   * @returns Promise<Models.ImagesDeleteMethodResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  deleteMethod(resourceGroupName: string, imageName: string, options?: msRest.RequestOptionsBase): Promise<Models.ImagesDeleteMethodResponse> {
+  deleteMethod(resourceGroupName: string, imageName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginDeleteMethod(resourceGroupName,imageName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.ImagesDeleteMethodResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -426,9 +426,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     204: {},
     default: {

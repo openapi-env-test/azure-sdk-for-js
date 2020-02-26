@@ -33,11 +33,11 @@ export class VirtualMachineScaleSetVMs {
    * @param vmScaleSetName The name of the VM scale set.
    * @param instanceId The instance ID of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachineScaleSetVMsReimageResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  reimage(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineScaleSetVMsReimageResponse> {
+  reimage(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: Models.VirtualMachineScaleSetVMsReimageOptionalParams): Promise<msRest.RestResponse> {
     return this.beginReimage(resourceGroupName,vmScaleSetName,instanceId,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachineScaleSetVMsReimageResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -47,11 +47,11 @@ export class VirtualMachineScaleSetVMs {
    * @param vmScaleSetName The name of the VM scale set.
    * @param instanceId The instance ID of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachineScaleSetVMsReimageAllResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  reimageAll(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineScaleSetVMsReimageAllResponse> {
+  reimageAll(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginReimageAll(resourceGroupName,vmScaleSetName,instanceId,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachineScaleSetVMsReimageAllResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -62,11 +62,11 @@ export class VirtualMachineScaleSetVMs {
    * @param vmScaleSetName The name of the VM scale set.
    * @param instanceId The instance ID of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachineScaleSetVMsDeallocateResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  deallocate(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineScaleSetVMsDeallocateResponse> {
+  deallocate(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginDeallocate(resourceGroupName,vmScaleSetName,instanceId,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachineScaleSetVMsDeallocateResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -90,11 +90,11 @@ export class VirtualMachineScaleSetVMs {
    * @param vmScaleSetName The name of the VM scale set.
    * @param instanceId The instance ID of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachineScaleSetVMsDeleteMethodResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  deleteMethod(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineScaleSetVMsDeleteMethodResponse> {
+  deleteMethod(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginDeleteMethod(resourceGroupName,vmScaleSetName,instanceId,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachineScaleSetVMsDeleteMethodResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -105,7 +105,7 @@ export class VirtualMachineScaleSetVMs {
    * @param [options] The optional parameters
    * @returns Promise<Models.VirtualMachineScaleSetVMsGetResponse>
    */
-  get(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineScaleSetVMsGetResponse>;
+  get(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: Models.VirtualMachineScaleSetVMsGetOptionalParams): Promise<Models.VirtualMachineScaleSetVMsGetResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param vmScaleSetName The name of the VM scale set.
@@ -120,8 +120,8 @@ export class VirtualMachineScaleSetVMs {
    * @param options The optional parameters
    * @param callback The callback
    */
-  get(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.VirtualMachineScaleSetVM>): void;
-  get(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.VirtualMachineScaleSetVM>, callback?: msRest.ServiceCallback<Models.VirtualMachineScaleSetVM>): Promise<Models.VirtualMachineScaleSetVMsGetResponse> {
+  get(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options: Models.VirtualMachineScaleSetVMsGetOptionalParams, callback: msRest.ServiceCallback<Models.VirtualMachineScaleSetVM>): void;
+  get(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: Models.VirtualMachineScaleSetVMsGetOptionalParams | msRest.ServiceCallback<Models.VirtualMachineScaleSetVM>, callback?: msRest.ServiceCallback<Models.VirtualMachineScaleSetVM>): Promise<Models.VirtualMachineScaleSetVMsGetResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
@@ -209,11 +209,11 @@ export class VirtualMachineScaleSetVMs {
    * @param vmScaleSetName The name of the VM scale set.
    * @param instanceId The instance ID of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachineScaleSetVMsPowerOffResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  powerOff(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineScaleSetVMsPowerOffResponse> {
+  powerOff(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: Models.VirtualMachineScaleSetVMsPowerOffOptionalParams): Promise<msRest.RestResponse> {
     return this.beginPowerOff(resourceGroupName,vmScaleSetName,instanceId,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachineScaleSetVMsPowerOffResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -222,11 +222,11 @@ export class VirtualMachineScaleSetVMs {
    * @param vmScaleSetName The name of the VM scale set.
    * @param instanceId The instance ID of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachineScaleSetVMsRestartResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  restart(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineScaleSetVMsRestartResponse> {
+  restart(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginRestart(resourceGroupName,vmScaleSetName,instanceId,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachineScaleSetVMsRestartResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -235,24 +235,25 @@ export class VirtualMachineScaleSetVMs {
    * @param vmScaleSetName The name of the VM scale set.
    * @param instanceId The instance ID of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachineScaleSetVMsStartResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  start(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineScaleSetVMsStartResponse> {
+  start(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginStart(resourceGroupName,vmScaleSetName,instanceId,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachineScaleSetVMsStartResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
-   * Redeploys a virtual machine in a VM scale set.
+   * Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and
+   * powers it back on.
    * @param resourceGroupName The name of the resource group.
    * @param vmScaleSetName The name of the VM scale set.
    * @param instanceId The instance ID of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachineScaleSetVMsRedeployResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  redeploy(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineScaleSetVMsRedeployResponse> {
+  redeploy(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginRedeploy(resourceGroupName,vmScaleSetName,instanceId,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachineScaleSetVMsRedeployResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -261,11 +262,25 @@ export class VirtualMachineScaleSetVMs {
    * @param vmScaleSetName The name of the VM scale set.
    * @param instanceId The instance ID of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachineScaleSetVMsPerformMaintenanceResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  performMaintenance(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineScaleSetVMsPerformMaintenanceResponse> {
+  performMaintenance(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginPerformMaintenance(resourceGroupName,vmScaleSetName,instanceId,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachineScaleSetVMsPerformMaintenanceResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
+  }
+
+  /**
+   * Run command on a virtual machine in a VM scale set.
+   * @param resourceGroupName The name of the resource group.
+   * @param vmScaleSetName The name of the VM scale set.
+   * @param instanceId The instance ID of the virtual machine.
+   * @param parameters Parameters supplied to the Run command operation.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.VirtualMachineScaleSetVMsRunCommandResponse>
+   */
+  runCommand(resourceGroupName: string, vmScaleSetName: string, instanceId: string, parameters: Models.RunCommandInput, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineScaleSetVMsRunCommandResponse> {
+    return this.beginRunCommand(resourceGroupName,vmScaleSetName,instanceId,parameters,options)
+      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachineScaleSetVMsRunCommandResponse>;
   }
 
   /**
@@ -276,7 +291,7 @@ export class VirtualMachineScaleSetVMs {
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
-  beginReimage(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+  beginReimage(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: Models.VirtualMachineScaleSetVMsBeginReimageOptionalParams): Promise<msRestAzure.LROPoller> {
     return this.client.sendLRORequest(
       {
         resourceGroupName,
@@ -384,7 +399,7 @@ export class VirtualMachineScaleSetVMs {
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
-  beginPowerOff(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+  beginPowerOff(resourceGroupName: string, vmScaleSetName: string, instanceId: string, options?: Models.VirtualMachineScaleSetVMsBeginPowerOffOptionalParams): Promise<msRestAzure.LROPoller> {
     return this.client.sendLRORequest(
       {
         resourceGroupName,
@@ -437,7 +452,8 @@ export class VirtualMachineScaleSetVMs {
   }
 
   /**
-   * Redeploys a virtual machine in a VM scale set.
+   * Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and
+   * powers it back on.
    * @param resourceGroupName The name of the resource group.
    * @param vmScaleSetName The name of the VM scale set.
    * @param instanceId The instance ID of the virtual machine.
@@ -473,6 +489,28 @@ export class VirtualMachineScaleSetVMs {
         options
       },
       beginPerformMaintenanceOperationSpec,
+      options);
+  }
+
+  /**
+   * Run command on a virtual machine in a VM scale set.
+   * @param resourceGroupName The name of the resource group.
+   * @param vmScaleSetName The name of the VM scale set.
+   * @param instanceId The instance ID of the virtual machine.
+   * @param parameters Parameters supplied to the Run command operation.
+   * @param [options] The optional parameters
+   * @returns Promise<msRestAzure.LROPoller>
+   */
+  beginRunCommand(resourceGroupName: string, vmScaleSetName: string, instanceId: string, parameters: Models.RunCommandInput, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+    return this.client.sendLRORequest(
+      {
+        resourceGroupName,
+        vmScaleSetName,
+        instanceId,
+        parameters,
+        options
+      },
+      beginRunCommandOperationSpec,
       options);
   }
 
@@ -517,6 +555,7 @@ const getOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
+    Parameters.expand1,
     Parameters.apiVersion0
   ],
   headerParameters: [
@@ -602,10 +641,15 @@ const beginReimageOperationSpec: msRest.OperationSpec = {
   headerParameters: [
     Parameters.acceptLanguage
   ],
+  requestBody: {
+    parameterPath: [
+      "options",
+      "vmScaleSetVMReimageInput"
+    ],
+    mapper: Mappers.VirtualMachineScaleSetVMReimageParameters
+  },
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -630,9 +674,7 @@ const beginReimageAllOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -657,9 +699,7 @@ const beginDeallocateOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -720,9 +760,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     204: {},
     default: {
@@ -742,15 +780,14 @@ const beginPowerOffOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
+    Parameters.skipShutdown,
     Parameters.apiVersion0
   ],
   headerParameters: [
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -775,9 +812,7 @@ const beginRestartOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -802,9 +837,7 @@ const beginStartOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -829,9 +862,7 @@ const beginRedeployOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -856,8 +887,40 @@ const beginPerformMaintenanceOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
+    200: {},
+    202: {},
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const beginRunCommandOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/runCommand",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.vmScaleSetName,
+    Parameters.instanceId,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "parameters",
+    mapper: {
+      ...Mappers.RunCommandInput,
+      required: true
+    }
+  },
+  responses: {
     200: {
-      bodyMapper: Mappers.OperationStatusResponse
+      bodyMapper: Mappers.RunCommandResult
     },
     202: {},
     default: {

@@ -44,6 +44,7 @@ export {
   DedicatedHostAllocatableVM,
   DedicatedHostAvailableCapacity,
   DedicatedHostGroup,
+  DedicatedHostGroupListResult,
   DedicatedHostGroupUpdate,
   DedicatedHostInstanceView,
   DedicatedHostUpdate,

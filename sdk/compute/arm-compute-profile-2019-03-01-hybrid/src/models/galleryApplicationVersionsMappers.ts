@@ -66,6 +66,7 @@ export {
   GalleryApplication,
   GalleryApplicationUpdate,
   GalleryApplicationVersion,
+  GalleryApplicationVersionList,
   GalleryApplicationVersionPublishingProfile,
   GalleryApplicationVersionUpdate,
   GalleryArtifactPublishingProfileBase,

@@ -28,38 +28,6 @@ export class VirtualMachines {
   }
 
   /**
-   * The operation to get all extensions of a Virtual Machine.
-   * @param resourceGroupName The name of the resource group.
-   * @param vmName The name of the virtual machine containing the extension.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachinesGetExtensionsResponse>
-   */
-  getExtensions(resourceGroupName: string, vmName: string, options?: Models.VirtualMachinesGetExtensionsOptionalParams): Promise<Models.VirtualMachinesGetExtensionsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param vmName The name of the virtual machine containing the extension.
-   * @param callback The callback
-   */
-  getExtensions(resourceGroupName: string, vmName: string, callback: msRest.ServiceCallback<Models.VirtualMachineExtensionsListResult>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param vmName The name of the virtual machine containing the extension.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  getExtensions(resourceGroupName: string, vmName: string, options: Models.VirtualMachinesGetExtensionsOptionalParams, callback: msRest.ServiceCallback<Models.VirtualMachineExtensionsListResult>): void;
-  getExtensions(resourceGroupName: string, vmName: string, options?: Models.VirtualMachinesGetExtensionsOptionalParams | msRest.ServiceCallback<Models.VirtualMachineExtensionsListResult>, callback?: msRest.ServiceCallback<Models.VirtualMachineExtensionsListResult>): Promise<Models.VirtualMachinesGetExtensionsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        vmName,
-        options
-      },
-      getExtensionsOperationSpec,
-      callback) as Promise<Models.VirtualMachinesGetExtensionsResponse>;
-  }
-
-  /**
    * Gets all the virtual machines under the specified subscription for the specified location.
    * @param location The location for which virtual machines under the subscription are queried.
    * @param [options] The optional parameters
@@ -102,7 +70,8 @@ export class VirtualMachines {
   }
 
   /**
-   * The operation to create or update a virtual machine.
+   * The operation to create or update a virtual machine. Please note some properties can be set only
+   * during virtual machine creation.
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param parameters Parameters supplied to the Create Virtual Machine operation.
@@ -132,11 +101,11 @@ export class VirtualMachines {
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachinesDeleteMethodResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  deleteMethod(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachinesDeleteMethodResponse> {
+  deleteMethod(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginDeleteMethod(resourceGroupName,vmName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachinesDeleteMethodResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -209,11 +178,11 @@ export class VirtualMachines {
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachinesConvertToManagedDisksResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  convertToManagedDisks(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachinesConvertToManagedDisksResponse> {
+  convertToManagedDisks(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginConvertToManagedDisks(resourceGroupName,vmName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachinesConvertToManagedDisksResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -222,35 +191,40 @@ export class VirtualMachines {
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachinesDeallocateResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  deallocate(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachinesDeallocateResponse> {
+  deallocate(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginDeallocate(resourceGroupName,vmName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachinesDeallocateResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
-   * Sets the state of the virtual machine to generalized.
+   * Sets the OS state of the virtual machine to generalized. It is recommended to sysprep the
+   * virtual machine before performing this operation. <br>For Windows, please refer to [Create a
+   * managed image of a generalized VM in
+   * Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/capture-image-resource).<br>For
+   * Linux, please refer to [How to create an image of a virtual machine or
+   * VHD](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/capture-image).
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachinesGeneralizeResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  generalize(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachinesGeneralizeResponse>;
+  generalize(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param callback The callback
    */
-  generalize(resourceGroupName: string, vmName: string, callback: msRest.ServiceCallback<Models.OperationStatusResponse>): void;
+  generalize(resourceGroupName: string, vmName: string, callback: msRest.ServiceCallback<void>): void;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param options The optional parameters
    * @param callback The callback
    */
-  generalize(resourceGroupName: string, vmName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.OperationStatusResponse>): void;
-  generalize(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.OperationStatusResponse>, callback?: msRest.ServiceCallback<Models.OperationStatusResponse>): Promise<Models.VirtualMachinesGeneralizeResponse> {
+  generalize(resourceGroupName: string, vmName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
+  generalize(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
@@ -258,7 +232,7 @@ export class VirtualMachines {
         options
       },
       generalizeOperationSpec,
-      callback) as Promise<Models.VirtualMachinesGeneralizeResponse>;
+      callback);
   }
 
   /**
@@ -296,7 +270,7 @@ export class VirtualMachines {
    * @param [options] The optional parameters
    * @returns Promise<Models.VirtualMachinesListAllResponse>
    */
-  listAll(options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachinesListAllResponse>;
+  listAll(options?: Models.VirtualMachinesListAllOptionalParams): Promise<Models.VirtualMachinesListAllResponse>;
   /**
    * @param callback The callback
    */
@@ -305,8 +279,8 @@ export class VirtualMachines {
    * @param options The optional parameters
    * @param callback The callback
    */
-  listAll(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.VirtualMachineListResult>): void;
-  listAll(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.VirtualMachineListResult>, callback?: msRest.ServiceCallback<Models.VirtualMachineListResult>): Promise<Models.VirtualMachinesListAllResponse> {
+  listAll(options: Models.VirtualMachinesListAllOptionalParams, callback: msRest.ServiceCallback<Models.VirtualMachineListResult>): void;
+  listAll(options?: Models.VirtualMachinesListAllOptionalParams | msRest.ServiceCallback<Models.VirtualMachineListResult>, callback?: msRest.ServiceCallback<Models.VirtualMachineListResult>): Promise<Models.VirtualMachinesListAllResponse> {
     return this.client.sendOperationRequest(
       {
         options
@@ -353,11 +327,23 @@ export class VirtualMachines {
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachinesPowerOffResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  powerOff(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachinesPowerOffResponse> {
+  powerOff(resourceGroupName: string, vmName: string, options?: Models.VirtualMachinesPowerOffOptionalParams): Promise<msRest.RestResponse> {
     return this.beginPowerOff(resourceGroupName,vmName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachinesPowerOffResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
+  }
+
+  /**
+   * The operation to reapply a virtual machine's state.
+   * @param resourceGroupName The name of the resource group.
+   * @param vmName The name of the virtual machine.
+   * @param [options] The optional parameters
+   * @returns Promise<msRest.RestResponse>
+   */
+  reapply(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
+    return this.beginReapply(resourceGroupName,vmName,options)
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -365,11 +351,11 @@ export class VirtualMachines {
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachinesRestartResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  restart(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachinesRestartResponse> {
+  restart(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginRestart(resourceGroupName,vmName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachinesRestartResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -377,23 +363,35 @@ export class VirtualMachines {
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachinesStartResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  start(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachinesStartResponse> {
+  start(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginStart(resourceGroupName,vmName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachinesStartResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
-   * The operation to redeploy a virtual machine.
+   * Shuts down the virtual machine, moves it to a new node, and powers it back on.
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachinesRedeployResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  redeploy(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachinesRedeployResponse> {
+  redeploy(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginRedeploy(resourceGroupName,vmName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachinesRedeployResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
+  }
+
+  /**
+   * Reimages the virtual machine which has an ephemeral OS disk back to its initial state.
+   * @param resourceGroupName The name of the resource group.
+   * @param vmName The name of the virtual machine.
+   * @param [options] The optional parameters
+   * @returns Promise<msRest.RestResponse>
+   */
+  reimage(resourceGroupName: string, vmName: string, options?: Models.VirtualMachinesReimageOptionalParams): Promise<msRest.RestResponse> {
+    return this.beginReimage(resourceGroupName,vmName,options)
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -401,11 +399,24 @@ export class VirtualMachines {
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachinesPerformMaintenanceResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  performMaintenance(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachinesPerformMaintenanceResponse> {
+  performMaintenance(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginPerformMaintenance(resourceGroupName,vmName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachinesPerformMaintenanceResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
+  }
+
+  /**
+   * Run command on the VM.
+   * @param resourceGroupName The name of the resource group.
+   * @param vmName The name of the virtual machine.
+   * @param parameters Parameters supplied to the Run command operation.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.VirtualMachinesRunCommandResponse>
+   */
+  runCommand(resourceGroupName: string, vmName: string, parameters: Models.RunCommandInput, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachinesRunCommandResponse> {
+    return this.beginRunCommand(resourceGroupName,vmName,parameters,options)
+      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachinesRunCommandResponse>;
   }
 
   /**
@@ -430,7 +441,8 @@ export class VirtualMachines {
   }
 
   /**
-   * The operation to create or update a virtual machine.
+   * The operation to create or update a virtual machine. Please note some properties can be set only
+   * during virtual machine creation.
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param parameters Parameters supplied to the Create Virtual Machine operation.
@@ -533,7 +545,7 @@ export class VirtualMachines {
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
-  beginPowerOff(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+  beginPowerOff(resourceGroupName: string, vmName: string, options?: Models.VirtualMachinesBeginPowerOffOptionalParams): Promise<msRestAzure.LROPoller> {
     return this.client.sendLRORequest(
       {
         resourceGroupName,
@@ -541,6 +553,24 @@ export class VirtualMachines {
         options
       },
       beginPowerOffOperationSpec,
+      options);
+  }
+
+  /**
+   * The operation to reapply a virtual machine's state.
+   * @param resourceGroupName The name of the resource group.
+   * @param vmName The name of the virtual machine.
+   * @param [options] The optional parameters
+   * @returns Promise<msRestAzure.LROPoller>
+   */
+  beginReapply(resourceGroupName: string, vmName: string, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+    return this.client.sendLRORequest(
+      {
+        resourceGroupName,
+        vmName,
+        options
+      },
+      beginReapplyOperationSpec,
       options);
   }
 
@@ -581,7 +611,7 @@ export class VirtualMachines {
   }
 
   /**
-   * The operation to redeploy a virtual machine.
+   * Shuts down the virtual machine, moves it to a new node, and powers it back on.
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param [options] The optional parameters
@@ -595,6 +625,24 @@ export class VirtualMachines {
         options
       },
       beginRedeployOperationSpec,
+      options);
+  }
+
+  /**
+   * Reimages the virtual machine which has an ephemeral OS disk back to its initial state.
+   * @param resourceGroupName The name of the resource group.
+   * @param vmName The name of the virtual machine.
+   * @param [options] The optional parameters
+   * @returns Promise<msRestAzure.LROPoller>
+   */
+  beginReimage(resourceGroupName: string, vmName: string, options?: Models.VirtualMachinesBeginReimageOptionalParams): Promise<msRestAzure.LROPoller> {
+    return this.client.sendLRORequest(
+      {
+        resourceGroupName,
+        vmName,
+        options
+      },
+      beginReimageOperationSpec,
       options);
   }
 
@@ -613,6 +661,26 @@ export class VirtualMachines {
         options
       },
       beginPerformMaintenanceOperationSpec,
+      options);
+  }
+
+  /**
+   * Run command on the VM.
+   * @param resourceGroupName The name of the resource group.
+   * @param vmName The name of the virtual machine.
+   * @param parameters Parameters supplied to the Run command operation.
+   * @param [options] The optional parameters
+   * @returns Promise<msRestAzure.LROPoller>
+   */
+  beginRunCommand(resourceGroupName: string, vmName: string, parameters: Models.RunCommandInput, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+    return this.client.sendLRORequest(
+      {
+        resourceGroupName,
+        vmName,
+        parameters,
+        options
+      },
+      beginRunCommandOperationSpec,
       options);
   }
 
@@ -705,32 +773,6 @@ export class VirtualMachines {
 
 // Operation Specifications
 const serializer = new msRest.Serializer(Mappers);
-const getExtensionsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.vmName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.expand0,
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.VirtualMachineExtensionsListResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
 const listByLocationOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
   path: "subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines",
@@ -821,9 +863,7 @@ const generalizeOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     default: {
       bodyMapper: Mappers.CloudError
     }
@@ -862,7 +902,8 @@ const listAllOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion0,
+    Parameters.statusOnly
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -1021,9 +1062,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     204: {},
     default: {
@@ -1048,9 +1087,7 @@ const beginConvertToManagedDisksOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -1074,9 +1111,7 @@ const beginDeallocateOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -1094,15 +1129,38 @@ const beginPowerOffOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
+    Parameters.skipShutdown,
     Parameters.apiVersion0
   ],
   headerParameters: [
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
+    202: {},
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const beginReapplyOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/reapply",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.vmName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -1126,9 +1184,7 @@ const beginRestartOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -1152,9 +1208,7 @@ const beginStartOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -1178,9 +1232,38 @@ const beginRedeployOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
+    202: {},
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const beginReimageOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/reimage",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.vmName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: [
+      "options",
+      "parameters"
+    ],
+    mapper: Mappers.VirtualMachineReimageParameters
+  },
+  responses: {
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -1204,8 +1287,39 @@ const beginPerformMaintenanceOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
+    200: {},
+    202: {},
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const beginRunCommandOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/runCommand",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.vmName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "parameters",
+    mapper: {
+      ...Mappers.RunCommandInput,
+      required: true
+    }
+  },
+  responses: {
     200: {
-      bodyMapper: Mappers.OperationStatusResponse
+      bodyMapper: Mappers.RunCommandResult
     },
     202: {},
     default: {

@@ -46,6 +46,7 @@ export {
   DedicatedHostGroup,
   DedicatedHostGroupUpdate,
   DedicatedHostInstanceView,
+  DedicatedHostListResult,
   DedicatedHostUpdate,
   DiagnosticsProfile,
   DiffDiskSettings,

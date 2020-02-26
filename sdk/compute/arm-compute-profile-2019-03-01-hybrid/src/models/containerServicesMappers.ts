@@ -29,6 +29,7 @@ export {
   ContainerServiceCustomProfile,
   ContainerServiceDiagnosticsProfile,
   ContainerServiceLinuxProfile,
+  ContainerServiceListResult,
   ContainerServiceMasterProfile,
   ContainerServiceOrchestratorProfile,
   ContainerServiceServicePrincipalProfile,

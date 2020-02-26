@@ -103,23 +103,23 @@ export class AvailabilitySets {
    * @param resourceGroupName The name of the resource group.
    * @param availabilitySetName The name of the availability set.
    * @param [options] The optional parameters
-   * @returns Promise<Models.AvailabilitySetsDeleteMethodResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  deleteMethod(resourceGroupName: string, availabilitySetName: string, options?: msRest.RequestOptionsBase): Promise<Models.AvailabilitySetsDeleteMethodResponse>;
+  deleteMethod(resourceGroupName: string, availabilitySetName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param availabilitySetName The name of the availability set.
    * @param callback The callback
    */
-  deleteMethod(resourceGroupName: string, availabilitySetName: string, callback: msRest.ServiceCallback<Models.OperationStatusResponse>): void;
+  deleteMethod(resourceGroupName: string, availabilitySetName: string, callback: msRest.ServiceCallback<void>): void;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param availabilitySetName The name of the availability set.
    * @param options The optional parameters
    * @param callback The callback
    */
-  deleteMethod(resourceGroupName: string, availabilitySetName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.OperationStatusResponse>): void;
-  deleteMethod(resourceGroupName: string, availabilitySetName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.OperationStatusResponse>, callback?: msRest.ServiceCallback<Models.OperationStatusResponse>): Promise<Models.AvailabilitySetsDeleteMethodResponse> {
+  deleteMethod(resourceGroupName: string, availabilitySetName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
+  deleteMethod(resourceGroupName: string, availabilitySetName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
@@ -127,7 +127,7 @@ export class AvailabilitySets {
         options
       },
       deleteMethodOperationSpec,
-      callback) as Promise<Models.AvailabilitySetsDeleteMethodResponse>;
+      callback);
   }
 
   /**
@@ -167,7 +167,7 @@ export class AvailabilitySets {
    * @param [options] The optional parameters
    * @returns Promise<Models.AvailabilitySetsListBySubscriptionResponse>
    */
-  listBySubscription(options?: msRest.RequestOptionsBase): Promise<Models.AvailabilitySetsListBySubscriptionResponse>;
+  listBySubscription(options?: Models.AvailabilitySetsListBySubscriptionOptionalParams): Promise<Models.AvailabilitySetsListBySubscriptionResponse>;
   /**
    * @param callback The callback
    */
@@ -176,8 +176,8 @@ export class AvailabilitySets {
    * @param options The optional parameters
    * @param callback The callback
    */
-  listBySubscription(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.AvailabilitySetListResult>): void;
-  listBySubscription(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.AvailabilitySetListResult>, callback?: msRest.ServiceCallback<Models.AvailabilitySetListResult>): Promise<Models.AvailabilitySetsListBySubscriptionResponse> {
+  listBySubscription(options: Models.AvailabilitySetsListBySubscriptionOptionalParams, callback: msRest.ServiceCallback<Models.AvailabilitySetListResult>): void;
+  listBySubscription(options?: Models.AvailabilitySetsListBySubscriptionOptionalParams | msRest.ServiceCallback<Models.AvailabilitySetListResult>, callback?: msRest.ServiceCallback<Models.AvailabilitySetListResult>): Promise<Models.AvailabilitySetsListBySubscriptionResponse> {
     return this.client.sendOperationRequest(
       {
         options
@@ -385,9 +385,7 @@ const deleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     204: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -428,7 +426,8 @@ const listBySubscriptionOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion0,
+    Parameters.expand0
   ],
   headerParameters: [
     Parameters.acceptLanguage

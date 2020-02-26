@@ -80,6 +80,7 @@ export {
   GalleryImageVersionPublishingProfile,
   GalleryImageVersionStorageProfile,
   GalleryImageVersionUpdate,
+  GalleryList,
   GalleryOSDiskImage,
   GalleryUpdate,
   HardwareProfile,

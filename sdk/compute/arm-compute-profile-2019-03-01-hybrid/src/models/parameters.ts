@@ -26,7 +26,7 @@ export const apiVersion0: msRest.OperationQueryParameter = {
     required: true,
     isConstant: true,
     serializedName: "api-version",
-    defaultValue: '2017-12-01',
+    defaultValue: '2019-07-01',
     type: {
       name: "String"
     }
@@ -38,7 +38,43 @@ export const apiVersion1: msRest.OperationQueryParameter = {
     required: true,
     isConstant: true,
     serializedName: "api-version",
-    defaultValue: '2017-03-30',
+    defaultValue: '2019-04-01',
+    type: {
+      name: "String"
+    }
+  }
+};
+export const apiVersion2: msRest.OperationQueryParameter = {
+  parameterPath: "apiVersion",
+  mapper: {
+    required: true,
+    isConstant: true,
+    serializedName: "api-version",
+    defaultValue: '2019-11-01',
+    type: {
+      name: "String"
+    }
+  }
+};
+export const apiVersion3: msRest.OperationQueryParameter = {
+  parameterPath: "apiVersion",
+  mapper: {
+    required: true,
+    isConstant: true,
+    serializedName: "api-version",
+    defaultValue: '2019-12-01',
+    type: {
+      name: "String"
+    }
+  }
+};
+export const apiVersion4: msRest.OperationQueryParameter = {
+  parameterPath: "apiVersion",
+  mapper: {
+    required: true,
+    isConstant: true,
+    serializedName: "api-version",
+    defaultValue: '2017-01-31',
     type: {
       name: "String"
     }
@@ -49,6 +85,36 @@ export const availabilitySetName: msRest.OperationURLParameter = {
   mapper: {
     required: true,
     serializedName: "availabilitySetName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const commandId: msRest.OperationURLParameter = {
+  parameterPath: "commandId",
+  mapper: {
+    required: true,
+    serializedName: "commandId",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const containerServiceName: msRest.OperationURLParameter = {
+  parameterPath: "containerServiceName",
+  mapper: {
+    required: true,
+    serializedName: "containerServiceName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const diskEncryptionSetName: msRest.OperationURLParameter = {
+  parameterPath: "diskEncryptionSetName",
+  mapper: {
+    required: true,
+    serializedName: "diskEncryptionSetName",
     type: {
       name: "String"
     }
@@ -103,11 +169,93 @@ export const filter: msRest.OperationQueryParameter = {
     }
   }
 };
+export const galleryApplicationName: msRest.OperationURLParameter = {
+  parameterPath: "galleryApplicationName",
+  mapper: {
+    required: true,
+    serializedName: "galleryApplicationName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const galleryApplicationVersionName: msRest.OperationURLParameter = {
+  parameterPath: "galleryApplicationVersionName",
+  mapper: {
+    required: true,
+    serializedName: "galleryApplicationVersionName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const galleryImageName: msRest.OperationURLParameter = {
+  parameterPath: "galleryImageName",
+  mapper: {
+    required: true,
+    serializedName: "galleryImageName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const galleryImageVersionName: msRest.OperationURLParameter = {
+  parameterPath: "galleryImageVersionName",
+  mapper: {
+    required: true,
+    serializedName: "galleryImageVersionName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const galleryName: msRest.OperationURLParameter = {
+  parameterPath: "galleryName",
+  mapper: {
+    required: true,
+    serializedName: "galleryName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const hostGroupName: msRest.OperationURLParameter = {
+  parameterPath: "hostGroupName",
+  mapper: {
+    required: true,
+    serializedName: "hostGroupName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const hostName: msRest.OperationURLParameter = {
+  parameterPath: "hostName",
+  mapper: {
+    required: true,
+    serializedName: "hostName",
+    type: {
+      name: "String"
+    }
+  }
+};
 export const imageName: msRest.OperationURLParameter = {
   parameterPath: "imageName",
   mapper: {
     required: true,
     serializedName: "imageName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const includeColocationStatus: msRest.OperationQueryParameter = {
+  parameterPath: [
+    "options",
+    "includeColocationStatus"
+  ],
+  mapper: {
+    serializedName: "includeColocationStatus",
     type: {
       name: "String"
     }
@@ -189,6 +337,16 @@ export const platformUpdateDomain: msRest.OperationQueryParameter = {
     }
   }
 };
+export const proximityPlacementGroupName: msRest.OperationURLParameter = {
+  parameterPath: "proximityPlacementGroupName",
+  mapper: {
+    required: true,
+    serializedName: "proximityPlacementGroupName",
+    type: {
+      name: "String"
+    }
+  }
+};
 export const publisherName: msRest.OperationURLParameter = {
   parameterPath: "publisherName",
   mapper: {
@@ -221,6 +379,19 @@ export const select: msRest.OperationQueryParameter = {
     }
   }
 };
+export const skipShutdown: msRest.OperationQueryParameter = {
+  parameterPath: [
+    "options",
+    "skipShutdown"
+  ],
+  mapper: {
+    serializedName: "skipShutdown",
+    defaultValue: false,
+    type: {
+      name: "Boolean"
+    }
+  }
+};
 export const skus: msRest.OperationURLParameter = {
   parameterPath: "skus",
   mapper: {
@@ -236,6 +407,18 @@ export const snapshotName: msRest.OperationURLParameter = {
   mapper: {
     required: true,
     serializedName: "snapshotName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const statusOnly: msRest.OperationQueryParameter = {
+  parameterPath: [
+    "options",
+    "statusOnly"
+  ],
+  mapper: {
+    serializedName: "statusOnly",
     type: {
       name: "String"
     }

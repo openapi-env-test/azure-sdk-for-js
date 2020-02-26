@@ -102,11 +102,11 @@ export class Disks {
    * after the disk is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The
    * maximum name length is 80 characters.
    * @param [options] The optional parameters
-   * @returns Promise<Models.DisksDeleteMethodResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  deleteMethod(resourceGroupName: string, diskName: string, options?: msRest.RequestOptionsBase): Promise<Models.DisksDeleteMethodResponse> {
+  deleteMethod(resourceGroupName: string, diskName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginDeleteMethod(resourceGroupName,diskName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.DisksDeleteMethodResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -183,11 +183,11 @@ export class Disks {
    * after the disk is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The
    * maximum name length is 80 characters.
    * @param [options] The optional parameters
-   * @returns Promise<Models.DisksRevokeAccessResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  revokeAccess(resourceGroupName: string, diskName: string, options?: msRest.RequestOptionsBase): Promise<Models.DisksRevokeAccessResponse> {
+  revokeAccess(resourceGroupName: string, diskName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginRevokeAccess(resourceGroupName,diskName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.DisksRevokeAccessResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -364,7 +364,7 @@ const getOperationSpec: msRest.OperationSpec = {
     Parameters.diskName
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -388,7 +388,7 @@ const listByResourceGroupOperationSpec: msRest.OperationSpec = {
     Parameters.resourceGroupName
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -411,7 +411,7 @@ const listOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -436,7 +436,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.diskName
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -471,7 +471,7 @@ const beginUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.diskName
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -506,15 +506,13 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.diskName
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     204: {},
     default: {
@@ -533,7 +531,7 @@ const beginGrantAccessOperationSpec: msRest.OperationSpec = {
     Parameters.diskName
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -566,15 +564,13 @@ const beginRevokeAccessOperationSpec: msRest.OperationSpec = {
     Parameters.diskName
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError

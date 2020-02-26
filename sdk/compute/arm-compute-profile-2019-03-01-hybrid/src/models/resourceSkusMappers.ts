@@ -8,9 +8,13 @@
 
 export {
   CloudError,
-  LogAnalyticsInputBase,
-  LogAnalyticsOperationResult,
-  LogAnalyticsOutput,
-  RequestRateByIntervalInput,
-  ThrottledRequestsInput
+  ResourceSku,
+  ResourceSkuCapabilities,
+  ResourceSkuCapacity,
+  ResourceSkuCosts,
+  ResourceSkuLocationInfo,
+  ResourceSkuRestrictionInfo,
+  ResourceSkuRestrictions,
+  ResourceSkusResult,
+  ResourceSkuZoneDetails
 } from "../models/mappers";

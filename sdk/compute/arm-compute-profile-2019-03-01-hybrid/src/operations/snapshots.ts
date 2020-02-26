@@ -102,11 +102,11 @@ export class Snapshots {
    * after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The
    * max name length is 80 characters.
    * @param [options] The optional parameters
-   * @returns Promise<Models.SnapshotsDeleteMethodResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  deleteMethod(resourceGroupName: string, snapshotName: string, options?: msRest.RequestOptionsBase): Promise<Models.SnapshotsDeleteMethodResponse> {
+  deleteMethod(resourceGroupName: string, snapshotName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginDeleteMethod(resourceGroupName,snapshotName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.SnapshotsDeleteMethodResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -184,11 +184,11 @@ export class Snapshots {
    * after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The
    * max name length is 80 characters.
    * @param [options] The optional parameters
-   * @returns Promise<Models.SnapshotsRevokeAccessResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  revokeAccess(resourceGroupName: string, snapshotName: string, options?: msRest.RequestOptionsBase): Promise<Models.SnapshotsRevokeAccessResponse> {
+  revokeAccess(resourceGroupName: string, snapshotName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginRevokeAccess(resourceGroupName,snapshotName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.SnapshotsRevokeAccessResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -366,7 +366,7 @@ const getOperationSpec: msRest.OperationSpec = {
     Parameters.snapshotName
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -390,7 +390,7 @@ const listByResourceGroupOperationSpec: msRest.OperationSpec = {
     Parameters.resourceGroupName
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -413,7 +413,7 @@ const listOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -438,7 +438,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.snapshotName
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -473,7 +473,7 @@ const beginUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.snapshotName
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -508,15 +508,13 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.snapshotName
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     204: {},
     default: {
@@ -535,7 +533,7 @@ const beginGrantAccessOperationSpec: msRest.OperationSpec = {
     Parameters.snapshotName
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -568,15 +566,13 @@ const beginRevokeAccessOperationSpec: msRest.OperationSpec = {
     Parameters.snapshotName
   ],
   queryParameters: [
-    Parameters.apiVersion1
+    Parameters.apiVersion2
   ],
   headerParameters: [
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError

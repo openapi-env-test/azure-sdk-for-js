@@ -8,9 +8,8 @@
 
 export {
   CloudError,
-  LogAnalyticsInputBase,
-  LogAnalyticsOperationResult,
-  LogAnalyticsOutput,
-  RequestRateByIntervalInput,
-  ThrottledRequestsInput
+  RunCommandDocument,
+  RunCommandDocumentBase,
+  RunCommandListResult,
+  RunCommandParameterDefinition
 } from "../models/mappers";

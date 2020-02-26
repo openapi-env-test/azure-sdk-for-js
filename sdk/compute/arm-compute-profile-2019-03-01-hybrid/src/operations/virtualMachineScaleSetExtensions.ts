@@ -43,16 +43,30 @@ export class VirtualMachineScaleSetExtensions {
   }
 
   /**
+   * The operation to update an extension.
+   * @param resourceGroupName The name of the resource group.
+   * @param vmScaleSetName The name of the VM scale set where the extension should be updated.
+   * @param vmssExtensionName The name of the VM scale set extension.
+   * @param extensionParameters Parameters supplied to the Update VM scale set Extension operation.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.VirtualMachineScaleSetExtensionsUpdateResponse>
+   */
+  update(resourceGroupName: string, vmScaleSetName: string, vmssExtensionName: string, extensionParameters: Models.VirtualMachineScaleSetExtensionUpdate, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineScaleSetExtensionsUpdateResponse> {
+    return this.beginUpdate(resourceGroupName,vmScaleSetName,vmssExtensionName,extensionParameters,options)
+      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachineScaleSetExtensionsUpdateResponse>;
+  }
+
+  /**
    * The operation to delete the extension.
    * @param resourceGroupName The name of the resource group.
    * @param vmScaleSetName The name of the VM scale set where the extension should be deleted.
    * @param vmssExtensionName The name of the VM scale set extension.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachineScaleSetExtensionsDeleteMethodResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  deleteMethod(resourceGroupName: string, vmScaleSetName: string, vmssExtensionName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineScaleSetExtensionsDeleteMethodResponse> {
+  deleteMethod(resourceGroupName: string, vmScaleSetName: string, vmssExtensionName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginDeleteMethod(resourceGroupName,vmScaleSetName,vmssExtensionName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachineScaleSetExtensionsDeleteMethodResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -143,6 +157,28 @@ export class VirtualMachineScaleSetExtensions {
         options
       },
       beginCreateOrUpdateOperationSpec,
+      options);
+  }
+
+  /**
+   * The operation to update an extension.
+   * @param resourceGroupName The name of the resource group.
+   * @param vmScaleSetName The name of the VM scale set where the extension should be updated.
+   * @param vmssExtensionName The name of the VM scale set extension.
+   * @param extensionParameters Parameters supplied to the Update VM scale set Extension operation.
+   * @param [options] The optional parameters
+   * @returns Promise<msRestAzure.LROPoller>
+   */
+  beginUpdate(resourceGroupName: string, vmScaleSetName: string, vmssExtensionName: string, extensionParameters: Models.VirtualMachineScaleSetExtensionUpdate, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+    return this.client.sendLRORequest(
+      {
+        resourceGroupName,
+        vmScaleSetName,
+        vmssExtensionName,
+        extensionParameters,
+        options
+      },
+      beginUpdateOperationSpec,
       options);
   }
 
@@ -285,6 +321,42 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
+const beginUpdateOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PATCH",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.vmScaleSetName,
+    Parameters.vmssExtensionName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "extensionParameters",
+    mapper: {
+      ...Mappers.VirtualMachineScaleSetExtensionUpdate,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.VirtualMachineScaleSetExtension
+    },
+    201: {
+      bodyMapper: Mappers.VirtualMachineScaleSetExtension
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
 const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
   httpMethod: "DELETE",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}",
@@ -301,9 +373,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     204: {},
     default: {

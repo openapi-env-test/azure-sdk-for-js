@@ -32,11 +32,11 @@ export class VirtualMachineScaleSetRollingUpgrades {
    * @param resourceGroupName The name of the resource group.
    * @param vmScaleSetName The name of the VM scale set.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachineScaleSetRollingUpgradesCancelResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  cancel(resourceGroupName: string, vmScaleSetName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineScaleSetRollingUpgradesCancelResponse> {
+  cancel(resourceGroupName: string, vmScaleSetName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginCancel(resourceGroupName,vmScaleSetName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachineScaleSetRollingUpgradesCancelResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -46,11 +46,25 @@ export class VirtualMachineScaleSetRollingUpgrades {
    * @param resourceGroupName The name of the resource group.
    * @param vmScaleSetName The name of the VM scale set.
    * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualMachineScaleSetRollingUpgradesStartOSUpgradeResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  startOSUpgrade(resourceGroupName: string, vmScaleSetName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualMachineScaleSetRollingUpgradesStartOSUpgradeResponse> {
+  startOSUpgrade(resourceGroupName: string, vmScaleSetName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginStartOSUpgrade(resourceGroupName,vmScaleSetName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualMachineScaleSetRollingUpgradesStartOSUpgradeResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
+  }
+
+  /**
+   * Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to
+   * the latest available extension version. Instances which are already running the latest extension
+   * versions are not affected.
+   * @param resourceGroupName The name of the resource group.
+   * @param vmScaleSetName The name of the VM scale set.
+   * @param [options] The optional parameters
+   * @returns Promise<msRest.RestResponse>
+   */
+  startExtensionUpgrade(resourceGroupName: string, vmScaleSetName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
+    return this.beginStartExtensionUpgrade(resourceGroupName,vmScaleSetName,options)
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -122,6 +136,26 @@ export class VirtualMachineScaleSetRollingUpgrades {
       beginStartOSUpgradeOperationSpec,
       options);
   }
+
+  /**
+   * Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to
+   * the latest available extension version. Instances which are already running the latest extension
+   * versions are not affected.
+   * @param resourceGroupName The name of the resource group.
+   * @param vmScaleSetName The name of the VM scale set.
+   * @param [options] The optional parameters
+   * @returns Promise<msRestAzure.LROPoller>
+   */
+  beginStartExtensionUpgrade(resourceGroupName: string, vmScaleSetName: string, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+    return this.client.sendLRORequest(
+      {
+        resourceGroupName,
+        vmScaleSetName,
+        options
+      },
+      beginStartExtensionUpgradeOperationSpec,
+      options);
+  }
 }
 
 // Operation Specifications
@@ -166,9 +200,7 @@ const beginCancelOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -192,9 +224,31 @@ const beginStartOSUpgradeOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: Mappers.OperationStatusResponse
-    },
+    200: {},
+    202: {},
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const beginStartExtensionUpgradeOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensionRollingUpgrade",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.vmScaleSetName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
