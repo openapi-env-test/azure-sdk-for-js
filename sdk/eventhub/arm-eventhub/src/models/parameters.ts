@@ -38,7 +38,9 @@ export const apiVersion: msRest.OperationQueryParameter = {
   parameterPath: "apiVersion",
   mapper: {
     required: true,
+    isConstant: true,
     serializedName: "api-version",
+    defaultValue: '2017-04-01',
     type: {
       name: "String"
     }
@@ -77,6 +79,7 @@ export const eventHubName: msRest.OperationURLParameter = {
     required: true,
     serializedName: "eventHubName",
     constraints: {
+      MaxLength: 50,
       MinLength: 1
     },
     type: {
