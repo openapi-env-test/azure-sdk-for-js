@@ -26,7 +26,7 @@ export const apiVersion0: msRest.OperationQueryParameter = {
     required: true,
     isConstant: true,
     serializedName: "api-version",
-    defaultValue: '2019-09-01',
+    defaultValue: '2019-11-01',
     type: {
       name: "String"
     }
@@ -39,18 +39,6 @@ export const apiVersion1: msRest.OperationQueryParameter = {
     isConstant: true,
     serializedName: "api-version",
     defaultValue: '2018-10-01',
-    type: {
-      name: "String"
-    }
-  }
-};
-export const apiVersion2: msRest.OperationQueryParameter = {
-  parameterPath: "apiVersion",
-  mapper: {
-    required: true,
-    isConstant: true,
-    serializedName: "api-version",
-    defaultValue: '2019-06-01',
     type: {
       name: "String"
     }
@@ -121,6 +109,26 @@ export const circuitName: msRest.OperationURLParameter = {
   mapper: {
     required: true,
     serializedName: "circuitName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const commitName: msRest.OperationURLParameter = {
+  parameterPath: "commitName",
+  mapper: {
+    required: true,
+    serializedName: "commitName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const configurationName: msRest.OperationURLParameter = {
+  parameterPath: "configurationName",
+  mapper: {
+    required: true,
+    serializedName: "configurationName",
     type: {
       name: "String"
     }
@@ -243,6 +251,16 @@ export const firewallPolicyName: msRest.OperationURLParameter = {
   mapper: {
     required: true,
     serializedName: "firewallPolicyName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const flowLogName: msRest.OperationURLParameter = {
+  parameterPath: "flowLogName",
+  mapper: {
+    required: true,
+    serializedName: "flowLogName",
     type: {
       name: "String"
     }
@@ -416,11 +434,31 @@ export const natGatewayName: msRest.OperationURLParameter = {
     }
   }
 };
+export const networkGroupName: msRest.OperationURLParameter = {
+  parameterPath: "networkGroupName",
+  mapper: {
+    required: true,
+    serializedName: "networkGroupName",
+    type: {
+      name: "String"
+    }
+  }
+};
 export const networkInterfaceName: msRest.OperationURLParameter = {
   parameterPath: "networkInterfaceName",
   mapper: {
     required: true,
     serializedName: "networkInterfaceName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const networkManagerName: msRest.OperationURLParameter = {
+  parameterPath: "networkManagerName",
+  mapper: {
+    required: true,
+    serializedName: "networkManagerName",
     type: {
       name: "String"
     }
@@ -472,6 +510,16 @@ export const outboundRuleName: msRest.OperationURLParameter = {
   mapper: {
     required: true,
     serializedName: "outboundRuleName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const p2sVpnGatewayName: msRest.OperationURLParameter = {
+  parameterPath: "p2sVpnGatewayName",
+  mapper: {
+    required: true,
+    serializedName: "p2sVpnGatewayName",
     type: {
       name: "String"
     }
@@ -692,6 +740,18 @@ export const serviceName: msRest.OperationURLParameter = {
     }
   }
 };
+export const skiptoken: msRest.OperationQueryParameter = {
+  parameterPath: [
+    "options",
+    "skiptoken"
+  ],
+  mapper: {
+    serializedName: "$skiptoken",
+    type: {
+      name: "String"
+    }
+  }
+};
 export const subnetName: msRest.OperationURLParameter = {
   parameterPath: "subnetName",
   mapper: {
@@ -729,6 +789,22 @@ export const tapName: msRest.OperationURLParameter = {
     serializedName: "tapName",
     type: {
       name: "String"
+    }
+  }
+};
+export const top: msRest.OperationQueryParameter = {
+  parameterPath: [
+    "options",
+    "top"
+  ],
+  mapper: {
+    serializedName: "$top",
+    constraints: {
+      InclusiveMaximum: 20,
+      InclusiveMinimum: 1
+    },
+    type: {
+      name: "Number"
     }
   }
 };

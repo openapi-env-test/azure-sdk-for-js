@@ -210,7 +210,7 @@ export class NetworkWatchers {
    * @param parameters Parameters that define the representation of topology.
    * @param callback The callback
    */
-  getTopology(resourceGroupName: string, networkWatcherName: string, parameters: Models.TopologyParameters, callback: msRest.ServiceCallback<Models.Topology>): void;
+  getTopology(resourceGroupName: string, networkWatcherName: string, parameters: Models.TopologyParameters, callback: msRest.ServiceCallback<Models.Topology1>): void;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param networkWatcherName The name of the network watcher.
@@ -218,8 +218,8 @@ export class NetworkWatchers {
    * @param options The optional parameters
    * @param callback The callback
    */
-  getTopology(resourceGroupName: string, networkWatcherName: string, parameters: Models.TopologyParameters, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Topology>): void;
-  getTopology(resourceGroupName: string, networkWatcherName: string, parameters: Models.TopologyParameters, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Topology>, callback?: msRest.ServiceCallback<Models.Topology>): Promise<Models.NetworkWatchersGetTopologyResponse> {
+  getTopology(resourceGroupName: string, networkWatcherName: string, parameters: Models.TopologyParameters, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Topology1>): void;
+  getTopology(resourceGroupName: string, networkWatcherName: string, parameters: Models.TopologyParameters, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Topology1>, callback?: msRest.ServiceCallback<Models.Topology1>): Promise<Models.NetworkWatchersGetTopologyResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
@@ -338,8 +338,9 @@ export class NetworkWatchers {
   }
 
   /**
-   * Gets the relative latency score for internet service providers from a specified location to
-   * Azure regions.
+   * NOTE: This feature is currently in preview and still being tested for stability. Gets the
+   * relative latency score for internet service providers from a specified location to Azure
+   * regions.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that determine Azure reachability report configuration.
@@ -352,7 +353,8 @@ export class NetworkWatchers {
   }
 
   /**
-   * Lists all available internet service providers for a specified Azure region.
+   * NOTE: This feature is currently in preview and still being tested for stability. Lists all
+   * available internet service providers for a specified Azure region.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that scope the list of available providers.
@@ -562,8 +564,9 @@ export class NetworkWatchers {
   }
 
   /**
-   * Gets the relative latency score for internet service providers from a specified location to
-   * Azure regions.
+   * NOTE: This feature is currently in preview and still being tested for stability. Gets the
+   * relative latency score for internet service providers from a specified location to Azure
+   * regions.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that determine Azure reachability report configuration.
@@ -583,7 +586,8 @@ export class NetworkWatchers {
   }
 
   /**
-   * Lists all available internet service providers for a specified Azure region.
+   * NOTE: This feature is currently in preview and still being tested for stability. Lists all
+   * available internet service providers for a specified Azure region.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that scope the list of available providers.
@@ -791,7 +795,7 @@ const getTopologyOperationSpec: msRest.OperationSpec = {
   },
   responses: {
     200: {
-      bodyMapper: Mappers.Topology
+      bodyMapper: Mappers.Topology1
     },
     default: {
       bodyMapper: Mappers.ErrorResponse
