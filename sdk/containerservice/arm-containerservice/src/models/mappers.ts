@@ -1892,6 +1892,12 @@ export const ManagedClusterPropertiesAutoScalerProfile: msRest.CompositeMapper =
     name: "Composite",
     className: "ManagedClusterPropertiesAutoScalerProfile",
     modelProperties: {
+      balanceSimilarNodeGroups: {
+        serializedName: "balance-similar-node-groups",
+        type: {
+          name: "Boolean"
+        }
+      },
       scanInterval: {
         serializedName: "scan-interval",
         type: {
@@ -2010,6 +2016,28 @@ export const ManagedClusterIdentity: msRest.CompositeMapper = {
             "SystemAssigned",
             "None"
           ]
+        }
+      }
+    }
+  }
+};
+
+export const ManagedClusterSKU: msRest.CompositeMapper = {
+  serializedName: "ManagedClusterSKU",
+  type: {
+    name: "Composite",
+    className: "ManagedClusterSKU",
+    modelProperties: {
+      name: {
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      tier: {
+        serializedName: "tier",
+        type: {
+          name: "String"
         }
       }
     }
@@ -2177,6 +2205,13 @@ export const ManagedCluster: msRest.CompositeMapper = {
         type: {
           name: "Composite",
           className: "ManagedClusterIdentity"
+        }
+      },
+      sku: {
+        serializedName: "sku",
+        type: {
+          name: "Composite",
+          className: "ManagedClusterSKU"
         }
       }
     }
