@@ -29,29 +29,29 @@ export class Location {
   /**
    * Checks whether the project name is available in the specified region.
    * @param locationName The desired region for the name check.
-   * @param parameters Properties needed to check the availability of a name.
+   * @param name The name to check for availability
    * @param [options] The optional parameters
    * @returns Promise<Models.LocationCheckNameAvailabilityResponse>
    */
-  checkNameAvailability(locationName: string, parameters: Models.CheckNameAvailabilityParameters, options?: msRest.RequestOptionsBase): Promise<Models.LocationCheckNameAvailabilityResponse>;
+  checkNameAvailability(locationName: string, name: string, options?: msRest.RequestOptionsBase): Promise<Models.LocationCheckNameAvailabilityResponse>;
   /**
    * @param locationName The desired region for the name check.
-   * @param parameters Properties needed to check the availability of a name.
+   * @param name The name to check for availability
    * @param callback The callback
    */
-  checkNameAvailability(locationName: string, parameters: Models.CheckNameAvailabilityParameters, callback: msRest.ServiceCallback<Models.CheckNameAvailabilityResult>): void;
+  checkNameAvailability(locationName: string, name: string, callback: msRest.ServiceCallback<Models.CheckNameAvailabilityResult>): void;
   /**
    * @param locationName The desired region for the name check.
-   * @param parameters Properties needed to check the availability of a name.
+   * @param name The name to check for availability
    * @param options The optional parameters
    * @param callback The callback
    */
-  checkNameAvailability(locationName: string, parameters: Models.CheckNameAvailabilityParameters, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CheckNameAvailabilityResult>): void;
-  checkNameAvailability(locationName: string, parameters: Models.CheckNameAvailabilityParameters, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.CheckNameAvailabilityResult>, callback?: msRest.ServiceCallback<Models.CheckNameAvailabilityResult>): Promise<Models.LocationCheckNameAvailabilityResponse> {
+  checkNameAvailability(locationName: string, name: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CheckNameAvailabilityResult>): void;
+  checkNameAvailability(locationName: string, name: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.CheckNameAvailabilityResult>, callback?: msRest.ServiceCallback<Models.CheckNameAvailabilityResult>): Promise<Models.LocationCheckNameAvailabilityResponse> {
     return this.client.sendOperationRequest(
       {
         locationName,
-        parameters,
+        name,
         options
       },
       checkNameAvailabilityOperationSpec,
@@ -75,7 +75,9 @@ const checkNameAvailabilityOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   requestBody: {
-    parameterPath: "parameters",
+    parameterPath: {
+      name: "name"
+    },
     mapper: {
       ...Mappers.CheckNameAvailabilityParameters,
       required: true

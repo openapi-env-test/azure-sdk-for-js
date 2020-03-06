@@ -144,7 +144,7 @@ export class Assessments {
 
   /**
    * Create a new assessment with the given name and the specified settings. Since name of an
-   * assessment in a project is a unique identiefier, if an assessment with the name provided already
+   * assessment in a project is a unique identifier, if an assessment with the name provided already
    * exists, then the existing assessment is updated.
    *
    * Any PUT operation, resulting in either create or update on an assessment, will cause the
@@ -160,34 +160,154 @@ export class Assessments {
    * @param projectName Name of the Azure Migrate project.
    * @param groupName Unique name of a group within a project.
    * @param assessmentName Unique name of an assessment within a project.
+   * @param azureLocation Target Azure location for which the machines should be assessed. These
+   * enums are the same as used by Compute API. Possible values include: 'Unknown', 'EastAsia',
+   * 'SoutheastAsia', 'AustraliaEast', 'AustraliaSoutheast', 'BrazilSouth', 'CanadaCentral',
+   * 'CanadaEast', 'WestEurope', 'NorthEurope', 'CentralIndia', 'SouthIndia', 'WestIndia',
+   * 'JapanEast', 'JapanWest', 'KoreaCentral', 'KoreaSouth', 'UkWest', 'UkSouth', 'NorthCentralUs',
+   * 'EastUs', 'WestUs2', 'SouthCentralUs', 'CentralUs', 'EastUs2', 'WestUs', 'WestCentralUs',
+   * 'GermanyCentral', 'GermanyNortheast', 'ChinaNorth', 'ChinaEast'
+   * @param azureOfferCode Offer code according to which cost estimation is done. Possible values
+   * include: 'Unknown', 'MSAZR0003P', 'MSAZR0044P', 'MSAZR0059P', 'MSAZR0060P', 'MSAZR0062P',
+   * 'MSAZR0063P', 'MSAZR0064P', 'MSAZR0029P', 'MSAZR0022P', 'MSAZR0023P', 'MSAZR0148P',
+   * 'MSAZR0025P', 'MSAZR0036P', 'MSAZR0120P', 'MSAZR0121P', 'MSAZR0122P', 'MSAZR0123P',
+   * 'MSAZR0124P', 'MSAZR0125P', 'MSAZR0126P', 'MSAZR0127P', 'MSAZR0128P', 'MSAZR0129P',
+   * 'MSAZR0130P', 'MSAZR0111P', 'MSAZR0144P', 'MSAZR0149P', 'MSMCAZR0044P', 'MSMCAZR0059P',
+   * 'MSMCAZR0060P', 'MSMCAZR0063P', 'MSMCAZR0120P', 'MSMCAZR0121P', 'MSMCAZR0125P', 'MSMCAZR0128P',
+   * 'MSAZRDE0003P', 'MSAZRDE0044P'
+   * @param azurePricingTier Pricing tier for Size evaluation. Possible values include: 'Standard',
+   * 'Basic'
+   * @param azureStorageRedundancy Storage Redundancy type offered by Azure. Possible values include:
+   * 'Unknown', 'LocallyRedundant', 'ZoneRedundant', 'GeoRedundant', 'ReadAccessGeoRedundant'
+   * @param scalingFactor Scaling factor used over utilization data to add a performance buffer for
+   * new machines to be created in Azure. Min Value = 1.0, Max value = 1.9, Default = 1.3.
+   * @param percentile Percentile of performance data used to recommend Azure size. Possible values
+   * include: 'Percentile50', 'Percentile90', 'Percentile95', 'Percentile99'
+   * @param timeRange Time range of performance data used to recommend a size. Possible values
+   * include: 'Day', 'Week', 'Month'
+   * @param stage User configurable setting that describes the status of the assessment. Possible
+   * values include: 'InProgress', 'UnderReview', 'Approved'
+   * @param currency Currency to report prices in. Possible values include: 'Unknown', 'USD', 'DKK',
+   * 'CAD', 'IDR', 'JPY', 'KRW', 'NZD', 'NOK', 'RUB', 'SAR', 'ZAR', 'SEK', 'TRY', 'GBP', 'MXN',
+   * 'MYR', 'INR', 'HKD', 'BRL', 'TWD', 'EUR', 'CHF', 'ARS', 'AUD', 'CNY'
+   * @param azureHybridUseBenefit AHUB discount on windows virtual machines. Possible values include:
+   * 'Unknown', 'Yes', 'No'
+   * @param discountPercentage Custom discount percentage to be applied on final costs. Can be in the
+   * range [0, 100].
+   * @param sizingCriterion Assessment sizing criterion. Possible values include: 'PerformanceBased',
+   * 'AsOnPremises'
    * @param [options] The optional parameters
    * @returns Promise<Models.AssessmentsCreateResponse>
    */
-  create(resourceGroupName: string, projectName: string, groupName: string, assessmentName: string, options?: Models.AssessmentsCreateOptionalParams): Promise<Models.AssessmentsCreateResponse>;
+  create(resourceGroupName: string, projectName: string, groupName: string, assessmentName: string, azureLocation: Models.AzureLocation, azureOfferCode: Models.AzureOfferCode, azurePricingTier: Models.AzurePricingTier, azureStorageRedundancy: Models.AzureStorageRedundancy, scalingFactor: number, percentile: Models.Percentile, timeRange: Models.TimeRange, stage: Models.AssessmentStage, currency: Models.Currency, azureHybridUseBenefit: Models.AzureHybridUseBenefit, discountPercentage: number, sizingCriterion: Models.AssessmentSizingCriterion, options?: Models.AssessmentsCreateOptionalParams): Promise<Models.AssessmentsCreateResponse>;
   /**
    * @param resourceGroupName Name of the Azure Resource Group that project is part of.
    * @param projectName Name of the Azure Migrate project.
    * @param groupName Unique name of a group within a project.
    * @param assessmentName Unique name of an assessment within a project.
+   * @param azureLocation Target Azure location for which the machines should be assessed. These
+   * enums are the same as used by Compute API. Possible values include: 'Unknown', 'EastAsia',
+   * 'SoutheastAsia', 'AustraliaEast', 'AustraliaSoutheast', 'BrazilSouth', 'CanadaCentral',
+   * 'CanadaEast', 'WestEurope', 'NorthEurope', 'CentralIndia', 'SouthIndia', 'WestIndia',
+   * 'JapanEast', 'JapanWest', 'KoreaCentral', 'KoreaSouth', 'UkWest', 'UkSouth', 'NorthCentralUs',
+   * 'EastUs', 'WestUs2', 'SouthCentralUs', 'CentralUs', 'EastUs2', 'WestUs', 'WestCentralUs',
+   * 'GermanyCentral', 'GermanyNortheast', 'ChinaNorth', 'ChinaEast'
+   * @param azureOfferCode Offer code according to which cost estimation is done. Possible values
+   * include: 'Unknown', 'MSAZR0003P', 'MSAZR0044P', 'MSAZR0059P', 'MSAZR0060P', 'MSAZR0062P',
+   * 'MSAZR0063P', 'MSAZR0064P', 'MSAZR0029P', 'MSAZR0022P', 'MSAZR0023P', 'MSAZR0148P',
+   * 'MSAZR0025P', 'MSAZR0036P', 'MSAZR0120P', 'MSAZR0121P', 'MSAZR0122P', 'MSAZR0123P',
+   * 'MSAZR0124P', 'MSAZR0125P', 'MSAZR0126P', 'MSAZR0127P', 'MSAZR0128P', 'MSAZR0129P',
+   * 'MSAZR0130P', 'MSAZR0111P', 'MSAZR0144P', 'MSAZR0149P', 'MSMCAZR0044P', 'MSMCAZR0059P',
+   * 'MSMCAZR0060P', 'MSMCAZR0063P', 'MSMCAZR0120P', 'MSMCAZR0121P', 'MSMCAZR0125P', 'MSMCAZR0128P',
+   * 'MSAZRDE0003P', 'MSAZRDE0044P'
+   * @param azurePricingTier Pricing tier for Size evaluation. Possible values include: 'Standard',
+   * 'Basic'
+   * @param azureStorageRedundancy Storage Redundancy type offered by Azure. Possible values include:
+   * 'Unknown', 'LocallyRedundant', 'ZoneRedundant', 'GeoRedundant', 'ReadAccessGeoRedundant'
+   * @param scalingFactor Scaling factor used over utilization data to add a performance buffer for
+   * new machines to be created in Azure. Min Value = 1.0, Max value = 1.9, Default = 1.3.
+   * @param percentile Percentile of performance data used to recommend Azure size. Possible values
+   * include: 'Percentile50', 'Percentile90', 'Percentile95', 'Percentile99'
+   * @param timeRange Time range of performance data used to recommend a size. Possible values
+   * include: 'Day', 'Week', 'Month'
+   * @param stage User configurable setting that describes the status of the assessment. Possible
+   * values include: 'InProgress', 'UnderReview', 'Approved'
+   * @param currency Currency to report prices in. Possible values include: 'Unknown', 'USD', 'DKK',
+   * 'CAD', 'IDR', 'JPY', 'KRW', 'NZD', 'NOK', 'RUB', 'SAR', 'ZAR', 'SEK', 'TRY', 'GBP', 'MXN',
+   * 'MYR', 'INR', 'HKD', 'BRL', 'TWD', 'EUR', 'CHF', 'ARS', 'AUD', 'CNY'
+   * @param azureHybridUseBenefit AHUB discount on windows virtual machines. Possible values include:
+   * 'Unknown', 'Yes', 'No'
+   * @param discountPercentage Custom discount percentage to be applied on final costs. Can be in the
+   * range [0, 100].
+   * @param sizingCriterion Assessment sizing criterion. Possible values include: 'PerformanceBased',
+   * 'AsOnPremises'
    * @param callback The callback
    */
-  create(resourceGroupName: string, projectName: string, groupName: string, assessmentName: string, callback: msRest.ServiceCallback<Models.Assessment>): void;
+  create(resourceGroupName: string, projectName: string, groupName: string, assessmentName: string, azureLocation: Models.AzureLocation, azureOfferCode: Models.AzureOfferCode, azurePricingTier: Models.AzurePricingTier, azureStorageRedundancy: Models.AzureStorageRedundancy, scalingFactor: number, percentile: Models.Percentile, timeRange: Models.TimeRange, stage: Models.AssessmentStage, currency: Models.Currency, azureHybridUseBenefit: Models.AzureHybridUseBenefit, discountPercentage: number, sizingCriterion: Models.AssessmentSizingCriterion, callback: msRest.ServiceCallback<Models.Assessment>): void;
   /**
    * @param resourceGroupName Name of the Azure Resource Group that project is part of.
    * @param projectName Name of the Azure Migrate project.
    * @param groupName Unique name of a group within a project.
    * @param assessmentName Unique name of an assessment within a project.
+   * @param azureLocation Target Azure location for which the machines should be assessed. These
+   * enums are the same as used by Compute API. Possible values include: 'Unknown', 'EastAsia',
+   * 'SoutheastAsia', 'AustraliaEast', 'AustraliaSoutheast', 'BrazilSouth', 'CanadaCentral',
+   * 'CanadaEast', 'WestEurope', 'NorthEurope', 'CentralIndia', 'SouthIndia', 'WestIndia',
+   * 'JapanEast', 'JapanWest', 'KoreaCentral', 'KoreaSouth', 'UkWest', 'UkSouth', 'NorthCentralUs',
+   * 'EastUs', 'WestUs2', 'SouthCentralUs', 'CentralUs', 'EastUs2', 'WestUs', 'WestCentralUs',
+   * 'GermanyCentral', 'GermanyNortheast', 'ChinaNorth', 'ChinaEast'
+   * @param azureOfferCode Offer code according to which cost estimation is done. Possible values
+   * include: 'Unknown', 'MSAZR0003P', 'MSAZR0044P', 'MSAZR0059P', 'MSAZR0060P', 'MSAZR0062P',
+   * 'MSAZR0063P', 'MSAZR0064P', 'MSAZR0029P', 'MSAZR0022P', 'MSAZR0023P', 'MSAZR0148P',
+   * 'MSAZR0025P', 'MSAZR0036P', 'MSAZR0120P', 'MSAZR0121P', 'MSAZR0122P', 'MSAZR0123P',
+   * 'MSAZR0124P', 'MSAZR0125P', 'MSAZR0126P', 'MSAZR0127P', 'MSAZR0128P', 'MSAZR0129P',
+   * 'MSAZR0130P', 'MSAZR0111P', 'MSAZR0144P', 'MSAZR0149P', 'MSMCAZR0044P', 'MSMCAZR0059P',
+   * 'MSMCAZR0060P', 'MSMCAZR0063P', 'MSMCAZR0120P', 'MSMCAZR0121P', 'MSMCAZR0125P', 'MSMCAZR0128P',
+   * 'MSAZRDE0003P', 'MSAZRDE0044P'
+   * @param azurePricingTier Pricing tier for Size evaluation. Possible values include: 'Standard',
+   * 'Basic'
+   * @param azureStorageRedundancy Storage Redundancy type offered by Azure. Possible values include:
+   * 'Unknown', 'LocallyRedundant', 'ZoneRedundant', 'GeoRedundant', 'ReadAccessGeoRedundant'
+   * @param scalingFactor Scaling factor used over utilization data to add a performance buffer for
+   * new machines to be created in Azure. Min Value = 1.0, Max value = 1.9, Default = 1.3.
+   * @param percentile Percentile of performance data used to recommend Azure size. Possible values
+   * include: 'Percentile50', 'Percentile90', 'Percentile95', 'Percentile99'
+   * @param timeRange Time range of performance data used to recommend a size. Possible values
+   * include: 'Day', 'Week', 'Month'
+   * @param stage User configurable setting that describes the status of the assessment. Possible
+   * values include: 'InProgress', 'UnderReview', 'Approved'
+   * @param currency Currency to report prices in. Possible values include: 'Unknown', 'USD', 'DKK',
+   * 'CAD', 'IDR', 'JPY', 'KRW', 'NZD', 'NOK', 'RUB', 'SAR', 'ZAR', 'SEK', 'TRY', 'GBP', 'MXN',
+   * 'MYR', 'INR', 'HKD', 'BRL', 'TWD', 'EUR', 'CHF', 'ARS', 'AUD', 'CNY'
+   * @param azureHybridUseBenefit AHUB discount on windows virtual machines. Possible values include:
+   * 'Unknown', 'Yes', 'No'
+   * @param discountPercentage Custom discount percentage to be applied on final costs. Can be in the
+   * range [0, 100].
+   * @param sizingCriterion Assessment sizing criterion. Possible values include: 'PerformanceBased',
+   * 'AsOnPremises'
    * @param options The optional parameters
    * @param callback The callback
    */
-  create(resourceGroupName: string, projectName: string, groupName: string, assessmentName: string, options: Models.AssessmentsCreateOptionalParams, callback: msRest.ServiceCallback<Models.Assessment>): void;
-  create(resourceGroupName: string, projectName: string, groupName: string, assessmentName: string, options?: Models.AssessmentsCreateOptionalParams | msRest.ServiceCallback<Models.Assessment>, callback?: msRest.ServiceCallback<Models.Assessment>): Promise<Models.AssessmentsCreateResponse> {
+  create(resourceGroupName: string, projectName: string, groupName: string, assessmentName: string, azureLocation: Models.AzureLocation, azureOfferCode: Models.AzureOfferCode, azurePricingTier: Models.AzurePricingTier, azureStorageRedundancy: Models.AzureStorageRedundancy, scalingFactor: number, percentile: Models.Percentile, timeRange: Models.TimeRange, stage: Models.AssessmentStage, currency: Models.Currency, azureHybridUseBenefit: Models.AzureHybridUseBenefit, discountPercentage: number, sizingCriterion: Models.AssessmentSizingCriterion, options: Models.AssessmentsCreateOptionalParams, callback: msRest.ServiceCallback<Models.Assessment>): void;
+  create(resourceGroupName: string, projectName: string, groupName: string, assessmentName: string, azureLocation: Models.AzureLocation, azureOfferCode: Models.AzureOfferCode, azurePricingTier: Models.AzurePricingTier, azureStorageRedundancy: Models.AzureStorageRedundancy, scalingFactor: number, percentile: Models.Percentile, timeRange: Models.TimeRange, stage: Models.AssessmentStage, currency: Models.Currency, azureHybridUseBenefit: Models.AzureHybridUseBenefit, discountPercentage: number, sizingCriterion: Models.AssessmentSizingCriterion, options?: Models.AssessmentsCreateOptionalParams | msRest.ServiceCallback<Models.Assessment>, callback?: msRest.ServiceCallback<Models.Assessment>): Promise<Models.AssessmentsCreateResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
         projectName,
         groupName,
         assessmentName,
+        azureLocation,
+        azureOfferCode,
+        azurePricingTier,
+        azureStorageRedundancy,
+        scalingFactor,
+        percentile,
+        timeRange,
+        stage,
+        currency,
+        azureHybridUseBenefit,
+        discountPercentage,
+        sizingCriterion,
         options
       },
       createOperationSpec,
@@ -381,10 +501,24 @@ const createOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   requestBody: {
-    parameterPath: [
-      "options",
-      "assessment"
-    ],
+    parameterPath: {
+      eTag: [
+        "options",
+        "eTag"
+      ],
+      azureLocation: "azureLocation",
+      azureOfferCode: "azureOfferCode",
+      azurePricingTier: "azurePricingTier",
+      azureStorageRedundancy: "azureStorageRedundancy",
+      scalingFactor: "scalingFactor",
+      percentile: "percentile",
+      timeRange: "timeRange",
+      stage: "stage",
+      currency: "currency",
+      azureHybridUseBenefit: "azureHybridUseBenefit",
+      discountPercentage: "discountPercentage",
+      sizingCriterion: "sizingCriterion"
+    },
     mapper: Mappers.Assessment
   },
   responses: {

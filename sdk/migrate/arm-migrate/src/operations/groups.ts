@@ -112,31 +112,35 @@ export class Groups {
    * @param resourceGroupName Name of the Azure Resource Group that project is part of.
    * @param projectName Name of the Azure Migrate project.
    * @param groupName Unique name of a group within a project.
+   * @param machines List of machine names that are part of this group.
    * @param [options] The optional parameters
    * @returns Promise<Models.GroupsCreateResponse>
    */
-  create(resourceGroupName: string, projectName: string, groupName: string, options?: Models.GroupsCreateOptionalParams): Promise<Models.GroupsCreateResponse>;
+  create(resourceGroupName: string, projectName: string, groupName: string, machines: string[], options?: Models.GroupsCreateOptionalParams): Promise<Models.GroupsCreateResponse>;
   /**
    * @param resourceGroupName Name of the Azure Resource Group that project is part of.
    * @param projectName Name of the Azure Migrate project.
    * @param groupName Unique name of a group within a project.
+   * @param machines List of machine names that are part of this group.
    * @param callback The callback
    */
-  create(resourceGroupName: string, projectName: string, groupName: string, callback: msRest.ServiceCallback<Models.Group>): void;
+  create(resourceGroupName: string, projectName: string, groupName: string, machines: string[], callback: msRest.ServiceCallback<Models.Group>): void;
   /**
    * @param resourceGroupName Name of the Azure Resource Group that project is part of.
    * @param projectName Name of the Azure Migrate project.
    * @param groupName Unique name of a group within a project.
+   * @param machines List of machine names that are part of this group.
    * @param options The optional parameters
    * @param callback The callback
    */
-  create(resourceGroupName: string, projectName: string, groupName: string, options: Models.GroupsCreateOptionalParams, callback: msRest.ServiceCallback<Models.Group>): void;
-  create(resourceGroupName: string, projectName: string, groupName: string, options?: Models.GroupsCreateOptionalParams | msRest.ServiceCallback<Models.Group>, callback?: msRest.ServiceCallback<Models.Group>): Promise<Models.GroupsCreateResponse> {
+  create(resourceGroupName: string, projectName: string, groupName: string, machines: string[], options: Models.GroupsCreateOptionalParams, callback: msRest.ServiceCallback<Models.Group>): void;
+  create(resourceGroupName: string, projectName: string, groupName: string, machines: string[], options?: Models.GroupsCreateOptionalParams | msRest.ServiceCallback<Models.Group>, callback?: msRest.ServiceCallback<Models.Group>): Promise<Models.GroupsCreateResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
         projectName,
         groupName,
+        machines,
         options
       },
       createOperationSpec,
@@ -256,10 +260,13 @@ const createOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   requestBody: {
-    parameterPath: [
-      "options",
-      "group"
-    ],
+    parameterPath: {
+      eTag: [
+        "options",
+        "eTag"
+      ],
+      machines: "machines"
+    },
     mapper: Mappers.Group
   },
   responses: {

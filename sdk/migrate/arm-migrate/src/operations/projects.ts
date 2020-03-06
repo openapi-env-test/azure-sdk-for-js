@@ -339,10 +339,32 @@ const createOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   requestBody: {
-    parameterPath: [
-      "options",
-      "project"
-    ],
+    parameterPath: {
+      eTag: [
+        "options",
+        "eTag"
+      ],
+      location: [
+        "options",
+        "location"
+      ],
+      tags: [
+        "options",
+        "tags"
+      ],
+      customerWorkspaceId: [
+        "options",
+        "customerWorkspaceId"
+      ],
+      customerWorkspaceLocation: [
+        "options",
+        "customerWorkspaceLocation"
+      ],
+      provisioningState: [
+        "options",
+        "provisioningState"
+      ]
+    },
     mapper: Mappers.Project
   },
   responses: {
@@ -376,10 +398,32 @@ const updateOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   requestBody: {
-    parameterPath: [
-      "options",
-      "project"
-    ],
+    parameterPath: {
+      eTag: [
+        "options",
+        "eTag"
+      ],
+      location: [
+        "options",
+        "location"
+      ],
+      tags: [
+        "options",
+        "tags"
+      ],
+      customerWorkspaceId: [
+        "options",
+        "customerWorkspaceId"
+      ],
+      customerWorkspaceLocation: [
+        "options",
+        "customerWorkspaceLocation"
+      ],
+      provisioningState: [
+        "options",
+        "provisioningState"
+      ]
+    },
     mapper: Mappers.Project
   },
   responses: {
