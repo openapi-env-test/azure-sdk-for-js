@@ -8,7 +8,6 @@
 
 export {
   discriminators,
-  CheckNameAvailabilityParameters,
-  CheckNameAvailabilityResult,
-  CloudError
+  CloudError,
+  PrivateLinkResource
 } from "../models/mappers";

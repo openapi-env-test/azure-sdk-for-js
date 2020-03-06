@@ -322,42 +322,6 @@ export interface CheckNameAvailabilityResult {
 }
 
 /**
- * ARM Resource.
- */
-export interface Resource extends BaseResource {
-  /**
-   * Resource Id represents the complete path to the resource.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly id?: string;
-  /**
-   * Resource name associated with the resource.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly name?: string;
-  /**
-   * Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly type?: string;
-  /**
-   * Optional ETag.
-   */
-  eTag?: string;
-}
-
-/**
- * Response for check name availability API. Resource provider will set availability as true |
- * false.
- */
-export interface CheckNameAvailabilityResultResource extends Resource {
-  /**
-   * CheckNameAvailabilityResultResource properties
-   */
-  properties?: CheckNameAvailabilityResult;
-}
-
-/**
  * Localized display information of an operation.
  */
 export interface ClientDiscoveryDisplay {
@@ -438,6 +402,31 @@ export interface ClientDiscoveryValueForSingleApi {
    * ShoeBox properties for the given operation.
    */
   properties?: ClientDiscoveryForProperties;
+}
+
+/**
+ * ARM Resource.
+ */
+export interface Resource extends BaseResource {
+  /**
+   * Resource Id represents the complete path to the resource.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly id?: string;
+  /**
+   * Resource name associated with the resource.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly name?: string;
+  /**
+   * Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly type?: string;
+  /**
+   * Optional ETag.
+   */
+  eTag?: string;
 }
 
 /**
@@ -532,6 +521,63 @@ export interface UpgradeDetails {
 }
 
 /**
+ * Managed Identity Data, as received from ARM headers.
+ */
+export interface IdentityData {
+  /**
+   * The tenant Id header.
+   */
+  tenantId?: string;
+  /**
+   * The principal Id header.
+   */
+  principalId?: string;
+  /**
+   * The Identity type, can be SystemAssigned/UserAssigned/None.
+   */
+  type: string;
+}
+
+/**
+ * An interface representing PrivateEndpoint.
+ */
+export interface PrivateEndpoint {
+  id?: string;
+}
+
+/**
+ * An interface representing PrivateLinkServiceConnectionState.
+ */
+export interface PrivateLinkServiceConnectionState {
+  /**
+   * Possible values include: 'Pending', 'Approved', 'Rejected', 'Disconnected'
+   */
+  status?: PrivateEndpointConnectionStatus;
+  description?: string;
+  actionsRequired?: string;
+}
+
+/**
+ * An interface representing PrivateEndpointConnection.
+ */
+export interface PrivateEndpointConnection {
+  /**
+   * Possible values include: 'Succeeded', 'Deleting', 'Failed', 'Pending'
+   */
+  provisioningState?: ProvisioningState;
+  privateEndpoint?: PrivateEndpoint;
+  privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
+}
+
+/**
+ * An interface representing PrivateEndpointConnectionVaultProperties.
+ */
+export interface PrivateEndpointConnectionVaultProperties {
+  id?: string;
+  properties?: PrivateEndpointConnection;
+}
+
+/**
  * Properties of the vault.
  */
 export interface VaultProperties {
@@ -541,12 +587,28 @@ export interface VaultProperties {
    */
   readonly provisioningState?: string;
   upgradeDetails?: UpgradeDetails;
+  /**
+   * List of private endpoint connection.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly privateEndpointConnections?: PrivateEndpointConnectionVaultProperties[];
+  /**
+   * Private endpoint state for backup. Possible values include: 'None', 'Enabled'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly privateEndpointStateForBackup?: VaultPrivateEndpointState;
+  /**
+   * Private endpoint state for site recovery. Possible values include: 'None', 'Enabled'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly privateEndpointStateForSiteRecovery?: VaultPrivateEndpointState;
 }
 
 /**
  * Resource information, as returned by the resource provider.
  */
 export interface Vault extends TrackedResource {
+  identity?: IdentityData;
   properties?: VaultProperties;
   sku?: Sku;
 }
@@ -579,6 +641,18 @@ export interface VaultExtendedInfoResource extends Resource {
    * Algorithm for Vault ExtendedInfo
    */
   algorithm?: string;
+}
+
+/**
+ * An interface representing PrivateLinkResource.
+ */
+export interface PrivateLinkResource {
+  id?: string;
+  name?: string;
+  type?: string;
+  groupId?: string;
+  requiredMembers?: string[];
+  requiredZoneNames?: string[];
 }
 
 /**
@@ -639,6 +713,18 @@ export interface RecoveryServicesClientOptions extends AzureServiceClientOptions
  * @extends Array<ReplicationUsage>
  */
 export interface ReplicationUsageList extends Array<ReplicationUsage> {
+}
+
+/**
+ * @interface
+ * An interface representing the PrivateLinkResources.
+ * @extends Array<PrivateLinkResource>
+ */
+export interface PrivateLinkResources extends Array<PrivateLinkResource> {
+  /**
+   * Link to the next chunk of the response
+   */
+  nextLink?: string;
 }
 
 /**
@@ -706,6 +792,30 @@ export type VaultUpgradeState = 'Unknown' | 'InProgress' | 'Upgraded' | 'Failed'
 export type TriggerType = 'UserTriggered' | 'ForcedUpgrade';
 
 /**
+ * Defines values for ProvisioningState.
+ * Possible values include: 'Succeeded', 'Deleting', 'Failed', 'Pending'
+ * @readonly
+ * @enum {string}
+ */
+export type ProvisioningState = 'Succeeded' | 'Deleting' | 'Failed' | 'Pending';
+
+/**
+ * Defines values for PrivateEndpointConnectionStatus.
+ * Possible values include: 'Pending', 'Approved', 'Rejected', 'Disconnected'
+ * @readonly
+ * @enum {string}
+ */
+export type PrivateEndpointConnectionStatus = 'Pending' | 'Approved' | 'Rejected' | 'Disconnected';
+
+/**
+ * Defines values for VaultPrivateEndpointState.
+ * Possible values include: 'None', 'Enabled'
+ * @readonly
+ * @enum {string}
+ */
+export type VaultPrivateEndpointState = 'None' | 'Enabled';
+
+/**
  * Defines values for UsagesUnit.
  * Possible values include: 'Count', 'Bytes', 'Seconds', 'Percent', 'CountPerSecond',
  * 'BytesPerSecond'
@@ -755,9 +865,9 @@ export type ReplicationUsagesListResponse = ReplicationUsageList & {
 };
 
 /**
- * Contains response data for the checkNameAvailability operation.
+ * Contains response data for the list operation.
  */
-export type RecoveryServicesCheckNameAvailabilityResponse = CheckNameAvailabilityResultResource & {
+export type PrivateLinkResourcesListResponse = PrivateLinkResources & {
   /**
    * The underlying HTTP response.
    */
@@ -770,7 +880,67 @@ export type RecoveryServicesCheckNameAvailabilityResponse = CheckNameAvailabilit
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: CheckNameAvailabilityResultResource;
+      parsedBody: PrivateLinkResources;
+    };
+};
+
+/**
+ * Contains response data for the listNext operation.
+ */
+export type PrivateLinkResourcesListNextResponse = PrivateLinkResources & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: PrivateLinkResources;
+    };
+};
+
+/**
+ * Contains response data for the get operation.
+ */
+export type PrivateLinkResourceGetResponse = PrivateLinkResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: PrivateLinkResource;
+    };
+};
+
+/**
+ * Contains response data for the checkNameAvailability operation.
+ */
+export type RecoveryServicesCheckNameAvailabilityResponse = CheckNameAvailabilityResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: CheckNameAvailabilityResult;
     };
 };
 
