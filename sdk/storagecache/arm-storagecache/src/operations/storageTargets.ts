@@ -68,11 +68,11 @@ export class StorageTargets {
    * @param cacheName Name of Cache.
    * @param storageTargetName Name of Storage Target.
    * @param [options] The optional parameters
-   * @returns Promise<Models.StorageTargetsDeleteMethodResponse>
+   * @returns Promise<msRest.RestResponse>
    */
-  deleteMethod(resourceGroupName: string, cacheName: string, storageTargetName: string, options?: msRest.RequestOptionsBase): Promise<Models.StorageTargetsDeleteMethodResponse> {
+  deleteMethod(resourceGroupName: string, cacheName: string, storageTargetName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginDeleteMethod(resourceGroupName,cacheName,storageTargetName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.StorageTargetsDeleteMethodResponse>;
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -269,30 +269,9 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "Object"
-        }
-      }
-    },
-    202: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "Object"
-        }
-      }
-    },
-    204: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "Object"
-        }
-      }
-    },
+    200: {},
+    202: {},
+    204: {},
     default: {
       bodyMapper: Mappers.CloudError
     }

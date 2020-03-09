@@ -728,31 +728,6 @@ export type CachesListByResourceGroupResponse = CachesListResult & {
 };
 
 /**
- * Contains response data for the deleteMethod operation.
- */
-export type CachesDeleteMethodResponse = {
-  /**
-   * The parsed response body.
-   */
-  body: any;
-
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: any;
-    };
-};
-
-/**
  * Contains response data for the get operation.
  */
 export type CachesGetResponse = Cache & {
@@ -813,131 +788,6 @@ export type CachesUpdateResponse = Cache & {
 };
 
 /**
- * Contains response data for the flush operation.
- */
-export type CachesFlushResponse = {
-  /**
-   * The parsed response body.
-   */
-  body: any;
-
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: any;
-    };
-};
-
-/**
- * Contains response data for the start operation.
- */
-export type CachesStartResponse = {
-  /**
-   * The parsed response body.
-   */
-  body: any;
-
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: any;
-    };
-};
-
-/**
- * Contains response data for the stop operation.
- */
-export type CachesStopResponse = {
-  /**
-   * The parsed response body.
-   */
-  body: any;
-
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: any;
-    };
-};
-
-/**
- * Contains response data for the upgradeFirmware operation.
- */
-export type CachesUpgradeFirmwareResponse = {
-  /**
-   * The parsed response body.
-   */
-  body: any;
-
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: any;
-    };
-};
-
-/**
- * Contains response data for the beginDeleteMethod operation.
- */
-export type CachesBeginDeleteMethodResponse = {
-  /**
-   * The parsed response body.
-   */
-  body: any;
-
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: any;
-    };
-};
-
-/**
  * Contains response data for the beginCreateOrUpdate operation.
  */
 export type CachesBeginCreateOrUpdateResponse = Cache & {
@@ -954,106 +804,6 @@ export type CachesBeginCreateOrUpdateResponse = Cache & {
        * The response body as parsed JSON or XML
        */
       parsedBody: Cache;
-    };
-};
-
-/**
- * Contains response data for the beginFlush operation.
- */
-export type CachesBeginFlushResponse = {
-  /**
-   * The parsed response body.
-   */
-  body: any;
-
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: any;
-    };
-};
-
-/**
- * Contains response data for the beginStart operation.
- */
-export type CachesBeginStartResponse = {
-  /**
-   * The parsed response body.
-   */
-  body: any;
-
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: any;
-    };
-};
-
-/**
- * Contains response data for the beginStop operation.
- */
-export type CachesBeginStopResponse = {
-  /**
-   * The parsed response body.
-   */
-  body: any;
-
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: any;
-    };
-};
-
-/**
- * Contains response data for the beginUpgradeFirmware operation.
- */
-export type CachesBeginUpgradeFirmwareResponse = {
-  /**
-   * The parsed response body.
-   */
-  body: any;
-
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: any;
     };
 };
 
@@ -1118,31 +868,6 @@ export type StorageTargetsListByCacheResponse = StorageTargetsResult & {
 };
 
 /**
- * Contains response data for the deleteMethod operation.
- */
-export type StorageTargetsDeleteMethodResponse = {
-  /**
-   * The parsed response body.
-   */
-  body: any;
-
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: any;
-    };
-};
-
-/**
  * Contains response data for the get operation.
  */
 export type StorageTargetsGetResponse = StorageTarget & {
@@ -1179,31 +904,6 @@ export type StorageTargetsCreateOrUpdateResponse = StorageTarget & {
        * The response body as parsed JSON or XML
        */
       parsedBody: StorageTarget;
-    };
-};
-
-/**
- * Contains response data for the beginDeleteMethod operation.
- */
-export type StorageTargetsBeginDeleteMethodResponse = {
-  /**
-   * The parsed response body.
-   */
-  body: any;
-
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: any;
     };
 };
 
