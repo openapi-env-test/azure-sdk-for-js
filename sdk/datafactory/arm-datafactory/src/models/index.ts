@@ -436,7 +436,7 @@ export interface ParameterSpecification {
 /**
  * Contains the possible cases for LinkedService.
  */
-export type LinkedServiceUnion = LinkedService | AzureFunctionLinkedService | AzureDataExplorerLinkedService | SapTableLinkedService | GoogleAdWordsLinkedService | OracleServiceCloudLinkedService | DynamicsAXLinkedService | ResponsysLinkedService | AzureDatabricksLinkedService | AzureDataLakeAnalyticsLinkedService | HDInsightOnDemandLinkedService | SalesforceMarketingCloudLinkedService | NetezzaLinkedService | VerticaLinkedService | ZohoLinkedService | XeroLinkedService | SquareLinkedService | SparkLinkedService | ShopifyLinkedService | ServiceNowLinkedService | QuickBooksLinkedService | PrestoLinkedService | PhoenixLinkedService | PaypalLinkedService | MarketoLinkedService | AzureMariaDBLinkedService | MariaDBLinkedService | MagentoLinkedService | JiraLinkedService | ImpalaLinkedService | HubspotLinkedService | HiveLinkedService | HBaseLinkedService | GreenplumLinkedService | GoogleBigQueryLinkedService | EloquaLinkedService | DrillLinkedService | CouchbaseLinkedService | ConcurLinkedService | AzurePostgreSqlLinkedService | AmazonMWSLinkedService | SapHanaLinkedService | SapBWLinkedService | SftpServerLinkedService | FtpServerLinkedService | HttpLinkedService | AzureSearchLinkedService | CustomDataSourceLinkedService | AmazonRedshiftLinkedService | AmazonS3LinkedService | RestServiceLinkedService | SapOpenHubLinkedService | SapEccLinkedService | SapCloudForCustomerLinkedService | SalesforceServiceCloudLinkedService | SalesforceLinkedService | Office365LinkedService | AzureBlobFSLinkedService | AzureDataLakeStoreLinkedService | CosmosDbMongoDbApiLinkedService | MongoDbV2LinkedService | MongoDbLinkedService | CassandraLinkedService | WebLinkedService | ODataLinkedService | HdfsLinkedService | MicrosoftAccessLinkedService | InformixLinkedService | OdbcLinkedService | AzureMLServiceLinkedService | AzureMLLinkedService | TeradataLinkedService | Db2LinkedService | SybaseLinkedService | PostgreSqlLinkedService | MySqlLinkedService | AzureMySqlLinkedService | OracleLinkedService | GoogleCloudStorageLinkedService | AzureFileStorageLinkedService | FileServerLinkedService | HDInsightLinkedService | CommonDataServiceForAppsLinkedService | DynamicsCrmLinkedService | DynamicsLinkedService | CosmosDbLinkedService | AzureKeyVaultLinkedService | AzureBatchLinkedService | AzureSqlMILinkedService | AzureSqlDatabaseLinkedService | SqlServerLinkedService | AzureSqlDWLinkedService | AzureTableStorageLinkedService | AzureBlobStorageLinkedService | AzureStorageLinkedService;
+export type LinkedServiceUnion = LinkedService | SnowflakeLinkedService | AzureFunctionLinkedService | AzureDataExplorerLinkedService | SapTableLinkedService | GoogleAdWordsLinkedService | OracleServiceCloudLinkedService | DynamicsAXLinkedService | ResponsysLinkedService | AzureDatabricksLinkedService | AzureDataLakeAnalyticsLinkedService | HDInsightOnDemandLinkedService | SalesforceMarketingCloudLinkedService | NetezzaLinkedService | VerticaLinkedService | ZohoLinkedService | XeroLinkedService | SquareLinkedService | SparkLinkedService | ShopifyLinkedService | ServiceNowLinkedService | QuickBooksLinkedService | PrestoLinkedService | PhoenixLinkedService | PaypalLinkedService | MarketoLinkedService | AzureMariaDBLinkedService | MariaDBLinkedService | MagentoLinkedService | JiraLinkedService | ImpalaLinkedService | HubspotLinkedService | HiveLinkedService | HBaseLinkedService | GreenplumLinkedService | GoogleBigQueryLinkedService | EloquaLinkedService | DrillLinkedService | CouchbaseLinkedService | ConcurLinkedService | AzurePostgreSqlLinkedService | AmazonMWSLinkedService | SapHanaLinkedService | SapBWLinkedService | SftpServerLinkedService | FtpServerLinkedService | HttpLinkedService | AzureSearchLinkedService | CustomDataSourceLinkedService | AmazonRedshiftLinkedService | AmazonS3LinkedService | RestServiceLinkedService | SapOpenHubLinkedService | SapEccLinkedService | SapCloudForCustomerLinkedService | SalesforceServiceCloudLinkedService | SalesforceLinkedService | Office365LinkedService | AzureBlobFSLinkedService | AzureDataLakeStoreLinkedService | CosmosDbMongoDbApiLinkedService | MongoDbV2LinkedService | MongoDbLinkedService | CassandraLinkedService | WebLinkedService | ODataLinkedService | HdfsLinkedService | MicrosoftAccessLinkedService | InformixLinkedService | OdbcLinkedService | AzureMLServiceLinkedService | AzureMLLinkedService | TeradataLinkedService | Db2LinkedService | SybaseLinkedService | PostgreSqlLinkedService | MySqlLinkedService | AzureMySqlLinkedService | OracleLinkedService | GoogleCloudStorageLinkedService | AzureFileStorageLinkedService | FileServerLinkedService | HDInsightLinkedService | CommonDataServiceForAppsLinkedService | DynamicsCrmLinkedService | DynamicsLinkedService | CosmosDbLinkedService | AzureKeyVaultLinkedService | AzureBatchLinkedService | AzureSqlMILinkedService | AzureSqlDatabaseLinkedService | SqlServerLinkedService | AzureSqlDWLinkedService | AzureTableStorageLinkedService | AzureBlobStorageLinkedService | AzureStorageLinkedService;
 
 /**
  * The Azure Data Factory nested object which contains the information and credential which can be
@@ -492,7 +492,7 @@ export interface DatasetFolder {
 /**
  * Contains the possible cases for Dataset.
  */
-export type DatasetUnion = Dataset | GoogleAdWordsObjectDataset | AzureDataExplorerTableDataset | OracleServiceCloudObjectDataset | DynamicsAXResourceDataset | ResponsysObjectDataset | SalesforceMarketingCloudObjectDataset | VerticaTableDataset | NetezzaTableDataset | ZohoObjectDataset | XeroObjectDataset | SquareObjectDataset | SparkObjectDataset | ShopifyObjectDataset | ServiceNowObjectDataset | QuickBooksObjectDataset | PrestoObjectDataset | PhoenixObjectDataset | PaypalObjectDataset | MarketoObjectDataset | AzureMariaDBTableDataset | MariaDBTableDataset | MagentoObjectDataset | JiraObjectDataset | ImpalaObjectDataset | HubspotObjectDataset | HiveObjectDataset | HBaseObjectDataset | GreenplumTableDataset | GoogleBigQueryObjectDataset | EloquaObjectDataset | DrillTableDataset | CouchbaseTableDataset | ConcurObjectDataset | AzurePostgreSqlTableDataset | AmazonMWSObjectDataset | HttpDataset | AzureSearchIndexDataset | WebTableDataset | SapTableResourceDataset | RestResourceDataset | SqlServerTableDataset | SapOpenHubTableDataset | SapHanaTableDataset | SapEccResourceDataset | SapCloudForCustomerResourceDataset | SapBwCubeDataset | SybaseTableDataset | SalesforceServiceCloudObjectDataset | SalesforceObjectDataset | MicrosoftAccessTableDataset | PostgreSqlTableDataset | MySqlTableDataset | OdbcTableDataset | InformixTableDataset | RelationalTableDataset | Db2TableDataset | AmazonRedshiftTableDataset | AzureMySqlTableDataset | TeradataTableDataset | OracleTableDataset | ODataResourceDataset | CosmosDbMongoDbApiCollectionDataset | MongoDbV2CollectionDataset | MongoDbCollectionDataset | FileShareDataset | Office365Dataset | AzureBlobFSDataset | AzureDataLakeStoreDataset | CommonDataServiceForAppsEntityDataset | DynamicsCrmEntityDataset | DynamicsEntityDataset | DocumentDbCollectionDataset | CosmosDbSqlApiCollectionDataset | CustomDataset | CassandraTableDataset | AzureSqlDWTableDataset | AzureSqlMITableDataset | AzureSqlTableDataset | AzureTableDataset | AzureBlobDataset | BinaryDataset | OrcDataset | JsonDataset | DelimitedTextDataset | ParquetDataset | AvroDataset | AmazonS3Dataset;
+export type DatasetUnion = Dataset | SnowflakeDataset | GoogleAdWordsObjectDataset | AzureDataExplorerTableDataset | OracleServiceCloudObjectDataset | DynamicsAXResourceDataset | ResponsysObjectDataset | SalesforceMarketingCloudObjectDataset | VerticaTableDataset | NetezzaTableDataset | ZohoObjectDataset | XeroObjectDataset | SquareObjectDataset | SparkObjectDataset | ShopifyObjectDataset | ServiceNowObjectDataset | QuickBooksObjectDataset | PrestoObjectDataset | PhoenixObjectDataset | PaypalObjectDataset | MarketoObjectDataset | AzureMariaDBTableDataset | MariaDBTableDataset | MagentoObjectDataset | JiraObjectDataset | ImpalaObjectDataset | HubspotObjectDataset | HiveObjectDataset | HBaseObjectDataset | GreenplumTableDataset | GoogleBigQueryObjectDataset | EloquaObjectDataset | DrillTableDataset | CouchbaseTableDataset | ConcurObjectDataset | AzurePostgreSqlTableDataset | AmazonMWSObjectDataset | HttpDataset | AzureSearchIndexDataset | WebTableDataset | SapTableResourceDataset | RestResourceDataset | SqlServerTableDataset | SapOpenHubTableDataset | SapHanaTableDataset | SapEccResourceDataset | SapCloudForCustomerResourceDataset | SapBwCubeDataset | SybaseTableDataset | SalesforceServiceCloudObjectDataset | SalesforceObjectDataset | MicrosoftAccessTableDataset | PostgreSqlTableDataset | MySqlTableDataset | OdbcTableDataset | InformixTableDataset | RelationalTableDataset | Db2TableDataset | AmazonRedshiftTableDataset | AzureMySqlTableDataset | TeradataTableDataset | OracleTableDataset | ODataResourceDataset | CosmosDbMongoDbApiCollectionDataset | MongoDbV2CollectionDataset | MongoDbCollectionDataset | FileShareDataset | Office365Dataset | AzureBlobFSDataset | AzureDataLakeStoreDataset | CommonDataServiceForAppsEntityDataset | DynamicsCrmEntityDataset | DynamicsEntityDataset | DocumentDbCollectionDataset | CosmosDbSqlApiCollectionDataset | CustomDataset | CassandraTableDataset | AzureSqlDWTableDataset | AzureSqlMITableDataset | AzureSqlTableDataset | AzureTableDataset | AzureBlobDataset | BinaryDataset | OrcDataset | JsonDataset | DelimitedTextDataset | ParquetDataset | AvroDataset | AmazonS3Dataset;
 
 /**
  * The Azure Data Factory nested object which identifies data within different data stores, such as
@@ -685,7 +685,7 @@ export interface PipelineResource extends SubResource {
 /**
  * Contains the possible cases for Trigger.
  */
-export type TriggerUnion = Trigger | RerunTumblingWindowTrigger | ChainingTrigger | TumblingWindowTrigger | MultiplePipelineTriggerUnion;
+export type TriggerUnion = Trigger | ChainingTrigger | RerunTumblingWindowTrigger | TumblingWindowTrigger | MultiplePipelineTriggerUnion;
 
 /**
  * Azure data factory nested object which contains information about creating pipeline run
@@ -723,6 +723,21 @@ export interface TriggerResource extends SubResource {
    * Properties of the trigger.
    */
   properties: TriggerUnion;
+}
+
+/**
+ * A query of triggers.
+ */
+export interface TriggerQueryResponse {
+  /**
+   * List of triggers.
+   */
+  value: TriggerResource[];
+  /**
+   * The continuation token for getting the next page of results, if any remaining results exist,
+   * null otherwise.
+   */
+  continuationToken?: string;
 }
 
 /**
@@ -988,6 +1003,20 @@ export interface LinkedServiceDebugResource extends SubResourceDebugResource {
    * Properties of linked service.
    */
   properties: LinkedServiceUnion;
+}
+
+/**
+ * Query parameters for triggers.
+ */
+export interface TriggerFilterParameters {
+  /**
+   * The continuation token for getting the next page of results. Null for first page.
+   */
+  continuationToken?: string;
+  /**
+   * The name of the parent TumblingWindowTrigger to get the child rerun triggers
+   */
+  parentTriggerName?: string;
 }
 
 /**
@@ -1333,79 +1362,6 @@ export interface TriggerRunsQueryResponse {
    * null otherwise.
    */
   continuationToken?: string;
-}
-
-/**
- * Rerun tumbling window trigger Parameters.
- */
-export interface RerunTumblingWindowTriggerActionParameters {
-  /**
-   * The start time for the time period for which restatement is initiated. Only UTC time is
-   * currently supported.
-   */
-  startTime: Date;
-  /**
-   * The end time for the time period for which restatement is initiated. Only UTC time is
-   * currently supported.
-   */
-  endTime: Date;
-  /**
-   * The max number of parallel time windows (ready for execution) for which a rerun is triggered.
-   */
-  maxConcurrency: number;
-}
-
-/**
- * Trigger that schedules pipeline reruns for all fixed time interval windows from a requested
- * start time to requested end time.
- */
-export interface RerunTumblingWindowTrigger {
-  /**
-   * Polymorphic Discriminator
-   */
-  type: "RerunTumblingWindowTrigger";
-  /**
-   * Trigger description.
-   */
-  description?: string;
-  /**
-   * Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the
-   * Trigger. Possible values include: 'Started', 'Stopped', 'Disabled'
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly runtimeState?: TriggerRuntimeState;
-  /**
-   * List of tags that can be used for describing the trigger.
-   */
-  annotations?: any[];
-  /**
-   * The parent trigger reference.
-   */
-  parentTrigger?: any;
-  /**
-   * The start time for the time period for which restatement is initiated. Only UTC time is
-   * currently supported.
-   */
-  requestedStartTime: Date;
-  /**
-   * The end time for the time period for which restatement is initiated. Only UTC time is
-   * currently supported.
-   */
-  requestedEndTime: Date;
-  /**
-   * The max number of parallel time windows (ready for execution) for which a rerun is triggered.
-   */
-  maxConcurrency: number;
-}
-
-/**
- * RerunTrigger resource type.
- */
-export interface RerunTriggerResource extends SubResource {
-  /**
-   * Properties of the rerun trigger.
-   */
-  properties: RerunTumblingWindowTrigger;
 }
 
 /**
@@ -2031,451 +1987,42 @@ export interface MappingDataFlow {
 }
 
 /**
- * Trigger that allows the referenced pipeline to depend on other pipeline runs based on
- * runDimension Name/Value pairs. Upstream pipelines should declare the same runDimension Name and
- * their runs should have the values for those runDimensions. The referenced pipeline run would be
- * triggered if the values for the runDimension match for all upstream pipeline runs.
+ * Snowflake linked service.
  */
-export interface ChainingTrigger {
+export interface SnowflakeLinkedService {
   /**
    * Polymorphic Discriminator
    */
-  type: "ChainingTrigger";
+  type: "Snowflake";
   /**
-   * Trigger description.
+   * The integration runtime reference.
+   */
+  connectVia?: IntegrationRuntimeReference;
+  /**
+   * Linked service description.
    */
   description?: string;
   /**
-   * Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the
-   * Trigger. Possible values include: 'Started', 'Stopped', 'Disabled'
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   * Parameters for linked service.
    */
-  readonly runtimeState?: TriggerRuntimeState;
+  parameters?: { [propertyName: string]: ParameterSpecification };
   /**
-   * List of tags that can be used for describing the trigger.
+   * List of tags that can be used for describing the linked service.
    */
   annotations?: any[];
   /**
-   * Pipeline for which runs are created when all upstream pipelines complete successfully.
+   * The connection string of snowflake. Type: string, SecureString.
    */
-  pipelineProperty: TriggerPipelineReference;
+  connectionString: any;
   /**
-   * Upstream Pipelines.
+   * The Azure key vault secret reference of password in connection string.
    */
-  dependsOn: PipelineReference[];
+  password?: AzureKeyVaultSecretReference;
   /**
-   * Run Dimension property that needs to be emitted by upstream pipelines.
+   * The encrypted credential used for authentication. Credentials are encrypted using the
+   * integration runtime credential manager. Type: string (or Expression with resultType string).
    */
-  runDimension: string;
-}
-
-/**
- * Contains the possible cases for DependencyReference.
- */
-export type DependencyReferenceUnion = DependencyReference | SelfDependencyTumblingWindowTriggerReference | TriggerDependencyReferenceUnion;
-
-/**
- * Referenced dependency.
- */
-export interface DependencyReference {
-  /**
-   * Polymorphic Discriminator
-   */
-  type: "DependencyReference";
-}
-
-/**
- * Self referenced tumbling window trigger dependency.
- */
-export interface SelfDependencyTumblingWindowTriggerReference {
-  /**
-   * Polymorphic Discriminator
-   */
-  type: "SelfDependencyTumblingWindowTriggerReference";
-  /**
-   * Timespan applied to the start time of a tumbling window when evaluating dependency.
-   */
-  offset: string;
-  /**
-   * The size of the window when evaluating the dependency. If undefined the frequency of the
-   * tumbling window will be used.
-   */
-  size?: string;
-}
-
-/**
- * Trigger reference type.
- */
-export interface TriggerReference {
-  /**
-   * Reference trigger name.
-   */
-  referenceName: string;
-}
-
-/**
- * Contains the possible cases for TriggerDependencyReference.
- */
-export type TriggerDependencyReferenceUnion = TriggerDependencyReference | TumblingWindowTriggerDependencyReference;
-
-/**
- * Trigger referenced dependency.
- */
-export interface TriggerDependencyReference {
-  /**
-   * Polymorphic Discriminator
-   */
-  type: "TriggerDependencyReference";
-  /**
-   * Referenced trigger.
-   */
-  referenceTrigger: TriggerReference;
-}
-
-/**
- * Referenced tumbling window trigger dependency.
- */
-export interface TumblingWindowTriggerDependencyReference {
-  /**
-   * Polymorphic Discriminator
-   */
-  type: "TumblingWindowTriggerDependencyReference";
-  /**
-   * Referenced trigger.
-   */
-  referenceTrigger: TriggerReference;
-  /**
-   * Timespan applied to the start time of a tumbling window when evaluating dependency.
-   */
-  offset?: string;
-  /**
-   * The size of the window when evaluating the dependency. If undefined the frequency of the
-   * tumbling window will be used.
-   */
-  size?: string;
-}
-
-/**
- * Execution policy for an activity.
- */
-export interface RetryPolicy {
-  /**
-   * Maximum ordinary retry attempts. Default is 0. Type: integer (or Expression with resultType
-   * integer), minimum: 0.
-   */
-  count?: any;
-  /**
-   * Interval between retries in seconds. Default is 30.
-   */
-  intervalInSeconds?: number;
-}
-
-/**
- * Trigger that schedules pipeline runs for all fixed time interval windows from a start time
- * without gaps and also supports backfill scenarios (when start time is in the past).
- */
-export interface TumblingWindowTrigger {
-  /**
-   * Polymorphic Discriminator
-   */
-  type: "TumblingWindowTrigger";
-  /**
-   * Trigger description.
-   */
-  description?: string;
-  /**
-   * Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the
-   * Trigger. Possible values include: 'Started', 'Stopped', 'Disabled'
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly runtimeState?: TriggerRuntimeState;
-  /**
-   * List of tags that can be used for describing the trigger.
-   */
-  annotations?: any[];
-  /**
-   * Pipeline for which runs are created when an event is fired for trigger window that is ready.
-   */
-  pipelineProperty: TriggerPipelineReference;
-  /**
-   * The frequency of the time windows. Possible values include: 'Minute', 'Hour'
-   */
-  frequency: TumblingWindowFrequency;
-  /**
-   * The interval of the time windows. The minimum interval allowed is 15 Minutes.
-   */
-  interval: number;
-  /**
-   * The start time for the time period for the trigger during which events are fired for windows
-   * that are ready. Only UTC time is currently supported.
-   */
-  startTime: Date;
-  /**
-   * The end time for the time period for the trigger during which events are fired for windows
-   * that are ready. Only UTC time is currently supported.
-   */
-  endTime?: Date;
-  /**
-   * Specifies how long the trigger waits past due time before triggering new run. It doesn't alter
-   * window start and end time. The default is 0. Type: string (or Expression with resultType
-   * string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
-   */
-  delay?: any;
-  /**
-   * The max number of parallel time windows (ready for execution) for which a new run is
-   * triggered.
-   */
-  maxConcurrency: number;
-  /**
-   * Retry policy that will be applied for failed pipeline runs.
-   */
-  retryPolicy?: RetryPolicy;
-  /**
-   * Triggers that this trigger depends on. Only tumbling window triggers are supported.
-   */
-  dependsOn?: DependencyReferenceUnion[];
-}
-
-/**
- * Contains the possible cases for MultiplePipelineTrigger.
- */
-export type MultiplePipelineTriggerUnion = MultiplePipelineTrigger | BlobEventsTrigger | BlobTrigger | ScheduleTrigger;
-
-/**
- * Base class for all triggers that support one to many model for trigger to pipeline.
- */
-export interface MultiplePipelineTrigger {
-  /**
-   * Polymorphic Discriminator
-   */
-  type: "MultiplePipelineTrigger";
-  /**
-   * Trigger description.
-   */
-  description?: string;
-  /**
-   * Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the
-   * Trigger. Possible values include: 'Started', 'Stopped', 'Disabled'
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly runtimeState?: TriggerRuntimeState;
-  /**
-   * List of tags that can be used for describing the trigger.
-   */
-  annotations?: any[];
-  /**
-   * Pipelines that need to be started.
-   */
-  pipelines?: TriggerPipelineReference[];
-}
-
-/**
- * Trigger that runs every time a Blob event occurs.
- */
-export interface BlobEventsTrigger {
-  /**
-   * Polymorphic Discriminator
-   */
-  type: "BlobEventsTrigger";
-  /**
-   * Trigger description.
-   */
-  description?: string;
-  /**
-   * Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the
-   * Trigger. Possible values include: 'Started', 'Stopped', 'Disabled'
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly runtimeState?: TriggerRuntimeState;
-  /**
-   * List of tags that can be used for describing the trigger.
-   */
-  annotations?: any[];
-  /**
-   * Pipelines that need to be started.
-   */
-  pipelines?: TriggerPipelineReference[];
-  /**
-   * The blob path must begin with the pattern provided for trigger to fire. For example,
-   * '/records/blobs/december/' will only fire the trigger for blobs in the december folder under
-   * the records container. At least one of these must be provided: blobPathBeginsWith,
-   * blobPathEndsWith.
-   */
-  blobPathBeginsWith?: string;
-  /**
-   * The blob path must end with the pattern provided for trigger to fire. For example,
-   * 'december/boxes.csv' will only fire the trigger for blobs named boxes in a december folder. At
-   * least one of these must be provided: blobPathBeginsWith, blobPathEndsWith.
-   */
-  blobPathEndsWith?: string;
-  /**
-   * If set to true, blobs with zero bytes will be ignored.
-   */
-  ignoreEmptyBlobs?: boolean;
-  /**
-   * The type of events that cause this trigger to fire.
-   */
-  events: BlobEventTypes[];
-  /**
-   * The ARM resource ID of the Storage Account.
-   */
-  scope: string;
-}
-
-/**
- * Trigger that runs every time the selected Blob container changes.
- */
-export interface BlobTrigger {
-  /**
-   * Polymorphic Discriminator
-   */
-  type: "BlobTrigger";
-  /**
-   * Trigger description.
-   */
-  description?: string;
-  /**
-   * Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the
-   * Trigger. Possible values include: 'Started', 'Stopped', 'Disabled'
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly runtimeState?: TriggerRuntimeState;
-  /**
-   * List of tags that can be used for describing the trigger.
-   */
-  annotations?: any[];
-  /**
-   * Pipelines that need to be started.
-   */
-  pipelines?: TriggerPipelineReference[];
-  /**
-   * The path of the container/folder that will trigger the pipeline.
-   */
-  folderPath: string;
-  /**
-   * The max number of parallel files to handle when it is triggered.
-   */
-  maxConcurrency: number;
-  /**
-   * The Azure Storage linked service reference.
-   */
-  linkedService: LinkedServiceReference;
-}
-
-/**
- * The recurrence schedule occurrence.
- */
-export interface RecurrenceScheduleOccurrence {
-  /**
-   * The day of the week. Possible values include: 'Sunday', 'Monday', 'Tuesday', 'Wednesday',
-   * 'Thursday', 'Friday', 'Saturday'
-   */
-  day?: DayOfWeek;
-  /**
-   * The occurrence.
-   */
-  occurrence?: number;
-  /**
-   * Describes unknown properties. The value of an unknown property can be of "any" type.
-   */
-  [property: string]: any;
-}
-
-/**
- * The recurrence schedule.
- */
-export interface RecurrenceSchedule {
-  /**
-   * The minutes.
-   */
-  minutes?: number[];
-  /**
-   * The hours.
-   */
-  hours?: number[];
-  /**
-   * The days of the week.
-   */
-  weekDays?: DaysOfWeek[];
-  /**
-   * The month days.
-   */
-  monthDays?: number[];
-  /**
-   * The monthly occurrences.
-   */
-  monthlyOccurrences?: RecurrenceScheduleOccurrence[];
-  /**
-   * Describes unknown properties. The value of an unknown property can be of "any" type.
-   */
-  [property: string]: any;
-}
-
-/**
- * The workflow trigger recurrence.
- */
-export interface ScheduleTriggerRecurrence {
-  /**
-   * The frequency. Possible values include: 'NotSpecified', 'Minute', 'Hour', 'Day', 'Week',
-   * 'Month', 'Year'
-   */
-  frequency?: RecurrenceFrequency;
-  /**
-   * The interval.
-   */
-  interval?: number;
-  /**
-   * The start time.
-   */
-  startTime?: Date;
-  /**
-   * The end time.
-   */
-  endTime?: Date;
-  /**
-   * The time zone.
-   */
-  timeZone?: string;
-  /**
-   * The recurrence schedule.
-   */
-  schedule?: RecurrenceSchedule;
-  /**
-   * Describes unknown properties. The value of an unknown property can be of "any" type.
-   */
-  [property: string]: any;
-}
-
-/**
- * Trigger that creates pipeline runs periodically, on schedule.
- */
-export interface ScheduleTrigger {
-  /**
-   * Polymorphic Discriminator
-   */
-  type: "ScheduleTrigger";
-  /**
-   * Trigger description.
-   */
-  description?: string;
-  /**
-   * Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the
-   * Trigger. Possible values include: 'Started', 'Stopped', 'Disabled'
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly runtimeState?: TriggerRuntimeState;
-  /**
-   * List of tags that can be used for describing the trigger.
-   */
-  annotations?: any[];
-  /**
-   * Pipelines that need to be started.
-   */
-  pipelines?: TriggerPipelineReference[];
-  /**
-   * Recurrence schedule configuration.
-   */
-  recurrence: ScheduleTriggerRecurrence;
+  encryptedCredential?: any;
 }
 
 /**
@@ -5875,9 +5422,13 @@ export interface SalesforceServiceCloudLinkedService {
    */
   password?: SecretBaseUnion;
   /**
-   * The security token is required to remotely access Salesforce instance.
+   * The security token is optional to remotely access Salesforce instance.
    */
   securityToken?: SecretBaseUnion;
+  /**
+   * The Salesforce API version used in ADF. Type: string (or Expression with resultType string).
+   */
+  apiVersion?: any;
   /**
    * Extended properties appended to the connection string. Type: string (or Expression with
    * resultType string).
@@ -5931,9 +5482,13 @@ export interface SalesforceLinkedService {
    */
   password?: SecretBaseUnion;
   /**
-   * The security token is required to remotely access Salesforce instance.
+   * The security token is optional to remotely access Salesforce instance.
    */
   securityToken?: SecretBaseUnion;
+  /**
+   * The Salesforce API version used in ADF. Type: string (or Expression with resultType string).
+   */
+  apiVersion?: any;
   /**
    * The encrypted credential used for authentication. Credentials are encrypted using the
    * integration runtime credential manager. Type: string (or Expression with resultType string).
@@ -6912,19 +6467,29 @@ export interface Db2LinkedService {
    */
   annotations?: any[];
   /**
-   * Server name for connection. Type: string (or Expression with resultType string).
+   * The connection string. It is mutually exclusive with server, database, authenticationType,
+   * userName, packageCollection and certificateCommonName property. Type: string, SecureString or
+   * AzureKeyVaultSecretReference.
    */
-  server: any;
+  connectionString?: any;
   /**
-   * Database name for connection. Type: string (or Expression with resultType string).
+   * Server name for connection. It is mutually exclusive with connectionString property. Type:
+   * string (or Expression with resultType string).
    */
-  database: any;
+  server?: any;
   /**
-   * AuthenticationType to be used for connection. Possible values include: 'Basic'
+   * Database name for connection. It is mutually exclusive with connectionString property. Type:
+   * string (or Expression with resultType string).
+   */
+  database?: any;
+  /**
+   * AuthenticationType to be used for connection. It is mutually exclusive with connectionString
+   * property. Possible values include: 'Basic'
    */
   authenticationType?: Db2AuthenticationType;
   /**
-   * Username for authentication. Type: string (or Expression with resultType string).
+   * Username for authentication. It is mutually exclusive with connectionString property. Type:
+   * string (or Expression with resultType string).
    */
   username?: any;
   /**
@@ -6932,18 +6497,19 @@ export interface Db2LinkedService {
    */
   password?: SecretBaseUnion;
   /**
-   * Under where packages are created when querying database. Type: string (or Expression with
-   * resultType string).
+   * Under where packages are created when querying database. It is mutually exclusive with
+   * connectionString property. Type: string (or Expression with resultType string).
    */
   packageCollection?: any;
   /**
-   * Certificate Common Name when TLS is enabled. Type: string (or Expression with resultType
-   * string).
+   * Certificate Common Name when TLS is enabled. It is mutually exclusive with connectionString
+   * property. Type: string (or Expression with resultType string).
    */
   certificateCommonName?: any;
   /**
    * The encrypted credential used for authentication. Credentials are encrypted using the
-   * integration runtime credential manager. Type: string (or Expression with resultType string).
+   * integration runtime credential manager. It is mutually exclusive with connectionString
+   * property. Type: string (or Expression with resultType string).
    */
   encryptedCredential?: any;
 }
@@ -8128,6 +7694,55 @@ export interface AzureStorageLinkedService {
    * integration runtime credential manager. Type: string (or Expression with resultType string).
    */
   encryptedCredential?: string;
+}
+
+/**
+ * The snowflake dataset.
+ */
+export interface SnowflakeDataset {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "SnowflakeTable";
+  /**
+   * Dataset description.
+   */
+  description?: string;
+  /**
+   * Columns that define the structure of the dataset. Type: array (or Expression with resultType
+   * array), itemType: DatasetDataElement.
+   */
+  structure?: any;
+  /**
+   * Columns that define the physical type schema of the dataset. Type: array (or Expression with
+   * resultType array), itemType: DatasetSchemaDataElement.
+   */
+  schema?: any;
+  /**
+   * Linked service reference.
+   */
+  linkedServiceName: LinkedServiceReference;
+  /**
+   * Parameters for dataset.
+   */
+  parameters?: { [propertyName: string]: ParameterSpecification };
+  /**
+   * List of tags that can be used for describing the Dataset.
+   */
+  annotations?: any[];
+  /**
+   * The folder that this Dataset is in. If not specified, Dataset will appear at the root level.
+   */
+  folder?: DatasetFolder;
+  /**
+   * The schema name of the Snowflake database. Type: string (or Expression with resultType
+   * string).
+   */
+  snowflakeDatasetSchema?: any;
+  /**
+   * The table name of the Snowflake database. Type: string (or Expression with resultType string).
+   */
+  table?: any;
 }
 
 /**
@@ -12899,6 +12514,497 @@ export interface AmazonS3Dataset {
 }
 
 /**
+ * Trigger that allows the referenced pipeline to depend on other pipeline runs based on
+ * runDimension Name/Value pairs. Upstream pipelines should declare the same runDimension Name and
+ * their runs should have the values for those runDimensions. The referenced pipeline run would be
+ * triggered if the values for the runDimension match for all upstream pipeline runs.
+ */
+export interface ChainingTrigger {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "ChainingTrigger";
+  /**
+   * Trigger description.
+   */
+  description?: string;
+  /**
+   * Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the
+   * Trigger. Possible values include: 'Started', 'Stopped', 'Disabled'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly runtimeState?: TriggerRuntimeState;
+  /**
+   * List of tags that can be used for describing the trigger.
+   */
+  annotations?: any[];
+  /**
+   * Pipeline for which runs are created when all upstream pipelines complete successfully.
+   */
+  pipelineProperty: TriggerPipelineReference;
+  /**
+   * Upstream Pipelines.
+   */
+  dependsOn: PipelineReference[];
+  /**
+   * Run Dimension property that needs to be emitted by upstream pipelines.
+   */
+  runDimension: string;
+}
+
+/**
+ * Trigger that schedules pipeline reruns for all fixed time interval windows from a requested
+ * start time to requested end time.
+ */
+export interface RerunTumblingWindowTrigger {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "RerunTumblingWindowTrigger";
+  /**
+   * Trigger description.
+   */
+  description?: string;
+  /**
+   * Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the
+   * Trigger. Possible values include: 'Started', 'Stopped', 'Disabled'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly runtimeState?: TriggerRuntimeState;
+  /**
+   * List of tags that can be used for describing the trigger.
+   */
+  annotations?: any[];
+  /**
+   * The parent trigger reference.
+   */
+  parentTrigger: any;
+  /**
+   * The start time for the time period for which restatement is initiated. Only UTC time is
+   * currently supported.
+   */
+  requestedStartTime: Date;
+  /**
+   * The end time for the time period for which restatement is initiated. Only UTC time is
+   * currently supported.
+   */
+  requestedEndTime: Date;
+  /**
+   * The max number of parallel time windows (ready for execution) for which a rerun is triggered.
+   */
+  rerunConcurrency: number;
+}
+
+/**
+ * Contains the possible cases for DependencyReference.
+ */
+export type DependencyReferenceUnion = DependencyReference | SelfDependencyTumblingWindowTriggerReference | TriggerDependencyReferenceUnion;
+
+/**
+ * Referenced dependency.
+ */
+export interface DependencyReference {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "DependencyReference";
+}
+
+/**
+ * Self referenced tumbling window trigger dependency.
+ */
+export interface SelfDependencyTumblingWindowTriggerReference {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "SelfDependencyTumblingWindowTriggerReference";
+  /**
+   * Timespan applied to the start time of a tumbling window when evaluating dependency.
+   */
+  offset: string;
+  /**
+   * The size of the window when evaluating the dependency. If undefined the frequency of the
+   * tumbling window will be used.
+   */
+  size?: string;
+}
+
+/**
+ * Trigger reference type.
+ */
+export interface TriggerReference {
+  /**
+   * Reference trigger name.
+   */
+  referenceName: string;
+}
+
+/**
+ * Contains the possible cases for TriggerDependencyReference.
+ */
+export type TriggerDependencyReferenceUnion = TriggerDependencyReference | TumblingWindowTriggerDependencyReference;
+
+/**
+ * Trigger referenced dependency.
+ */
+export interface TriggerDependencyReference {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "TriggerDependencyReference";
+  /**
+   * Referenced trigger.
+   */
+  referenceTrigger: TriggerReference;
+}
+
+/**
+ * Referenced tumbling window trigger dependency.
+ */
+export interface TumblingWindowTriggerDependencyReference {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "TumblingWindowTriggerDependencyReference";
+  /**
+   * Referenced trigger.
+   */
+  referenceTrigger: TriggerReference;
+  /**
+   * Timespan applied to the start time of a tumbling window when evaluating dependency.
+   */
+  offset?: string;
+  /**
+   * The size of the window when evaluating the dependency. If undefined the frequency of the
+   * tumbling window will be used.
+   */
+  size?: string;
+}
+
+/**
+ * Execution policy for an activity.
+ */
+export interface RetryPolicy {
+  /**
+   * Maximum ordinary retry attempts. Default is 0. Type: integer (or Expression with resultType
+   * integer), minimum: 0.
+   */
+  count?: any;
+  /**
+   * Interval between retries in seconds. Default is 30.
+   */
+  intervalInSeconds?: number;
+}
+
+/**
+ * Trigger that schedules pipeline runs for all fixed time interval windows from a start time
+ * without gaps and also supports backfill scenarios (when start time is in the past).
+ */
+export interface TumblingWindowTrigger {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "TumblingWindowTrigger";
+  /**
+   * Trigger description.
+   */
+  description?: string;
+  /**
+   * Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the
+   * Trigger. Possible values include: 'Started', 'Stopped', 'Disabled'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly runtimeState?: TriggerRuntimeState;
+  /**
+   * List of tags that can be used for describing the trigger.
+   */
+  annotations?: any[];
+  /**
+   * Pipeline for which runs are created when an event is fired for trigger window that is ready.
+   */
+  pipelineProperty: TriggerPipelineReference;
+  /**
+   * The frequency of the time windows. Possible values include: 'Minute', 'Hour'
+   */
+  frequency: TumblingWindowFrequency;
+  /**
+   * The interval of the time windows. The minimum interval allowed is 15 Minutes.
+   */
+  interval: number;
+  /**
+   * The start time for the time period for the trigger during which events are fired for windows
+   * that are ready. Only UTC time is currently supported.
+   */
+  startTime: Date;
+  /**
+   * The end time for the time period for the trigger during which events are fired for windows
+   * that are ready. Only UTC time is currently supported.
+   */
+  endTime?: Date;
+  /**
+   * Specifies how long the trigger waits past due time before triggering new run. It doesn't alter
+   * window start and end time. The default is 0. Type: string (or Expression with resultType
+   * string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
+   */
+  delay?: any;
+  /**
+   * The max number of parallel time windows (ready for execution) for which a new run is
+   * triggered.
+   */
+  maxConcurrency: number;
+  /**
+   * Retry policy that will be applied for failed pipeline runs.
+   */
+  retryPolicy?: RetryPolicy;
+  /**
+   * Triggers that this trigger depends on. Only tumbling window triggers are supported.
+   */
+  dependsOn?: DependencyReferenceUnion[];
+}
+
+/**
+ * Contains the possible cases for MultiplePipelineTrigger.
+ */
+export type MultiplePipelineTriggerUnion = MultiplePipelineTrigger | BlobEventsTrigger | BlobTrigger | ScheduleTrigger;
+
+/**
+ * Base class for all triggers that support one to many model for trigger to pipeline.
+ */
+export interface MultiplePipelineTrigger {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "MultiplePipelineTrigger";
+  /**
+   * Trigger description.
+   */
+  description?: string;
+  /**
+   * Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the
+   * Trigger. Possible values include: 'Started', 'Stopped', 'Disabled'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly runtimeState?: TriggerRuntimeState;
+  /**
+   * List of tags that can be used for describing the trigger.
+   */
+  annotations?: any[];
+  /**
+   * Pipelines that need to be started.
+   */
+  pipelines?: TriggerPipelineReference[];
+}
+
+/**
+ * Trigger that runs every time a Blob event occurs.
+ */
+export interface BlobEventsTrigger {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "BlobEventsTrigger";
+  /**
+   * Trigger description.
+   */
+  description?: string;
+  /**
+   * Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the
+   * Trigger. Possible values include: 'Started', 'Stopped', 'Disabled'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly runtimeState?: TriggerRuntimeState;
+  /**
+   * List of tags that can be used for describing the trigger.
+   */
+  annotations?: any[];
+  /**
+   * Pipelines that need to be started.
+   */
+  pipelines?: TriggerPipelineReference[];
+  /**
+   * The blob path must begin with the pattern provided for trigger to fire. For example,
+   * '/records/blobs/december/' will only fire the trigger for blobs in the december folder under
+   * the records container. At least one of these must be provided: blobPathBeginsWith,
+   * blobPathEndsWith.
+   */
+  blobPathBeginsWith?: string;
+  /**
+   * The blob path must end with the pattern provided for trigger to fire. For example,
+   * 'december/boxes.csv' will only fire the trigger for blobs named boxes in a december folder. At
+   * least one of these must be provided: blobPathBeginsWith, blobPathEndsWith.
+   */
+  blobPathEndsWith?: string;
+  /**
+   * If set to true, blobs with zero bytes will be ignored.
+   */
+  ignoreEmptyBlobs?: boolean;
+  /**
+   * The type of events that cause this trigger to fire.
+   */
+  events: BlobEventTypes[];
+  /**
+   * The ARM resource ID of the Storage Account.
+   */
+  scope: string;
+}
+
+/**
+ * Trigger that runs every time the selected Blob container changes.
+ */
+export interface BlobTrigger {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "BlobTrigger";
+  /**
+   * Trigger description.
+   */
+  description?: string;
+  /**
+   * Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the
+   * Trigger. Possible values include: 'Started', 'Stopped', 'Disabled'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly runtimeState?: TriggerRuntimeState;
+  /**
+   * List of tags that can be used for describing the trigger.
+   */
+  annotations?: any[];
+  /**
+   * Pipelines that need to be started.
+   */
+  pipelines?: TriggerPipelineReference[];
+  /**
+   * The path of the container/folder that will trigger the pipeline.
+   */
+  folderPath: string;
+  /**
+   * The max number of parallel files to handle when it is triggered.
+   */
+  maxConcurrency: number;
+  /**
+   * The Azure Storage linked service reference.
+   */
+  linkedService: LinkedServiceReference;
+}
+
+/**
+ * The recurrence schedule occurrence.
+ */
+export interface RecurrenceScheduleOccurrence {
+  /**
+   * The day of the week. Possible values include: 'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+   * 'Thursday', 'Friday', 'Saturday'
+   */
+  day?: DayOfWeek;
+  /**
+   * The occurrence.
+   */
+  occurrence?: number;
+  /**
+   * Describes unknown properties. The value of an unknown property can be of "any" type.
+   */
+  [property: string]: any;
+}
+
+/**
+ * The recurrence schedule.
+ */
+export interface RecurrenceSchedule {
+  /**
+   * The minutes.
+   */
+  minutes?: number[];
+  /**
+   * The hours.
+   */
+  hours?: number[];
+  /**
+   * The days of the week.
+   */
+  weekDays?: DaysOfWeek[];
+  /**
+   * The month days.
+   */
+  monthDays?: number[];
+  /**
+   * The monthly occurrences.
+   */
+  monthlyOccurrences?: RecurrenceScheduleOccurrence[];
+  /**
+   * Describes unknown properties. The value of an unknown property can be of "any" type.
+   */
+  [property: string]: any;
+}
+
+/**
+ * The workflow trigger recurrence.
+ */
+export interface ScheduleTriggerRecurrence {
+  /**
+   * The frequency. Possible values include: 'NotSpecified', 'Minute', 'Hour', 'Day', 'Week',
+   * 'Month', 'Year'
+   */
+  frequency?: RecurrenceFrequency;
+  /**
+   * The interval.
+   */
+  interval?: number;
+  /**
+   * The start time.
+   */
+  startTime?: Date;
+  /**
+   * The end time.
+   */
+  endTime?: Date;
+  /**
+   * The time zone.
+   */
+  timeZone?: string;
+  /**
+   * The recurrence schedule.
+   */
+  schedule?: RecurrenceSchedule;
+  /**
+   * Describes unknown properties. The value of an unknown property can be of "any" type.
+   */
+  [property: string]: any;
+}
+
+/**
+ * Trigger that creates pipeline runs periodically, on schedule.
+ */
+export interface ScheduleTrigger {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "ScheduleTrigger";
+  /**
+   * Trigger description.
+   */
+  description?: string;
+  /**
+   * Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the
+   * Trigger. Possible values include: 'Started', 'Stopped', 'Disabled'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly runtimeState?: TriggerRuntimeState;
+  /**
+   * List of tags that can be used for describing the trigger.
+   */
+  annotations?: any[];
+  /**
+   * Pipelines that need to be started.
+   */
+  pipelines?: TriggerPipelineReference[];
+  /**
+   * Recurrence schedule configuration.
+   */
+  recurrence: ScheduleTriggerRecurrence;
+}
+
+/**
  * Execution policy for an activity.
  */
 export interface ActivityPolicy {
@@ -13621,9 +13727,50 @@ export interface WebActivity {
 }
 
 /**
+ * Contains the possible cases for ExportSettings.
+ */
+export type ExportSettingsUnion = ExportSettings | SnowflakeExportCopyCommand;
+
+/**
+ * Export command settings.
+ */
+export interface ExportSettings {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "ExportSettings";
+  /**
+   * Describes unknown properties. The value of an unknown property can be of "any" type.
+   */
+  [property: string]: any;
+}
+
+/**
+ * Snowflake export command settings.
+ */
+export interface SnowflakeExportCopyCommand {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "SnowflakeExportCopyCommand";
+  /**
+   * Additional copy options directly passed to snowflake Copy Command. Type: key value pairs
+   * (value should be string type) (or Expression with resultType object). Example:
+   * "additionalCopyOptions": { "DATE_FORMAT": "MM/DD/YYYY", "TIME_FORMAT": "'HH24:MI:SS.FF'" }
+   */
+  additionalCopyOptions?: { [propertyName: string]: any };
+  /**
+   * Additional format options directly passed to snowflake Copy Command. Type: key value pairs
+   * (value should be string type) (or Expression with resultType object). Example:
+   * "additionalFormatOptions": { "OVERWRITE": "TRUE", "MAX_FILE_SIZE": "'FALSE'" }
+   */
+  additionalFormatOptions?: { [propertyName: string]: any };
+}
+
+/**
  * Contains the possible cases for CopySource.
  */
-export type CopySourceUnion = CopySource | HttpSource | AzureBlobFSSource | AzureDataLakeStoreSource | Office365Source | CosmosDbMongoDbApiSource | MongoDbV2Source | MongoDbSource | WebSource | OracleSource | AzureDataExplorerSource | HdfsSource | FileSystemSource | RestSource | SalesforceServiceCloudSource | ODataSource | MicrosoftAccessSource | RelationalSource | CommonDataServiceForAppsSource | DynamicsCrmSource | DynamicsSource | CosmosDbSqlApiSource | DocumentDbCollectionSource | BlobSource | TabularSourceUnion | BinarySource | OrcSource | JsonSource | DelimitedTextSource | ParquetSource | AvroSource;
+export type CopySourceUnion = CopySource | SnowflakeSource | HttpSource | AzureBlobFSSource | AzureDataLakeStoreSource | Office365Source | CosmosDbMongoDbApiSource | MongoDbV2Source | MongoDbSource | WebSource | OracleSource | AzureDataExplorerSource | HdfsSource | FileSystemSource | RestSource | SalesforceServiceCloudSource | ODataSource | MicrosoftAccessSource | RelationalSource | CommonDataServiceForAppsSource | DynamicsCrmSource | DynamicsSource | CosmosDbSqlApiSource | DocumentDbCollectionSource | BlobSource | TabularSourceUnion | BinarySource | OrcSource | JsonSource | DelimitedTextSource | ParquetSource | AvroSource;
 
 /**
  * A copy activity source.
@@ -13651,6 +13798,38 @@ export interface CopySource {
    * Describes unknown properties. The value of an unknown property can be of "any" type.
    */
   [property: string]: any;
+}
+
+/**
+ * A copy activity snowflake source.
+ */
+export interface SnowflakeSource {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "SnowflakeSource";
+  /**
+   * Source retry count. Type: integer (or Expression with resultType integer).
+   */
+  sourceRetryCount?: any;
+  /**
+   * Source retry wait. Type: string (or Expression with resultType string), pattern:
+   * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
+   */
+  sourceRetryWait?: any;
+  /**
+   * The maximum concurrent connection count for the source data store. Type: integer (or
+   * Expression with resultType integer).
+   */
+  maxConcurrentConnections?: any;
+  /**
+   * Snowflake Sql query. Type: string (or Expression with resultType string).
+   */
+  query?: any;
+  /**
+   * Snowflake export settings.
+   */
+  exportSettings?: SnowflakeExportCopyCommand;
 }
 
 /**
@@ -13805,6 +13984,20 @@ export interface Office365Source {
 }
 
 /**
+ * Specify the column name and value of additional columns.
+ */
+export interface AdditionalColumns {
+  /**
+   * Additional column name. Type: string (or Expression with resultType string).
+   */
+  name?: any;
+  /**
+   * Additional column value. Type: string (or Expression with resultType string).
+   */
+  value?: any;
+}
+
+/**
  * Cursor methods for Mongodb query
  */
 export interface MongoDbCursorMethodsProperties {
@@ -13880,6 +14073,11 @@ export interface CosmosDbMongoDbApiSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -13926,6 +14124,11 @@ export interface MongoDbV2Source {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -13955,6 +14158,11 @@ export interface MongoDbSource {
    * resultType string).
    */
   query?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -13979,6 +14187,11 @@ export interface WebSource {
    * Expression with resultType integer).
    */
   maxConcurrentConnections?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -14046,6 +14259,11 @@ export interface OracleSource {
    * The settings that will be leveraged for Oracle source partitioning.
    */
   partitionSettings?: OraclePartitionSettings;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -14085,6 +14303,11 @@ export interface AzureDataExplorerSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))..
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -14168,6 +14391,11 @@ export interface FileSystemSource {
    * (or Expression with resultType boolean).
    */
   recursive?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -14222,6 +14450,11 @@ export interface RestSource {
    * The time to await before sending next page request.
    */
   requestInterval?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -14255,6 +14488,11 @@ export interface SalesforceServiceCloudSource {
    * 'QueryAll'
    */
   readBehavior?: SalesforceSourceReadBehavior;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -14283,6 +14521,11 @@ export interface ODataSource {
    * OData query. For example, "$top=1". Type: string (or Expression with resultType string).
    */
   query?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -14311,6 +14554,11 @@ export interface MicrosoftAccessSource {
    * Database query. Type: string (or Expression with resultType string).
    */
   query?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -14339,6 +14587,11 @@ export interface RelationalSource {
    * Database query. Type: string (or Expression with resultType string).
    */
   query?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -14368,6 +14621,11 @@ export interface CommonDataServiceForAppsSource {
    * Apps (online & on-premises). Type: string (or Expression with resultType string).
    */
   query?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -14397,6 +14655,11 @@ export interface DynamicsCrmSource {
    * on-premises). Type: string (or Expression with resultType string).
    */
   query?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -14426,6 +14689,11 @@ export interface DynamicsSource {
    * on-premises). Type: string (or Expression with resultType string).
    */
   query?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -14462,6 +14730,11 @@ export interface CosmosDbSqlApiSource {
    * Preferred regions. Type: array of strings (or Expression with resultType array of strings).
    */
   preferredRegions?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -14499,6 +14772,11 @@ export interface DocumentDbCollectionSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -14590,6 +14868,11 @@ export interface TabularSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -14619,6 +14902,11 @@ export interface AmazonRedshiftSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * Database query. Type: string (or Expression with resultType string).
    */
@@ -14659,6 +14947,11 @@ export interface GoogleAdWordsSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -14691,6 +14984,11 @@ export interface OracleServiceCloudSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -14725,6 +15023,11 @@ export interface DynamicsAXSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -14757,6 +15060,11 @@ export interface ResponsysSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -14791,6 +15099,11 @@ export interface SalesforceMarketingCloudSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -14823,6 +15136,11 @@ export interface VerticaSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -14878,6 +15196,11 @@ export interface NetezzaSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -14920,6 +15243,11 @@ export interface ZohoSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -14952,6 +15280,11 @@ export interface XeroSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -14986,6 +15319,11 @@ export interface SquareSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -15018,6 +15356,11 @@ export interface SparkSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -15052,6 +15395,11 @@ export interface ShopifySource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -15084,6 +15432,11 @@ export interface ServiceNowSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -15118,6 +15471,11 @@ export interface QuickBooksSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -15150,6 +15508,11 @@ export interface PrestoSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -15184,6 +15547,11 @@ export interface PhoenixSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -15216,6 +15584,11 @@ export interface PaypalSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -15250,6 +15623,11 @@ export interface MarketoSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -15282,6 +15660,11 @@ export interface AzureMariaDBSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -15316,6 +15699,11 @@ export interface MariaDBSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -15348,6 +15736,11 @@ export interface MagentoSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -15382,6 +15775,11 @@ export interface JiraSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -15414,6 +15812,11 @@ export interface ImpalaSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -15448,6 +15851,11 @@ export interface HubspotSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -15480,6 +15888,11 @@ export interface HiveSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -15514,6 +15927,11 @@ export interface HBaseSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -15546,6 +15964,11 @@ export interface GreenplumSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -15580,6 +16003,11 @@ export interface GoogleBigQuerySource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -15612,6 +16040,11 @@ export interface EloquaSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -15646,6 +16079,11 @@ export interface DrillSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -15678,6 +16116,11 @@ export interface CouchbaseSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -15712,6 +16155,11 @@ export interface ConcurSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -15744,6 +16192,11 @@ export interface AzurePostgreSqlSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -15778,6 +16231,11 @@ export interface AmazonMWSSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -15810,6 +16268,11 @@ export interface CassandraSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * Database query. Should be a SQL-92 query expression or Cassandra Query Language (CQL) command.
    * Type: string (or Expression with resultType string).
@@ -15875,6 +16338,11 @@ export interface TeradataSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * Teradata query. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -15917,6 +16385,11 @@ export interface AzureMySqlSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * Database query. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -15949,6 +16422,11 @@ export interface SqlDWSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * SQL Data Warehouse reader query. Type: string (or Expression with resultType string).
    */
@@ -16009,6 +16487,11 @@ export interface SqlMISource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * SQL reader query. Type: string (or Expression with resultType string).
    */
   sqlReaderQuery?: any;
@@ -16055,6 +16538,11 @@ export interface AzureSqlSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * SQL reader query. Type: string (or Expression with resultType string).
    */
@@ -16103,6 +16591,11 @@ export interface SqlServerSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * SQL reader query. Type: string (or Expression with resultType string).
    */
   sqlReaderQuery?: any;
@@ -16150,6 +16643,11 @@ export interface SqlSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * SQL reader query. Type: string (or Expression with resultType string).
    */
   sqlReaderQuery?: any;
@@ -16163,6 +16661,12 @@ export interface SqlSource {
    * type: "int"}}".
    */
   storedProcedureParameters?: { [propertyName: string]: StoredProcedureParameter };
+  /**
+   * Specifies the transaction locking behavior for the SQL source. Allowed values:
+   * ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is
+   * ReadCommitted. Type: string (or Expression with resultType string).
+   */
+  isolationLevel?: any;
 }
 
 /**
@@ -16218,6 +16722,11 @@ export interface SapTableSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * The number of rows to be retrieved. Type: integer(or Expression with resultType integer).
    */
@@ -16287,6 +16796,11 @@ export interface SapOpenHubSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * Whether to exclude the records of the last request. The default value is true. Type: boolean
    * (or Expression with resultType boolean).
    */
@@ -16338,6 +16852,11 @@ export interface SapHanaSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * SAP HANA Sql query. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -16385,6 +16904,11 @@ export interface SapEccSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * SAP ECC OData query. For example, "$top=1". Type: string (or Expression with resultType
    * string).
    */
@@ -16419,6 +16943,11 @@ export interface SapCloudForCustomerSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * SAP Cloud for Customer OData query. For example, "$top=1". Type: string (or Expression with
    * resultType string).
    */
@@ -16452,6 +16981,11 @@ export interface SalesforceSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * Database query. Type: string (or Expression with resultType string).
    */
@@ -16491,6 +17025,11 @@ export interface SapBwSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * MDX query. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -16523,6 +17062,11 @@ export interface SybaseSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * Database query. Type: string (or Expression with resultType string).
    */
@@ -16557,6 +17101,11 @@ export interface PostgreSqlSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * Database query. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -16589,6 +17138,11 @@ export interface MySqlSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * Database query. Type: string (or Expression with resultType string).
    */
@@ -16623,6 +17177,11 @@ export interface OdbcSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * Database query. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -16655,6 +17214,11 @@ export interface Db2Source {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * Database query. Type: string (or Expression with resultType string).
    */
@@ -16689,6 +17253,11 @@ export interface InformixSource {
    */
   queryTimeout?: any;
   /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+  /**
    * Database query. Type: string (or Expression with resultType string).
    */
   query?: any;
@@ -16721,6 +17290,11 @@ export interface AzureTableSource {
    * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
    */
   queryTimeout?: any;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
   /**
    * Azure Table source query. Type: string (or Expression with resultType string).
    */
@@ -16782,6 +17356,11 @@ export interface HdfsReadSettings {
    * HDFS wildcardFileName. Type: string (or Expression with resultType string).
    */
   wildcardFileName?: any;
+  /**
+   * Point to a text file that lists each file (relative path to the path configured in the
+   * dataset) that you want to copy. Type: string (or Expression with resultType string).
+   */
+  fileListPath?: any;
   /**
    * Indicates whether to enable partition discovery.
    */
@@ -16861,6 +17440,11 @@ export interface SftpReadSettings {
    */
   wildcardFileName?: any;
   /**
+   * Point to a text file that lists each file (relative path to the path configured in the
+   * dataset) that you want to copy. Type: string (or Expression with resultType string).
+   */
+  fileListPath?: any;
+  /**
    * The start of file's modified datetime. Type: string (or Expression with resultType string).
    */
   modifiedDatetimeStart?: any;
@@ -16896,6 +17480,11 @@ export interface FtpReadSettings {
    * Ftp wildcardFileName. Type: string (or Expression with resultType string).
    */
   wildcardFileName?: any;
+  /**
+   * Point to a text file that lists each file (relative path to the path configured in the
+   * dataset) that you want to copy. Type: string (or Expression with resultType string).
+   */
+  fileListPath?: any;
   /**
    * Specify whether to use binary transfer mode for FTP stores.
    */
@@ -16933,6 +17522,11 @@ export interface GoogleCloudStorageReadSettings {
    * resultType string).
    */
   prefix?: any;
+  /**
+   * Point to a text file that lists each file (relative path to the path configured in the
+   * dataset) that you want to copy. Type: string (or Expression with resultType string).
+   */
+  fileListPath?: any;
   /**
    * Indicates whether to enable partition discovery.
    */
@@ -16974,6 +17568,11 @@ export interface AzureFileStorageReadSettings {
    */
   wildcardFileName?: any;
   /**
+   * Point to a text file that lists each file (relative path to the path configured in the
+   * dataset) that you want to copy. Type: string (or Expression with resultType string).
+   */
+  fileListPath?: any;
+  /**
    * Indicates whether to enable partition discovery.
    */
   enablePartitionDiscovery?: boolean;
@@ -17013,6 +17612,11 @@ export interface FileServerReadSettings {
    * FileServer wildcardFileName. Type: string (or Expression with resultType string).
    */
   wildcardFileName?: any;
+  /**
+   * Point to a text file that lists each file (relative path to the path configured in the
+   * dataset) that you want to copy. Type: string (or Expression with resultType string).
+   */
+  fileListPath?: any;
   /**
    * Indicates whether to enable partition discovery.
    */
@@ -17058,6 +17662,11 @@ export interface AmazonS3ReadSettings {
    */
   prefix?: any;
   /**
+   * Point to a text file that lists each file (relative path to the path configured in the
+   * dataset) that you want to copy. Type: string (or Expression with resultType string).
+   */
+  fileListPath?: any;
+  /**
    * Indicates whether to enable partition discovery.
    */
   enablePartitionDiscovery?: boolean;
@@ -17098,6 +17707,11 @@ export interface AzureDataLakeStoreReadSettings {
    */
   wildcardFileName?: any;
   /**
+   * Point to a text file that lists each file (relative path to the path configured in the
+   * dataset) that you want to copy. Type: string (or Expression with resultType string).
+   */
+  fileListPath?: any;
+  /**
    * Indicates whether to enable partition discovery.
    */
   enablePartitionDiscovery?: boolean;
@@ -17137,6 +17751,11 @@ export interface AzureBlobFSReadSettings {
    * Azure blobFS wildcardFileName. Type: string (or Expression with resultType string).
    */
   wildcardFileName?: any;
+  /**
+   * Point to a text file that lists each file (relative path to the path configured in the
+   * dataset) that you want to copy. Type: string (or Expression with resultType string).
+   */
+  fileListPath?: any;
   /**
    * Indicates whether to enable partition discovery.
    */
@@ -17182,6 +17801,11 @@ export interface AzureBlobStorageReadSettings {
    * string).
    */
   prefix?: any;
+  /**
+   * Point to a text file that lists each file (relative path to the path configured in the
+   * dataset) that you want to copy. Type: string (or Expression with resultType string).
+   */
+  fileListPath?: any;
   /**
    * Indicates whether to enable partition discovery.
    */
@@ -17250,6 +17874,11 @@ export interface OrcSource {
    * ORC store settings.
    */
   storeSettings?: StoreReadSettingsUnion;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -17278,6 +17907,11 @@ export interface JsonSource {
    * Json store settings.
    */
   storeSettings?: StoreReadSettingsUnion;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -17344,6 +17978,11 @@ export interface DelimitedTextSource {
    * DelimitedText format settings.
    */
   formatSettings?: DelimitedTextReadSettings;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -17372,6 +18011,11 @@ export interface ParquetSource {
    * Parquet store settings.
    */
   storeSettings?: StoreReadSettingsUnion;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -17400,6 +18044,11 @@ export interface AvroSource {
    * Avro store settings.
    */
   storeSettings?: StoreReadSettingsUnion;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
 }
 
 /**
@@ -18262,6 +18911,22 @@ export interface HDInsightHiveActivity {
 }
 
 /**
+ * Skip error file.
+ */
+export interface SkipErrorFile {
+  /**
+   * Skip if file is deleted by other client during copy. Default is true. Type: boolean (or
+   * Expression with resultType boolean).
+   */
+  fileMissing?: any;
+  /**
+   * Skip if source/sink file changed by other concurrent write. Default is false. Type: boolean
+   * (or Expression with resultType boolean).
+   */
+  dataInconsistency?: any;
+}
+
+/**
  * Redirect incompatible row settings
  */
 export interface RedirectIncompatibleRowSettings {
@@ -18309,7 +18974,7 @@ export interface StagingSettings {
 /**
  * Contains the possible cases for CopySink.
  */
-export type CopySinkUnion = CopySink | CosmosDbMongoDbApiSink | SalesforceServiceCloudSink | SalesforceSink | AzureDataExplorerSink | CommonDataServiceForAppsSink | DynamicsCrmSink | DynamicsSink | MicrosoftAccessSink | InformixSink | OdbcSink | AzureSearchIndexSink | AzureBlobFSSink | AzureDataLakeStoreSink | OracleSink | SqlDWSink | SqlMISink | AzureSqlSink | SqlServerSink | SqlSink | CosmosDbSqlApiSink | DocumentDbCollectionSink | FileSystemSink | BlobSink | BinarySink | ParquetSink | AvroSink | AzureTableSink | AzureQueueSink | SapCloudForCustomerSink | AzureMySqlSink | AzurePostgreSqlSink | OrcSink | JsonSink | DelimitedTextSink;
+export type CopySinkUnion = CopySink | CosmosDbMongoDbApiSink | SalesforceServiceCloudSink | SalesforceSink | AzureDataExplorerSink | CommonDataServiceForAppsSink | DynamicsCrmSink | DynamicsSink | MicrosoftAccessSink | InformixSink | OdbcSink | AzureSearchIndexSink | AzureBlobFSSink | AzureDataLakeStoreSink | OracleSink | SnowflakeSink | SqlDWSink | SqlMISink | AzureSqlSink | SqlServerSink | SqlSink | CosmosDbSqlApiSink | DocumentDbCollectionSink | FileSystemSink | BlobSink | BinarySink | ParquetSink | AvroSink | AzureTableSink | AzureQueueSink | SapCloudForCustomerSink | AzureMySqlSink | AzurePostgreSqlSink | OrcSink | JsonSink | DelimitedTextSink;
 
 /**
  * A copy activity sink.
@@ -18935,6 +19600,88 @@ export interface OracleSink {
 }
 
 /**
+ * Contains the possible cases for ImportSettings.
+ */
+export type ImportSettingsUnion = ImportSettings | SnowflakeImportCopyCommand;
+
+/**
+ * Import command settings.
+ */
+export interface ImportSettings {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "ImportSettings";
+  /**
+   * Describes unknown properties. The value of an unknown property can be of "any" type.
+   */
+  [property: string]: any;
+}
+
+/**
+ * Snowflake import command settings.
+ */
+export interface SnowflakeImportCopyCommand {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "SnowflakeImportCopyCommand";
+  /**
+   * Additional copy options directly passed to snowflake Copy Command. Type: key value pairs
+   * (value should be string type) (or Expression with resultType object). Example:
+   * "additionalCopyOptions": { "DATE_FORMAT": "MM/DD/YYYY", "TIME_FORMAT": "'HH24:MI:SS.FF'" }
+   */
+  additionalCopyOptions?: { [propertyName: string]: any };
+  /**
+   * Additional format options directly passed to snowflake Copy Command. Type: key value pairs
+   * (value should be string type) (or Expression with resultType object). Example:
+   * "additionalFormatOptions": { "FORCE": "TRUE", "LOAD_UNCERTAIN_FILES": "'FALSE'" }
+   */
+  additionalFormatOptions?: { [propertyName: string]: any };
+}
+
+/**
+ * A copy activity snowflake sink.
+ */
+export interface SnowflakeSink {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "SnowflakeSink";
+  /**
+   * Write batch size. Type: integer (or Expression with resultType integer), minimum: 0.
+   */
+  writeBatchSize?: any;
+  /**
+   * Write batch timeout. Type: string (or Expression with resultType string), pattern:
+   * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
+   */
+  writeBatchTimeout?: any;
+  /**
+   * Sink retry count. Type: integer (or Expression with resultType integer).
+   */
+  sinkRetryCount?: any;
+  /**
+   * Sink retry wait. Type: string (or Expression with resultType string), pattern:
+   * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
+   */
+  sinkRetryWait?: any;
+  /**
+   * The maximum concurrent connection count for the sink data store. Type: integer (or Expression
+   * with resultType integer).
+   */
+  maxConcurrentConnections?: any;
+  /**
+   * SQL pre-copy script. Type: string (or Expression with resultType string).
+   */
+  preCopyScript?: any;
+  /**
+   * Snowflake import settings.
+   */
+  importSettings?: SnowflakeImportCopyCommand;
+}
+
+/**
  * Default value.
  */
 export interface DWCopyCommandDefaultValue {
@@ -19523,6 +20270,12 @@ export interface AzureDataLakeStoreWriteSettings {
    * The type of copy behavior for copy sink.
    */
   copyBehavior?: any;
+  /**
+   * Specifies the expiry time of the written files. The time is applied to the UTC time zone in
+   * the format of "2018-12-01T05:00:00Z". Default value is NULL. Type: integer (or Expression with
+   * resultType integer).
+   */
+  expiryDateTime?: any;
 }
 
 /**
@@ -19595,6 +20348,11 @@ export interface SftpWriteSettings {
    * hour). Type: string (or Expression with resultType string).
    */
   operationTimeout?: any;
+  /**
+   * Upload to temporary file(s) and rename. Disable this option if your SFTP server doesn't
+   * support rename operation. Type: boolean (or Expression with resultType boolean).
+   */
+  useTempFileRename?: any;
 }
 
 /**
@@ -20173,6 +20931,10 @@ export interface CopyActivity {
    */
   redirectIncompatibleRowSettings?: RedirectIncompatibleRowSettings;
   /**
+   * Log storage settings customer need to provide when enabling session log.
+   */
+  logStorageSettings?: LogStorageSettings;
+  /**
    * Preserve Rules.
    */
   preserveRules?: any[];
@@ -20180,6 +20942,15 @@ export interface CopyActivity {
    * Preserve rules.
    */
   preserve?: any[];
+  /**
+   * Whether to enable Data Consistency validation. Type: boolean (or Expression with resultType
+   * boolean).
+   */
+  validateDataConsistency?: any;
+  /**
+   * Specify the fault tolerance for data consistency.
+   */
+  skipErrorFile?: SkipErrorFile;
   /**
    * List of inputs for the activity.
    */
@@ -21976,6 +22747,11 @@ export interface PipelinesCreateRunOptionalParams extends msRest.RequestOptionsB
    */
   startActivityName?: string;
   /**
+   * In recovery mode, if set to true, the rerun will start from failed activities. The property
+   * will be used only if startActivityName is not specified.
+   */
+  startFromFailure?: boolean;
+  /**
    * Parameters of the pipeline run. These parameters will be used only if the runId is not
    * specified.
    */
@@ -22149,20 +22925,6 @@ export interface TriggerListResponse extends Array<TriggerResource> {
 
 /**
  * @interface
- * A list of rerun triggers.
- * @extends Array<RerunTriggerResource>
- */
-export interface RerunTriggerListResponse extends Array<RerunTriggerResource> {
-  /**
-   * The continuation token for getting the next page of results, if any remaining results exist,
-   * null otherwise.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly nextLink?: string;
-}
-
-/**
- * @interface
  * A list of data flow resources.
  * @extends Array<DataFlowResource>
  */
@@ -22293,48 +23055,6 @@ export type TriggerRunStatus = 'Succeeded' | 'Failed' | 'Inprogress';
  * @enum {string}
  */
 export type DataFlowDebugCommandType = 'executePreviewQuery' | 'executeStatisticsQuery' | 'executeExpressionQuery';
-
-/**
- * Defines values for TumblingWindowFrequency.
- * Possible values include: 'Minute', 'Hour'
- * @readonly
- * @enum {string}
- */
-export type TumblingWindowFrequency = 'Minute' | 'Hour';
-
-/**
- * Defines values for BlobEventTypes.
- * Possible values include: 'Microsoft.Storage.BlobCreated', 'Microsoft.Storage.BlobDeleted'
- * @readonly
- * @enum {string}
- */
-export type BlobEventTypes = 'Microsoft.Storage.BlobCreated' | 'Microsoft.Storage.BlobDeleted';
-
-/**
- * Defines values for DayOfWeek.
- * Possible values include: 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
- * 'Saturday'
- * @readonly
- * @enum {string}
- */
-export type DayOfWeek = 'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday';
-
-/**
- * Defines values for DaysOfWeek.
- * Possible values include: 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
- * 'Saturday'
- * @readonly
- * @enum {string}
- */
-export type DaysOfWeek = 'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday';
-
-/**
- * Defines values for RecurrenceFrequency.
- * Possible values include: 'NotSpecified', 'Minute', 'Hour', 'Day', 'Week', 'Month', 'Year'
- * @readonly
- * @enum {string}
- */
-export type RecurrenceFrequency = 'NotSpecified' | 'Minute' | 'Hour' | 'Day' | 'Week' | 'Month' | 'Year';
 
 /**
  * Defines values for GoogleAdWordsAuthenticationType.
@@ -22562,6 +23282,48 @@ export type OrcCompressionCodec = 'none' | 'zlib' | 'snappy';
  * @enum {string}
  */
 export type AvroCompressionCodec = 'none' | 'deflate' | 'snappy' | 'xz' | 'bzip2';
+
+/**
+ * Defines values for TumblingWindowFrequency.
+ * Possible values include: 'Minute', 'Hour'
+ * @readonly
+ * @enum {string}
+ */
+export type TumblingWindowFrequency = 'Minute' | 'Hour';
+
+/**
+ * Defines values for BlobEventTypes.
+ * Possible values include: 'Microsoft.Storage.BlobCreated', 'Microsoft.Storage.BlobDeleted'
+ * @readonly
+ * @enum {string}
+ */
+export type BlobEventTypes = 'Microsoft.Storage.BlobCreated' | 'Microsoft.Storage.BlobDeleted';
+
+/**
+ * Defines values for DayOfWeek.
+ * Possible values include: 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
+ * 'Saturday'
+ * @readonly
+ * @enum {string}
+ */
+export type DayOfWeek = 'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday';
+
+/**
+ * Defines values for DaysOfWeek.
+ * Possible values include: 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
+ * 'Saturday'
+ * @readonly
+ * @enum {string}
+ */
+export type DaysOfWeek = 'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday';
+
+/**
+ * Defines values for RecurrenceFrequency.
+ * Possible values include: 'NotSpecified', 'Minute', 'Hour', 'Day', 'Week', 'Month', 'Year'
+ * @readonly
+ * @enum {string}
+ */
+export type RecurrenceFrequency = 'NotSpecified' | 'Minute' | 'Hour' | 'Day' | 'Week' | 'Month' | 'Year';
 
 /**
  * Defines values for DataFlowComputeType.
@@ -23807,6 +24569,26 @@ export type TriggersListByFactoryResponse = TriggerListResponse & {
 };
 
 /**
+ * Contains response data for the queryByFactory operation.
+ */
+export type TriggersQueryByFactoryResponse = TriggerQueryResponse & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: TriggerQueryResponse;
+    };
+};
+
+/**
  * Contains response data for the createOrUpdate operation.
  */
 export type TriggersCreateOrUpdateResponse = TriggerResource & {
@@ -23983,66 +24765,6 @@ export type TriggerRunsQueryByFactoryResponse = TriggerRunsQueryResponse & {
        * The response body as parsed JSON or XML
        */
       parsedBody: TriggerRunsQueryResponse;
-    };
-};
-
-/**
- * Contains response data for the create operation.
- */
-export type RerunTriggersCreateResponse = TriggerResource & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: TriggerResource;
-    };
-};
-
-/**
- * Contains response data for the listByTrigger operation.
- */
-export type RerunTriggersListByTriggerResponse = RerunTriggerListResponse & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: RerunTriggerListResponse;
-    };
-};
-
-/**
- * Contains response data for the listByTriggerNext operation.
- */
-export type RerunTriggersListByTriggerNextResponse = RerunTriggerListResponse & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: RerunTriggerListResponse;
     };
 };
 
