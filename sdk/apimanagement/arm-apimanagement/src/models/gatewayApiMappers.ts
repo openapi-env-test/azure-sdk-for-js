@@ -8,6 +8,7 @@
 
 export {
   AdditionalLocation,
+  ApiCollection,
   ApiContract,
   ApiManagementServiceIdentity,
   ApiManagementServiceIdentityUserAssignedIdentitiesValue,
@@ -42,9 +43,9 @@ export {
   EmailTemplateParametersContractProperties,
   ErrorFieldContract,
   ErrorResponse,
+  GatewayApiGetEntityTagHeaders,
   GatewayContract,
   GatewayHostnameConfigurationContract,
-  GroupCollection,
   GroupContract,
   GroupContractProperties,
   HostnameConfiguration,
