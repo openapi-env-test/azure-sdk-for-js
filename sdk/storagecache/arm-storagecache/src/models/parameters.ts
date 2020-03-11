@@ -36,7 +36,7 @@ export const cacheName: msRest.OperationURLParameter = {
     required: true,
     serializedName: "cacheName",
     constraints: {
-      Pattern: /^[-0-9a-zA-Z_]{1,31}$/
+      Pattern: /^[-0-9a-zA-Z_]{1,80}$/
     },
     type: {
       name: "String"

@@ -438,26 +438,6 @@ export interface CachesBeginCreateOrUpdateOptionalParams extends msRest.RequestO
 }
 
 /**
- * Optional Parameters.
- */
-export interface StorageTargetsCreateOrUpdateOptionalParams extends msRest.RequestOptionsBase {
-  /**
-   * Object containing the definition of a Storage Target.
-   */
-  storagetarget?: StorageTarget;
-}
-
-/**
- * Optional Parameters.
- */
-export interface StorageTargetsBeginCreateOrUpdateOptionalParams extends msRest.RequestOptionsBase {
-  /**
-   * Object containing the definition of a Storage Target.
-   */
-  storagetarget?: StorageTarget;
-}
-
-/**
  * An interface representing StorageCacheManagementClientOptions.
  */
 export interface StorageCacheManagementClientOptions extends AzureServiceClientOptions {

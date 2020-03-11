@@ -118,11 +118,12 @@ export class StorageTargets {
    * @param resourceGroupName Target resource group.
    * @param cacheName Name of Cache.
    * @param storageTargetName Name of the Storage Target.
+   * @param storagetarget Object containing the definition of a Storage Target.
    * @param [options] The optional parameters
    * @returns Promise<Models.StorageTargetsCreateOrUpdateResponse>
    */
-  createOrUpdate(resourceGroupName: string, cacheName: string, storageTargetName: string, options?: Models.StorageTargetsCreateOrUpdateOptionalParams): Promise<Models.StorageTargetsCreateOrUpdateResponse> {
-    return this.beginCreateOrUpdate(resourceGroupName,cacheName,storageTargetName,options)
+  createOrUpdate(resourceGroupName: string, cacheName: string, storageTargetName: string, storagetarget: Models.StorageTarget, options?: msRest.RequestOptionsBase): Promise<Models.StorageTargetsCreateOrUpdateResponse> {
+    return this.beginCreateOrUpdate(resourceGroupName,cacheName,storageTargetName,storagetarget,options)
       .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.StorageTargetsCreateOrUpdateResponse>;
   }
 
@@ -156,15 +157,17 @@ export class StorageTargets {
    * @param resourceGroupName Target resource group.
    * @param cacheName Name of Cache.
    * @param storageTargetName Name of the Storage Target.
+   * @param storagetarget Object containing the definition of a Storage Target.
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
-  beginCreateOrUpdate(resourceGroupName: string, cacheName: string, storageTargetName: string, options?: Models.StorageTargetsBeginCreateOrUpdateOptionalParams): Promise<msRestAzure.LROPoller> {
+  beginCreateOrUpdate(resourceGroupName: string, cacheName: string, storageTargetName: string, storagetarget: Models.StorageTarget, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
     return this.client.sendLRORequest(
       {
         resourceGroupName,
         cacheName,
         storageTargetName,
+        storagetarget,
         options
       },
       beginCreateOrUpdateOperationSpec,
@@ -316,11 +319,11 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.acceptLanguage
   ],
   requestBody: {
-    parameterPath: [
-      "options",
-      "storagetarget"
-    ],
-    mapper: Mappers.StorageTarget
+    parameterPath: "storagetarget",
+    mapper: {
+      ...Mappers.StorageTarget,
+      required: true
+    }
   },
   responses: {
     200: {
