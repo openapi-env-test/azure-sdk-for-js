@@ -467,6 +467,53 @@ export interface DedicatedHostUpdate extends UpdateResource {
 }
 
 /**
+ * Response from generation of an SSH key pair.
+ */
+export interface SshPublicKeyGenerateKeyPairResult {
+  /**
+   * Private key portion of the key pair used to authenticate to a virtual machine through ssh. The
+   * private key is returned in RFC3447 format and should be treated as a secret.
+   */
+  privateKey: string;
+  /**
+   * Public key portion of the key pair used to authenticate to a virtual machine through ssh. The
+   * public key is in ssh-rsa format.
+   */
+  publicKey: string;
+  /**
+   * The ARM resource id in the form of
+   * /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{SshPublicKeyName}
+   */
+  id: string;
+}
+
+/**
+ * Specifies information about the SSH public key.
+ */
+export interface SshPublicKeyResource extends Resource {
+  /**
+   * SSH public key used to authenticate to a virtual machine through ssh. If this property is not
+   * initially provided when the resource is created, the publicKey property will be populated when
+   * generateKeyPair is called. If the public key is provided upon resource creation, the provided
+   * public key needs to be at least 2048-bit and in ssh-rsa format.
+   */
+  publicKey?: string;
+}
+
+/**
+ * Specifies information about the SSH public key.
+ */
+export interface SshPublicKeyUpdateResource extends UpdateResource {
+  /**
+   * SSH public key used to authenticate to a virtual machine through ssh. If this property is not
+   * initially provided when the resource is created, the publicKey property will be populated when
+   * generateKeyPair is called. If the public key is provided upon resource creation, the provided
+   * public key needs to be at least 2048-bit and in ssh-rsa format.
+   */
+  publicKey?: string;
+}
+
+/**
  * Describes the properties of a VM size.
  */
 export interface VirtualMachineSize {
@@ -5784,9 +5831,9 @@ export interface VirtualMachineExtensionsListOptionalParams extends msRest.Reque
  */
 export interface VirtualMachineImagesListOptionalParams extends msRest.RequestOptionsBase {
   /**
-   * The expand expression to apply on the operation.
+   * The filter to apply on the operation.
    */
-  expand?: string;
+  filter?: string;
   top?: number;
   orderby?: string;
 }
@@ -6239,6 +6286,19 @@ export interface DedicatedHostListResult extends Array<DedicatedHost> {
   /**
    * The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the
    * next page of dedicated hosts.
+   */
+  nextLink?: string;
+}
+
+/**
+ * @interface
+ * The list SSH public keys operation response.
+ * @extends Array<SshPublicKeyResource>
+ */
+export interface SshPublicKeysGroupListResult extends Array<SshPublicKeyResource> {
+  /**
+   * The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the
+   * next page of SSH public keys.
    */
   nextLink?: string;
 }
@@ -7566,6 +7626,166 @@ export type DedicatedHostsListByHostGroupNextResponse = DedicatedHostListResult 
        * The response body as parsed JSON or XML
        */
       parsedBody: DedicatedHostListResult;
+    };
+};
+
+/**
+ * Contains response data for the listBySubscription operation.
+ */
+export type SshPublicKeysListBySubscriptionResponse = SshPublicKeysGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeysGroupListResult;
+    };
+};
+
+/**
+ * Contains response data for the listByResourceGroup operation.
+ */
+export type SshPublicKeysListByResourceGroupResponse = SshPublicKeysGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeysGroupListResult;
+    };
+};
+
+/**
+ * Contains response data for the create operation.
+ */
+export type SshPublicKeysCreateResponse = SshPublicKeyResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeyResource;
+    };
+};
+
+/**
+ * Contains response data for the update operation.
+ */
+export type SshPublicKeysUpdateResponse = SshPublicKeyResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeyResource;
+    };
+};
+
+/**
+ * Contains response data for the get operation.
+ */
+export type SshPublicKeysGetResponse = SshPublicKeyResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeyResource;
+    };
+};
+
+/**
+ * Contains response data for the generateKeyPair operation.
+ */
+export type SshPublicKeysGenerateKeyPairResponse = SshPublicKeyGenerateKeyPairResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeyGenerateKeyPairResult;
+    };
+};
+
+/**
+ * Contains response data for the listBySubscriptionNext operation.
+ */
+export type SshPublicKeysListBySubscriptionNextResponse = SshPublicKeysGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeysGroupListResult;
+    };
+};
+
+/**
+ * Contains response data for the listByResourceGroupNext operation.
+ */
+export type SshPublicKeysListByResourceGroupNextResponse = SshPublicKeysGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeysGroupListResult;
     };
 };
 
