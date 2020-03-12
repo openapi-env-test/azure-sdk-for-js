@@ -174,7 +174,11 @@ export class VirtualMachines {
 
   /**
    * Converts virtual machine disks from blob-based to managed disks. Virtual machine must be
-   * stop-deallocated before invoking this operation.
+   * stop-deallocated before invoking this operation. <br>For Windows, please refer to [Convert a
+   * virtual machine from unmanaged disks to managed
+   * disks.](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/convert-unmanaged-to-managed-disks).<br>For
+   * Linux, please refer to [Convert a virtual machine from unmanaged disks to managed
+   * disks.](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/convert-unmanaged-to-managed-disks).
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param [options] The optional parameters
@@ -395,7 +399,8 @@ export class VirtualMachines {
   }
 
   /**
-   * The operation to perform maintenance on a virtual machine.
+   * Shuts down the virtual machine, moves it to a already updated node, and powers it back on during
+   * the self-service phase of planned maintenance.
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param [options] The optional parameters
@@ -501,7 +506,11 @@ export class VirtualMachines {
 
   /**
    * Converts virtual machine disks from blob-based to managed disks. Virtual machine must be
-   * stop-deallocated before invoking this operation.
+   * stop-deallocated before invoking this operation. <br>For Windows, please refer to [Convert a
+   * virtual machine from unmanaged disks to managed
+   * disks.](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/convert-unmanaged-to-managed-disks).<br>For
+   * Linux, please refer to [Convert a virtual machine from unmanaged disks to managed
+   * disks.](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/convert-unmanaged-to-managed-disks).
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param [options] The optional parameters
@@ -647,7 +656,8 @@ export class VirtualMachines {
   }
 
   /**
-   * The operation to perform maintenance on a virtual machine.
+   * Shuts down the virtual machine, moves it to a already updated node, and powers it back on during
+   * the self-service phase of planned maintenance.
    * @param resourceGroupName The name of the resource group.
    * @param vmName The name of the virtual machine.
    * @param [options] The optional parameters
