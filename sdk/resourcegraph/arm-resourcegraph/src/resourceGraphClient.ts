@@ -19,15 +19,18 @@ import { ResourceGraphClientContext } from "./resourceGraphClientContext";
 class ResourceGraphClient extends ResourceGraphClientContext {
   // Operation groups
   operations: operations.Operations;
+  graphQuery: operations.GraphQuery;
 
   /**
    * Initializes a new instance of the ResourceGraphClient class.
    * @param credentials Credentials needed for the client to connect to Azure.
+   * @param subscriptionId The Azure subscription Id.
    * @param [options] The parameter options
    */
-  constructor(credentials: msRest.ServiceClientCredentials, options?: Models.ResourceGraphClientOptions) {
-    super(credentials, options);
+  constructor(credentials: msRest.ServiceClientCredentials, subscriptionId: string, options?: Models.ResourceGraphClientOptions) {
+    super(credentials, subscriptionId, options);
     this.operations = new operations.Operations(this);
+    this.graphQuery = new operations.GraphQuery(this);
   }
 
   /**
@@ -66,7 +69,7 @@ const resourcesOperationSpec: msRest.OperationSpec = {
   httpMethod: "POST",
   path: "providers/Microsoft.ResourceGraph/resources",
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion0
   ],
   headerParameters: [
     Parameters.acceptLanguage

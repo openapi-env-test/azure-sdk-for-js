@@ -310,6 +310,121 @@ export interface Operation {
 }
 
 /**
+ * An azure resource object
+ */
+export interface Resource extends BaseResource {
+  /**
+   * Azure resource Id
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly id?: string;
+  /**
+   * Azure resource name. This is GUID value. The display name should be assigned within properties
+   * field.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly name?: string;
+  /**
+   * Azure resource type
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly type?: string;
+  /**
+   * This will be used to handle Optimistic Concurrency. If not present, it will always overwrite
+   * the existing resource without checking conflict.
+   */
+  eTag?: string;
+  /**
+   * Resource tags
+   */
+  tags?: { [propertyName: string]: string };
+}
+
+/**
+ * Graph Query entity definition.
+ */
+export interface GraphQueryResource extends Resource {
+  /**
+   * Date and time in UTC of the last modification that was made to this graph query definition.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly timeModified?: Date;
+  /**
+   * The description of a graph query.
+   */
+  description?: string;
+  /**
+   * KQL query that will be graph.
+   */
+  query: string;
+  /**
+   * Enum indicating a type of graph query. Possible values include: 'basic'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly resultKind?: ResultKind;
+}
+
+/**
+ * The parameters that can be provided when updating workbook properties properties.
+ */
+export interface GraphQueryUpdateParameters {
+  /**
+   * Resource tags
+   */
+  tags?: { [propertyName: string]: string };
+  /**
+   * This will be used to handle Optimistic Concurrency. If not present, it will always overwrite
+   * the existing resource without checking conflict.
+   */
+  eTag?: string;
+  /**
+   * The description of a graph query.
+   */
+  description?: string;
+  /**
+   * KQL query that will be graph.
+   */
+  query?: string;
+}
+
+/**
+ * Error Field contract.
+ */
+export interface ErrorFieldContract {
+  /**
+   * Property level error code.
+   */
+  code?: string;
+  /**
+   * Human-readable representation of property-level error.
+   */
+  message?: string;
+  /**
+   * Property name.
+   */
+  target?: string;
+}
+
+/**
+ * Error message body that will indicate why the operation failed.
+ */
+export interface GraphQueryError {
+  /**
+   * Service-defined error code. This code serves as a sub-status for the HTTP error code specified
+   * in the response.
+   */
+  code?: string;
+  /**
+   * Human-readable representation of the error.
+   */
+  message?: string;
+  /**
+   * The list of invalid fields send in request, in case of validation error.
+   */
+  details?: ErrorFieldContract[];
+}
+
+/**
  * An interface representing ResourceGraphClientOptions.
  */
 export interface ResourceGraphClientOptions extends AzureServiceClientOptions {
@@ -323,6 +438,18 @@ export interface ResourceGraphClientOptions extends AzureServiceClientOptions {
  * @extends Array<Operation>
  */
 export interface OperationListResult extends Array<Operation> {
+}
+
+/**
+ * @interface
+ * Graph query list result.
+ * @extends Array<GraphQueryResource>
+ */
+export interface GraphQueryListResult extends Array<GraphQueryResource> {
+  /**
+   * URL to fetch the next set of queries.
+   */
+  nextLink?: string;
 }
 
 /**
@@ -356,6 +483,14 @@ export type ResultTruncated = 'true' | 'false';
  * @enum {string}
  */
 export type ColumnDataType = 'string' | 'integer' | 'number' | 'boolean' | 'object';
+
+/**
+ * Defines values for ResultKind.
+ * Possible values include: 'basic'
+ * @readonly
+ * @enum {string}
+ */
+export type ResultKind = 'basic';
 
 /**
  * Contains response data for the resources operation.
@@ -394,5 +529,105 @@ export type OperationsListResponse = OperationListResult & {
        * The response body as parsed JSON or XML
        */
       parsedBody: OperationListResult;
+    };
+};
+
+/**
+ * Contains response data for the list operation.
+ */
+export type GraphQueryListResponse = GraphQueryListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: GraphQueryListResult;
+    };
+};
+
+/**
+ * Contains response data for the get operation.
+ */
+export type GraphQueryGetResponse = GraphQueryResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: GraphQueryResource;
+    };
+};
+
+/**
+ * Contains response data for the createOrUpdate operation.
+ */
+export type GraphQueryCreateOrUpdateResponse = GraphQueryResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: GraphQueryResource;
+    };
+};
+
+/**
+ * Contains response data for the update operation.
+ */
+export type GraphQueryUpdateResponse = GraphQueryResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: GraphQueryResource;
+    };
+};
+
+/**
+ * Contains response data for the listNext operation.
+ */
+export type GraphQueryListNextResponse = GraphQueryListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: GraphQueryListResult;
     };
 };

@@ -9,3 +9,4 @@
  */
 
 export * from "./operations";
+export * from "./graphQuery";

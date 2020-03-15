@@ -548,6 +548,193 @@ export const Operation: msRest.CompositeMapper = {
   }
 };
 
+export const Resource: msRest.CompositeMapper = {
+  serializedName: "Resource",
+  type: {
+    name: "Composite",
+    className: "Resource",
+    modelProperties: {
+      id: {
+        readOnly: true,
+        serializedName: "id",
+        type: {
+          name: "String"
+        }
+      },
+      name: {
+        readOnly: true,
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      type: {
+        readOnly: true,
+        serializedName: "type",
+        type: {
+          name: "String"
+        }
+      },
+      eTag: {
+        serializedName: "eTag",
+        type: {
+          name: "String"
+        }
+      },
+      tags: {
+        serializedName: "tags",
+        type: {
+          name: "Dictionary",
+          value: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const GraphQueryResource: msRest.CompositeMapper = {
+  serializedName: "GraphQueryResource",
+  type: {
+    name: "Composite",
+    className: "GraphQueryResource",
+    modelProperties: {
+      ...Resource.type.modelProperties,
+      timeModified: {
+        readOnly: true,
+        serializedName: "properties.timeModified",
+        type: {
+          name: "DateTime"
+        }
+      },
+      description: {
+        serializedName: "properties.description",
+        type: {
+          name: "String"
+        }
+      },
+      query: {
+        required: true,
+        serializedName: "properties.query",
+        type: {
+          name: "String"
+        }
+      },
+      resultKind: {
+        readOnly: true,
+        serializedName: "properties.resultKind",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const GraphQueryUpdateParameters: msRest.CompositeMapper = {
+  serializedName: "GraphQueryUpdateParameters",
+  type: {
+    name: "Composite",
+    className: "GraphQueryUpdateParameters",
+    modelProperties: {
+      tags: {
+        serializedName: "tags",
+        type: {
+          name: "Dictionary",
+          value: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      },
+      eTag: {
+        serializedName: "eTag",
+        type: {
+          name: "String"
+        }
+      },
+      description: {
+        serializedName: "properties.description",
+        type: {
+          name: "String"
+        }
+      },
+      query: {
+        serializedName: "properties.query",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const ErrorFieldContract: msRest.CompositeMapper = {
+  serializedName: "ErrorFieldContract",
+  type: {
+    name: "Composite",
+    className: "ErrorFieldContract",
+    modelProperties: {
+      code: {
+        serializedName: "code",
+        type: {
+          name: "String"
+        }
+      },
+      message: {
+        serializedName: "message",
+        type: {
+          name: "String"
+        }
+      },
+      target: {
+        serializedName: "target",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const GraphQueryError: msRest.CompositeMapper = {
+  serializedName: "GraphQueryError",
+  type: {
+    name: "Composite",
+    className: "GraphQueryError",
+    modelProperties: {
+      code: {
+        serializedName: "code",
+        type: {
+          name: "String"
+        }
+      },
+      message: {
+        serializedName: "message",
+        type: {
+          name: "String"
+        }
+      },
+      details: {
+        serializedName: "details",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "ErrorFieldContract"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
 export const OperationListResult: msRest.CompositeMapper = {
   serializedName: "OperationListResult",
   type: {
@@ -562,6 +749,35 @@ export const OperationListResult: msRest.CompositeMapper = {
             type: {
               name: "Composite",
               className: "Operation"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const GraphQueryListResult: msRest.CompositeMapper = {
+  serializedName: "GraphQueryListResult",
+  type: {
+    name: "Composite",
+    className: "GraphQueryListResult",
+    modelProperties: {
+      nextLink: {
+        serializedName: "nextLink",
+        type: {
+          name: "String"
+        }
+      },
+      value: {
+        readOnly: true,
+        serializedName: "",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "GraphQueryResource"
             }
           }
         }
