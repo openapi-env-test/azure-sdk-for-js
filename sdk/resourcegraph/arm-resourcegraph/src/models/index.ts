@@ -358,9 +358,9 @@ export type ResultTruncated = 'true' | 'false';
 export type ColumnDataType = 'string' | 'integer' | 'number' | 'boolean' | 'object';
 
 /**
- * Contains response data for the resources operation.
+ * Contains response data for the query operation.
  */
-export type ResourcesResponse = QueryResponse & {
+export type ResourcesQueryResponse = QueryResponse & {
   /**
    * The underlying HTTP response.
    */
