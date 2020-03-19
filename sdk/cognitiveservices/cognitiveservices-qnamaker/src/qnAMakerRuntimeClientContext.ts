@@ -13,19 +13,19 @@ import * as msRest from "@azure/ms-rest-js";
 const packageName = "@azure/cognitiveservices-qnamaker";
 const packageVersion = "3.1.0";
 
-export class QnAMakerClientContext extends msRest.ServiceClient {
-  endpoint: string;
+export class QnAMakerRuntimeClientContext extends msRest.ServiceClient {
+  runtimeEndpoint: string;
   credentials: msRest.ServiceClientCredentials;
 
   /**
-   * Initializes a new instance of the QnAMakerClientContext class.
-   * @param endpoint Cognitive Service endpoint (for example: westus.api.cognitive.microsoft.com)
+   * Initializes a new instance of the QnAMakerRuntimeClientContext class.
+   * @param runtimeEndpoint QnA Maker App Service endpoint (for example: hostname.azurewebsites.net).
    * @param credentials Subscription credentials which uniquely identify client subscription.
    * @param [options] The parameter options
    */
-  constructor(credentials: msRest.ServiceClientCredentials, endpoint: string, options?: msRest.ServiceClientOptions) {
-    if (endpoint == undefined) {
-      throw new Error("'endpoint' cannot be null.");
+  constructor(credentials: msRest.ServiceClientCredentials, runtimeEndpoint: string, options?: msRest.ServiceClientOptions) {
+    if (runtimeEndpoint == undefined) {
+      throw new Error("'runtimeEndpoint' cannot be null.");
     }
     if (credentials == undefined) {
       throw new Error("'credentials' cannot be null.");
@@ -42,9 +42,9 @@ export class QnAMakerClientContext extends msRest.ServiceClient {
 
     super(credentials, options);
 
-    this.baseUri = "https://{Endpoint}/qnamaker/v4.0";
+    this.baseUri = "https://{RuntimeEndpoint}/qnamaker";
     this.requestContentType = "application/json; charset=utf-8";
-    this.endpoint = endpoint;
+    this.runtimeEndpoint = runtimeEndpoint;
     this.credentials = credentials;
   }
 }
