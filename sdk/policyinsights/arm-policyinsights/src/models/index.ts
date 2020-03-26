@@ -314,6 +314,45 @@ export interface ErrorResponse {
 }
 
 /**
+ * Component event details.
+ */
+export interface ComponentEventDetails {
+  /**
+   * Component Id.
+   */
+  id?: string;
+  /**
+   * Component type.
+   */
+  type?: string;
+  /**
+   * Component name.
+   */
+  name?: string;
+  /**
+   * Timestamp for component policy event record.
+   */
+  timestamp?: Date;
+  /**
+   * Tenant ID for the policy event record.
+   */
+  tenantId?: string;
+  /**
+   * Principal object ID for the user who initiated the resource component operation that triggered
+   * the policy event.
+   */
+  principalOid?: string;
+  /**
+   * Policy definition action, i.e. effect.
+   */
+  policyDefinitionAction?: string;
+  /**
+   * Describes unknown properties. The value of an unknown property can be of "any" type.
+   */
+  [property: string]: any;
+}
+
+/**
  * Policy event record.
  */
 export interface PolicyEvent {
@@ -429,6 +468,10 @@ export interface PolicyEvent {
    */
   policyDefinitionReferenceId?: string;
   /**
+   * Compliance state of the resource.
+   */
+  complianceState?: string;
+  /**
    * Tenant ID for the policy event record.
    */
   tenantId?: string;
@@ -437,6 +480,10 @@ export interface PolicyEvent {
    * policy event.
    */
   principalOid?: string;
+  /**
+   * Components events records populated only when URL contains $expand=components clause.
+   */
+  components?: ComponentEventDetails[];
   /**
    * Describes unknown properties. The value of an unknown property can be of "any" type.
    */
@@ -517,6 +564,36 @@ export interface PolicyEvaluationDetails {
    * Evaluation details of IfNotExists effect.
    */
   ifNotExistsDetails?: IfNotExistsEvaluationDetails;
+}
+
+/**
+ * Component state details.
+ */
+export interface ComponentStateDetails {
+  /**
+   * Component Id.
+   */
+  id?: string;
+  /**
+   * Component type.
+   */
+  type?: string;
+  /**
+   * Component name.
+   */
+  name?: string;
+  /**
+   * Component compliance evaluation timestamp.
+   */
+  timestamp?: Date;
+  /**
+   * Component compliance state.
+   */
+  complianceState?: string;
+  /**
+   * Describes unknown properties. The value of an unknown property can be of "any" type.
+   */
+  [property: string]: any;
 }
 
 /**
@@ -646,6 +723,26 @@ export interface PolicyState {
    * Policy definition group names.
    */
   policyDefinitionGroupNames?: string[];
+  /**
+   * Components state compliance records populated only when URL contains $expand=components
+   * clause.
+   */
+  components?: ComponentStateDetails[];
+  /**
+   * Evaluated policy definition version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly policyDefinitionVersion?: string;
+  /**
+   * Evaluated policy set definition version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly policySetDefinitionVersion?: string;
+  /**
+   * Evaluated policy assignment version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly policyAssignmentVersion?: string;
   /**
    * Describes unknown properties. The value of an unknown property can be of "any" type.
    */
@@ -1022,8 +1119,7 @@ export interface QueryOptions {
    */
   apply?: string;
   /**
-   * The $expand query parameter. For example, to expand policyEvaluationDetails, use
-   * $expand=policyEvaluationDetails
+   * The $expand query parameter. For example, to expand components use $expand=components
    */
   expand?: string;
 }

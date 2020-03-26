@@ -480,6 +480,63 @@ export const ErrorResponse: msRest.CompositeMapper = {
   }
 };
 
+export const ComponentEventDetails: msRest.CompositeMapper = {
+  serializedName: "ComponentEventDetails",
+  type: {
+    name: "Composite",
+    className: "ComponentEventDetails",
+    modelProperties: {
+      id: {
+        serializedName: "id",
+        type: {
+          name: "String"
+        }
+      },
+      type: {
+        serializedName: "type",
+        type: {
+          name: "String"
+        }
+      },
+      name: {
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      timestamp: {
+        serializedName: "timestamp",
+        type: {
+          name: "DateTime"
+        }
+      },
+      tenantId: {
+        serializedName: "tenantId",
+        type: {
+          name: "String"
+        }
+      },
+      principalOid: {
+        serializedName: "principalOid",
+        type: {
+          name: "String"
+        }
+      },
+      policyDefinitionAction: {
+        serializedName: "policyDefinitionAction",
+        type: {
+          name: "String"
+        }
+      }
+    },
+    additionalProperties: {
+      type: {
+        name: "Object"
+      }
+    }
+  }
+};
+
 export const PolicyEvent: msRest.CompositeMapper = {
   serializedName: "PolicyEvent",
   type: {
@@ -648,6 +705,12 @@ export const PolicyEvent: msRest.CompositeMapper = {
           name: "String"
         }
       },
+      complianceState: {
+        serializedName: "complianceState",
+        type: {
+          name: "String"
+        }
+      },
       tenantId: {
         serializedName: "tenantId",
         type: {
@@ -658,6 +721,23 @@ export const PolicyEvent: msRest.CompositeMapper = {
         serializedName: "principalOid",
         type: {
           name: "String"
+        }
+      },
+      components: {
+        serializedName: "components",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "ComponentEventDetails",
+              additionalProperties: {
+                type: {
+                  name: "Object"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -803,6 +883,51 @@ export const PolicyEvaluationDetails: msRest.CompositeMapper = {
           name: "Composite",
           className: "IfNotExistsEvaluationDetails"
         }
+      }
+    }
+  }
+};
+
+export const ComponentStateDetails: msRest.CompositeMapper = {
+  serializedName: "ComponentStateDetails",
+  type: {
+    name: "Composite",
+    className: "ComponentStateDetails",
+    modelProperties: {
+      id: {
+        serializedName: "id",
+        type: {
+          name: "String"
+        }
+      },
+      type: {
+        serializedName: "type",
+        type: {
+          name: "String"
+        }
+      },
+      name: {
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      timestamp: {
+        serializedName: "timestamp",
+        type: {
+          name: "DateTime"
+        }
+      },
+      complianceState: {
+        serializedName: "complianceState",
+        type: {
+          name: "String"
+        }
+      }
+    },
+    additionalProperties: {
+      type: {
+        name: "Object"
       }
     }
   }
@@ -998,6 +1123,44 @@ export const PolicyState: msRest.CompositeMapper = {
               name: "String"
             }
           }
+        }
+      },
+      components: {
+        serializedName: "components",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "ComponentStateDetails",
+              additionalProperties: {
+                type: {
+                  name: "Object"
+                }
+              }
+            }
+          }
+        }
+      },
+      policyDefinitionVersion: {
+        readOnly: true,
+        serializedName: "policyDefinitionVersion",
+        type: {
+          name: "String"
+        }
+      },
+      policySetDefinitionVersion: {
+        readOnly: true,
+        serializedName: "policySetDefinitionVersion",
+        type: {
+          name: "String"
+        }
+      },
+      policyAssignmentVersion: {
+        readOnly: true,
+        serializedName: "policyAssignmentVersion",
+        type: {
+          name: "String"
         }
       }
     },

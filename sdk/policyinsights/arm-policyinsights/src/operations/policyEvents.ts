@@ -420,7 +420,8 @@ const listQueryResultsForResourceOperationSpec: msRest.OperationSpec = {
     Parameters.from,
     Parameters.to,
     Parameters.filter,
-    Parameters.apply
+    Parameters.apply,
+    Parameters.expand
   ],
   headerParameters: [
     Parameters.acceptLanguage

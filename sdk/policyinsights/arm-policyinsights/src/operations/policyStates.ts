@@ -9,6 +9,7 @@
  */
 
 import * as msRest from "@azure/ms-rest-js";
+import * as msRestAzure from "@azure/ms-rest-azure-js";
 import * as Models from "../models";
 import * as Mappers from "../models/policyStatesMappers";
 import * as Parameters from "../models/parameters";
@@ -296,6 +297,29 @@ export class PolicyStates {
       },
       summarizeForResourceOperationSpec,
       callback) as Promise<Models.PolicyStatesSummarizeForResourceResponse>;
+  }
+
+  /**
+   * Triggers a policy evaluation scan for all the resources under the subscription
+   * @param subscriptionId Microsoft Azure subscription ID.
+   * @param [options] The optional parameters
+   * @returns Promise<msRest.RestResponse>
+   */
+  triggerSubscriptionEvaluation(subscriptionId: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
+    return this.beginTriggerSubscriptionEvaluation(subscriptionId,options)
+      .then(lroPoller => lroPoller.pollUntilFinished());
+  }
+
+  /**
+   * Triggers a policy evaluation scan for all the resources under the resource group.
+   * @param subscriptionId Microsoft Azure subscription ID.
+   * @param resourceGroupName Resource group name.
+   * @param [options] The optional parameters
+   * @returns Promise<msRest.RestResponse>
+   */
+  triggerResourceGroupEvaluation(subscriptionId: string, resourceGroupName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
+    return this.beginTriggerResourceGroupEvaluation(subscriptionId,resourceGroupName,options)
+      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -603,6 +627,40 @@ export class PolicyStates {
       summarizeForResourceGroupLevelPolicyAssignmentOperationSpec,
       callback) as Promise<Models.PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentResponse>;
   }
+
+  /**
+   * Triggers a policy evaluation scan for all the resources under the subscription
+   * @param subscriptionId Microsoft Azure subscription ID.
+   * @param [options] The optional parameters
+   * @returns Promise<msRestAzure.LROPoller>
+   */
+  beginTriggerSubscriptionEvaluation(subscriptionId: string, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+    return this.client.sendLRORequest(
+      {
+        subscriptionId,
+        options
+      },
+      beginTriggerSubscriptionEvaluationOperationSpec,
+      options);
+  }
+
+  /**
+   * Triggers a policy evaluation scan for all the resources under the resource group.
+   * @param subscriptionId Microsoft Azure subscription ID.
+   * @param resourceGroupName Resource group name.
+   * @param [options] The optional parameters
+   * @returns Promise<msRestAzure.LROPoller>
+   */
+  beginTriggerResourceGroupEvaluation(subscriptionId: string, resourceGroupName: string, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+    return this.client.sendLRORequest(
+      {
+        subscriptionId,
+        resourceGroupName,
+        options
+      },
+      beginTriggerResourceGroupEvaluationOperationSpec,
+      options);
+  }
 }
 
 // Operation Specifications
@@ -616,7 +674,7 @@ const listQueryResultsForManagementGroupOperationSpec: msRest.OperationSpec = {
     Parameters.managementGroupName
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.orderBy,
     Parameters.select,
@@ -648,7 +706,7 @@ const summarizeForManagementGroupOperationSpec: msRest.OperationSpec = {
     Parameters.managementGroupName
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.from,
     Parameters.to,
@@ -676,7 +734,7 @@ const listQueryResultsForSubscriptionOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.orderBy,
     Parameters.select,
@@ -707,7 +765,7 @@ const summarizeForSubscriptionOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.from,
     Parameters.to,
@@ -736,7 +794,7 @@ const listQueryResultsForResourceGroupOperationSpec: msRest.OperationSpec = {
     Parameters.resourceGroupName
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.orderBy,
     Parameters.select,
@@ -768,7 +826,7 @@ const summarizeForResourceGroupOperationSpec: msRest.OperationSpec = {
     Parameters.resourceGroupName
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.from,
     Parameters.to,
@@ -796,7 +854,7 @@ const listQueryResultsForResourceOperationSpec: msRest.OperationSpec = {
     Parameters.resourceId
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.orderBy,
     Parameters.select,
@@ -828,7 +886,7 @@ const summarizeForResourceOperationSpec: msRest.OperationSpec = {
     Parameters.resourceId
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.from,
     Parameters.to,
@@ -858,7 +916,7 @@ const listQueryResultsForPolicySetDefinitionOperationSpec: msRest.OperationSpec 
     Parameters.policySetDefinitionName
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.orderBy,
     Parameters.select,
@@ -891,7 +949,7 @@ const summarizeForPolicySetDefinitionOperationSpec: msRest.OperationSpec = {
     Parameters.policySetDefinitionName
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.from,
     Parameters.to,
@@ -921,7 +979,7 @@ const listQueryResultsForPolicyDefinitionOperationSpec: msRest.OperationSpec = {
     Parameters.policyDefinitionName
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.orderBy,
     Parameters.select,
@@ -954,7 +1012,7 @@ const summarizeForPolicyDefinitionOperationSpec: msRest.OperationSpec = {
     Parameters.policyDefinitionName
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.from,
     Parameters.to,
@@ -984,7 +1042,7 @@ const listQueryResultsForSubscriptionLevelPolicyAssignmentOperationSpec: msRest.
     Parameters.policyAssignmentName
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.orderBy,
     Parameters.select,
@@ -1017,7 +1075,7 @@ const summarizeForSubscriptionLevelPolicyAssignmentOperationSpec: msRest.Operati
     Parameters.policyAssignmentName
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.from,
     Parameters.to,
@@ -1048,7 +1106,7 @@ const listQueryResultsForResourceGroupLevelPolicyAssignmentOperationSpec: msRest
     Parameters.policyAssignmentName
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.orderBy,
     Parameters.select,
@@ -1082,7 +1140,7 @@ const summarizeForResourceGroupLevelPolicyAssignmentOperationSpec: msRest.Operat
     Parameters.policyAssignmentName
   ],
   queryParameters: [
-    Parameters.apiVersion3,
+    Parameters.apiVersion2,
     Parameters.top,
     Parameters.from,
     Parameters.to,
@@ -1095,6 +1153,51 @@ const summarizeForResourceGroupLevelPolicyAssignmentOperationSpec: msRest.Operat
     200: {
       bodyMapper: Mappers.SummarizeResults
     },
+    default: {
+      bodyMapper: Mappers.QueryFailure
+    }
+  },
+  serializer
+};
+
+const beginTriggerSubscriptionEvaluationOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation",
+  urlParameters: [
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion2
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {},
+    202: {},
+    default: {
+      bodyMapper: Mappers.QueryFailure
+    }
+  },
+  serializer
+};
+
+const beginTriggerResourceGroupEvaluationOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation",
+  urlParameters: [
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName
+  ],
+  queryParameters: [
+    Parameters.apiVersion2
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {},
+    202: {},
     default: {
       bodyMapper: Mappers.QueryFailure
     }
