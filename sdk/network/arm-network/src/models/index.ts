@@ -1127,6 +1127,10 @@ export interface Subnet extends SubResource {
    */
   readonly ipConfigurationProfiles?: IPConfigurationProfile[];
   /**
+   * Array of IpAllocation which reference this subnet.
+   */
+  ipAllocations?: SubResource[];
+  /**
    * An array of references to the external resources using subnet.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
@@ -5201,6 +5205,51 @@ export interface NetworkRuleCondition {
 }
 
 /**
+ * IpAllocation resource.
+ */
+export interface IpAllocation extends Resource {
+  /**
+   * The Subnet that using the prefix of this IpAllocation resource.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly subnet?: SubResource;
+  /**
+   * The VirtualNetwork that using the prefix of this IpAllocation resource.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly virtualNetwork?: SubResource;
+  /**
+   * The type for the IpAllocation. Possible values include: 'Undefined', 'Hypernet'
+   */
+  ipAllocationType?: IpAllocationType;
+  /**
+   * The address prefix for the IpAllocation.
+   */
+  prefix?: string;
+  /**
+   * The address prefix length for the IpAllocation. Default value: 0.
+   */
+  prefixLength?: number;
+  /**
+   * The address prefix Type for the IpAllocation. Possible values include: 'IPv4', 'IPv6'
+   */
+  prefixType?: IPVersion;
+  /**
+   * The IPAM allocation ID.
+   */
+  ipamAllocationId?: string;
+  /**
+   * IpAllocation tags.
+   */
+  allocationTags?: { [propertyName: string]: string };
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly etag?: string;
+}
+
+/**
  * The IpGroups resource information.
  */
 export interface IpGroup extends Resource {
@@ -8653,6 +8702,10 @@ export interface VirtualNetwork extends Resource {
    */
   bgpCommunities?: VirtualNetworkBgpCommunities;
   /**
+   * Array of IpAllocation which reference this VNET.
+   */
+  ipAllocations?: SubResource[];
+  /**
    * A unique read-only string that changes whenever the resource is updated.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
@@ -11008,6 +11061,16 @@ export interface FirewallPoliciesGetOptionalParams extends msRest.RequestOptions
 /**
  * Optional Parameters.
  */
+export interface IpAllocationsGetOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * Expands referenced resources.
+   */
+  expand?: string;
+}
+
+/**
+ * Optional Parameters.
+ */
 export interface IpGroupsGetOptionalParams extends msRest.RequestOptionsBase {
   /**
    * Expands resourceIds (of Firewalls/Network Security Groups etc.) back referenced by the
@@ -11649,6 +11712,18 @@ export interface FirewallPolicyListResult extends Array<FirewallPolicy> {
 export interface FirewallPolicyRuleGroupListResult extends Array<FirewallPolicyRuleGroup> {
   /**
    * URL to get the next set of results.
+   */
+  nextLink?: string;
+}
+
+/**
+ * @interface
+ * Response for the ListIpAllocations API service call.
+ * @extends Array<IpAllocation>
+ */
+export interface IpAllocationListResult extends Array<IpAllocation> {
+  /**
+   * The URL to get the next set of results.
    */
   nextLink?: string;
 }
@@ -12840,6 +12915,14 @@ export type FirewallPolicyRuleConditionApplicationProtocolType = 'Http' | 'Https
  * @enum {string}
  */
 export type FirewallPolicyRuleConditionNetworkProtocol = 'TCP' | 'UDP' | 'Any' | 'ICMP';
+
+/**
+ * Defines values for IpAllocationType.
+ * Possible values include: 'Undefined', 'Hypernet'
+ * @readonly
+ * @enum {string}
+ */
+export type IpAllocationType = 'Undefined' | 'Hypernet';
 
 /**
  * Defines values for LoadBalancerSkuName.
@@ -16888,6 +16971,166 @@ export type FirewallPolicyRuleGroupsListNextResponse = FirewallPolicyRuleGroupLi
        * The response body as parsed JSON or XML
        */
       parsedBody: FirewallPolicyRuleGroupListResult;
+    };
+};
+
+/**
+ * Contains response data for the get operation.
+ */
+export type IpAllocationsGetResponse = IpAllocation & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: IpAllocation;
+    };
+};
+
+/**
+ * Contains response data for the createOrUpdate operation.
+ */
+export type IpAllocationsCreateOrUpdateResponse = IpAllocation & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: IpAllocation;
+    };
+};
+
+/**
+ * Contains response data for the updateTags operation.
+ */
+export type IpAllocationsUpdateTagsResponse = IpAllocation & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: IpAllocation;
+    };
+};
+
+/**
+ * Contains response data for the list operation.
+ */
+export type IpAllocationsListResponse = IpAllocationListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: IpAllocationListResult;
+    };
+};
+
+/**
+ * Contains response data for the listByResourceGroup operation.
+ */
+export type IpAllocationsListByResourceGroupResponse = IpAllocationListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: IpAllocationListResult;
+    };
+};
+
+/**
+ * Contains response data for the beginCreateOrUpdate operation.
+ */
+export type IpAllocationsBeginCreateOrUpdateResponse = IpAllocation & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: IpAllocation;
+    };
+};
+
+/**
+ * Contains response data for the listNext operation.
+ */
+export type IpAllocationsListNextResponse = IpAllocationListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: IpAllocationListResult;
+    };
+};
+
+/**
+ * Contains response data for the listByResourceGroupNext operation.
+ */
+export type IpAllocationsListByResourceGroupNextResponse = IpAllocationListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: IpAllocationListResult;
     };
 };
 

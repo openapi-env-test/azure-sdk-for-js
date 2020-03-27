@@ -160,6 +160,7 @@ export {
   HubVirtualNetworkConnection,
   InboundNatPool,
   InboundNatRule,
+  IpAllocation,
   IPConfiguration,
   IPConfigurationBgpPeeringAddress,
   IPConfigurationProfile,

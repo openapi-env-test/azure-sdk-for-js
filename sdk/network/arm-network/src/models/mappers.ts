@@ -1849,6 +1849,18 @@ export const Subnet: msRest.CompositeMapper = {
           }
         }
       },
+      ipAllocations: {
+        serializedName: "properties.ipAllocations",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "SubResource"
+            }
+          }
+        }
+      },
       resourceNavigationLinks: {
         readOnly: true,
         serializedName: "properties.resourceNavigationLinks",
@@ -8699,6 +8711,83 @@ export const NetworkRuleCondition: msRest.CompositeMapper = {
   }
 };
 
+export const IpAllocation: msRest.CompositeMapper = {
+  serializedName: "IpAllocation",
+  type: {
+    name: "Composite",
+    className: "IpAllocation",
+    modelProperties: {
+      ...Resource.type.modelProperties,
+      subnet: {
+        readOnly: true,
+        serializedName: "properties.subnet",
+        type: {
+          name: "Composite",
+          className: "SubResource"
+        }
+      },
+      virtualNetwork: {
+        readOnly: true,
+        serializedName: "properties.virtualNetwork",
+        type: {
+          name: "Composite",
+          className: "SubResource"
+        }
+      },
+      ipAllocationType: {
+        serializedName: "properties.type",
+        type: {
+          name: "String"
+        }
+      },
+      prefix: {
+        serializedName: "properties.prefix",
+        type: {
+          name: "String"
+        }
+      },
+      prefixLength: {
+        nullable: true,
+        serializedName: "properties.prefixLength",
+        defaultValue: 0,
+        type: {
+          name: "Number"
+        }
+      },
+      prefixType: {
+        serializedName: "properties.prefixType",
+        type: {
+          name: "String"
+        }
+      },
+      ipamAllocationId: {
+        serializedName: "properties.ipamAllocationId",
+        type: {
+          name: "String"
+        }
+      },
+      allocationTags: {
+        serializedName: "properties.allocationTags",
+        type: {
+          name: "Dictionary",
+          value: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      },
+      etag: {
+        readOnly: true,
+        serializedName: "etag",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const IpGroup: msRest.CompositeMapper = {
   serializedName: "IpGroup",
   type: {
@@ -14649,6 +14738,18 @@ export const VirtualNetwork: msRest.CompositeMapper = {
           className: "VirtualNetworkBgpCommunities"
         }
       },
+      ipAllocations: {
+        serializedName: "properties.ipAllocations",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "SubResource"
+            }
+          }
+        }
+      },
       etag: {
         readOnly: true,
         serializedName: "etag",
@@ -19232,6 +19333,34 @@ export const FirewallPolicyRuleGroupListResult: msRest.CompositeMapper = {
             type: {
               name: "Composite",
               className: "FirewallPolicyRuleGroup"
+            }
+          }
+        }
+      },
+      nextLink: {
+        serializedName: "nextLink",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const IpAllocationListResult: msRest.CompositeMapper = {
+  serializedName: "IpAllocationListResult",
+  type: {
+    name: "Composite",
+    className: "IpAllocationListResult",
+    modelProperties: {
+      value: {
+        serializedName: "",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "IpAllocation"
             }
           }
         }

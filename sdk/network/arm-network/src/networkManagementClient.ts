@@ -45,6 +45,7 @@ class NetworkManagementClient extends NetworkManagementClientContext {
   expressRouteLinks: operations.ExpressRouteLinks;
   firewallPolicies: operations.FirewallPolicies;
   firewallPolicyRuleGroups: operations.FirewallPolicyRuleGroups;
+  ipAllocations: operations.IpAllocations;
   ipGroups: operations.IpGroups;
   loadBalancers: operations.LoadBalancers;
   loadBalancerBackendAddressPools: operations.LoadBalancerBackendAddressPools;
@@ -145,6 +146,7 @@ class NetworkManagementClient extends NetworkManagementClientContext {
     this.expressRouteLinks = new operations.ExpressRouteLinks(this);
     this.firewallPolicies = new operations.FirewallPolicies(this);
     this.firewallPolicyRuleGroups = new operations.FirewallPolicyRuleGroups(this);
+    this.ipAllocations = new operations.IpAllocations(this);
     this.ipGroups = new operations.IpGroups(this);
     this.loadBalancers = new operations.LoadBalancers(this);
     this.loadBalancerBackendAddressPools = new operations.LoadBalancerBackendAddressPools(this);

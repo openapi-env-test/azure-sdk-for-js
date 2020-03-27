@@ -139,6 +139,7 @@ export {
   InboundNatPool,
   InboundNatRule,
   IPAddressAvailabilityResult,
+  IpAllocation,
   IPConfiguration,
   IPConfigurationBgpPeeringAddress,
   IPConfigurationProfile,

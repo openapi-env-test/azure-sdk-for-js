@@ -34,6 +34,7 @@ export * from "./expressRoutePorts";
 export * from "./expressRouteLinks";
 export * from "./firewallPolicies";
 export * from "./firewallPolicyRuleGroups";
+export * from "./ipAllocations";
 export * from "./ipGroups";
 export * from "./loadBalancers";
 export * from "./loadBalancerBackendAddressPools";
