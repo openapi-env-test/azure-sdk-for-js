@@ -71,6 +71,7 @@ class NetworkManagementClient extends NetworkManagementClientContext {
   operations: operations.Operations;
   privateEndpoints: operations.PrivateEndpoints;
   availablePrivateEndpointTypes: operations.AvailablePrivateEndpointTypes;
+  privateDnsZoneGroups: operations.PrivateDnsZoneGroups;
   privateLinkServices: operations.PrivateLinkServices;
   publicIPAddresses: operations.PublicIPAddresses;
   publicIPPrefixes: operations.PublicIPPrefixes;
@@ -171,6 +172,7 @@ class NetworkManagementClient extends NetworkManagementClientContext {
     this.operations = new operations.Operations(this);
     this.privateEndpoints = new operations.PrivateEndpoints(this);
     this.availablePrivateEndpointTypes = new operations.AvailablePrivateEndpointTypes(this);
+    this.privateDnsZoneGroups = new operations.PrivateDnsZoneGroups(this);
     this.privateLinkServices = new operations.PrivateLinkServices(this);
     this.publicIPAddresses = new operations.PublicIPAddresses(this);
     this.publicIPPrefixes = new operations.PublicIPPrefixes(this);

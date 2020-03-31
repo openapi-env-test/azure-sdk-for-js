@@ -60,6 +60,7 @@ export * from "./flowLogs";
 export * from "./operations";
 export * from "./privateEndpoints";
 export * from "./availablePrivateEndpointTypes";
+export * from "./privateDnsZoneGroups";
 export * from "./privateLinkServices";
 export * from "./publicIPAddresses";
 export * from "./publicIPPrefixes";

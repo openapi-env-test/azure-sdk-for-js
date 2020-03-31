@@ -318,6 +318,20 @@ export interface PrivateLinkServiceConnection extends SubResource {
 }
 
 /**
+ * Contains custom Dns resolution configuration from customer.
+ */
+export interface CustomDnsConfigPropertiesFormat {
+  /**
+   * Fqdn that resolves to private endpoint ip address.
+   */
+  fqdn?: string;
+  /**
+   * A list of private ip addresses of the private endpoint.
+   */
+  ipAddresses?: string[];
+}
+
+/**
  * Private endpoint resource.
  */
 export interface PrivateEndpoint extends Resource {
@@ -345,6 +359,10 @@ export interface PrivateEndpoint extends Resource {
    * admin does not have access to approve connections to the remote resource.
    */
   manualPrivateLinkServiceConnections?: PrivateLinkServiceConnection[];
+  /**
+   * An array of custom dns configurations.
+   */
+  customDnsConfigs?: CustomDnsConfigPropertiesFormat[];
   /**
    * A unique read-only string that changes whenever the resource is updated.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
@@ -7874,6 +7892,85 @@ export interface Operation {
 }
 
 /**
+ * A collective group of information about the record set information.
+ */
+export interface RecordSet {
+  /**
+   * Resource record type.
+   */
+  recordType?: string;
+  /**
+   * Recordset name.
+   */
+  recordSetName?: string;
+  /**
+   * Fqdn that resolves to private endpoint ip address.
+   */
+  fqdn?: string;
+  /**
+   * The provisioning state of the recordset. Possible values include: 'Succeeded', 'Updating',
+   * 'Deleting', 'Failed'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly provisioningState?: ProvisioningState;
+  /**
+   * Recordset time to live.
+   */
+  ttl?: number;
+  /**
+   * The private ip address of the private endpoint.
+   */
+  ipAddresses?: string[];
+}
+
+/**
+ * PrivateDnsZoneConfig resource.
+ */
+export interface PrivateDnsZoneConfig {
+  /**
+   * Name of the resource that is unique within a resource group. This name can be used to access
+   * the resource.
+   */
+  name?: string;
+  /**
+   * The resource id of the private dns zone.
+   */
+  privateDnsZoneId?: string;
+  /**
+   * A collection of information regarding a recordSet, holding information to identify private
+   * resources.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly recordSets?: RecordSet[];
+}
+
+/**
+ * Private dns zone group resource.
+ */
+export interface PrivateDnsZoneGroup extends SubResource {
+  /**
+   * Name of the resource that is unique within a resource group. This name can be used to access
+   * the resource.
+   */
+  name?: string;
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly etag?: string;
+  /**
+   * The provisioning state of the private dns zone group resource. Possible values include:
+   * 'Succeeded', 'Updating', 'Deleting', 'Failed'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly provisioningState?: ProvisioningState;
+  /**
+   * A collection of private dns zone configurations of the private dns zone group.
+   */
+  privateDnsZoneConfigs?: PrivateDnsZoneConfig[];
+}
+
+/**
  * The information of an AvailablePrivateEndpointType.
  */
 export interface AvailablePrivateEndpointType {
@@ -11938,6 +12035,19 @@ export interface PrivateEndpointListResult extends Array<PrivateEndpoint> {
  * @extends Array<AvailablePrivateEndpointType>
  */
 export interface AvailablePrivateEndpointTypesResult extends Array<AvailablePrivateEndpointType> {
+  /**
+   * The URL to get the next set of results.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly nextLink?: string;
+}
+
+/**
+ * @interface
+ * Response for the ListPrivateDnsZoneGroups API service call.
+ * @extends Array<PrivateDnsZoneGroup>
+ */
+export interface PrivateDnsZoneGroupListResult extends Array<PrivateDnsZoneGroup> {
   /**
    * The URL to get the next set of results.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
@@ -20208,6 +20318,106 @@ export type AvailablePrivateEndpointTypesListByResourceGroupNextResponse = Avail
        * The response body as parsed JSON or XML
        */
       parsedBody: AvailablePrivateEndpointTypesResult;
+    };
+};
+
+/**
+ * Contains response data for the get operation.
+ */
+export type PrivateDnsZoneGroupsGetResponse = PrivateDnsZoneGroup & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: PrivateDnsZoneGroup;
+    };
+};
+
+/**
+ * Contains response data for the createOrUpdate operation.
+ */
+export type PrivateDnsZoneGroupsCreateOrUpdateResponse = PrivateDnsZoneGroup & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: PrivateDnsZoneGroup;
+    };
+};
+
+/**
+ * Contains response data for the list operation.
+ */
+export type PrivateDnsZoneGroupsListResponse = PrivateDnsZoneGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: PrivateDnsZoneGroupListResult;
+    };
+};
+
+/**
+ * Contains response data for the beginCreateOrUpdate operation.
+ */
+export type PrivateDnsZoneGroupsBeginCreateOrUpdateResponse = PrivateDnsZoneGroup & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: PrivateDnsZoneGroup;
+    };
+};
+
+/**
+ * Contains response data for the listNext operation.
+ */
+export type PrivateDnsZoneGroupsListNextResponse = PrivateDnsZoneGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: PrivateDnsZoneGroupListResult;
     };
 };
 

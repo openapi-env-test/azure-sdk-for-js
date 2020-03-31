@@ -492,6 +492,33 @@ export const PrivateLinkServiceConnection: msRest.CompositeMapper = {
   }
 };
 
+export const CustomDnsConfigPropertiesFormat: msRest.CompositeMapper = {
+  serializedName: "CustomDnsConfigPropertiesFormat",
+  type: {
+    name: "Composite",
+    className: "CustomDnsConfigPropertiesFormat",
+    modelProperties: {
+      fqdn: {
+        serializedName: "fqdn",
+        type: {
+          name: "String"
+        }
+      },
+      ipAddresses: {
+        serializedName: "ipAddresses",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
 export const PrivateEndpoint: msRest.CompositeMapper = {
   serializedName: "PrivateEndpoint",
   type: {
@@ -546,6 +573,18 @@ export const PrivateEndpoint: msRest.CompositeMapper = {
             type: {
               name: "Composite",
               className: "PrivateLinkServiceConnection"
+            }
+          }
+        }
+      },
+      customDnsConfigs: {
+        serializedName: "properties.customDnsConfigs",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "CustomDnsConfigPropertiesFormat"
             }
           }
         }
@@ -13303,6 +13342,136 @@ export const Operation: msRest.CompositeMapper = {
   }
 };
 
+export const RecordSet: msRest.CompositeMapper = {
+  serializedName: "RecordSet",
+  type: {
+    name: "Composite",
+    className: "RecordSet",
+    modelProperties: {
+      recordType: {
+        serializedName: "recordType",
+        type: {
+          name: "String"
+        }
+      },
+      recordSetName: {
+        serializedName: "recordSetName",
+        type: {
+          name: "String"
+        }
+      },
+      fqdn: {
+        serializedName: "fqdn",
+        type: {
+          name: "String"
+        }
+      },
+      provisioningState: {
+        readOnly: true,
+        serializedName: "provisioningState",
+        type: {
+          name: "String"
+        }
+      },
+      ttl: {
+        serializedName: "ttl",
+        type: {
+          name: "Number"
+        }
+      },
+      ipAddresses: {
+        serializedName: "ipAddresses",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const PrivateDnsZoneConfig: msRest.CompositeMapper = {
+  serializedName: "PrivateDnsZoneConfig",
+  type: {
+    name: "Composite",
+    className: "PrivateDnsZoneConfig",
+    modelProperties: {
+      name: {
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      privateDnsZoneId: {
+        serializedName: "properties.privateDnsZoneId",
+        type: {
+          name: "String"
+        }
+      },
+      recordSets: {
+        readOnly: true,
+        serializedName: "properties.recordSets",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "RecordSet"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const PrivateDnsZoneGroup: msRest.CompositeMapper = {
+  serializedName: "PrivateDnsZoneGroup",
+  type: {
+    name: "Composite",
+    className: "PrivateDnsZoneGroup",
+    modelProperties: {
+      ...SubResource.type.modelProperties,
+      name: {
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      etag: {
+        readOnly: true,
+        serializedName: "etag",
+        type: {
+          name: "String"
+        }
+      },
+      provisioningState: {
+        readOnly: true,
+        serializedName: "properties.provisioningState",
+        type: {
+          name: "String"
+        }
+      },
+      privateDnsZoneConfigs: {
+        serializedName: "properties.privateDnsZoneConfigs",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "PrivateDnsZoneConfig"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
 export const AvailablePrivateEndpointType: msRest.CompositeMapper = {
   serializedName: "AvailablePrivateEndpointType",
   type: {
@@ -19899,6 +20068,35 @@ export const AvailablePrivateEndpointTypesResult: msRest.CompositeMapper = {
             type: {
               name: "Composite",
               className: "AvailablePrivateEndpointType"
+            }
+          }
+        }
+      },
+      nextLink: {
+        readOnly: true,
+        serializedName: "nextLink",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const PrivateDnsZoneGroupListResult: msRest.CompositeMapper = {
+  serializedName: "PrivateDnsZoneGroupListResult",
+  type: {
+    name: "Composite",
+    className: "PrivateDnsZoneGroupListResult",
+    modelProperties: {
+      value: {
+        serializedName: "",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "PrivateDnsZoneGroup"
             }
           }
         }
