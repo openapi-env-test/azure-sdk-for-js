@@ -147,6 +147,7 @@ export {
   Ipv6CircuitConnectionConfig,
   Ipv6ExpressRouteCircuitPeeringConfig,
   LoadBalancer,
+  LoadBalancerBackendAddress,
   LoadBalancerProbeListResult,
   LoadBalancerSku,
   LoadBalancingRule,

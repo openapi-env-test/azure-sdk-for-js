@@ -38,8 +38,6 @@ class NetworkManagementClient extends NetworkManagementClientContext {
   expressRouteServiceProviders: operations.ExpressRouteServiceProviders;
   expressRouteCrossConnections: operations.ExpressRouteCrossConnections;
   expressRouteCrossConnectionPeerings: operations.ExpressRouteCrossConnectionPeerings;
-  expressRouteGateways: operations.ExpressRouteGateways;
-  expressRouteConnections: operations.ExpressRouteConnections;
   expressRoutePortsLocations: operations.ExpressRoutePortsLocations;
   expressRoutePorts: operations.ExpressRoutePorts;
   expressRouteLinks: operations.ExpressRouteLinks;
@@ -108,6 +106,8 @@ class NetworkManagementClient extends NetworkManagementClientContext {
   p2sVpnGateways: operations.P2sVpnGateways;
   vpnServerConfigurationsAssociatedWithVirtualWan: operations.VpnServerConfigurationsAssociatedWithVirtualWan;
   virtualHubRouteTableV2s: operations.VirtualHubRouteTableV2s;
+  expressRouteGateways: operations.ExpressRouteGateways;
+  expressRouteConnections: operations.ExpressRouteConnections;
   webApplicationFirewallPolicies: operations.WebApplicationFirewallPolicies;
 
   /**
@@ -138,8 +138,6 @@ class NetworkManagementClient extends NetworkManagementClientContext {
     this.expressRouteServiceProviders = new operations.ExpressRouteServiceProviders(this);
     this.expressRouteCrossConnections = new operations.ExpressRouteCrossConnections(this);
     this.expressRouteCrossConnectionPeerings = new operations.ExpressRouteCrossConnectionPeerings(this);
-    this.expressRouteGateways = new operations.ExpressRouteGateways(this);
-    this.expressRouteConnections = new operations.ExpressRouteConnections(this);
     this.expressRoutePortsLocations = new operations.ExpressRoutePortsLocations(this);
     this.expressRoutePorts = new operations.ExpressRoutePorts(this);
     this.expressRouteLinks = new operations.ExpressRouteLinks(this);
@@ -208,6 +206,8 @@ class NetworkManagementClient extends NetworkManagementClientContext {
     this.p2sVpnGateways = new operations.P2sVpnGateways(this);
     this.vpnServerConfigurationsAssociatedWithVirtualWan = new operations.VpnServerConfigurationsAssociatedWithVirtualWan(this);
     this.virtualHubRouteTableV2s = new operations.VirtualHubRouteTableV2s(this);
+    this.expressRouteGateways = new operations.ExpressRouteGateways(this);
+    this.expressRouteConnections = new operations.ExpressRouteConnections(this);
     this.webApplicationFirewallPolicies = new operations.WebApplicationFirewallPolicies(this);
   }
 

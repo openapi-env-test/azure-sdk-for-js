@@ -148,6 +148,7 @@ export {
   Ipv6ExpressRouteCircuitPeeringConfig,
   ListVpnServerConfigurationsResult,
   LoadBalancer,
+  LoadBalancerBackendAddress,
   LoadBalancerSku,
   LoadBalancingRule,
   LocalNetworkGateway,
