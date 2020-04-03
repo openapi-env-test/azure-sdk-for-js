@@ -15070,6 +15070,35 @@ export const IpsecPolicy: msRest.CompositeMapper = {
   }
 };
 
+export const RadiusServer: msRest.CompositeMapper = {
+  serializedName: "RadiusServer",
+  type: {
+    name: "Composite",
+    className: "RadiusServer",
+    modelProperties: {
+      radiusServerAddress: {
+        required: true,
+        serializedName: "radiusServerAddress",
+        type: {
+          name: "String"
+        }
+      },
+      radiusServerScore: {
+        serializedName: "radiusServerScore",
+        type: {
+          name: "Number"
+        }
+      },
+      radiusServerSecret: {
+        serializedName: "radiusServerSecret",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const VpnClientConfiguration: msRest.CompositeMapper = {
   serializedName: "VpnClientConfiguration",
   type: {
@@ -15140,6 +15169,18 @@ export const VpnClientConfiguration: msRest.CompositeMapper = {
         serializedName: "radiusServerSecret",
         type: {
           name: "String"
+        }
+      },
+      radiusServers: {
+        serializedName: "radiusServers",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "RadiusServer"
+            }
+          }
         }
       },
       aadTenant: {
@@ -15778,6 +15819,12 @@ export const VirtualNetworkGatewayConnection: msRest.CompositeMapper = {
       },
       routingWeight: {
         serializedName: "properties.routingWeight",
+        type: {
+          name: "Number"
+        }
+      },
+      dpdTimeoutSeconds: {
+        serializedName: "properties.dpdTimeoutSeconds",
         type: {
           name: "Number"
         }
@@ -17301,6 +17348,12 @@ export const VpnConnection: msRest.CompositeMapper = {
           name: "Number"
         }
       },
+      dpdTimeoutSeconds: {
+        serializedName: "properties.dpdTimeoutSeconds",
+        type: {
+          name: "Number"
+        }
+      },
       connectionStatus: {
         serializedName: "properties.connectionStatus",
         type: {
@@ -17906,6 +17959,18 @@ export const VpnServerConfiguration: msRest.CompositeMapper = {
         serializedName: "properties.radiusServerSecret",
         type: {
           name: "String"
+        }
+      },
+      radiusServers: {
+        serializedName: "properties.radiusServers",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "RadiusServer"
+            }
+          }
         }
       },
       aadAuthenticationParameters: {

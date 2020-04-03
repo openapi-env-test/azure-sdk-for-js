@@ -230,6 +230,7 @@ export {
   PublicIPPrefix,
   PublicIPPrefixSku,
   QueryTroubleshootingParameters,
+  RadiusServer,
   ReferencedPublicIpAddress,
   Resource,
   ResourceNavigationLink,

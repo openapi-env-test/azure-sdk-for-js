@@ -203,6 +203,7 @@ export {
   PublicIPAddressSku,
   PublicIPPrefix,
   PublicIPPrefixSku,
+  RadiusServer,
   ReferencedPublicIpAddress,
   Resource,
   ResourceNavigationLink,

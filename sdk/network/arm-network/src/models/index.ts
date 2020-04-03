@@ -8930,6 +8930,24 @@ export interface IpsecPolicy {
 }
 
 /**
+ * Radius Server Settings.
+ */
+export interface RadiusServer {
+  /**
+   * The address of this radius server.
+   */
+  radiusServerAddress: string;
+  /**
+   * The initial score assigned to this radius server.
+   */
+  radiusServerScore?: number;
+  /**
+   * The secret used for this radius server.
+   */
+  radiusServerSecret?: string;
+}
+
+/**
  * VpnClientConfiguration for P2S client.
  */
 export interface VpnClientConfiguration {
@@ -8962,6 +8980,10 @@ export interface VpnClientConfiguration {
    * The radius secret property of the VirtualNetworkGateway resource for vpn client connection.
    */
   radiusServerSecret?: string;
+  /**
+   * The radiusServers property for multiple radius server configuration.
+   */
+  radiusServers?: RadiusServer[];
   /**
    * The AADTenant property of the VirtualNetworkGateway resource for vpn client connection used
    * for AAD authentication.
@@ -9359,6 +9381,10 @@ export interface VirtualNetworkGatewayConnection extends Resource {
    * The routing weight.
    */
   routingWeight?: number;
+  /**
+   * The dead peer detection timeout of this connection in seconds.
+   */
+  dpdTimeoutSeconds?: number;
   /**
    * The IPSec shared key.
    */
@@ -10272,6 +10298,10 @@ export interface VpnConnection extends SubResource {
    */
   routingWeight?: number;
   /**
+   * The dead peer detection timeout for a vpn connection in seconds.
+   */
+  dpdTimeoutSeconds?: number;
+  /**
    * The connection status. Possible values include: 'Unknown', 'Connecting', 'Connected',
    * 'NotConnected'
    */
@@ -10624,6 +10654,10 @@ export interface VpnServerConfiguration extends Resource {
    * connection.
    */
   radiusServerSecret?: string;
+  /**
+   * Multiple Radius Server configuration for VpnServerConfiguration.
+   */
+  radiusServers?: RadiusServer[];
   /**
    * The set of aad vpn authentication parameters.
    */

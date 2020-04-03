@@ -196,6 +196,7 @@ export {
   PublicIPPrefix,
   PublicIPPrefixListResult,
   PublicIPPrefixSku,
+  RadiusServer,
   ReferencedPublicIpAddress,
   Resource,
   ResourceNavigationLink,
