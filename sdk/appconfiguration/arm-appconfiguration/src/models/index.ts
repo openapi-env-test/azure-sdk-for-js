@@ -83,6 +83,72 @@ export interface EncryptionProperties {
 }
 
 /**
+ * Private endpoint which a connection belongs to.
+ */
+export interface PrivateEndpoint {
+  /**
+   * The resource Id for private endpoint
+   */
+  id?: string;
+}
+
+/**
+ * The state of a private link service connection.
+ */
+export interface PrivateLinkServiceConnectionState {
+  /**
+   * The private link service connection status. Possible values include: 'Pending', 'Approved',
+   * 'Rejected', 'Disconnected'
+   */
+  status?: ConnectionStatus;
+  /**
+   * The private link service connection description.
+   */
+  description?: string;
+  /**
+   * Any action that is required beyond basic workflow (approve/ reject/ disconnect). Possible
+   * values include: 'None', 'Recreate'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly actionsRequired?: ActionsRequired;
+}
+
+/**
+ * A private endpoint connection
+ */
+export interface PrivateEndpointConnection extends BaseResource {
+  /**
+   * The resource ID.
+   */
+  id?: string;
+  /**
+   * The name of the resource.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly name?: string;
+  /**
+   * The type of the resource.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly type?: string;
+  /**
+   * The provisioning status of the private endpoint connection. Possible values include:
+   * 'Creating', 'Updating', 'Deleting', 'Succeeded', 'Failed', 'Canceled'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly provisioningState?: ProvisioningState;
+  /**
+   * The resource of private endpoint.
+   */
+  privateEndpoint?: PrivateEndpoint;
+  /**
+   * A collection of information about the state of the connection between service consumer and
+   * provider.
+   */
+  privateLinkServiceConnectionState: PrivateLinkServiceConnectionState;
+}
+
+/**
  * Describes a configuration store SKU.
  */
 export interface Sku {
@@ -150,6 +216,11 @@ export interface ConfigurationStore extends Resource {
    * The encryption settings of the configuration store.
    */
   encryption?: EncryptionProperties;
+  /**
+   * private endpoint connections of configuration store
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly privateEndpointConnections?: PrivateEndpointConnection[];
   /**
    * The sku of the configuration store.
    */
@@ -370,73 +441,6 @@ export interface ErrorModel {
    * Error message.
    */
   message?: string;
-}
-
-/**
- * Private endpoint which a connection belongs to.
- */
-export interface PrivateEndpoint {
-  /**
-   * The resource Id for private endpoint
-   */
-  id?: string;
-}
-
-/**
- * The state of a private link service connection.
- */
-export interface PrivateLinkServiceConnectionState {
-  /**
-   * The private link service connection status. Possible values include: 'Pending', 'Approved',
-   * 'Rejected', 'Disconnected'
-   */
-  status?: ConnectionStatus;
-  /**
-   * The private link service connection description.
-   */
-  description?: string;
-  /**
-   * Any action that is required beyond basic workflow (approve/ reject/ disconnect). Possible
-   * values include: 'None', 'Recreate'
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly actionsRequired?: ActionsRequired;
-}
-
-/**
- * A private endpoint connection
- */
-export interface PrivateEndpointConnection extends BaseResource {
-  /**
-   * The resource ID.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly id?: string;
-  /**
-   * The name of the resource.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly name?: string;
-  /**
-   * The type of the resource.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly type?: string;
-  /**
-   * The provisioning status of the private endpoint connection. Possible values include:
-   * 'Creating', 'Updating', 'Deleting', 'Succeeded', 'Failed', 'Canceled'
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly provisioningState?: ProvisioningState;
-  /**
-   * The resource of private endpoint.
-   */
-  privateEndpoint?: PrivateEndpoint;
-  /**
-   * A collection of information about the state of the connection between service consumer and
-   * provider.
-   */
-  privateLinkServiceConnectionState: PrivateLinkServiceConnectionState;
 }
 
 /**
