@@ -84,7 +84,9 @@ export interface SubResource extends BaseResource {
 }
 
 /**
- * Describes a virtual machine scale set sku.
+ * Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the
+ * hardware the scale set is currently on, you need to deallocate the VMs in the scale set before
+ * you modify the SKU name.
  */
 export interface Sku {
   /**
@@ -177,7 +179,7 @@ export interface AvailabilitySet extends Resource {
 /**
  * The Update Resource model definition.
  */
-export interface UpdateResource extends BaseResource {
+export interface UpdateResource {
   /**
    * Resource tags
    */
@@ -464,6 +466,53 @@ export interface DedicatedHostUpdate extends UpdateResource {
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly instanceView?: DedicatedHostInstanceView;
+}
+
+/**
+ * Response from generation of an SSH key pair.
+ */
+export interface SshPublicKeyGenerateKeyPairResult {
+  /**
+   * Private key portion of the key pair used to authenticate to a virtual machine through ssh. The
+   * private key is returned in RFC3447 format and should be treated as a secret.
+   */
+  privateKey: string;
+  /**
+   * Public key portion of the key pair used to authenticate to a virtual machine through ssh. The
+   * public key is in ssh-rsa format.
+   */
+  publicKey: string;
+  /**
+   * The ARM resource id in the form of
+   * /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{SshPublicKeyName}
+   */
+  id: string;
+}
+
+/**
+ * Specifies information about the SSH public key.
+ */
+export interface SshPublicKeyResource extends Resource {
+  /**
+   * SSH public key used to authenticate to a virtual machine through ssh. If this property is not
+   * initially provided when the resource is created, the publicKey property will be populated when
+   * generateKeyPair is called. If the public key is provided upon resource creation, the provided
+   * public key needs to be at least 2048-bit and in ssh-rsa format.
+   */
+  publicKey?: string;
+}
+
+/**
+ * Specifies information about the SSH public key.
+ */
+export interface SshPublicKeyUpdateResource extends UpdateResource {
+  /**
+   * SSH public key used to authenticate to a virtual machine through ssh. If this property is not
+   * initially provided when the resource is created, the publicKey property will be populated when
+   * generateKeyPair is called. If the public key is provided upon resource creation, the provided
+   * public key needs to be at least 2048-bit and in ssh-rsa format.
+   */
+  publicKey?: string;
 }
 
 /**
@@ -903,7 +952,8 @@ export interface HardwareProfile {
  * Specifies information about the image to use. You can specify information about platform images,
  * marketplace images, or virtual machine images. This element is required when you want to use a
  * platform image, marketplace image, or virtual machine image, but is not used in other creation
- * operations.
+ * operations. NOTE: Image reference publisher and offer can only be set when you create the scale
+ * set.
  */
 export interface ImageReference extends SubResource {
   /**
@@ -1010,6 +1060,13 @@ export interface DiffDiskSettings {
    * 'Local'
    */
   option?: DiffDiskOptions;
+  /**
+   * Specifies the ephemeral disk placement for operating system disk. This property is used to
+   * specify Cache disk or Resource disk for ephemeral OS disk provisioning. By default if customer
+   * does not specify this placement property in the request, the Ephemeral OS disk will be
+   * provisioned using Cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'
+   */
+  placement?: DiffDiskPlacement;
 }
 
 /**
@@ -2752,7 +2809,9 @@ export interface VirtualMachineScaleSetIPConfiguration extends SubResource {
 }
 
 /**
- * Describes a virtual machine scale set network profile's IP configuration.
+ * Describes a virtual machine scale set network profile's IP configuration. NOTE: The subnet of a
+ * scale set may be modified as long as the original subnet and the new subnet are in the same
+ * virtual network
  */
 export interface VirtualMachineScaleSetUpdateIPConfiguration extends SubResource {
   /**
@@ -3204,7 +3263,8 @@ export interface VirtualMachineScaleSet extends Resource {
   readonly uniqueId?: string;
   /**
    * When true this limits the scale set to a single placement group, of max size 100 virtual
-   * machines.
+   * machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if
+   * singlePlacementGroup is false, it may not be modified to true.
    */
   singlePlacementGroup?: boolean;
   /**
@@ -3237,7 +3297,8 @@ export interface VirtualMachineScaleSet extends Resource {
    */
   identity?: VirtualMachineScaleSetIdentity;
   /**
-   * The virtual machine scale set zones.
+   * The virtual machine scale set zones. NOTE: Availability zones can only be set when you create
+   * the scale set
    */
   zones?: string[];
 }
@@ -3296,7 +3357,8 @@ export interface VirtualMachineScaleSetUpdate extends UpdateResource {
   doNotRunExtensionsOnOverprovisionedVMs?: boolean;
   /**
    * When true this limits the scale set to a single placement group, of max size 100 virtual
-   * machines.
+   * machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if
+   * singlePlacementGroup is false, it may not be modified to true.
    */
   singlePlacementGroup?: boolean;
   /**
@@ -3387,6 +3449,23 @@ export interface VirtualMachineScaleSetVMExtensionsSummary {
 }
 
 /**
+ * Summary for an orchestration service of a virtual machine scale set.
+ */
+export interface OrchestrationServiceSummary {
+  /**
+   * The name of the service. Possible values include: 'AutomaticRepairs'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly serviceName?: OrchestrationServiceNames;
+  /**
+   * The current state of the service. Possible values include: 'NotRunning', 'Running',
+   * 'Suspended'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly serviceState?: OrchestrationServiceState;
+}
+
+/**
  * The instance view of a virtual machine scale set.
  */
 export interface VirtualMachineScaleSetInstanceView {
@@ -3404,6 +3483,11 @@ export interface VirtualMachineScaleSetInstanceView {
    * The resource status information.
    */
   statuses?: InstanceViewStatus[];
+  /**
+   * The orchestration services information.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly orchestrationServices?: OrchestrationServiceSummary[];
 }
 
 /**
@@ -3994,6 +4078,16 @@ export interface VMScaleSetConvertToSinglePlacementGroupInput {
    * the platform will choose one with maximum number of virtual machine instances.
    */
   activePlacementGroupId?: string;
+}
+
+/**
+ * The input for OrchestrationServiceState
+ */
+export interface OrchestrationServiceStateInput {
+  /**
+   * The action to be performed. Possible values include: 'Resume', 'Suspend'
+   */
+  action: OrchestrationServiceStateAction;
 }
 
 /**
@@ -6245,6 +6339,19 @@ export interface DedicatedHostListResult extends Array<DedicatedHost> {
 
 /**
  * @interface
+ * The list SSH public keys operation response.
+ * @extends Array<SshPublicKeyResource>
+ */
+export interface SshPublicKeysGroupListResult extends Array<SshPublicKeyResource> {
+  /**
+   * The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the
+   * next page of SSH public keys.
+   */
+  nextLink?: string;
+}
+
+/**
+ * @interface
  * The List Usages operation response.
  * @extends Array<Usage>
  */
@@ -6624,6 +6731,14 @@ export type StorageAccountTypes = 'Standard_LRS' | 'Premium_LRS' | 'StandardSSD_
 export type DiffDiskOptions = 'Local';
 
 /**
+ * Defines values for DiffDiskPlacement.
+ * Possible values include: 'CacheDisk', 'ResourceDisk'
+ * @readonly
+ * @enum {string}
+ */
+export type DiffDiskPlacement = 'CacheDisk' | 'ResourceDisk';
+
+/**
  * Defines values for PassNames.
  * Possible values include: 'OobeSystem'
  * @readonly
@@ -6729,6 +6844,22 @@ export type OperatingSystemStateTypes = 'Generalized' | 'Specialized';
 export type IPVersion = 'IPv4' | 'IPv6';
 
 /**
+ * Defines values for OrchestrationServiceNames.
+ * Possible values include: 'AutomaticRepairs'
+ * @readonly
+ * @enum {string}
+ */
+export type OrchestrationServiceNames = 'AutomaticRepairs';
+
+/**
+ * Defines values for OrchestrationServiceState.
+ * Possible values include: 'NotRunning', 'Running', 'Suspended'
+ * @readonly
+ * @enum {string}
+ */
+export type OrchestrationServiceState = 'NotRunning' | 'Running' | 'Suspended';
+
+/**
  * Defines values for VirtualMachineScaleSetSkuScaleType.
  * Possible values include: 'Automatic', 'None'
  * @readonly
@@ -6775,6 +6906,14 @@ export type RollingUpgradeActionType = 'Start' | 'Cancel';
  * @enum {string}
  */
 export type IntervalInMins = 'ThreeMins' | 'FiveMins' | 'ThirtyMins' | 'SixtyMins';
+
+/**
+ * Defines values for OrchestrationServiceStateAction.
+ * Possible values include: 'Resume', 'Suspend'
+ * @readonly
+ * @enum {string}
+ */
+export type OrchestrationServiceStateAction = 'Resume' | 'Suspend';
 
 /**
  * Defines values for ResourceSkuCapacityScaleType.
@@ -7566,6 +7705,166 @@ export type DedicatedHostsListByHostGroupNextResponse = DedicatedHostListResult 
        * The response body as parsed JSON or XML
        */
       parsedBody: DedicatedHostListResult;
+    };
+};
+
+/**
+ * Contains response data for the listBySubscription operation.
+ */
+export type SshPublicKeysListBySubscriptionResponse = SshPublicKeysGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeysGroupListResult;
+    };
+};
+
+/**
+ * Contains response data for the listByResourceGroup operation.
+ */
+export type SshPublicKeysListByResourceGroupResponse = SshPublicKeysGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeysGroupListResult;
+    };
+};
+
+/**
+ * Contains response data for the create operation.
+ */
+export type SshPublicKeysCreateResponse = SshPublicKeyResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeyResource;
+    };
+};
+
+/**
+ * Contains response data for the update operation.
+ */
+export type SshPublicKeysUpdateResponse = SshPublicKeyResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeyResource;
+    };
+};
+
+/**
+ * Contains response data for the get operation.
+ */
+export type SshPublicKeysGetResponse = SshPublicKeyResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeyResource;
+    };
+};
+
+/**
+ * Contains response data for the generateKeyPair operation.
+ */
+export type SshPublicKeysGenerateKeyPairResponse = SshPublicKeyGenerateKeyPairResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeyGenerateKeyPairResult;
+    };
+};
+
+/**
+ * Contains response data for the listBySubscriptionNext operation.
+ */
+export type SshPublicKeysListBySubscriptionNextResponse = SshPublicKeysGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeysGroupListResult;
+    };
+};
+
+/**
+ * Contains response data for the listByResourceGroupNext operation.
+ */
+export type SshPublicKeysListByResourceGroupNextResponse = SshPublicKeysGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeysGroupListResult;
     };
 };
 
