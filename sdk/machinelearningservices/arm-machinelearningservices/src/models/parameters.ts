@@ -40,6 +40,76 @@ export const computeName: msRest.OperationURLParameter = {
     }
   }
 };
+export const linkName: msRest.OperationURLParameter = {
+  parameterPath: "linkName",
+  mapper: {
+    required: true,
+    serializedName: "linkName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const linkResourceGroup: msRest.OperationQueryParameter = {
+  parameterPath: [
+    "options",
+    "linkResourceGroup"
+  ],
+  mapper: {
+    serializedName: "link-resource-group",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const linkResourceId: msRest.OperationQueryParameter = {
+  parameterPath: [
+    "options",
+    "linkResourceId"
+  ],
+  mapper: {
+    serializedName: "link-resourceId",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const linkResourceName: msRest.OperationQueryParameter = {
+  parameterPath: [
+    "options",
+    "linkResourceName"
+  ],
+  mapper: {
+    serializedName: "link-resource-name",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const linkSubscriptionId: msRest.OperationQueryParameter = {
+  parameterPath: [
+    "options",
+    "linkSubscriptionId"
+  ],
+  mapper: {
+    serializedName: "link-subscriptionId",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const linkType: msRest.OperationQueryParameter = {
+  parameterPath: [
+    "options",
+    "linkType"
+  ],
+  mapper: {
+    serializedName: "link-type",
+    type: {
+      name: "String"
+    }
+  }
+};
 export const location: msRest.OperationURLParameter = {
   parameterPath: "location",
   mapper: {
@@ -63,6 +133,16 @@ export const nextPageLink: msRest.OperationURLParameter = {
     }
   },
   skipEncoding: true
+};
+export const privateEndpointConnectionName: msRest.OperationURLParameter = {
+  parameterPath: "privateEndpointConnectionName",
+  mapper: {
+    required: true,
+    serializedName: "privateEndpointConnectionName",
+    type: {
+      name: "String"
+    }
+  }
 };
 export const resourceGroupName: msRest.OperationURLParameter = {
   parameterPath: "resourceGroupName",
@@ -91,6 +171,18 @@ export const subscriptionId: msRest.OperationURLParameter = {
   mapper: {
     required: true,
     serializedName: "subscriptionId",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const uaiResourceId: msRest.OperationQueryParameter = {
+  parameterPath: [
+    "options",
+    "uaiResourceId"
+  ],
+  mapper: {
+    serializedName: "uai-resourceId",
     type: {
       name: "String"
     }
