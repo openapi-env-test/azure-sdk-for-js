@@ -507,6 +507,20 @@ export const KeyVaultProperties: msRest.CompositeMapper = {
         type: {
           name: "String"
         }
+      },
+      currentVersionedKeyIdentifier: {
+        readOnly: true,
+        serializedName: "currentVersionedKeyIdentifier",
+        type: {
+          name: "String"
+        }
+      },
+      lastKeyRotationTimestamp: {
+        readOnly: true,
+        serializedName: "lastKeyRotationTimestamp",
+        type: {
+          name: "DateTime"
+        }
       }
     }
   }
@@ -531,6 +545,12 @@ export const Encryption: msRest.CompositeMapper = {
         defaultValue: 'Microsoft.Storage',
         type: {
           name: "String"
+        }
+      },
+      requireInfrastructureEncryption: {
+        serializedName: "requireInfrastructureEncryption",
+        type: {
+          name: "Boolean"
         }
       },
       keyVaultProperties: {
@@ -2366,6 +2386,181 @@ export const PrivateLinkResourceListResult: msRest.CompositeMapper = {
   }
 };
 
+export const EncryptionScopeKeyVaultProperties: msRest.CompositeMapper = {
+  serializedName: "EncryptionScopeKeyVaultProperties",
+  type: {
+    name: "Composite",
+    className: "EncryptionScopeKeyVaultProperties",
+    modelProperties: {
+      keyUri: {
+        serializedName: "keyUri",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const EncryptionScope: msRest.CompositeMapper = {
+  serializedName: "EncryptionScope",
+  type: {
+    name: "Composite",
+    className: "EncryptionScope",
+    modelProperties: {
+      ...Resource.type.modelProperties,
+      source: {
+        serializedName: "properties.source",
+        type: {
+          name: "String"
+        }
+      },
+      state: {
+        serializedName: "properties.state",
+        type: {
+          name: "String"
+        }
+      },
+      creationTime: {
+        readOnly: true,
+        serializedName: "properties.creationTime",
+        type: {
+          name: "DateTime"
+        }
+      },
+      lastModifiedTime: {
+        readOnly: true,
+        serializedName: "properties.lastModifiedTime",
+        type: {
+          name: "DateTime"
+        }
+      },
+      keyVaultProperties: {
+        serializedName: "properties.keyVaultProperties",
+        type: {
+          name: "Composite",
+          className: "EncryptionScopeKeyVaultProperties"
+        }
+      }
+    }
+  }
+};
+
+export const ObjectReplicationPolicyFilter: msRest.CompositeMapper = {
+  serializedName: "ObjectReplicationPolicyFilter",
+  type: {
+    name: "Composite",
+    className: "ObjectReplicationPolicyFilter",
+    modelProperties: {
+      prefixMatch: {
+        serializedName: "prefixMatch",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      },
+      minCreationTime: {
+        serializedName: "minCreationTime",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const ObjectReplicationPolicyRule: msRest.CompositeMapper = {
+  serializedName: "ObjectReplicationPolicyRule",
+  type: {
+    name: "Composite",
+    className: "ObjectReplicationPolicyRule",
+    modelProperties: {
+      ruleId: {
+        serializedName: "ruleId",
+        type: {
+          name: "String"
+        }
+      },
+      sourceContainer: {
+        required: true,
+        serializedName: "sourceContainer",
+        type: {
+          name: "String"
+        }
+      },
+      destinationContainer: {
+        required: true,
+        serializedName: "destinationContainer",
+        type: {
+          name: "String"
+        }
+      },
+      filters: {
+        serializedName: "filters",
+        type: {
+          name: "Composite",
+          className: "ObjectReplicationPolicyFilter"
+        }
+      }
+    }
+  }
+};
+
+export const ObjectReplicationPolicy: msRest.CompositeMapper = {
+  serializedName: "ObjectReplicationPolicy",
+  type: {
+    name: "Composite",
+    className: "ObjectReplicationPolicy",
+    modelProperties: {
+      ...Resource.type.modelProperties,
+      policyId: {
+        readOnly: true,
+        serializedName: "properties.policyId",
+        type: {
+          name: "String"
+        }
+      },
+      enabledTime: {
+        readOnly: true,
+        serializedName: "properties.enabledTime",
+        type: {
+          name: "DateTime"
+        }
+      },
+      sourceAccount: {
+        required: true,
+        serializedName: "properties.sourceAccount",
+        type: {
+          name: "String"
+        }
+      },
+      destinationAccount: {
+        required: true,
+        serializedName: "properties.destinationAccount",
+        type: {
+          name: "String"
+        }
+      },
+      rules: {
+        serializedName: "properties.rules",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "ObjectReplicationPolicyRule"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
 export const ErrorResponse: msRest.CompositeMapper = {
   serializedName: "ErrorResponse",
   type: {
@@ -2476,7 +2671,6 @@ export const ImmutabilityPolicyProperties: msRest.CompositeMapper = {
     className: "ImmutabilityPolicyProperties",
     modelProperties: {
       immutabilityPeriodSinceCreationInDays: {
-        required: true,
         serializedName: "properties.immutabilityPeriodSinceCreationInDays",
         type: {
           name: "Number"
@@ -2487,6 +2681,12 @@ export const ImmutabilityPolicyProperties: msRest.CompositeMapper = {
         serializedName: "properties.state",
         type: {
           name: "String"
+        }
+      },
+      allowProtectedAppendWrites: {
+        serializedName: "properties.allowProtectedAppendWrites",
+        type: {
+          name: "Boolean"
         }
       },
       etag: {
@@ -2594,6 +2794,18 @@ export const BlobContainer: msRest.CompositeMapper = {
     className: "BlobContainer",
     modelProperties: {
       ...AzureEntityResource.type.modelProperties,
+      defaultEncryptionScope: {
+        serializedName: "properties.defaultEncryptionScope",
+        type: {
+          name: "String"
+        }
+      },
+      denyEncryptionScopeOverride: {
+        serializedName: "properties.denyEncryptionScopeOverride",
+        type: {
+          name: "Boolean"
+        }
+      },
       publicAccess: {
         serializedName: "properties.publicAccess",
         type: {
@@ -2686,7 +2898,6 @@ export const ImmutabilityPolicy: msRest.CompositeMapper = {
     modelProperties: {
       ...AzureEntityResource.type.modelProperties,
       immutabilityPeriodSinceCreationInDays: {
-        required: true,
         serializedName: "properties.immutabilityPeriodSinceCreationInDays",
         type: {
           name: "Number"
@@ -2697,6 +2908,12 @@ export const ImmutabilityPolicy: msRest.CompositeMapper = {
         serializedName: "properties.state",
         type: {
           name: "String"
+        }
+      },
+      allowProtectedAppendWrites: {
+        serializedName: "properties.allowProtectedAppendWrites",
+        type: {
+          name: "Boolean"
         }
       }
     }
@@ -2739,6 +2956,18 @@ export const ListContainerItem: msRest.CompositeMapper = {
     className: "ListContainerItem",
     modelProperties: {
       ...AzureEntityResource.type.modelProperties,
+      defaultEncryptionScope: {
+        serializedName: "properties.defaultEncryptionScope",
+        type: {
+          name: "String"
+        }
+      },
+      denyEncryptionScopeOverride: {
+        serializedName: "properties.denyEncryptionScopeOverride",
+        type: {
+          name: "Boolean"
+        }
+      },
       publicAccess: {
         serializedName: "properties.publicAccess",
         type: {
@@ -2974,6 +3203,13 @@ export const RestorePolicyProperties: msRest.CompositeMapper = {
         type: {
           name: "Number"
         }
+      },
+      lastEnabledTime: {
+        readOnly: true,
+        serializedName: "lastEnabledTime",
+        type: {
+          name: "DateTime"
+        }
       }
     }
   }
@@ -3006,6 +3242,12 @@ export const BlobServiceProperties: msRest.CompositeMapper = {
           className: "DeleteRetentionPolicy"
         }
       },
+      isVersioningEnabled: {
+        serializedName: "properties.isVersioningEnabled",
+        type: {
+          name: "Boolean"
+        }
+      },
       automaticSnapshotPolicyEnabled: {
         serializedName: "properties.automaticSnapshotPolicyEnabled",
         type: {
@@ -3024,6 +3266,13 @@ export const BlobServiceProperties: msRest.CompositeMapper = {
         type: {
           name: "Composite",
           className: "RestorePolicyProperties"
+        }
+      },
+      containerDeleteRetentionPolicy: {
+        serializedName: "properties.containerDeleteRetentionPolicy",
+        type: {
+          name: "Composite",
+          className: "DeleteRetentionPolicy"
         }
       },
       sku: {
@@ -3406,6 +3655,58 @@ export const UsageListResult: msRest.CompositeMapper = {
               className: "Usage"
             }
           }
+        }
+      }
+    }
+  }
+};
+
+export const ObjectReplicationPolicies: msRest.CompositeMapper = {
+  serializedName: "ObjectReplicationPolicies",
+  type: {
+    name: "Composite",
+    className: "ObjectReplicationPolicies",
+    modelProperties: {
+      value: {
+        serializedName: "",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "ObjectReplicationPolicy"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const EncryptionScopeListResult: msRest.CompositeMapper = {
+  serializedName: "EncryptionScopeListResult",
+  type: {
+    name: "Composite",
+    className: "EncryptionScopeListResult",
+    modelProperties: {
+      value: {
+        readOnly: true,
+        serializedName: "",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "EncryptionScope"
+            }
+          }
+        }
+      },
+      nextLink: {
+        readOnly: true,
+        serializedName: "nextLink",
+        type: {
+          name: "String"
         }
       }
     }

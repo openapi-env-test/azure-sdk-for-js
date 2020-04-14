@@ -73,6 +73,20 @@ export const containerName: msRest.OperationURLParameter = {
     }
   }
 };
+export const encryptionScopeName: msRest.OperationURLParameter = {
+  parameterPath: "encryptionScopeName",
+  mapper: {
+    required: true,
+    serializedName: "encryptionScopeName",
+    constraints: {
+      MaxLength: 63,
+      MinLength: 3
+    },
+    type: {
+      name: "String"
+    }
+  }
+};
 export const expand0: msRest.OperationQueryParameter = {
   parameterPath: [
     "options",
@@ -206,6 +220,19 @@ export const nextPageLink: msRest.OperationURLParameter = {
     }
   },
   skipEncoding: true
+};
+export const objectReplicationPolicyId: msRest.OperationURLParameter = {
+  parameterPath: "objectReplicationPolicyId",
+  mapper: {
+    required: true,
+    serializedName: "objectReplicationPolicyId",
+    constraints: {
+      MinLength: 1
+    },
+    type: {
+      name: "String"
+    }
+  }
 };
 export const privateEndpointConnectionName: msRest.OperationURLParameter = {
   parameterPath: "privateEndpointConnectionName",
