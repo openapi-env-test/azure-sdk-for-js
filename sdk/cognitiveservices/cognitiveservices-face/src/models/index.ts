@@ -432,7 +432,7 @@ export interface IdentifyRequest {
    */
   largePersonGroupId?: string;
   /**
-   * The range of maxNumOfCandidatesReturned is between 1 and 5 (default is 1). Default value: 1.
+   * The range of maxNumOfCandidatesReturned is between 1 and 100 (default is 1). Default value: 1.
    */
   maxNumOfCandidatesReturned?: number;
   /**
@@ -878,7 +878,7 @@ export interface FaceIdentifyOptionalParams extends msRest.RequestOptionsBase {
    */
   largePersonGroupId?: string;
   /**
-   * The range of maxNumOfCandidatesReturned is between 1 and 5 (default is 1). Default value: 1.
+   * The range of maxNumOfCandidatesReturned is between 1 and 100 (default is 1). Default value: 1.
    */
   maxNumOfCandidatesReturned?: number;
   /**

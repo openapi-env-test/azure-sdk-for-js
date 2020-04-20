@@ -1054,7 +1054,7 @@ export const IdentifyRequest: msRest.CompositeMapper = {
         serializedName: "maxNumOfCandidatesReturned",
         defaultValue: 1,
         constraints: {
-          InclusiveMaximum: 5,
+          InclusiveMaximum: 100,
           InclusiveMinimum: 1
         },
         type: {
