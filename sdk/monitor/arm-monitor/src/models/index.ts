@@ -2113,7 +2113,7 @@ export interface MetricAlertAction {
   /**
    * The properties of a webhook object.
    */
-  webhookProperties?: { [propertyName: string]: string };
+  webHookProperties?: { [propertyName: string]: string };
 }
 
 /**
@@ -2179,7 +2179,7 @@ export interface MetricAlertResource extends Resource {
    */
   criteria: MetricAlertCriteriaUnion;
   /**
-   * the flag that indicates whether the alert should be auto resolved or not.
+   * the flag that indicates whether the alert should be auto resolved or not. The default is true.
    */
   autoMitigate?: boolean;
   /**
@@ -2205,15 +2205,15 @@ export interface MetricAlertResourcePatch {
   /**
    * the description of the metric alert that will be included in the alert email.
    */
-  description: string;
+  description?: string;
   /**
    * Alert severity {0, 1, 2, 3, 4}
    */
-  severity: number;
+  severity?: number;
   /**
    * the flag that indicates whether the metric alert is enabled.
    */
-  enabled: boolean;
+  enabled?: boolean;
   /**
    * the list of resource id's that this metric alert is scoped to.
    */
@@ -2221,28 +2221,30 @@ export interface MetricAlertResourcePatch {
   /**
    * how often the metric alert is evaluated represented in ISO 8601 duration format.
    */
-  evaluationFrequency: string;
+  evaluationFrequency?: string;
   /**
    * the period of time (in ISO 8601 duration format) that is used to monitor alert activity based
    * on the threshold.
    */
-  windowSize: string;
+  windowSize?: string;
   /**
    * the resource type of the target resource(s) on which the alert is created/updated. Mandatory
    * for MultipleResourceMultipleMetricCriteria.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
-  targetResourceType?: string;
+  readonly targetResourceType?: string;
   /**
    * the region of the target resource(s) on which the alert is created/updated. Mandatory for
    * MultipleResourceMultipleMetricCriteria.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
-  targetResourceRegion?: string;
+  readonly targetResourceRegion?: string;
   /**
    * defines the specific alert criteria information.
    */
-  criteria: MetricAlertCriteriaUnion;
+  criteria?: MetricAlertCriteriaUnion;
   /**
-   * the flag that indicates whether the alert should be auto resolved or not.
+   * the flag that indicates whether the alert should be auto resolved or not. The default is true.
    */
   autoMitigate?: boolean;
   /**
@@ -2375,9 +2377,10 @@ export interface MetricCriteria {
    */
   dimensions?: MetricDimension[];
   /**
-   * the criteria operator.
+   * the criteria operator. Possible values include: 'Equals', 'NotEquals', 'GreaterThan',
+   * 'GreaterThanOrEqual', 'LessThan', 'LessThanOrEqual'
    */
-  operator: any;
+  operator: Operator;
   /**
    * the criteria threshold value that activates the alert.
    */
@@ -2396,6 +2399,24 @@ export interface MetricAlertSingleResourceMultipleMetricCriteria {
    * The list of metric criteria for this 'all of' operation.
    */
   allOf?: MetricCriteria[];
+}
+
+/**
+ * Specifies the metric alert rule criteria for a web test resource.
+ */
+export interface WebtestLocationAvailabilityCriteria {
+  /**
+   * The Application Insights web test Id.
+   */
+  webTestId: string;
+  /**
+   * The Application Insights resource Id.
+   */
+  componentId: string;
+  /**
+   * The number of failed locations.
+   */
+  failedLocationCount: number;
 }
 
 /**
@@ -2476,14 +2497,15 @@ export interface DynamicMetricCriteria {
    */
   dimensions?: MetricDimension[];
   /**
-   * The operator used to compare the metric value against the threshold.
+   * The operator used to compare the metric value against the threshold. Possible values include:
+   * 'GreaterThan', 'LessThan', 'GreaterOrLessThan'
    */
-  operator: any;
+  operator: DynamicThresholdOperator;
   /**
    * The extent of deviation required to trigger an alert. This will affect how tight the threshold
-   * is to the metric series pattern.
+   * is to the metric series pattern. Possible values include: 'Low', 'Medium', 'High'
    */
-  alertSensitivity: any;
+  alertSensitivity: DynamicThresholdSensitivity;
   /**
    * The minimum number of violations required within the selected lookback time window required to
    * raise an alert.
@@ -3330,6 +3352,31 @@ export type Sensitivity = 'Low' | 'Medium' | 'High';
  * @enum {string}
  */
 export type BaselineSensitivity = 'Low' | 'Medium' | 'High';
+
+/**
+ * Defines values for Operator.
+ * Possible values include: 'Equals', 'NotEquals', 'GreaterThan', 'GreaterThanOrEqual', 'LessThan',
+ * 'LessThanOrEqual'
+ * @readonly
+ * @enum {string}
+ */
+export type Operator = 'Equals' | 'NotEquals' | 'GreaterThan' | 'GreaterThanOrEqual' | 'LessThan' | 'LessThanOrEqual';
+
+/**
+ * Defines values for DynamicThresholdOperator.
+ * Possible values include: 'GreaterThan', 'LessThan', 'GreaterOrLessThan'
+ * @readonly
+ * @enum {string}
+ */
+export type DynamicThresholdOperator = 'GreaterThan' | 'LessThan' | 'GreaterOrLessThan';
+
+/**
+ * Defines values for DynamicThresholdSensitivity.
+ * Possible values include: 'Low', 'Medium', 'High'
+ * @readonly
+ * @enum {string}
+ */
+export type DynamicThresholdSensitivity = 'Low' | 'Medium' | 'High';
 
 /**
  * Defines values for Enabled.

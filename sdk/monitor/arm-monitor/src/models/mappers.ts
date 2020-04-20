@@ -3591,8 +3591,8 @@ export const MetricAlertAction: msRest.CompositeMapper = {
           name: "String"
         }
       },
-      webhookProperties: {
-        serializedName: "webhookProperties",
+      webHookProperties: {
+        serializedName: "webHookProperties",
         type: {
           name: "Dictionary",
           value: {
@@ -3758,21 +3758,18 @@ export const MetricAlertResourcePatch: msRest.CompositeMapper = {
         }
       },
       description: {
-        required: true,
         serializedName: "properties.description",
         type: {
           name: "String"
         }
       },
       severity: {
-        required: true,
         serializedName: "properties.severity",
         type: {
           name: "Number"
         }
       },
       enabled: {
-        required: true,
         serializedName: "properties.enabled",
         type: {
           name: "Boolean"
@@ -3790,33 +3787,32 @@ export const MetricAlertResourcePatch: msRest.CompositeMapper = {
         }
       },
       evaluationFrequency: {
-        required: true,
         serializedName: "properties.evaluationFrequency",
         type: {
           name: "TimeSpan"
         }
       },
       windowSize: {
-        required: true,
         serializedName: "properties.windowSize",
         type: {
           name: "TimeSpan"
         }
       },
       targetResourceType: {
+        readOnly: true,
         serializedName: "properties.targetResourceType",
         type: {
           name: "String"
         }
       },
       targetResourceRegion: {
+        readOnly: true,
         serializedName: "properties.targetResourceRegion",
         type: {
           name: "String"
         }
       },
       criteria: {
-        required: true,
         serializedName: "properties.criteria",
         type: {
           name: "Composite",
@@ -4026,7 +4022,7 @@ export const MetricCriteria: msRest.CompositeMapper = {
         required: true,
         serializedName: "operator",
         type: {
-          name: "Object"
+          name: "String"
         }
       },
       threshold: {
@@ -4065,6 +4061,37 @@ export const MetricAlertSingleResourceMultipleMetricCriteria: msRest.CompositeMa
       }
     },
     additionalProperties: MetricAlertCriteria.type.additionalProperties
+  }
+};
+
+export const WebtestLocationAvailabilityCriteria: msRest.CompositeMapper = {
+  serializedName: "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria",
+  type: {
+    name: "Composite",
+    className: "WebtestLocationAvailabilityCriteria",
+    modelProperties: {
+      webTestId: {
+        required: true,
+        serializedName: "webTestId",
+        type: {
+          name: "String"
+        }
+      },
+      componentId: {
+        required: true,
+        serializedName: "componentId",
+        type: {
+          name: "String"
+        }
+      },
+      failedLocationCount: {
+        required: true,
+        serializedName: "failedLocationCount",
+        type: {
+          name: "Number"
+        }
+      }
+    }
   }
 };
 
@@ -4172,14 +4199,14 @@ export const DynamicMetricCriteria: msRest.CompositeMapper = {
         required: true,
         serializedName: "operator",
         type: {
-          name: "Object"
+          name: "String"
         }
       },
       alertSensitivity: {
         required: true,
         serializedName: "alertSensitivity",
         type: {
-          name: "Object"
+          name: "String"
         }
       },
       failingPeriods: {
