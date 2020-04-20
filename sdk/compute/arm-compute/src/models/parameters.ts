@@ -26,7 +26,7 @@ export const apiVersion0: msRest.OperationQueryParameter = {
     required: true,
     isConstant: true,
     serializedName: "api-version",
-    defaultValue: '2019-07-01',
+    defaultValue: '2020-06-01',
     type: {
       name: "String"
     }
@@ -38,7 +38,7 @@ export const apiVersion1: msRest.OperationQueryParameter = {
     required: true,
     isConstant: true,
     serializedName: "api-version",
-    defaultValue: '2019-04-01',
+    defaultValue: '2019-12-01',
     type: {
       name: "String"
     }
@@ -50,7 +50,7 @@ export const apiVersion2: msRest.OperationQueryParameter = {
     required: true,
     isConstant: true,
     serializedName: "api-version",
-    defaultValue: '2019-11-01',
+    defaultValue: '2019-04-01',
     type: {
       name: "String"
     }
@@ -62,7 +62,7 @@ export const apiVersion3: msRest.OperationQueryParameter = {
     required: true,
     isConstant: true,
     serializedName: "api-version",
-    defaultValue: '2019-12-01',
+    defaultValue: '2019-11-01',
     type: {
       name: "String"
     }
@@ -407,6 +407,16 @@ export const snapshotName: msRest.OperationURLParameter = {
   mapper: {
     required: true,
     serializedName: "snapshotName",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const sshPublicKeyName: msRest.OperationURLParameter = {
+  parameterPath: "sshPublicKeyName",
+  mapper: {
+    required: true,
+    serializedName: "sshPublicKeyName",
     type: {
       name: "String"
     }

@@ -906,7 +906,7 @@ const beginRunCommandOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion1
   ],
   headerParameters: [
     Parameters.acceptLanguage
