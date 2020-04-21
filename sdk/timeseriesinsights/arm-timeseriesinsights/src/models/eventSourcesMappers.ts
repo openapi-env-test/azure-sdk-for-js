@@ -29,11 +29,19 @@ export {
   IoTHubEventSourceUpdateParameters,
   LocalTimestamp,
   LocalTimestampTimeZoneOffset,
-  PartitionKeyProperty,
+  LongTermEnvironmentCreateOrUpdateParameters,
+  LongTermEnvironmentResource,
+  LongTermStorageConfigurationInput,
+  LongTermStorageConfigurationOutput,
   ReferenceDataSetCreateOrUpdateParameters,
   ReferenceDataSetKeyProperty,
   ReferenceDataSetResource,
   Resource,
   Sku,
-  TrackedResource
+  StandardEnvironmentCreateOrUpdateParameters,
+  StandardEnvironmentResource,
+  TimeSeriesIdProperty,
+  TrackedResource,
+  WarmStorageEnvironmentStatus,
+  WarmStoreConfigurationProperties
 } from "../models/mappers";

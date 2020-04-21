@@ -144,15 +144,7 @@ export const ResourceProperties: msRest.CompositeMapper = {
       provisioningState: {
         serializedName: "provisioningState",
         type: {
-          name: "Enum",
-          allowedValues: [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Deleting"
-          ]
+          name: "String"
         }
       },
       creationTime: {
@@ -176,11 +168,7 @@ export const Sku: msRest.CompositeMapper = {
         required: true,
         serializedName: "name",
         type: {
-          name: "Enum",
-          allowedValues: [
-            "S1",
-            "S2"
-          ]
+          name: "String"
         }
       },
       capacity: {
@@ -192,6 +180,81 @@ export const Sku: msRest.CompositeMapper = {
         },
         type: {
           name: "Number"
+        }
+      }
+    }
+  }
+};
+
+export const WarmStoreConfigurationProperties: msRest.CompositeMapper = {
+  serializedName: "WarmStoreConfigurationProperties",
+  type: {
+    name: "Composite",
+    className: "WarmStoreConfigurationProperties",
+    modelProperties: {
+      dataRetention: {
+        required: true,
+        serializedName: "dataRetention",
+        type: {
+          name: "TimeSpan"
+        }
+      }
+    }
+  }
+};
+
+export const LongTermStorageConfigurationInput: msRest.CompositeMapper = {
+  serializedName: "LongTermStorageConfigurationInput",
+  type: {
+    name: "Composite",
+    className: "LongTermStorageConfigurationInput",
+    modelProperties: {
+      accountName: {
+        required: true,
+        serializedName: "accountName",
+        type: {
+          name: "String"
+        }
+      },
+      managementKey: {
+        required: true,
+        serializedName: "managementKey",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const LongTermStorageConfigurationOutput: msRest.CompositeMapper = {
+  serializedName: "LongTermStorageConfigurationOutput",
+  type: {
+    name: "Composite",
+    className: "LongTermStorageConfigurationOutput",
+    modelProperties: {
+      accountName: {
+        required: true,
+        serializedName: "accountName",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const LongTermStorageConfigurationMutableProperties: msRest.CompositeMapper = {
+  serializedName: "LongTermStorageConfigurationMutableProperties",
+  type: {
+    name: "Composite",
+    className: "LongTermStorageConfigurationMutableProperties",
+    modelProperties: {
+      managementKey: {
+        required: true,
+        serializedName: "managementKey",
+        type: {
+          name: "String"
         }
       }
     }
@@ -226,11 +289,42 @@ export const CreateOrUpdateTrackedResourceProperties: msRest.CompositeMapper = {
   }
 };
 
-export const PartitionKeyProperty: msRest.CompositeMapper = {
-  serializedName: "PartitionKeyProperty",
+export const EnvironmentCreateOrUpdateParameters: msRest.CompositeMapper = {
+  serializedName: "EnvironmentCreateOrUpdateParameters",
   type: {
     name: "Composite",
-    className: "PartitionKeyProperty",
+    polymorphicDiscriminator: {
+      serializedName: "kind",
+      clientName: "kind"
+    },
+    uberParent: "CreateOrUpdateTrackedResourceProperties",
+    className: "EnvironmentCreateOrUpdateParameters",
+    modelProperties: {
+      ...CreateOrUpdateTrackedResourceProperties.type.modelProperties,
+      sku: {
+        required: true,
+        serializedName: "sku",
+        type: {
+          name: "Composite",
+          className: "Sku"
+        }
+      },
+      kind: {
+        required: true,
+        serializedName: "kind",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const TimeSeriesIdProperty: msRest.CompositeMapper = {
+  serializedName: "TimeSeriesIdProperty",
+  type: {
+    name: "Composite",
+    className: "TimeSeriesIdProperty",
     modelProperties: {
       name: {
         serializedName: "name",
@@ -248,21 +342,13 @@ export const PartitionKeyProperty: msRest.CompositeMapper = {
   }
 };
 
-export const EnvironmentCreateOrUpdateParameters: msRest.CompositeMapper = {
-  serializedName: "EnvironmentCreateOrUpdateParameters",
+export const StandardEnvironmentCreateOrUpdateParameters: msRest.CompositeMapper = {
+  serializedName: "Standard",
   type: {
     name: "Composite",
-    className: "EnvironmentCreateOrUpdateParameters",
+    className: "StandardEnvironmentCreateOrUpdateParameters",
     modelProperties: {
-      ...CreateOrUpdateTrackedResourceProperties.type.modelProperties,
-      sku: {
-        required: true,
-        serializedName: "sku",
-        type: {
-          name: "Composite",
-          className: "Sku"
-        }
-      },
+      ...EnvironmentCreateOrUpdateParameters.type.modelProperties,
       dataRetentionTime: {
         required: true,
         serializedName: "properties.dataRetentionTime",
@@ -273,11 +359,7 @@ export const EnvironmentCreateOrUpdateParameters: msRest.CompositeMapper = {
       storageLimitExceededBehavior: {
         serializedName: "properties.storageLimitExceededBehavior",
         type: {
-          name: "Enum",
-          allowedValues: [
-            "PurgeOldData",
-            "PauseIngress"
-          ]
+          name: "String"
         }
       },
       partitionKeyProperties: {
@@ -287,9 +369,48 @@ export const EnvironmentCreateOrUpdateParameters: msRest.CompositeMapper = {
           element: {
             type: {
               name: "Composite",
-              className: "PartitionKeyProperty"
+              className: "TimeSeriesIdProperty"
             }
           }
+        }
+      }
+    }
+  }
+};
+
+export const LongTermEnvironmentCreateOrUpdateParameters: msRest.CompositeMapper = {
+  serializedName: "LongTerm",
+  type: {
+    name: "Composite",
+    className: "LongTermEnvironmentCreateOrUpdateParameters",
+    modelProperties: {
+      ...EnvironmentCreateOrUpdateParameters.type.modelProperties,
+      timeSeriesIdProperties: {
+        required: true,
+        serializedName: "properties.timeSeriesIdProperties",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "TimeSeriesIdProperty"
+            }
+          }
+        }
+      },
+      storageConfiguration: {
+        required: true,
+        serializedName: "properties.storageConfiguration",
+        type: {
+          name: "Composite",
+          className: "LongTermStorageConfigurationInput"
+        }
+      },
+      warmStoreConfiguration: {
+        serializedName: "properties.warmStoreConfiguration",
+        type: {
+          name: "Composite",
+          className: "WarmStoreConfigurationProperties"
         }
       }
     }
@@ -302,13 +423,6 @@ export const EnvironmentUpdateParameters: msRest.CompositeMapper = {
     name: "Composite",
     className: "EnvironmentUpdateParameters",
     modelProperties: {
-      sku: {
-        serializedName: "sku",
-        type: {
-          name: "Composite",
-          className: "Sku"
-        }
-      },
       tags: {
         serializedName: "tags",
         type: {
@@ -318,6 +432,24 @@ export const EnvironmentUpdateParameters: msRest.CompositeMapper = {
               name: "String"
             }
           }
+        }
+      }
+    }
+  }
+};
+
+export const StandardEnvironmentUpdateParameters: msRest.CompositeMapper = {
+  serializedName: "StandardEnvironmentUpdateParameters",
+  type: {
+    name: "Composite",
+    className: "StandardEnvironmentUpdateParameters",
+    modelProperties: {
+      ...EnvironmentUpdateParameters.type.modelProperties,
+      sku: {
+        serializedName: "sku",
+        type: {
+          name: "Composite",
+          className: "Sku"
         }
       },
       dataRetentionTime: {
@@ -329,21 +461,83 @@ export const EnvironmentUpdateParameters: msRest.CompositeMapper = {
       storageLimitExceededBehavior: {
         serializedName: "properties.storageLimitExceededBehavior",
         type: {
-          name: "Enum",
-          allowedValues: [
-            "PurgeOldData",
-            "PauseIngress"
-          ]
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const LongTermEnvironmentUpdateParameters: msRest.CompositeMapper = {
+  serializedName: "LongTermEnvironmentUpdateParameters",
+  type: {
+    name: "Composite",
+    className: "LongTermEnvironmentUpdateParameters",
+    modelProperties: {
+      ...EnvironmentUpdateParameters.type.modelProperties,
+      storageConfiguration: {
+        serializedName: "properties.storageConfiguration",
+        type: {
+          name: "Composite",
+          className: "LongTermStorageConfigurationMutableProperties"
         }
       },
-      partitionKeyProperties: {
-        serializedName: "properties.partitionKeyProperties",
+      warmStoreConfiguration: {
+        serializedName: "properties.warmStoreConfiguration",
+        type: {
+          name: "Composite",
+          className: "WarmStoreConfigurationProperties"
+        }
+      }
+    }
+  }
+};
+
+export const EnvironmentResource: msRest.CompositeMapper = {
+  serializedName: "EnvironmentResource",
+  type: {
+    name: "Composite",
+    polymorphicDiscriminator: {
+      serializedName: "kind",
+      clientName: "kind"
+    },
+    uberParent: "BaseResource",
+    className: "EnvironmentResource",
+    modelProperties: {
+      ...TrackedResource.type.modelProperties,
+      sku: {
+        required: true,
+        serializedName: "sku",
+        type: {
+          name: "Composite",
+          className: "Sku"
+        }
+      },
+      kind: {
+        required: true,
+        serializedName: "kind",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const EnvironmentListResponse: msRest.CompositeMapper = {
+  serializedName: "EnvironmentListResponse",
+  type: {
+    name: "Composite",
+    className: "EnvironmentListResponse",
+    modelProperties: {
+      value: {
+        serializedName: "value",
         type: {
           name: "Sequence",
           element: {
             type: {
               name: "Composite",
-              className: "PartitionKeyProperty"
+              className: "EnvironmentResource"
             }
           }
         }
@@ -383,14 +577,7 @@ export const IngressEnvironmentStatus: msRest.CompositeMapper = {
       state: {
         serializedName: "state",
         type: {
-          name: "Enum",
-          allowedValues: [
-            "Disabled",
-            "Ready",
-            "Running",
-            "Paused",
-            "Unknown"
-          ]
+          name: "String"
         }
       },
       stateDetails: {
@@ -398,6 +585,42 @@ export const IngressEnvironmentStatus: msRest.CompositeMapper = {
         type: {
           name: "Composite",
           className: "EnvironmentStateDetails"
+        }
+      }
+    }
+  }
+};
+
+export const WarmStorageEnvironmentStatus: msRest.CompositeMapper = {
+  serializedName: "WarmStorageEnvironmentStatus",
+  type: {
+    name: "Composite",
+    className: "WarmStorageEnvironmentStatus",
+    modelProperties: {
+      state: {
+        serializedName: "propertiesUsage.state",
+        type: {
+          name: "String"
+        }
+      },
+      currentCount: {
+        serializedName: "propertiesUsage.stateDetails.currentCount",
+        constraints: {
+          InclusiveMaximum: 10,
+          InclusiveMinimum: 1
+        },
+        type: {
+          name: "Number"
+        }
+      },
+      maxCount: {
+        serializedName: "propertiesUsage.stateDetails.maxCount",
+        constraints: {
+          InclusiveMaximum: 10,
+          InclusiveMinimum: 1
+        },
+        type: {
+          name: "Number"
         }
       }
     }
@@ -416,25 +639,25 @@ export const EnvironmentStatus: msRest.CompositeMapper = {
           name: "Composite",
           className: "IngressEnvironmentStatus"
         }
+      },
+      warmStorage: {
+        serializedName: "warmStorage",
+        type: {
+          name: "Composite",
+          className: "WarmStorageEnvironmentStatus"
+        }
       }
     }
   }
 };
 
-export const EnvironmentResource: msRest.CompositeMapper = {
-  serializedName: "EnvironmentResource",
+export const StandardEnvironmentResource: msRest.CompositeMapper = {
+  serializedName: "Standard",
   type: {
     name: "Composite",
-    className: "EnvironmentResource",
+    className: "StandardEnvironmentResource",
     modelProperties: {
-      ...TrackedResource.type.modelProperties,
-      sku: {
-        serializedName: "sku",
-        type: {
-          name: "Composite",
-          className: "Sku"
-        }
-      },
+      ...EnvironmentResource.type.modelProperties,
       dataRetentionTime: {
         required: true,
         serializedName: "properties.dataRetentionTime",
@@ -445,11 +668,7 @@ export const EnvironmentResource: msRest.CompositeMapper = {
       storageLimitExceededBehavior: {
         serializedName: "properties.storageLimitExceededBehavior",
         type: {
-          name: "Enum",
-          allowedValues: [
-            "PurgeOldData",
-            "PauseIngress"
-          ]
+          name: "String"
         }
       },
       partitionKeyProperties: {
@@ -459,30 +678,9 @@ export const EnvironmentResource: msRest.CompositeMapper = {
           element: {
             type: {
               name: "Composite",
-              className: "PartitionKeyProperty"
+              className: "TimeSeriesIdProperty"
             }
           }
-        }
-      },
-      provisioningState: {
-        serializedName: "properties.provisioningState",
-        type: {
-          name: "Enum",
-          allowedValues: [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Deleting"
-          ]
-        }
-      },
-      creationTime: {
-        readOnly: true,
-        serializedName: "properties.creationTime",
-        type: {
-          name: "DateTime"
         }
       },
       dataAccessId: {
@@ -505,27 +703,162 @@ export const EnvironmentResource: msRest.CompositeMapper = {
           name: "Composite",
           className: "EnvironmentStatus"
         }
+      },
+      provisioningState: {
+        serializedName: "properties.provisioningState",
+        type: {
+          name: "String"
+        }
+      },
+      creationTime: {
+        readOnly: true,
+        serializedName: "properties.creationTime",
+        type: {
+          name: "DateTime"
+        }
       }
     }
   }
 };
 
-export const EnvironmentListResponse: msRest.CompositeMapper = {
-  serializedName: "EnvironmentListResponse",
+export const LongTermEnvironmentResource: msRest.CompositeMapper = {
+  serializedName: "LongTerm",
   type: {
     name: "Composite",
-    className: "EnvironmentListResponse",
+    className: "LongTermEnvironmentResource",
     modelProperties: {
-      value: {
-        serializedName: "value",
+      ...EnvironmentResource.type.modelProperties,
+      dataAccessId: {
+        readOnly: true,
+        serializedName: "properties.dataAccessId",
+        type: {
+          name: "Uuid"
+        }
+      },
+      dataAccessFqdn: {
+        readOnly: true,
+        serializedName: "properties.dataAccessFqdn",
+        type: {
+          name: "String"
+        }
+      },
+      status: {
+        serializedName: "properties.status",
+        type: {
+          name: "Composite",
+          className: "EnvironmentStatus"
+        }
+      },
+      provisioningState: {
+        serializedName: "properties.provisioningState",
+        type: {
+          name: "String"
+        }
+      },
+      creationTime: {
+        readOnly: true,
+        serializedName: "properties.creationTime",
+        type: {
+          name: "DateTime"
+        }
+      },
+      timeSeriesIdProperties: {
+        required: true,
+        serializedName: "properties.timeSeriesIdProperties",
         type: {
           name: "Sequence",
           element: {
             type: {
               name: "Composite",
-              className: "EnvironmentResource"
+              className: "TimeSeriesIdProperty"
             }
           }
+        }
+      },
+      storageConfiguration: {
+        required: true,
+        serializedName: "properties.storageConfiguration",
+        type: {
+          name: "Composite",
+          className: "LongTermStorageConfigurationOutput"
+        }
+      },
+      warmStoreConfiguration: {
+        serializedName: "properties.warmStoreConfiguration",
+        type: {
+          name: "Composite",
+          className: "WarmStoreConfigurationProperties"
+        }
+      }
+    }
+  }
+};
+
+export const EnvironmentResourceProperties: msRest.CompositeMapper = {
+  serializedName: "EnvironmentResourceProperties",
+  type: {
+    name: "Composite",
+    className: "EnvironmentResourceProperties",
+    modelProperties: {
+      ...ResourceProperties.type.modelProperties,
+      dataAccessId: {
+        readOnly: true,
+        serializedName: "dataAccessId",
+        type: {
+          name: "Uuid"
+        }
+      },
+      dataAccessFqdn: {
+        readOnly: true,
+        serializedName: "dataAccessFqdn",
+        type: {
+          name: "String"
+        }
+      },
+      status: {
+        serializedName: "status",
+        type: {
+          name: "Composite",
+          className: "EnvironmentStatus"
+        }
+      }
+    }
+  }
+};
+
+export const LocalTimestampTimeZoneOffset: msRest.CompositeMapper = {
+  serializedName: "LocalTimestamp_timeZoneOffset",
+  type: {
+    name: "Composite",
+    className: "LocalTimestampTimeZoneOffset",
+    modelProperties: {
+      propertyName: {
+        serializedName: "propertyName",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const LocalTimestamp: msRest.CompositeMapper = {
+  serializedName: "LocalTimestamp",
+  type: {
+    name: "Composite",
+    className: "LocalTimestamp",
+    modelProperties: {
+      format: {
+        serializedName: "format",
+        type: {
+          name: "String"
+        }
+      },
+      timeZoneOffset: {
+        serializedName: "timeZoneOffset",
+        type: {
+          name: "Composite",
+          className: "LocalTimestampTimeZoneOffset"
         }
       }
     }
@@ -544,6 +877,13 @@ export const EventSourceCreateOrUpdateParameters: msRest.CompositeMapper = {
     className: "EventSourceCreateOrUpdateParameters",
     modelProperties: {
       ...CreateOrUpdateTrackedResourceProperties.type.modelProperties,
+      localTimestamp: {
+        serializedName: "localTimestamp",
+        type: {
+          name: "Composite",
+          className: "LocalTimestamp"
+        }
+      },
       kind: {
         required: true,
         serializedName: "kind",
@@ -565,15 +905,7 @@ export const EventHubEventSourceCreateOrUpdateParameters: msRest.CompositeMapper
       provisioningState: {
         serializedName: "properties.provisioningState",
         type: {
-          name: "Enum",
-          allowedValues: [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Deleting"
-          ]
+          name: "String"
         }
       },
       creationTime: {
@@ -645,15 +977,7 @@ export const IoTHubEventSourceCreateOrUpdateParameters: msRest.CompositeMapper =
       provisioningState: {
         serializedName: "properties.provisioningState",
         type: {
-          name: "Enum",
-          allowedValues: [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Deleting"
-          ]
+          name: "String"
         }
       },
       creationTime: {
@@ -730,7 +1054,7 @@ export const EventSourceUpdateParameters: msRest.CompositeMapper = {
 };
 
 export const EventHubEventSourceUpdateParameters: msRest.CompositeMapper = {
-  serializedName: "EventHubEventSourceUpdateParameters",
+  serializedName: "Microsoft.EventHub",
   type: {
     name: "Composite",
     className: "EventHubEventSourceUpdateParameters",
@@ -760,7 +1084,7 @@ export const EventHubEventSourceUpdateParameters: msRest.CompositeMapper = {
 };
 
 export const IoTHubEventSourceUpdateParameters: msRest.CompositeMapper = {
-  serializedName: "IoTHubEventSourceUpdateParameters",
+  serializedName: "Microsoft.IoTHub",
   type: {
     name: "Composite",
     className: "IoTHubEventSourceUpdateParameters",
@@ -844,15 +1168,7 @@ export const EventHubEventSourceResource: msRest.CompositeMapper = {
       provisioningState: {
         serializedName: "properties.provisioningState",
         type: {
-          name: "Enum",
-          allowedValues: [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Deleting"
-          ]
+          name: "String"
         }
       },
       creationTime: {
@@ -908,7 +1224,7 @@ export const EventHubEventSourceResource: msRest.CompositeMapper = {
 };
 
 export const IoTHubEventSourceResource: msRest.CompositeMapper = {
-  serializedName: "Microsoft.IotHub",
+  serializedName: "Microsoft.IoTHub",
   type: {
     name: "Composite",
     className: "IoTHubEventSourceResource",
@@ -917,15 +1233,7 @@ export const IoTHubEventSourceResource: msRest.CompositeMapper = {
       provisioningState: {
         serializedName: "properties.provisioningState",
         type: {
-          name: "Enum",
-          allowedValues: [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Deleting"
-          ]
+          name: "String"
         }
       },
       creationTime: {
@@ -1079,50 +1387,6 @@ export const IoTHubEventSourceCommonProperties: msRest.CompositeMapper = {
   }
 };
 
-export const LocalTimestampTimeZoneOffset: msRest.CompositeMapper = {
-  serializedName: "LocalTimestamp_timeZoneOffset",
-  type: {
-    name: "Composite",
-    className: "LocalTimestampTimeZoneOffset",
-    modelProperties: {
-      propertyName: {
-        serializedName: "propertyName",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const LocalTimestamp: msRest.CompositeMapper = {
-  serializedName: "LocalTimestamp",
-  type: {
-    name: "Composite",
-    className: "LocalTimestamp",
-    modelProperties: {
-      format: {
-        serializedName: "format",
-        type: {
-          name: "Enum",
-          allowedValues: [
-            "Embedded",
-            "Iana",
-            "TimeSpan"
-          ]
-        }
-      },
-      timeZoneOffset: {
-        serializedName: "timeZoneOffset",
-        type: {
-          name: "Composite",
-          className: "LocalTimestampTimeZoneOffset"
-        }
-      }
-    }
-  }
-};
-
 export const EventSourceMutableProperties: msRest.CompositeMapper = {
   serializedName: "EventSourceMutableProperties",
   type: {
@@ -1161,13 +1425,7 @@ export const ReferenceDataSetKeyProperty: msRest.CompositeMapper = {
       type: {
         serializedName: "type",
         type: {
-          name: "Enum",
-          allowedValues: [
-            "String",
-            "Double",
-            "Bool",
-            "DateTime"
-          ]
+          name: "String"
         }
       }
     }
@@ -1197,11 +1455,7 @@ export const ReferenceDataSetCreateOrUpdateParameters: msRest.CompositeMapper = 
       dataStringComparisonBehavior: {
         serializedName: "properties.dataStringComparisonBehavior",
         type: {
-          name: "Enum",
-          allowedValues: [
-            "Ordinal",
-            "OrdinalIgnoreCase"
-          ]
+          name: "String"
         }
       }
     }
@@ -1252,25 +1506,13 @@ export const ReferenceDataSetResource: msRest.CompositeMapper = {
       dataStringComparisonBehavior: {
         serializedName: "properties.dataStringComparisonBehavior",
         type: {
-          name: "Enum",
-          allowedValues: [
-            "Ordinal",
-            "OrdinalIgnoreCase"
-          ]
+          name: "String"
         }
       },
       provisioningState: {
         serializedName: "properties.provisioningState",
         type: {
-          name: "Enum",
-          allowedValues: [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Deleting"
-          ]
+          name: "String"
         }
       },
       creationTime: {
@@ -1330,11 +1572,7 @@ export const AccessPolicyCreateOrUpdateParameters: msRest.CompositeMapper = {
           name: "Sequence",
           element: {
             type: {
-              name: "Enum",
-              allowedValues: [
-                "Reader",
-                "Contributor"
-              ]
+              name: "String"
             }
           }
         }
@@ -1361,11 +1599,7 @@ export const AccessPolicyUpdateParameters: msRest.CompositeMapper = {
           name: "Sequence",
           element: {
             type: {
-              name: "Enum",
-              allowedValues: [
-                "Reader",
-                "Contributor"
-              ]
+              name: "String"
             }
           }
         }
@@ -1399,11 +1633,7 @@ export const AccessPolicyResource: msRest.CompositeMapper = {
           name: "Sequence",
           element: {
             type: {
-              name: "Enum",
-              allowedValues: [
-                "Reader",
-                "Contributor"
-              ]
+              name: "String"
             }
           }
         }
@@ -1465,11 +1695,17 @@ export const OperationListResult: msRest.CompositeMapper = {
 };
 
 export const discriminators = {
+  'CreateOrUpdateTrackedResourceProperties.EnvironmentCreateOrUpdateParameters' : EnvironmentCreateOrUpdateParameters,
+  'CreateOrUpdateTrackedResourceProperties.Standard' : StandardEnvironmentCreateOrUpdateParameters,
+  'CreateOrUpdateTrackedResourceProperties.LongTerm' : LongTermEnvironmentCreateOrUpdateParameters,
+  'BaseResource.EnvironmentResource' : EnvironmentResource,
+  'BaseResource.Standard' : StandardEnvironmentResource,
+  'BaseResource.LongTerm' : LongTermEnvironmentResource,
   'CreateOrUpdateTrackedResourceProperties.EventSourceCreateOrUpdateParameters' : EventSourceCreateOrUpdateParameters,
   'CreateOrUpdateTrackedResourceProperties.Microsoft.EventHub' : EventHubEventSourceCreateOrUpdateParameters,
   'CreateOrUpdateTrackedResourceProperties.Microsoft.IoTHub' : IoTHubEventSourceCreateOrUpdateParameters,
   'BaseResource.EventSourceResource' : EventSourceResource,
   'BaseResource.Microsoft.EventHub' : EventHubEventSourceResource,
-  'BaseResource.Microsoft.IotHub' : IoTHubEventSourceResource
+  'BaseResource.Microsoft.IoTHub' : IoTHubEventSourceResource
 
 };
