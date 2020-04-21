@@ -27,150 +27,6 @@ export class WCFRelays {
   }
 
   /**
-   * Lists the WCF relays within the namespace.
-   * @param resourceGroupName Name of the Resource group within the Azure subscription.
-   * @param namespaceName The namespace name
-   * @param [options] The optional parameters
-   * @returns Promise<Models.WCFRelaysListByNamespaceResponse>
-   */
-  listByNamespace(resourceGroupName: string, namespaceName: string, options?: msRest.RequestOptionsBase): Promise<Models.WCFRelaysListByNamespaceResponse>;
-  /**
-   * @param resourceGroupName Name of the Resource group within the Azure subscription.
-   * @param namespaceName The namespace name
-   * @param callback The callback
-   */
-  listByNamespace(resourceGroupName: string, namespaceName: string, callback: msRest.ServiceCallback<Models.WcfRelaysListResult>): void;
-  /**
-   * @param resourceGroupName Name of the Resource group within the Azure subscription.
-   * @param namespaceName The namespace name
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listByNamespace(resourceGroupName: string, namespaceName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.WcfRelaysListResult>): void;
-  listByNamespace(resourceGroupName: string, namespaceName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.WcfRelaysListResult>, callback?: msRest.ServiceCallback<Models.WcfRelaysListResult>): Promise<Models.WCFRelaysListByNamespaceResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        namespaceName,
-        options
-      },
-      listByNamespaceOperationSpec,
-      callback) as Promise<Models.WCFRelaysListByNamespaceResponse>;
-  }
-
-  /**
-   * Creates or updates a WCF relay. This operation is idempotent.
-   * @param resourceGroupName Name of the Resource group within the Azure subscription.
-   * @param namespaceName The namespace name
-   * @param relayName The relay name.
-   * @param parameters Parameters supplied to create a WCF relay.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.WCFRelaysCreateOrUpdateResponse>
-   */
-  createOrUpdate(resourceGroupName: string, namespaceName: string, relayName: string, parameters: Models.WcfRelay, options?: msRest.RequestOptionsBase): Promise<Models.WCFRelaysCreateOrUpdateResponse>;
-  /**
-   * @param resourceGroupName Name of the Resource group within the Azure subscription.
-   * @param namespaceName The namespace name
-   * @param relayName The relay name.
-   * @param parameters Parameters supplied to create a WCF relay.
-   * @param callback The callback
-   */
-  createOrUpdate(resourceGroupName: string, namespaceName: string, relayName: string, parameters: Models.WcfRelay, callback: msRest.ServiceCallback<Models.WcfRelay>): void;
-  /**
-   * @param resourceGroupName Name of the Resource group within the Azure subscription.
-   * @param namespaceName The namespace name
-   * @param relayName The relay name.
-   * @param parameters Parameters supplied to create a WCF relay.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  createOrUpdate(resourceGroupName: string, namespaceName: string, relayName: string, parameters: Models.WcfRelay, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.WcfRelay>): void;
-  createOrUpdate(resourceGroupName: string, namespaceName: string, relayName: string, parameters: Models.WcfRelay, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.WcfRelay>, callback?: msRest.ServiceCallback<Models.WcfRelay>): Promise<Models.WCFRelaysCreateOrUpdateResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        namespaceName,
-        relayName,
-        parameters,
-        options
-      },
-      createOrUpdateOperationSpec,
-      callback) as Promise<Models.WCFRelaysCreateOrUpdateResponse>;
-  }
-
-  /**
-   * Deletes a WCF relay.
-   * @param resourceGroupName Name of the Resource group within the Azure subscription.
-   * @param namespaceName The namespace name
-   * @param relayName The relay name.
-   * @param [options] The optional parameters
-   * @returns Promise<msRest.RestResponse>
-   */
-  deleteMethod(resourceGroupName: string, namespaceName: string, relayName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
-  /**
-   * @param resourceGroupName Name of the Resource group within the Azure subscription.
-   * @param namespaceName The namespace name
-   * @param relayName The relay name.
-   * @param callback The callback
-   */
-  deleteMethod(resourceGroupName: string, namespaceName: string, relayName: string, callback: msRest.ServiceCallback<void>): void;
-  /**
-   * @param resourceGroupName Name of the Resource group within the Azure subscription.
-   * @param namespaceName The namespace name
-   * @param relayName The relay name.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  deleteMethod(resourceGroupName: string, namespaceName: string, relayName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
-  deleteMethod(resourceGroupName: string, namespaceName: string, relayName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        namespaceName,
-        relayName,
-        options
-      },
-      deleteMethodOperationSpec,
-      callback);
-  }
-
-  /**
-   * Returns the description for the specified WCF relay.
-   * @param resourceGroupName Name of the Resource group within the Azure subscription.
-   * @param namespaceName The namespace name
-   * @param relayName The relay name.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.WCFRelaysGetResponse>
-   */
-  get(resourceGroupName: string, namespaceName: string, relayName: string, options?: msRest.RequestOptionsBase): Promise<Models.WCFRelaysGetResponse>;
-  /**
-   * @param resourceGroupName Name of the Resource group within the Azure subscription.
-   * @param namespaceName The namespace name
-   * @param relayName The relay name.
-   * @param callback The callback
-   */
-  get(resourceGroupName: string, namespaceName: string, relayName: string, callback: msRest.ServiceCallback<Models.WcfRelay>): void;
-  /**
-   * @param resourceGroupName Name of the Resource group within the Azure subscription.
-   * @param namespaceName The namespace name
-   * @param relayName The relay name.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  get(resourceGroupName: string, namespaceName: string, relayName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.WcfRelay>): void;
-  get(resourceGroupName: string, namespaceName: string, relayName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.WcfRelay>, callback?: msRest.ServiceCallback<Models.WcfRelay>): Promise<Models.WCFRelaysGetResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        namespaceName,
-        relayName,
-        options
-      },
-      getOperationSpec,
-      callback) as Promise<Models.WCFRelaysGetResponse>;
-  }
-
-  /**
    * Authorization rules for a WCF relay.
    * @param resourceGroupName Name of the Resource group within the Azure subscription.
    * @param namespaceName The namespace name
@@ -416,30 +272,146 @@ export class WCFRelays {
 
   /**
    * Lists the WCF relays within the namespace.
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
    * @param [options] The optional parameters
-   * @returns Promise<Models.WCFRelaysListByNamespaceNextResponse>
+   * @returns Promise<Models.WCFRelaysListByNamespaceResponse>
    */
-  listByNamespaceNext(nextPageLink: string, options?: msRest.RequestOptionsBase): Promise<Models.WCFRelaysListByNamespaceNextResponse>;
+  listByNamespace(resourceGroupName: string, namespaceName: string, options?: msRest.RequestOptionsBase): Promise<Models.WCFRelaysListByNamespaceResponse>;
   /**
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
    * @param callback The callback
    */
-  listByNamespaceNext(nextPageLink: string, callback: msRest.ServiceCallback<Models.WcfRelaysListResult>): void;
+  listByNamespace(resourceGroupName: string, namespaceName: string, callback: msRest.ServiceCallback<Models.WcfRelaysListResult>): void;
   /**
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
    * @param options The optional parameters
    * @param callback The callback
    */
-  listByNamespaceNext(nextPageLink: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.WcfRelaysListResult>): void;
-  listByNamespaceNext(nextPageLink: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.WcfRelaysListResult>, callback?: msRest.ServiceCallback<Models.WcfRelaysListResult>): Promise<Models.WCFRelaysListByNamespaceNextResponse> {
+  listByNamespace(resourceGroupName: string, namespaceName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.WcfRelaysListResult>): void;
+  listByNamespace(resourceGroupName: string, namespaceName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.WcfRelaysListResult>, callback?: msRest.ServiceCallback<Models.WcfRelaysListResult>): Promise<Models.WCFRelaysListByNamespaceResponse> {
     return this.client.sendOperationRequest(
       {
-        nextPageLink,
+        resourceGroupName,
+        namespaceName,
         options
       },
-      listByNamespaceNextOperationSpec,
-      callback) as Promise<Models.WCFRelaysListByNamespaceNextResponse>;
+      listByNamespaceOperationSpec,
+      callback) as Promise<Models.WCFRelaysListByNamespaceResponse>;
+  }
+
+  /**
+   * Creates or updates a WCF relay. This operation is idempotent.
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param relayName The relay name.
+   * @param parameters Parameters supplied to create a WCF relay.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.WCFRelaysCreateOrUpdateResponse>
+   */
+  createOrUpdate(resourceGroupName: string, namespaceName: string, relayName: string, parameters: Models.WcfRelay, options?: msRest.RequestOptionsBase): Promise<Models.WCFRelaysCreateOrUpdateResponse>;
+  /**
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param relayName The relay name.
+   * @param parameters Parameters supplied to create a WCF relay.
+   * @param callback The callback
+   */
+  createOrUpdate(resourceGroupName: string, namespaceName: string, relayName: string, parameters: Models.WcfRelay, callback: msRest.ServiceCallback<Models.WcfRelay>): void;
+  /**
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param relayName The relay name.
+   * @param parameters Parameters supplied to create a WCF relay.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  createOrUpdate(resourceGroupName: string, namespaceName: string, relayName: string, parameters: Models.WcfRelay, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.WcfRelay>): void;
+  createOrUpdate(resourceGroupName: string, namespaceName: string, relayName: string, parameters: Models.WcfRelay, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.WcfRelay>, callback?: msRest.ServiceCallback<Models.WcfRelay>): Promise<Models.WCFRelaysCreateOrUpdateResponse> {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        namespaceName,
+        relayName,
+        parameters,
+        options
+      },
+      createOrUpdateOperationSpec,
+      callback) as Promise<Models.WCFRelaysCreateOrUpdateResponse>;
+  }
+
+  /**
+   * Deletes a WCF relay.
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param relayName The relay name.
+   * @param [options] The optional parameters
+   * @returns Promise<msRest.RestResponse>
+   */
+  deleteMethod(resourceGroupName: string, namespaceName: string, relayName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
+  /**
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param relayName The relay name.
+   * @param callback The callback
+   */
+  deleteMethod(resourceGroupName: string, namespaceName: string, relayName: string, callback: msRest.ServiceCallback<void>): void;
+  /**
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param relayName The relay name.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  deleteMethod(resourceGroupName: string, namespaceName: string, relayName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
+  deleteMethod(resourceGroupName: string, namespaceName: string, relayName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        namespaceName,
+        relayName,
+        options
+      },
+      deleteMethodOperationSpec,
+      callback);
+  }
+
+  /**
+   * Returns the description for the specified WCF relay.
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param relayName The relay name.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.WCFRelaysGetResponse>
+   */
+  get(resourceGroupName: string, namespaceName: string, relayName: string, options?: msRest.RequestOptionsBase): Promise<Models.WCFRelaysGetResponse>;
+  /**
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param relayName The relay name.
+   * @param callback The callback
+   */
+  get(resourceGroupName: string, namespaceName: string, relayName: string, callback: msRest.ServiceCallback<Models.WcfRelay>): void;
+  /**
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param relayName The relay name.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  get(resourceGroupName: string, namespaceName: string, relayName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.WcfRelay>): void;
+  get(resourceGroupName: string, namespaceName: string, relayName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.WcfRelay>, callback?: msRest.ServiceCallback<Models.WcfRelay>): Promise<Models.WCFRelaysGetResponse> {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        namespaceName,
+        relayName,
+        options
+      },
+      getOperationSpec,
+      callback) as Promise<Models.WCFRelaysGetResponse>;
   }
 
   /**
@@ -469,120 +441,38 @@ export class WCFRelays {
       listAuthorizationRulesNextOperationSpec,
       callback) as Promise<Models.WCFRelaysListAuthorizationRulesNextResponse>;
   }
+
+  /**
+   * Lists the WCF relays within the namespace.
+   * @param nextPageLink The NextLink from the previous successful call to List operation.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.WCFRelaysListByNamespaceNextResponse>
+   */
+  listByNamespaceNext(nextPageLink: string, options?: msRest.RequestOptionsBase): Promise<Models.WCFRelaysListByNamespaceNextResponse>;
+  /**
+   * @param nextPageLink The NextLink from the previous successful call to List operation.
+   * @param callback The callback
+   */
+  listByNamespaceNext(nextPageLink: string, callback: msRest.ServiceCallback<Models.WcfRelaysListResult>): void;
+  /**
+   * @param nextPageLink The NextLink from the previous successful call to List operation.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  listByNamespaceNext(nextPageLink: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.WcfRelaysListResult>): void;
+  listByNamespaceNext(nextPageLink: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.WcfRelaysListResult>, callback?: msRest.ServiceCallback<Models.WcfRelaysListResult>): Promise<Models.WCFRelaysListByNamespaceNextResponse> {
+    return this.client.sendOperationRequest(
+      {
+        nextPageLink,
+        options
+      },
+      listByNamespaceNextOperationSpec,
+      callback) as Promise<Models.WCFRelaysListByNamespaceNextResponse>;
+  }
 }
 
 // Operation Specifications
 const serializer = new msRest.Serializer(Mappers);
-const listByNamespaceOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.namespaceName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.WcfRelaysListResult
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  serializer
-};
-
-const createOrUpdateOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PUT",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.namespaceName,
-    Parameters.relayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.WcfRelay,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.WcfRelay
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  serializer
-};
-
-const deleteMethodOperationSpec: msRest.OperationSpec = {
-  httpMethod: "DELETE",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.namespaceName,
-    Parameters.relayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {},
-    204: {},
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  serializer
-};
-
-const getOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.namespaceName,
-    Parameters.relayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.WcfRelay
-    },
-    204: {},
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  serializer
-};
-
 const listAuthorizationRulesOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}/authorizationRules",
@@ -593,7 +483,7 @@ const listAuthorizationRulesOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion1
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -620,7 +510,7 @@ const createOrUpdateAuthorizationRuleOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion1
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -654,7 +544,7 @@ const deleteAuthorizationRuleOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion1
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -680,7 +570,7 @@ const getAuthorizationRuleOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion1
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -707,7 +597,7 @@ const listKeysOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion1
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -734,7 +624,7 @@ const regenerateKeysOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion1
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -757,12 +647,16 @@ const regenerateKeysOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
-const listByNamespaceNextOperationSpec: msRest.OperationSpec = {
+const listByNamespaceOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
-  baseUrl: "https://management.azure.com",
-  path: "{nextLink}",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays",
   urlParameters: [
-    Parameters.nextPageLink
+    Parameters.resourceGroupName,
+    Parameters.namespaceName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion1
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -771,6 +665,91 @@ const listByNamespaceNextOperationSpec: msRest.OperationSpec = {
     200: {
       bodyMapper: Mappers.WcfRelaysListResult
     },
+    default: {
+      bodyMapper: Mappers.ErrorResponse
+    }
+  },
+  serializer
+};
+
+const createOrUpdateOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PUT",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.namespaceName,
+    Parameters.relayName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion1
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "parameters",
+    mapper: {
+      ...Mappers.WcfRelay,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.WcfRelay
+    },
+    default: {
+      bodyMapper: Mappers.ErrorResponse
+    }
+  },
+  serializer
+};
+
+const deleteMethodOperationSpec: msRest.OperationSpec = {
+  httpMethod: "DELETE",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.namespaceName,
+    Parameters.relayName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion1
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {},
+    204: {},
+    default: {
+      bodyMapper: Mappers.ErrorResponse
+    }
+  },
+  serializer
+};
+
+const getOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.namespaceName,
+    Parameters.relayName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion1
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {
+      bodyMapper: Mappers.WcfRelay
+    },
+    204: {},
     default: {
       bodyMapper: Mappers.ErrorResponse
     }
@@ -794,6 +773,27 @@ const listAuthorizationRulesNextOperationSpec: msRest.OperationSpec = {
     },
     default: {
       bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const listByNamespaceNextOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  baseUrl: "https://management.azure.com",
+  path: "{nextLink}",
+  urlParameters: [
+    Parameters.nextPageLink
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {
+      bodyMapper: Mappers.WcfRelaysListResult
+    },
+    default: {
+      bodyMapper: Mappers.ErrorResponse
     }
   },
   serializer

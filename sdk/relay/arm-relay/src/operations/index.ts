@@ -10,5 +10,7 @@
 
 export * from "./operations";
 export * from "./namespaces";
+export * from "./privateEndpointConnections";
+export * from "./operationStatusPrivateEndpointConnections";
 export * from "./hybridConnections";
 export * from "./wCFRelays";

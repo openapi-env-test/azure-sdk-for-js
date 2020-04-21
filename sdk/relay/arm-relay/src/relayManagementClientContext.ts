@@ -13,26 +13,30 @@ import * as msRest from "@azure/ms-rest-js";
 import * as msRestAzure from "@azure/ms-rest-azure-js";
 
 const packageName = "@azure/arm-relay";
-const packageVersion = "0.1.0";
+const packageVersion = "2.1.0";
 
 export class RelayManagementClientContext extends msRestAzure.AzureServiceClient {
   credentials: msRest.ServiceClientCredentials;
   subscriptionId: string;
-  apiVersion?: string;
+  operationType: string;
 
   /**
    * Initializes a new instance of the RelayManagementClient class.
    * @param credentials Credentials needed for the client to connect to Azure.
    * @param subscriptionId Subscription credentials which uniquely identify the Microsoft Azure
    * subscription. The subscription ID forms part of the URI for every service call.
+   * @param operationType Operation Type
    * @param [options] The parameter options
    */
-  constructor(credentials: msRest.ServiceClientCredentials, subscriptionId: string, options?: Models.RelayManagementClientOptions) {
+  constructor(credentials: msRest.ServiceClientCredentials, subscriptionId: string, operationType: string, options?: Models.RelayManagementClientOptions) {
     if (credentials == undefined) {
       throw new Error('\'credentials\' cannot be null.');
     }
     if (subscriptionId == undefined) {
       throw new Error('\'subscriptionId\' cannot be null.');
+    }
+    if (operationType == undefined) {
+      throw new Error('\'operationType\' cannot be null.');
     }
 
     if (!options) {
@@ -45,13 +49,13 @@ export class RelayManagementClientContext extends msRestAzure.AzureServiceClient
 
     super(credentials, options);
 
-    this.apiVersion = '2017-04-01';
     this.acceptLanguage = 'en-US';
     this.longRunningOperationRetryTimeout = 30;
     this.baseUri = options.baseUri || this.baseUri || "https://management.azure.com";
     this.requestContentType = "application/json; charset=utf-8";
     this.credentials = credentials;
     this.subscriptionId = subscriptionId;
+    this.operationType = operationType;
 
     if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) {
       this.acceptLanguage = options.acceptLanguage;

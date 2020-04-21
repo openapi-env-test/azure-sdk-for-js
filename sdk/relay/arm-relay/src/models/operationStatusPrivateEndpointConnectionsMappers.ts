@@ -8,7 +8,5 @@
 
 export {
   ErrorResponse,
-  Operation,
-  OperationDisplay,
-  OperationListResult
+  OperationStatusItem
 } from "../models/mappers";

@@ -11,6 +11,7 @@
 import * as msRest from "@azure/ms-rest-js";
 import * as Models from "./models";
 import * as Mappers from "./models/mappers";
+import * as Parameters from "./models/parameters";
 import * as operations from "./operations";
 import { RelayManagementClientContext } from "./relayManagementClientContext";
 
@@ -19,6 +20,8 @@ class RelayManagementClient extends RelayManagementClientContext {
   // Operation groups
   operations: operations.Operations;
   namespaces: operations.Namespaces;
+  privateEndpointConnections: operations.PrivateEndpointConnections;
+  operationStatusPrivateEndpointConnections: operations.OperationStatusPrivateEndpointConnections;
   hybridConnections: operations.HybridConnections;
   wCFRelays: operations.WCFRelays;
 
@@ -27,18 +30,127 @@ class RelayManagementClient extends RelayManagementClientContext {
    * @param credentials Credentials needed for the client to connect to Azure.
    * @param subscriptionId Subscription credentials which uniquely identify the Microsoft Azure
    * subscription. The subscription ID forms part of the URI for every service call.
+   * @param operationType Operation Type
    * @param [options] The parameter options
    */
-  constructor(credentials: msRest.ServiceClientCredentials, subscriptionId: string, options?: Models.RelayManagementClientOptions) {
-    super(credentials, subscriptionId, options);
+  constructor(credentials: msRest.ServiceClientCredentials, subscriptionId: string, operationType: string, options?: Models.RelayManagementClientOptions) {
+    super(credentials, subscriptionId, operationType, options);
     this.operations = new operations.Operations(this);
     this.namespaces = new operations.Namespaces(this);
+    this.privateEndpointConnections = new operations.PrivateEndpointConnections(this);
+    this.operationStatusPrivateEndpointConnections = new operations.OperationStatusPrivateEndpointConnections(this);
     this.hybridConnections = new operations.HybridConnections(this);
     this.wCFRelays = new operations.WCFRelays(this);
+  }
+
+  /**
+   * Gets the private link resources supported for the Relay namespace
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param [options] The optional parameters
+   * @returns Promise<Models.PrivateLinkResourcesGetResponse>
+   */
+  privateLinkResourcesGet(resourceGroupName: string, namespaceName: string, options?: msRest.RequestOptionsBase): Promise<Models.PrivateLinkResourcesGetResponse>;
+  /**
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param callback The callback
+   */
+  privateLinkResourcesGet(resourceGroupName: string, namespaceName: string, callback: msRest.ServiceCallback<Models.PrivateLinkResourceListResult>): void;
+  /**
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  privateLinkResourcesGet(resourceGroupName: string, namespaceName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PrivateLinkResourceListResult>): void;
+  privateLinkResourcesGet(resourceGroupName: string, namespaceName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PrivateLinkResourceListResult>, callback?: msRest.ServiceCallback<Models.PrivateLinkResourceListResult>): Promise<Models.PrivateLinkResourcesGetResponse> {
+    return this.sendOperationRequest(
+      {
+        resourceGroupName,
+        namespaceName,
+        options
+      },
+      privateLinkResourcesGetOperationSpec,
+      callback) as Promise<Models.PrivateLinkResourcesGetResponse>;
+  }
+
+  /**
+   * Gets the private link resources supported for the Relay namespace
+   * @param nextPageLink The NextLink from the previous successful call to List operation.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.PrivateLinkResourcesGetNextResponse>
+   */
+  privateLinkResourcesGetNext(nextPageLink: string, options?: msRest.RequestOptionsBase): Promise<Models.PrivateLinkResourcesGetNextResponse>;
+  /**
+   * @param nextPageLink The NextLink from the previous successful call to List operation.
+   * @param callback The callback
+   */
+  privateLinkResourcesGetNext(nextPageLink: string, callback: msRest.ServiceCallback<Models.PrivateLinkResourceListResult>): void;
+  /**
+   * @param nextPageLink The NextLink from the previous successful call to List operation.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  privateLinkResourcesGetNext(nextPageLink: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PrivateLinkResourceListResult>): void;
+  privateLinkResourcesGetNext(nextPageLink: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PrivateLinkResourceListResult>, callback?: msRest.ServiceCallback<Models.PrivateLinkResourceListResult>): Promise<Models.PrivateLinkResourcesGetNextResponse> {
+    return this.sendOperationRequest(
+      {
+        nextPageLink,
+        options
+      },
+      privateLinkResourcesGetNextOperationSpec,
+      callback) as Promise<Models.PrivateLinkResourcesGetNextResponse>;
   }
 }
 
 // Operation Specifications
+const serializer = new msRest.Serializer(Mappers);
+const privateLinkResourcesGetOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateLinkResources",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.namespaceName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {
+      bodyMapper: Mappers.PrivateLinkResourceListResult
+    },
+    default: {
+      bodyMapper: Mappers.ErrorResponse
+    }
+  },
+  serializer
+};
+
+const privateLinkResourcesGetNextOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  baseUrl: "https://management.azure.com",
+  path: "{nextLink}",
+  urlParameters: [
+    Parameters.nextPageLink
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {
+      bodyMapper: Mappers.PrivateLinkResourceListResult
+    },
+    default: {
+      bodyMapper: Mappers.ErrorResponse
+    }
+  },
+  serializer
+};
 
 export {
   RelayManagementClient,

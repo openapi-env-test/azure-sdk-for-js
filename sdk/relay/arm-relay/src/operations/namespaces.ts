@@ -203,6 +203,74 @@ export class Namespaces {
   }
 
   /**
+   * Create or update NetworkRuleSet for a Namespace.
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param parameters The Namespace IpFilterRule.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.NamespacesCreateOrUpdateNetworkRuleSetResponse>
+   */
+  createOrUpdateNetworkRuleSet(resourceGroupName: string, namespaceName: string, parameters: Models.NetworkRuleSet, options?: msRest.RequestOptionsBase): Promise<Models.NamespacesCreateOrUpdateNetworkRuleSetResponse>;
+  /**
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param parameters The Namespace IpFilterRule.
+   * @param callback The callback
+   */
+  createOrUpdateNetworkRuleSet(resourceGroupName: string, namespaceName: string, parameters: Models.NetworkRuleSet, callback: msRest.ServiceCallback<Models.NetworkRuleSet>): void;
+  /**
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param parameters The Namespace IpFilterRule.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  createOrUpdateNetworkRuleSet(resourceGroupName: string, namespaceName: string, parameters: Models.NetworkRuleSet, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.NetworkRuleSet>): void;
+  createOrUpdateNetworkRuleSet(resourceGroupName: string, namespaceName: string, parameters: Models.NetworkRuleSet, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.NetworkRuleSet>, callback?: msRest.ServiceCallback<Models.NetworkRuleSet>): Promise<Models.NamespacesCreateOrUpdateNetworkRuleSetResponse> {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        namespaceName,
+        parameters,
+        options
+      },
+      createOrUpdateNetworkRuleSetOperationSpec,
+      callback) as Promise<Models.NamespacesCreateOrUpdateNetworkRuleSetResponse>;
+  }
+
+  /**
+   * Gets NetworkRuleSet for a Namespace.
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param [options] The optional parameters
+   * @returns Promise<Models.NamespacesGetNetworkRuleSetResponse>
+   */
+  getNetworkRuleSet(resourceGroupName: string, namespaceName: string, options?: msRest.RequestOptionsBase): Promise<Models.NamespacesGetNetworkRuleSetResponse>;
+  /**
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param callback The callback
+   */
+  getNetworkRuleSet(resourceGroupName: string, namespaceName: string, callback: msRest.ServiceCallback<Models.NetworkRuleSet>): void;
+  /**
+   * @param resourceGroupName Name of the Resource group within the Azure subscription.
+   * @param namespaceName The namespace name
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  getNetworkRuleSet(resourceGroupName: string, namespaceName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.NetworkRuleSet>): void;
+  getNetworkRuleSet(resourceGroupName: string, namespaceName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.NetworkRuleSet>, callback?: msRest.ServiceCallback<Models.NetworkRuleSet>): Promise<Models.NamespacesGetNetworkRuleSetResponse> {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        namespaceName,
+        options
+      },
+      getNetworkRuleSetOperationSpec,
+      callback) as Promise<Models.NamespacesGetNetworkRuleSetResponse>;
+  }
+
+  /**
    * Authorization rules for a namespace.
    * @param resourceGroupName Name of the Resource group within the Azure subscription.
    * @param namespaceName The namespace name
@@ -555,7 +623,7 @@ const checkNameAvailabilityMethodOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion0
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -585,7 +653,7 @@ const listOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion0
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -609,7 +677,7 @@ const listByResourceGroupOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion0
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -634,7 +702,7 @@ const getOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion0
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -659,7 +727,7 @@ const updateOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion0
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -685,6 +753,63 @@ const updateOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
+const createOrUpdateNetworkRuleSetOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PUT",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkRuleSets/default",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.namespaceName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "parameters",
+    mapper: {
+      ...Mappers.NetworkRuleSet,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.NetworkRuleSet
+    },
+    default: {
+      bodyMapper: Mappers.ErrorResponse
+    }
+  },
+  serializer
+};
+
+const getNetworkRuleSetOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkRuleSets/default",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.namespaceName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {
+      bodyMapper: Mappers.NetworkRuleSet
+    },
+    default: {
+      bodyMapper: Mappers.ErrorResponse
+    }
+  },
+  serializer
+};
+
 const listAuthorizationRulesOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/authorizationRules",
@@ -694,7 +819,7 @@ const listAuthorizationRulesOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion1
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -720,7 +845,7 @@ const createOrUpdateAuthorizationRuleOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion1
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -753,7 +878,7 @@ const deleteAuthorizationRuleOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion1
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -778,7 +903,7 @@ const getAuthorizationRuleOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion1
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -804,7 +929,7 @@ const listKeysOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion1
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -830,7 +955,7 @@ const regenerateKeysOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion1
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -862,7 +987,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion0
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -897,7 +1022,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion
+    Parameters.apiVersion0
   ],
   headerParameters: [
     Parameters.acceptLanguage
