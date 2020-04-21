@@ -26,8 +26,6 @@ export {
   DateAfterModification,
   DeleteRetentionPolicy,
   Encryption,
-  EncryptionScope,
-  EncryptionScopeKeyVaultProperties,
   EncryptionService,
   EncryptionServices,
   Endpoints,
