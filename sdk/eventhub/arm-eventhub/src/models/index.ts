@@ -12,38 +12,151 @@ import * as msRest from "@azure/ms-rest-js";
 export { BaseResource, CloudError };
 
 /**
- * The Resource definition
+ * Pre-provisioned and readily available Event Hubs Cluster count per region.
+ */
+export interface AvailableCluster {
+  /**
+   * Location fo the Available Cluster
+   */
+  location?: string;
+}
+
+/**
+ * The response of the List Available Clusters operation.
+ */
+export interface AvailableClustersList {
+  /**
+   * The count of readily available and pre-provisioned Event Hubs Clusters per region.
+   */
+  value?: AvailableCluster[];
+}
+
+/**
+ * Error response indicates Event Hub service is not able to process the incoming request. The
+ * reason is provided in the error message.
+ */
+export interface ErrorResponse {
+  /**
+   * Error code.
+   */
+  code?: string;
+  /**
+   * Error message indicating why the operation failed.
+   */
+  message?: string;
+}
+
+/**
+ * SKU parameters particular to a cluster instance.
+ */
+export interface ClusterSku {
+  /**
+   * The quantity of Event Hubs Cluster Capacity Units contained in this cluster.
+   */
+  capacity?: number;
+}
+
+/**
+ * The resource definition.
  */
 export interface Resource extends BaseResource {
   /**
-   * Resource Id
+   * Resource ID.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly id?: string;
   /**
-   * Resource name
+   * Resource name.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly name?: string;
   /**
-   * Resource type
+   * Resource type.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly type?: string;
 }
 
 /**
- * Definition of Resource
+ * Definition of resource.
  */
 export interface TrackedResource extends Resource {
   /**
-   * Resource location
+   * Resource location.
    */
   location?: string;
   /**
-   * Resource tags
+   * Resource tags.
    */
   tags?: { [propertyName: string]: string };
+}
+
+/**
+ * Single Event Hubs Cluster resource in List or Get operations.
+ */
+export interface Cluster extends TrackedResource {
+  /**
+   * Properties of the cluster SKU.
+   */
+  sku?: ClusterSku;
+  /**
+   * The UTC time when the Event Hubs Cluster was created.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly created?: string;
+  /**
+   * The UTC time when the Event Hubs Cluster was last updated.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly updated?: string;
+  /**
+   * The metric ID of the cluster resource. Provided by the service and not modifiable by the user.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly metricId?: string;
+  /**
+   * Status of the Cluster resource
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly status?: string;
+}
+
+/**
+ * The full ARM ID of an Event Hubs Namespace
+ */
+export interface EHNamespaceIdContainer {
+  /**
+   * id parameter
+   */
+  id?: string;
+}
+
+/**
+ * The response of the List Namespace IDs operation
+ */
+export interface EHNamespaceIdListResult {
+  /**
+   * Result of the List Namespace IDs operation
+   */
+  value?: EHNamespaceIdContainer[];
+}
+
+/**
+ * Single item in a List or Get IpFilterRules operation
+ */
+export interface IpFilterRule extends Resource {
+  /**
+   * IP Mask
+   */
+  ipMask?: string;
+  /**
+   * The IP Filter Action. Possible values include: 'Accept', 'Reject'
+   */
+  action?: IPAction;
+  /**
+   * IP Filter name
+   */
+  filterName?: string;
 }
 
 /**
@@ -65,6 +178,54 @@ export interface Sku {
 }
 
 /**
+ * Properties to configure Identity for Bring your Own Keys
+ */
+export interface Identity {
+  /**
+   * ObjectId from the KeyVault
+   */
+  principalId?: string;
+  /**
+   * TenantId from the KeyVault
+   */
+  tenantId?: string;
+  /**
+   * Enumerates the possible value Identity type, which currently supports only 'SystemAssigned'.
+   * Possible values include: 'SystemAssigned'. Default value: 'SystemAssigned'.
+   */
+  type?: IdentityType;
+}
+
+/**
+ * Properties to configure keyVault Properties
+ */
+export interface KeyVaultProperties {
+  /**
+   * Name of the Key from KeyVault
+   */
+  keyName?: string;
+  /**
+   * Uri of KeyVault
+   */
+  keyVaultUri?: string;
+}
+
+/**
+ * Properties to configure Encryption
+ */
+export interface Encryption {
+  /**
+   * Properties of KeyVault
+   */
+  keyVaultProperties?: KeyVaultProperties;
+  /**
+   * Enumerates the possible value of keySource for Encryption. Possible values include:
+   * 'Microsoft.KeyVault'. Default value: 'Microsoft.KeyVault'.
+   */
+  keySource?: KeySource;
+}
+
+/**
  * Single Namespace item in List or Get Operation
  */
 export interface EHNamespace extends TrackedResource {
@@ -72,6 +233,10 @@ export interface EHNamespace extends TrackedResource {
    * Properties of sku resource
    */
   sku?: Sku;
+  /**
+   * Properties of BYOK Identity description
+   */
+  identity?: Identity;
   /**
    * Provisioning state of the Namespace.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
@@ -93,6 +258,10 @@ export interface EHNamespace extends TrackedResource {
    */
   readonly serviceBusEndpoint?: string;
   /**
+   * Cluster ARM ID of the Namespace.
+   */
+  clusterArmId?: string;
+  /**
    * Identifier for Azure Insights metrics.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
@@ -110,224 +279,15 @@ export interface EHNamespace extends TrackedResource {
    * Value that indicates whether Kafka is enabled for eventhub namespace.
    */
   kafkaEnabled?: boolean;
-}
-
-/**
- * Single item in a List or Get AuthorizationRule operation
- */
-export interface AuthorizationRule extends Resource {
   /**
-   * The rights associated with the rule.
+   * Enabling this property creates a Standard Event Hubs Namespace in regions supported
+   * availability zones.
    */
-  rights: AccessRights[];
-}
-
-/**
- * Namespace/EventHub Connection String
- */
-export interface AccessKeys {
+  zoneRedundant?: boolean;
   /**
-   * Primary connection string of the created namespace AuthorizationRule.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   * Properties of BYOK Encryption description
    */
-  readonly primaryConnectionString?: string;
-  /**
-   * Secondary connection string of the created namespace AuthorizationRule.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly secondaryConnectionString?: string;
-  /**
-   * Primary connection string of the alias if GEO DR is enabled
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly aliasPrimaryConnectionString?: string;
-  /**
-   * Secondary  connection string of the alias if GEO DR is enabled
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly aliasSecondaryConnectionString?: string;
-  /**
-   * A base64-encoded 256-bit primary key for signing and validating the SAS token.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly primaryKey?: string;
-  /**
-   * A base64-encoded 256-bit primary key for signing and validating the SAS token.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly secondaryKey?: string;
-  /**
-   * A string that describes the AuthorizationRule.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly keyName?: string;
-}
-
-/**
- * Parameters supplied to the Regenerate Authorization Rule operation, specifies which key needs to
- * be reset.
- */
-export interface RegenerateAccessKeyParameters {
-  /**
-   * The access key to regenerate. Possible values include: 'PrimaryKey', 'SecondaryKey'
-   */
-  keyType: KeyType;
-  /**
-   * Optional, if the key value provided, is set for KeyType or autogenerated Key value set for
-   * keyType
-   */
-  key?: string;
-}
-
-/**
- * Capture storage details for capture description
- */
-export interface Destination {
-  /**
-   * Name for capture destination
-   */
-  name?: string;
-  /**
-   * Resource id of the storage account to be used to create the blobs
-   */
-  storageAccountResourceId?: string;
-  /**
-   * Blob container Name
-   */
-  blobContainer?: string;
-  /**
-   * Blob naming convention for archive, e.g.
-   * {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all
-   * the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order
-   */
-  archiveNameFormat?: string;
-}
-
-/**
- * Properties to configure capture description for eventhub
- */
-export interface CaptureDescription {
-  /**
-   * A value that indicates whether capture description is enabled.
-   */
-  enabled?: boolean;
-  /**
-   * Enumerates the possible values for the encoding format of capture description. Note:
-   * 'AvroDeflate' will be deprecated in New API Version. Possible values include: 'Avro',
-   * 'AvroDeflate'
-   */
-  encoding?: EncodingCaptureDescription;
-  /**
-   * The time window allows you to set the frequency with which the capture to Azure Blobs will
-   * happen, value should between 60 to 900 seconds
-   */
-  intervalInSeconds?: number;
-  /**
-   * The size window defines the amount of data built up in your Event Hub before an capture
-   * operation, value should be between 10485760 to 524288000 bytes
-   */
-  sizeLimitInBytes?: number;
-  /**
-   * Properties of Destination where capture will be stored. (Storage Account, Blob Names)
-   */
-  destination?: Destination;
-  /**
-   * A value that indicates whether to Skip Empty Archives
-   */
-  skipEmptyArchives?: boolean;
-}
-
-/**
- * Single item in List or Get Event Hub operation
- */
-export interface Eventhub extends Resource {
-  /**
-   * Current number of shards on the Event Hub.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly partitionIds?: string[];
-  /**
-   * Exact time the Event Hub was created.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly createdAt?: Date;
-  /**
-   * The exact time the message was updated.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly updatedAt?: Date;
-  /**
-   * Number of days to retain the events for this Event Hub, value should be 1 to 7 days
-   */
-  messageRetentionInDays?: number;
-  /**
-   * Number of partitions created for the Event Hub, allowed values are from 1 to 32 partitions.
-   */
-  partitionCount?: number;
-  /**
-   * Enumerates the possible values for the status of the Event Hub. Possible values include:
-   * 'Active', 'Disabled', 'Restoring', 'SendDisabled', 'ReceiveDisabled', 'Creating', 'Deleting',
-   * 'Renaming', 'Unknown'
-   */
-  status?: EntityStatus;
-  /**
-   * Properties of capture description
-   */
-  captureDescription?: CaptureDescription;
-}
-
-/**
- * Single item in List or Get Consumer group operation
- */
-export interface ConsumerGroup extends Resource {
-  /**
-   * Exact time the message was created.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly createdAt?: Date;
-  /**
-   * The exact time the message was updated.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly updatedAt?: Date;
-  /**
-   * User Metadata is a placeholder to store user-defined string data with maximum length 1024.
-   * e.g. it can be used to store descriptive data, such as list of teams and their contact
-   * information also user-defined configuration settings can be stored.
-   */
-  userMetadata?: string;
-}
-
-/**
- * Parameter supplied to check Namespace name availability operation
- */
-export interface CheckNameAvailabilityParameter {
-  /**
-   * Name to check the namespace name availability
-   */
-  name: string;
-}
-
-/**
- * The Result of the CheckNameAvailability operation
- */
-export interface CheckNameAvailabilityResult {
-  /**
-   * The detailed info regarding the reason associated with the Namespace.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly message?: string;
-  /**
-   * Value indicating Namespace is availability, true if the Namespace is available; otherwise,
-   * false.
-   */
-  nameAvailable?: boolean;
-  /**
-   * The reason for unavailability of a Namespace. Possible values include: 'None', 'InvalidName',
-   * 'SubscriptionIsDisabled', 'NameInUse', 'NameInLockdown',
-   * 'TooManyNamespaceInCurrentSubscription'
-   */
-  reason?: UnavailableReason;
+  encryption?: Encryption;
 }
 
 /**
@@ -367,98 +327,24 @@ export interface Operation {
 }
 
 /**
- * Error response indicates EventHub service is not able to process the incoming request. The
- * reason is provided in the error message.
+ * Contains all settings for the cluster.
  */
-export interface ErrorResponse {
+export interface ClusterQuotaConfigurationProperties {
   /**
-   * Error code.
+   * All possible Cluster settings - a collection of key/value paired settings which apply to
+   * quotas and configurations imposed on the cluster.
    */
-  code?: string;
-  /**
-   * Error message indicating why the operation failed.
-   */
-  message?: string;
+  settings?: { [propertyName: string]: string };
 }
 
 /**
- * Single item in List or Get Alias(Disaster Recovery configuration) operation
+ * Single item in a List or Get VirtualNetworkRules operation
  */
-export interface ArmDisasterRecovery extends Resource {
+export interface VirtualNetworkRule extends Resource {
   /**
-   * Provisioning state of the Alias(Disaster Recovery configuration) - possible values 'Accepted'
-   * or 'Succeeded' or 'Failed'. Possible values include: 'Accepted', 'Succeeded', 'Failed'
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   * ARM ID of Virtual Network Subnet
    */
-  readonly provisioningState?: ProvisioningStateDR;
-  /**
-   * ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairing
-   */
-  partnerNamespace?: string;
-  /**
-   * Alternate name specified when alias and namespace names are same.
-   */
-  alternateName?: string;
-  /**
-   * role of namespace in GEO DR - possible values 'Primary' or 'PrimaryNotReplicating' or
-   * 'Secondary'. Possible values include: 'Primary', 'PrimaryNotReplicating', 'Secondary'
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly role?: RoleDisasterRecovery;
-  /**
-   * Number of entities pending to be replicated.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly pendingReplicationOperationsCount?: number;
-}
-
-/**
- * An interface representing MessagingRegionsProperties.
- */
-export interface MessagingRegionsProperties {
-  /**
-   * Region code
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly code?: string;
-  /**
-   * Full name of the region
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly fullName?: string;
-}
-
-/**
- * Messaging Region
- */
-export interface MessagingRegions extends TrackedResource {
-  properties?: MessagingRegionsProperties;
-}
-
-/**
- * Messaging Plan for the namespace
- */
-export interface MessagingPlan extends TrackedResource {
-  /**
-   * Sku type
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly sku?: number;
-  /**
-   * Selected event hub unit
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly selectedEventHubUnit?: number;
-  /**
-   * The exact time the messaging plan was updated.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly updatedAt?: Date;
-  /**
-   * revision number
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly revision?: number;
+  virtualNetworkSubnetId?: string;
 }
 
 /**
@@ -468,11 +354,11 @@ export interface Subnet {
   /**
    * Resource ID of Virtual Network Subnet
    */
-  id: string;
+  id?: string;
 }
 
 /**
- * Description of NetWorkRuleSet - IpRules resource.
+ * The response from the List namespace operation.
  */
 export interface NWRuleSetIpRules {
   /**
@@ -480,13 +366,13 @@ export interface NWRuleSetIpRules {
    */
   ipMask?: string;
   /**
-   * The IP Filter Action. Possible values include: 'Allow'. Default value: 'Allow'.
+   * The IP Filter Action. Possible values include: 'Allow'
    */
   action?: NetworkRuleIPAction;
 }
 
 /**
- * Description of VirtualNetworkRules - NetworkRules resource.
+ * The response from the List namespace operation.
  */
 export interface NWRuleSetVirtualNetworkRules {
   /**
@@ -494,13 +380,13 @@ export interface NWRuleSetVirtualNetworkRules {
    */
   subnet?: Subnet;
   /**
-   * Value that indicates whether to ignore missing VNet Service Endpoint
+   * Value that indicates whether to ignore missing Vnet Service Endpoint
    */
   ignoreMissingVnetServiceEndpoint?: boolean;
 }
 
 /**
- * Description of NetworkRuleSet resource.
+ * Description of topic resource.
  */
 export interface NetworkRuleSet extends Resource {
   /**
@@ -518,38 +404,6 @@ export interface NetworkRuleSet extends Resource {
 }
 
 /**
- * Optional Parameters.
- */
-export interface EventHubsListByNamespaceOptionalParams extends msRest.RequestOptionsBase {
-  /**
-   * Skip is only used if a previous operation returned a partial result. If a previous response
-   * contains a nextLink element, the value of the nextLink element will include a skip parameter
-   * that specifies a starting point to use for subsequent calls.
-   */
-  skip?: number;
-  /**
-   * May be used to limit the number of results to the most recent N usageDetails.
-   */
-  top?: number;
-}
-
-/**
- * Optional Parameters.
- */
-export interface ConsumerGroupsListByEventHubOptionalParams extends msRest.RequestOptionsBase {
-  /**
-   * Skip is only used if a previous operation returned a partial result. If a previous response
-   * contains a nextLink element, the value of the nextLink element will include a skip parameter
-   * that specifies a starting point to use for subsequent calls.
-   */
-  skip?: number;
-  /**
-   * May be used to limit the number of results to the most recent N usageDetails.
-   */
-  top?: number;
-}
-
-/**
  * An interface representing EventHubManagementClientOptions.
  */
 export interface EventHubManagementClientOptions extends AzureServiceClientOptions {
@@ -558,16 +412,28 @@ export interface EventHubManagementClientOptions extends AzureServiceClientOptio
 
 /**
  * @interface
- * Result of the request to list Event Hub operations. It contains a list of operations and a URL
- * link to get the next set of results.
- * @extends Array<Operation>
+ * The response of the List Event Hubs Clusters operation.
+ * @extends Array<Cluster>
  */
-export interface OperationListResult extends Array<Operation> {
+export interface ClusterListResult extends Array<Cluster> {
   /**
-   * URL to get the next set of operation list results if there are any.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   * Link to the next set of results. Empty unless the value parameter contains an incomplete list
+   * of Event Hubs Clusters.
    */
-  readonly nextLink?: string;
+  nextLink?: string;
+}
+
+/**
+ * @interface
+ * The response from the List namespace operation.
+ * @extends Array<IpFilterRule>
+ */
+export interface IpFilterRuleListResult extends Array<IpFilterRule> {
+  /**
+   * Link to the next set of results. Not empty if Value contains an incomplete list of IpFilter
+   * Rules
+   */
+  nextLink?: string;
 }
 
 /**
@@ -585,67 +451,37 @@ export interface EHNamespaceListResult extends Array<EHNamespace> {
 /**
  * @interface
  * The response from the List namespace operation.
- * @extends Array<AuthorizationRule>
+ * @extends Array<VirtualNetworkRule>
  */
-export interface AuthorizationRuleListResult extends Array<AuthorizationRule> {
+export interface VirtualNetworkRuleListResult extends Array<VirtualNetworkRule> {
   /**
    * Link to the next set of results. Not empty if Value contains an incomplete list of
-   * Authorization Rules
+   * VirtualNetwork Rules
    */
   nextLink?: string;
 }
 
 /**
  * @interface
- * The result of the List Alias(Disaster Recovery configuration) operation.
- * @extends Array<ArmDisasterRecovery>
+ * Result of the request to list Event Hub operations. It contains a list of operations and a URL
+ * link to get the next set of results.
+ * @extends Array<Operation>
  */
-export interface ArmDisasterRecoveryListResult extends Array<ArmDisasterRecovery> {
+export interface OperationListResult extends Array<Operation> {
   /**
-   * Link to the next set of results. Not empty if Value contains incomplete list of Alias(Disaster
-   * Recovery configuration)
+   * URL to get the next set of operation list results if there are any.
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly nextLink?: string;
 }
 
 /**
- * @interface
- * The result of the List EventHubs operation.
- * @extends Array<Eventhub>
+ * Defines values for IPAction.
+ * Possible values include: 'Accept', 'Reject'
+ * @readonly
+ * @enum {string}
  */
-export interface EventHubListResult extends Array<Eventhub> {
-  /**
-   * Link to the next set of results. Not empty if Value contains incomplete list of EventHubs.
-   */
-  nextLink?: string;
-}
-
-/**
- * @interface
- * The result to the List Consumer Group operation.
- * @extends Array<ConsumerGroup>
- */
-export interface ConsumerGroupListResult extends Array<ConsumerGroup> {
-  /**
-   * Link to the next set of results. Not empty if Value contains incomplete list of Consumer Group
-   */
-  nextLink?: string;
-}
-
-/**
- * @interface
- * The response of the List MessagingRegions operation.
- * @extends Array<MessagingRegions>
- */
-export interface MessagingRegionsListResult extends Array<MessagingRegions> {
-  /**
-   * Link to the next set of results. Not empty if Value contains incomplete list of
-   * MessagingRegions.
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly nextLink?: string;
-}
+export type IPAction = 'Accept' | 'Reject';
 
 /**
  * Defines values for SkuName.
@@ -664,62 +500,20 @@ export type SkuName = 'Basic' | 'Standard';
 export type SkuTier = 'Basic' | 'Standard';
 
 /**
- * Defines values for AccessRights.
- * Possible values include: 'Manage', 'Send', 'Listen'
+ * Defines values for IdentityType.
+ * Possible values include: 'SystemAssigned'
  * @readonly
  * @enum {string}
  */
-export type AccessRights = 'Manage' | 'Send' | 'Listen';
+export type IdentityType = 'SystemAssigned';
 
 /**
- * Defines values for KeyType.
- * Possible values include: 'PrimaryKey', 'SecondaryKey'
+ * Defines values for KeySource.
+ * Possible values include: 'Microsoft.KeyVault'
  * @readonly
  * @enum {string}
  */
-export type KeyType = 'PrimaryKey' | 'SecondaryKey';
-
-/**
- * Defines values for EntityStatus.
- * Possible values include: 'Active', 'Disabled', 'Restoring', 'SendDisabled', 'ReceiveDisabled',
- * 'Creating', 'Deleting', 'Renaming', 'Unknown'
- * @readonly
- * @enum {string}
- */
-export type EntityStatus = 'Active' | 'Disabled' | 'Restoring' | 'SendDisabled' | 'ReceiveDisabled' | 'Creating' | 'Deleting' | 'Renaming' | 'Unknown';
-
-/**
- * Defines values for EncodingCaptureDescription.
- * Possible values include: 'Avro', 'AvroDeflate'
- * @readonly
- * @enum {string}
- */
-export type EncodingCaptureDescription = 'Avro' | 'AvroDeflate';
-
-/**
- * Defines values for UnavailableReason.
- * Possible values include: 'None', 'InvalidName', 'SubscriptionIsDisabled', 'NameInUse',
- * 'NameInLockdown', 'TooManyNamespaceInCurrentSubscription'
- * @readonly
- * @enum {string}
- */
-export type UnavailableReason = 'None' | 'InvalidName' | 'SubscriptionIsDisabled' | 'NameInUse' | 'NameInLockdown' | 'TooManyNamespaceInCurrentSubscription';
-
-/**
- * Defines values for ProvisioningStateDR.
- * Possible values include: 'Accepted', 'Succeeded', 'Failed'
- * @readonly
- * @enum {string}
- */
-export type ProvisioningStateDR = 'Accepted' | 'Succeeded' | 'Failed';
-
-/**
- * Defines values for RoleDisasterRecovery.
- * Possible values include: 'Primary', 'PrimaryNotReplicating', 'Secondary'
- * @readonly
- * @enum {string}
- */
-export type RoleDisasterRecovery = 'Primary' | 'PrimaryNotReplicating' | 'Secondary';
+export type KeySource = 'Microsoft.KeyVault';
 
 /**
  * Defines values for NetworkRuleIPAction.
@@ -738,9 +532,9 @@ export type NetworkRuleIPAction = 'Allow';
 export type DefaultAction = 'Allow' | 'Deny';
 
 /**
- * Contains response data for the list operation.
+ * Contains response data for the listAvailableClusters operation.
  */
-export type OperationsListResponse = OperationListResult & {
+export type ClustersListAvailableClustersResponse = AvailableClustersList & {
   /**
    * The underlying HTTP response.
    */
@@ -753,14 +547,14 @@ export type OperationsListResponse = OperationListResult & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: OperationListResult;
+      parsedBody: AvailableClustersList;
     };
 };
 
 /**
- * Contains response data for the listNext operation.
+ * Contains response data for the listByResourceGroup operation.
  */
-export type OperationsListNextResponse = OperationListResult & {
+export type ClustersListByResourceGroupResponse = ClusterListResult & {
   /**
    * The underlying HTTP response.
    */
@@ -773,14 +567,14 @@ export type OperationsListNextResponse = OperationListResult & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: OperationListResult;
+      parsedBody: ClusterListResult;
     };
 };
 
 /**
- * Contains response data for the checkNameAvailability operation.
+ * Contains response data for the get operation.
  */
-export type NamespacesCheckNameAvailabilityResponse = CheckNameAvailabilityResult & {
+export type ClustersGetResponse = Cluster & {
   /**
    * The underlying HTTP response.
    */
@@ -793,7 +587,187 @@ export type NamespacesCheckNameAvailabilityResponse = CheckNameAvailabilityResul
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: CheckNameAvailabilityResult;
+      parsedBody: Cluster;
+    };
+};
+
+/**
+ * Contains response data for the put operation.
+ */
+export type ClustersPutResponse = Cluster & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Cluster;
+    };
+};
+
+/**
+ * Contains response data for the patch operation.
+ */
+export type ClustersPatchResponse = Cluster & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Cluster;
+    };
+};
+
+/**
+ * Contains response data for the listNamespaces operation.
+ */
+export type ClustersListNamespacesResponse = EHNamespaceIdListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: EHNamespaceIdListResult;
+    };
+};
+
+/**
+ * Contains response data for the beginPut operation.
+ */
+export type ClustersBeginPutResponse = Cluster & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Cluster;
+    };
+};
+
+/**
+ * Contains response data for the beginPatch operation.
+ */
+export type ClustersBeginPatchResponse = Cluster & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Cluster;
+    };
+};
+
+/**
+ * Contains response data for the listByResourceGroupNext operation.
+ */
+export type ClustersListByResourceGroupNextResponse = ClusterListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: ClusterListResult;
+    };
+};
+
+/**
+ * Contains response data for the listIPFilterRules operation.
+ */
+export type NamespacesListIPFilterRulesResponse = IpFilterRuleListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: IpFilterRuleListResult;
+    };
+};
+
+/**
+ * Contains response data for the createOrUpdateIpFilterRule operation.
+ */
+export type NamespacesCreateOrUpdateIpFilterRuleResponse = IpFilterRule & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: IpFilterRule;
+    };
+};
+
+/**
+ * Contains response data for the getIpFilterRule operation.
+ */
+export type NamespacesGetIpFilterRuleResponse = IpFilterRule & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: IpFilterRule;
     };
 };
 
@@ -898,9 +872,9 @@ export type NamespacesUpdateResponse = EHNamespace & {
 };
 
 /**
- * Contains response data for the getMessagingPlan operation.
+ * Contains response data for the listVirtualNetworkRules operation.
  */
-export type NamespacesGetMessagingPlanResponse = MessagingPlan & {
+export type NamespacesListVirtualNetworkRulesResponse = VirtualNetworkRuleListResult & {
   /**
    * The underlying HTTP response.
    */
@@ -913,14 +887,14 @@ export type NamespacesGetMessagingPlanResponse = MessagingPlan & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: MessagingPlan;
+      parsedBody: VirtualNetworkRuleListResult;
     };
 };
 
 /**
- * Contains response data for the listAuthorizationRules operation.
+ * Contains response data for the createOrUpdateVirtualNetworkRule operation.
  */
-export type NamespacesListAuthorizationRulesResponse = AuthorizationRuleListResult & {
+export type NamespacesCreateOrUpdateVirtualNetworkRuleResponse = VirtualNetworkRule & {
   /**
    * The underlying HTTP response.
    */
@@ -933,14 +907,14 @@ export type NamespacesListAuthorizationRulesResponse = AuthorizationRuleListResu
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: AuthorizationRuleListResult;
+      parsedBody: VirtualNetworkRule;
     };
 };
 
 /**
- * Contains response data for the createOrUpdateAuthorizationRule operation.
+ * Contains response data for the getVirtualNetworkRule operation.
  */
-export type NamespacesCreateOrUpdateAuthorizationRuleResponse = AuthorizationRule & {
+export type NamespacesGetVirtualNetworkRuleResponse = VirtualNetworkRule & {
   /**
    * The underlying HTTP response.
    */
@@ -953,67 +927,7 @@ export type NamespacesCreateOrUpdateAuthorizationRuleResponse = AuthorizationRul
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: AuthorizationRule;
-    };
-};
-
-/**
- * Contains response data for the getAuthorizationRule operation.
- */
-export type NamespacesGetAuthorizationRuleResponse = AuthorizationRule & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: AuthorizationRule;
-    };
-};
-
-/**
- * Contains response data for the listKeys operation.
- */
-export type NamespacesListKeysResponse = AccessKeys & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: AccessKeys;
-    };
-};
-
-/**
- * Contains response data for the regenerateKeys operation.
- */
-export type NamespacesRegenerateKeysResponse = AccessKeys & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: AccessKeys;
+      parsedBody: VirtualNetworkRule;
     };
 };
 
@@ -1078,6 +992,26 @@ export type NamespacesBeginCreateOrUpdateResponse = EHNamespace & {
 };
 
 /**
+ * Contains response data for the listIPFilterRulesNext operation.
+ */
+export type NamespacesListIPFilterRulesNextResponse = IpFilterRuleListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: IpFilterRuleListResult;
+    };
+};
+
+/**
  * Contains response data for the listNext operation.
  */
 export type NamespacesListNextResponse = EHNamespaceListResult & {
@@ -1118,9 +1052,9 @@ export type NamespacesListByResourceGroupNextResponse = EHNamespaceListResult & 
 };
 
 /**
- * Contains response data for the listAuthorizationRulesNext operation.
+ * Contains response data for the listVirtualNetworkRulesNext operation.
  */
-export type NamespacesListAuthorizationRulesNextResponse = AuthorizationRuleListResult & {
+export type NamespacesListVirtualNetworkRulesNextResponse = VirtualNetworkRuleListResult & {
   /**
    * The underlying HTTP response.
    */
@@ -1133,34 +1067,14 @@ export type NamespacesListAuthorizationRulesNextResponse = AuthorizationRuleList
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: AuthorizationRuleListResult;
-    };
-};
-
-/**
- * Contains response data for the checkNameAvailability operation.
- */
-export type DisasterRecoveryConfigsCheckNameAvailabilityResponse = CheckNameAvailabilityResult & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: CheckNameAvailabilityResult;
+      parsedBody: VirtualNetworkRuleListResult;
     };
 };
 
 /**
  * Contains response data for the list operation.
  */
-export type DisasterRecoveryConfigsListResponse = ArmDisasterRecoveryListResult & {
+export type OperationsListResponse = OperationListResult & {
   /**
    * The underlying HTTP response.
    */
@@ -1173,114 +1087,14 @@ export type DisasterRecoveryConfigsListResponse = ArmDisasterRecoveryListResult 
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: ArmDisasterRecoveryListResult;
-    };
-};
-
-/**
- * Contains response data for the createOrUpdate operation.
- */
-export type DisasterRecoveryConfigsCreateOrUpdateResponse = ArmDisasterRecovery & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: ArmDisasterRecovery;
-    };
-};
-
-/**
- * Contains response data for the get operation.
- */
-export type DisasterRecoveryConfigsGetResponse = ArmDisasterRecovery & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: ArmDisasterRecovery;
-    };
-};
-
-/**
- * Contains response data for the listAuthorizationRules operation.
- */
-export type DisasterRecoveryConfigsListAuthorizationRulesResponse = AuthorizationRuleListResult & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: AuthorizationRuleListResult;
-    };
-};
-
-/**
- * Contains response data for the getAuthorizationRule operation.
- */
-export type DisasterRecoveryConfigsGetAuthorizationRuleResponse = AuthorizationRule & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: AuthorizationRule;
-    };
-};
-
-/**
- * Contains response data for the listKeys operation.
- */
-export type DisasterRecoveryConfigsListKeysResponse = AccessKeys & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: AccessKeys;
+      parsedBody: OperationListResult;
     };
 };
 
 /**
  * Contains response data for the listNext operation.
  */
-export type DisasterRecoveryConfigsListNextResponse = ArmDisasterRecoveryListResult & {
+export type OperationsListNextResponse = OperationListResult & {
   /**
    * The underlying HTTP response.
    */
@@ -1293,14 +1107,14 @@ export type DisasterRecoveryConfigsListNextResponse = ArmDisasterRecoveryListRes
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: ArmDisasterRecoveryListResult;
+      parsedBody: OperationListResult;
     };
 };
 
 /**
- * Contains response data for the listAuthorizationRulesNext operation.
+ * Contains response data for the patch operation.
  */
-export type DisasterRecoveryConfigsListAuthorizationRulesNextResponse = AuthorizationRuleListResult & {
+export type ConfigurationPatchResponse = ClusterQuotaConfigurationProperties & {
   /**
    * The underlying HTTP response.
    */
@@ -1313,54 +1127,14 @@ export type DisasterRecoveryConfigsListAuthorizationRulesNextResponse = Authoriz
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: AuthorizationRuleListResult;
-    };
-};
-
-/**
- * Contains response data for the listByNamespace operation.
- */
-export type EventHubsListByNamespaceResponse = EventHubListResult & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: EventHubListResult;
-    };
-};
-
-/**
- * Contains response data for the createOrUpdate operation.
- */
-export type EventHubsCreateOrUpdateResponse = Eventhub & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: Eventhub;
+      parsedBody: ClusterQuotaConfigurationProperties;
     };
 };
 
 /**
  * Contains response data for the get operation.
  */
-export type EventHubsGetResponse = Eventhub & {
+export type ConfigurationGetResponse = ClusterQuotaConfigurationProperties & {
   /**
    * The underlying HTTP response.
    */
@@ -1373,266 +1147,6 @@ export type EventHubsGetResponse = Eventhub & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: Eventhub;
-    };
-};
-
-/**
- * Contains response data for the listAuthorizationRules operation.
- */
-export type EventHubsListAuthorizationRulesResponse = AuthorizationRuleListResult & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: AuthorizationRuleListResult;
-    };
-};
-
-/**
- * Contains response data for the createOrUpdateAuthorizationRule operation.
- */
-export type EventHubsCreateOrUpdateAuthorizationRuleResponse = AuthorizationRule & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: AuthorizationRule;
-    };
-};
-
-/**
- * Contains response data for the getAuthorizationRule operation.
- */
-export type EventHubsGetAuthorizationRuleResponse = AuthorizationRule & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: AuthorizationRule;
-    };
-};
-
-/**
- * Contains response data for the listKeys operation.
- */
-export type EventHubsListKeysResponse = AccessKeys & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: AccessKeys;
-    };
-};
-
-/**
- * Contains response data for the regenerateKeys operation.
- */
-export type EventHubsRegenerateKeysResponse = AccessKeys & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: AccessKeys;
-    };
-};
-
-/**
- * Contains response data for the listByNamespaceNext operation.
- */
-export type EventHubsListByNamespaceNextResponse = EventHubListResult & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: EventHubListResult;
-    };
-};
-
-/**
- * Contains response data for the listAuthorizationRulesNext operation.
- */
-export type EventHubsListAuthorizationRulesNextResponse = AuthorizationRuleListResult & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: AuthorizationRuleListResult;
-    };
-};
-
-/**
- * Contains response data for the createOrUpdate operation.
- */
-export type ConsumerGroupsCreateOrUpdateResponse = ConsumerGroup & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: ConsumerGroup;
-    };
-};
-
-/**
- * Contains response data for the get operation.
- */
-export type ConsumerGroupsGetResponse = ConsumerGroup & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: ConsumerGroup;
-    };
-};
-
-/**
- * Contains response data for the listByEventHub operation.
- */
-export type ConsumerGroupsListByEventHubResponse = ConsumerGroupListResult & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: ConsumerGroupListResult;
-    };
-};
-
-/**
- * Contains response data for the listByEventHubNext operation.
- */
-export type ConsumerGroupsListByEventHubNextResponse = ConsumerGroupListResult & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: ConsumerGroupListResult;
-    };
-};
-
-/**
- * Contains response data for the listBySku operation.
- */
-export type RegionsListBySkuResponse = MessagingRegionsListResult & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: MessagingRegionsListResult;
-    };
-};
-
-/**
- * Contains response data for the listBySkuNext operation.
- */
-export type RegionsListBySkuNextResponse = MessagingRegionsListResult & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: MessagingRegionsListResult;
+      parsedBody: ClusterQuotaConfigurationProperties;
     };
 };

@@ -7,24 +7,26 @@
  */
 
 export {
-  ArmDisasterRecovery,
-  AuthorizationRule,
+  AvailableCluster,
+  AvailableClustersList,
   BaseResource,
-  CaptureDescription,
-  ConsumerGroup,
-  ConsumerGroupListResult,
-  Destination,
+  Cluster,
+  ClusterListResult,
+  ClusterSku,
   EHNamespace,
+  EHNamespaceIdContainer,
+  EHNamespaceIdListResult,
+  Encryption,
   ErrorResponse,
-  Eventhub,
-  MessagingPlan,
-  MessagingRegions,
-  MessagingRegionsProperties,
+  Identity,
+  IpFilterRule,
+  KeyVaultProperties,
   NetworkRuleSet,
   NWRuleSetIpRules,
   NWRuleSetVirtualNetworkRules,
   Resource,
   Sku,
   Subnet,
-  TrackedResource
+  TrackedResource,
+  VirtualNetworkRule
 } from "../models/mappers";

@@ -17,12 +17,10 @@ import { EventHubManagementClientContext } from "./eventHubManagementClientConte
 
 class EventHubManagementClient extends EventHubManagementClientContext {
   // Operation groups
-  operations: operations.Operations;
+  clusters: operations.Clusters;
   namespaces: operations.Namespaces;
-  disasterRecoveryConfigs: operations.DisasterRecoveryConfigs;
-  eventHubs: operations.EventHubs;
-  consumerGroups: operations.ConsumerGroups;
-  regions: operations.Regions;
+  operations: operations.Operations;
+  configuration: operations.Configuration;
 
   /**
    * Initializes a new instance of the EventHubManagementClient class.
@@ -33,12 +31,10 @@ class EventHubManagementClient extends EventHubManagementClientContext {
    */
   constructor(credentials: msRest.ServiceClientCredentials, subscriptionId: string, options?: Models.EventHubManagementClientOptions) {
     super(credentials, subscriptionId, options);
-    this.operations = new operations.Operations(this);
+    this.clusters = new operations.Clusters(this);
     this.namespaces = new operations.Namespaces(this);
-    this.disasterRecoveryConfigs = new operations.DisasterRecoveryConfigs(this);
-    this.eventHubs = new operations.EventHubs(this);
-    this.consumerGroups = new operations.ConsumerGroups(this);
-    this.regions = new operations.Regions(this);
+    this.operations = new operations.Operations(this);
+    this.configuration = new operations.Configuration(this);
   }
 }
 

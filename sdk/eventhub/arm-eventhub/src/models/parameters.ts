@@ -20,20 +20,6 @@ export const acceptLanguage: msRest.OperationParameter = {
     }
   }
 };
-export const alias: msRest.OperationURLParameter = {
-  parameterPath: "alias",
-  mapper: {
-    required: true,
-    serializedName: "alias",
-    constraints: {
-      MaxLength: 50,
-      MinLength: 1
-    },
-    type: {
-      name: "String"
-    }
-  }
-};
 export const apiVersion: msRest.OperationQueryParameter = {
   parameterPath: "apiVersion",
   mapper: {
@@ -44,38 +30,25 @@ export const apiVersion: msRest.OperationQueryParameter = {
     }
   }
 };
-export const authorizationRuleName: msRest.OperationURLParameter = {
-  parameterPath: "authorizationRuleName",
+export const clusterName: msRest.OperationURLParameter = {
+  parameterPath: "clusterName",
   mapper: {
     required: true,
-    serializedName: "authorizationRuleName",
-    constraints: {
-      MinLength: 1
-    },
-    type: {
-      name: "String"
-    }
-  }
-};
-export const consumerGroupName: msRest.OperationURLParameter = {
-  parameterPath: "consumerGroupName",
-  mapper: {
-    required: true,
-    serializedName: "consumerGroupName",
+    serializedName: "clusterName",
     constraints: {
       MaxLength: 50,
-      MinLength: 1
+      MinLength: 6
     },
     type: {
       name: "String"
     }
   }
 };
-export const eventHubName: msRest.OperationURLParameter = {
-  parameterPath: "eventHubName",
+export const ipFilterRuleName: msRest.OperationURLParameter = {
+  parameterPath: "ipFilterRuleName",
   mapper: {
     required: true,
-    serializedName: "eventHubName",
+    serializedName: "ipFilterRuleName",
     constraints: {
       MinLength: 1
     },
@@ -123,36 +96,6 @@ export const resourceGroupName: msRest.OperationURLParameter = {
     }
   }
 };
-export const skip: msRest.OperationQueryParameter = {
-  parameterPath: [
-    "options",
-    "skip"
-  ],
-  mapper: {
-    serializedName: "$skip",
-    constraints: {
-      InclusiveMaximum: 1000,
-      InclusiveMinimum: 0
-    },
-    type: {
-      name: "Number"
-    }
-  }
-};
-export const sku: msRest.OperationURLParameter = {
-  parameterPath: "sku",
-  mapper: {
-    required: true,
-    serializedName: "sku",
-    constraints: {
-      MaxLength: 50,
-      MinLength: 1
-    },
-    type: {
-      name: "String"
-    }
-  }
-};
 export const subscriptionId: msRest.OperationURLParameter = {
   parameterPath: "subscriptionId",
   mapper: {
@@ -163,19 +106,16 @@ export const subscriptionId: msRest.OperationURLParameter = {
     }
   }
 };
-export const top: msRest.OperationQueryParameter = {
-  parameterPath: [
-    "options",
-    "top"
-  ],
+export const virtualNetworkRuleName: msRest.OperationURLParameter = {
+  parameterPath: "virtualNetworkRuleName",
   mapper: {
-    serializedName: "$top",
+    required: true,
+    serializedName: "virtualNetworkRuleName",
     constraints: {
-      InclusiveMaximum: 1000,
-      InclusiveMinimum: 1
+      MinLength: 1
     },
     type: {
-      name: "Number"
+      name: "String"
     }
   }
 };
