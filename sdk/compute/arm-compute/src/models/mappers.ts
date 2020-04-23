@@ -796,6 +796,71 @@ export const DedicatedHostUpdate: msRest.CompositeMapper = {
   }
 };
 
+export const SshPublicKeyGenerateKeyPairResult: msRest.CompositeMapper = {
+  serializedName: "SshPublicKeyGenerateKeyPairResult",
+  type: {
+    name: "Composite",
+    className: "SshPublicKeyGenerateKeyPairResult",
+    modelProperties: {
+      privateKey: {
+        required: true,
+        serializedName: "privateKey",
+        type: {
+          name: "String"
+        }
+      },
+      publicKey: {
+        required: true,
+        serializedName: "publicKey",
+        type: {
+          name: "String"
+        }
+      },
+      id: {
+        required: true,
+        serializedName: "id",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const SshPublicKeyResource: msRest.CompositeMapper = {
+  serializedName: "SshPublicKeyResource",
+  type: {
+    name: "Composite",
+    className: "SshPublicKeyResource",
+    modelProperties: {
+      ...Resource.type.modelProperties,
+      publicKey: {
+        serializedName: "properties.publicKey",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const SshPublicKeyUpdateResource: msRest.CompositeMapper = {
+  serializedName: "SshPublicKeyUpdateResource",
+  type: {
+    name: "Composite",
+    className: "SshPublicKeyUpdateResource",
+    modelProperties: {
+      ...UpdateResource.type.modelProperties,
+      publicKey: {
+        serializedName: "properties.publicKey",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const VirtualMachineSize: msRest.CompositeMapper = {
   serializedName: "VirtualMachineSize",
   type: {
@@ -1613,6 +1678,12 @@ export const DiffDiskSettings: msRest.CompositeMapper = {
     modelProperties: {
       option: {
         serializedName: "option",
+        type: {
+          name: "String"
+        }
+      },
+      placement: {
+        serializedName: "placement",
         type: {
           name: "String"
         }
@@ -5136,6 +5207,30 @@ export const VirtualMachineScaleSetVMExtensionsSummary: msRest.CompositeMapper =
   }
 };
 
+export const OrchestrationServiceSummary: msRest.CompositeMapper = {
+  serializedName: "OrchestrationServiceSummary",
+  type: {
+    name: "Composite",
+    className: "OrchestrationServiceSummary",
+    modelProperties: {
+      serviceName: {
+        readOnly: true,
+        serializedName: "serviceName",
+        type: {
+          name: "String"
+        }
+      },
+      serviceState: {
+        readOnly: true,
+        serializedName: "serviceState",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const VirtualMachineScaleSetInstanceView: msRest.CompositeMapper = {
   serializedName: "VirtualMachineScaleSetInstanceView",
   type: {
@@ -5171,6 +5266,19 @@ export const VirtualMachineScaleSetInstanceView: msRest.CompositeMapper = {
             type: {
               name: "Composite",
               className: "InstanceViewStatus"
+            }
+          }
+        }
+      },
+      orchestrationServices: {
+        readOnly: true,
+        serializedName: "orchestrationServices",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "OrchestrationServiceSummary"
             }
           }
         }
@@ -6126,6 +6234,30 @@ export const VMScaleSetConvertToSinglePlacementGroupInput: msRest.CompositeMappe
   }
 };
 
+export const OrchestrationServiceStateInput: msRest.CompositeMapper = {
+  serializedName: "OrchestrationServiceStateInput",
+  type: {
+    name: "Composite",
+    className: "OrchestrationServiceStateInput",
+    modelProperties: {
+      serviceName: {
+        required: true,
+        serializedName: "serviceName",
+        type: {
+          name: "String"
+        }
+      },
+      action: {
+        required: true,
+        serializedName: "action",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const RunCommandInputParameter: msRest.CompositeMapper = {
   serializedName: "RunCommandInputParameter",
   type: {
@@ -6327,6 +6459,254 @@ export const RunCommandResult: msRest.CompositeMapper = {
               className: "InstanceViewStatus"
             }
           }
+        }
+      }
+    }
+  }
+};
+
+export const VirtualMachineRunCommandInstanceView: msRest.CompositeMapper = {
+  serializedName: "VirtualMachineRunCommandInstanceView",
+  type: {
+    name: "Composite",
+    className: "VirtualMachineRunCommandInstanceView",
+    modelProperties: {
+      executionState: {
+        serializedName: "executionState",
+        type: {
+          name: "String"
+        }
+      },
+      output: {
+        serializedName: "output",
+        type: {
+          name: "String"
+        }
+      },
+      error: {
+        serializedName: "error",
+        type: {
+          name: "String"
+        }
+      },
+      startTime: {
+        serializedName: "startTime",
+        type: {
+          name: "DateTime"
+        }
+      },
+      endTime: {
+        serializedName: "endTime",
+        type: {
+          name: "DateTime"
+        }
+      },
+      statuses: {
+        serializedName: "statuses",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "InstanceViewStatus"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const VirtualMachineRunCommandScriptSource: msRest.CompositeMapper = {
+  serializedName: "VirtualMachineRunCommandScriptSource",
+  type: {
+    name: "Composite",
+    className: "VirtualMachineRunCommandScriptSource",
+    modelProperties: {
+      script: {
+        serializedName: "script",
+        type: {
+          name: "String"
+        }
+      },
+      scriptUri: {
+        serializedName: "scriptUri",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const VirtualMachineRunCommand: msRest.CompositeMapper = {
+  serializedName: "VirtualMachineRunCommand",
+  type: {
+    name: "Composite",
+    className: "VirtualMachineRunCommand",
+    modelProperties: {
+      ...Resource.type.modelProperties,
+      source: {
+        serializedName: "properties.source",
+        type: {
+          name: "Composite",
+          className: "VirtualMachineRunCommandScriptSource"
+        }
+      },
+      parameters: {
+        serializedName: "properties.parameters",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "RunCommandInputParameter"
+            }
+          }
+        }
+      },
+      protectedParameters: {
+        serializedName: "properties.protectedParameters",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "RunCommandInputParameter"
+            }
+          }
+        }
+      },
+      runAsUser: {
+        serializedName: "properties.runAsUser",
+        type: {
+          name: "String"
+        }
+      },
+      runAsPassword: {
+        serializedName: "properties.runAsPassword",
+        type: {
+          name: "String"
+        }
+      },
+      timeoutInSeconds: {
+        serializedName: "properties.timeoutInSeconds",
+        type: {
+          name: "Number"
+        }
+      },
+      outputBlobUri: {
+        serializedName: "properties.outputBlobUri",
+        type: {
+          name: "String"
+        }
+      },
+      errorBlobUri: {
+        serializedName: "properties.errorBlobUri",
+        type: {
+          name: "String"
+        }
+      },
+      provisioningState: {
+        readOnly: true,
+        serializedName: "properties.provisioningState",
+        type: {
+          name: "String"
+        }
+      },
+      instanceView: {
+        readOnly: true,
+        serializedName: "properties.instanceView",
+        type: {
+          name: "Composite",
+          className: "VirtualMachineRunCommandInstanceView"
+        }
+      }
+    }
+  }
+};
+
+export const VirtualMachineRunCommandUpdate: msRest.CompositeMapper = {
+  serializedName: "VirtualMachineRunCommandUpdate",
+  type: {
+    name: "Composite",
+    className: "VirtualMachineRunCommandUpdate",
+    modelProperties: {
+      ...UpdateResource.type.modelProperties,
+      source: {
+        serializedName: "properties.source",
+        type: {
+          name: "Composite",
+          className: "VirtualMachineRunCommandScriptSource"
+        }
+      },
+      parameters: {
+        serializedName: "properties.parameters",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "RunCommandInputParameter"
+            }
+          }
+        }
+      },
+      protectedParameters: {
+        serializedName: "properties.protectedParameters",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "RunCommandInputParameter"
+            }
+          }
+        }
+      },
+      runAsUser: {
+        serializedName: "properties.runAsUser",
+        type: {
+          name: "String"
+        }
+      },
+      runAsPassword: {
+        serializedName: "properties.runAsPassword",
+        type: {
+          name: "String"
+        }
+      },
+      timeoutInSeconds: {
+        serializedName: "properties.timeoutInSeconds",
+        type: {
+          name: "Number"
+        }
+      },
+      outputBlobUri: {
+        serializedName: "properties.outputBlobUri",
+        type: {
+          name: "String"
+        }
+      },
+      errorBlobUri: {
+        serializedName: "properties.errorBlobUri",
+        type: {
+          name: "String"
+        }
+      },
+      provisioningState: {
+        readOnly: true,
+        serializedName: "properties.provisioningState",
+        type: {
+          name: "String"
+        }
+      },
+      instanceView: {
+        readOnly: true,
+        serializedName: "properties.instanceView",
+        type: {
+          name: "Composite",
+          className: "VirtualMachineRunCommandInstanceView"
         }
       }
     }
@@ -9276,6 +9656,35 @@ export const DedicatedHostListResult: msRest.CompositeMapper = {
   }
 };
 
+export const SshPublicKeysGroupListResult: msRest.CompositeMapper = {
+  serializedName: "SshPublicKeysGroupListResult",
+  type: {
+    name: "Composite",
+    className: "SshPublicKeysGroupListResult",
+    modelProperties: {
+      value: {
+        required: true,
+        serializedName: "",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "SshPublicKeyResource"
+            }
+          }
+        }
+      },
+      nextLink: {
+        serializedName: "nextLink",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const ListUsagesResult: msRest.CompositeMapper = {
   serializedName: "ListUsagesResult",
   type: {
@@ -9552,6 +9961,35 @@ export const RunCommandListResult: msRest.CompositeMapper = {
             type: {
               name: "Composite",
               className: "RunCommandDocumentBase"
+            }
+          }
+        }
+      },
+      nextLink: {
+        serializedName: "nextLink",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const VirtualMachineRunCommandsListResult: msRest.CompositeMapper = {
+  serializedName: "VirtualMachineRunCommandsListResult",
+  type: {
+    name: "Composite",
+    className: "VirtualMachineRunCommandsListResult",
+    modelProperties: {
+      value: {
+        required: true,
+        serializedName: "",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "VirtualMachineRunCommand"
             }
           }
         }
