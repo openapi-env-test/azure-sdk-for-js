@@ -210,7 +210,6 @@ export {
   FactoryIdentity,
   FactoryListResponse,
   FactoryRepoConfiguration,
-  FactoryRepoUpdate,
   FactoryUpdateParameters,
   FactoryVSTSConfiguration,
   FileServerLinkedService,
