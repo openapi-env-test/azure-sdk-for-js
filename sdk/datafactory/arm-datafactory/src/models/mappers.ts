@@ -15652,6 +15652,34 @@ export const AzureMySqlSource: msRest.CompositeMapper = {
   }
 };
 
+export const SqlPartitionSettings: msRest.CompositeMapper = {
+  serializedName: "SqlPartitionSettings",
+  type: {
+    name: "Composite",
+    className: "SqlPartitionSettings",
+    modelProperties: {
+      partitionColumnName: {
+        serializedName: "partitionColumnName",
+        type: {
+          name: "Object"
+        }
+      },
+      partitionUpperBound: {
+        serializedName: "partitionUpperBound",
+        type: {
+          name: "Object"
+        }
+      },
+      partitionLowerBound: {
+        serializedName: "partitionLowerBound",
+        type: {
+          name: "Object"
+        }
+      }
+    }
+  }
+};
+
 export const SqlDWSource: msRest.CompositeMapper = {
   serializedName: "SqlDWSource",
   type: {
@@ -15677,6 +15705,19 @@ export const SqlDWSource: msRest.CompositeMapper = {
         serializedName: "storedProcedureParameters",
         type: {
           name: "Object"
+        }
+      },
+      partitionOption: {
+        serializedName: "partitionOption",
+        type: {
+          name: "String"
+        }
+      },
+      partitionSettings: {
+        serializedName: "partitionSettings",
+        type: {
+          name: "Composite",
+          className: "SqlPartitionSettings"
         }
       }
     },
@@ -15744,6 +15785,19 @@ export const SqlMISource: msRest.CompositeMapper = {
         type: {
           name: "Object"
         }
+      },
+      partitionOption: {
+        serializedName: "partitionOption",
+        type: {
+          name: "String"
+        }
+      },
+      partitionSettings: {
+        serializedName: "partitionSettings",
+        type: {
+          name: "Composite",
+          className: "SqlPartitionSettings"
+        }
       }
     },
     additionalProperties: CopySource.type.additionalProperties
@@ -15787,6 +15841,19 @@ export const AzureSqlSource: msRest.CompositeMapper = {
         serializedName: "produceAdditionalTypes",
         type: {
           name: "Object"
+        }
+      },
+      partitionOption: {
+        serializedName: "partitionOption",
+        type: {
+          name: "String"
+        }
+      },
+      partitionSettings: {
+        serializedName: "partitionSettings",
+        type: {
+          name: "Composite",
+          className: "SqlPartitionSettings"
         }
       }
     },
@@ -15832,6 +15899,19 @@ export const SqlServerSource: msRest.CompositeMapper = {
         type: {
           name: "Object"
         }
+      },
+      partitionOption: {
+        serializedName: "partitionOption",
+        type: {
+          name: "String"
+        }
+      },
+      partitionSettings: {
+        serializedName: "partitionSettings",
+        type: {
+          name: "Composite",
+          className: "SqlPartitionSettings"
+        }
       }
     },
     additionalProperties: CopySource.type.additionalProperties
@@ -15875,6 +15955,19 @@ export const SqlSource: msRest.CompositeMapper = {
         serializedName: "isolationLevel",
         type: {
           name: "Object"
+        }
+      },
+      partitionOption: {
+        serializedName: "partitionOption",
+        type: {
+          name: "String"
+        }
+      },
+      partitionSettings: {
+        serializedName: "partitionSettings",
+        type: {
+          name: "Composite",
+          className: "SqlPartitionSettings"
         }
       }
     },
