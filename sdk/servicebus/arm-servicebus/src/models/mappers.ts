@@ -735,6 +735,34 @@ export const SBTopic: msRest.CompositeMapper = {
   }
 };
 
+export const SBClientAffineProperties: msRest.CompositeMapper = {
+  serializedName: "SBClientAffineProperties",
+  type: {
+    name: "Composite",
+    className: "SBClientAffineProperties",
+    modelProperties: {
+      clientId: {
+        serializedName: "clientId",
+        type: {
+          name: "String"
+        }
+      },
+      isDurable: {
+        serializedName: "isDurable",
+        type: {
+          name: "Boolean"
+        }
+      },
+      isShared: {
+        serializedName: "isShared",
+        type: {
+          name: "Boolean"
+        }
+      }
+    }
+  }
+};
+
 export const SBSubscription: msRest.CompositeMapper = {
   serializedName: "SBSubscription",
   type: {
@@ -859,6 +887,19 @@ export const SBSubscription: msRest.CompositeMapper = {
         serializedName: "properties.forwardDeadLetteredMessagesTo",
         type: {
           name: "String"
+        }
+      },
+      isClientAffine: {
+        serializedName: "properties.isClientAffine",
+        type: {
+          name: "Boolean"
+        }
+      },
+      clientAffineProperties: {
+        serializedName: "properties.clientAffineProperties",
+        type: {
+          name: "Composite",
+          className: "SBClientAffineProperties"
         }
       }
     }
@@ -1038,9 +1079,12 @@ export const SqlFilter: msRest.CompositeMapper = {
         }
       },
       compatibilityLevel: {
-        readOnly: true,
         serializedName: "compatibilityLevel",
         defaultValue: 20,
+        constraints: {
+          InclusiveMaximum: 20,
+          InclusiveMinimum: 20
+        },
         type: {
           name: "Number"
         }
@@ -1671,6 +1715,34 @@ export const SBAuthorizationRuleListResult: msRest.CompositeMapper = {
             type: {
               name: "Composite",
               className: "SBAuthorizationRule"
+            }
+          }
+        }
+      },
+      nextLink: {
+        serializedName: "nextLink",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const NetworkRuleSetListResult: msRest.CompositeMapper = {
+  serializedName: "NetworkRuleSetListResult",
+  type: {
+    name: "Composite",
+    className: "NetworkRuleSetListResult",
+    modelProperties: {
+      value: {
+        serializedName: "",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "NetworkRuleSet"
             }
           }
         }

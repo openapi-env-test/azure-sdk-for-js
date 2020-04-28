@@ -26,6 +26,7 @@ export {
   ResourceNamespacePatch,
   Rule,
   SBAuthorizationRule,
+  SBClientAffineProperties,
   SBNamespace,
   SBNamespaceUpdateParameters,
   SBQueue,

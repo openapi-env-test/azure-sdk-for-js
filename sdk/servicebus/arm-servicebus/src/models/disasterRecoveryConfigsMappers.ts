@@ -31,6 +31,7 @@ export {
   Rule,
   SBAuthorizationRule,
   SBAuthorizationRuleListResult,
+  SBClientAffineProperties,
   SBNamespace,
   SBNamespaceUpdateParameters,
   SBQueue,
