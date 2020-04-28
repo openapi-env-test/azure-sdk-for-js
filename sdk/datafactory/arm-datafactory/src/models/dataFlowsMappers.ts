@@ -457,6 +457,7 @@ export {
   SqlDWSource,
   SqlMISink,
   SqlMISource,
+  SqlPartitionSettings,
   SqlServerLinkedService,
   SqlServerSink,
   SqlServerSource,
