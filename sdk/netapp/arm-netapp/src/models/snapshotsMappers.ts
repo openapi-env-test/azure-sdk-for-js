@@ -8,20 +8,26 @@
 
 export {
   ActiveDirectory,
+  AzureEntityResource,
   BaseResource,
   CapacityPool,
   CapacityPoolPatch,
   CloudError,
   ExportPolicyRule,
+  MountTargetProperties,
   NetAppAccount,
   NetAppAccountPatch,
+  ProxyResource,
   ReplicationObject,
+  Resource,
   Snapshot,
-  SnapshotPatch,
+  SnapshotPolicy,
   SnapshotsList,
+  TrackedResource,
   Volume,
   VolumePatch,
   VolumePatchPropertiesExportPolicy,
   VolumePropertiesDataProtection,
-  VolumePropertiesExportPolicy
+  VolumePropertiesExportPolicy,
+  VolumeSnapshotProperties
 } from "../models/mappers";
