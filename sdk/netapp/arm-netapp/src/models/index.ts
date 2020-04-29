@@ -203,10 +203,6 @@ export interface ActiveDirectory {
    * The Organizational Unit (OU) within the Windows Active Directory
    */
   organizationalUnit?: string;
-  /**
-   * The Active Directory site the service will limit Domain Controller discovery to
-   */
-  site?: string;
 }
 
 /**
@@ -420,53 +416,6 @@ export interface VolumePropertiesExportPolicy {
 }
 
 /**
- * Mount Target
- */
-export interface MountTarget {
-  /**
-   * Resource location
-   */
-  location: string;
-  /**
-   * Resource Id
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly id?: string;
-  /**
-   * Resource name
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly name?: string;
-  /**
-   * Resource type
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly type?: string;
-  /**
-   * Resource tags
-   */
-  tags?: { [propertyName: string]: string };
-  /**
-   * mountTargetId. UUID v4 used to identify the MountTarget
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly mountTargetId?: string;
-  /**
-   * fileSystemId. UUID v4 used to identify the MountTarget
-   */
-  fileSystemId: string;
-  /**
-   * ipAddress. The mount target's IPv4 address
-   * **NOTE: This property will not be serialized. It can only be populated by the server.**
-   */
-  readonly ipAddress?: string;
-  /**
-   * smbServerFQDN. The SMB server's Fully Qualified Domain Name, FQDN
-   */
-  smbServerFqdn?: string;
-}
-
-/**
  * Replication properties
  */
 export interface ReplicationObject {
@@ -582,7 +531,7 @@ export interface Volume extends BaseResource {
   /**
    * mountTargets. List of mount targets
    */
-  mountTargets?: MountTarget[];
+  mountTargets?: any;
   /**
    * What type of volume is this
    */
@@ -680,13 +629,75 @@ export interface VolumePatch extends BaseResource {
 }
 
 /**
- * List of Mount Targets
+ * Mount Target
  */
-export interface MountTargetList {
+export interface MountTarget {
   /**
-   * A list of Mount targets
+   * Resource location
    */
-  value?: MountTarget[];
+  location: string;
+  /**
+   * Resource Id
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly id?: string;
+  /**
+   * Resource name
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly name?: string;
+  /**
+   * Resource type
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly type?: string;
+  /**
+   * Resource tags
+   */
+  tags?: { [propertyName: string]: string };
+  /**
+   * mountTargetId. UUID v4 used to identify the MountTarget
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly mountTargetId?: string;
+  /**
+   * fileSystemId. UUID v4 used to identify the MountTarget
+   */
+  fileSystemId: string;
+  /**
+   * ipAddress. The mount target's IPv4 address
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly ipAddress?: string;
+  /**
+   * subnet. The subnet
+   */
+  subnet?: string;
+  /**
+   * startIp. The start of IPv4 address range to use when creating a new mount target
+   */
+  startIp?: string;
+  /**
+   * endIp. The end of IPv4 address range to use when creating a new mount target
+   */
+  endIp?: string;
+  /**
+   * gateway. The gateway of the IPv4 address range to use when creating a new mount target
+   */
+  gateway?: string;
+  /**
+   * netmask. The netmask of the IPv4 address range to use when creating a new mount target
+   */
+  netmask?: string;
+  /**
+   * smbServerFQDN. The SMB server's Fully Qualified Domain Name, FQDN
+   */
+  smbServerFqdn?: string;
+  /**
+   * Azure lifecycle management
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly provisioningState?: string;
 }
 
 /**
@@ -713,6 +724,10 @@ export interface Snapshot extends BaseResource {
    */
   readonly type?: string;
   /**
+   * Resource tags
+   */
+  tags?: { [propertyName: string]: string };
+  /**
    * snapshotId. UUID v4 used to identify the Snapshot
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
@@ -734,13 +749,13 @@ export interface Snapshot extends BaseResource {
 }
 
 /**
- * revert a volume to the snapshot
+ * Snapshot patch
  */
-export interface VolumeRevert {
+export interface SnapshotPatch extends BaseResource {
   /**
-   * Resource id of the snapshot
+   * Resource tags
    */
-  snapshotId?: string;
+  tags?: { [propertyName: string]: string };
 }
 
 /**
@@ -748,19 +763,9 @@ export interface VolumeRevert {
  */
 export interface AuthorizeRequest {
   /**
-   * Resource id of the remote volume
+   * Resource id
    */
   remoteVolumeResourceId?: string;
-}
-
-/**
- * Optional Parameters.
- */
-export interface VolumesRevertOptionalParams extends msRest.RequestOptionsBase {
-  /**
-   * Resource id of the snapshot
-   */
-  snapshotId?: string;
 }
 
 /**
@@ -768,7 +773,7 @@ export interface VolumesRevertOptionalParams extends msRest.RequestOptionsBase {
  */
 export interface VolumesAuthorizeReplicationOptionalParams extends msRest.RequestOptionsBase {
   /**
-   * Resource id of the remote volume
+   * Resource id
    */
   remoteVolumeResourceId?: string;
 }
@@ -776,41 +781,11 @@ export interface VolumesAuthorizeReplicationOptionalParams extends msRest.Reques
 /**
  * Optional Parameters.
  */
-export interface VolumesBeginRevertOptionalParams extends msRest.RequestOptionsBase {
+export interface SnapshotsUpdateOptionalParams extends msRest.RequestOptionsBase {
   /**
-   * Resource id of the snapshot
+   * Resource tags
    */
-  snapshotId?: string;
-}
-
-/**
- * Optional Parameters.
- */
-export interface VolumesBeginAuthorizeReplicationOptionalParams extends msRest.RequestOptionsBase {
-  /**
-   * Resource id of the remote volume
-   */
-  remoteVolumeResourceId?: string;
-}
-
-/**
- * Optional Parameters.
- */
-export interface SnapshotsCreateOptionalParams extends msRest.RequestOptionsBase {
-  /**
-   * fileSystemId UUID v4 used to identify the FileSystem
-   */
-  fileSystemId?: string;
-}
-
-/**
- * Optional Parameters.
- */
-export interface SnapshotsBeginCreateOptionalParams extends msRest.RequestOptionsBase {
-  /**
-   * fileSystemId UUID v4 used to identify the FileSystem
-   */
-  fileSystemId?: string;
+  tags?: { [propertyName: string]: string };
 }
 
 /**
@@ -851,6 +826,14 @@ export interface CapacityPoolList extends Array<CapacityPool> {
  * @extends Array<Volume>
  */
 export interface VolumeList extends Array<Volume> {
+}
+
+/**
+ * @interface
+ * List of Mount Targets
+ * @extends Array<MountTarget>
+ */
+export interface MountTargetList extends Array<MountTarget> {
 }
 
 /**
@@ -1181,26 +1164,6 @@ export type PoolsBeginCreateOrUpdateResponse = CapacityPool & {
 };
 
 /**
- * Contains response data for the beginUpdate operation.
- */
-export type PoolsBeginUpdateResponse = CapacityPool & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: CapacityPool;
-    };
-};
-
-/**
  * Contains response data for the list operation.
  */
 export type VolumesListResponse = VolumeList & {
@@ -1321,9 +1284,9 @@ export type VolumesBeginCreateOrUpdateResponse = Volume & {
 };
 
 /**
- * Contains response data for the beginUpdate operation.
+ * Contains response data for the list operation.
  */
-export type VolumesBeginUpdateResponse = Volume & {
+export type MountTargetsListResponse = MountTargetList & {
   /**
    * The underlying HTTP response.
    */
@@ -1336,7 +1299,7 @@ export type VolumesBeginUpdateResponse = Volume & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: Volume;
+      parsedBody: MountTargetList;
     };
 };
 
@@ -1424,26 +1387,6 @@ export type SnapshotsUpdateResponse = Snapshot & {
  * Contains response data for the beginCreate operation.
  */
 export type SnapshotsBeginCreateResponse = Snapshot & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: Snapshot;
-    };
-};
-
-/**
- * Contains response data for the beginUpdate operation.
- */
-export type SnapshotsBeginUpdateResponse = Snapshot & {
   /**
    * The underlying HTTP response.
    */
