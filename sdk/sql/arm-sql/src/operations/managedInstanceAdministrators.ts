@@ -204,7 +204,7 @@ const listByInstanceOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion4
+    Parameters.apiVersion5
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -226,11 +226,11 @@ const getOperationSpec: msRest.OperationSpec = {
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.managedInstanceName,
-    Parameters.administratorName1,
+    Parameters.administratorName,
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion4
+    Parameters.apiVersion5
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -252,11 +252,11 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.managedInstanceName,
-    Parameters.administratorName1,
+    Parameters.administratorName,
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion4
+    Parameters.apiVersion5
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -289,11 +289,11 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.managedInstanceName,
-    Parameters.administratorName1,
+    Parameters.administratorName,
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion4
+    Parameters.apiVersion5
   ],
   headerParameters: [
     Parameters.acceptLanguage

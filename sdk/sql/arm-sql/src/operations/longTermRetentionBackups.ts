@@ -587,7 +587,7 @@ const getByResourceGroupOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion4
+    Parameters.apiVersion5
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -616,7 +616,7 @@ const listByResourceGroupDatabaseOperationSpec: msRest.OperationSpec = {
   queryParameters: [
     Parameters.onlyLatestPerDatabase,
     Parameters.databaseState,
-    Parameters.apiVersion4
+    Parameters.apiVersion5
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -643,7 +643,7 @@ const listByResourceGroupLocationOperationSpec: msRest.OperationSpec = {
   queryParameters: [
     Parameters.onlyLatestPerDatabase,
     Parameters.databaseState,
-    Parameters.apiVersion4
+    Parameters.apiVersion5
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -671,7 +671,7 @@ const listByResourceGroupServerOperationSpec: msRest.OperationSpec = {
   queryParameters: [
     Parameters.onlyLatestPerDatabase,
     Parameters.databaseState,
-    Parameters.apiVersion4
+    Parameters.apiVersion5
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -698,7 +698,7 @@ const getOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion4
+    Parameters.apiVersion5
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -726,7 +726,7 @@ const listByDatabaseOperationSpec: msRest.OperationSpec = {
   queryParameters: [
     Parameters.onlyLatestPerDatabase,
     Parameters.databaseState,
-    Parameters.apiVersion4
+    Parameters.apiVersion5
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -752,7 +752,7 @@ const listByLocationOperationSpec: msRest.OperationSpec = {
   queryParameters: [
     Parameters.onlyLatestPerDatabase,
     Parameters.databaseState,
-    Parameters.apiVersion4
+    Parameters.apiVersion5
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -779,7 +779,7 @@ const listByServerOperationSpec: msRest.OperationSpec = {
   queryParameters: [
     Parameters.onlyLatestPerDatabase,
     Parameters.databaseState,
-    Parameters.apiVersion4
+    Parameters.apiVersion5
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -807,7 +807,7 @@ const beginDeleteByResourceGroupOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion4
+    Parameters.apiVersion5
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -833,7 +833,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion4
+    Parameters.apiVersion5
   ],
   headerParameters: [
     Parameters.acceptLanguage
