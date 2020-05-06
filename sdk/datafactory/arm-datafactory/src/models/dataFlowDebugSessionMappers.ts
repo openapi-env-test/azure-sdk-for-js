@@ -120,6 +120,7 @@ export {
   EloquaObjectDataset,
   EntityReference,
   EnvironmentVariableSetup,
+  ExcelDataset,
   FileServerLinkedService,
   FileServerLocation,
   FileShareDataset,

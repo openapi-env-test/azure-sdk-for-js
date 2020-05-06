@@ -3277,6 +3277,13 @@ export const DataFlowSink: msRest.CompositeMapper = {
           name: "Composite",
           className: "DatasetReference"
         }
+      },
+      linkedService: {
+        serializedName: "linkedService",
+        type: {
+          name: "Composite",
+          className: "LinkedServiceReference"
+        }
       }
     }
   }
@@ -3294,6 +3301,13 @@ export const DataFlowSource: msRest.CompositeMapper = {
         type: {
           name: "Composite",
           className: "DatasetReference"
+        }
+      },
+      linkedService: {
+        serializedName: "linkedService",
+        type: {
+          name: "Composite",
+          className: "LinkedServiceReference"
         }
       }
     }
@@ -12088,6 +12102,70 @@ export const ParquetDataset: msRest.CompositeMapper = {
   }
 };
 
+export const ExcelDataset: msRest.CompositeMapper = {
+  serializedName: "Excel",
+  type: {
+    name: "Composite",
+    polymorphicDiscriminator: Dataset.type.polymorphicDiscriminator,
+    uberParent: "Dataset",
+    className: "ExcelDataset",
+    modelProperties: {
+      ...Dataset.type.modelProperties,
+      location: {
+        required: true,
+        serializedName: "typeProperties.location",
+        type: {
+          name: "Composite",
+          className: "DatasetLocation",
+          additionalProperties: {
+            type: {
+              name: "Object"
+            }
+          }
+        }
+      },
+      sheetName: {
+        required: true,
+        serializedName: "typeProperties.sheetName",
+        type: {
+          name: "Object"
+        }
+      },
+      range: {
+        serializedName: "typeProperties.range",
+        type: {
+          name: "Object"
+        }
+      },
+      firstRowAsHeader: {
+        serializedName: "typeProperties.firstRowAsHeader",
+        type: {
+          name: "Object"
+        }
+      },
+      compression: {
+        serializedName: "typeProperties.compression",
+        type: {
+          name: "Composite",
+          className: "DatasetCompression",
+          additionalProperties: {
+            type: {
+              name: "Object"
+            }
+          }
+        }
+      },
+      nullValue: {
+        serializedName: "typeProperties.nullValue",
+        type: {
+          name: "Object"
+        }
+      }
+    },
+    additionalProperties: Dataset.type.additionalProperties
+  }
+};
+
 export const AvroDataset: msRest.CompositeMapper = {
   serializedName: "Avro",
   type: {
@@ -15652,6 +15730,34 @@ export const AzureMySqlSource: msRest.CompositeMapper = {
   }
 };
 
+export const SqlPartitionSettings: msRest.CompositeMapper = {
+  serializedName: "SqlPartitionSettings",
+  type: {
+    name: "Composite",
+    className: "SqlPartitionSettings",
+    modelProperties: {
+      partitionColumnName: {
+        serializedName: "partitionColumnName",
+        type: {
+          name: "Object"
+        }
+      },
+      partitionUpperBound: {
+        serializedName: "partitionUpperBound",
+        type: {
+          name: "Object"
+        }
+      },
+      partitionLowerBound: {
+        serializedName: "partitionLowerBound",
+        type: {
+          name: "Object"
+        }
+      }
+    }
+  }
+};
+
 export const SqlDWSource: msRest.CompositeMapper = {
   serializedName: "SqlDWSource",
   type: {
@@ -15677,6 +15783,19 @@ export const SqlDWSource: msRest.CompositeMapper = {
         serializedName: "storedProcedureParameters",
         type: {
           name: "Object"
+        }
+      },
+      partitionOption: {
+        serializedName: "partitionOption",
+        type: {
+          name: "String"
+        }
+      },
+      partitionSettings: {
+        serializedName: "partitionSettings",
+        type: {
+          name: "Composite",
+          className: "SqlPartitionSettings"
         }
       }
     },
@@ -15744,6 +15863,19 @@ export const SqlMISource: msRest.CompositeMapper = {
         type: {
           name: "Object"
         }
+      },
+      partitionOption: {
+        serializedName: "partitionOption",
+        type: {
+          name: "String"
+        }
+      },
+      partitionSettings: {
+        serializedName: "partitionSettings",
+        type: {
+          name: "Composite",
+          className: "SqlPartitionSettings"
+        }
       }
     },
     additionalProperties: CopySource.type.additionalProperties
@@ -15787,6 +15919,19 @@ export const AzureSqlSource: msRest.CompositeMapper = {
         serializedName: "produceAdditionalTypes",
         type: {
           name: "Object"
+        }
+      },
+      partitionOption: {
+        serializedName: "partitionOption",
+        type: {
+          name: "String"
+        }
+      },
+      partitionSettings: {
+        serializedName: "partitionSettings",
+        type: {
+          name: "Composite",
+          className: "SqlPartitionSettings"
         }
       }
     },
@@ -15832,6 +15977,19 @@ export const SqlServerSource: msRest.CompositeMapper = {
         type: {
           name: "Object"
         }
+      },
+      partitionOption: {
+        serializedName: "partitionOption",
+        type: {
+          name: "String"
+        }
+      },
+      partitionSettings: {
+        serializedName: "partitionSettings",
+        type: {
+          name: "Composite",
+          className: "SqlPartitionSettings"
+        }
       }
     },
     additionalProperties: CopySource.type.additionalProperties
@@ -15875,6 +16033,19 @@ export const SqlSource: msRest.CompositeMapper = {
         serializedName: "isolationLevel",
         type: {
           name: "Object"
+        }
+      },
+      partitionOption: {
+        serializedName: "partitionOption",
+        type: {
+          name: "String"
+        }
+      },
+      partitionSettings: {
+        serializedName: "partitionSettings",
+        type: {
+          name: "Composite",
+          className: "SqlPartitionSettings"
         }
       }
     },
@@ -17367,6 +17538,44 @@ export const ParquetSource: msRest.CompositeMapper = {
     polymorphicDiscriminator: CopySource.type.polymorphicDiscriminator,
     uberParent: "CopySource",
     className: "ParquetSource",
+    modelProperties: {
+      ...CopySource.type.modelProperties,
+      storeSettings: {
+        serializedName: "storeSettings",
+        type: {
+          name: "Composite",
+          className: "StoreReadSettings",
+          additionalProperties: {
+            type: {
+              name: "Object"
+            }
+          }
+        }
+      },
+      additionalColumns: {
+        serializedName: "additionalColumns",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "AdditionalColumns"
+            }
+          }
+        }
+      }
+    },
+    additionalProperties: CopySource.type.additionalProperties
+  }
+};
+
+export const ExcelSource: msRest.CompositeMapper = {
+  serializedName: "ExcelSource",
+  type: {
+    name: "Composite",
+    polymorphicDiscriminator: CopySource.type.polymorphicDiscriminator,
+    uberParent: "CopySource",
+    className: "ExcelSource",
     modelProperties: {
       ...CopySource.type.modelProperties,
       storeSettings: {
@@ -23117,6 +23326,7 @@ export const discriminators = {
   'Dataset.Json' : JsonDataset,
   'Dataset.DelimitedText' : DelimitedTextDataset,
   'Dataset.Parquet' : ParquetDataset,
+  'Dataset.Excel' : ExcelDataset,
   'Dataset.Avro' : AvroDataset,
   'Dataset.AmazonS3Object' : AmazonS3Dataset,
   'Trigger.ChainingTrigger' : ChainingTrigger,
@@ -23249,6 +23459,7 @@ export const discriminators = {
   'CopySource.JsonSource' : JsonSource,
   'CopySource.DelimitedTextSource' : DelimitedTextSource,
   'CopySource.ParquetSource' : ParquetSource,
+  'CopySource.ExcelSource' : ExcelSource,
   'CopySource.AvroSource' : AvroSource,
   'CopySource' : CopySource,
   'Activity.Lookup' : LookupActivity,

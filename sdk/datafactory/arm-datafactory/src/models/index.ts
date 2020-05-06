@@ -492,7 +492,7 @@ export interface DatasetFolder {
 /**
  * Contains the possible cases for Dataset.
  */
-export type DatasetUnion = Dataset | SharePointOnlineListResourceDataset | SnowflakeDataset | GoogleAdWordsObjectDataset | AzureDataExplorerTableDataset | OracleServiceCloudObjectDataset | DynamicsAXResourceDataset | ResponsysObjectDataset | SalesforceMarketingCloudObjectDataset | VerticaTableDataset | NetezzaTableDataset | ZohoObjectDataset | XeroObjectDataset | SquareObjectDataset | SparkObjectDataset | ShopifyObjectDataset | ServiceNowObjectDataset | QuickBooksObjectDataset | PrestoObjectDataset | PhoenixObjectDataset | PaypalObjectDataset | MarketoObjectDataset | AzureMariaDBTableDataset | MariaDBTableDataset | MagentoObjectDataset | JiraObjectDataset | ImpalaObjectDataset | HubspotObjectDataset | HiveObjectDataset | HBaseObjectDataset | GreenplumTableDataset | GoogleBigQueryObjectDataset | EloquaObjectDataset | DrillTableDataset | CouchbaseTableDataset | ConcurObjectDataset | AzurePostgreSqlTableDataset | AmazonMWSObjectDataset | HttpDataset | AzureSearchIndexDataset | WebTableDataset | SapTableResourceDataset | RestResourceDataset | SqlServerTableDataset | SapOpenHubTableDataset | SapHanaTableDataset | SapEccResourceDataset | SapCloudForCustomerResourceDataset | SapBwCubeDataset | SybaseTableDataset | SalesforceServiceCloudObjectDataset | SalesforceObjectDataset | MicrosoftAccessTableDataset | PostgreSqlTableDataset | MySqlTableDataset | OdbcTableDataset | InformixTableDataset | RelationalTableDataset | Db2TableDataset | AmazonRedshiftTableDataset | AzureMySqlTableDataset | TeradataTableDataset | OracleTableDataset | ODataResourceDataset | CosmosDbMongoDbApiCollectionDataset | MongoDbV2CollectionDataset | MongoDbCollectionDataset | FileShareDataset | Office365Dataset | AzureBlobFSDataset | AzureDataLakeStoreDataset | CommonDataServiceForAppsEntityDataset | DynamicsCrmEntityDataset | DynamicsEntityDataset | DocumentDbCollectionDataset | CosmosDbSqlApiCollectionDataset | CustomDataset | CassandraTableDataset | AzureSqlDWTableDataset | AzureSqlMITableDataset | AzureSqlTableDataset | AzureTableDataset | AzureBlobDataset | BinaryDataset | OrcDataset | JsonDataset | DelimitedTextDataset | ParquetDataset | AvroDataset | AmazonS3Dataset;
+export type DatasetUnion = Dataset | SharePointOnlineListResourceDataset | SnowflakeDataset | GoogleAdWordsObjectDataset | AzureDataExplorerTableDataset | OracleServiceCloudObjectDataset | DynamicsAXResourceDataset | ResponsysObjectDataset | SalesforceMarketingCloudObjectDataset | VerticaTableDataset | NetezzaTableDataset | ZohoObjectDataset | XeroObjectDataset | SquareObjectDataset | SparkObjectDataset | ShopifyObjectDataset | ServiceNowObjectDataset | QuickBooksObjectDataset | PrestoObjectDataset | PhoenixObjectDataset | PaypalObjectDataset | MarketoObjectDataset | AzureMariaDBTableDataset | MariaDBTableDataset | MagentoObjectDataset | JiraObjectDataset | ImpalaObjectDataset | HubspotObjectDataset | HiveObjectDataset | HBaseObjectDataset | GreenplumTableDataset | GoogleBigQueryObjectDataset | EloquaObjectDataset | DrillTableDataset | CouchbaseTableDataset | ConcurObjectDataset | AzurePostgreSqlTableDataset | AmazonMWSObjectDataset | HttpDataset | AzureSearchIndexDataset | WebTableDataset | SapTableResourceDataset | RestResourceDataset | SqlServerTableDataset | SapOpenHubTableDataset | SapHanaTableDataset | SapEccResourceDataset | SapCloudForCustomerResourceDataset | SapBwCubeDataset | SybaseTableDataset | SalesforceServiceCloudObjectDataset | SalesforceObjectDataset | MicrosoftAccessTableDataset | PostgreSqlTableDataset | MySqlTableDataset | OdbcTableDataset | InformixTableDataset | RelationalTableDataset | Db2TableDataset | AmazonRedshiftTableDataset | AzureMySqlTableDataset | TeradataTableDataset | OracleTableDataset | ODataResourceDataset | CosmosDbMongoDbApiCollectionDataset | MongoDbV2CollectionDataset | MongoDbCollectionDataset | FileShareDataset | Office365Dataset | AzureBlobFSDataset | AzureDataLakeStoreDataset | CommonDataServiceForAppsEntityDataset | DynamicsCrmEntityDataset | DynamicsEntityDataset | DocumentDbCollectionDataset | CosmosDbSqlApiCollectionDataset | CustomDataset | CassandraTableDataset | AzureSqlDWTableDataset | AzureSqlMITableDataset | AzureSqlTableDataset | AzureTableDataset | AzureBlobDataset | BinaryDataset | OrcDataset | JsonDataset | DelimitedTextDataset | ParquetDataset | ExcelDataset | AvroDataset | AmazonS3Dataset;
 
 /**
  * The Azure Data Factory nested object which identifies data within different data stores, such as
@@ -1935,6 +1935,10 @@ export interface DataFlowSink extends Transformation {
    * Dataset reference.
    */
   dataset?: DatasetReference;
+  /**
+   * Linked service reference.
+   */
+  linkedService?: LinkedServiceReference;
 }
 
 /**
@@ -1945,6 +1949,10 @@ export interface DataFlowSource extends Transformation {
    * Dataset reference.
    */
   dataset?: DatasetReference;
+  /**
+   * Linked service reference.
+   */
+  linkedService?: LinkedServiceReference;
 }
 
 /**
@@ -12514,6 +12522,72 @@ export interface ParquetDataset {
 }
 
 /**
+ * Excel dataset.
+ */
+export interface ExcelDataset {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "Excel";
+  /**
+   * Dataset description.
+   */
+  description?: string;
+  /**
+   * Columns that define the structure of the dataset. Type: array (or Expression with resultType
+   * array), itemType: DatasetDataElement.
+   */
+  structure?: any;
+  /**
+   * Columns that define the physical type schema of the dataset. Type: array (or Expression with
+   * resultType array), itemType: DatasetSchemaDataElement.
+   */
+  schema?: any;
+  /**
+   * Linked service reference.
+   */
+  linkedServiceName: LinkedServiceReference;
+  /**
+   * Parameters for dataset.
+   */
+  parameters?: { [propertyName: string]: ParameterSpecification };
+  /**
+   * List of tags that can be used for describing the Dataset.
+   */
+  annotations?: any[];
+  /**
+   * The folder that this Dataset is in. If not specified, Dataset will appear at the root level.
+   */
+  folder?: DatasetFolder;
+  /**
+   * The location of the excel storage.
+   */
+  location: DatasetLocationUnion;
+  /**
+   * The sheet of excel file. Type: string (or Expression with resultType string).
+   */
+  sheetName: any;
+  /**
+   * The partial data of one sheet. Type: string (or Expression with resultType string).
+   */
+  range?: any;
+  /**
+   * When used as input, treat the first row of data as headers. When used as output,write the
+   * headers into the output as the first row of data. The default value is false. Type: boolean
+   * (or Expression with resultType boolean).
+   */
+  firstRowAsHeader?: any;
+  /**
+   * The data compression method used for the json dataset.
+   */
+  compression?: DatasetCompressionUnion;
+  /**
+   * The null value string. Type: string (or Expression with resultType string).
+   */
+  nullValue?: any;
+}
+
+/**
  * Avro dataset.
  */
 export interface AvroDataset {
@@ -13851,7 +13925,7 @@ export interface WebActivity {
 /**
  * Contains the possible cases for CopySource.
  */
-export type CopySourceUnion = CopySource | SharePointOnlineListSource | SnowflakeSource | HttpSource | AzureBlobFSSource | AzureDataLakeStoreSource | Office365Source | CosmosDbMongoDbApiSource | MongoDbV2Source | MongoDbSource | WebSource | OracleSource | AzureDataExplorerSource | HdfsSource | FileSystemSource | RestSource | SalesforceServiceCloudSource | ODataSource | MicrosoftAccessSource | RelationalSource | CommonDataServiceForAppsSource | DynamicsCrmSource | DynamicsSource | CosmosDbSqlApiSource | DocumentDbCollectionSource | BlobSource | TabularSourceUnion | BinarySource | OrcSource | JsonSource | DelimitedTextSource | ParquetSource | AvroSource;
+export type CopySourceUnion = CopySource | SharePointOnlineListSource | SnowflakeSource | HttpSource | AzureBlobFSSource | AzureDataLakeStoreSource | Office365Source | CosmosDbMongoDbApiSource | MongoDbV2Source | MongoDbSource | WebSource | OracleSource | AzureDataExplorerSource | HdfsSource | FileSystemSource | RestSource | SalesforceServiceCloudSource | ODataSource | MicrosoftAccessSource | RelationalSource | CommonDataServiceForAppsSource | DynamicsCrmSource | DynamicsSource | CosmosDbSqlApiSource | DocumentDbCollectionSource | BlobSource | TabularSourceUnion | BinarySource | OrcSource | JsonSource | DelimitedTextSource | ParquetSource | ExcelSource | AvroSource;
 
 /**
  * A copy activity source.
@@ -16565,6 +16639,28 @@ export interface AzureMySqlSource {
 }
 
 /**
+ * The settings that will be leveraged for Sql source partitioning.
+ */
+export interface SqlPartitionSettings {
+  /**
+   * The name of the column in integer or datetime type that will be used for proceeding
+   * partitioning. If not specified, the primary key of the table is auto-detected and used as the
+   * partition column. Type: string (or Expression with resultType string).
+   */
+  partitionColumnName?: any;
+  /**
+   * The maximum value of column specified in partitionColumnName that will be used for proceeding
+   * range partitioning. Type: string (or Expression with resultType string).
+   */
+  partitionUpperBound?: any;
+  /**
+   * The minimum value of column specified in partitionColumnName that will be used for proceeding
+   * range partitioning. Type: string (or Expression with resultType string).
+   */
+  partitionLowerBound?: any;
+}
+
+/**
  * A copy activity SQL Data Warehouse source.
  */
 export interface SqlDWSource {
@@ -16611,6 +16707,15 @@ export interface SqlDWSource {
    * StoredProcedureParameter.
    */
   storedProcedureParameters?: any;
+  /**
+   * The partition mechanism that will be used for Sql read in parallel. Possible values include:
+   * 'None', 'PhysicalPartitionsOfTable', 'DynamicRange'
+   */
+  partitionOption?: SqlPartitionOption;
+  /**
+   * The settings that will be leveraged for Sql source partitioning.
+   */
+  partitionSettings?: SqlPartitionSettings;
 }
 
 /**
@@ -16678,6 +16783,15 @@ export interface SqlMISource {
    * Which additional types to produce.
    */
   produceAdditionalTypes?: any;
+  /**
+   * The partition mechanism that will be used for Sql read in parallel. Possible values include:
+   * 'None', 'PhysicalPartitionsOfTable', 'DynamicRange'
+   */
+  partitionOption?: SqlPartitionOption;
+  /**
+   * The settings that will be leveraged for Sql source partitioning.
+   */
+  partitionSettings?: SqlPartitionSettings;
 }
 
 /**
@@ -16730,6 +16844,15 @@ export interface AzureSqlSource {
    * Which additional types to produce.
    */
   produceAdditionalTypes?: any;
+  /**
+   * The partition mechanism that will be used for Sql read in parallel. Possible values include:
+   * 'None', 'PhysicalPartitionsOfTable', 'DynamicRange'
+   */
+  partitionOption?: SqlPartitionOption;
+  /**
+   * The settings that will be leveraged for Sql source partitioning.
+   */
+  partitionSettings?: SqlPartitionSettings;
 }
 
 /**
@@ -16782,6 +16905,15 @@ export interface SqlServerSource {
    * Which additional types to produce.
    */
   produceAdditionalTypes?: any;
+  /**
+   * The partition mechanism that will be used for Sql read in parallel. Possible values include:
+   * 'None', 'PhysicalPartitionsOfTable', 'DynamicRange'
+   */
+  partitionOption?: SqlPartitionOption;
+  /**
+   * The settings that will be leveraged for Sql source partitioning.
+   */
+  partitionSettings?: SqlPartitionSettings;
 }
 
 /**
@@ -16836,6 +16968,15 @@ export interface SqlSource {
    * ReadCommitted. Type: string (or Expression with resultType string).
    */
   isolationLevel?: any;
+  /**
+   * The partition mechanism that will be used for Sql read in parallel. Possible values include:
+   * 'None', 'PhysicalPartitionsOfTable', 'DynamicRange'
+   */
+  partitionOption?: SqlPartitionOption;
+  /**
+   * The settings that will be leveraged for Sql source partitioning.
+   */
+  partitionSettings?: SqlPartitionSettings;
 }
 
 /**
@@ -18341,6 +18482,39 @@ export interface ParquetSource {
   maxConcurrentConnections?: any;
   /**
    * Parquet store settings.
+   */
+  storeSettings?: StoreReadSettingsUnion;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+}
+
+/**
+ * A copy activity excel source.
+ */
+export interface ExcelSource {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "ExcelSource";
+  /**
+   * Source retry count. Type: integer (or Expression with resultType integer).
+   */
+  sourceRetryCount?: any;
+  /**
+   * Source retry wait. Type: string (or Expression with resultType string), pattern:
+   * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
+   */
+  sourceRetryWait?: any;
+  /**
+   * The maximum concurrent connection count for the source data store. Type: integer (or
+   * Expression with resultType integer).
+   */
+  maxConcurrentConnections?: any;
+  /**
+   * Excel store settings.
    */
   storeSettings?: StoreReadSettingsUnion;
   /**
@@ -23766,6 +23940,14 @@ export type CassandraSourceReadConsistencyLevels = 'ALL' | 'EACH_QUORUM' | 'QUOR
  * @enum {string}
  */
 export type TeradataPartitionOption = 'None' | 'Hash' | 'DynamicRange';
+
+/**
+ * Defines values for SqlPartitionOption.
+ * Possible values include: 'None', 'PhysicalPartitionsOfTable', 'DynamicRange'
+ * @readonly
+ * @enum {string}
+ */
+export type SqlPartitionOption = 'None' | 'PhysicalPartitionsOfTable' | 'DynamicRange';
 
 /**
  * Defines values for StoredProcedureParameterType.
