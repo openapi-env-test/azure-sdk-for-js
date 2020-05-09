@@ -760,7 +760,7 @@ export interface ManagedServiceIdentityUserAssignedIdentitiesValue {
 export interface ManagedServiceIdentity {
   /**
    * Type of managed service identity. Possible values include: 'None', 'SystemAssigned',
-   * 'UserAssigned'
+   * 'UserAssigned', 'SystemAssigned, UserAssigned'
    */
   type?: ManagedServiceIdentityType;
   /**
@@ -1313,6 +1313,10 @@ export interface SiteConfig {
    * Version of Node.js.
    */
   nodeVersion?: string;
+  /**
+   * Version of PowerShell.
+   */
+  powerShellVersion?: string;
   /**
    * Linux App Framework and version
    */
@@ -4288,7 +4292,7 @@ export interface ApiKVReference {
   /**
    * Possible values include: 'None', 'SystemAssigned', 'UserAssigned'
    */
-  identityType?: ManagedServiceIdentityType;
+  identityType?: KeyVaultReferenceIdentityType;
   details?: string;
   /**
    * Possible values include: 'KeyVault'
@@ -4361,6 +4365,16 @@ export interface ApplicationLogsConfig {
    * Application logs to blob storage configuration.
    */
   azureBlobStorage?: AzureBlobStorageApplicationLogsConfig;
+}
+
+/**
+ * A wrapper for an ARM resource id
+ */
+export interface ArmIdWrapper {
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly id?: string;
 }
 
 /**
@@ -5117,7 +5131,7 @@ export interface KeyVaultReferenceResource extends ProxyOnlyResource {
   /**
    * Possible values include: 'None', 'SystemAssigned', 'UserAssigned'
    */
-  identityType?: ManagedServiceIdentityType;
+  identityType?: KeyVaultReferenceIdentityType;
   details?: string;
   /**
    * Possible values include: 'KeyVault'
@@ -5489,6 +5503,90 @@ export interface PrivateAccess extends ProxyOnlyResource {
    * The Virtual Networks (and subnets) allowed to access the site privately.
    */
   virtualNetworks?: PrivateAccessVirtualNetwork[];
+}
+
+/**
+ * The state of a private link connection
+ */
+export interface PrivateLinkConnectionState {
+  /**
+   * Status of a private link connection
+   */
+  status?: string;
+  /**
+   * Description of a private link connection
+   */
+  description?: string;
+  /**
+   * ActionsRequired for a private link connection
+   */
+  actionsRequired?: string;
+}
+
+/**
+ * Private Endpoint Connection ARM resource.
+ */
+export interface PrivateEndpointConnectionResource extends ProxyOnlyResource {
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly provisioningState?: string;
+  /**
+   * PrivateEndpoint of a remote private endpoint connection
+   */
+  privateEndpoint?: ArmIdWrapper;
+  privateLinkServiceConnectionState?: PrivateLinkConnectionState;
+}
+
+/**
+ * Private Endpoint Connection Approval ARM resource.
+ */
+export interface PrivateLinkConnectionApprovalRequestResource extends ProxyOnlyResource {
+  privateLinkServiceConnectionState?: PrivateLinkConnectionState;
+}
+
+/**
+ * Properties of a private link resource
+ */
+export interface PrivateLinkResourceProperties {
+  /**
+   * GroupId of a private link resource
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly groupId?: string;
+  /**
+   * RequiredMembers of a private link resource
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly requiredMembers?: string[];
+  /**
+   * RequiredZoneNames of a private link resource
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly requiredZoneNames?: string[];
+}
+
+/**
+ * A private link resource
+ */
+export interface PrivateLinkResource {
+  id: string;
+  /**
+   * Name of a private link resource
+   */
+  name: string;
+  type: string;
+  /**
+   * Properties of a private link resource
+   */
+  properties: PrivateLinkResourceProperties;
+}
+
+/**
+ * Wrapper for a collection of private link resources
+ */
+export interface PrivateLinkResourcesWrapper {
+  value: PrivateLinkResource[];
 }
 
 /**
@@ -6056,6 +6154,10 @@ export interface SiteConfigResource extends ProxyOnlyResource {
    * Version of Node.js.
    */
   nodeVersion?: string;
+  /**
+   * Version of PowerShell.
+   */
+  powerShellVersion?: string;
   /**
    * Linux App Framework and version
    */
@@ -9554,11 +9656,12 @@ export type RouteType = 'DEFAULT' | 'INHERITED' | 'STATIC';
 
 /**
  * Defines values for ManagedServiceIdentityType.
- * Possible values include: 'None', 'SystemAssigned', 'UserAssigned'
+ * Possible values include: 'None', 'SystemAssigned', 'UserAssigned', 'SystemAssigned,
+ * UserAssigned'
  * @readonly
  * @enum {string}
  */
-export type ManagedServiceIdentityType = 'None' | 'SystemAssigned' | 'UserAssigned';
+export type ManagedServiceIdentityType = 'None' | 'SystemAssigned' | 'UserAssigned' | 'SystemAssigned, UserAssigned';
 
 /**
  * Defines values for IpFilterTag.
@@ -9866,6 +9969,14 @@ export type ValidateResourceTypes = 'ServerFarm' | 'Site';
  * @enum {string}
  */
 export type ResolveStatus = 'Initialized' | 'Resolved' | 'InvalidSyntax' | 'MSINotEnabled' | 'VaultNotFound' | 'SecretNotFound' | 'SecretVersionNotFound' | 'AccessToKeyVaultDenied' | 'OtherReasons';
+
+/**
+ * Defines values for KeyVaultReferenceIdentityType.
+ * Possible values include: 'None', 'SystemAssigned', 'UserAssigned'
+ * @readonly
+ * @enum {string}
+ */
+export type KeyVaultReferenceIdentityType = 'None' | 'SystemAssigned' | 'UserAssigned';
 
 /**
  * Defines values for ConfigReferenceSource.
@@ -17064,6 +17175,91 @@ export type WebAppsPutPrivateAccessVnetSlotResponse = PrivateAccess & {
 };
 
 /**
+ * Contains response data for the getPrivateEndpointConnection operation.
+ */
+export type WebAppsGetPrivateEndpointConnectionResponse = PrivateEndpointConnectionResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: PrivateEndpointConnectionResource;
+    };
+};
+
+/**
+ * Contains response data for the approveOrRejectPrivateEndpointConnection operation.
+ */
+export type WebAppsApproveOrRejectPrivateEndpointConnectionResponse = PrivateEndpointConnectionResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: PrivateEndpointConnectionResource;
+    };
+};
+
+/**
+ * Contains response data for the deletePrivateEndpointConnection operation.
+ */
+export type WebAppsDeletePrivateEndpointConnectionResponse = {
+  /**
+   * The parsed response body.
+   */
+  body: any;
+
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: any;
+    };
+};
+
+/**
+ * Contains response data for the getPrivateLinkResources operation.
+ */
+export type WebAppsGetPrivateLinkResourcesResponse = PrivateLinkResourcesWrapper & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: PrivateLinkResourcesWrapper;
+    };
+};
+
+/**
  * Contains response data for the listProcessesSlot operation.
  */
 export type WebAppsListProcessesSlotResponse = ProcessInfoCollection & {
@@ -18472,6 +18668,51 @@ export type WebAppsBeginStartWebSiteNetworkTraceOperationSlotResponse = Array<Ne
        * The response body as parsed JSON or XML
        */
       parsedBody: NetworkTrace[];
+    };
+};
+
+/**
+ * Contains response data for the beginApproveOrRejectPrivateEndpointConnection operation.
+ */
+export type WebAppsBeginApproveOrRejectPrivateEndpointConnectionResponse = PrivateEndpointConnectionResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: PrivateEndpointConnectionResource;
+    };
+};
+
+/**
+ * Contains response data for the beginDeletePrivateEndpointConnection operation.
+ */
+export type WebAppsBeginDeletePrivateEndpointConnectionResponse = {
+  /**
+   * The parsed response body.
+   */
+  body: any;
+
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: any;
     };
 };
 
