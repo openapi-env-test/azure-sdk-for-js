@@ -10,22 +10,12 @@
 
 export {
   discriminators,
-  WebApplicationFirewallPolicyListResult,
-  WebApplicationFirewallPolicy1,
-  Resource,
-  BaseResource,
-  PolicySettings,
-  CustomRules,
-  CustomRule,
-  MatchCondition1,
-  ManagedRuleSets,
-  ManagedRuleSet,
-  ErrorResponse,
-  CloudError,
-  FrontDoor,
+  RoutingRuleListResult,
   RoutingRule,
   SubResource,
+  BaseResource,
   CacheConfiguration,
+  ErrorResponse,
   LoadBalancingSettingsModel,
   HealthProbeSettingsModel,
   BackendPool,
@@ -34,7 +24,16 @@ export {
   FrontendEndpointUpdateParametersWebApplicationFirewallPolicyLink,
   CustomHttpsConfiguration,
   KeyVaultCertificateSourceParametersVault,
+  Resource,
+  WebApplicationFirewallPolicy1,
+  PolicySettings,
+  CustomRules,
+  CustomRule,
+  MatchCondition1,
+  ManagedRuleSets,
+  ManagedRuleSet,
   AzureManagedRuleSet,
-  AzureManagedOverrideRuleGroup
+  AzureManagedOverrideRuleGroup,
+  FrontDoor
 } from "../models/mappers";
 
