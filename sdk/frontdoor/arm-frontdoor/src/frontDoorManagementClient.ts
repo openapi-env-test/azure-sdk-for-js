@@ -11,21 +11,24 @@
 import * as msRest from "@azure/ms-rest-js";
 import * as Models from "./models";
 import * as Mappers from "./models/mappers";
-import * as Parameters from "./models/parameters";
 import * as operations from "./operations";
 import { FrontDoorManagementClientContext } from "./frontDoorManagementClientContext";
 
 
 class FrontDoorManagementClient extends FrontDoorManagementClientContext {
   // Operation groups
+  networkExperimentProfiles: operations.NetworkExperimentProfiles;
+  preconfiguredEndpoints: operations.PreconfiguredEndpoints;
+  experiments: operations.Experiments;
+  reports: operations.Reports;
+  frontDoorNameAvailability: operations.FrontDoorNameAvailability;
+  frontDoorNameAvailabilityWithSubscription: operations.FrontDoorNameAvailabilityWithSubscription;
   frontDoors: operations.FrontDoors;
-  routingRules: operations.RoutingRules;
-  healthProbeSettings: operations.HealthProbeSettings;
-  loadBalancingSettings: operations.LoadBalancingSettings;
-  backendPools: operations.BackendPools;
   frontendEndpoints: operations.FrontendEndpoints;
   endpoints: operations.Endpoints;
+  rulesEngines: operations.RulesEngines;
   policies: operations.Policies;
+  managedRuleSets: operations.ManagedRuleSets;
 
   /**
    * Initializes a new instance of the FrontDoorManagementClient class.
@@ -36,131 +39,22 @@ class FrontDoorManagementClient extends FrontDoorManagementClientContext {
    */
   constructor(credentials: msRest.ServiceClientCredentials, subscriptionId: string, options?: Models.FrontDoorManagementClientOptions) {
     super(credentials, subscriptionId, options);
+    this.networkExperimentProfiles = new operations.NetworkExperimentProfiles(this);
+    this.preconfiguredEndpoints = new operations.PreconfiguredEndpoints(this);
+    this.experiments = new operations.Experiments(this);
+    this.reports = new operations.Reports(this);
+    this.frontDoorNameAvailability = new operations.FrontDoorNameAvailability(this);
+    this.frontDoorNameAvailabilityWithSubscription = new operations.FrontDoorNameAvailabilityWithSubscription(this);
     this.frontDoors = new operations.FrontDoors(this);
-    this.routingRules = new operations.RoutingRules(this);
-    this.healthProbeSettings = new operations.HealthProbeSettings(this);
-    this.loadBalancingSettings = new operations.LoadBalancingSettings(this);
-    this.backendPools = new operations.BackendPools(this);
     this.frontendEndpoints = new operations.FrontendEndpoints(this);
     this.endpoints = new operations.Endpoints(this);
+    this.rulesEngines = new operations.RulesEngines(this);
     this.policies = new operations.Policies(this);
-  }
-
-  /**
-   * Check the availability of a Front Door resource name.
-   * @param checkFrontDoorNameAvailabilityInput Input to check.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.CheckFrontDoorNameAvailabilityResponse>
-   */
-  checkFrontDoorNameAvailability(checkFrontDoorNameAvailabilityInput: Models.CheckNameAvailabilityInput, options?: msRest.RequestOptionsBase): Promise<Models.CheckFrontDoorNameAvailabilityResponse>;
-  /**
-   * @param checkFrontDoorNameAvailabilityInput Input to check.
-   * @param callback The callback
-   */
-  checkFrontDoorNameAvailability(checkFrontDoorNameAvailabilityInput: Models.CheckNameAvailabilityInput, callback: msRest.ServiceCallback<Models.CheckNameAvailabilityOutput>): void;
-  /**
-   * @param checkFrontDoorNameAvailabilityInput Input to check.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  checkFrontDoorNameAvailability(checkFrontDoorNameAvailabilityInput: Models.CheckNameAvailabilityInput, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CheckNameAvailabilityOutput>): void;
-  checkFrontDoorNameAvailability(checkFrontDoorNameAvailabilityInput: Models.CheckNameAvailabilityInput, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.CheckNameAvailabilityOutput>, callback?: msRest.ServiceCallback<Models.CheckNameAvailabilityOutput>): Promise<Models.CheckFrontDoorNameAvailabilityResponse> {
-    return this.sendOperationRequest(
-      {
-        checkFrontDoorNameAvailabilityInput,
-        options
-      },
-      checkFrontDoorNameAvailabilityOperationSpec,
-      callback) as Promise<Models.CheckFrontDoorNameAvailabilityResponse>;
-  }
-
-  /**
-   * Check the availability of a Front Door subdomain.
-   * @param checkFrontDoorNameAvailabilityInput Input to check.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.CheckFrontDoorNameAvailabilityWithSubscriptionResponse>
-   */
-  checkFrontDoorNameAvailabilityWithSubscription(checkFrontDoorNameAvailabilityInput: Models.CheckNameAvailabilityInput, options?: msRest.RequestOptionsBase): Promise<Models.CheckFrontDoorNameAvailabilityWithSubscriptionResponse>;
-  /**
-   * @param checkFrontDoorNameAvailabilityInput Input to check.
-   * @param callback The callback
-   */
-  checkFrontDoorNameAvailabilityWithSubscription(checkFrontDoorNameAvailabilityInput: Models.CheckNameAvailabilityInput, callback: msRest.ServiceCallback<Models.CheckNameAvailabilityOutput>): void;
-  /**
-   * @param checkFrontDoorNameAvailabilityInput Input to check.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  checkFrontDoorNameAvailabilityWithSubscription(checkFrontDoorNameAvailabilityInput: Models.CheckNameAvailabilityInput, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.CheckNameAvailabilityOutput>): void;
-  checkFrontDoorNameAvailabilityWithSubscription(checkFrontDoorNameAvailabilityInput: Models.CheckNameAvailabilityInput, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.CheckNameAvailabilityOutput>, callback?: msRest.ServiceCallback<Models.CheckNameAvailabilityOutput>): Promise<Models.CheckFrontDoorNameAvailabilityWithSubscriptionResponse> {
-    return this.sendOperationRequest(
-      {
-        checkFrontDoorNameAvailabilityInput,
-        options
-      },
-      checkFrontDoorNameAvailabilityWithSubscriptionOperationSpec,
-      callback) as Promise<Models.CheckFrontDoorNameAvailabilityWithSubscriptionResponse>;
+    this.managedRuleSets = new operations.ManagedRuleSets(this);
   }
 }
 
 // Operation Specifications
-const serializer = new msRest.Serializer(Mappers);
-const checkFrontDoorNameAvailabilityOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "providers/Microsoft.Network/checkFrontDoorNameAvailability",
-  queryParameters: [
-    Parameters.apiVersion
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "checkFrontDoorNameAvailabilityInput",
-    mapper: {
-      ...Mappers.CheckNameAvailabilityInput,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.CheckNameAvailabilityOutput
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  serializer
-};
-
-const checkFrontDoorNameAvailabilityWithSubscriptionOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/providers/Microsoft.Network/checkFrontDoorNameAvailability",
-  urlParameters: [
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "checkFrontDoorNameAvailabilityInput",
-    mapper: {
-      ...Mappers.CheckNameAvailabilityInput,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.CheckNameAvailabilityOutput
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  serializer
-};
 
 export {
   FrontDoorManagementClient,
