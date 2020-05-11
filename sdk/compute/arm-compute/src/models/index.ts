@@ -84,7 +84,9 @@ export interface SubResource extends BaseResource {
 }
 
 /**
- * Describes a virtual machine scale set sku.
+ * Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the
+ * hardware the scale set is currently on, you need to deallocate the VMs in the scale set before
+ * you modify the SKU name.
  */
 export interface Sku {
   /**
@@ -177,7 +179,7 @@ export interface AvailabilitySet extends Resource {
 /**
  * The Update Resource model definition.
  */
-export interface UpdateResource extends BaseResource {
+export interface UpdateResource {
   /**
    * Resource tags
    */
@@ -467,6 +469,53 @@ export interface DedicatedHostUpdate extends UpdateResource {
 }
 
 /**
+ * Response from generation of an SSH key pair.
+ */
+export interface SshPublicKeyGenerateKeyPairResult {
+  /**
+   * Private key portion of the key pair used to authenticate to a virtual machine through ssh. The
+   * private key is returned in RFC3447 format and should be treated as a secret.
+   */
+  privateKey: string;
+  /**
+   * Public key portion of the key pair used to authenticate to a virtual machine through ssh. The
+   * public key is in ssh-rsa format.
+   */
+  publicKey: string;
+  /**
+   * The ARM resource id in the form of
+   * /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{SshPublicKeyName}
+   */
+  id: string;
+}
+
+/**
+ * Specifies information about the SSH public key.
+ */
+export interface SshPublicKeyResource extends Resource {
+  /**
+   * SSH public key used to authenticate to a virtual machine through ssh. If this property is not
+   * initially provided when the resource is created, the publicKey property will be populated when
+   * generateKeyPair is called. If the public key is provided upon resource creation, the provided
+   * public key needs to be at least 2048-bit and in ssh-rsa format.
+   */
+  publicKey?: string;
+}
+
+/**
+ * Specifies information about the SSH public key.
+ */
+export interface SshPublicKeyUpdateResource extends UpdateResource {
+  /**
+   * SSH public key used to authenticate to a virtual machine through ssh. If this property is not
+   * initially provided when the resource is created, the publicKey property will be populated when
+   * generateKeyPair is called. If the public key is provided upon resource creation, the provided
+   * public key needs to be at least 2048-bit and in ssh-rsa format.
+   */
+  publicKey?: string;
+}
+
+/**
  * Describes the properties of a VM size.
  */
 export interface VirtualMachineSize {
@@ -664,6 +713,172 @@ export interface VirtualMachineExtensionsListResult {
    * The list of extensions
    */
   value?: VirtualMachineExtension[];
+}
+
+/**
+ * Describes the properties of a Virtual Machine software patch.
+ */
+export interface VirtualMachineSoftwarePatchProperties {
+  /**
+   * A unique identifier for the patch.
+   */
+  patchId?: string;
+  /**
+   * The friendly name of the patch.
+   */
+  name?: string;
+  /**
+   * The version number of the patch. This property applies only to Linux patches.
+   */
+  version?: string;
+  /**
+   * The KBID of the patch. Only applies to Windows patches.
+   */
+  kbid?: string;
+  /**
+   * The classification(s) of the patch as provided by the patch publisher.
+   */
+  classifications?: string[];
+  /**
+   * Describes the reboot requirements of the patch. Possible values include: 'NeverReboots',
+   * 'AlwaysRequiresReboot', 'CanRequestReboot'
+   */
+  rebootBehavior?: SoftwareUpdateRebootBehavior;
+  /**
+   * The activity ID of the operation that produced this result. It is used to correlate across CRP
+   * and extension logs.
+   */
+  activityId?: string;
+  /**
+   * The UTC timestamp when the repository published this patch.
+   */
+  publishedDate?: Date;
+  /**
+   * The UTC timestamp of the last update to this patch record.
+   */
+  lastModifiedDateTime?: Date;
+  /**
+   * Describes the outcome of an install operation for a given patch. Possible values include:
+   * 'Installed', 'Failed', 'Excluded', 'NotSelected', 'Pending', 'Available'
+   */
+  assessmentState?: PatchAssessmentState;
+}
+
+/**
+ * Api error base.
+ */
+export interface ApiErrorBase {
+  /**
+   * The error code.
+   */
+  code?: string;
+  /**
+   * The target of the particular error.
+   */
+  target?: string;
+  /**
+   * The error message.
+   */
+  message?: string;
+}
+
+/**
+ * Inner error details.
+ */
+export interface InnerError {
+  /**
+   * The exception type.
+   */
+  exceptiontype?: string;
+  /**
+   * The internal error message or exception dump.
+   */
+  errordetail?: string;
+}
+
+/**
+ * Api error.
+ */
+export interface ApiError {
+  /**
+   * The Api error details
+   */
+  details?: ApiErrorBase[];
+  /**
+   * The Api inner error
+   */
+  innererror?: InnerError;
+  /**
+   * The error code.
+   */
+  code?: string;
+  /**
+   * The target of the particular error.
+   */
+  target?: string;
+  /**
+   * The error message.
+   */
+  message?: string;
+}
+
+/**
+ * Describes the properties of an AssessPatches result.
+ */
+export interface VirtualMachineAssessPatchesResult {
+  /**
+   * The overall success or failure status of the operation. It remains "InProgress" until the
+   * operation completes. At that point it will become "Failed", "Succeeded", or
+   * "CompletedWithWarnings.". Possible values include: 'InProgress', 'Failed', 'Succeeded',
+   * 'CompletedWithWarnings'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly status?: PatchOperationStatus;
+  /**
+   * The activity ID of the operation that produced this result. It is used to correlate across CRP
+   * and extension logs.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly assessmentActivityId?: string;
+  /**
+   * The overall reboot status of the VM. It will be true when partially installed patches require
+   * a reboot to complete installation but the reboot has not yet occurred. Possible values
+   * include: 'true', 'false'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly rebootPending?: RebootPending;
+  /**
+   * The number of critical or security patches that have been detected as available and not yet
+   * installed.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly criticalAndSecurityPatchCount?: number;
+  /**
+   * The number of all available patches excluding critical and security.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly otherPatchCount?: number;
+  /**
+   * The UTC timestamp when the operation began.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly startDateTime?: Date;
+  /**
+   * The UTC timestamp of the last update of this result object.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly lastModifiedDateTime?: Date;
+  /**
+   * The list of patches that have been detected as available for installation.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly patches?: VirtualMachineSoftwarePatchProperties[];
+  /**
+   * The errors that were encountered during execution of the operation. The details array contains
+   * the list of them.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly error?: ApiError;
 }
 
 /**
@@ -903,7 +1118,8 @@ export interface HardwareProfile {
  * Specifies information about the image to use. You can specify information about platform images,
  * marketplace images, or virtual machine images. This element is required when you want to use a
  * platform image, marketplace image, or virtual machine image, but is not used in other creation
- * operations.
+ * operations. NOTE: Image reference publisher and offer can only be set when you create the scale
+ * set.
  */
 export interface ImageReference extends SubResource {
   /**
@@ -1010,6 +1226,16 @@ export interface DiffDiskSettings {
    * 'Local'
    */
   option?: DiffDiskOptions;
+  /**
+   * Specifies the ephemeral disk placement for operating system disk.<br><br> Possible values are:
+   * <br><br> **CacheDisk** <br><br> **ResourceDisk** <br><br> Default: **CacheDisk** if one is
+   * configured for the VM size otherwise **ResourceDisk** is used.<br><br> Refer to VM size
+   * documentation for Windows VM at
+   * https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes and Linux VM at
+   * https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes to check which VM sizes
+   * exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'
+   */
+  placement?: DiffDiskPlacement;
 }
 
 /**
@@ -1060,8 +1286,8 @@ export interface OSDisk {
   image?: VirtualHardDisk;
   /**
    * Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br>
-   * **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly
-   * for Premium storage**. Possible values include: 'None', 'ReadOnly', 'ReadWrite'
+   * **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None** for Standard storage.
+   * **ReadOnly** for Premium storage. Possible values include: 'None', 'ReadOnly', 'ReadWrite'
    */
   caching?: CachingTypes;
   /**
@@ -1491,7 +1717,8 @@ export interface AutomaticRepairsPolicy {
    * The amount of time for which automatic repairs are suspended due to a state change on VM. The
    * grace time starts after the state change has completed. This helps avoid premature or
    * accidental repairs. The time duration should be specified in ISO 8601 format. The minimum
-   * allowed grace period is 30 minutes (PT30M), which is also the default value.
+   * allowed grace period is 30 minutes (PT30M), which is also the default value. The maximum
+   * allowed grace period is 90 minutes (PT90M).
    */
   gracePeriod?: string;
 }
@@ -2752,7 +2979,9 @@ export interface VirtualMachineScaleSetIPConfiguration extends SubResource {
 }
 
 /**
- * Describes a virtual machine scale set network profile's IP configuration.
+ * Describes a virtual machine scale set network profile's IP configuration. NOTE: The subnet of a
+ * scale set may be modified as long as the original subnet and the new subnet are in the same
+ * virtual network
  */
 export interface VirtualMachineScaleSetUpdateIPConfiguration extends SubResource {
   /**
@@ -3204,7 +3433,8 @@ export interface VirtualMachineScaleSet extends Resource {
   readonly uniqueId?: string;
   /**
    * When true this limits the scale set to a single placement group, of max size 100 virtual
-   * machines.
+   * machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if
+   * singlePlacementGroup is false, it may not be modified to true.
    */
   singlePlacementGroup?: boolean;
   /**
@@ -3237,7 +3467,8 @@ export interface VirtualMachineScaleSet extends Resource {
    */
   identity?: VirtualMachineScaleSetIdentity;
   /**
-   * The virtual machine scale set zones.
+   * The virtual machine scale set zones. NOTE: Availability zones can only be set when you create
+   * the scale set
    */
   zones?: string[];
 }
@@ -3296,7 +3527,8 @@ export interface VirtualMachineScaleSetUpdate extends UpdateResource {
   doNotRunExtensionsOnOverprovisionedVMs?: boolean;
   /**
    * When true this limits the scale set to a single placement group, of max size 100 virtual
-   * machines.
+   * machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if
+   * singlePlacementGroup is false, it may not be modified to true.
    */
   singlePlacementGroup?: boolean;
   /**
@@ -3387,6 +3619,24 @@ export interface VirtualMachineScaleSetVMExtensionsSummary {
 }
 
 /**
+ * Summary for an orchestration service of a virtual machine scale set.
+ */
+export interface OrchestrationServiceSummary {
+  /**
+   * The name of the service. Possible values include: 'AutomaticRepairs',
+   
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly serviceName?: OrchestrationServiceNames;
+  /**
+   * The current state of the service. Possible values include: 'NotRunning', 'Running',
+   * 'Suspended'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly serviceState?: OrchestrationServiceState;
+}
+
+/**
  * The instance view of a virtual machine scale set.
  */
 export interface VirtualMachineScaleSetInstanceView {
@@ -3404,6 +3654,11 @@ export interface VirtualMachineScaleSetInstanceView {
    * The resource status information.
    */
   statuses?: InstanceViewStatus[];
+  /**
+   * The orchestration services information.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly orchestrationServices?: OrchestrationServiceSummary[];
 }
 
 /**
@@ -3451,64 +3706,6 @@ export interface VirtualMachineScaleSetSku {
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly capacity?: VirtualMachineScaleSetSkuCapacity;
-}
-
-/**
- * Api error base.
- */
-export interface ApiErrorBase {
-  /**
-   * The error code.
-   */
-  code?: string;
-  /**
-   * The target of the particular error.
-   */
-  target?: string;
-  /**
-   * The error message.
-   */
-  message?: string;
-}
-
-/**
- * Inner error details.
- */
-export interface InnerError {
-  /**
-   * The exception type.
-   */
-  exceptiontype?: string;
-  /**
-   * The internal error message or exception dump.
-   */
-  errordetail?: string;
-}
-
-/**
- * Api error.
- */
-export interface ApiError {
-  /**
-   * The Api error details
-   */
-  details?: ApiErrorBase[];
-  /**
-   * The Api inner error
-   */
-  innererror?: InnerError;
-  /**
-   * The error code.
-   */
-  code?: string;
-  /**
-   * The target of the particular error.
-   */
-  target?: string;
-  /**
-   * The error message.
-   */
-  message?: string;
 }
 
 /**
@@ -3994,6 +4191,21 @@ export interface VMScaleSetConvertToSinglePlacementGroupInput {
    * the platform will choose one with maximum number of virtual machine instances.
    */
   activePlacementGroupId?: string;
+}
+
+/**
+ * The input for OrchestrationServiceState
+ */
+export interface OrchestrationServiceStateInput {
+  /**
+   * The name of the service. Possible values include: 'AutomaticRepairs',
+   
+   */
+  serviceName: OrchestrationServiceNames;
+  /**
+   * The action to be performed. Possible values include: 'Resume', 'Suspend'
+   */
+  action: OrchestrationServiceStateAction;
 }
 
 /**
@@ -5048,7 +5260,7 @@ export interface GalleryArtifactPublishingProfileBase {
   endOfLifeDate?: Date;
   /**
    * Specifies the storage account type to be used to store the image. This property is not
-   * updatable. Possible values include: 'Standard_LRS', 'Standard_ZRS'
+   * updatable. Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Premium_LRS'
    */
   storageAccountType?: StorageAccountType;
 }
@@ -5340,7 +5552,7 @@ export interface GalleryArtifactVersionSource {
    * The id of the gallery artifact version source. Can specify a disk uri, snapshot uri, or user
    * image.
    */
-  id: string;
+  id?: string;
 }
 
 /**
@@ -5483,7 +5695,7 @@ export interface TargetRegion {
   regionalReplicaCount?: number;
   /**
    * Specifies the storage account type to be used to store the image. This property is not
-   * updatable. Possible values include: 'Standard_LRS', 'Standard_ZRS'
+   * updatable. Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Premium_LRS'
    */
   storageAccountType?: StorageAccountType;
   encryption?: EncryptionImages;
@@ -6245,6 +6457,19 @@ export interface DedicatedHostListResult extends Array<DedicatedHost> {
 
 /**
  * @interface
+ * The list SSH public keys operation response.
+ * @extends Array<SshPublicKeyResource>
+ */
+export interface SshPublicKeysGroupListResult extends Array<SshPublicKeyResource> {
+  /**
+   * The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the
+   * next page of SSH public keys.
+   */
+  nextLink?: string;
+}
+
+/**
+ * @interface
  * The List Usages operation response.
  * @extends Array<Usage>
  */
@@ -6543,6 +6768,39 @@ export type ProximityPlacementGroupType = 'Standard' | 'Ultra';
 export type DedicatedHostLicenseTypes = 'None' | 'Windows_Server_Hybrid' | 'Windows_Server_Perpetual';
 
 /**
+ * Defines values for SoftwareUpdateRebootBehavior.
+ * Possible values include: 'NeverReboots', 'AlwaysRequiresReboot', 'CanRequestReboot'
+ * @readonly
+ * @enum {string}
+ */
+export type SoftwareUpdateRebootBehavior = 'NeverReboots' | 'AlwaysRequiresReboot' | 'CanRequestReboot';
+
+/**
+ * Defines values for PatchAssessmentState.
+ * Possible values include: 'Installed', 'Failed', 'Excluded', 'NotSelected', 'Pending',
+ * 'Available'
+ * @readonly
+ * @enum {string}
+ */
+export type PatchAssessmentState = 'Installed' | 'Failed' | 'Excluded' | 'NotSelected' | 'Pending' | 'Available';
+
+/**
+ * Defines values for PatchOperationStatus.
+ * Possible values include: 'InProgress', 'Failed', 'Succeeded', 'CompletedWithWarnings'
+ * @readonly
+ * @enum {string}
+ */
+export type PatchOperationStatus = 'InProgress' | 'Failed' | 'Succeeded' | 'CompletedWithWarnings';
+
+/**
+ * Defines values for RebootPending.
+ * Possible values include: 'true', 'false'
+ * @readonly
+ * @enum {string}
+ */
+export type RebootPending = 'true' | 'false';
+
+/**
  * Defines values for OperatingSystemTypes.
  * Possible values include: 'Windows', 'Linux'
  * @readonly
@@ -6622,6 +6880,14 @@ export type StorageAccountTypes = 'Standard_LRS' | 'Premium_LRS' | 'StandardSSD_
  * @enum {string}
  */
 export type DiffDiskOptions = 'Local';
+
+/**
+ * Defines values for DiffDiskPlacement.
+ * Possible values include: 'CacheDisk', 'ResourceDisk'
+ * @readonly
+ * @enum {string}
+ */
+export type DiffDiskPlacement = 'CacheDisk' | 'ResourceDisk';
 
 /**
  * Defines values for PassNames.
@@ -6729,6 +6995,22 @@ export type OperatingSystemStateTypes = 'Generalized' | 'Specialized';
 export type IPVersion = 'IPv4' | 'IPv6';
 
 /**
+ * Defines values for OrchestrationServiceNames.
+ * Possible values include: 'AutomaticRepairs'
+ * @readonly
+ * @enum {string}
+ */
+export type OrchestrationServiceNames = 'AutomaticRepairs' ;
+
+/**
+ * Defines values for OrchestrationServiceState.
+ * Possible values include: 'NotRunning', 'Running', 'Suspended'
+ * @readonly
+ * @enum {string}
+ */
+export type OrchestrationServiceState = 'NotRunning' | 'Running' | 'Suspended';
+
+/**
  * Defines values for VirtualMachineScaleSetSkuScaleType.
  * Possible values include: 'Automatic', 'None'
  * @readonly
@@ -6775,6 +7057,14 @@ export type RollingUpgradeActionType = 'Start' | 'Cancel';
  * @enum {string}
  */
 export type IntervalInMins = 'ThreeMins' | 'FiveMins' | 'ThirtyMins' | 'SixtyMins';
+
+/**
+ * Defines values for OrchestrationServiceStateAction.
+ * Possible values include: 'Resume', 'Suspend'
+ * @readonly
+ * @enum {string}
+ */
+export type OrchestrationServiceStateAction = 'Resume' | 'Suspend';
 
 /**
  * Defines values for ResourceSkuCapacityScaleType.
@@ -6883,11 +7173,11 @@ export type ReplicationState = 'Unknown' | 'Replicating' | 'Completed' | 'Failed
 
 /**
  * Defines values for StorageAccountType.
- * Possible values include: 'Standard_LRS', 'Standard_ZRS'
+ * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Premium_LRS'
  * @readonly
  * @enum {string}
  */
-export type StorageAccountType = 'Standard_LRS' | 'Standard_ZRS';
+export type StorageAccountType = 'Standard_LRS' | 'Standard_ZRS' | 'Premium_LRS';
 
 /**
  * Defines values for HostCaching.
@@ -7570,6 +7860,166 @@ export type DedicatedHostsListByHostGroupNextResponse = DedicatedHostListResult 
 };
 
 /**
+ * Contains response data for the listBySubscription operation.
+ */
+export type SshPublicKeysListBySubscriptionResponse = SshPublicKeysGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeysGroupListResult;
+    };
+};
+
+/**
+ * Contains response data for the listByResourceGroup operation.
+ */
+export type SshPublicKeysListByResourceGroupResponse = SshPublicKeysGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeysGroupListResult;
+    };
+};
+
+/**
+ * Contains response data for the create operation.
+ */
+export type SshPublicKeysCreateResponse = SshPublicKeyResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeyResource;
+    };
+};
+
+/**
+ * Contains response data for the update operation.
+ */
+export type SshPublicKeysUpdateResponse = SshPublicKeyResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeyResource;
+    };
+};
+
+/**
+ * Contains response data for the get operation.
+ */
+export type SshPublicKeysGetResponse = SshPublicKeyResource & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeyResource;
+    };
+};
+
+/**
+ * Contains response data for the generateKeyPair operation.
+ */
+export type SshPublicKeysGenerateKeyPairResponse = SshPublicKeyGenerateKeyPairResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeyGenerateKeyPairResult;
+    };
+};
+
+/**
+ * Contains response data for the listBySubscriptionNext operation.
+ */
+export type SshPublicKeysListBySubscriptionNextResponse = SshPublicKeysGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeysGroupListResult;
+    };
+};
+
+/**
+ * Contains response data for the listByResourceGroupNext operation.
+ */
+export type SshPublicKeysListByResourceGroupNextResponse = SshPublicKeysGroupListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: SshPublicKeysGroupListResult;
+    };
+};
+
+/**
  * Contains response data for the get operation.
  */
 export type VirtualMachineExtensionImagesGetResponse = VirtualMachineExtensionImage & {
@@ -8070,6 +8520,26 @@ export type VirtualMachinesListAvailableSizesResponse = VirtualMachineSizeListRe
 };
 
 /**
+ * Contains response data for the assessPatches operation.
+ */
+export type VirtualMachinesAssessPatchesResponse = VirtualMachineAssessPatchesResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: VirtualMachineAssessPatchesResult;
+    };
+};
+
+/**
  * Contains response data for the runCommand operation.
  */
 export type VirtualMachinesRunCommandResponse = RunCommandResult & {
@@ -8146,6 +8616,26 @@ export type VirtualMachinesBeginUpdateResponse = VirtualMachine & {
        * The response body as parsed JSON or XML
        */
       parsedBody: VirtualMachine;
+    };
+};
+
+/**
+ * Contains response data for the beginAssessPatches operation.
+ */
+export type VirtualMachinesBeginAssessPatchesResponse = VirtualMachineAssessPatchesResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: VirtualMachineAssessPatchesResult;
     };
 };
 
