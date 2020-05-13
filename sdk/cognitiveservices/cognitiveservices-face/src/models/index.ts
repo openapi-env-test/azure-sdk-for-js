@@ -820,6 +820,366 @@ export interface OperationStatus {
 }
 
 /**
+ * Describes the active illumination information performed during the image capture.
+ */
+export interface ActiveIlluminationInformation {
+  /**
+   * The actively illuminated color during the image capture.
+   */
+  illuminatedColor: string;
+}
+
+/**
+ * Extrinsic calibration data.
+ */
+export interface CameraExtrinsics {
+  /**
+   * 3x3 Rotation matrix stored in row major order.
+   */
+  rotation: number[];
+  /**
+   * Translation vector, x,y,z (in millimeters).
+   */
+  translation: number[];
+}
+
+/**
+ * Camera intrinsic parameters.
+ */
+export interface IntrinsicParameters {
+  /**
+   * Principal point in image, x.
+   */
+  cx: number;
+  /**
+   * Principal point in image, y.
+   */
+  cy: number;
+  /**
+   * Focal length x.
+   */
+  fx: number;
+  /**
+   * Focal length y.
+   */
+  fy: number;
+}
+
+/**
+ * Intrinsics calibration data.
+ */
+export interface CameraIntrinsics {
+  /**
+   * Intrinsics calibration data.
+   */
+  parameters: IntrinsicParameters;
+}
+
+/**
+ * Camera calibration parameters needed to correlate faces from one camera modality to another.
+ */
+export interface CameraCalibrationParameters {
+  /**
+   * Describes the image type based on the camera modality. Possible values include: 'color',
+   * 'infrared', 'depth'
+   */
+  imageType: ImageType;
+  /**
+   * Extrinsic calibration data.
+   */
+  cameraExtrinsics: CameraExtrinsics;
+  /**
+   * Intrinsics calibration data.
+   */
+  cameraIntrinsics: CameraIntrinsics;
+}
+
+/**
+ * An interface representing ContainerStatus.
+ */
+export interface ContainerStatus {
+  service?: string;
+  apiStatus?: string;
+  apiStatusMessage?: string;
+}
+
+/**
+ * An interface representing InnerError.
+ */
+export interface InnerError {
+  requestId?: string;
+}
+
+/**
+ * An interface representing ErrorInformation.
+ */
+export interface ErrorInformation {
+  code?: string;
+  innerError?: InnerError;
+  message?: string;
+}
+
+/**
+ * An interface representing ErrorResponse.
+ */
+export interface ErrorResponse {
+  error?: ErrorInformation;
+}
+
+/**
+ * Describes the image crop offset values, and is only required if the original full frame image is
+ * cropped to call this api.
+ */
+export interface ImageCropOffsets {
+  /**
+   * Crop offset in horizontal axis.
+   */
+  cropOffsetX: number;
+  /**
+   * Crop offset in vertical axis.
+   */
+  cropOffsetY: number;
+  /**
+   * Full frame image width.
+   */
+  fullFrameImageWidth: number;
+  /**
+   * Full frame image height.
+   */
+  fullFrameImageHeight: number;
+}
+
+/**
+ * Describes the properties of the captured image data.
+ */
+export interface ImageProperties {
+  /**
+   * Describes the context around the captured image.
+   */
+  description?: string;
+  /**
+   * Exposure time in seconds in floating point format.
+   */
+  exposureTimeInSeconds?: number;
+  /**
+   * F stop number in floating point format.
+   */
+  fNumber?: number;
+  /**
+   * The ISO speed in floating point format.
+   */
+  isoSpeed?: number;
+}
+
+/**
+ * An interface representing IFormFile.
+ */
+export interface IFormFile {
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly contentType?: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly contentDisposition?: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly headers?: { [propertyName: string]: string[] };
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly length?: number;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly name?: string;
+  /**
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly fileName?: string;
+}
+
+/**
+ * The liveness classification based on the input payload.
+ */
+export interface LivenessOutputs {
+  /**
+   * Specifies the liveness classification made by the algorithm.
+   * This would be one of the LivenessDecision enumeration values: Uncertain, RealFace or
+   * SpoofFace. Possible values include: 'uncertain', 'realface', 'spoofface'
+   */
+  livenessDecision: LivenessDecision;
+  /**
+   * Specifies the liveness classification score.
+   * The values range from 0.0 to 1.0,
+   * Where 0.0 implies that the face is a spoof and 1.0 implies that the face is real.
+   */
+  livenessScore: number;
+  /**
+   * The face region where the liveness classification was made on.
+   */
+  targetFaceRectangle: FaceRectangle;
+  /**
+   * The file name which contians the face rectangle where the liveness classification was made on.
+   */
+  targetFileName: string;
+  /**
+   * The time offset within the file of the frame which contians the face rectangle where the
+   * liveness classification was made on.
+   */
+  targetTimeOffsetWithinFile: number;
+  /**
+   * The image type which contians the face rectangle where the liveness classification was made
+   * on. Possible values include: 'color', 'infrared', 'depth'
+   */
+  targetImageType: TargetImageType;
+}
+
+/**
+ * The image metadata corresponding to each image in the multi-modal content payload.
+ */
+export interface MultiModalImageData {
+  /**
+   * Describes the image type based on the camera modality. Possible values include: 'color',
+   * 'infrared', 'depth'
+   */
+  imageType: ImageType1;
+  /**
+   * The file name of the corresponding Content payload.
+   */
+  fileName: string;
+  /**
+   * Required parameter if the file specified is a container of a sequence of images.
+   * This will be used to locate the target frame in the container.
+   */
+  timeOffsetWithinFileInMilliseconds?: number;
+  /**
+   * The timestamp of the target frame/image in milliseconds.
+   * This is needed to understand the relative time differences in between each subsequent frame in
+   * the input payload.
+   */
+  imageTimestampInMilliseconds: number;
+  /**
+   * The target face region where the liveness detection should be focused on.
+   */
+  targetFaceRectangle?: FaceRectangle;
+  /**
+   * Describes the image crop offset values, and is only required if the original full frame image
+   * is cropped to call this api.
+   */
+  imageOffsetsIfCropped?: ImageCropOffsets;
+  /**
+   * Describes the properties of the captured image data.
+   */
+  imageProperties?: ImageProperties;
+  imageCreationTimeInMilliseconds?: number;
+}
+
+/**
+ * The image metadata corresponding to each image in the multi-modal image content payload.
+ */
+export interface MultiModalImageMetadata {
+  /**
+   * An array of image metadata corresponding to each image in the input content payload.
+   */
+  imageData: MultiModalImageData[];
+  /**
+   * An array of modalities supported by camera, e.g. { color, infrared } or { color, infrared,
+   * depth }
+   */
+  modalitiesSupportedByCamera: string[];
+  /**
+   * The required camera calibration parameters if the target face rectangle is not speicified in
+   * all of the images.
+   */
+  cameraCalibrationParameters?: CameraCalibrationParameters[];
+}
+
+/**
+ * The input payload consisting of a sequence of images and the corresponding metadata.
+ */
+export interface MultiModalImageContainer {
+  /**
+   * The metadata describing the input file content.
+   */
+  metadata: MultiModalImageMetadata;
+  /**
+   * A ordered collection of application/octet-stream data containing the input data.
+   */
+  content: IFormFile[];
+}
+
+/**
+ * The image metadata corresponding to each image in the single-modal content payload.
+ */
+export interface SingleModalImageData {
+  /**
+   * Describes the active illumination information performed during the image capture.
+   */
+  activeIlluminationInformation?: ActiveIlluminationInformation;
+  /**
+   * The file name of the corresponding Content payload.
+   */
+  fileName: string;
+  /**
+   * Required parameter if the file specified is a container of a sequence of images.
+   * This will be used to locate the target frame in the container.
+   */
+  timeOffsetWithinFileInMilliseconds?: number;
+  /**
+   * The timestamp of the target frame/image in milliseconds.
+   * This is needed to understand the relative time differences in between each subsequent frame in
+   * the input payload.
+   */
+  imageTimestampInMilliseconds: number;
+  /**
+   * The target face region where the liveness detection should be focused on.
+   */
+  targetFaceRectangle?: FaceRectangle;
+  /**
+   * Describes the image crop offset values, and is only required if the original full frame image
+   * is cropped to call this api.
+   */
+  imageOffsetsIfCropped?: ImageCropOffsets;
+  /**
+   * Describes the properties of the captured image data.
+   */
+  imageProperties?: ImageProperties;
+  imageCreationTimeInMilliseconds?: number;
+}
+
+/**
+ * The image metadata corresponding to each image in the single-modal image content payload.
+ */
+export interface SingleModalImageMetadata {
+  /**
+   * Describes the image type based on the camera modality. Possible values include: 'color',
+   * 'infrared', 'depth'
+   */
+  imageType: ImageType2;
+  /**
+   * An array of image metadata corresponding to each image in the input content payload.
+   */
+  imageData: SingleModalImageData[];
+}
+
+/**
+ * The input payload consisting of a video and it's corresponding metadata.
+ */
+export interface SingleModalImageContainer {
+  /**
+   * The metadata describing the input file content.
+   */
+  metadata: SingleModalImageMetadata;
+  /**
+   * A ordered collection of application/octet-stream data containing the input data.
+   */
+  content: IFormFile[];
+}
+
+/**
  * An interface representing ImageUrl.
  */
 export interface ImageUrl {
@@ -1613,6 +1973,37 @@ export interface SnapshotApplyOptionalParams extends msRest.RequestOptionsBase {
 }
 
 /**
+ * Optional Parameters.
+ */
+export interface FaceClientDetectLivenessSingleModalPostOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * (optional) The liveness model to be used for the classification. Choose one from the following
+   * { "2020-02-15-preview.01", "latest" }, where "latest" refers to the "2020-02-15-preview.01"
+   * model. If this value is not specified then the "latest" model would be chosen by default.
+   * Default value: ''.
+   */
+  modelVersion?: string;
+}
+
+/**
+ * Optional Parameters.
+ */
+export interface FaceClientDetectLivenessMultiModalPostOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * (optional) The liveness model to be used for the classification. Choose one from the following
+   * { "2020-02-15-preview.01", "latest" }, where "latest" refers to the "2020-02-15-preview.01"
+   * model. If this value is not specified then the "latest" model would be chosen by default.
+   * Default value: ''.
+   */
+  modelVersion?: string;
+  /**
+   * The required camera calibration parameters if the target face rectangle is not speicified in
+   * all of the images.
+   */
+  metadataCameraCalibrationParameters?: any[];
+}
+
+/**
  * Defines headers for Take operation.
  */
 export interface SnapshotTakeHeaders {
@@ -1755,6 +2146,54 @@ export type FaceAttributeType = 'age' | 'gender' | 'headPose' | 'smile' | 'facia
  * @enum {string}
  */
 export type DetectionModel = 'detection_01' | 'detection_02';
+
+/**
+ * Defines values for ImageType.
+ * Possible values include: 'color', 'infrared', 'depth'
+ * @readonly
+ * @enum {string}
+ */
+export type ImageType = 'color' | 'infrared' | 'depth';
+
+/**
+ * Defines values for LivenessDecision.
+ * Possible values include: 'uncertain', 'realface', 'spoofface'
+ * @readonly
+ * @enum {string}
+ */
+export type LivenessDecision = 'uncertain' | 'realface' | 'spoofface';
+
+/**
+ * Defines values for TargetImageType.
+ * Possible values include: 'color', 'infrared', 'depth'
+ * @readonly
+ * @enum {string}
+ */
+export type TargetImageType = 'color' | 'infrared' | 'depth';
+
+/**
+ * Defines values for ImageType1.
+ * Possible values include: 'color', 'infrared', 'depth'
+ * @readonly
+ * @enum {string}
+ */
+export type ImageType1 = 'color' | 'infrared' | 'depth';
+
+/**
+ * Defines values for ImageType2.
+ * Possible values include: 'color', 'infrared', 'depth'
+ * @readonly
+ * @enum {string}
+ */
+export type ImageType2 = 'color' | 'infrared' | 'depth';
+
+/**
+ * Defines values for MetadataImageType.
+ * Possible values include: 'color', 'infrared', 'depth'
+ * @readonly
+ * @enum {string}
+ */
+export type MetadataImageType = 'color' | 'infrared' | 'depth';
 
 /**
  * Contains response data for the findSimilar operation.
@@ -2563,5 +3002,45 @@ export type SnapshotGetOperationStatusResponse = OperationStatus & {
        * The response body as parsed JSON or XML
        */
       parsedBody: OperationStatus;
+    };
+};
+
+/**
+ * Contains response data for the detectLivenessSingleModalPost operation.
+ */
+export type DetectLivenessSingleModalPostResponse = LivenessOutputs & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: LivenessOutputs;
+    };
+};
+
+/**
+ * Contains response data for the detectLivenessMultiModalPost operation.
+ */
+export type DetectLivenessMultiModalPostResponse = LivenessOutputs & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: LivenessOutputs;
     };
 };

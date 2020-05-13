@@ -11,6 +11,7 @@
 import * as msRest from "@azure/ms-rest-js";
 import * as Models from "./models";
 import * as Mappers from "./models/mappers";
+import * as Parameters from "./models/parameters";
 import * as operations from "./operations";
 import { FaceClientContext } from "./faceClientContext";
 
@@ -43,9 +44,159 @@ class FaceClient extends FaceClientContext {
     this.largeFaceList = new operations.LargeFaceListOperations(this);
     this.snapshot = new operations.SnapshotOperations(this);
   }
+
+  /**
+   * @summary Detects liveness of a target face in a sequence of images of the same stream type (e.g.
+   * color)
+   * @param content A ordered collection of application/octet-stream data containing the input data.
+   * @param metadataImageType Describes the image type based on the camera modality. Possible values
+   * include: 'color', 'infrared', 'depth'
+   * @param metadataImageData An array of image metadata corresponding to each image in the input
+   * content payload.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.DetectLivenessSingleModalPostResponse>
+   */
+  detectLivenessSingleModalPost(content: any[], metadataImageType: Models.MetadataImageType, metadataImageData: any[], options?: Models.FaceClientDetectLivenessSingleModalPostOptionalParams): Promise<Models.DetectLivenessSingleModalPostResponse>;
+  /**
+   * @param content A ordered collection of application/octet-stream data containing the input data.
+   * @param metadataImageType Describes the image type based on the camera modality. Possible values
+   * include: 'color', 'infrared', 'depth'
+   * @param metadataImageData An array of image metadata corresponding to each image in the input
+   * content payload.
+   * @param callback The callback
+   */
+  detectLivenessSingleModalPost(content: any[], metadataImageType: Models.MetadataImageType, metadataImageData: any[], callback: msRest.ServiceCallback<Models.LivenessOutputs>): void;
+  /**
+   * @param content A ordered collection of application/octet-stream data containing the input data.
+   * @param metadataImageType Describes the image type based on the camera modality. Possible values
+   * include: 'color', 'infrared', 'depth'
+   * @param metadataImageData An array of image metadata corresponding to each image in the input
+   * content payload.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  detectLivenessSingleModalPost(content: any[], metadataImageType: Models.MetadataImageType, metadataImageData: any[], options: Models.FaceClientDetectLivenessSingleModalPostOptionalParams, callback: msRest.ServiceCallback<Models.LivenessOutputs>): void;
+  detectLivenessSingleModalPost(content: any[], metadataImageType: Models.MetadataImageType, metadataImageData: any[], options?: Models.FaceClientDetectLivenessSingleModalPostOptionalParams | msRest.ServiceCallback<Models.LivenessOutputs>, callback?: msRest.ServiceCallback<Models.LivenessOutputs>): Promise<Models.DetectLivenessSingleModalPostResponse> {
+    return this.sendOperationRequest(
+      {
+        content,
+        metadataImageType,
+        metadataImageData,
+        options
+      },
+      detectLivenessSingleModalPostOperationSpec,
+      callback) as Promise<Models.DetectLivenessSingleModalPostResponse>;
+  }
+
+  /**
+   * @summary Detects liveness of a target face in a sequence of infrared, color and/or depth images.
+   * @param content A ordered collection of application/octet-stream data containing the input data.
+   * @param metadataImageData An array of image metadata corresponding to each image in the input
+   * content payload.
+   * @param metadataModalitiesSupportedByCamera An array of modalities supported by camera, e.g. {
+   * color, infrared } or { color, infrared, depth }
+   * @param [options] The optional parameters
+   * @returns Promise<Models.DetectLivenessMultiModalPostResponse>
+   */
+  detectLivenessMultiModalPost(content: any[], metadataImageData: any[], metadataModalitiesSupportedByCamera: string[], options?: Models.FaceClientDetectLivenessMultiModalPostOptionalParams): Promise<Models.DetectLivenessMultiModalPostResponse>;
+  /**
+   * @param content A ordered collection of application/octet-stream data containing the input data.
+   * @param metadataImageData An array of image metadata corresponding to each image in the input
+   * content payload.
+   * @param metadataModalitiesSupportedByCamera An array of modalities supported by camera, e.g. {
+   * color, infrared } or { color, infrared, depth }
+   * @param callback The callback
+   */
+  detectLivenessMultiModalPost(content: any[], metadataImageData: any[], metadataModalitiesSupportedByCamera: string[], callback: msRest.ServiceCallback<Models.LivenessOutputs>): void;
+  /**
+   * @param content A ordered collection of application/octet-stream data containing the input data.
+   * @param metadataImageData An array of image metadata corresponding to each image in the input
+   * content payload.
+   * @param metadataModalitiesSupportedByCamera An array of modalities supported by camera, e.g. {
+   * color, infrared } or { color, infrared, depth }
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  detectLivenessMultiModalPost(content: any[], metadataImageData: any[], metadataModalitiesSupportedByCamera: string[], options: Models.FaceClientDetectLivenessMultiModalPostOptionalParams, callback: msRest.ServiceCallback<Models.LivenessOutputs>): void;
+  detectLivenessMultiModalPost(content: any[], metadataImageData: any[], metadataModalitiesSupportedByCamera: string[], options?: Models.FaceClientDetectLivenessMultiModalPostOptionalParams | msRest.ServiceCallback<Models.LivenessOutputs>, callback?: msRest.ServiceCallback<Models.LivenessOutputs>): Promise<Models.DetectLivenessMultiModalPostResponse> {
+    return this.sendOperationRequest(
+      {
+        content,
+        metadataImageData,
+        metadataModalitiesSupportedByCamera,
+        options
+      },
+      detectLivenessMultiModalPostOperationSpec,
+      callback) as Promise<Models.DetectLivenessMultiModalPostResponse>;
+  }
 }
 
 // Operation Specifications
+const serializer = new msRest.Serializer(Mappers);
+const detectLivenessSingleModalPostOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "detectLiveness/singleModal",
+  urlParameters: [
+    Parameters.endpoint
+  ],
+  queryParameters: [
+    Parameters.content,
+    Parameters.modelVersion
+  ],
+  formDataParameters: [
+    Parameters.metadataImageType,
+    Parameters.metadataImageData
+  ],
+  contentType: "multipart/form-data",
+  responses: {
+    200: {
+      bodyMapper: Mappers.LivenessOutputs
+    },
+    400: {},
+    401: {},
+    403: {},
+    408: {},
+    415: {},
+    429: {},
+    default: {
+      bodyMapper: Mappers.ErrorResponse
+    }
+  },
+  serializer
+};
+
+const detectLivenessMultiModalPostOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "detectLiveness/multiModal",
+  urlParameters: [
+    Parameters.endpoint
+  ],
+  queryParameters: [
+    Parameters.content,
+    Parameters.modelVersion
+  ],
+  formDataParameters: [
+    Parameters.metadataImageData,
+    Parameters.metadataModalitiesSupportedByCamera,
+    Parameters.metadataCameraCalibrationParameters
+  ],
+  contentType: "multipart/form-data",
+  responses: {
+    200: {
+      bodyMapper: Mappers.LivenessOutputs
+    },
+    400: {},
+    401: {},
+    403: {},
+    408: {},
+    415: {},
+    429: {},
+    default: {
+      bodyMapper: Mappers.ErrorResponse
+    }
+  },
+  serializer
+};
 
 export {
   FaceClient,

@@ -28,6 +28,22 @@ export const applyScope: msRest.OperationQueryParameter = {
   },
   collectionFormat: msRest.QueryCollectionFormat.Csv
 };
+export const content: msRest.OperationQueryParameter = {
+  parameterPath: "content",
+  mapper: {
+    required: true,
+    serializedName: "Content",
+    type: {
+      name: "Sequence",
+      element: {
+        type: {
+          name: "Object"
+        }
+      }
+    }
+  },
+  collectionFormat: msRest.QueryCollectionFormat.Multi
+};
 export const detectionModel: msRest.OperationQueryParameter = {
   parameterPath: [
     "options",
@@ -90,6 +106,76 @@ export const largePersonGroupId: msRest.OperationURLParameter = {
       MaxLength: 64,
       Pattern: /^[a-z0-9-_]+$/
     },
+    type: {
+      name: "String"
+    }
+  }
+};
+export const metadataCameraCalibrationParameters: msRest.OperationParameter = {
+  parameterPath: [
+    "options",
+    "metadataCameraCalibrationParameters"
+  ],
+  mapper: {
+    serializedName: "Metadata.CameraCalibrationParameters",
+    type: {
+      name: "Sequence",
+      element: {
+        type: {
+          name: "Object"
+        }
+      }
+    }
+  }
+};
+export const metadataImageData: msRest.OperationParameter = {
+  parameterPath: "metadataImageData",
+  mapper: {
+    required: true,
+    serializedName: "Metadata.ImageData",
+    type: {
+      name: "Sequence",
+      element: {
+        type: {
+          name: "Object"
+        }
+      }
+    }
+  }
+};
+export const metadataImageType: msRest.OperationParameter = {
+  parameterPath: "metadataImageType",
+  mapper: {
+    required: true,
+    serializedName: "Metadata.ImageType",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const metadataModalitiesSupportedByCamera: msRest.OperationParameter = {
+  parameterPath: "metadataModalitiesSupportedByCamera",
+  mapper: {
+    required: true,
+    serializedName: "Metadata.ModalitiesSupportedByCamera",
+    type: {
+      name: "Sequence",
+      element: {
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+export const modelVersion: msRest.OperationQueryParameter = {
+  parameterPath: [
+    "options",
+    "modelVersion"
+  ],
+  mapper: {
+    serializedName: "model-version",
+    defaultValue: '',
     type: {
       name: "String"
     }

@@ -1723,6 +1723,741 @@ export const OperationStatus: msRest.CompositeMapper = {
   }
 };
 
+export const ActiveIlluminationInformation: msRest.CompositeMapper = {
+  serializedName: "ActiveIlluminationInformation",
+  type: {
+    name: "Composite",
+    className: "ActiveIlluminationInformation",
+    modelProperties: {
+      illuminatedColor: {
+        required: true,
+        serializedName: "illuminatedColor",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const CameraExtrinsics: msRest.CompositeMapper = {
+  serializedName: "CameraExtrinsics",
+  type: {
+    name: "Composite",
+    className: "CameraExtrinsics",
+    modelProperties: {
+      rotation: {
+        required: true,
+        serializedName: "rotation",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Number"
+            }
+          }
+        }
+      },
+      translation: {
+        required: true,
+        serializedName: "translation",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Number"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const IntrinsicParameters: msRest.CompositeMapper = {
+  serializedName: "IntrinsicParameters",
+  type: {
+    name: "Composite",
+    className: "IntrinsicParameters",
+    modelProperties: {
+      cx: {
+        required: true,
+        serializedName: "cx",
+        type: {
+          name: "Number"
+        }
+      },
+      cy: {
+        required: true,
+        serializedName: "cy",
+        type: {
+          name: "Number"
+        }
+      },
+      fx: {
+        required: true,
+        serializedName: "fx",
+        type: {
+          name: "Number"
+        }
+      },
+      fy: {
+        required: true,
+        serializedName: "fy",
+        type: {
+          name: "Number"
+        }
+      }
+    }
+  }
+};
+
+export const CameraIntrinsics: msRest.CompositeMapper = {
+  serializedName: "CameraIntrinsics",
+  type: {
+    name: "Composite",
+    className: "CameraIntrinsics",
+    modelProperties: {
+      parameters: {
+        required: true,
+        serializedName: "parameters",
+        type: {
+          name: "Composite",
+          className: "IntrinsicParameters"
+        }
+      }
+    }
+  }
+};
+
+export const CameraCalibrationParameters: msRest.CompositeMapper = {
+  serializedName: "CameraCalibrationParameters",
+  type: {
+    name: "Composite",
+    className: "CameraCalibrationParameters",
+    modelProperties: {
+      imageType: {
+        required: true,
+        serializedName: "imageType",
+        type: {
+          name: "String"
+        }
+      },
+      cameraExtrinsics: {
+        required: true,
+        serializedName: "cameraExtrinsics",
+        type: {
+          name: "Composite",
+          className: "CameraExtrinsics"
+        }
+      },
+      cameraIntrinsics: {
+        required: true,
+        serializedName: "cameraIntrinsics",
+        type: {
+          name: "Composite",
+          className: "CameraIntrinsics"
+        }
+      }
+    }
+  }
+};
+
+export const ContainerStatus: msRest.CompositeMapper = {
+  serializedName: "ContainerStatus",
+  type: {
+    name: "Composite",
+    className: "ContainerStatus",
+    modelProperties: {
+      service: {
+        serializedName: "service",
+        type: {
+          name: "String"
+        }
+      },
+      apiStatus: {
+        serializedName: "apiStatus",
+        type: {
+          name: "String"
+        }
+      },
+      apiStatusMessage: {
+        serializedName: "apiStatusMessage",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const InnerError: msRest.CompositeMapper = {
+  serializedName: "InnerError",
+  type: {
+    name: "Composite",
+    className: "InnerError",
+    modelProperties: {
+      requestId: {
+        serializedName: "requestId",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const ErrorInformation: msRest.CompositeMapper = {
+  serializedName: "ErrorInformation",
+  type: {
+    name: "Composite",
+    className: "ErrorInformation",
+    modelProperties: {
+      code: {
+        serializedName: "code",
+        type: {
+          name: "String"
+        }
+      },
+      innerError: {
+        serializedName: "innerError",
+        type: {
+          name: "Composite",
+          className: "InnerError"
+        }
+      },
+      message: {
+        serializedName: "message",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const ErrorResponse: msRest.CompositeMapper = {
+  serializedName: "ErrorResponse",
+  type: {
+    name: "Composite",
+    className: "ErrorResponse",
+    modelProperties: {
+      error: {
+        serializedName: "error",
+        type: {
+          name: "Composite",
+          className: "ErrorInformation"
+        }
+      }
+    }
+  }
+};
+
+export const ImageCropOffsets: msRest.CompositeMapper = {
+  serializedName: "ImageCropOffsets",
+  type: {
+    name: "Composite",
+    className: "ImageCropOffsets",
+    modelProperties: {
+      cropOffsetX: {
+        required: true,
+        serializedName: "cropOffsetX",
+        constraints: {
+          InclusiveMaximum: 65535,
+          InclusiveMinimum: 0
+        },
+        type: {
+          name: "Number"
+        }
+      },
+      cropOffsetY: {
+        required: true,
+        serializedName: "cropOffsetY",
+        constraints: {
+          InclusiveMaximum: 65535,
+          InclusiveMinimum: 0
+        },
+        type: {
+          name: "Number"
+        }
+      },
+      fullFrameImageWidth: {
+        required: true,
+        serializedName: "fullFrameImageWidth",
+        constraints: {
+          InclusiveMaximum: 65535,
+          InclusiveMinimum: 0
+        },
+        type: {
+          name: "Number"
+        }
+      },
+      fullFrameImageHeight: {
+        required: true,
+        serializedName: "fullFrameImageHeight",
+        constraints: {
+          InclusiveMaximum: 65535,
+          InclusiveMinimum: 0
+        },
+        type: {
+          name: "Number"
+        }
+      }
+    }
+  }
+};
+
+export const ImageProperties: msRest.CompositeMapper = {
+  serializedName: "ImageProperties",
+  type: {
+    name: "Composite",
+    className: "ImageProperties",
+    modelProperties: {
+      description: {
+        serializedName: "description",
+        type: {
+          name: "String"
+        }
+      },
+      exposureTimeInSeconds: {
+        serializedName: "exposureTimeInSeconds",
+        type: {
+          name: "Number"
+        }
+      },
+      fNumber: {
+        serializedName: "fNumber",
+        type: {
+          name: "Number"
+        }
+      },
+      isoSpeed: {
+        serializedName: "isoSpeed",
+        type: {
+          name: "Number"
+        }
+      }
+    }
+  }
+};
+
+export const IFormFile: msRest.CompositeMapper = {
+  serializedName: "IFormFile",
+  type: {
+    name: "Composite",
+    className: "IFormFile",
+    modelProperties: {
+      contentType: {
+        readOnly: true,
+        serializedName: "contentType",
+        type: {
+          name: "String"
+        }
+      },
+      contentDisposition: {
+        readOnly: true,
+        serializedName: "contentDisposition",
+        type: {
+          name: "String"
+        }
+      },
+      headers: {
+        readOnly: true,
+        serializedName: "headers",
+        type: {
+          name: "Dictionary",
+          value: {
+            type: {
+              name: "Sequence",
+              element: {
+                type: {
+                  name: "String"
+                }
+              }
+            }
+          }
+        }
+      },
+      length: {
+        readOnly: true,
+        serializedName: "length",
+        type: {
+          name: "Number"
+        }
+      },
+      name: {
+        readOnly: true,
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      fileName: {
+        readOnly: true,
+        serializedName: "fileName",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const LivenessOutputs: msRest.CompositeMapper = {
+  serializedName: "LivenessOutputs",
+  type: {
+    name: "Composite",
+    className: "LivenessOutputs",
+    modelProperties: {
+      livenessDecision: {
+        required: true,
+        serializedName: "livenessDecision",
+        type: {
+          name: "String"
+        }
+      },
+      livenessScore: {
+        required: true,
+        serializedName: "livenessScore",
+        constraints: {
+          InclusiveMaximum: 1,
+          InclusiveMinimum: 0
+        },
+        type: {
+          name: "Number"
+        }
+      },
+      targetFaceRectangle: {
+        required: true,
+        serializedName: "targetFaceRectangle",
+        type: {
+          name: "Composite",
+          className: "FaceRectangle"
+        }
+      },
+      targetFileName: {
+        required: true,
+        serializedName: "targetFileName",
+        type: {
+          name: "String"
+        }
+      },
+      targetTimeOffsetWithinFile: {
+        required: true,
+        serializedName: "targetTimeOffsetWithinFile",
+        type: {
+          name: "Number"
+        }
+      },
+      targetImageType: {
+        required: true,
+        serializedName: "targetImageType",
+        type: {
+          name: "String"
+        }
+      },
+      modelVersionUsed: {
+        required: true,
+        isConstant: true,
+        serializedName: "modelVersionUsed",
+        defaultValue: '2020-02-15-preview.01',
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const MultiModalImageData: msRest.CompositeMapper = {
+  serializedName: "MultiModalImageData",
+  type: {
+    name: "Composite",
+    className: "MultiModalImageData",
+    modelProperties: {
+      imageType: {
+        required: true,
+        serializedName: "imageType",
+        type: {
+          name: "String"
+        }
+      },
+      fileName: {
+        required: true,
+        serializedName: "fileName",
+        constraints: {
+          MaxLength: 255,
+          MinLength: 0
+        },
+        type: {
+          name: "String"
+        }
+      },
+      timeOffsetWithinFileInMilliseconds: {
+        serializedName: "timeOffsetWithinFileInMilliseconds",
+        constraints: {
+          InclusiveMaximum: 2147483647,
+          InclusiveMinimum: 0
+        },
+        type: {
+          name: "Number"
+        }
+      },
+      imageTimestampInMilliseconds: {
+        required: true,
+        serializedName: "imageTimestampInMilliseconds",
+        constraints: {
+          InclusiveMinimum: 0
+        },
+        type: {
+          name: "Number"
+        }
+      },
+      targetFaceRectangle: {
+        serializedName: "targetFaceRectangle",
+        type: {
+          name: "Composite",
+          className: "FaceRectangle"
+        }
+      },
+      imageOffsetsIfCropped: {
+        serializedName: "imageOffsetsIfCropped",
+        type: {
+          name: "Composite",
+          className: "ImageCropOffsets"
+        }
+      },
+      imageProperties: {
+        serializedName: "imageProperties",
+        type: {
+          name: "Composite",
+          className: "ImageProperties"
+        }
+      },
+      imageCreationTimeInMilliseconds: {
+        serializedName: "imageCreationTimeInMilliseconds",
+        type: {
+          name: "Number"
+        }
+      }
+    }
+  }
+};
+
+export const MultiModalImageMetadata: msRest.CompositeMapper = {
+  serializedName: "MultiModalImageMetadata",
+  type: {
+    name: "Composite",
+    className: "MultiModalImageMetadata",
+    modelProperties: {
+      imageData: {
+        required: true,
+        serializedName: "imageData",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "MultiModalImageData"
+            }
+          }
+        }
+      },
+      modalitiesSupportedByCamera: {
+        required: true,
+        serializedName: "modalitiesSupportedByCamera",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      },
+      cameraCalibrationParameters: {
+        serializedName: "cameraCalibrationParameters",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "CameraCalibrationParameters"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const MultiModalImageContainer: msRest.CompositeMapper = {
+  serializedName: "MultiModalImageContainer",
+  type: {
+    name: "Composite",
+    className: "MultiModalImageContainer",
+    modelProperties: {
+      metadata: {
+        required: true,
+        serializedName: "metadata",
+        type: {
+          name: "Composite",
+          className: "MultiModalImageMetadata"
+        }
+      },
+      content: {
+        required: true,
+        serializedName: "content",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "IFormFile"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const SingleModalImageData: msRest.CompositeMapper = {
+  serializedName: "SingleModalImageData",
+  type: {
+    name: "Composite",
+    className: "SingleModalImageData",
+    modelProperties: {
+      activeIlluminationInformation: {
+        serializedName: "activeIlluminationInformation",
+        type: {
+          name: "Composite",
+          className: "ActiveIlluminationInformation"
+        }
+      },
+      fileName: {
+        required: true,
+        serializedName: "fileName",
+        constraints: {
+          MaxLength: 255,
+          MinLength: 0
+        },
+        type: {
+          name: "String"
+        }
+      },
+      timeOffsetWithinFileInMilliseconds: {
+        serializedName: "timeOffsetWithinFileInMilliseconds",
+        constraints: {
+          InclusiveMaximum: 2147483647,
+          InclusiveMinimum: 0
+        },
+        type: {
+          name: "Number"
+        }
+      },
+      imageTimestampInMilliseconds: {
+        required: true,
+        serializedName: "imageTimestampInMilliseconds",
+        constraints: {
+          InclusiveMinimum: 0
+        },
+        type: {
+          name: "Number"
+        }
+      },
+      targetFaceRectangle: {
+        serializedName: "targetFaceRectangle",
+        type: {
+          name: "Composite",
+          className: "FaceRectangle"
+        }
+      },
+      imageOffsetsIfCropped: {
+        serializedName: "imageOffsetsIfCropped",
+        type: {
+          name: "Composite",
+          className: "ImageCropOffsets"
+        }
+      },
+      imageProperties: {
+        serializedName: "imageProperties",
+        type: {
+          name: "Composite",
+          className: "ImageProperties"
+        }
+      },
+      imageCreationTimeInMilliseconds: {
+        serializedName: "imageCreationTimeInMilliseconds",
+        type: {
+          name: "Number"
+        }
+      }
+    }
+  }
+};
+
+export const SingleModalImageMetadata: msRest.CompositeMapper = {
+  serializedName: "SingleModalImageMetadata",
+  type: {
+    name: "Composite",
+    className: "SingleModalImageMetadata",
+    modelProperties: {
+      imageType: {
+        required: true,
+        serializedName: "imageType",
+        type: {
+          name: "String"
+        }
+      },
+      imageData: {
+        required: true,
+        serializedName: "imageData",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "SingleModalImageData"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const SingleModalImageContainer: msRest.CompositeMapper = {
+  serializedName: "SingleModalImageContainer",
+  type: {
+    name: "Composite",
+    className: "SingleModalImageContainer",
+    modelProperties: {
+      metadata: {
+        required: true,
+        serializedName: "metadata",
+        type: {
+          name: "Composite",
+          className: "SingleModalImageMetadata"
+        }
+      },
+      content: {
+        required: true,
+        serializedName: "content",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "IFormFile"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
 export const ImageUrl: msRest.CompositeMapper = {
   serializedName: "ImageUrl",
   type: {

@@ -43,7 +43,7 @@ export class FaceClientContext extends msRest.ServiceClient {
 
     super(credentials, options);
 
-    this.baseUri = "{Endpoint}/face/v1.0";
+    this.baseUri = "{Endpoint}/face/v1.1-preview.1";
     this.requestContentType = "application/json; charset=utf-8";
     this.endpoint = endpoint;
     this.credentials = credentials;
