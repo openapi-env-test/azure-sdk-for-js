@@ -83,6 +83,38 @@ export class Factories {
   }
 
   /**
+   * Updates a factory's repo information.
+   * @param locationId The location identifier.
+   * @param factoryRepoUpdate Update factory repo request definition.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.FactoriesResetFactoryRepoResponse>
+   */
+  resetFactoryRepo(locationId: string, factoryRepoUpdate: Models.FactoryRepoUpdate, options?: msRest.RequestOptionsBase): Promise<Models.FactoriesResetFactoryRepoResponse>;
+  /**
+   * @param locationId The location identifier.
+   * @param factoryRepoUpdate Update factory repo request definition.
+   * @param callback The callback
+   */
+  resetFactoryRepo(locationId: string, factoryRepoUpdate: Models.FactoryRepoUpdate, callback: msRest.ServiceCallback<Models.Factory>): void;
+  /**
+   * @param locationId The location identifier.
+   * @param factoryRepoUpdate Update factory repo request definition.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  resetFactoryRepo(locationId: string, factoryRepoUpdate: Models.FactoryRepoUpdate, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Factory>): void;
+  resetFactoryRepo(locationId: string, factoryRepoUpdate: Models.FactoryRepoUpdate, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Factory>, callback?: msRest.ServiceCallback<Models.Factory>): Promise<Models.FactoriesResetFactoryRepoResponse> {
+    return this.client.sendOperationRequest(
+      {
+        locationId,
+        factoryRepoUpdate,
+        options
+      },
+      resetFactoryRepoOperationSpec,
+      callback) as Promise<Models.FactoriesResetFactoryRepoResponse>;
+  }
+
+  /**
    * Lists factories.
    * @param resourceGroupName The resource group name.
    * @param [options] The optional parameters
@@ -403,6 +435,37 @@ const listOperationSpec: msRest.OperationSpec = {
 const configureFactoryRepoOperationSpec: msRest.OperationSpec = {
   httpMethod: "POST",
   path: "subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/configureFactoryRepo",
+  urlParameters: [
+    Parameters.subscriptionId,
+    Parameters.locationId
+  ],
+  queryParameters: [
+    Parameters.apiVersion
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "factoryRepoUpdate",
+    mapper: {
+      ...Mappers.FactoryRepoUpdate,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.Factory
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const resetFactoryRepoOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/resetFactoryRepo",
   urlParameters: [
     Parameters.subscriptionId,
     Parameters.locationId

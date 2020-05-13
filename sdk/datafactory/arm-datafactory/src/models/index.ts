@@ -24113,6 +24113,26 @@ export type FactoriesConfigureFactoryRepoResponse = Factory & {
 };
 
 /**
+ * Contains response data for the resetFactoryRepo operation.
+ */
+export type FactoriesResetFactoryRepoResponse = Factory & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Factory;
+    };
+};
+
+/**
  * Contains response data for the listByResourceGroup operation.
  */
 export type FactoriesListByResourceGroupResponse = FactoryListResponse & {
