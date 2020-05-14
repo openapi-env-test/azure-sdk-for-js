@@ -13,4 +13,5 @@ export * from "./netAppResource";
 export * from "./accounts";
 export * from "./pools";
 export * from "./volumes";
+export * from "./mountTargets";
 export * from "./snapshots";
