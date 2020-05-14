@@ -308,6 +308,12 @@ export const ActiveDirectory: msRest.CompositeMapper = {
         type: {
           name: "String"
         }
+      },
+      site: {
+        serializedName: "site",
+        type: {
+          name: "String"
+        }
       }
     }
   }
@@ -675,6 +681,83 @@ export const VolumePropertiesExportPolicy: msRest.CompositeMapper = {
   }
 };
 
+export const MountTargetProperties: msRest.CompositeMapper = {
+  serializedName: "mountTargetProperties",
+  type: {
+    name: "Composite",
+    className: "MountTargetProperties",
+    modelProperties: {
+      mountTargetId: {
+        readOnly: true,
+        serializedName: "mountTargetId",
+        constraints: {
+          MaxLength: 36,
+          MinLength: 36,
+          Pattern: /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/
+        },
+        type: {
+          name: "String"
+        }
+      },
+      fileSystemId: {
+        required: true,
+        serializedName: "fileSystemId",
+        constraints: {
+          MaxLength: 36,
+          MinLength: 36,
+          Pattern: /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/
+        },
+        type: {
+          name: "String"
+        }
+      },
+      ipAddress: {
+        readOnly: true,
+        serializedName: "ipAddress",
+        type: {
+          name: "String"
+        }
+      },
+      subnet: {
+        serializedName: "subnet",
+        type: {
+          name: "String"
+        }
+      },
+      startIp: {
+        serializedName: "startIp",
+        type: {
+          name: "String"
+        }
+      },
+      endIp: {
+        serializedName: "endIp",
+        type: {
+          name: "String"
+        }
+      },
+      gateway: {
+        serializedName: "gateway",
+        type: {
+          name: "String"
+        }
+      },
+      netmask: {
+        serializedName: "netmask",
+        type: {
+          name: "String"
+        }
+      },
+      smbServerFqdn: {
+        serializedName: "smbServerFqdn",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const ReplicationObject: msRest.CompositeMapper = {
   serializedName: "replicationObject",
   type: {
@@ -794,6 +877,11 @@ export const Volume: msRest.CompositeMapper = {
       creationToken: {
         required: true,
         serializedName: "properties.creationToken",
+        constraints: {
+          MaxLength: 80,
+          MinLength: 1,
+          Pattern: /^[a-zA-Z][a-zA-Z0-9\-]{0,79}$/
+        },
         type: {
           name: "String"
         }
@@ -875,7 +963,13 @@ export const Volume: msRest.CompositeMapper = {
       mountTargets: {
         serializedName: "properties.mountTargets",
         type: {
-          name: "Object"
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "MountTargetProperties"
+            }
+          }
         }
       },
       volumeType: {
@@ -1147,13 +1241,6 @@ export const MountTarget: msRest.CompositeMapper = {
         type: {
           name: "String"
         }
-      },
-      provisioningState: {
-        readOnly: true,
-        serializedName: "properties.provisioningState",
-        type: {
-          name: "String"
-        }
       }
     }
   }
@@ -1191,17 +1278,6 @@ export const Snapshot: msRest.CompositeMapper = {
         serializedName: "type",
         type: {
           name: "String"
-        }
-      },
-      tags: {
-        serializedName: "tags",
-        type: {
-          name: "Dictionary",
-          value: {
-            type: {
-              name: "String"
-            }
-          }
         }
       },
       snapshotId: {
@@ -1245,21 +1321,16 @@ export const Snapshot: msRest.CompositeMapper = {
   }
 };
 
-export const SnapshotPatch: msRest.CompositeMapper = {
-  serializedName: "snapshotPatch",
+export const VolumeRevert: msRest.CompositeMapper = {
+  serializedName: "volumeRevert",
   type: {
     name: "Composite",
-    className: "SnapshotPatch",
+    className: "VolumeRevert",
     modelProperties: {
-      tags: {
-        serializedName: "tags",
+      snapshotId: {
+        serializedName: "snapshotId",
         type: {
-          name: "Dictionary",
-          value: {
-            type: {
-              name: "String"
-            }
-          }
+          name: "String"
         }
       }
     }
@@ -1362,28 +1433,6 @@ export const VolumeList: msRest.CompositeMapper = {
             type: {
               name: "Composite",
               className: "Volume"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
-export const MountTargetList: msRest.CompositeMapper = {
-  serializedName: "mountTargetList",
-  type: {
-    name: "Composite",
-    className: "MountTargetList",
-    modelProperties: {
-      value: {
-        serializedName: "",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "MountTarget"
             }
           }
         }
