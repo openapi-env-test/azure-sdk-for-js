@@ -22983,6 +22983,17 @@ export interface IntegrationRuntimeConnectionInfo {
 /**
  * Optional Parameters.
  */
+export interface FactoriesCreateOrUpdateOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * ETag of the factory entity. Should only be specified for update, for which it should match
+   * existing entity or can be * for unconditional update.
+   */
+  ifMatch?: string;
+}
+
+/**
+ * Optional Parameters.
+ */
 export interface IntegrationRuntimesCreateOrUpdateOptionalParams extends msRest.RequestOptionsBase {
   /**
    * ETag of the integration runtime entity. Should only be specified for update, for which it
@@ -24032,6 +24043,26 @@ export type FactoriesListByResourceGroupResponse = FactoryListResponse & {
        * The response body as parsed JSON or XML
        */
       parsedBody: FactoryListResponse;
+    };
+};
+
+/**
+ * Contains response data for the createOrUpdate operation.
+ */
+export type FactoriesCreateOrUpdateResponse = Factory & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Factory;
     };
 };
 

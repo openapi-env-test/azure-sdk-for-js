@@ -111,6 +111,42 @@ export class Factories {
   }
 
   /**
+   * Creates or updates a factory.
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param factory Factory resource definition.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.FactoriesCreateOrUpdateResponse>
+   */
+  createOrUpdate(resourceGroupName: string, factoryName: string, factory: Models.Factory, options?: Models.FactoriesCreateOrUpdateOptionalParams): Promise<Models.FactoriesCreateOrUpdateResponse>;
+  /**
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param factory Factory resource definition.
+   * @param callback The callback
+   */
+  createOrUpdate(resourceGroupName: string, factoryName: string, factory: Models.Factory, callback: msRest.ServiceCallback<Models.Factory>): void;
+  /**
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param factory Factory resource definition.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  createOrUpdate(resourceGroupName: string, factoryName: string, factory: Models.Factory, options: Models.FactoriesCreateOrUpdateOptionalParams, callback: msRest.ServiceCallback<Models.Factory>): void;
+  createOrUpdate(resourceGroupName: string, factoryName: string, factory: Models.Factory, options?: Models.FactoriesCreateOrUpdateOptionalParams | msRest.ServiceCallback<Models.Factory>, callback?: msRest.ServiceCallback<Models.Factory>): Promise<Models.FactoriesCreateOrUpdateResponse> {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        factoryName,
+        factory,
+        options
+      },
+      createOrUpdateOperationSpec,
+      callback) as Promise<Models.FactoriesCreateOrUpdateResponse>;
+  }
+
+  /**
    * Get GitHub Access Token.
    * @param resourceGroupName The resource group name.
    * @param factoryName The factory name.
@@ -311,6 +347,39 @@ const listByResourceGroupOperationSpec: msRest.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.FactoryListResponse
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const createOrUpdateOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PUT",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}",
+  urlParameters: [
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName,
+    Parameters.factoryName
+  ],
+  queryParameters: [
+    Parameters.apiVersion
+  ],
+  headerParameters: [
+    Parameters.ifMatch,
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "factory",
+    mapper: {
+      ...Mappers.Factory,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.Factory
     },
     default: {
       bodyMapper: Mappers.CloudError
