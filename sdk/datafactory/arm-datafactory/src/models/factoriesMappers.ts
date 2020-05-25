@@ -211,7 +211,6 @@ export {
   FactoryListResponse,
   FactoryRepoConfiguration,
   FactoryRepoUpdate,
-  FactoryUpdateParameters,
   FactoryVSTSConfiguration,
   FileServerLinkedService,
   FileServerLocation,
