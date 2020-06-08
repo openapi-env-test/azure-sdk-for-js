@@ -120,6 +120,7 @@ export {
   EloquaObjectDataset,
   EntityReference,
   EnvironmentVariableSetup,
+  ExcelDataset,
   FileServerLinkedService,
   FileServerLocation,
   FileShareDataset,
@@ -275,6 +276,7 @@ export {
   WebTableDataset,
   XeroLinkedService,
   XeroObjectDataset,
+  XmlDataset,
   ZohoLinkedService,
   ZohoObjectDataset
 } from "../models/mappers";
