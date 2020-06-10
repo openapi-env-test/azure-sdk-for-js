@@ -111,6 +111,142 @@ export class Factories {
   }
 
   /**
+   * Creates or updates a factory.
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param factory Factory resource definition.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.FactoriesCreateOrUpdateResponse>
+   */
+  createOrUpdate(resourceGroupName: string, factoryName: string, factory: Models.Factory, options?: Models.FactoriesCreateOrUpdateOptionalParams): Promise<Models.FactoriesCreateOrUpdateResponse>;
+  /**
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param factory Factory resource definition.
+   * @param callback The callback
+   */
+  createOrUpdate(resourceGroupName: string, factoryName: string, factory: Models.Factory, callback: msRest.ServiceCallback<Models.Factory>): void;
+  /**
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param factory Factory resource definition.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  createOrUpdate(resourceGroupName: string, factoryName: string, factory: Models.Factory, options: Models.FactoriesCreateOrUpdateOptionalParams, callback: msRest.ServiceCallback<Models.Factory>): void;
+  createOrUpdate(resourceGroupName: string, factoryName: string, factory: Models.Factory, options?: Models.FactoriesCreateOrUpdateOptionalParams | msRest.ServiceCallback<Models.Factory>, callback?: msRest.ServiceCallback<Models.Factory>): Promise<Models.FactoriesCreateOrUpdateResponse> {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        factoryName,
+        factory,
+        options
+      },
+      createOrUpdateOperationSpec,
+      callback) as Promise<Models.FactoriesCreateOrUpdateResponse>;
+  }
+
+  /**
+   * Updates a factory.
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param factoryUpdateParameters The parameters for updating a factory.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.FactoriesUpdateResponse>
+   */
+  update(resourceGroupName: string, factoryName: string, factoryUpdateParameters: Models.FactoryUpdateParameters, options?: msRest.RequestOptionsBase): Promise<Models.FactoriesUpdateResponse>;
+  /**
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param factoryUpdateParameters The parameters for updating a factory.
+   * @param callback The callback
+   */
+  update(resourceGroupName: string, factoryName: string, factoryUpdateParameters: Models.FactoryUpdateParameters, callback: msRest.ServiceCallback<Models.Factory>): void;
+  /**
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param factoryUpdateParameters The parameters for updating a factory.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  update(resourceGroupName: string, factoryName: string, factoryUpdateParameters: Models.FactoryUpdateParameters, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Factory>): void;
+  update(resourceGroupName: string, factoryName: string, factoryUpdateParameters: Models.FactoryUpdateParameters, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Factory>, callback?: msRest.ServiceCallback<Models.Factory>): Promise<Models.FactoriesUpdateResponse> {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        factoryName,
+        factoryUpdateParameters,
+        options
+      },
+      updateOperationSpec,
+      callback) as Promise<Models.FactoriesUpdateResponse>;
+  }
+
+  /**
+   * Gets a factory.
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.FactoriesGetResponse>
+   */
+  get(resourceGroupName: string, factoryName: string, options?: Models.FactoriesGetOptionalParams): Promise<Models.FactoriesGetResponse>;
+  /**
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param callback The callback
+   */
+  get(resourceGroupName: string, factoryName: string, callback: msRest.ServiceCallback<Models.Factory>): void;
+  /**
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  get(resourceGroupName: string, factoryName: string, options: Models.FactoriesGetOptionalParams, callback: msRest.ServiceCallback<Models.Factory>): void;
+  get(resourceGroupName: string, factoryName: string, options?: Models.FactoriesGetOptionalParams | msRest.ServiceCallback<Models.Factory>, callback?: msRest.ServiceCallback<Models.Factory>): Promise<Models.FactoriesGetResponse> {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        factoryName,
+        options
+      },
+      getOperationSpec,
+      callback) as Promise<Models.FactoriesGetResponse>;
+  }
+
+  /**
+   * Deletes a factory.
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param [options] The optional parameters
+   * @returns Promise<msRest.RestResponse>
+   */
+  deleteMethod(resourceGroupName: string, factoryName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
+  /**
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param callback The callback
+   */
+  deleteMethod(resourceGroupName: string, factoryName: string, callback: msRest.ServiceCallback<void>): void;
+  /**
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  deleteMethod(resourceGroupName: string, factoryName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
+  deleteMethod(resourceGroupName: string, factoryName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        factoryName,
+        options
+      },
+      deleteMethodOperationSpec,
+      callback);
+  }
+
+  /**
    * Get GitHub Access Token.
    * @param resourceGroupName The resource group name.
    * @param factoryName The factory name.
@@ -144,6 +280,42 @@ export class Factories {
       },
       getGitHubAccessTokenOperationSpec,
       callback) as Promise<Models.FactoriesGetGitHubAccessTokenResponse>;
+  }
+
+  /**
+   * Get GitHub Access Token.
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param gitHubAccessTokenRequest Get GitHub access token request definition.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.FactoriesGetGitHubAccessTokenDemoResponse>
+   */
+  getGitHubAccessTokenDemo(resourceGroupName: string, factoryName: string, gitHubAccessTokenRequest: Models.GitHubAccessTokenRequest, options?: msRest.RequestOptionsBase): Promise<Models.FactoriesGetGitHubAccessTokenDemoResponse>;
+  /**
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param gitHubAccessTokenRequest Get GitHub access token request definition.
+   * @param callback The callback
+   */
+  getGitHubAccessTokenDemo(resourceGroupName: string, factoryName: string, gitHubAccessTokenRequest: Models.GitHubAccessTokenRequest, callback: msRest.ServiceCallback<Models.GitHubAccessTokenResponse>): void;
+  /**
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param gitHubAccessTokenRequest Get GitHub access token request definition.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  getGitHubAccessTokenDemo(resourceGroupName: string, factoryName: string, gitHubAccessTokenRequest: Models.GitHubAccessTokenRequest, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.GitHubAccessTokenResponse>): void;
+  getGitHubAccessTokenDemo(resourceGroupName: string, factoryName: string, gitHubAccessTokenRequest: Models.GitHubAccessTokenRequest, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.GitHubAccessTokenResponse>, callback?: msRest.ServiceCallback<Models.GitHubAccessTokenResponse>): Promise<Models.FactoriesGetGitHubAccessTokenDemoResponse> {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        factoryName,
+        gitHubAccessTokenRequest,
+        options
+      },
+      getGitHubAccessTokenDemoOperationSpec,
+      callback) as Promise<Models.FactoriesGetGitHubAccessTokenDemoResponse>;
   }
 
   /**
@@ -319,9 +491,157 @@ const listByResourceGroupOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
+const createOrUpdateOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PUT",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}",
+  urlParameters: [
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName,
+    Parameters.factoryName
+  ],
+  queryParameters: [
+    Parameters.apiVersion
+  ],
+  headerParameters: [
+    Parameters.ifMatch,
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "factory",
+    mapper: {
+      ...Mappers.Factory,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.Factory
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const updateOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PATCH",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}",
+  urlParameters: [
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName,
+    Parameters.factoryName
+  ],
+  queryParameters: [
+    Parameters.apiVersion
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "factoryUpdateParameters",
+    mapper: {
+      ...Mappers.FactoryUpdateParameters,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.Factory
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const getOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}",
+  urlParameters: [
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName,
+    Parameters.factoryName
+  ],
+  queryParameters: [
+    Parameters.apiVersion
+  ],
+  headerParameters: [
+    Parameters.ifNoneMatch,
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {
+      bodyMapper: Mappers.Factory
+    },
+    304: {},
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const deleteMethodOperationSpec: msRest.OperationSpec = {
+  httpMethod: "DELETE",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}",
+  urlParameters: [
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName,
+    Parameters.factoryName
+  ],
+  queryParameters: [
+    Parameters.apiVersion
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {},
+    204: {},
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
 const getGitHubAccessTokenOperationSpec: msRest.OperationSpec = {
   httpMethod: "POST",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getGitHubAccessToken",
+  urlParameters: [
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName,
+    Parameters.factoryName
+  ],
+  queryParameters: [
+    Parameters.apiVersion
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "gitHubAccessTokenRequest",
+    mapper: {
+      ...Mappers.GitHubAccessTokenRequest,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.GitHubAccessTokenResponse
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const getGitHubAccessTokenDemoOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getGitHubAccessTokenDemo",
   urlParameters: [
     Parameters.subscriptionId,
     Parameters.resourceGroupName,

@@ -211,6 +211,21 @@ export interface FactoryRepoConfiguration {
 }
 
 /**
+ * Definition of a single parameter for an entity.
+ */
+export interface GlobalParameterSpecification {
+  /**
+   * Global Parameter type. Possible values include: 'Object', 'String', 'Int', 'Float', 'Bool',
+   * 'Array'
+   */
+  type: GlobalParameterType;
+  /**
+   * Value of parameter.
+   */
+  value: any;
+}
+
+/**
  * Factory resource type.
  */
 export interface Factory extends Resource {
@@ -237,6 +252,10 @@ export interface Factory extends Resource {
    * Git repo information of the factory.
    */
   repoConfiguration?: FactoryRepoConfigurationUnion;
+  /**
+   * List of parameters for factory.
+   */
+  globalParameters?: { [propertyName: string]: GlobalParameterSpecification };
   /**
    * Describes unknown properties. The value of an unknown property can be of "any" type.
    */
@@ -492,7 +511,7 @@ export interface DatasetFolder {
 /**
  * Contains the possible cases for Dataset.
  */
-export type DatasetUnion = Dataset | SharePointOnlineListResourceDataset | SnowflakeDataset | GoogleAdWordsObjectDataset | AzureDataExplorerTableDataset | OracleServiceCloudObjectDataset | DynamicsAXResourceDataset | ResponsysObjectDataset | SalesforceMarketingCloudObjectDataset | VerticaTableDataset | NetezzaTableDataset | ZohoObjectDataset | XeroObjectDataset | SquareObjectDataset | SparkObjectDataset | ShopifyObjectDataset | ServiceNowObjectDataset | QuickBooksObjectDataset | PrestoObjectDataset | PhoenixObjectDataset | PaypalObjectDataset | MarketoObjectDataset | AzureMariaDBTableDataset | MariaDBTableDataset | MagentoObjectDataset | JiraObjectDataset | ImpalaObjectDataset | HubspotObjectDataset | HiveObjectDataset | HBaseObjectDataset | GreenplumTableDataset | GoogleBigQueryObjectDataset | EloquaObjectDataset | DrillTableDataset | CouchbaseTableDataset | ConcurObjectDataset | AzurePostgreSqlTableDataset | AmazonMWSObjectDataset | HttpDataset | AzureSearchIndexDataset | WebTableDataset | SapTableResourceDataset | RestResourceDataset | SqlServerTableDataset | SapOpenHubTableDataset | SapHanaTableDataset | SapEccResourceDataset | SapCloudForCustomerResourceDataset | SapBwCubeDataset | SybaseTableDataset | SalesforceServiceCloudObjectDataset | SalesforceObjectDataset | MicrosoftAccessTableDataset | PostgreSqlTableDataset | MySqlTableDataset | OdbcTableDataset | InformixTableDataset | RelationalTableDataset | Db2TableDataset | AmazonRedshiftTableDataset | AzureMySqlTableDataset | TeradataTableDataset | OracleTableDataset | ODataResourceDataset | CosmosDbMongoDbApiCollectionDataset | MongoDbV2CollectionDataset | MongoDbCollectionDataset | FileShareDataset | Office365Dataset | AzureBlobFSDataset | AzureDataLakeStoreDataset | CommonDataServiceForAppsEntityDataset | DynamicsCrmEntityDataset | DynamicsEntityDataset | DocumentDbCollectionDataset | CosmosDbSqlApiCollectionDataset | CustomDataset | CassandraTableDataset | AzureSqlDWTableDataset | AzureSqlMITableDataset | AzureSqlTableDataset | AzureTableDataset | AzureBlobDataset | BinaryDataset | OrcDataset | JsonDataset | DelimitedTextDataset | ParquetDataset | AvroDataset | AmazonS3Dataset;
+export type DatasetUnion = Dataset | SharePointOnlineListResourceDataset | SnowflakeDataset | GoogleAdWordsObjectDataset | AzureDataExplorerTableDataset | OracleServiceCloudObjectDataset | DynamicsAXResourceDataset | ResponsysObjectDataset | SalesforceMarketingCloudObjectDataset | VerticaTableDataset | NetezzaTableDataset | ZohoObjectDataset | XeroObjectDataset | SquareObjectDataset | SparkObjectDataset | ShopifyObjectDataset | ServiceNowObjectDataset | QuickBooksObjectDataset | PrestoObjectDataset | PhoenixObjectDataset | PaypalObjectDataset | MarketoObjectDataset | AzureMariaDBTableDataset | MariaDBTableDataset | MagentoObjectDataset | JiraObjectDataset | ImpalaObjectDataset | HubspotObjectDataset | HiveObjectDataset | HBaseObjectDataset | GreenplumTableDataset | GoogleBigQueryObjectDataset | EloquaObjectDataset | DrillTableDataset | CouchbaseTableDataset | ConcurObjectDataset | AzurePostgreSqlTableDataset | AmazonMWSObjectDataset | HttpDataset | AzureSearchIndexDataset | WebTableDataset | SapTableResourceDataset | RestResourceDataset | SqlServerTableDataset | SapOpenHubTableDataset | SapHanaTableDataset | SapEccResourceDataset | SapCloudForCustomerResourceDataset | SapBwCubeDataset | SybaseTableDataset | SalesforceServiceCloudObjectDataset | SalesforceObjectDataset | MicrosoftAccessTableDataset | PostgreSqlTableDataset | MySqlTableDataset | OdbcTableDataset | InformixTableDataset | RelationalTableDataset | Db2TableDataset | AmazonRedshiftTableDataset | AzureMySqlTableDataset | TeradataTableDataset | OracleTableDataset | ODataResourceDataset | CosmosDbMongoDbApiCollectionDataset | MongoDbV2CollectionDataset | MongoDbCollectionDataset | FileShareDataset | Office365Dataset | AzureBlobFSDataset | AzureDataLakeStoreDataset | CommonDataServiceForAppsEntityDataset | DynamicsCrmEntityDataset | DynamicsEntityDataset | DocumentDbCollectionDataset | CosmosDbSqlApiCollectionDataset | CustomDataset | CassandraTableDataset | AzureSqlDWTableDataset | AzureSqlMITableDataset | AzureSqlTableDataset | AzureTableDataset | AzureBlobDataset | BinaryDataset | OrcDataset | XmlDataset | JsonDataset | DelimitedTextDataset | ParquetDataset | ExcelDataset | AvroDataset | AmazonS3Dataset;
 
 /**
  * The Azure Data Factory nested object which identifies data within different data stores, such as
@@ -1935,6 +1954,14 @@ export interface DataFlowSink extends Transformation {
    * Dataset reference.
    */
   dataset?: DatasetReference;
+  /**
+   * Linked service reference.
+   */
+  linkedService?: LinkedServiceReference;
+  /**
+   * Schema linked service reference.
+   */
+  schemaLinkedService?: LinkedServiceReference;
 }
 
 /**
@@ -1945,6 +1972,14 @@ export interface DataFlowSource extends Transformation {
    * Dataset reference.
    */
   dataset?: DatasetReference;
+  /**
+   * Linked service reference.
+   */
+  linkedService?: LinkedServiceReference;
+  /**
+   * Schema linked service reference.
+   */
+  schemaLinkedService?: LinkedServiceReference;
 }
 
 /**
@@ -2707,10 +2742,9 @@ export interface ScriptAction {
    */
   uri: string;
   /**
-   * The node types on which the script action should be executed. Possible values include:
-   * 'Headnode', 'Workernode', 'Zookeeper'
+   * The node types on which the script action should be executed.
    */
-  roles: HdiNodeTypes;
+  roles: any;
   /**
    * The parameters for the script action.
    */
@@ -9526,9 +9560,9 @@ export interface DatasetZipDeflateCompression {
    */
   type: "ZipDeflate";
   /**
-   * The ZipDeflate compression level. Possible values include: 'Optimal', 'Fastest'
+   * The ZipDeflate compression level.
    */
-  level?: DatasetCompressionLevel;
+  level?: any;
 }
 
 /**
@@ -9540,9 +9574,9 @@ export interface DatasetDeflateCompression {
    */
   type: "Deflate";
   /**
-   * The Deflate compression level. Possible values include: 'Optimal', 'Fastest'
+   * The Deflate compression level.
    */
-  level?: DatasetCompressionLevel;
+  level?: any;
 }
 
 /**
@@ -9554,9 +9588,9 @@ export interface DatasetGZipCompression {
    */
   type: "GZip";
   /**
-   * The GZip compression level. Possible values include: 'Optimal', 'Fastest'
+   * The GZip compression level.
    */
-  level?: DatasetCompressionLevel;
+  level?: any;
 }
 
 /**
@@ -12330,6 +12364,66 @@ export interface OrcDataset {
 }
 
 /**
+ * Xml dataset.
+ */
+export interface XmlDataset {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "Xml";
+  /**
+   * Dataset description.
+   */
+  description?: string;
+  /**
+   * Columns that define the structure of the dataset. Type: array (or Expression with resultType
+   * array), itemType: DatasetDataElement.
+   */
+  structure?: any;
+  /**
+   * Columns that define the physical type schema of the dataset. Type: array (or Expression with
+   * resultType array), itemType: DatasetSchemaDataElement.
+   */
+  schema?: any;
+  /**
+   * Linked service reference.
+   */
+  linkedServiceName: LinkedServiceReference;
+  /**
+   * Parameters for dataset.
+   */
+  parameters?: { [propertyName: string]: ParameterSpecification };
+  /**
+   * List of tags that can be used for describing the Dataset.
+   */
+  annotations?: any[];
+  /**
+   * The folder that this Dataset is in. If not specified, Dataset will appear at the root level.
+   */
+  folder?: DatasetFolder;
+  /**
+   * The location of the json data storage.
+   */
+  location: DatasetLocationUnion;
+  /**
+   * The code page name of the preferred encoding. If not specified, the default value is UTF-8,
+   * unless BOM denotes another Unicode encoding. Refer to the name column of the table in the
+   * following link to set supported values:
+   * https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with
+   * resultType string).
+   */
+  encodingName?: any;
+  /**
+   * The null value string. Type: string (or Expression with resultType string).
+   */
+  nullValue?: any;
+  /**
+   * The data compression method used for the json dataset.
+   */
+  compression?: DatasetCompressionUnion;
+}
+
+/**
  * Json dataset.
  */
 export interface JsonDataset {
@@ -12444,10 +12538,9 @@ export interface DelimitedTextDataset {
   encodingName?: any;
   compressionCodec?: any;
   /**
-   * The data compression method used for DelimitedText. Possible values include: 'Optimal',
-   * 'Fastest'
+   * The data compression method used for DelimitedText.
    */
-  compressionLevel?: DatasetCompressionLevel;
+  compressionLevel?: any;
   /**
    * The quote character. Type: string (or Expression with resultType string).
    */
@@ -12511,6 +12604,72 @@ export interface ParquetDataset {
    */
   location: DatasetLocationUnion;
   compressionCodec?: any;
+}
+
+/**
+ * Excel dataset.
+ */
+export interface ExcelDataset {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "Excel";
+  /**
+   * Dataset description.
+   */
+  description?: string;
+  /**
+   * Columns that define the structure of the dataset. Type: array (or Expression with resultType
+   * array), itemType: DatasetDataElement.
+   */
+  structure?: any;
+  /**
+   * Columns that define the physical type schema of the dataset. Type: array (or Expression with
+   * resultType array), itemType: DatasetSchemaDataElement.
+   */
+  schema?: any;
+  /**
+   * Linked service reference.
+   */
+  linkedServiceName: LinkedServiceReference;
+  /**
+   * Parameters for dataset.
+   */
+  parameters?: { [propertyName: string]: ParameterSpecification };
+  /**
+   * List of tags that can be used for describing the Dataset.
+   */
+  annotations?: any[];
+  /**
+   * The folder that this Dataset is in. If not specified, Dataset will appear at the root level.
+   */
+  folder?: DatasetFolder;
+  /**
+   * The location of the excel storage.
+   */
+  location: DatasetLocationUnion;
+  /**
+   * The sheet of excel file. Type: string (or Expression with resultType string).
+   */
+  sheetName: any;
+  /**
+   * The partial data of one sheet. Type: string (or Expression with resultType string).
+   */
+  range?: any;
+  /**
+   * When used as input, treat the first row of data as headers. When used as output,write the
+   * headers into the output as the first row of data. The default value is false. Type: boolean
+   * (or Expression with resultType boolean).
+   */
+  firstRowAsHeader?: any;
+  /**
+   * The data compression method used for the json dataset.
+   */
+  compression?: DatasetCompressionUnion;
+  /**
+   * The null value string. Type: string (or Expression with resultType string).
+   */
+  nullValue?: any;
 }
 
 /**
@@ -13748,7 +13907,7 @@ export interface ZipDeflateReadSettings {
 /**
  * Contains the possible cases for FormatReadSettings.
  */
-export type FormatReadSettingsUnion = FormatReadSettings | BinaryReadSettings | JsonReadSettings | DelimitedTextReadSettings;
+export type FormatReadSettingsUnion = FormatReadSettings | BinaryReadSettings | XmlReadSettings | JsonReadSettings | DelimitedTextReadSettings;
 
 /**
  * Format read settings.
@@ -13776,6 +13935,32 @@ export interface BinaryReadSettings {
    * Compression settings.
    */
   compressionProperties?: CompressionReadSettingsUnion;
+}
+
+/**
+ * Xml read settings.
+ */
+export interface XmlReadSettings {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "XmlReadSettings";
+  /**
+   * Compression settings.
+   */
+  compressionProperties?: CompressionReadSettingsUnion;
+  /**
+   * Indicates what validation method is used when reading the xml files. Allowed values: 'none',
+   * 'xsd', or 'dtd'. Type: string (or Expression with resultType string).
+   */
+  validationMode?: any;
+  /**
+   * Namespace uri to prefix mappings to override the prefixes in column names when namespace is
+   * enabled, if no prefix is defined for a namespace uri, the prefix of xml element/attribute name
+   * in the xml data file will be used. Example: "{"http://www.example.com/xml":"prefix"}" Type:
+   * object (or Expression with resultType object).
+   */
+  namespacePrefixes?: any;
 }
 
 /**
@@ -13994,6 +14179,11 @@ export interface SftpReadSettings {
    */
   fileListPath?: any;
   /**
+   * Indicates whether the source files need to be deleted after copy completion. Default is false.
+   * Type: boolean (or Expression with resultType boolean).
+   */
+  deleteFilesAfterCompletion?: any;
+  /**
    * The start of file's modified datetime. Type: string (or Expression with resultType string).
    */
   modifiedDatetimeStart?: any;
@@ -14038,6 +14228,11 @@ export interface FtpReadSettings {
    * resultType string).
    */
   partitionRootPath?: any;
+  /**
+   * Indicates whether the source files need to be deleted after copy completion. Default is false.
+   * Type: boolean (or Expression with resultType boolean).
+   */
+  deleteFilesAfterCompletion?: any;
   /**
    * Point to a text file that lists each file (relative path to the path configured in the
    * dataset) that you want to copy. Type: string (or Expression with resultType string).
@@ -14095,6 +14290,11 @@ export interface GoogleCloudStorageReadSettings {
    */
   partitionRootPath?: any;
   /**
+   * Indicates whether the source files need to be deleted after copy completion. Default is false.
+   * Type: boolean (or Expression with resultType boolean).
+   */
+  deleteFilesAfterCompletion?: any;
+  /**
    * The start of file's modified datetime. Type: string (or Expression with resultType string).
    */
   modifiedDatetimeStart?: any;
@@ -14150,6 +14350,11 @@ export interface AzureFileStorageReadSettings {
    */
   partitionRootPath?: any;
   /**
+   * Indicates whether the source files need to be deleted after copy completion. Default is false.
+   * Type: boolean (or Expression with resultType boolean).
+   */
+  deleteFilesAfterCompletion?: any;
+  /**
    * The start of file's modified datetime. Type: string (or Expression with resultType string).
    */
   modifiedDatetimeStart?: any;
@@ -14199,6 +14404,11 @@ export interface FileServerReadSettings {
    * resultType string).
    */
   partitionRootPath?: any;
+  /**
+   * Indicates whether the source files need to be deleted after copy completion. Default is false.
+   * Type: boolean (or Expression with resultType boolean).
+   */
+  deleteFilesAfterCompletion?: any;
   /**
    * The start of file's modified datetime. Type: string (or Expression with resultType string).
    */
@@ -14259,6 +14469,11 @@ export interface AmazonS3ReadSettings {
    */
   partitionRootPath?: any;
   /**
+   * Indicates whether the source files need to be deleted after copy completion. Default is false.
+   * Type: boolean (or Expression with resultType boolean).
+   */
+  deleteFilesAfterCompletion?: any;
+  /**
    * The start of file's modified datetime. Type: string (or Expression with resultType string).
    */
   modifiedDatetimeStart?: any;
@@ -14300,6 +14515,18 @@ export interface AzureDataLakeStoreReadSettings {
    */
   fileListPath?: any;
   /**
+   * Lists files after the value (exclusive) based on file/folder names’ lexicographical order.
+   * Applies under the folderPath in data set, and filter files/sub-folders under the folderPath.
+   * Type: string (or Expression with resultType string).
+   */
+  listAfter?: any;
+  /**
+   * Lists files before the value (inclusive) based on file/folder names’ lexicographical order.
+   * Applies under the folderPath in data set, and filter files/sub-folders under the folderPath.
+   * Type: string (or Expression with resultType string).
+   */
+  listBefore?: any;
+  /**
    * Indicates whether to enable partition discovery.
    */
   enablePartitionDiscovery?: boolean;
@@ -14308,6 +14535,11 @@ export interface AzureDataLakeStoreReadSettings {
    * resultType string).
    */
   partitionRootPath?: any;
+  /**
+   * Indicates whether the source files need to be deleted after copy completion. Default is false.
+   * Type: boolean (or Expression with resultType boolean).
+   */
+  deleteFilesAfterCompletion?: any;
   /**
    * The start of file's modified datetime. Type: string (or Expression with resultType string).
    */
@@ -14358,6 +14590,11 @@ export interface AzureBlobFSReadSettings {
    * resultType string).
    */
   partitionRootPath?: any;
+  /**
+   * Indicates whether the source files need to be deleted after copy completion. Default is false.
+   * Type: boolean (or Expression with resultType boolean).
+   */
+  deleteFilesAfterCompletion?: any;
   /**
    * The start of file's modified datetime. Type: string (or Expression with resultType string).
    */
@@ -14413,6 +14650,11 @@ export interface AzureBlobStorageReadSettings {
    * resultType string).
    */
   partitionRootPath?: any;
+  /**
+   * Indicates whether the source files need to be deleted after copy completion. Default is false.
+   * Type: boolean (or Expression with resultType boolean).
+   */
+  deleteFilesAfterCompletion?: any;
   /**
    * The start of file's modified datetime. Type: string (or Expression with resultType string).
    */
@@ -14571,7 +14813,7 @@ export interface WebActivity {
 /**
  * Contains the possible cases for CopySource.
  */
-export type CopySourceUnion = CopySource | SharePointOnlineListSource | SnowflakeSource | HttpSource | AzureBlobFSSource | AzureDataLakeStoreSource | Office365Source | CosmosDbMongoDbApiSource | MongoDbV2Source | MongoDbSource | WebSource | OracleSource | AzureDataExplorerSource | HdfsSource | FileSystemSource | RestSource | SalesforceServiceCloudSource | ODataSource | MicrosoftAccessSource | RelationalSource | CommonDataServiceForAppsSource | DynamicsCrmSource | DynamicsSource | CosmosDbSqlApiSource | DocumentDbCollectionSource | BlobSource | TabularSourceUnion | BinarySource | OrcSource | JsonSource | DelimitedTextSource | ParquetSource | AvroSource;
+export type CopySourceUnion = CopySource | SharePointOnlineListSource | SnowflakeSource | HttpSource | AzureBlobFSSource | AzureDataLakeStoreSource | Office365Source | CosmosDbMongoDbApiSource | MongoDbV2Source | MongoDbSource | WebSource | OracleSource | AzureDataExplorerSource | HdfsSource | FileSystemSource | RestSource | SalesforceServiceCloudSource | ODataSource | MicrosoftAccessSource | RelationalSource | CommonDataServiceForAppsSource | DynamicsCrmSource | DynamicsSource | CosmosDbSqlApiSource | DocumentDbCollectionSource | BlobSource | TabularSourceUnion | BinarySource | OrcSource | XmlSource | JsonSource | DelimitedTextSource | ParquetSource | ExcelSource | AvroSource;
 
 /**
  * A copy activity source.
@@ -17264,6 +17506,32 @@ export interface AzureMySqlSource {
 }
 
 /**
+ * The settings that will be leveraged for Sql source partitioning.
+ */
+export interface SqlPartitionSettings {
+  /**
+   * The name of the column in integer or datetime type that will be used for proceeding
+   * partitioning. If not specified, the primary key of the table is auto-detected and used as the
+   * partition column. Type: string (or Expression with resultType string).
+   */
+  partitionColumnName?: any;
+  /**
+   * The maximum value of the partition column for partition range splitting. This value is used to
+   * decide the partition stride, not for filtering the rows in table. All rows in the table or
+   * query result will be partitioned and copied. Type: string (or Expression with resultType
+   * string).
+   */
+  partitionUpperBound?: any;
+  /**
+   * The minimum value of the partition column for partition range splitting. This value is used to
+   * decide the partition stride, not for filtering the rows in table. All rows in the table or
+   * query result will be partitioned and copied. Type: string (or Expression with resultType
+   * string).
+   */
+  partitionLowerBound?: any;
+}
+
+/**
  * A copy activity SQL Data Warehouse source.
  */
 export interface SqlDWSource {
@@ -17310,6 +17578,15 @@ export interface SqlDWSource {
    * StoredProcedureParameter.
    */
   storedProcedureParameters?: any;
+  /**
+   * The partition mechanism that will be used for Sql read in parallel. Possible values include:
+   * 'None', 'PhysicalPartitionsOfTable', 'DynamicRange'
+   */
+  partitionOption?: SqlPartitionOption;
+  /**
+   * The settings that will be leveraged for Sql source partitioning.
+   */
+  partitionSettings?: SqlPartitionSettings;
 }
 
 /**
@@ -17377,6 +17654,15 @@ export interface SqlMISource {
    * Which additional types to produce.
    */
   produceAdditionalTypes?: any;
+  /**
+   * The partition mechanism that will be used for Sql read in parallel. Possible values include:
+   * 'None', 'PhysicalPartitionsOfTable', 'DynamicRange'
+   */
+  partitionOption?: SqlPartitionOption;
+  /**
+   * The settings that will be leveraged for Sql source partitioning.
+   */
+  partitionSettings?: SqlPartitionSettings;
 }
 
 /**
@@ -17429,6 +17715,15 @@ export interface AzureSqlSource {
    * Which additional types to produce.
    */
   produceAdditionalTypes?: any;
+  /**
+   * The partition mechanism that will be used for Sql read in parallel. Possible values include:
+   * 'None', 'PhysicalPartitionsOfTable', 'DynamicRange'
+   */
+  partitionOption?: SqlPartitionOption;
+  /**
+   * The settings that will be leveraged for Sql source partitioning.
+   */
+  partitionSettings?: SqlPartitionSettings;
 }
 
 /**
@@ -17481,6 +17776,15 @@ export interface SqlServerSource {
    * Which additional types to produce.
    */
   produceAdditionalTypes?: any;
+  /**
+   * The partition mechanism that will be used for Sql read in parallel. Possible values include:
+   * 'None', 'PhysicalPartitionsOfTable', 'DynamicRange'
+   */
+  partitionOption?: SqlPartitionOption;
+  /**
+   * The settings that will be leveraged for Sql source partitioning.
+   */
+  partitionSettings?: SqlPartitionSettings;
 }
 
 /**
@@ -17535,6 +17839,15 @@ export interface SqlSource {
    * ReadCommitted. Type: string (or Expression with resultType string).
    */
   isolationLevel?: any;
+  /**
+   * The partition mechanism that will be used for Sql read in parallel. Possible values include:
+   * 'None', 'PhysicalPartitionsOfTable', 'DynamicRange'
+   */
+  partitionOption?: SqlPartitionOption;
+  /**
+   * The settings that will be leveraged for Sql source partitioning.
+   */
+  partitionSettings?: SqlPartitionSettings;
 }
 
 /**
@@ -18252,6 +18565,43 @@ export interface OrcSource {
 }
 
 /**
+ * A copy activity Xml source.
+ */
+export interface XmlSource {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "XmlSource";
+  /**
+   * Source retry count. Type: integer (or Expression with resultType integer).
+   */
+  sourceRetryCount?: any;
+  /**
+   * Source retry wait. Type: string (or Expression with resultType string), pattern:
+   * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
+   */
+  sourceRetryWait?: any;
+  /**
+   * The maximum concurrent connection count for the source data store. Type: integer (or
+   * Expression with resultType integer).
+   */
+  maxConcurrentConnections?: any;
+  /**
+   * Xml store settings.
+   */
+  storeSettings?: StoreReadSettingsUnion;
+  /**
+   * Xml format settings.
+   */
+  formatSettings?: XmlReadSettings;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+}
+
+/**
  * A copy activity Json source.
  */
 export interface JsonSource {
@@ -18349,6 +18699,39 @@ export interface ParquetSource {
   maxConcurrentConnections?: any;
   /**
    * Parquet store settings.
+   */
+  storeSettings?: StoreReadSettingsUnion;
+  /**
+   * Specifies the additional columns to be added to source data. Type: array of objects (or
+   * Expression with resultType array of objects).
+   */
+  additionalColumns?: AdditionalColumns[];
+}
+
+/**
+ * A copy activity excel source.
+ */
+export interface ExcelSource {
+  /**
+   * Polymorphic Discriminator
+   */
+  type: "ExcelSource";
+  /**
+   * Source retry count. Type: integer (or Expression with resultType integer).
+   */
+  sourceRetryCount?: any;
+  /**
+   * Source retry wait. Type: string (or Expression with resultType string), pattern:
+   * ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
+   */
+  sourceRetryWait?: any;
+  /**
+   * The maximum concurrent connection count for the source data store. Type: integer (or
+   * Expression with resultType integer).
+   */
+  maxConcurrentConnections?: any;
+  /**
+   * Excel store settings.
    */
   storeSettings?: StoreReadSettingsUnion;
   /**
@@ -21630,7 +22013,7 @@ export interface WaitActivity {
   /**
    * Duration in seconds.
    */
-  waitTimeInSeconds: number;
+  waitTimeInSeconds: any;
 }
 
 /**
@@ -22983,6 +23366,28 @@ export interface IntegrationRuntimeConnectionInfo {
 /**
  * Optional Parameters.
  */
+export interface FactoriesCreateOrUpdateOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * ETag of the factory entity. Should only be specified for update, for which it should match
+   * existing entity or can be * for unconditional update.
+   */
+  ifMatch?: string;
+}
+
+/**
+ * Optional Parameters.
+ */
+export interface FactoriesGetOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * ETag of the factory entity. Should only be specified for get. If the ETag matches the existing
+   * entity tag, or if * was provided, then no content will be returned.
+   */
+  ifNoneMatch?: string;
+}
+
+/**
+ * Optional Parameters.
+ */
 export interface IntegrationRuntimesCreateOrUpdateOptionalParams extends msRest.RequestOptionsBase {
   /**
    * ETag of the integration runtime entity. Should only be specified for update, for which it
@@ -23299,6 +23704,14 @@ export interface QueryDataFlowDebugSessionsResponse extends Array<DataFlowDebugS
 }
 
 /**
+ * Defines values for GlobalParameterType.
+ * Possible values include: 'Object', 'String', 'Int', 'Float', 'Bool', 'Array'
+ * @readonly
+ * @enum {string}
+ */
+export type GlobalParameterType = 'Object' | 'String' | 'Int' | 'Float' | 'Bool' | 'Array';
+
+/**
  * Defines values for IntegrationRuntimeState.
  * Possible values include: 'Initial', 'Stopped', 'Started', 'Starting', 'Stopping',
  * 'NeedRegistration', 'Online', 'Limited', 'Offline', 'AccessDenied'
@@ -23414,14 +23827,6 @@ export type DataFlowDebugCommandType = 'executePreviewQuery' | 'executeStatistic
  * @enum {string}
  */
 export type GoogleAdWordsAuthenticationType = 'ServiceAuthentication' | 'UserAuthentication';
-
-/**
- * Defines values for HdiNodeTypes.
- * Possible values include: 'Headnode', 'Workernode', 'Zookeeper'
- * @readonly
- * @enum {string}
- */
-export type HdiNodeTypes = 'Headnode' | 'Workernode' | 'Zookeeper';
 
 /**
  * Defines values for SparkServerType.
@@ -23627,14 +24032,6 @@ export type DynamicsDeploymentType = 'Online' | 'OnPremisesWithIfd';
 export type DynamicsAuthenticationType = 'Office365' | 'Ifd' | 'AADServicePrincipal';
 
 /**
- * Defines values for DatasetCompressionLevel.
- * Possible values include: 'Optimal', 'Fastest'
- * @readonly
- * @enum {string}
- */
-export type DatasetCompressionLevel = 'Optimal' | 'Fastest';
-
-/**
  * Defines values for OrcCompressionCodec.
  * Possible values include: 'none', 'zlib', 'snappy'
  * @readonly
@@ -23756,6 +24153,14 @@ export type CassandraSourceReadConsistencyLevels = 'ALL' | 'EACH_QUORUM' | 'QUOR
  * @enum {string}
  */
 export type TeradataPartitionOption = 'None' | 'Hash' | 'DynamicRange';
+
+/**
+ * Defines values for SqlPartitionOption.
+ * Possible values include: 'None', 'PhysicalPartitionsOfTable', 'DynamicRange'
+ * @readonly
+ * @enum {string}
+ */
+export type SqlPartitionOption = 'None' | 'PhysicalPartitionsOfTable' | 'DynamicRange';
 
 /**
  * Defines values for StoredProcedureParameterType.
@@ -24036,9 +24441,89 @@ export type FactoriesListByResourceGroupResponse = FactoryListResponse & {
 };
 
 /**
+ * Contains response data for the createOrUpdate operation.
+ */
+export type FactoriesCreateOrUpdateResponse = Factory & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Factory;
+    };
+};
+
+/**
+ * Contains response data for the update operation.
+ */
+export type FactoriesUpdateResponse = Factory & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Factory;
+    };
+};
+
+/**
+ * Contains response data for the get operation.
+ */
+export type FactoriesGetResponse = Factory & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: Factory;
+    };
+};
+
+/**
  * Contains response data for the getGitHubAccessToken operation.
  */
 export type FactoriesGetGitHubAccessTokenResponse = GitHubAccessTokenResponse & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: GitHubAccessTokenResponse;
+    };
+};
+
+/**
+ * Contains response data for the getGitHubAccessTokenDemo operation.
+ */
+export type FactoriesGetGitHubAccessTokenDemoResponse = GitHubAccessTokenResponse & {
   /**
    * The underlying HTTP response.
    */
