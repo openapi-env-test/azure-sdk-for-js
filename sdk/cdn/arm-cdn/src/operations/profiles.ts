@@ -28,7 +28,7 @@ export class Profiles {
   }
 
   /**
-   * Lists all of the CDN profiles within an Azure subscription.
+   * Lists all of the CDN profiles within an Azure subscription
    * @param [options] The optional parameters
    * @returns Promise<Models.ProfilesListResponse>
    */
@@ -313,7 +313,7 @@ export class Profiles {
   }
 
   /**
-   * Lists all of the CDN profiles within an Azure subscription.
+   * Lists all of the CDN profiles within an Azure subscription
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.ProfilesListNextResponse>
@@ -426,7 +426,7 @@ const listByResourceGroupOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles",
   urlParameters: [
-    Parameters.resourceGroupName,
+    Parameters.resourceGroupName0,
     Parameters.subscriptionId
   ],
   queryParameters: [
@@ -450,7 +450,7 @@ const getOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}",
   urlParameters: [
-    Parameters.resourceGroupName,
+    Parameters.resourceGroupName0,
     Parameters.profileName,
     Parameters.subscriptionId
   ],
@@ -475,7 +475,7 @@ const generateSsoUriOperationSpec: msRest.OperationSpec = {
   httpMethod: "POST",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/generateSsoUri",
   urlParameters: [
-    Parameters.resourceGroupName,
+    Parameters.resourceGroupName0,
     Parameters.profileName,
     Parameters.subscriptionId
   ],
@@ -500,7 +500,7 @@ const listSupportedOptimizationTypesOperationSpec: msRest.OperationSpec = {
   httpMethod: "POST",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getSupportedOptimizationTypes",
   urlParameters: [
-    Parameters.resourceGroupName,
+    Parameters.resourceGroupName0,
     Parameters.profileName,
     Parameters.subscriptionId
   ],
@@ -525,7 +525,7 @@ const listResourceUsageOperationSpec: msRest.OperationSpec = {
   httpMethod: "POST",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/checkResourceUsage",
   urlParameters: [
-    Parameters.resourceGroupName,
+    Parameters.resourceGroupName0,
     Parameters.profileName,
     Parameters.subscriptionId
   ],
@@ -550,7 +550,7 @@ const beginCreateOperationSpec: msRest.OperationSpec = {
   httpMethod: "PUT",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}",
   urlParameters: [
-    Parameters.resourceGroupName,
+    Parameters.resourceGroupName0,
     Parameters.profileName,
     Parameters.subscriptionId
   ],
@@ -588,7 +588,7 @@ const beginUpdateOperationSpec: msRest.OperationSpec = {
   httpMethod: "PATCH",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}",
   urlParameters: [
-    Parameters.resourceGroupName,
+    Parameters.resourceGroupName0,
     Parameters.profileName,
     Parameters.subscriptionId
   ],
@@ -628,7 +628,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
   httpMethod: "DELETE",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}",
   urlParameters: [
-    Parameters.resourceGroupName,
+    Parameters.resourceGroupName0,
     Parameters.profileName,
     Parameters.subscriptionId
   ],
