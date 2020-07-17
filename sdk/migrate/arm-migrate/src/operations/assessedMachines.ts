@@ -74,7 +74,7 @@ export class AssessedMachines {
   }
 
   /**
-   * Get an assessed machine with its size & cost estimnate that was evaluated in the specified
+   * Get an assessed machine with its size & cost estimate that was evaluated in the specified
    * assessment.
    * @summary Get an assessed machine.
    * @param resourceGroupName Name of the Azure Resource Group that project is part of.
@@ -147,7 +147,8 @@ const listByAssessmentOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.AssessedMachinesListByAssessmentHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.AssessedMachinesListByAssessmentHeaders
     }
   },
   serializer
@@ -176,7 +177,8 @@ const getOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.AssessedMachinesGetHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.AssessedMachinesGetHeaders
     }
   },
   serializer
