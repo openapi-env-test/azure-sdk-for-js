@@ -121,7 +121,8 @@ const listByProjectOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.MachinesListByProjectHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.MachinesListByProjectHeaders
     }
   },
   serializer
@@ -148,7 +149,8 @@ const getOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.MachinesGetHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.MachinesGetHeaders
     }
   },
   serializer

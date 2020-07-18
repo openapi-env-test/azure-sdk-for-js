@@ -207,7 +207,8 @@ const listByProjectOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.GroupsListByProjectHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.GroupsListByProjectHeaders
     }
   },
   serializer
@@ -234,7 +235,8 @@ const getOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.GroupsGetHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.GroupsGetHeaders
     }
   },
   serializer
@@ -272,7 +274,8 @@ const createOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.GroupsCreateHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.GroupsCreateHeaders
     }
   },
   serializer
@@ -298,7 +301,8 @@ const deleteMethodOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.GroupsDeleteHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.GroupsDeleteHeaders
     }
   },
   serializer
