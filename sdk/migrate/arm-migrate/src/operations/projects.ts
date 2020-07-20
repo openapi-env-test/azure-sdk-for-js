@@ -267,7 +267,8 @@ const listBySubscriptionOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.ProjectsListBySubscriptionHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.ProjectsListBySubscriptionHeaders
     }
   },
   serializer
@@ -292,7 +293,8 @@ const listByResourceGroupOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.ProjectsListByResourceGroupHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.ProjectsListByResourceGroupHeaders
     }
   },
   serializer
@@ -318,7 +320,8 @@ const getOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.ProjectsGetHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.ProjectsGetHeaders
     }
   },
   serializer
@@ -355,7 +358,8 @@ const createOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.ProjectsCreateHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.ProjectsCreateHeaders
     }
   },
   serializer
@@ -388,7 +392,8 @@ const updateOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.ProjectsUpdateHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.ProjectsUpdateHeaders
     }
   },
   serializer
@@ -413,7 +418,8 @@ const deleteMethodOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.ProjectsDeleteHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.ProjectsDeleteHeaders
     }
   },
   serializer
@@ -439,7 +445,8 @@ const getKeysOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.ProjectsGetKeysHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.ProjectsGetKeysHeaders
     }
   },
   serializer
