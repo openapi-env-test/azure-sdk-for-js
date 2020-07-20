@@ -144,7 +144,7 @@ export class Assessments {
 
   /**
    * Create a new assessment with the given name and the specified settings. Since name of an
-   * assessment in a project is a unique identiefier, if an assessment with the name provided already
+   * assessment in a project is a unique identifier, if an assessment with the name provided already
    * exists, then the existing assessment is updated.
    *
    * Any PUT operation, resulting in either create or update on an assessment, will cause the
@@ -304,7 +304,8 @@ const listByGroupOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.AssessmentsListByGroupHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.AssessmentsListByGroupHeaders
     }
   },
   serializer
@@ -330,7 +331,8 @@ const listByProjectOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.AssessmentsListByProjectHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.AssessmentsListByProjectHeaders
     }
   },
   serializer
@@ -358,7 +360,8 @@ const getOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.AssessmentsGetHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.AssessmentsGetHeaders
     }
   },
   serializer
@@ -397,7 +400,8 @@ const createOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.AssessmentsCreateHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.AssessmentsCreateHeaders
     }
   },
   serializer
@@ -424,7 +428,8 @@ const deleteMethodOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.AssessmentsDeleteHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.AssessmentsDeleteHeaders
     }
   },
   serializer
@@ -452,7 +457,8 @@ const getReportDownloadUrlOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.AssessmentsGetReportDownloadUrlHeaders
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.CloudError,
+      headersMapper: Mappers.AssessmentsGetReportDownloadUrlHeaders
     }
   },
   serializer
