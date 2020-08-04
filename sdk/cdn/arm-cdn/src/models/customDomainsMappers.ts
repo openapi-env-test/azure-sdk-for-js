@@ -100,6 +100,9 @@ export {
   UrlRedirectActionParameters,
   UrlRewriteAction,
   UrlRewriteActionParameters,
+  UrlSigningAction,
+  UrlSigningActionParameters,
   UrlSigningKey,
+  UrlSigningParamIdentifier,
   UserManagedHttpsParameters
 } from "../models/mappers";

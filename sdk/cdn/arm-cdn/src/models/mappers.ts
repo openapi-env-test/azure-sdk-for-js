@@ -2255,6 +2255,27 @@ export const UrlSigningActionParameters: msRest.CompositeMapper = {
   }
 };
 
+export const UrlSigningAction: msRest.CompositeMapper = {
+  serializedName: "UrlSigning",
+  type: {
+    name: "Composite",
+    polymorphicDiscriminator: DeliveryRuleAction.type.polymorphicDiscriminator,
+    uberParent: "DeliveryRuleAction",
+    className: "UrlSigningAction",
+    modelProperties: {
+      ...DeliveryRuleAction.type.modelProperties,
+      parameters: {
+        required: true,
+        serializedName: "parameters",
+        type: {
+          name: "Composite",
+          className: "UrlSigningActionParameters"
+        }
+      }
+    }
+  }
+};
+
 export const UrlRewriteActionParameters: msRest.CompositeMapper = {
   serializedName: "UrlRewriteActionParameters",
   type: {
@@ -4389,6 +4410,7 @@ export const discriminators = {
   'DeliveryRuleCondition.Cookies' : DeliveryRuleCookiesCondition,
   'DeliveryRuleCondition.IsDevice' : DeliveryRuleIsDeviceCondition,
   'DeliveryRuleAction.UrlRedirect' : UrlRedirectAction,
+  'DeliveryRuleAction.UrlSigning' : UrlSigningAction,
   'DeliveryRuleAction.UrlRewrite' : UrlRewriteAction,
   'DeliveryRuleAction.ModifyRequestHeader' : DeliveryRuleRequestHeaderAction,
   'DeliveryRuleAction.ModifyResponseHeader' : DeliveryRuleResponseHeaderAction,
