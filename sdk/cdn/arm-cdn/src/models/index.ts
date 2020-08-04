@@ -458,7 +458,7 @@ export interface DeliveryRuleCondition {
 /**
  * Contains the possible cases for DeliveryRuleAction.
  */
-export type DeliveryRuleActionUnion = DeliveryRuleAction | UrlRedirectAction | UrlRewriteAction | DeliveryRuleRequestHeaderAction | DeliveryRuleResponseHeaderAction | DeliveryRuleCacheExpirationAction | DeliveryRuleCacheKeyQueryStringAction;
+export type DeliveryRuleActionUnion = DeliveryRuleAction | UrlRedirectAction | UrlSigningAction | UrlRewriteAction | DeliveryRuleRequestHeaderAction | DeliveryRuleResponseHeaderAction | DeliveryRuleCacheExpirationAction | DeliveryRuleCacheKeyQueryStringAction;
 
 /**
  * An action for the delivery rule.
@@ -1193,6 +1193,20 @@ export interface UrlSigningActionParameters {
    * Match values to match against. Supports CIDR ranges (both IPv4 and IPv6).
    */
   ipSubnets?: string[];
+}
+
+/**
+ * Defines the url signing action for the delivery rule.
+ */
+export interface UrlSigningAction {
+  /**
+   * Polymorphic Discriminator
+   */
+  name: "UrlSigning";
+  /**
+   * Defines the parameters for the action.
+   */
+  parameters: UrlSigningActionParameters;
 }
 
 /**

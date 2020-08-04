@@ -99,7 +99,10 @@ export {
   UrlRedirectActionParameters,
   UrlRewriteAction,
   UrlRewriteActionParameters,
+  UrlSigningAction,
+  UrlSigningActionParameters,
   UrlSigningKey,
+  UrlSigningParamIdentifier,
   ValidateCustomDomainInput,
   ValidateCustomDomainOutput
 } from "../models/mappers";
