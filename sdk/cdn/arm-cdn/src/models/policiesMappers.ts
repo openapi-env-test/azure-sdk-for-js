@@ -96,5 +96,8 @@ export {
   UrlRedirectActionParameters,
   UrlRewriteAction,
   UrlRewriteActionParameters,
-  UrlSigningKey
+  UrlSigningAction,
+  UrlSigningActionParameters,
+  UrlSigningKey,
+  UrlSigningParamIdentifier
 } from "../models/mappers";

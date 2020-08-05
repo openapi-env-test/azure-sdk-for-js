@@ -458,7 +458,7 @@ export interface DeliveryRuleCondition {
 /**
  * Contains the possible cases for DeliveryRuleAction.
  */
-export type DeliveryRuleActionUnion = DeliveryRuleAction | UrlRedirectAction | UrlRewriteAction | DeliveryRuleRequestHeaderAction | DeliveryRuleResponseHeaderAction | DeliveryRuleCacheExpirationAction | DeliveryRuleCacheKeyQueryStringAction;
+export type DeliveryRuleActionUnion = DeliveryRuleAction | UrlRedirectAction | UrlSigningAction | UrlRewriteAction | DeliveryRuleRequestHeaderAction | DeliveryRuleResponseHeaderAction | DeliveryRuleCacheExpirationAction | DeliveryRuleCacheKeyQueryStringAction;
 
 /**
  * An action for the delivery rule.
@@ -1193,6 +1193,20 @@ export interface UrlSigningActionParameters {
    * Match values to match against. Supports CIDR ranges (both IPv4 and IPv6).
    */
   ipSubnets?: string[];
+}
+
+/**
+ * Defines the url signing action for the delivery rule.
+ */
+export interface UrlSigningAction {
+  /**
+   * Polymorphic Discriminator
+   */
+  name: "UrlSigning";
+  /**
+   * Defines the parameters for the action.
+   */
+  parameters: UrlSigningActionParameters;
 }
 
 /**
@@ -2264,26 +2278,6 @@ export interface ManagedRuleSetDefinition extends Resource {
 /**
  * Optional Parameters.
  */
-export interface ProfilesUpdateOptionalParams extends msRest.RequestOptionsBase {
-  /**
-   * Profile tags
-   */
-  tags?: { [propertyName: string]: string };
-}
-
-/**
- * Optional Parameters.
- */
-export interface ProfilesBeginUpdateOptionalParams extends msRest.RequestOptionsBase {
-  /**
-   * Profile tags
-   */
-  tags?: { [propertyName: string]: string };
-}
-
-/**
- * Optional Parameters.
- */
 export interface CustomDomainsEnableCustomHttpsOptionalParams extends msRest.RequestOptionsBase {
   /**
    * The configuration specifying how to enable HTTPS for the custom domain - using CDN managed
@@ -2931,26 +2925,6 @@ export type ProfilesCreateResponse = Profile & {
 };
 
 /**
- * Contains response data for the update operation.
- */
-export type ProfilesUpdateResponse = Profile & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: Profile;
-    };
-};
-
-/**
  * Contains response data for the generateSsoUri operation.
  */
 export type ProfilesGenerateSsoUriResponse = SsoUri & {
@@ -3014,26 +2988,6 @@ export type ProfilesListResourceUsageResponse = ResourceUsageListResult & {
  * Contains response data for the beginCreate operation.
  */
 export type ProfilesBeginCreateResponse = Profile & {
-  /**
-   * The underlying HTTP response.
-   */
-  _response: msRest.HttpResponse & {
-      /**
-       * The response body as text (string format)
-       */
-      bodyAsText: string;
-
-      /**
-       * The response body as parsed JSON or XML
-       */
-      parsedBody: Profile;
-    };
-};
-
-/**
- * Contains response data for the beginUpdate operation.
- */
-export type ProfilesBeginUpdateResponse = Profile & {
   /**
    * The underlying HTTP response.
    */
