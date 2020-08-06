@@ -31,10 +31,12 @@ import * as msRest from "@azure/ms-rest-js";
 import * as msRestAzure from "@azure/ms-rest-azure-js";
 import * as msRestNodeAuth from "@azure/ms-rest-nodeauth";
 import { SubscriptionClient, SubscriptionModels, SubscriptionMappers } from "@azure/arm-subscriptions";
- 
+const subscriptionId = process.env["AZURE_SUBSCRIPTION_ID"];
+
 msRestNodeAuth.interactiveLogin().then((creds) => {
-  const client = new SubscriptionClient(creds);
-  client.subscriptions.list().then((result) => {
+  const client = new SubscriptionClient(creds, subscriptionId);
+  const subscriptionId = "testsubscriptionId";
+  client.subscriptions.listLocations(subscriptionId).then((result) => {
     console.log("The result is:");
     console.log(result);
   });
