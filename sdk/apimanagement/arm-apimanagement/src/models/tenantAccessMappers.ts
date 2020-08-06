@@ -12,6 +12,5 @@ export {
   ErrorFieldContract,
   ErrorResponse,
   TenantAccessGetEntityTagHeaders,
-  TenantAccessGetHeaders,
-  TenantAccessListSecretsHeaders
+  TenantAccessGetHeaders
 } from "../models/mappers";

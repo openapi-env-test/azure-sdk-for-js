@@ -10,16 +10,16 @@
 
 import * as msRest from "@azure/ms-rest-js";
 import * as Models from "../models";
-import * as Mappers from "../models/openIdConnectProviderMappers";
+import * as Mappers from "../models/propertyMappers";
 import * as Parameters from "../models/parameters";
 import { ApiManagementClientContext } from "../apiManagementClientContext";
 
-/** Class representing a OpenIdConnectProvider. */
-export class OpenIdConnectProvider {
+/** Class representing a Property. */
+export class Property {
   private readonly client: ApiManagementClientContext;
 
   /**
-   * Create a OpenIdConnectProvider.
+   * Create a Property.
    * @param {ApiManagementClientContext} client Reference to the service client.
    */
   constructor(client: ApiManagementClientContext) {
@@ -27,27 +27,27 @@ export class OpenIdConnectProvider {
   }
 
   /**
-   * Lists of all the OpenId Connect Providers.
+   * Lists a collection of properties defined within a service instance.
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
    * @param [options] The optional parameters
-   * @returns Promise<Models.OpenIdConnectProviderListByServiceResponse>
+   * @returns Promise<Models.PropertyListByServiceResponse>
    */
-  listByService(resourceGroupName: string, serviceName: string, options?: Models.OpenIdConnectProviderListByServiceOptionalParams): Promise<Models.OpenIdConnectProviderListByServiceResponse>;
+  listByService(resourceGroupName: string, serviceName: string, options?: Models.PropertyListByServiceOptionalParams): Promise<Models.PropertyListByServiceResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
    * @param callback The callback
    */
-  listByService(resourceGroupName: string, serviceName: string, callback: msRest.ServiceCallback<Models.OpenIdConnectProviderCollection>): void;
+  listByService(resourceGroupName: string, serviceName: string, callback: msRest.ServiceCallback<Models.PropertyCollection>): void;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
    * @param options The optional parameters
    * @param callback The callback
    */
-  listByService(resourceGroupName: string, serviceName: string, options: Models.OpenIdConnectProviderListByServiceOptionalParams, callback: msRest.ServiceCallback<Models.OpenIdConnectProviderCollection>): void;
-  listByService(resourceGroupName: string, serviceName: string, options?: Models.OpenIdConnectProviderListByServiceOptionalParams | msRest.ServiceCallback<Models.OpenIdConnectProviderCollection>, callback?: msRest.ServiceCallback<Models.OpenIdConnectProviderCollection>): Promise<Models.OpenIdConnectProviderListByServiceResponse> {
+  listByService(resourceGroupName: string, serviceName: string, options: Models.PropertyListByServiceOptionalParams, callback: msRest.ServiceCallback<Models.PropertyCollection>): void;
+  listByService(resourceGroupName: string, serviceName: string, options?: Models.PropertyListByServiceOptionalParams | msRest.ServiceCallback<Models.PropertyCollection>, callback?: msRest.ServiceCallback<Models.PropertyCollection>): Promise<Models.PropertyListByServiceResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
@@ -55,160 +55,160 @@ export class OpenIdConnectProvider {
         options
       },
       listByServiceOperationSpec,
-      callback) as Promise<Models.OpenIdConnectProviderListByServiceResponse>;
+      callback) as Promise<Models.PropertyListByServiceResponse>;
   }
 
   /**
-   * Gets the entity state (Etag) version of the openIdConnectProvider specified by its identifier.
+   * Gets the entity state (Etag) version of the property specified by its identifier.
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
-   * @param opid Identifier of the OpenID Connect Provider.
+   * @param propId Identifier of the property.
    * @param [options] The optional parameters
-   * @returns Promise<Models.OpenIdConnectProviderGetEntityTagResponse>
+   * @returns Promise<Models.PropertyGetEntityTagResponse>
    */
-  getEntityTag(resourceGroupName: string, serviceName: string, opid: string, options?: msRest.RequestOptionsBase): Promise<Models.OpenIdConnectProviderGetEntityTagResponse>;
+  getEntityTag(resourceGroupName: string, serviceName: string, propId: string, options?: msRest.RequestOptionsBase): Promise<Models.PropertyGetEntityTagResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
-   * @param opid Identifier of the OpenID Connect Provider.
+   * @param propId Identifier of the property.
    * @param callback The callback
    */
-  getEntityTag(resourceGroupName: string, serviceName: string, opid: string, callback: msRest.ServiceCallback<void>): void;
+  getEntityTag(resourceGroupName: string, serviceName: string, propId: string, callback: msRest.ServiceCallback<void>): void;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
-   * @param opid Identifier of the OpenID Connect Provider.
+   * @param propId Identifier of the property.
    * @param options The optional parameters
    * @param callback The callback
    */
-  getEntityTag(resourceGroupName: string, serviceName: string, opid: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
-  getEntityTag(resourceGroupName: string, serviceName: string, opid: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<Models.OpenIdConnectProviderGetEntityTagResponse> {
+  getEntityTag(resourceGroupName: string, serviceName: string, propId: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
+  getEntityTag(resourceGroupName: string, serviceName: string, propId: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<Models.PropertyGetEntityTagResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
         serviceName,
-        opid,
+        propId,
         options
       },
       getEntityTagOperationSpec,
-      callback) as Promise<Models.OpenIdConnectProviderGetEntityTagResponse>;
+      callback) as Promise<Models.PropertyGetEntityTagResponse>;
   }
 
   /**
-   * Gets specific OpenID Connect Provider.
+   * Gets the details of the property specified by its identifier.
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
-   * @param opid Identifier of the OpenID Connect Provider.
+   * @param propId Identifier of the property.
    * @param [options] The optional parameters
-   * @returns Promise<Models.OpenIdConnectProviderGetResponse>
+   * @returns Promise<Models.PropertyGetResponse>
    */
-  get(resourceGroupName: string, serviceName: string, opid: string, options?: msRest.RequestOptionsBase): Promise<Models.OpenIdConnectProviderGetResponse>;
+  get(resourceGroupName: string, serviceName: string, propId: string, options?: msRest.RequestOptionsBase): Promise<Models.PropertyGetResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
-   * @param opid Identifier of the OpenID Connect Provider.
+   * @param propId Identifier of the property.
    * @param callback The callback
    */
-  get(resourceGroupName: string, serviceName: string, opid: string, callback: msRest.ServiceCallback<Models.OpenidConnectProviderContract>): void;
+  get(resourceGroupName: string, serviceName: string, propId: string, callback: msRest.ServiceCallback<Models.PropertyContract>): void;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
-   * @param opid Identifier of the OpenID Connect Provider.
+   * @param propId Identifier of the property.
    * @param options The optional parameters
    * @param callback The callback
    */
-  get(resourceGroupName: string, serviceName: string, opid: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.OpenidConnectProviderContract>): void;
-  get(resourceGroupName: string, serviceName: string, opid: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.OpenidConnectProviderContract>, callback?: msRest.ServiceCallback<Models.OpenidConnectProviderContract>): Promise<Models.OpenIdConnectProviderGetResponse> {
+  get(resourceGroupName: string, serviceName: string, propId: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PropertyContract>): void;
+  get(resourceGroupName: string, serviceName: string, propId: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PropertyContract>, callback?: msRest.ServiceCallback<Models.PropertyContract>): Promise<Models.PropertyGetResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
         serviceName,
-        opid,
+        propId,
         options
       },
       getOperationSpec,
-      callback) as Promise<Models.OpenIdConnectProviderGetResponse>;
+      callback) as Promise<Models.PropertyGetResponse>;
   }
 
   /**
-   * Creates or updates the OpenID Connect Provider.
+   * Creates or updates a property.
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
-   * @param opid Identifier of the OpenID Connect Provider.
+   * @param propId Identifier of the property.
    * @param parameters Create parameters.
    * @param [options] The optional parameters
-   * @returns Promise<Models.OpenIdConnectProviderCreateOrUpdateResponse>
+   * @returns Promise<Models.PropertyCreateOrUpdateResponse>
    */
-  createOrUpdate(resourceGroupName: string, serviceName: string, opid: string, parameters: Models.OpenidConnectProviderContract, options?: Models.OpenIdConnectProviderCreateOrUpdateOptionalParams): Promise<Models.OpenIdConnectProviderCreateOrUpdateResponse>;
+  createOrUpdate(resourceGroupName: string, serviceName: string, propId: string, parameters: Models.PropertyContract, options?: Models.PropertyCreateOrUpdateOptionalParams): Promise<Models.PropertyCreateOrUpdateResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
-   * @param opid Identifier of the OpenID Connect Provider.
+   * @param propId Identifier of the property.
    * @param parameters Create parameters.
    * @param callback The callback
    */
-  createOrUpdate(resourceGroupName: string, serviceName: string, opid: string, parameters: Models.OpenidConnectProviderContract, callback: msRest.ServiceCallback<Models.OpenidConnectProviderContract>): void;
+  createOrUpdate(resourceGroupName: string, serviceName: string, propId: string, parameters: Models.PropertyContract, callback: msRest.ServiceCallback<Models.PropertyContract>): void;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
-   * @param opid Identifier of the OpenID Connect Provider.
+   * @param propId Identifier of the property.
    * @param parameters Create parameters.
    * @param options The optional parameters
    * @param callback The callback
    */
-  createOrUpdate(resourceGroupName: string, serviceName: string, opid: string, parameters: Models.OpenidConnectProviderContract, options: Models.OpenIdConnectProviderCreateOrUpdateOptionalParams, callback: msRest.ServiceCallback<Models.OpenidConnectProviderContract>): void;
-  createOrUpdate(resourceGroupName: string, serviceName: string, opid: string, parameters: Models.OpenidConnectProviderContract, options?: Models.OpenIdConnectProviderCreateOrUpdateOptionalParams | msRest.ServiceCallback<Models.OpenidConnectProviderContract>, callback?: msRest.ServiceCallback<Models.OpenidConnectProviderContract>): Promise<Models.OpenIdConnectProviderCreateOrUpdateResponse> {
+  createOrUpdate(resourceGroupName: string, serviceName: string, propId: string, parameters: Models.PropertyContract, options: Models.PropertyCreateOrUpdateOptionalParams, callback: msRest.ServiceCallback<Models.PropertyContract>): void;
+  createOrUpdate(resourceGroupName: string, serviceName: string, propId: string, parameters: Models.PropertyContract, options?: Models.PropertyCreateOrUpdateOptionalParams | msRest.ServiceCallback<Models.PropertyContract>, callback?: msRest.ServiceCallback<Models.PropertyContract>): Promise<Models.PropertyCreateOrUpdateResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
         serviceName,
-        opid,
+        propId,
         parameters,
         options
       },
       createOrUpdateOperationSpec,
-      callback) as Promise<Models.OpenIdConnectProviderCreateOrUpdateResponse>;
+      callback) as Promise<Models.PropertyCreateOrUpdateResponse>;
   }
 
   /**
-   * Updates the specific OpenID Connect Provider.
+   * Updates the specific property.
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
-   * @param opid Identifier of the OpenID Connect Provider.
+   * @param propId Identifier of the property.
    * @param parameters Update parameters.
    * @param ifMatch ETag of the Entity. ETag should match the current entity state from the header
    * response of the GET request or it should be * for unconditional update.
    * @param [options] The optional parameters
    * @returns Promise<msRest.RestResponse>
    */
-  update(resourceGroupName: string, serviceName: string, opid: string, parameters: Models.OpenidConnectProviderUpdateContract, ifMatch: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
+  update(resourceGroupName: string, serviceName: string, propId: string, parameters: Models.PropertyUpdateParameters, ifMatch: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
-   * @param opid Identifier of the OpenID Connect Provider.
+   * @param propId Identifier of the property.
    * @param parameters Update parameters.
    * @param ifMatch ETag of the Entity. ETag should match the current entity state from the header
    * response of the GET request or it should be * for unconditional update.
    * @param callback The callback
    */
-  update(resourceGroupName: string, serviceName: string, opid: string, parameters: Models.OpenidConnectProviderUpdateContract, ifMatch: string, callback: msRest.ServiceCallback<void>): void;
+  update(resourceGroupName: string, serviceName: string, propId: string, parameters: Models.PropertyUpdateParameters, ifMatch: string, callback: msRest.ServiceCallback<void>): void;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
-   * @param opid Identifier of the OpenID Connect Provider.
+   * @param propId Identifier of the property.
    * @param parameters Update parameters.
    * @param ifMatch ETag of the Entity. ETag should match the current entity state from the header
    * response of the GET request or it should be * for unconditional update.
    * @param options The optional parameters
    * @param callback The callback
    */
-  update(resourceGroupName: string, serviceName: string, opid: string, parameters: Models.OpenidConnectProviderUpdateContract, ifMatch: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
-  update(resourceGroupName: string, serviceName: string, opid: string, parameters: Models.OpenidConnectProviderUpdateContract, ifMatch: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
+  update(resourceGroupName: string, serviceName: string, propId: string, parameters: Models.PropertyUpdateParameters, ifMatch: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
+  update(resourceGroupName: string, serviceName: string, propId: string, parameters: Models.PropertyUpdateParameters, ifMatch: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
         serviceName,
-        opid,
+        propId,
         parameters,
         ifMatch,
         options
@@ -218,41 +218,41 @@ export class OpenIdConnectProvider {
   }
 
   /**
-   * Deletes specific OpenID Connect Provider of the API Management service instance.
+   * Deletes specific property from the API Management service instance.
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
-   * @param opid Identifier of the OpenID Connect Provider.
+   * @param propId Identifier of the property.
    * @param ifMatch ETag of the Entity. ETag should match the current entity state from the header
    * response of the GET request or it should be * for unconditional update.
    * @param [options] The optional parameters
    * @returns Promise<msRest.RestResponse>
    */
-  deleteMethod(resourceGroupName: string, serviceName: string, opid: string, ifMatch: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
+  deleteMethod(resourceGroupName: string, serviceName: string, propId: string, ifMatch: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
-   * @param opid Identifier of the OpenID Connect Provider.
+   * @param propId Identifier of the property.
    * @param ifMatch ETag of the Entity. ETag should match the current entity state from the header
    * response of the GET request or it should be * for unconditional update.
    * @param callback The callback
    */
-  deleteMethod(resourceGroupName: string, serviceName: string, opid: string, ifMatch: string, callback: msRest.ServiceCallback<void>): void;
+  deleteMethod(resourceGroupName: string, serviceName: string, propId: string, ifMatch: string, callback: msRest.ServiceCallback<void>): void;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
-   * @param opid Identifier of the OpenID Connect Provider.
+   * @param propId Identifier of the property.
    * @param ifMatch ETag of the Entity. ETag should match the current entity state from the header
    * response of the GET request or it should be * for unconditional update.
    * @param options The optional parameters
    * @param callback The callback
    */
-  deleteMethod(resourceGroupName: string, serviceName: string, opid: string, ifMatch: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
-  deleteMethod(resourceGroupName: string, serviceName: string, opid: string, ifMatch: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
+  deleteMethod(resourceGroupName: string, serviceName: string, propId: string, ifMatch: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
+  deleteMethod(resourceGroupName: string, serviceName: string, propId: string, ifMatch: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
         serviceName,
-        opid,
+        propId,
         ifMatch,
         options
       },
@@ -261,31 +261,31 @@ export class OpenIdConnectProvider {
   }
 
   /**
-   * Lists of all the OpenId Connect Providers.
+   * Lists a collection of properties defined within a service instance.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
-   * @returns Promise<Models.OpenIdConnectProviderListByServiceNextResponse>
+   * @returns Promise<Models.PropertyListByServiceNextResponse>
    */
-  listByServiceNext(nextPageLink: string, options?: msRest.RequestOptionsBase): Promise<Models.OpenIdConnectProviderListByServiceNextResponse>;
+  listByServiceNext(nextPageLink: string, options?: msRest.RequestOptionsBase): Promise<Models.PropertyListByServiceNextResponse>;
   /**
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param callback The callback
    */
-  listByServiceNext(nextPageLink: string, callback: msRest.ServiceCallback<Models.OpenIdConnectProviderCollection>): void;
+  listByServiceNext(nextPageLink: string, callback: msRest.ServiceCallback<Models.PropertyCollection>): void;
   /**
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param options The optional parameters
    * @param callback The callback
    */
-  listByServiceNext(nextPageLink: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.OpenIdConnectProviderCollection>): void;
-  listByServiceNext(nextPageLink: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.OpenIdConnectProviderCollection>, callback?: msRest.ServiceCallback<Models.OpenIdConnectProviderCollection>): Promise<Models.OpenIdConnectProviderListByServiceNextResponse> {
+  listByServiceNext(nextPageLink: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PropertyCollection>): void;
+  listByServiceNext(nextPageLink: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PropertyCollection>, callback?: msRest.ServiceCallback<Models.PropertyCollection>): Promise<Models.PropertyListByServiceNextResponse> {
     return this.client.sendOperationRequest(
       {
         nextPageLink,
         options
       },
       listByServiceNextOperationSpec,
-      callback) as Promise<Models.OpenIdConnectProviderListByServiceNextResponse>;
+      callback) as Promise<Models.PropertyListByServiceNextResponse>;
   }
 }
 
@@ -293,7 +293,7 @@ export class OpenIdConnectProvider {
 const serializer = new msRest.Serializer(Mappers);
 const listByServiceOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/properties",
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.serviceName,
@@ -310,7 +310,7 @@ const listByServiceOperationSpec: msRest.OperationSpec = {
   ],
   responses: {
     200: {
-      bodyMapper: Mappers.OpenIdConnectProviderCollection
+      bodyMapper: Mappers.PropertyCollection
     },
     default: {
       bodyMapper: Mappers.ErrorResponse
@@ -321,11 +321,11 @@ const listByServiceOperationSpec: msRest.OperationSpec = {
 
 const getEntityTagOperationSpec: msRest.OperationSpec = {
   httpMethod: "HEAD",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/properties/{propId}",
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.serviceName,
-    Parameters.opid,
+    Parameters.propId,
     Parameters.subscriptionId
   ],
   queryParameters: [
@@ -336,7 +336,7 @@ const getEntityTagOperationSpec: msRest.OperationSpec = {
   ],
   responses: {
     200: {
-      headersMapper: Mappers.OpenIdConnectProviderGetEntityTagHeaders
+      headersMapper: Mappers.PropertyGetEntityTagHeaders
     },
     default: {
       bodyMapper: Mappers.ErrorResponse
@@ -347,11 +347,11 @@ const getEntityTagOperationSpec: msRest.OperationSpec = {
 
 const getOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/properties/{propId}",
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.serviceName,
-    Parameters.opid,
+    Parameters.propId,
     Parameters.subscriptionId
   ],
   queryParameters: [
@@ -362,8 +362,8 @@ const getOperationSpec: msRest.OperationSpec = {
   ],
   responses: {
     200: {
-      bodyMapper: Mappers.OpenidConnectProviderContract,
-      headersMapper: Mappers.OpenIdConnectProviderGetHeaders
+      bodyMapper: Mappers.PropertyContract,
+      headersMapper: Mappers.PropertyGetHeaders
     },
     default: {
       bodyMapper: Mappers.ErrorResponse
@@ -374,11 +374,11 @@ const getOperationSpec: msRest.OperationSpec = {
 
 const createOrUpdateOperationSpec: msRest.OperationSpec = {
   httpMethod: "PUT",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/properties/{propId}",
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.serviceName,
-    Parameters.opid,
+    Parameters.propId,
     Parameters.subscriptionId
   ],
   queryParameters: [
@@ -391,18 +391,18 @@ const createOrUpdateOperationSpec: msRest.OperationSpec = {
   requestBody: {
     parameterPath: "parameters",
     mapper: {
-      ...Mappers.OpenidConnectProviderContract,
+      ...Mappers.PropertyContract,
       required: true
     }
   },
   responses: {
     200: {
-      bodyMapper: Mappers.OpenidConnectProviderContract,
-      headersMapper: Mappers.OpenIdConnectProviderCreateOrUpdateHeaders
+      bodyMapper: Mappers.PropertyContract,
+      headersMapper: Mappers.PropertyCreateOrUpdateHeaders
     },
     201: {
-      bodyMapper: Mappers.OpenidConnectProviderContract,
-      headersMapper: Mappers.OpenIdConnectProviderCreateOrUpdateHeaders
+      bodyMapper: Mappers.PropertyContract,
+      headersMapper: Mappers.PropertyCreateOrUpdateHeaders
     },
     default: {
       bodyMapper: Mappers.ErrorResponse
@@ -413,11 +413,11 @@ const createOrUpdateOperationSpec: msRest.OperationSpec = {
 
 const updateOperationSpec: msRest.OperationSpec = {
   httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/properties/{propId}",
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.serviceName,
-    Parameters.opid,
+    Parameters.propId,
     Parameters.subscriptionId
   ],
   queryParameters: [
@@ -430,7 +430,7 @@ const updateOperationSpec: msRest.OperationSpec = {
   requestBody: {
     parameterPath: "parameters",
     mapper: {
-      ...Mappers.OpenidConnectProviderUpdateContract,
+      ...Mappers.PropertyUpdateParameters,
       required: true
     }
   },
@@ -445,11 +445,11 @@ const updateOperationSpec: msRest.OperationSpec = {
 
 const deleteMethodOperationSpec: msRest.OperationSpec = {
   httpMethod: "DELETE",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/properties/{propId}",
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.serviceName,
-    Parameters.opid,
+    Parameters.propId,
     Parameters.subscriptionId
   ],
   queryParameters: [
@@ -481,7 +481,7 @@ const listByServiceNextOperationSpec: msRest.OperationSpec = {
   ],
   responses: {
     200: {
-      bodyMapper: Mappers.OpenIdConnectProviderCollection
+      bodyMapper: Mappers.PropertyCollection
     },
     default: {
       bodyMapper: Mappers.ErrorResponse

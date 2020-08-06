@@ -7,8 +7,8 @@
  */
 
 export {
-  AccessInformationContract,
   ErrorFieldContract,
   ErrorResponse,
-  TenantAccessGitGetHeaders
+  PolicySnippetContract,
+  PolicySnippetsCollection
 } from "../models/mappers";
