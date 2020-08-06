@@ -261,6 +261,42 @@ export class OpenIdConnectProvider {
   }
 
   /**
+   * Gets the client secret details of the OpenID Connect Provider.
+   * @param resourceGroupName The name of the resource group.
+   * @param serviceName The name of the API Management service.
+   * @param opid Identifier of the OpenID Connect Provider.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.OpenIdConnectProviderListSecretsResponse>
+   */
+  listSecrets(resourceGroupName: string, serviceName: string, opid: string, options?: msRest.RequestOptionsBase): Promise<Models.OpenIdConnectProviderListSecretsResponse>;
+  /**
+   * @param resourceGroupName The name of the resource group.
+   * @param serviceName The name of the API Management service.
+   * @param opid Identifier of the OpenID Connect Provider.
+   * @param callback The callback
+   */
+  listSecrets(resourceGroupName: string, serviceName: string, opid: string, callback: msRest.ServiceCallback<Models.ClientSecretContract>): void;
+  /**
+   * @param resourceGroupName The name of the resource group.
+   * @param serviceName The name of the API Management service.
+   * @param opid Identifier of the OpenID Connect Provider.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  listSecrets(resourceGroupName: string, serviceName: string, opid: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ClientSecretContract>): void;
+  listSecrets(resourceGroupName: string, serviceName: string, opid: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ClientSecretContract>, callback?: msRest.ServiceCallback<Models.ClientSecretContract>): Promise<Models.OpenIdConnectProviderListSecretsResponse> {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        serviceName,
+        opid,
+        options
+      },
+      listSecretsOperationSpec,
+      callback) as Promise<Models.OpenIdConnectProviderListSecretsResponse>;
+  }
+
+  /**
    * Lists of all the OpenId Connect Providers.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
@@ -339,7 +375,8 @@ const getEntityTagOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.OpenIdConnectProviderGetEntityTagHeaders
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.ErrorResponse,
+      headersMapper: Mappers.OpenIdConnectProviderGetEntityTagHeaders
     }
   },
   serializer
@@ -366,7 +403,8 @@ const getOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.OpenIdConnectProviderGetHeaders
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.ErrorResponse,
+      headersMapper: Mappers.OpenIdConnectProviderGetHeaders
     }
   },
   serializer
@@ -405,7 +443,8 @@ const createOrUpdateOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.OpenIdConnectProviderCreateOrUpdateHeaders
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.ErrorResponse,
+      headersMapper: Mappers.OpenIdConnectProviderCreateOrUpdateHeaders
     }
   },
   serializer
@@ -462,6 +501,32 @@ const deleteMethodOperationSpec: msRest.OperationSpec = {
   responses: {
     200: {},
     204: {},
+    default: {
+      bodyMapper: Mappers.ErrorResponse
+    }
+  },
+  serializer
+};
+
+const listSecretsOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}/listSecrets",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.serviceName,
+    Parameters.opid,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {
+      bodyMapper: Mappers.ClientSecretContract
+    },
     default: {
       bodyMapper: Mappers.ErrorResponse
     }

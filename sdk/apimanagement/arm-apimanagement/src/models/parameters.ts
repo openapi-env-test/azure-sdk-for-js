@@ -71,6 +71,19 @@ export const apiVersion: msRest.OperationQueryParameter = {
     }
   }
 };
+export const appType: msRest.OperationQueryParameter = {
+  parameterPath: [
+    "options",
+    "appType"
+  ],
+  mapper: {
+    serializedName: "appType",
+    defaultValue: 'portal',
+    type: {
+      name: "String"
+    }
+  }
+};
 export const attachmentId: msRest.OperationURLParameter = {
   parameterPath: "attachmentId",
   mapper: {
@@ -167,6 +180,34 @@ export const configurationName: msRest.OperationURLParameter = {
     isConstant: true,
     serializedName: "configurationName",
     defaultValue: 'configuration',
+    type: {
+      name: "String"
+    }
+  }
+};
+export const contentItemId: msRest.OperationURLParameter = {
+  parameterPath: "contentItemId",
+  mapper: {
+    required: true,
+    serializedName: "contentItemId",
+    constraints: {
+      MaxLength: 80,
+      MinLength: 1
+    },
+    type: {
+      name: "String"
+    }
+  }
+};
+export const contentTypeId: msRest.OperationURLParameter = {
+  parameterPath: "contentTypeId",
+  mapper: {
+    required: true,
+    serializedName: "contentTypeId",
+    constraints: {
+      MaxLength: 80,
+      MinLength: 1
+    },
     type: {
       name: "String"
     }
@@ -326,6 +367,20 @@ export const format1: msRest.OperationQueryParameter = {
     }
   }
 };
+export const gatewayId: msRest.OperationURLParameter = {
+  parameterPath: "gatewayId",
+  mapper: {
+    required: true,
+    serializedName: "gatewayId",
+    constraints: {
+      MaxLength: 80,
+      MinLength: 1
+    },
+    type: {
+      name: "String"
+    }
+  }
+};
 export const groupId: msRest.OperationURLParameter = {
   parameterPath: "groupId",
   mapper: {
@@ -333,6 +388,20 @@ export const groupId: msRest.OperationURLParameter = {
     serializedName: "groupId",
     constraints: {
       MaxLength: 256,
+      MinLength: 1
+    },
+    type: {
+      name: "String"
+    }
+  }
+};
+export const hcId: msRest.OperationURLParameter = {
+  parameterPath: "hcId",
+  mapper: {
+    required: true,
+    serializedName: "hcId",
+    constraints: {
+      MaxLength: 80,
       MinLength: 1
     },
     type: {
@@ -460,6 +529,20 @@ export const loggerId: msRest.OperationURLParameter = {
     }
   }
 };
+export const namedValueId: msRest.OperationURLParameter = {
+  parameterPath: "namedValueId",
+  mapper: {
+    required: true,
+    serializedName: "namedValueId",
+    constraints: {
+      MaxLength: 256,
+      Pattern: /^[^*#&+:<>?]+$/
+    },
+    type: {
+      name: "String"
+    }
+  }
+};
 export const nextPageLink: msRest.OperationURLParameter = {
   parameterPath: "nextPageLink",
   mapper: {
@@ -553,20 +636,6 @@ export const productId: msRest.OperationURLParameter = {
     constraints: {
       MaxLength: 256,
       MinLength: 1
-    },
-    type: {
-      name: "String"
-    }
-  }
-};
-export const propId: msRest.OperationURLParameter = {
-  parameterPath: "propId",
-  mapper: {
-    required: true,
-    serializedName: "propId",
-    constraints: {
-      MaxLength: 256,
-      Pattern: /^[^*#&+:<>?]+$/
     },
     type: {
       name: "String"
@@ -713,6 +782,21 @@ export const subscriptionId: msRest.OperationURLParameter = {
   mapper: {
     required: true,
     serializedName: "subscriptionId",
+    type: {
+      name: "String"
+    }
+  }
+};
+export const tagDescriptionId: msRest.OperationURLParameter = {
+  parameterPath: "tagDescriptionId",
+  mapper: {
+    required: true,
+    serializedName: "tagDescriptionId",
+    constraints: {
+      MaxLength: 80,
+      MinLength: 1,
+      Pattern: /^[^*#&+:<>?]+$/
+    },
     type: {
       name: "String"
     }

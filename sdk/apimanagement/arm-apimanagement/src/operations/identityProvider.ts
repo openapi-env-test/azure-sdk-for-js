@@ -147,7 +147,7 @@ export class IdentityProvider {
    * @param [options] The optional parameters
    * @returns Promise<Models.IdentityProviderCreateOrUpdateResponse>
    */
-  createOrUpdate(resourceGroupName: string, serviceName: string, identityProviderName: Models.IdentityProviderType, parameters: Models.IdentityProviderContract, options?: Models.IdentityProviderCreateOrUpdateOptionalParams): Promise<Models.IdentityProviderCreateOrUpdateResponse>;
+  createOrUpdate(resourceGroupName: string, serviceName: string, identityProviderName: Models.IdentityProviderType, parameters: Models.IdentityProviderCreateContract, options?: Models.IdentityProviderCreateOrUpdateOptionalParams): Promise<Models.IdentityProviderCreateOrUpdateResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
@@ -156,7 +156,7 @@ export class IdentityProvider {
    * @param parameters Create parameters.
    * @param callback The callback
    */
-  createOrUpdate(resourceGroupName: string, serviceName: string, identityProviderName: Models.IdentityProviderType, parameters: Models.IdentityProviderContract, callback: msRest.ServiceCallback<Models.IdentityProviderContract>): void;
+  createOrUpdate(resourceGroupName: string, serviceName: string, identityProviderName: Models.IdentityProviderType, parameters: Models.IdentityProviderCreateContract, callback: msRest.ServiceCallback<Models.IdentityProviderContract>): void;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param serviceName The name of the API Management service.
@@ -166,8 +166,8 @@ export class IdentityProvider {
    * @param options The optional parameters
    * @param callback The callback
    */
-  createOrUpdate(resourceGroupName: string, serviceName: string, identityProviderName: Models.IdentityProviderType, parameters: Models.IdentityProviderContract, options: Models.IdentityProviderCreateOrUpdateOptionalParams, callback: msRest.ServiceCallback<Models.IdentityProviderContract>): void;
-  createOrUpdate(resourceGroupName: string, serviceName: string, identityProviderName: Models.IdentityProviderType, parameters: Models.IdentityProviderContract, options?: Models.IdentityProviderCreateOrUpdateOptionalParams | msRest.ServiceCallback<Models.IdentityProviderContract>, callback?: msRest.ServiceCallback<Models.IdentityProviderContract>): Promise<Models.IdentityProviderCreateOrUpdateResponse> {
+  createOrUpdate(resourceGroupName: string, serviceName: string, identityProviderName: Models.IdentityProviderType, parameters: Models.IdentityProviderCreateContract, options: Models.IdentityProviderCreateOrUpdateOptionalParams, callback: msRest.ServiceCallback<Models.IdentityProviderContract>): void;
+  createOrUpdate(resourceGroupName: string, serviceName: string, identityProviderName: Models.IdentityProviderType, parameters: Models.IdentityProviderCreateContract, options?: Models.IdentityProviderCreateOrUpdateOptionalParams | msRest.ServiceCallback<Models.IdentityProviderContract>, callback?: msRest.ServiceCallback<Models.IdentityProviderContract>): Promise<Models.IdentityProviderCreateOrUpdateResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
@@ -277,6 +277,45 @@ export class IdentityProvider {
   }
 
   /**
+   * Gets the client secret details of the Identity Provider.
+   * @param resourceGroupName The name of the resource group.
+   * @param serviceName The name of the API Management service.
+   * @param identityProviderName Identity Provider Type identifier. Possible values include:
+   * 'facebook', 'google', 'microsoft', 'twitter', 'aad', 'aadB2C'
+   * @param [options] The optional parameters
+   * @returns Promise<Models.IdentityProviderListSecretsResponse>
+   */
+  listSecrets(resourceGroupName: string, serviceName: string, identityProviderName: Models.IdentityProviderType, options?: msRest.RequestOptionsBase): Promise<Models.IdentityProviderListSecretsResponse>;
+  /**
+   * @param resourceGroupName The name of the resource group.
+   * @param serviceName The name of the API Management service.
+   * @param identityProviderName Identity Provider Type identifier. Possible values include:
+   * 'facebook', 'google', 'microsoft', 'twitter', 'aad', 'aadB2C'
+   * @param callback The callback
+   */
+  listSecrets(resourceGroupName: string, serviceName: string, identityProviderName: Models.IdentityProviderType, callback: msRest.ServiceCallback<Models.ClientSecretContract>): void;
+  /**
+   * @param resourceGroupName The name of the resource group.
+   * @param serviceName The name of the API Management service.
+   * @param identityProviderName Identity Provider Type identifier. Possible values include:
+   * 'facebook', 'google', 'microsoft', 'twitter', 'aad', 'aadB2C'
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  listSecrets(resourceGroupName: string, serviceName: string, identityProviderName: Models.IdentityProviderType, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ClientSecretContract>): void;
+  listSecrets(resourceGroupName: string, serviceName: string, identityProviderName: Models.IdentityProviderType, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ClientSecretContract>, callback?: msRest.ServiceCallback<Models.ClientSecretContract>): Promise<Models.IdentityProviderListSecretsResponse> {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        serviceName,
+        identityProviderName,
+        options
+      },
+      listSecretsOperationSpec,
+      callback) as Promise<Models.IdentityProviderListSecretsResponse>;
+  }
+
+  /**
    * Lists a collection of Identity Provider configured in the specified service instance.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
@@ -352,7 +391,8 @@ const getEntityTagOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.IdentityProviderGetEntityTagHeaders
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.ErrorResponse,
+      headersMapper: Mappers.IdentityProviderGetEntityTagHeaders
     }
   },
   serializer
@@ -379,7 +419,8 @@ const getOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.IdentityProviderGetHeaders
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.ErrorResponse,
+      headersMapper: Mappers.IdentityProviderGetHeaders
     }
   },
   serializer
@@ -404,7 +445,7 @@ const createOrUpdateOperationSpec: msRest.OperationSpec = {
   requestBody: {
     parameterPath: "parameters",
     mapper: {
-      ...Mappers.IdentityProviderContract,
+      ...Mappers.IdentityProviderCreateContract,
       required: true
     }
   },
@@ -418,7 +459,8 @@ const createOrUpdateOperationSpec: msRest.OperationSpec = {
       headersMapper: Mappers.IdentityProviderCreateOrUpdateHeaders
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.ErrorResponse,
+      headersMapper: Mappers.IdentityProviderCreateOrUpdateHeaders
     }
   },
   serializer
@@ -475,6 +517,32 @@ const deleteMethodOperationSpec: msRest.OperationSpec = {
   responses: {
     200: {},
     204: {},
+    default: {
+      bodyMapper: Mappers.ErrorResponse
+    }
+  },
+  serializer
+};
+
+const listSecretsOperationSpec: msRest.OperationSpec = {
+  httpMethod: "POST",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders/{identityProviderName}/listSecrets",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.serviceName,
+    Parameters.identityProviderName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {
+      bodyMapper: Mappers.ClientSecretContract
+    },
     default: {
       bodyMapper: Mappers.ErrorResponse
     }
