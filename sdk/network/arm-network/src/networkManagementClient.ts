@@ -20,6 +20,8 @@ import { NetworkManagementClientContext } from "./networkManagementClientContext
 class NetworkManagementClient extends NetworkManagementClientContext {
   // Operation groups
   applicationGateways: operations.ApplicationGateways;
+  applicationGatewayPrivateLinkResources: operations.ApplicationGatewayPrivateLinkResources;
+  applicationGatewayPrivateEndpointConnections: operations.ApplicationGatewayPrivateEndpointConnections;
   applicationSecurityGroups: operations.ApplicationSecurityGroups;
   availableDelegations: operations.AvailableDelegations;
   availableResourceGroupDelegations: operations.AvailableResourceGroupDelegations;
@@ -38,13 +40,12 @@ class NetworkManagementClient extends NetworkManagementClientContext {
   expressRouteServiceProviders: operations.ExpressRouteServiceProviders;
   expressRouteCrossConnections: operations.ExpressRouteCrossConnections;
   expressRouteCrossConnectionPeerings: operations.ExpressRouteCrossConnectionPeerings;
-  expressRouteGateways: operations.ExpressRouteGateways;
-  expressRouteConnections: operations.ExpressRouteConnections;
   expressRoutePortsLocations: operations.ExpressRoutePortsLocations;
   expressRoutePorts: operations.ExpressRoutePorts;
   expressRouteLinks: operations.ExpressRouteLinks;
   firewallPolicies: operations.FirewallPolicies;
-  firewallPolicyRuleGroups: operations.FirewallPolicyRuleGroups;
+  firewallPolicyRuleCollectionGroups: operations.FirewallPolicyRuleCollectionGroups;
+  ipAllocations: operations.IpAllocations;
   ipGroups: operations.IpGroups;
   loadBalancers: operations.LoadBalancers;
   loadBalancerBackendAddressPools: operations.LoadBalancerBackendAddressPools;
@@ -64,6 +65,8 @@ class NetworkManagementClient extends NetworkManagementClientContext {
   securityRules: operations.SecurityRules;
   defaultSecurityRules: operations.DefaultSecurityRules;
   networkVirtualAppliances: operations.NetworkVirtualAppliances;
+  virtualApplianceSites: operations.VirtualApplianceSites;
+  virtualApplianceSkus: operations.VirtualApplianceSkus;
   networkWatchers: operations.NetworkWatchers;
   packetCaptures: operations.PacketCaptures;
   connectionMonitors: operations.ConnectionMonitors;
@@ -71,6 +74,7 @@ class NetworkManagementClient extends NetworkManagementClientContext {
   operations: operations.Operations;
   privateEndpoints: operations.PrivateEndpoints;
   availablePrivateEndpointTypes: operations.AvailablePrivateEndpointTypes;
+  privateDnsZoneGroups: operations.PrivateDnsZoneGroups;
   privateLinkServices: operations.PrivateLinkServices;
   publicIPAddresses: operations.PublicIPAddresses;
   publicIPPrefixes: operations.PublicIPPrefixes;
@@ -78,6 +82,7 @@ class NetworkManagementClient extends NetworkManagementClientContext {
   routeFilterRules: operations.RouteFilterRules;
   routeTables: operations.RouteTables;
   routes: operations.Routes;
+  securityPartnerProviders: operations.SecurityPartnerProviders;
   bgpServiceCommunities: operations.BgpServiceCommunities;
   serviceEndpointPolicies: operations.ServiceEndpointPolicies;
   serviceEndpointPolicyDefinitions: operations.ServiceEndpointPolicyDefinitions;
@@ -108,7 +113,12 @@ class NetworkManagementClient extends NetworkManagementClientContext {
   p2sVpnGateways: operations.P2sVpnGateways;
   vpnServerConfigurationsAssociatedWithVirtualWan: operations.VpnServerConfigurationsAssociatedWithVirtualWan;
   virtualHubRouteTableV2s: operations.VirtualHubRouteTableV2s;
-  webApplicationFirewallPolicies: operations.WebApplicationFirewallPolicies;
+  expressRouteGateways: operations.ExpressRouteGateways;
+  expressRouteConnections: operations.ExpressRouteConnections;
+  virtualHubBgpConnection: operations.VirtualHubBgpConnection;
+  virtualHubBgpConnections: operations.VirtualHubBgpConnections;
+  virtualHubIpConfiguration: operations.VirtualHubIpConfiguration;
+  hubRouteTables: operations.HubRouteTables;
 
   /**
    * Initializes a new instance of the NetworkManagementClient class.
@@ -120,6 +130,8 @@ class NetworkManagementClient extends NetworkManagementClientContext {
   constructor(credentials: msRest.ServiceClientCredentials, subscriptionId: string, options?: Models.NetworkManagementClientOptions) {
     super(credentials, subscriptionId, options);
     this.applicationGateways = new operations.ApplicationGateways(this);
+    this.applicationGatewayPrivateLinkResources = new operations.ApplicationGatewayPrivateLinkResources(this);
+    this.applicationGatewayPrivateEndpointConnections = new operations.ApplicationGatewayPrivateEndpointConnections(this);
     this.applicationSecurityGroups = new operations.ApplicationSecurityGroups(this);
     this.availableDelegations = new operations.AvailableDelegations(this);
     this.availableResourceGroupDelegations = new operations.AvailableResourceGroupDelegations(this);
@@ -138,13 +150,12 @@ class NetworkManagementClient extends NetworkManagementClientContext {
     this.expressRouteServiceProviders = new operations.ExpressRouteServiceProviders(this);
     this.expressRouteCrossConnections = new operations.ExpressRouteCrossConnections(this);
     this.expressRouteCrossConnectionPeerings = new operations.ExpressRouteCrossConnectionPeerings(this);
-    this.expressRouteGateways = new operations.ExpressRouteGateways(this);
-    this.expressRouteConnections = new operations.ExpressRouteConnections(this);
     this.expressRoutePortsLocations = new operations.ExpressRoutePortsLocations(this);
     this.expressRoutePorts = new operations.ExpressRoutePorts(this);
     this.expressRouteLinks = new operations.ExpressRouteLinks(this);
     this.firewallPolicies = new operations.FirewallPolicies(this);
-    this.firewallPolicyRuleGroups = new operations.FirewallPolicyRuleGroups(this);
+    this.firewallPolicyRuleCollectionGroups = new operations.FirewallPolicyRuleCollectionGroups(this);
+    this.ipAllocations = new operations.IpAllocations(this);
     this.ipGroups = new operations.IpGroups(this);
     this.loadBalancers = new operations.LoadBalancers(this);
     this.loadBalancerBackendAddressPools = new operations.LoadBalancerBackendAddressPools(this);
@@ -164,6 +175,8 @@ class NetworkManagementClient extends NetworkManagementClientContext {
     this.securityRules = new operations.SecurityRules(this);
     this.defaultSecurityRules = new operations.DefaultSecurityRules(this);
     this.networkVirtualAppliances = new operations.NetworkVirtualAppliances(this);
+    this.virtualApplianceSites = new operations.VirtualApplianceSites(this);
+    this.virtualApplianceSkus = new operations.VirtualApplianceSkus(this);
     this.networkWatchers = new operations.NetworkWatchers(this);
     this.packetCaptures = new operations.PacketCaptures(this);
     this.connectionMonitors = new operations.ConnectionMonitors(this);
@@ -171,6 +184,7 @@ class NetworkManagementClient extends NetworkManagementClientContext {
     this.operations = new operations.Operations(this);
     this.privateEndpoints = new operations.PrivateEndpoints(this);
     this.availablePrivateEndpointTypes = new operations.AvailablePrivateEndpointTypes(this);
+    this.privateDnsZoneGroups = new operations.PrivateDnsZoneGroups(this);
     this.privateLinkServices = new operations.PrivateLinkServices(this);
     this.publicIPAddresses = new operations.PublicIPAddresses(this);
     this.publicIPPrefixes = new operations.PublicIPPrefixes(this);
@@ -178,6 +192,7 @@ class NetworkManagementClient extends NetworkManagementClientContext {
     this.routeFilterRules = new operations.RouteFilterRules(this);
     this.routeTables = new operations.RouteTables(this);
     this.routes = new operations.Routes(this);
+    this.securityPartnerProviders = new operations.SecurityPartnerProviders(this);
     this.bgpServiceCommunities = new operations.BgpServiceCommunities(this);
     this.serviceEndpointPolicies = new operations.ServiceEndpointPolicies(this);
     this.serviceEndpointPolicyDefinitions = new operations.ServiceEndpointPolicyDefinitions(this);
@@ -208,7 +223,12 @@ class NetworkManagementClient extends NetworkManagementClientContext {
     this.p2sVpnGateways = new operations.P2sVpnGateways(this);
     this.vpnServerConfigurationsAssociatedWithVirtualWan = new operations.VpnServerConfigurationsAssociatedWithVirtualWan(this);
     this.virtualHubRouteTableV2s = new operations.VirtualHubRouteTableV2s(this);
-    this.webApplicationFirewallPolicies = new operations.WebApplicationFirewallPolicies(this);
+    this.expressRouteGateways = new operations.ExpressRouteGateways(this);
+    this.expressRouteConnections = new operations.ExpressRouteConnections(this);
+    this.virtualHubBgpConnection = new operations.VirtualHubBgpConnection(this);
+    this.virtualHubBgpConnections = new operations.VirtualHubBgpConnections(this);
+    this.virtualHubIpConfiguration = new operations.VirtualHubIpConfiguration(this);
+    this.hubRouteTables = new operations.HubRouteTables(this);
   }
 
   /**
