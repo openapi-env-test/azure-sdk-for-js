@@ -127,19 +127,6 @@ export class Profiles {
   }
 
   /**
-   * Updates an existing CDN profile with the specified profile name under the specified subscription
-   * and resource group.
-   * @param resourceGroupName Name of the Resource group within the Azure subscription.
-   * @param profileName Name of the CDN profile which is unique within the resource group.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ProfilesUpdateResponse>
-   */
-  update(resourceGroupName: string, profileName: string, options?: Models.ProfilesUpdateOptionalParams): Promise<Models.ProfilesUpdateResponse> {
-    return this.beginUpdate(resourceGroupName,profileName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.ProfilesUpdateResponse>;
-  }
-
-  /**
    * Deletes an existing CDN profile with the specified parameters. Deleting a profile will result in
    * the deletion of all of the sub-resources including endpoints, origins and custom domains.
    * @param resourceGroupName Name of the Resource group within the Azure subscription.
@@ -271,25 +258,6 @@ export class Profiles {
         options
       },
       beginCreateOperationSpec,
-      options);
-  }
-
-  /**
-   * Updates an existing CDN profile with the specified profile name under the specified subscription
-   * and resource group.
-   * @param resourceGroupName Name of the Resource group within the Azure subscription.
-   * @param profileName Name of the CDN profile which is unique within the resource group.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginUpdate(resourceGroupName: string, profileName: string, options?: Models.ProfilesBeginUpdateOptionalParams): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        profileName,
-        options
-      },
-      beginUpdateOperationSpec,
       options);
   }
 
@@ -572,46 +540,6 @@ const beginCreateOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.Profile
     },
     201: {
-      bodyMapper: Mappers.Profile
-    },
-    202: {
-      bodyMapper: Mappers.Profile
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  serializer
-};
-
-const beginUpdateOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.profileName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: {
-      tags: [
-        "options",
-        "tags"
-      ]
-    },
-    mapper: {
-      ...Mappers.ProfileUpdateParameters,
-      required: true
-    }
-  },
-  responses: {
-    200: {
       bodyMapper: Mappers.Profile
     },
     202: {
