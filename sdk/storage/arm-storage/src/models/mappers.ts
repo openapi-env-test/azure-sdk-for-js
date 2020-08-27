@@ -1361,6 +1361,77 @@ export const PrivateEndpointConnection: msRest.CompositeMapper = {
   }
 };
 
+export const ProxyResource: msRest.CompositeMapper = {
+  serializedName: "ProxyResource",
+  type: {
+    name: "Composite",
+    className: "ProxyResource",
+    modelProperties: {
+      ...Resource.type.modelProperties
+    }
+  }
+};
+
+export const DeletedAccount: msRest.CompositeMapper = {
+  serializedName: "DeletedAccount",
+  type: {
+    name: "Composite",
+    className: "DeletedAccount",
+    modelProperties: {
+      ...ProxyResource.type.modelProperties,
+      key: {
+        readOnly: true,
+        serializedName: "properties.key",
+        type: {
+          name: "String"
+        }
+      },
+      deletedAccountName: {
+        readOnly: true,
+        serializedName: "properties.name",
+        type: {
+          name: "String"
+        }
+      },
+      location: {
+        readOnly: true,
+        serializedName: "properties.location",
+        type: {
+          name: "String"
+        }
+      },
+      subscription: {
+        readOnly: true,
+        serializedName: "properties.subscription",
+        type: {
+          name: "String"
+        }
+      },
+      resourceGroupName: {
+        readOnly: true,
+        serializedName: "properties.resourceGroupName",
+        type: {
+          name: "String"
+        }
+      },
+      creationTime: {
+        readOnly: true,
+        serializedName: "properties.creationTime",
+        type: {
+          name: "String"
+        }
+      },
+      deletionTime: {
+        readOnly: true,
+        serializedName: "properties.deletionTime",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const TrackedResource: msRest.CompositeMapper = {
   serializedName: "TrackedResource",
   type: {
@@ -1645,6 +1716,29 @@ export const StorageAccountKey: msRest.CompositeMapper = {
             "Read",
             "Full"
           ]
+        }
+      }
+    }
+  }
+};
+
+export const DeletedAccountListResult: msRest.CompositeMapper = {
+  serializedName: "DeletedAccountListResult",
+  type: {
+    name: "Composite",
+    className: "DeletedAccountListResult",
+    modelProperties: {
+      value: {
+        readOnly: true,
+        serializedName: "value",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "DeletedAccount"
+            }
+          }
         }
       }
     }
@@ -2585,11 +2679,11 @@ export const ObjectReplicationPolicy: msRest.CompositeMapper = {
   }
 };
 
-export const ErrorResponse: msRest.CompositeMapper = {
-  serializedName: "ErrorResponse",
+export const ErrorResponseBody: msRest.CompositeMapper = {
+  serializedName: "ErrorResponseBody",
   type: {
     name: "Composite",
-    className: "ErrorResponse",
+    className: "ErrorResponseBody",
     modelProperties: {
       code: {
         serializedName: "code",
@@ -2607,13 +2701,19 @@ export const ErrorResponse: msRest.CompositeMapper = {
   }
 };
 
-export const ProxyResource: msRest.CompositeMapper = {
-  serializedName: "ProxyResource",
+export const ErrorResponse: msRest.CompositeMapper = {
+  serializedName: "ErrorResponse",
   type: {
     name: "Composite",
-    className: "ProxyResource",
+    className: "ErrorResponse",
     modelProperties: {
-      ...Resource.type.modelProperties
+      error: {
+        serializedName: "error",
+        type: {
+          name: "Composite",
+          className: "ErrorResponseBody"
+        }
+      }
     }
   }
 };

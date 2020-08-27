@@ -28,6 +28,7 @@ export {
   CustomDomain,
   DateAfterCreation,
   DateAfterModification,
+  DeletedAccount,
   DeleteRetentionPolicy,
   Encryption,
   EncryptionScope,

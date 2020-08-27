@@ -862,6 +862,54 @@ export interface PrivateEndpointConnection extends Resource {
 }
 
 /**
+ * The resource model definition for a ARM proxy resource. It will have everything other than
+ * required location and tags
+ */
+export interface ProxyResource extends Resource {
+}
+
+/**
+ * Deleted storage account
+ */
+export interface DeletedAccount extends ProxyResource {
+  /**
+   * key of the deleted account
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly key?: string;
+  /**
+   * name of the deleted account
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly deletedAccountName?: string;
+  /**
+   * location of the deleted account
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly location?: string;
+  /**
+   * subscription of the deleted account
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly subscription?: string;
+  /**
+   * resource group of the deleted account
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly resourceGroupName?: string;
+  /**
+   * creation time of the deleted account
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly creationTime?: string;
+  /**
+   * deletion time of the deleted account
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly deletionTime?: string;
+}
+
+/**
  * The resource model definition for a ARM tracked top level resource
  */
 export interface TrackedResource extends Resource {
@@ -1043,6 +1091,17 @@ export interface StorageAccountKey {
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly permissions?: KeyPermission;
+}
+
+/**
+ * The response from the List Deleted Accounts operation.
+ */
+export interface DeletedAccountListResult {
+  /**
+   * Gets the list of deleted accounts and their properties.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly value?: DeletedAccount[];
 }
 
 /**
@@ -1612,9 +1671,9 @@ export interface ObjectReplicationPolicy extends Resource {
 }
 
 /**
- * An error response from the storage resource provider.
+ * Error response body contract.
  */
-export interface ErrorResponse {
+export interface ErrorResponseBody {
   /**
    * An identifier for the error. Codes are invariant and are intended to be consumed
    * programmatically.
@@ -1627,10 +1686,13 @@ export interface ErrorResponse {
 }
 
 /**
- * The resource model definition for a ARM proxy resource. It will have everything other than
- * required location and tags
+ * An error response from the storage resource provider.
  */
-export interface ProxyResource extends Resource {
+export interface ErrorResponse {
+  /**
+   * Azure Storage Resource Provider error response body.
+   */
+  error?: ErrorResponseBody;
 }
 
 /**
@@ -3568,6 +3630,26 @@ export type StorageAccountsListNextResponse = StorageAccountListResult & {
        * The response body as parsed JSON or XML
        */
       parsedBody: StorageAccountListResult;
+    };
+};
+
+/**
+ * Contains response data for the list operation.
+ */
+export type DeletedAccountsListResponse = DeletedAccountListResult & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: DeletedAccountListResult;
     };
 };
 

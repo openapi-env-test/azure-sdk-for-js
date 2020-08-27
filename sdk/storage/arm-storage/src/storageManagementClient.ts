@@ -20,6 +20,7 @@ class StorageManagementClient extends StorageManagementClientContext {
   operations: operations.Operations;
   skus: operations.Skus;
   storageAccounts: operations.StorageAccounts;
+  deletedAccounts: operations.DeletedAccounts;
   usages: operations.Usages;
   managementPolicies: operations.ManagementPolicies;
   privateEndpointConnections: operations.PrivateEndpointConnections;
@@ -46,6 +47,7 @@ class StorageManagementClient extends StorageManagementClientContext {
     this.operations = new operations.Operations(this);
     this.skus = new operations.Skus(this);
     this.storageAccounts = new operations.StorageAccounts(this);
+    this.deletedAccounts = new operations.DeletedAccounts(this);
     this.usages = new operations.Usages(this);
     this.managementPolicies = new operations.ManagementPolicies(this);
     this.privateEndpointConnections = new operations.PrivateEndpointConnections(this);
