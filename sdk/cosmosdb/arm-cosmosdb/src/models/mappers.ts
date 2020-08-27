@@ -221,15 +221,15 @@ export const PrivateLinkServiceConnectionStateProperty: msRest.CompositeMapper =
           name: "String"
         }
       },
-      actionsRequired: {
-        readOnly: true,
-        serializedName: "actionsRequired",
+      description: {
+        serializedName: "description",
         type: {
           name: "String"
         }
       },
-      description: {
-        serializedName: "description",
+      actionsRequired: {
+        readOnly: true,
+        serializedName: "actionsRequired",
         type: {
           name: "String"
         }

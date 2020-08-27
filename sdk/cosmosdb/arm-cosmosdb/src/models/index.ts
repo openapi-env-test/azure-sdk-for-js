@@ -147,14 +147,14 @@ export interface PrivateLinkServiceConnectionStateProperty {
    */
   status?: string;
   /**
+   * The private link service connection description.
+   */
+  description?: string;
+  /**
    * Any action that is required beyond basic workflow (approve/ reject/ disconnect)
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly actionsRequired?: string;
-  /**
-   * The private link service connection description.
-   */
-  description?: string;
 }
 
 /**
