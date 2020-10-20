@@ -13,16 +13,17 @@ import * as msRest from "@azure/ms-rest-js";
 import * as msRestAzure from "@azure/ms-rest-azure-js";
 
 const packageName = "@azure/arm-monitor";
-const packageVersion = "5.4.0";
+const packageVersion = "6.0.0";
 
 export class MonitorManagementClientContext extends msRestAzure.AzureServiceClient {
   credentials: msRest.ServiceClientCredentials;
+  apiVersion?: string;
   subscriptionId: string;
 
   /**
    * Initializes a new instance of the MonitorManagementClient class.
    * @param credentials Credentials needed for the client to connect to Azure.
-   * @param subscriptionId The Azure subscription Id.
+   * @param subscriptionId The ID of the target subscription.
    * @param [options] The parameter options
    */
   constructor(credentials: msRest.ServiceClientCredentials, subscriptionId: string, options?: Models.MonitorManagementClientOptions) {
@@ -43,6 +44,7 @@ export class MonitorManagementClientContext extends msRestAzure.AzureServiceClie
 
     super(credentials, options);
 
+    this.apiVersion = '2020-10-01';
     this.acceptLanguage = 'en-US';
     this.longRunningOperationRetryTimeout = 30;
     this.baseUri = options.baseUri || this.baseUri || "https://management.azure.com";
