@@ -9,16 +9,16 @@
 
 import * as msRest from "@azure/ms-rest-js";
 import * as Models from "../models";
-import * as Mappers from "../models/managedRuleSetsMappers";
+import * as Mappers from "../models/profilesTestMappers";
 import * as Parameters from "../models/parameters";
 import { CdnManagementClientContext } from "../cdnManagementClientContext";
 
-/** Class representing a ManagedRuleSets. */
-export class ManagedRuleSets {
+/** Class representing a ProfilesTest. */
+export class ProfilesTest {
   private readonly client: CdnManagementClientContext;
 
   /**
-   * Create a ManagedRuleSets.
+   * Create a ProfilesTest.
    * @param {CdnManagementClientContext} client Reference to the service client.
    */
   constructor(client: CdnManagementClientContext) {
@@ -26,55 +26,55 @@ export class ManagedRuleSets {
   }
 
   /**
-   * Lists all available managed rule sets.
+   * Lists all of the CDN profiles within an Azure subscription.
    * @param [options] The optional parameters
-   * @returns Promise<Models.ManagedRuleSetsListResponse>
+   * @returns Promise<Models.ProfilesTestListResponse>
    */
-  list(options?: msRest.RequestOptionsBase): Promise<Models.ManagedRuleSetsListResponse>;
+  list(options?: msRest.RequestOptionsBase): Promise<Models.ProfilesTestListResponse>;
   /**
    * @param callback The callback
    */
-  list(callback: msRest.ServiceCallback<Models.ManagedRuleSetDefinitionList>): void;
+  list(callback: msRest.ServiceCallback<Models.ProfileListResult>): void;
   /**
    * @param options The optional parameters
    * @param callback The callback
    */
-  list(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ManagedRuleSetDefinitionList>): void;
-  list(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ManagedRuleSetDefinitionList>, callback?: msRest.ServiceCallback<Models.ManagedRuleSetDefinitionList>): Promise<Models.ManagedRuleSetsListResponse> {
+  list(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ProfileListResult>): void;
+  list(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ProfileListResult>, callback?: msRest.ServiceCallback<Models.ProfileListResult>): Promise<Models.ProfilesTestListResponse> {
     return this.client.sendOperationRequest(
       {
         options
       },
       listOperationSpec,
-      callback) as Promise<Models.ManagedRuleSetsListResponse>;
+      callback) as Promise<Models.ProfilesTestListResponse>;
   }
 
   /**
-   * Lists all available managed rule sets.
+   * Lists all of the CDN profiles within an Azure subscription.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
-   * @returns Promise<Models.ManagedRuleSetsListNextResponse>
+   * @returns Promise<Models.ProfilesTestListNextResponse>
    */
-  listNext(nextPageLink: string, options?: msRest.RequestOptionsBase): Promise<Models.ManagedRuleSetsListNextResponse>;
+  listNext(nextPageLink: string, options?: msRest.RequestOptionsBase): Promise<Models.ProfilesTestListNextResponse>;
   /**
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param callback The callback
    */
-  listNext(nextPageLink: string, callback: msRest.ServiceCallback<Models.ManagedRuleSetDefinitionList>): void;
+  listNext(nextPageLink: string, callback: msRest.ServiceCallback<Models.ProfileListResult>): void;
   /**
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param options The optional parameters
    * @param callback The callback
    */
-  listNext(nextPageLink: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ManagedRuleSetDefinitionList>): void;
-  listNext(nextPageLink: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ManagedRuleSetDefinitionList>, callback?: msRest.ServiceCallback<Models.ManagedRuleSetDefinitionList>): Promise<Models.ManagedRuleSetsListNextResponse> {
+  listNext(nextPageLink: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ProfileListResult>): void;
+  listNext(nextPageLink: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ProfileListResult>, callback?: msRest.ServiceCallback<Models.ProfileListResult>): Promise<Models.ProfilesTestListNextResponse> {
     return this.client.sendOperationRequest(
       {
         nextPageLink,
         options
       },
       listNextOperationSpec,
-      callback) as Promise<Models.ManagedRuleSetsListNextResponse>;
+      callback) as Promise<Models.ProfilesTestListNextResponse>;
   }
 }
 
@@ -82,7 +82,7 @@ export class ManagedRuleSets {
 const serializer = new msRest.Serializer(Mappers);
 const listOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/providers/Microsoft.Cdn/CdnWebApplicationFirewallManagedRuleSets",
+  path: "subscriptions/{subscriptionId}/providers/Microsoft.Cdn/profiles",
   urlParameters: [
     Parameters.subscriptionId
   ],
@@ -94,7 +94,7 @@ const listOperationSpec: msRest.OperationSpec = {
   ],
   responses: {
     200: {
-      bodyMapper: Mappers.ManagedRuleSetDefinitionList
+      bodyMapper: Mappers.ProfileListResult
     },
     default: {
       bodyMapper: Mappers.ErrorResponse
@@ -118,7 +118,7 @@ const listNextOperationSpec: msRest.OperationSpec = {
   ],
   responses: {
     200: {
-      bodyMapper: Mappers.ManagedRuleSetDefinitionList
+      bodyMapper: Mappers.ProfileListResult
     },
     default: {
       bodyMapper: Mappers.ErrorResponse
