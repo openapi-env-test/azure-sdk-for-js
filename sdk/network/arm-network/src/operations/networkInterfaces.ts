@@ -91,32 +91,9 @@ export class NetworkInterfaces {
    * @param [options] The optional parameters
    * @returns Promise<Models.NetworkInterfacesUpdateTagsResponse>
    */
-  updateTags(resourceGroupName: string, networkInterfaceName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.NetworkInterfacesUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param networkInterfaceName The name of the network interface.
-   * @param parameters Parameters supplied to update network interface tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, networkInterfaceName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.NetworkInterface>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param networkInterfaceName The name of the network interface.
-   * @param parameters Parameters supplied to update network interface tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, networkInterfaceName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.NetworkInterface>): void;
-  updateTags(resourceGroupName: string, networkInterfaceName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.NetworkInterface>, callback?: msRest.ServiceCallback<Models.NetworkInterface>): Promise<Models.NetworkInterfacesUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        networkInterfaceName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.NetworkInterfacesUpdateTagsResponse>;
+  updateTags(resourceGroupName: string, networkInterfaceName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.NetworkInterfacesUpdateTagsResponse> {
+    return this.beginUpdateTags(resourceGroupName,networkInterfaceName,parameters,options)
+      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.NetworkInterfacesUpdateTagsResponse>;
   }
 
   /**
@@ -389,114 +366,6 @@ export class NetworkInterfaces {
   }
 
   /**
-   * Gets information about all network interfaces in a role instance in a cloud service.
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param roleInstanceName The name of role instance.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.NetworkInterfacesListCloudServiceRoleInstanceNetworkInterfacesResponse>
-   */
-  listCloudServiceRoleInstanceNetworkInterfaces(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, options?: msRest.RequestOptionsBase): Promise<Models.NetworkInterfacesListCloudServiceRoleInstanceNetworkInterfacesResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param roleInstanceName The name of role instance.
-   * @param callback The callback
-   */
-  listCloudServiceRoleInstanceNetworkInterfaces(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, callback: msRest.ServiceCallback<Models.NetworkInterfaceListResult>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param roleInstanceName The name of role instance.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listCloudServiceRoleInstanceNetworkInterfaces(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.NetworkInterfaceListResult>): void;
-  listCloudServiceRoleInstanceNetworkInterfaces(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.NetworkInterfaceListResult>, callback?: msRest.ServiceCallback<Models.NetworkInterfaceListResult>): Promise<Models.NetworkInterfacesListCloudServiceRoleInstanceNetworkInterfacesResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        cloudServiceName,
-        roleInstanceName,
-        options
-      },
-      listCloudServiceRoleInstanceNetworkInterfacesOperationSpec,
-      callback) as Promise<Models.NetworkInterfacesListCloudServiceRoleInstanceNetworkInterfacesResponse>;
-  }
-
-  /**
-   * Gets all network interfaces in a cloud service.
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.NetworkInterfacesListCloudServiceNetworkInterfacesResponse>
-   */
-  listCloudServiceNetworkInterfaces(resourceGroupName: string, cloudServiceName: string, options?: msRest.RequestOptionsBase): Promise<Models.NetworkInterfacesListCloudServiceNetworkInterfacesResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param callback The callback
-   */
-  listCloudServiceNetworkInterfaces(resourceGroupName: string, cloudServiceName: string, callback: msRest.ServiceCallback<Models.NetworkInterfaceListResult>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listCloudServiceNetworkInterfaces(resourceGroupName: string, cloudServiceName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.NetworkInterfaceListResult>): void;
-  listCloudServiceNetworkInterfaces(resourceGroupName: string, cloudServiceName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.NetworkInterfaceListResult>, callback?: msRest.ServiceCallback<Models.NetworkInterfaceListResult>): Promise<Models.NetworkInterfacesListCloudServiceNetworkInterfacesResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        cloudServiceName,
-        options
-      },
-      listCloudServiceNetworkInterfacesOperationSpec,
-      callback) as Promise<Models.NetworkInterfacesListCloudServiceNetworkInterfacesResponse>;
-  }
-
-  /**
-   * Get the specified network interface in a cloud service.
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param roleInstanceName The name of role instance.
-   * @param networkInterfaceName The name of the network interface.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.NetworkInterfacesGetCloudServiceNetworkInterfaceResponse>
-   */
-  getCloudServiceNetworkInterface(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, networkInterfaceName: string, options?: Models.NetworkInterfacesGetCloudServiceNetworkInterfaceOptionalParams): Promise<Models.NetworkInterfacesGetCloudServiceNetworkInterfaceResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param roleInstanceName The name of role instance.
-   * @param networkInterfaceName The name of the network interface.
-   * @param callback The callback
-   */
-  getCloudServiceNetworkInterface(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, networkInterfaceName: string, callback: msRest.ServiceCallback<Models.NetworkInterface>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param roleInstanceName The name of role instance.
-   * @param networkInterfaceName The name of the network interface.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  getCloudServiceNetworkInterface(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, networkInterfaceName: string, options: Models.NetworkInterfacesGetCloudServiceNetworkInterfaceOptionalParams, callback: msRest.ServiceCallback<Models.NetworkInterface>): void;
-  getCloudServiceNetworkInterface(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, networkInterfaceName: string, options?: Models.NetworkInterfacesGetCloudServiceNetworkInterfaceOptionalParams | msRest.ServiceCallback<Models.NetworkInterface>, callback?: msRest.ServiceCallback<Models.NetworkInterface>): Promise<Models.NetworkInterfacesGetCloudServiceNetworkInterfaceResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        cloudServiceName,
-        roleInstanceName,
-        networkInterfaceName,
-        options
-      },
-      getCloudServiceNetworkInterfaceOperationSpec,
-      callback) as Promise<Models.NetworkInterfacesGetCloudServiceNetworkInterfaceResponse>;
-  }
-
-  /**
    * Deletes the specified network interface.
    * @param resourceGroupName The name of the resource group.
    * @param networkInterfaceName The name of the network interface.
@@ -531,6 +400,26 @@ export class NetworkInterfaces {
         options
       },
       beginCreateOrUpdateOperationSpec,
+      options);
+  }
+
+  /**
+   * Updates a network interface tags.
+   * @param resourceGroupName The name of the resource group.
+   * @param networkInterfaceName The name of the network interface.
+   * @param parameters Parameters supplied to update network interface tags.
+   * @param [options] The optional parameters
+   * @returns Promise<msRestAzure.LROPoller>
+   */
+  beginUpdateTags(resourceGroupName: string, networkInterfaceName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+    return this.client.sendLRORequest(
+      {
+        resourceGroupName,
+        networkInterfaceName,
+        parameters,
+        options
+      },
+      beginUpdateTagsOperationSpec,
       options);
   }
 
@@ -712,63 +601,6 @@ export class NetworkInterfaces {
       listVirtualMachineScaleSetIpConfigurationsNextOperationSpec,
       callback) as Promise<Models.NetworkInterfacesListVirtualMachineScaleSetIpConfigurationsNextResponse>;
   }
-
-  /**
-   * Gets information about all network interfaces in a role instance in a cloud service.
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param [options] The optional parameters
-   * @returns
-   * Promise<Models.NetworkInterfacesListCloudServiceRoleInstanceNetworkInterfacesNextResponse>
-   */
-  listCloudServiceRoleInstanceNetworkInterfacesNext(nextPageLink: string, options?: msRest.RequestOptionsBase): Promise<Models.NetworkInterfacesListCloudServiceRoleInstanceNetworkInterfacesNextResponse>;
-  /**
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param callback The callback
-   */
-  listCloudServiceRoleInstanceNetworkInterfacesNext(nextPageLink: string, callback: msRest.ServiceCallback<Models.NetworkInterfaceListResult>): void;
-  /**
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listCloudServiceRoleInstanceNetworkInterfacesNext(nextPageLink: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.NetworkInterfaceListResult>): void;
-  listCloudServiceRoleInstanceNetworkInterfacesNext(nextPageLink: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.NetworkInterfaceListResult>, callback?: msRest.ServiceCallback<Models.NetworkInterfaceListResult>): Promise<Models.NetworkInterfacesListCloudServiceRoleInstanceNetworkInterfacesNextResponse> {
-    return this.client.sendOperationRequest(
-      {
-        nextPageLink,
-        options
-      },
-      listCloudServiceRoleInstanceNetworkInterfacesNextOperationSpec,
-      callback) as Promise<Models.NetworkInterfacesListCloudServiceRoleInstanceNetworkInterfacesNextResponse>;
-  }
-
-  /**
-   * Gets all network interfaces in a cloud service.
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.NetworkInterfacesListCloudServiceNetworkInterfacesNextResponse>
-   */
-  listCloudServiceNetworkInterfacesNext(nextPageLink: string, options?: msRest.RequestOptionsBase): Promise<Models.NetworkInterfacesListCloudServiceNetworkInterfacesNextResponse>;
-  /**
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param callback The callback
-   */
-  listCloudServiceNetworkInterfacesNext(nextPageLink: string, callback: msRest.ServiceCallback<Models.NetworkInterfaceListResult>): void;
-  /**
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listCloudServiceNetworkInterfacesNext(nextPageLink: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.NetworkInterfaceListResult>): void;
-  listCloudServiceNetworkInterfacesNext(nextPageLink: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.NetworkInterfaceListResult>, callback?: msRest.ServiceCallback<Models.NetworkInterfaceListResult>): Promise<Models.NetworkInterfacesListCloudServiceNetworkInterfacesNextResponse> {
-    return this.client.sendOperationRequest(
-      {
-        nextPageLink,
-        options
-      },
-      listCloudServiceNetworkInterfacesNextOperationSpec,
-      callback) as Promise<Models.NetworkInterfacesListCloudServiceNetworkInterfacesNextResponse>;
-  }
 }
 
 // Operation Specifications
@@ -788,38 +620,6 @@ const getOperationSpec: msRest.OperationSpec = {
   headerParameters: [
     Parameters.acceptLanguage
   ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.NetworkInterface
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.networkInterfaceName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
   responses: {
     200: {
       bodyMapper: Mappers.NetworkInterface
@@ -1014,85 +814,6 @@ const getVirtualMachineScaleSetIpConfigurationOperationSpec: msRest.OperationSpe
   serializer
 };
 
-const listCloudServiceRoleInstanceNetworkInterfacesOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/networkInterfaces",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.cloudServiceName,
-    Parameters.roleInstanceName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.NetworkInterfaceListResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const listCloudServiceNetworkInterfacesOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/networkInterfaces",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.cloudServiceName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.NetworkInterfaceListResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const getCloudServiceNetworkInterfaceOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/networkInterfaces/{networkInterfaceName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.cloudServiceName,
-    Parameters.roleInstanceName,
-    Parameters.networkInterfaceName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0,
-    Parameters.expand
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.NetworkInterface
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
 const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
   httpMethod: "DELETE",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}",
@@ -1144,6 +865,38 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.NetworkInterface
     },
     201: {
+      bodyMapper: Mappers.NetworkInterface
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const beginUpdateTagsOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PATCH",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.networkInterfaceName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "parameters",
+    mapper: {
+      ...Mappers.TagsObject,
+      required: true
+    }
+  },
+  responses: {
+    200: {
       bodyMapper: Mappers.NetworkInterface
     },
     default: {
@@ -1318,54 +1071,6 @@ const listVirtualMachineScaleSetIpConfigurationsNextOperationSpec: msRest.Operat
   responses: {
     200: {
       bodyMapper: Mappers.NetworkInterfaceIPConfigurationListResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const listCloudServiceRoleInstanceNetworkInterfacesNextOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  baseUrl: "https://management.azure.com",
-  path: "{nextLink}",
-  urlParameters: [
-    Parameters.nextPageLink
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.NetworkInterfaceListResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const listCloudServiceNetworkInterfacesNextOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  baseUrl: "https://management.azure.com",
-  path: "{nextLink}",
-  urlParameters: [
-    Parameters.nextPageLink
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.NetworkInterfaceListResult
     },
     default: {
       bodyMapper: Mappers.CloudError

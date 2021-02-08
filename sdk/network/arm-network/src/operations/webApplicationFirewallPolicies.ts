@@ -81,20 +81,20 @@ export class WebApplicationFirewallPolicies {
   /**
    * Retrieve protection policy with specified name within a resource group.
    * @param resourceGroupName The name of the resource group.
-   * @param policyName The name of the policy.
+   * @param policyName The name of the policy
    * @param [options] The optional parameters
    * @returns Promise<Models.WebApplicationFirewallPoliciesGetResponse>
    */
   get(resourceGroupName: string, policyName: string, options?: msRest.RequestOptionsBase): Promise<Models.WebApplicationFirewallPoliciesGetResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
-   * @param policyName The name of the policy.
+   * @param policyName The name of the policy
    * @param callback The callback
    */
   get(resourceGroupName: string, policyName: string, callback: msRest.ServiceCallback<Models.WebApplicationFirewallPolicy>): void;
   /**
    * @param resourceGroupName The name of the resource group.
-   * @param policyName The name of the policy.
+   * @param policyName The name of the policy
    * @param options The optional parameters
    * @param callback The callback
    */
@@ -147,7 +147,7 @@ export class WebApplicationFirewallPolicies {
   }
 
   /**
-   * Deletes Policy.
+   * Deletes Policy
    * @param resourceGroupName The name of the resource group.
    * @param policyName The name of the policy.
    * @param [options] The optional parameters
@@ -159,7 +159,7 @@ export class WebApplicationFirewallPolicies {
   }
 
   /**
-   * Deletes Policy.
+   * Deletes Policy
    * @param resourceGroupName The name of the resource group.
    * @param policyName The name of the policy.
    * @param [options] The optional parameters

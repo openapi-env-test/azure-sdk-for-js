@@ -84,19 +84,6 @@ export class AzureFirewalls {
   }
 
   /**
-   * Updates tags of an Azure Firewall resource.
-   * @param resourceGroupName The name of the resource group.
-   * @param azureFirewallName The name of the Azure Firewall.
-   * @param parameters Parameters supplied to update azure firewall tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.AzureFirewallsUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, azureFirewallName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.AzureFirewallsUpdateTagsResponse> {
-    return this.beginUpdateTags(resourceGroupName,azureFirewallName,parameters,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.AzureFirewallsUpdateTagsResponse>;
-  }
-
-  /**
    * Lists all Azure Firewalls in a resource group.
    * @param resourceGroupName The name of the resource group.
    * @param [options] The optional parameters
@@ -187,26 +174,6 @@ export class AzureFirewalls {
   }
 
   /**
-   * Updates tags of an Azure Firewall resource.
-   * @param resourceGroupName The name of the resource group.
-   * @param azureFirewallName The name of the Azure Firewall.
-   * @param parameters Parameters supplied to update azure firewall tags.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginUpdateTags(resourceGroupName: string, azureFirewallName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        azureFirewallName,
-        parameters,
-        options
-      },
-      beginUpdateTagsOperationSpec,
-      options);
-  }
-
-  /**
    * Lists all Azure Firewalls in a resource group.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
@@ -270,7 +237,7 @@ const getOperationSpec: msRest.OperationSpec = {
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}",
   urlParameters: [
     Parameters.resourceGroupName,
-    Parameters.azureFirewallName0,
+    Parameters.azureFirewallName,
     Parameters.subscriptionId
   ],
   queryParameters: [
@@ -342,7 +309,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}",
   urlParameters: [
     Parameters.resourceGroupName,
-    Parameters.azureFirewallName0,
+    Parameters.azureFirewallName,
     Parameters.subscriptionId
   ],
   queryParameters: [
@@ -367,7 +334,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}",
   urlParameters: [
     Parameters.resourceGroupName,
-    Parameters.azureFirewallName1,
+    Parameters.azureFirewallName,
     Parameters.subscriptionId
   ],
   queryParameters: [
@@ -390,39 +357,6 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     201: {
       bodyMapper: Mappers.AzureFirewall
     },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const beginUpdateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.azureFirewallName0,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.AzureFirewall
-    },
-    202: {},
     default: {
       bodyMapper: Mappers.CloudError
     }

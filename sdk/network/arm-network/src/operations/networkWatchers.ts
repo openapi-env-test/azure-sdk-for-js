@@ -270,7 +270,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * Initiate troubleshooting on a specified resource.
+   * Initiate troubleshooting on a specified resource
    * @param resourceGroupName The name of the resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that define the resource to troubleshoot.
@@ -283,7 +283,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * Get the last completed troubleshooting result on a specified resource.
+   * Get the last completed troubleshooting result on a specified resource
    * @param resourceGroupName The name of the resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that define the resource to query the troubleshooting result.
@@ -296,7 +296,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * Configures flow log and traffic analytics (optional) on a specified resource.
+   * Configures flow log  and traffic analytics (optional) on a specified resource.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that define the configuration of flow log.
@@ -313,7 +313,7 @@ export class NetworkWatchers {
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that define a resource to query flow log and traffic analytics
-   * (optional) status.
+   * (optional)  status.
    * @param [options] The optional parameters
    * @returns Promise<Models.NetworkWatchersGetFlowLogStatusResponse>
    */
@@ -337,9 +337,8 @@ export class NetworkWatchers {
   }
 
   /**
-   * NOTE: This feature is currently in preview and still being tested for stability. Gets the
-   * relative latency score for internet service providers from a specified location to Azure
-   * regions.
+   * Gets the relative latency score for internet service providers from a specified location to
+   * Azure regions.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that determine Azure reachability report configuration.
@@ -352,8 +351,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * NOTE: This feature is currently in preview and still being tested for stability. Lists all
-   * available internet service providers for a specified Azure region.
+   * Lists all available internet service providers for a specified Azure region.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that scope the list of available providers.
@@ -366,11 +364,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * Gets Network Configuration Diagnostic data to help customers understand and debug network
-   * behavior. It provides detailed information on what security rules were applied to a specified
-   * traffic flow and the result of evaluating these rules. Customers must provide details of a flow
-   * like source, destination, protocol, etc. The API returns whether traffic was allowed or denied,
-   * the rules evaluated for the specified flow and the evaluation results.
+   * Get network configuration diagnostic.
    * @param resourceGroupName The name of the resource group.
    * @param networkWatcherName The name of the network watcher.
    * @param parameters Parameters to get network configuration diagnostic.
@@ -461,7 +455,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * Initiate troubleshooting on a specified resource.
+   * Initiate troubleshooting on a specified resource
    * @param resourceGroupName The name of the resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that define the resource to troubleshoot.
@@ -481,7 +475,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * Get the last completed troubleshooting result on a specified resource.
+   * Get the last completed troubleshooting result on a specified resource
    * @param resourceGroupName The name of the resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that define the resource to query the troubleshooting result.
@@ -501,7 +495,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * Configures flow log and traffic analytics (optional) on a specified resource.
+   * Configures flow log  and traffic analytics (optional) on a specified resource.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that define the configuration of flow log.
@@ -525,7 +519,7 @@ export class NetworkWatchers {
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that define a resource to query flow log and traffic analytics
-   * (optional) status.
+   * (optional)  status.
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -563,9 +557,8 @@ export class NetworkWatchers {
   }
 
   /**
-   * NOTE: This feature is currently in preview and still being tested for stability. Gets the
-   * relative latency score for internet service providers from a specified location to Azure
-   * regions.
+   * Gets the relative latency score for internet service providers from a specified location to
+   * Azure regions.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that determine Azure reachability report configuration.
@@ -585,8 +578,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * NOTE: This feature is currently in preview and still being tested for stability. Lists all
-   * available internet service providers for a specified Azure region.
+   * Lists all available internet service providers for a specified Azure region.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that scope the list of available providers.
@@ -606,11 +598,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * Gets Network Configuration Diagnostic data to help customers understand and debug network
-   * behavior. It provides detailed information on what security rules were applied to a specified
-   * traffic flow and the result of evaluating these rules. Customers must provide details of a flow
-   * like source, destination, protocol, etc. The API returns whether traffic was allowed or denied,
-   * the rules evaluated for the specified flow and the evaluation results.
+   * Get network configuration diagnostic.
    * @param resourceGroupName The name of the resource group.
    * @param networkWatcherName The name of the network watcher.
    * @param parameters Parameters to get network configuration diagnostic.

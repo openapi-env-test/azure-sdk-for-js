@@ -79,32 +79,9 @@ export class VirtualHubs {
    * @param [options] The optional parameters
    * @returns Promise<Models.VirtualHubsUpdateTagsResponse>
    */
-  updateTags(resourceGroupName: string, virtualHubName: string, virtualHubParameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.VirtualHubsUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The resource group name of the VirtualHub.
-   * @param virtualHubName The name of the VirtualHub.
-   * @param virtualHubParameters Parameters supplied to update VirtualHub tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, virtualHubName: string, virtualHubParameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.VirtualHub>): void;
-  /**
-   * @param resourceGroupName The resource group name of the VirtualHub.
-   * @param virtualHubName The name of the VirtualHub.
-   * @param virtualHubParameters Parameters supplied to update VirtualHub tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, virtualHubName: string, virtualHubParameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.VirtualHub>): void;
-  updateTags(resourceGroupName: string, virtualHubName: string, virtualHubParameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.VirtualHub>, callback?: msRest.ServiceCallback<Models.VirtualHub>): Promise<Models.VirtualHubsUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        virtualHubName,
-        virtualHubParameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.VirtualHubsUpdateTagsResponse>;
+  updateTags(resourceGroupName: string, virtualHubName: string, virtualHubParameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.VirtualHubsUpdateTagsResponse> {
+    return this.beginUpdateTags(resourceGroupName,virtualHubName,virtualHubParameters,options)
+      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualHubsUpdateTagsResponse>;
   }
 
   /**
@@ -172,18 +149,6 @@ export class VirtualHubs {
   }
 
   /**
-   * Gets the effective routes configured for the Virtual Hub resource or the specified resource .
-   * @param resourceGroupName The resource group name of the VirtualHub.
-   * @param virtualHubName The name of the VirtualHub.
-   * @param [options] The optional parameters
-   * @returns Promise<msRest.RestResponse>
-   */
-  getEffectiveVirtualHubRoutes(resourceGroupName: string, virtualHubName: string, options?: Models.VirtualHubsGetEffectiveVirtualHubRoutesOptionalParams): Promise<msRest.RestResponse> {
-    return this.beginGetEffectiveVirtualHubRoutes(resourceGroupName,virtualHubName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished());
-  }
-
-  /**
    * Creates a VirtualHub resource if it doesn't exist else updates the existing VirtualHub.
    * @param resourceGroupName The resource group name of the VirtualHub.
    * @param virtualHubName The name of the VirtualHub.
@@ -204,6 +169,26 @@ export class VirtualHubs {
   }
 
   /**
+   * Updates VirtualHub tags.
+   * @param resourceGroupName The resource group name of the VirtualHub.
+   * @param virtualHubName The name of the VirtualHub.
+   * @param virtualHubParameters Parameters supplied to update VirtualHub tags.
+   * @param [options] The optional parameters
+   * @returns Promise<msRestAzure.LROPoller>
+   */
+  beginUpdateTags(resourceGroupName: string, virtualHubName: string, virtualHubParameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+    return this.client.sendLRORequest(
+      {
+        resourceGroupName,
+        virtualHubName,
+        virtualHubParameters,
+        options
+      },
+      beginUpdateTagsOperationSpec,
+      options);
+  }
+
+  /**
    * Deletes a VirtualHub.
    * @param resourceGroupName The resource group name of the VirtualHub.
    * @param virtualHubName The name of the VirtualHub.
@@ -218,24 +203,6 @@ export class VirtualHubs {
         options
       },
       beginDeleteMethodOperationSpec,
-      options);
-  }
-
-  /**
-   * Gets the effective routes configured for the Virtual Hub resource or the specified resource .
-   * @param resourceGroupName The resource group name of the VirtualHub.
-   * @param virtualHubName The name of the VirtualHub.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginGetEffectiveVirtualHubRoutes(resourceGroupName: string, virtualHubName: string, options?: Models.VirtualHubsBeginGetEffectiveVirtualHubRoutesOptionalParams): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        virtualHubName,
-        options
-      },
-      beginGetEffectiveVirtualHubRoutesOperationSpec,
       options);
   }
 
@@ -317,39 +284,7 @@ const getOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.VirtualHub
     },
     default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}",
-  urlParameters: [
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.virtualHubName
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "virtualHubParameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.VirtualHub
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer
@@ -373,7 +308,7 @@ const listByResourceGroupOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.ListVirtualHubsResult
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer
@@ -396,7 +331,7 @@ const listOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.ListVirtualHubsResult
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer
@@ -431,7 +366,42 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.VirtualHub
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.ErrorModel
+    }
+  },
+  serializer
+};
+
+const beginUpdateTagsOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PATCH",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}",
+  urlParameters: [
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName,
+    Parameters.virtualHubName
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "virtualHubParameters",
+    mapper: {
+      ...Mappers.TagsObject,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.VirtualHub
+    },
+    201: {
+      bodyMapper: Mappers.VirtualHub
+    },
+    default: {
+      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer
@@ -456,38 +426,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     202: {},
     204: {},
     default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const beginGetEffectiveVirtualHubRoutesOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/effectiveRoutes",
-  urlParameters: [
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.virtualHubName
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: [
-      "options",
-      "effectiveRoutesParameters"
-    ],
-    mapper: Mappers.EffectiveRoutesParameters
-  },
-  responses: {
-    200: {},
-    202: {},
-    default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer
@@ -511,7 +450,7 @@ const listByResourceGroupNextOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.ListVirtualHubsResult
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer
@@ -535,7 +474,7 @@ const listNextOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.ListVirtualHubsResult
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer

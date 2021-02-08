@@ -84,39 +84,16 @@ export class ExpressRoutePorts {
   }
 
   /**
-   * Update ExpressRoutePort tags.
+   * Update ExpressRoutePort tags
    * @param resourceGroupName The name of the resource group.
    * @param expressRoutePortName The name of the ExpressRoutePort resource.
    * @param parameters Parameters supplied to update ExpressRoutePort resource tags.
    * @param [options] The optional parameters
    * @returns Promise<Models.ExpressRoutePortsUpdateTagsResponse>
    */
-  updateTags(resourceGroupName: string, expressRoutePortName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.ExpressRoutePortsUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param expressRoutePortName The name of the ExpressRoutePort resource.
-   * @param parameters Parameters supplied to update ExpressRoutePort resource tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, expressRoutePortName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.ExpressRoutePort>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param expressRoutePortName The name of the ExpressRoutePort resource.
-   * @param parameters Parameters supplied to update ExpressRoutePort resource tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, expressRoutePortName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ExpressRoutePort>): void;
-  updateTags(resourceGroupName: string, expressRoutePortName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ExpressRoutePort>, callback?: msRest.ServiceCallback<Models.ExpressRoutePort>): Promise<Models.ExpressRoutePortsUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        expressRoutePortName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.ExpressRoutePortsUpdateTagsResponse>;
+  updateTags(resourceGroupName: string, expressRoutePortName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.ExpressRoutePortsUpdateTagsResponse> {
+    return this.beginUpdateTags(resourceGroupName,expressRoutePortName,parameters,options)
+      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.ExpressRoutePortsUpdateTagsResponse>;
   }
 
   /**
@@ -148,7 +125,7 @@ export class ExpressRoutePorts {
   }
 
   /**
-   * List all the ExpressRoutePort resources in the specified subscription.
+   * List all the ExpressRoutePort resources in the specified subscription
    * @param [options] The optional parameters
    * @returns Promise<Models.ExpressRoutePortsListResponse>
    */
@@ -169,42 +146,6 @@ export class ExpressRoutePorts {
       },
       listOperationSpec,
       callback) as Promise<Models.ExpressRoutePortsListResponse>;
-  }
-
-  /**
-   * Generate a letter of authorization for the requested ExpressRoutePort resource.
-   * @param resourceGroupName The name of the resource group.
-   * @param expressRoutePortName The name of ExpressRoutePort.
-   * @param request Request parameters supplied to generate a letter of authorization.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ExpressRoutePortsGenerateLOAResponse>
-   */
-  generateLOA(resourceGroupName: string, expressRoutePortName: string, request: Models.GenerateExpressRoutePortsLOARequest, options?: msRest.RequestOptionsBase): Promise<Models.ExpressRoutePortsGenerateLOAResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param expressRoutePortName The name of ExpressRoutePort.
-   * @param request Request parameters supplied to generate a letter of authorization.
-   * @param callback The callback
-   */
-  generateLOA(resourceGroupName: string, expressRoutePortName: string, request: Models.GenerateExpressRoutePortsLOARequest, callback: msRest.ServiceCallback<Models.GenerateExpressRoutePortsLOAResult>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param expressRoutePortName The name of ExpressRoutePort.
-   * @param request Request parameters supplied to generate a letter of authorization.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  generateLOA(resourceGroupName: string, expressRoutePortName: string, request: Models.GenerateExpressRoutePortsLOARequest, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.GenerateExpressRoutePortsLOAResult>): void;
-  generateLOA(resourceGroupName: string, expressRoutePortName: string, request: Models.GenerateExpressRoutePortsLOARequest, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.GenerateExpressRoutePortsLOAResult>, callback?: msRest.ServiceCallback<Models.GenerateExpressRoutePortsLOAResult>): Promise<Models.ExpressRoutePortsGenerateLOAResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        expressRoutePortName,
-        request,
-        options
-      },
-      generateLOAOperationSpec,
-      callback) as Promise<Models.ExpressRoutePortsGenerateLOAResponse>;
   }
 
   /**
@@ -246,6 +187,26 @@ export class ExpressRoutePorts {
   }
 
   /**
+   * Update ExpressRoutePort tags
+   * @param resourceGroupName The name of the resource group.
+   * @param expressRoutePortName The name of the ExpressRoutePort resource.
+   * @param parameters Parameters supplied to update ExpressRoutePort resource tags.
+   * @param [options] The optional parameters
+   * @returns Promise<msRestAzure.LROPoller>
+   */
+  beginUpdateTags(resourceGroupName: string, expressRoutePortName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+    return this.client.sendLRORequest(
+      {
+        resourceGroupName,
+        expressRoutePortName,
+        parameters,
+        options
+      },
+      beginUpdateTagsOperationSpec,
+      options);
+  }
+
+  /**
    * List all the ExpressRoutePort resources in the specified resource group.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
@@ -274,7 +235,7 @@ export class ExpressRoutePorts {
   }
 
   /**
-   * List all the ExpressRoutePort resources in the specified subscription.
+   * List all the ExpressRoutePort resources in the specified subscription
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.ExpressRoutePortsListNextResponse>
@@ -329,38 +290,6 @@ const getOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ExpressRoutePorts/{expressRoutePortName}",
-  urlParameters: [
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.expressRoutePortName
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.ExpressRoutePort
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
 const listByResourceGroupOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ExpressRoutePorts",
@@ -400,38 +329,6 @@ const listOperationSpec: msRest.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.ExpressRoutePortListResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const generateLOAOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRoutePorts/{expressRoutePortName}/generateLoa",
-  urlParameters: [
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.expressRoutePortName
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "request",
-    mapper: {
-      ...Mappers.GenerateExpressRoutePortsLOARequest,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.GenerateExpressRoutePortsLOAResult
     },
     default: {
       bodyMapper: Mappers.CloudError
@@ -491,6 +388,38 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.ExpressRoutePort
     },
     201: {
+      bodyMapper: Mappers.ExpressRoutePort
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const beginUpdateTagsOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PATCH",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ExpressRoutePorts/{expressRoutePortName}",
+  urlParameters: [
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName,
+    Parameters.expressRoutePortName
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "parameters",
+    mapper: {
+      ...Mappers.TagsObject,
+      required: true
+    }
+  },
+  responses: {
+    200: {
       bodyMapper: Mappers.ExpressRoutePort
     },
     default: {
