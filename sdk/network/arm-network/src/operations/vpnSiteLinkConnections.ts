@@ -89,7 +89,7 @@ const getOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.VpnSiteLinkConnection
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer

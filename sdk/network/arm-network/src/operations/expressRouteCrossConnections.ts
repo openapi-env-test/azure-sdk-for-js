@@ -135,34 +135,9 @@ export class ExpressRouteCrossConnections {
    * @param [options] The optional parameters
    * @returns Promise<Models.ExpressRouteCrossConnectionsUpdateTagsResponse>
    */
-  updateTags(resourceGroupName: string, crossConnectionName: string, crossConnectionParameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.ExpressRouteCrossConnectionsUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param crossConnectionName The name of the cross connection.
-   * @param crossConnectionParameters Parameters supplied to update express route cross connection
-   * tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, crossConnectionName: string, crossConnectionParameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.ExpressRouteCrossConnection>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param crossConnectionName The name of the cross connection.
-   * @param crossConnectionParameters Parameters supplied to update express route cross connection
-   * tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, crossConnectionName: string, crossConnectionParameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ExpressRouteCrossConnection>): void;
-  updateTags(resourceGroupName: string, crossConnectionName: string, crossConnectionParameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ExpressRouteCrossConnection>, callback?: msRest.ServiceCallback<Models.ExpressRouteCrossConnection>): Promise<Models.ExpressRouteCrossConnectionsUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        crossConnectionName,
-        crossConnectionParameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.ExpressRouteCrossConnectionsUpdateTagsResponse>;
+  updateTags(resourceGroupName: string, crossConnectionName: string, crossConnectionParameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.ExpressRouteCrossConnectionsUpdateTagsResponse> {
+    return this.beginUpdateTags(resourceGroupName,crossConnectionName,crossConnectionParameters,options)
+      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.ExpressRouteCrossConnectionsUpdateTagsResponse>;
   }
 
   /**
@@ -227,6 +202,27 @@ export class ExpressRouteCrossConnections {
         options
       },
       beginCreateOrUpdateOperationSpec,
+      options);
+  }
+
+  /**
+   * Updates an express route cross connection tags.
+   * @param resourceGroupName The name of the resource group.
+   * @param crossConnectionName The name of the cross connection.
+   * @param crossConnectionParameters Parameters supplied to update express route cross connection
+   * tags.
+   * @param [options] The optional parameters
+   * @returns Promise<msRestAzure.LROPoller>
+   */
+  beginUpdateTags(resourceGroupName: string, crossConnectionName: string, crossConnectionParameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+    return this.client.sendLRORequest(
+      {
+        resourceGroupName,
+        crossConnectionName,
+        crossConnectionParameters,
+        options
+      },
+      beginUpdateTagsOperationSpec,
       options);
   }
 
@@ -430,38 +426,6 @@ const getOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.crossConnectionName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "crossConnectionParameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.ExpressRouteCrossConnection
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
 const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
   httpMethod: "PUT",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}",
@@ -480,6 +444,38 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     parameterPath: "parameters",
     mapper: {
       ...Mappers.ExpressRouteCrossConnection,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.ExpressRouteCrossConnection
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const beginUpdateTagsOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PATCH",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.crossConnectionName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "crossConnectionParameters",
+    mapper: {
+      ...Mappers.TagsObject,
       required: true
     }
   },
