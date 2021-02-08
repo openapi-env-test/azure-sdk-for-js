@@ -391,38 +391,6 @@ export const SecurityRule: msRest.CompositeMapper = {
         type: {
           name: "String"
         }
-      },
-      type: {
-        serializedName: "type",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const ExtendedLocation: msRest.CompositeMapper = {
-  serializedName: "ExtendedLocation",
-  type: {
-    name: "Composite",
-    className: "ExtendedLocation",
-    modelProperties: {
-      name: {
-        required: true,
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      type: {
-        required: true,
-        isConstant: true,
-        serializedName: "type",
-        defaultValue: 'EdgeZone',
-        type: {
-          name: "String"
-        }
       }
     }
   }
@@ -558,13 +526,6 @@ export const PrivateEndpoint: msRest.CompositeMapper = {
     className: "PrivateEndpoint",
     modelProperties: {
       ...Resource.type.modelProperties,
-      extendedLocation: {
-        serializedName: "extendedLocation",
-        type: {
-          name: "Composite",
-          className: "ExtendedLocation"
-        }
-      },
       subnet: {
         serializedName: "properties.subnet",
         type: {
@@ -699,13 +660,6 @@ export const NetworkInterface: msRest.CompositeMapper = {
     className: "NetworkInterface",
     modelProperties: {
       ...Resource.type.modelProperties,
-      extendedLocation: {
-        serializedName: "extendedLocation",
-        type: {
-          name: "Composite",
-          className: "ExtendedLocation"
-        }
-      },
       virtualMachine: {
         readOnly: true,
         serializedName: "properties.virtualMachine",
@@ -797,14 +751,6 @@ export const NetworkInterface: msRest.CompositeMapper = {
               name: "String"
             }
           }
-        }
-      },
-      dscpConfiguration: {
-        readOnly: true,
-        serializedName: "properties.dscpConfiguration",
-        type: {
-          name: "Composite",
-          className: "SubResource"
         }
       },
       resourceGuid: {
@@ -1138,12 +1084,6 @@ export const Route: msRest.CompositeMapper = {
           name: "String"
         }
       },
-      hasBgpOverride: {
-        serializedName: "properties.hasBgpOverride",
-        type: {
-          name: "Boolean"
-        }
-      },
       name: {
         serializedName: "name",
         type: {
@@ -1153,12 +1093,6 @@ export const Route: msRest.CompositeMapper = {
       etag: {
         readOnly: true,
         serializedName: "etag",
-        type: {
-          name: "String"
-        }
-      },
-      type: {
-        serializedName: "type",
         type: {
           name: "String"
         }
@@ -1208,13 +1142,6 @@ export const RouteTable: msRest.CompositeMapper = {
       provisioningState: {
         readOnly: true,
         serializedName: "properties.provisioningState",
-        type: {
-          name: "String"
-        }
-      },
-      resourceGuid: {
-        readOnly: true,
-        serializedName: "properties.resourceGuid",
         type: {
           name: "String"
         }
@@ -1386,12 +1313,6 @@ export const PublicIPAddressSku: msRest.CompositeMapper = {
         type: {
           name: "String"
         }
-      },
-      tier: {
-        serializedName: "tier",
-        type: {
-          name: "String"
-        }
       }
     }
   }
@@ -1483,13 +1404,6 @@ export const PublicIPAddress: msRest.CompositeMapper = {
     className: "PublicIPAddress",
     modelProperties: {
       ...Resource.type.modelProperties,
-      extendedLocation: {
-        serializedName: "extendedLocation",
-        type: {
-          name: "Composite",
-          className: "ExtendedLocation"
-        }
-      },
       sku: {
         serializedName: "sku",
         type: {
@@ -2299,13 +2213,6 @@ export const LoadBalancerBackendAddress: msRest.CompositeMapper = {
           className: "SubResource"
         }
       },
-      loadBalancerFrontendIPConfiguration: {
-        serializedName: "properties.loadBalancerFrontendIPConfiguration",
-        type: {
-          name: "Composite",
-          className: "SubResource"
-        }
-      },
       name: {
         serializedName: "name",
         type: {
@@ -2323,12 +2230,6 @@ export const BackendAddressPool: msRest.CompositeMapper = {
     className: "BackendAddressPool",
     modelProperties: {
       ...SubResource.type.modelProperties,
-      location: {
-        serializedName: "properties.location",
-        type: {
-          name: "String"
-        }
-      },
       loadBalancerBackendAddresses: {
         serializedName: "properties.loadBalancerBackendAddresses",
         type: {
@@ -3141,22 +3042,6 @@ export const ApplicationGatewaySslPolicy: msRest.CompositeMapper = {
   }
 };
 
-export const ApplicationGatewayClientAuthConfiguration: msRest.CompositeMapper = {
-  serializedName: "ApplicationGatewayClientAuthConfiguration",
-  type: {
-    name: "Composite",
-    className: "ApplicationGatewayClientAuthConfiguration",
-    modelProperties: {
-      verifyClientCertIssuerDN: {
-        serializedName: "verifyClientCertIssuerDN",
-        type: {
-          name: "Boolean"
-        }
-      }
-    }
-  }
-};
-
 export const ApplicationGatewayIPConfiguration: msRest.CompositeMapper = {
   serializedName: "ApplicationGatewayIPConfiguration",
   type: {
@@ -3261,50 +3146,6 @@ export const ApplicationGatewayTrustedRootCertificate: msRest.CompositeMapper = 
       },
       keyVaultSecretId: {
         serializedName: "properties.keyVaultSecretId",
-        type: {
-          name: "String"
-        }
-      },
-      provisioningState: {
-        readOnly: true,
-        serializedName: "properties.provisioningState",
-        type: {
-          name: "String"
-        }
-      },
-      name: {
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      etag: {
-        readOnly: true,
-        serializedName: "etag",
-        type: {
-          name: "String"
-        }
-      },
-      type: {
-        readOnly: true,
-        serializedName: "type",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const ApplicationGatewayTrustedClientCertificate: msRest.CompositeMapper = {
-  serializedName: "ApplicationGatewayTrustedClientCertificate",
-  type: {
-    name: "Composite",
-    className: "ApplicationGatewayTrustedClientCertificate",
-    modelProperties: {
-      ...SubResource.type.modelProperties,
-      data: {
-        serializedName: "properties.data",
         type: {
           name: "String"
         }
@@ -3518,70 +3359,6 @@ export const ApplicationGatewayFrontendPort: msRest.CompositeMapper = {
   }
 };
 
-export const ApplicationGatewaySslProfile: msRest.CompositeMapper = {
-  serializedName: "ApplicationGatewaySslProfile",
-  type: {
-    name: "Composite",
-    className: "ApplicationGatewaySslProfile",
-    modelProperties: {
-      ...SubResource.type.modelProperties,
-      trustedClientCertificates: {
-        serializedName: "properties.trustedClientCertificates",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "SubResource"
-            }
-          }
-        }
-      },
-      sslPolicy: {
-        serializedName: "properties.sslPolicy",
-        type: {
-          name: "Composite",
-          className: "ApplicationGatewaySslPolicy"
-        }
-      },
-      clientAuthConfiguration: {
-        serializedName: "properties.clientAuthConfiguration",
-        type: {
-          name: "Composite",
-          className: "ApplicationGatewayClientAuthConfiguration"
-        }
-      },
-      provisioningState: {
-        readOnly: true,
-        serializedName: "properties.provisioningState",
-        type: {
-          name: "String"
-        }
-      },
-      name: {
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      etag: {
-        readOnly: true,
-        serializedName: "etag",
-        type: {
-          name: "String"
-        }
-      },
-      type: {
-        readOnly: true,
-        serializedName: "type",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
 export const ApplicationGatewayCustomError: msRest.CompositeMapper = {
   serializedName: "ApplicationGatewayCustomError",
   type: {
@@ -3639,13 +3416,6 @@ export const ApplicationGatewayHttpListener: msRest.CompositeMapper = {
       },
       sslCertificate: {
         serializedName: "properties.sslCertificate",
-        type: {
-          name: "Composite",
-          className: "SubResource"
-        }
-      },
-      sslProfile: {
-        serializedName: "properties.sslProfile",
         type: {
           name: "Composite",
           className: "SubResource"
@@ -4941,18 +4711,6 @@ export const ApplicationGateway: msRest.CompositeMapper = {
           }
         }
       },
-      trustedClientCertificates: {
-        serializedName: "properties.trustedClientCertificates",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "ApplicationGatewayTrustedClientCertificate"
-            }
-          }
-        }
-      },
       sslCertificates: {
         serializedName: "properties.sslCertificates",
         type: {
@@ -5033,18 +4791,6 @@ export const ApplicationGateway: msRest.CompositeMapper = {
             type: {
               name: "Composite",
               className: "ApplicationGatewayHttpListener"
-            }
-          }
-        }
-      },
-      sslProfiles: {
-        serializedName: "properties.sslProfiles",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "ApplicationGatewaySslProfile"
             }
           }
         }
@@ -6464,50 +6210,6 @@ export const AzureFirewallFqdnTag: msRest.CompositeMapper = {
   }
 };
 
-export const AzureWebCategory: msRest.CompositeMapper = {
-  serializedName: "AzureWebCategory",
-  type: {
-    name: "Composite",
-    className: "AzureWebCategory",
-    modelProperties: {
-      group: {
-        readOnly: true,
-        serializedName: "properties.group",
-        type: {
-          name: "String"
-        }
-      },
-      id: {
-        serializedName: "id",
-        type: {
-          name: "String"
-        }
-      },
-      name: {
-        readOnly: true,
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      type: {
-        readOnly: true,
-        serializedName: "type",
-        type: {
-          name: "String"
-        }
-      },
-      etag: {
-        readOnly: true,
-        serializedName: "etag",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
 export const BastionHostIPConfiguration: msRest.CompositeMapper = {
   serializedName: "BastionHostIPConfiguration",
   type: {
@@ -6838,81 +6540,6 @@ export const DnsNameAvailabilityResult: msRest.CompositeMapper = {
   }
 };
 
-export const CustomIpPrefix: msRest.CompositeMapper = {
-  serializedName: "CustomIpPrefix",
-  type: {
-    name: "Composite",
-    className: "CustomIpPrefix",
-    modelProperties: {
-      ...Resource.type.modelProperties,
-      extendedLocation: {
-        serializedName: "extendedLocation",
-        type: {
-          name: "Composite",
-          className: "ExtendedLocation"
-        }
-      },
-      cidr: {
-        serializedName: "properties.cidr",
-        type: {
-          name: "String"
-        }
-      },
-      commissionedState: {
-        serializedName: "properties.commissionedState",
-        type: {
-          name: "String"
-        }
-      },
-      publicIpPrefixes: {
-        readOnly: true,
-        serializedName: "properties.publicIpPrefixes",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "SubResource"
-            }
-          }
-        }
-      },
-      resourceGuid: {
-        readOnly: true,
-        serializedName: "properties.resourceGuid",
-        type: {
-          name: "String"
-        }
-      },
-      provisioningState: {
-        readOnly: true,
-        serializedName: "properties.provisioningState",
-        type: {
-          name: "String"
-        }
-      },
-      etag: {
-        readOnly: true,
-        serializedName: "etag",
-        type: {
-          name: "String"
-        }
-      },
-      zones: {
-        serializedName: "zones",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
 export const ProtocolCustomSettingsFormat: msRest.CompositeMapper = {
   serializedName: "ProtocolCustomSettingsFormat",
   type: {
@@ -7073,167 +6700,6 @@ export const DdosProtectionPlan: msRest.CompositeMapper = {
               className: "SubResource"
             }
           }
-        }
-      },
-      etag: {
-        readOnly: true,
-        serializedName: "etag",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const QosIpRange: msRest.CompositeMapper = {
-  serializedName: "QosIpRange",
-  type: {
-    name: "Composite",
-    className: "QosIpRange",
-    modelProperties: {
-      startIP: {
-        serializedName: "startIP",
-        type: {
-          name: "String"
-        }
-      },
-      endIP: {
-        serializedName: "endIP",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const QosPortRange: msRest.CompositeMapper = {
-  serializedName: "QosPortRange",
-  type: {
-    name: "Composite",
-    className: "QosPortRange",
-    modelProperties: {
-      start: {
-        serializedName: "start",
-        type: {
-          name: "Number"
-        }
-      },
-      end: {
-        serializedName: "end",
-        type: {
-          name: "Number"
-        }
-      }
-    }
-  }
-};
-
-export const DscpConfiguration: msRest.CompositeMapper = {
-  serializedName: "DscpConfiguration",
-  type: {
-    name: "Composite",
-    className: "DscpConfiguration",
-    modelProperties: {
-      ...Resource.type.modelProperties,
-      markings: {
-        serializedName: "properties.markings",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Number"
-            }
-          }
-        }
-      },
-      sourceIpRanges: {
-        serializedName: "properties.sourceIpRanges",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "QosIpRange"
-            }
-          }
-        }
-      },
-      destinationIpRanges: {
-        serializedName: "properties.destinationIpRanges",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "QosIpRange"
-            }
-          }
-        }
-      },
-      sourcePortRanges: {
-        serializedName: "properties.sourcePortRanges",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "QosPortRange"
-            }
-          }
-        }
-      },
-      destinationPortRanges: {
-        serializedName: "properties.destinationPortRanges",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "QosPortRange"
-            }
-          }
-        }
-      },
-      protocol: {
-        serializedName: "properties.protocol",
-        type: {
-          name: "String"
-        }
-      },
-      qosCollectionId: {
-        readOnly: true,
-        serializedName: "properties.qosCollectionId",
-        type: {
-          name: "String"
-        }
-      },
-      associatedNetworkInterfaces: {
-        readOnly: true,
-        serializedName: "properties.associatedNetworkInterfaces",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "NetworkInterface"
-            }
-          }
-        }
-      },
-      resourceGuid: {
-        readOnly: true,
-        serializedName: "properties.resourceGuid",
-        type: {
-          name: "String"
-        }
-      },
-      provisioningState: {
-        readOnly: true,
-        serializedName: "properties.provisioningState",
-        type: {
-          name: "String"
         }
       },
       etag: {
@@ -8498,14 +7964,12 @@ export const ExpressRouteCrossConnection: msRest.CompositeMapper = {
         }
       },
       peeringLocation: {
-        readOnly: true,
         serializedName: "properties.peeringLocation",
         type: {
           name: "String"
         }
       },
       bandwidthInMbps: {
-        readOnly: true,
         serializedName: "properties.bandwidthInMbps",
         type: {
           name: "Number"
@@ -8648,12 +8112,6 @@ export const ExpressRouteLinkMacSecConfig: msRest.CompositeMapper = {
       },
       cipher: {
         serializedName: "cipher",
-        type: {
-          name: "String"
-        }
-      },
-      sciState: {
-        serializedName: "sciState",
         type: {
           name: "String"
         }
@@ -8851,39 +8309,6 @@ export const ExpressRoutePort: msRest.CompositeMapper = {
   }
 };
 
-export const GenerateExpressRoutePortsLOARequest: msRest.CompositeMapper = {
-  serializedName: "GenerateExpressRoutePortsLOARequest",
-  type: {
-    name: "Composite",
-    className: "GenerateExpressRoutePortsLOARequest",
-    modelProperties: {
-      customerName: {
-        required: true,
-        serializedName: "customerName",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const GenerateExpressRoutePortsLOAResult: msRest.CompositeMapper = {
-  serializedName: "GenerateExpressRoutePortsLOAResult",
-  type: {
-    name: "Composite",
-    className: "GenerateExpressRoutePortsLOAResult",
-    modelProperties: {
-      encodedContent: {
-        serializedName: "encodedContent",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
 export const FirewallPolicyThreatIntelWhitelist: msRest.CompositeMapper = {
   serializedName: "FirewallPolicyThreatIntelWhitelist",
   type: {
@@ -8944,223 +8369,6 @@ export const DnsSettings: msRest.CompositeMapper = {
         serializedName: "requireProxyForNetworkRules",
         type: {
           name: "Boolean"
-        }
-      }
-    }
-  }
-};
-
-export const FirewallPolicyIntrusionDetectionSignatureSpecification: msRest.CompositeMapper = {
-  serializedName: "FirewallPolicyIntrusionDetectionSignatureSpecification",
-  type: {
-    name: "Composite",
-    className: "FirewallPolicyIntrusionDetectionSignatureSpecification",
-    modelProperties: {
-      id: {
-        serializedName: "id",
-        type: {
-          name: "String"
-        }
-      },
-      mode: {
-        serializedName: "mode",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const FirewallPolicyIntrusionDetectionBypassTrafficSpecifications: msRest.CompositeMapper = {
-  serializedName: "FirewallPolicyIntrusionDetectionBypassTrafficSpecifications",
-  type: {
-    name: "Composite",
-    className: "FirewallPolicyIntrusionDetectionBypassTrafficSpecifications",
-    modelProperties: {
-      name: {
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      description: {
-        serializedName: "description",
-        type: {
-          name: "String"
-        }
-      },
-      protocol: {
-        serializedName: "protocol",
-        type: {
-          name: "String"
-        }
-      },
-      sourceAddresses: {
-        serializedName: "sourceAddresses",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      },
-      destinationAddresses: {
-        serializedName: "destinationAddresses",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      },
-      destinationPorts: {
-        serializedName: "destinationPorts",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      },
-      sourceIpGroups: {
-        serializedName: "sourceIpGroups",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      },
-      destinationIpGroups: {
-        serializedName: "destinationIpGroups",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
-export const FirewallPolicyIntrusionDetectionConfiguration: msRest.CompositeMapper = {
-  serializedName: "FirewallPolicyIntrusionDetectionConfiguration",
-  type: {
-    name: "Composite",
-    className: "FirewallPolicyIntrusionDetectionConfiguration",
-    modelProperties: {
-      signatureOverrides: {
-        serializedName: "signatureOverrides",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "FirewallPolicyIntrusionDetectionSignatureSpecification"
-            }
-          }
-        }
-      },
-      bypassTrafficSettings: {
-        serializedName: "bypassTrafficSettings",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "FirewallPolicyIntrusionDetectionBypassTrafficSpecifications"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
-export const FirewallPolicyIntrusionDetection: msRest.CompositeMapper = {
-  serializedName: "FirewallPolicyIntrusionDetection",
-  type: {
-    name: "Composite",
-    className: "FirewallPolicyIntrusionDetection",
-    modelProperties: {
-      mode: {
-        serializedName: "mode",
-        type: {
-          name: "String"
-        }
-      },
-      configuration: {
-        serializedName: "configuration",
-        type: {
-          name: "Composite",
-          className: "FirewallPolicyIntrusionDetectionConfiguration"
-        }
-      }
-    }
-  }
-};
-
-export const FirewallPolicyCertificateAuthority: msRest.CompositeMapper = {
-  serializedName: "FirewallPolicyCertificateAuthority",
-  type: {
-    name: "Composite",
-    className: "FirewallPolicyCertificateAuthority",
-    modelProperties: {
-      keyVaultSecretId: {
-        serializedName: "keyVaultSecretId",
-        type: {
-          name: "String"
-        }
-      },
-      name: {
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const FirewallPolicyTransportSecurity: msRest.CompositeMapper = {
-  serializedName: "FirewallPolicyTransportSecurity",
-  type: {
-    name: "Composite",
-    className: "FirewallPolicyTransportSecurity",
-    modelProperties: {
-      certificateAuthority: {
-        serializedName: "certificateAuthority",
-        type: {
-          name: "Composite",
-          className: "FirewallPolicyCertificateAuthority"
-        }
-      }
-    }
-  }
-};
-
-export const FirewallPolicySku: msRest.CompositeMapper = {
-  serializedName: "FirewallPolicySku",
-  type: {
-    name: "Composite",
-    className: "FirewallPolicySku",
-    modelProperties: {
-      tier: {
-        serializedName: "tier",
-        type: {
-          name: "String"
         }
       }
     }
@@ -9247,39 +8455,11 @@ export const FirewallPolicy: msRest.CompositeMapper = {
           className: "DnsSettings"
         }
       },
-      intrusionDetection: {
-        serializedName: "properties.intrusionDetection",
-        type: {
-          name: "Composite",
-          className: "FirewallPolicyIntrusionDetection"
-        }
-      },
-      transportSecurity: {
-        serializedName: "properties.transportSecurity",
-        type: {
-          name: "Composite",
-          className: "FirewallPolicyTransportSecurity"
-        }
-      },
-      sku: {
-        serializedName: "properties.sku",
-        type: {
-          name: "Composite",
-          className: "FirewallPolicySku"
-        }
-      },
       etag: {
         readOnly: true,
         serializedName: "etag",
         type: {
           name: "String"
-        }
-      },
-      identity: {
-        serializedName: "identity",
-        type: {
-          name: "Composite",
-          className: "ManagedServiceIdentity"
         }
       }
     }
@@ -9594,17 +8774,6 @@ export const ApplicationRule: msRest.CompositeMapper = {
           }
         }
       },
-      targetUrls: {
-        serializedName: "targetUrls",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      },
       fqdnTags: {
         serializedName: "fqdnTags",
         type: {
@@ -9618,23 +8787,6 @@ export const ApplicationRule: msRest.CompositeMapper = {
       },
       sourceIpGroups: {
         serializedName: "sourceIpGroups",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      },
-      terminateTLS: {
-        serializedName: "terminateTLS",
-        type: {
-          name: "Boolean"
-        }
-      },
-      webCategories: {
-        serializedName: "webCategories",
         type: {
           name: "Sequence",
           element: {
@@ -9722,12 +8874,6 @@ export const NatRule: msRest.CompositeMapper = {
               name: "String"
             }
           }
-        }
-      },
-      translatedFqdn: {
-        serializedName: "translatedFqdn",
-        type: {
-          name: "String"
         }
       }
     }
@@ -9939,19 +9085,6 @@ export const IpGroup: msRest.CompositeMapper = {
           }
         }
       },
-      firewallPolicies: {
-        readOnly: true,
-        serializedName: "properties.firewallPolicies",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "SubResource"
-            }
-          }
-        }
-      },
       etag: {
         readOnly: true,
         serializedName: "etag",
@@ -9971,12 +9104,6 @@ export const LoadBalancerSku: msRest.CompositeMapper = {
     modelProperties: {
       name: {
         serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      tier: {
-        serializedName: "tier",
         type: {
           name: "String"
         }
@@ -10359,13 +9486,6 @@ export const LoadBalancer: msRest.CompositeMapper = {
     className: "LoadBalancer",
     modelProperties: {
       ...Resource.type.modelProperties,
-      extendedLocation: {
-        serializedName: "extendedLocation",
-        type: {
-          name: "Composite",
-          className: "ExtendedLocation"
-        }
-      },
       sku: {
         serializedName: "sku",
         type: {
@@ -11246,13 +10366,6 @@ export const NetworkVirtualAppliance: msRest.CompositeMapper = {
           className: "VirtualApplianceSkuProperties"
         }
       },
-      addressPrefix: {
-        readOnly: true,
-        serializedName: "properties.addressPrefix",
-        type: {
-          name: "String"
-        }
-      },
       bootStrapConfigurationBlobs: {
         serializedName: "properties.bootStrapConfigurationBlobs",
         type: {
@@ -11314,19 +10427,6 @@ export const NetworkVirtualAppliance: msRest.CompositeMapper = {
       virtualApplianceSites: {
         readOnly: true,
         serializedName: "properties.virtualApplianceSites",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "SubResource"
-            }
-          }
-        }
-      },
-      inboundSecurityRules: {
-        readOnly: true,
-        serializedName: "properties.inboundSecurityRules",
         type: {
           name: "Sequence",
           element: {
@@ -11523,88 +10623,6 @@ export const NetworkVirtualApplianceSku: msRest.CompositeMapper = {
       etag: {
         readOnly: true,
         serializedName: "etag",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const InboundSecurityRules: msRest.CompositeMapper = {
-  serializedName: "InboundSecurityRules",
-  type: {
-    name: "Composite",
-    className: "InboundSecurityRules",
-    modelProperties: {
-      protocol: {
-        serializedName: "protocol",
-        type: {
-          name: "String"
-        }
-      },
-      sourceAddressPrefix: {
-        serializedName: "sourceAddressPrefix",
-        type: {
-          name: "String"
-        }
-      },
-      destinationPortRange: {
-        serializedName: "destinationPortRange",
-        constraints: {
-          InclusiveMaximum: 65535,
-          InclusiveMinimum: 0
-        },
-        type: {
-          name: "Number"
-        }
-      }
-    }
-  }
-};
-
-export const InboundSecurityRule: msRest.CompositeMapper = {
-  serializedName: "InboundSecurityRule",
-  type: {
-    name: "Composite",
-    className: "InboundSecurityRule",
-    modelProperties: {
-      ...SubResource.type.modelProperties,
-      rules: {
-        serializedName: "properties.rules",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "InboundSecurityRules"
-            }
-          }
-        }
-      },
-      provisioningState: {
-        readOnly: true,
-        serializedName: "properties.provisioningState",
-        type: {
-          name: "String"
-        }
-      },
-      name: {
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      etag: {
-        readOnly: true,
-        serializedName: "etag",
-        type: {
-          name: "String"
-        }
-      },
-      type: {
-        readOnly: true,
-        serializedName: "type",
         type: {
           name: "String"
         }
@@ -12201,10 +11219,6 @@ export const PacketCaptureParameters: msRest.CompositeMapper = {
       bytesToCapturePerPacket: {
         serializedName: "bytesToCapturePerPacket",
         defaultValue: 0,
-        constraints: {
-          InclusiveMaximum: 4294967295,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -12212,10 +11226,6 @@ export const PacketCaptureParameters: msRest.CompositeMapper = {
       totalBytesPerSession: {
         serializedName: "totalBytesPerSession",
         defaultValue: 1073741824,
-        constraints: {
-          InclusiveMaximum: 4294967295,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -12223,10 +11233,6 @@ export const PacketCaptureParameters: msRest.CompositeMapper = {
       timeLimitInSeconds: {
         serializedName: "timeLimitInSeconds",
         defaultValue: 18000,
-        constraints: {
-          InclusiveMaximum: 18000,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -12271,10 +11277,6 @@ export const PacketCapture: msRest.CompositeMapper = {
       bytesToCapturePerPacket: {
         serializedName: "properties.bytesToCapturePerPacket",
         defaultValue: 0,
-        constraints: {
-          InclusiveMaximum: 4294967295,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -12282,10 +11284,6 @@ export const PacketCapture: msRest.CompositeMapper = {
       totalBytesPerSession: {
         serializedName: "properties.totalBytesPerSession",
         defaultValue: 1073741824,
-        constraints: {
-          InclusiveMaximum: 4294967295,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -12293,10 +11291,6 @@ export const PacketCapture: msRest.CompositeMapper = {
       timeLimitInSeconds: {
         serializedName: "properties.timeLimitInSeconds",
         defaultValue: 18000,
-        constraints: {
-          InclusiveMaximum: 18000,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -12362,10 +11356,6 @@ export const PacketCaptureResult: msRest.CompositeMapper = {
       bytesToCapturePerPacket: {
         serializedName: "properties.bytesToCapturePerPacket",
         defaultValue: 0,
-        constraints: {
-          InclusiveMaximum: 4294967295,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -12373,10 +11363,6 @@ export const PacketCaptureResult: msRest.CompositeMapper = {
       totalBytesPerSession: {
         serializedName: "properties.totalBytesPerSession",
         defaultValue: 1073741824,
-        constraints: {
-          InclusiveMaximum: 4294967295,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -12384,10 +11370,6 @@ export const PacketCaptureResult: msRest.CompositeMapper = {
       timeLimitInSeconds: {
         serializedName: "properties.timeLimitInSeconds",
         defaultValue: 18000,
-        constraints: {
-          InclusiveMaximum: 18000,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -12726,10 +11708,6 @@ export const ConnectivitySource: msRest.CompositeMapper = {
       },
       port: {
         serializedName: "port",
-        constraints: {
-          InclusiveMaximum: 65535,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -12758,10 +11736,6 @@ export const ConnectivityDestination: msRest.CompositeMapper = {
       },
       port: {
         serializedName: "port",
-        constraints: {
-          InclusiveMaximum: 65535,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -12964,10 +11938,6 @@ export const HopLink: msRest.CompositeMapper = {
       roundTripTimeMin: {
         readOnly: true,
         serializedName: "properties.roundTripTimeMin",
-        constraints: {
-          InclusiveMaximum: 4294967295,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -12975,10 +11945,6 @@ export const HopLink: msRest.CompositeMapper = {
       roundTripTimeAvg: {
         readOnly: true,
         serializedName: "properties.roundTripTimeAvg",
-        constraints: {
-          InclusiveMaximum: 4294967295,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -12986,10 +11952,6 @@ export const HopLink: msRest.CompositeMapper = {
       roundTripTimeMax: {
         readOnly: true,
         serializedName: "properties.roundTripTimeMax",
-        constraints: {
-          InclusiveMaximum: 4294967295,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -13826,10 +12788,6 @@ export const ConnectionMonitorSource: msRest.CompositeMapper = {
       },
       port: {
         serializedName: "port",
-        constraints: {
-          InclusiveMaximum: 65535,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -13858,10 +12816,6 @@ export const ConnectionMonitorDestination: msRest.CompositeMapper = {
       },
       port: {
         serializedName: "port",
-        constraints: {
-          InclusiveMaximum: 65535,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -13920,56 +12874,6 @@ export const ConnectionMonitorEndpointFilter: msRest.CompositeMapper = {
   }
 };
 
-export const ConnectionMonitorEndpointScopeItem: msRest.CompositeMapper = {
-  serializedName: "ConnectionMonitorEndpointScopeItem",
-  type: {
-    name: "Composite",
-    className: "ConnectionMonitorEndpointScopeItem",
-    modelProperties: {
-      address: {
-        serializedName: "address",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const ConnectionMonitorEndpointScope: msRest.CompositeMapper = {
-  serializedName: "ConnectionMonitorEndpointScope",
-  type: {
-    name: "Composite",
-    className: "ConnectionMonitorEndpointScope",
-    modelProperties: {
-      include: {
-        serializedName: "include",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "ConnectionMonitorEndpointScopeItem"
-            }
-          }
-        }
-      },
-      exclude: {
-        serializedName: "exclude",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "ConnectionMonitorEndpointScopeItem"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
 export const ConnectionMonitorEndpoint: msRest.CompositeMapper = {
   serializedName: "ConnectionMonitorEndpoint",
   type: {
@@ -13979,12 +12883,6 @@ export const ConnectionMonitorEndpoint: msRest.CompositeMapper = {
       name: {
         required: true,
         serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      type: {
-        serializedName: "type",
         type: {
           name: "String"
         }
@@ -14007,19 +12905,6 @@ export const ConnectionMonitorEndpoint: msRest.CompositeMapper = {
           name: "Composite",
           className: "ConnectionMonitorEndpointFilter"
         }
-      },
-      scope: {
-        serializedName: "scope",
-        type: {
-          name: "Composite",
-          className: "ConnectionMonitorEndpointScope"
-        }
-      },
-      coverageLevel: {
-        serializedName: "coverageLevel",
-        type: {
-          name: "String"
-        }
       }
     }
   }
@@ -14033,10 +12918,6 @@ export const ConnectionMonitorHttpConfiguration: msRest.CompositeMapper = {
     modelProperties: {
       port: {
         serializedName: "port",
-        constraints: {
-          InclusiveMaximum: 65535,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -14094,10 +12975,6 @@ export const ConnectionMonitorTcpConfiguration: msRest.CompositeMapper = {
     modelProperties: {
       port: {
         serializedName: "port",
-        constraints: {
-          InclusiveMaximum: 65535,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -14106,12 +12983,6 @@ export const ConnectionMonitorTcpConfiguration: msRest.CompositeMapper = {
         serializedName: "disableTraceRoute",
         type: {
           name: "Boolean"
-        }
-      },
-      destinationPortBehavior: {
-        serializedName: "destinationPortBehavior",
-        type: {
-          name: "String"
         }
       }
     }
@@ -14348,10 +13219,6 @@ export const ConnectionMonitorParameters: msRest.CompositeMapper = {
       monitoringIntervalInSeconds: {
         serializedName: "monitoringIntervalInSeconds",
         defaultValue: 60,
-        constraints: {
-          InclusiveMaximum: 1800,
-          InclusiveMinimum: 30
-        },
         type: {
           name: "Number"
         }
@@ -14461,10 +13328,6 @@ export const ConnectionMonitor: msRest.CompositeMapper = {
       monitoringIntervalInSeconds: {
         serializedName: "properties.monitoringIntervalInSeconds",
         defaultValue: 60,
-        constraints: {
-          InclusiveMaximum: 1800,
-          InclusiveMinimum: 30
-        },
         type: {
           name: "Number"
         }
@@ -14559,50 +13422,30 @@ export const ConnectionStateSnapshot: msRest.CompositeMapper = {
       },
       avgLatencyInMs: {
         serializedName: "avgLatencyInMs",
-        constraints: {
-          InclusiveMaximum: 4294967295,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
       },
       minLatencyInMs: {
         serializedName: "minLatencyInMs",
-        constraints: {
-          InclusiveMaximum: 4294967295,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
       },
       maxLatencyInMs: {
         serializedName: "maxLatencyInMs",
-        constraints: {
-          InclusiveMaximum: 4294967295,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
       },
       probesSent: {
         serializedName: "probesSent",
-        constraints: {
-          InclusiveMaximum: 4294967295,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
       },
       probesFailed: {
         serializedName: "probesFailed",
-        constraints: {
-          InclusiveMaximum: 4294967295,
-          InclusiveMinimum: 0
-        },
         type: {
           name: "Number"
         }
@@ -14699,10 +13542,6 @@ export const ConnectionMonitorResult: msRest.CompositeMapper = {
       monitoringIntervalInSeconds: {
         serializedName: "properties.monitoringIntervalInSeconds",
         defaultValue: 60,
-        constraints: {
-          InclusiveMaximum: 1800,
-          InclusiveMinimum: 30
-        },
         type: {
           name: "Number"
         }
@@ -15458,13 +14297,6 @@ export const PrivateLinkService: msRest.CompositeMapper = {
     className: "PrivateLinkService",
     modelProperties: {
       ...Resource.type.modelProperties,
-      extendedLocation: {
-        serializedName: "extendedLocation",
-        type: {
-          name: "Composite",
-          className: "ExtendedLocation"
-        }
-      },
       loadBalancerFrontendIpConfigurations: {
         serializedName: "properties.loadBalancerFrontendIpConfigurations",
         type: {
@@ -15630,12 +14462,6 @@ export const PublicIPPrefixSku: msRest.CompositeMapper = {
         type: {
           name: "String"
         }
-      },
-      tier: {
-        serializedName: "tier",
-        type: {
-          name: "String"
-        }
       }
     }
   }
@@ -15664,13 +14490,6 @@ export const PublicIPPrefix: msRest.CompositeMapper = {
     className: "PublicIPPrefix",
     modelProperties: {
       ...Resource.type.modelProperties,
-      extendedLocation: {
-        serializedName: "extendedLocation",
-        type: {
-          name: "Composite",
-          className: "ExtendedLocation"
-        }
-      },
       sku: {
         serializedName: "sku",
         type: {
@@ -15725,13 +14544,6 @@ export const PublicIPPrefix: msRest.CompositeMapper = {
       loadBalancerFrontendIpConfiguration: {
         readOnly: true,
         serializedName: "properties.loadBalancerFrontendIpConfiguration",
-        type: {
-          name: "Composite",
-          className: "SubResource"
-        }
-      },
-      customIPPrefix: {
-        serializedName: "properties.customIPPrefix",
         type: {
           name: "Composite",
           className: "SubResource"
@@ -16302,13 +15114,6 @@ export const ServiceTagsListResult: msRest.CompositeMapper = {
             }
           }
         }
-      },
-      nextLink: {
-        readOnly: true,
-        serializedName: "nextLink",
-        type: {
-          name: "String"
-        }
       }
     }
   }
@@ -16405,30 +15210,6 @@ export const AddressSpace: msRest.CompositeMapper = {
   }
 };
 
-export const VirtualNetworkBgpCommunities: msRest.CompositeMapper = {
-  serializedName: "VirtualNetworkBgpCommunities",
-  type: {
-    name: "Composite",
-    className: "VirtualNetworkBgpCommunities",
-    modelProperties: {
-      virtualNetworkCommunity: {
-        required: true,
-        serializedName: "virtualNetworkCommunity",
-        type: {
-          name: "String"
-        }
-      },
-      regionalCommunity: {
-        readOnly: true,
-        serializedName: "regionalCommunity",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
 export const VirtualNetworkPeering: msRest.CompositeMapper = {
   serializedName: "VirtualNetworkPeering",
   type: {
@@ -16472,13 +15253,6 @@ export const VirtualNetworkPeering: msRest.CompositeMapper = {
         type: {
           name: "Composite",
           className: "AddressSpace"
-        }
-      },
-      remoteBgpCommunities: {
-        serializedName: "properties.remoteBgpCommunities",
-        type: {
-          name: "Composite",
-          className: "VirtualNetworkBgpCommunities"
         }
       },
       peeringState: {
@@ -16590,6 +15364,30 @@ export const DhcpOptions: msRest.CompositeMapper = {
   }
 };
 
+export const VirtualNetworkBgpCommunities: msRest.CompositeMapper = {
+  serializedName: "VirtualNetworkBgpCommunities",
+  type: {
+    name: "Composite",
+    className: "VirtualNetworkBgpCommunities",
+    modelProperties: {
+      virtualNetworkCommunity: {
+        required: true,
+        serializedName: "virtualNetworkCommunity",
+        type: {
+          name: "String"
+        }
+      },
+      regionalCommunity: {
+        readOnly: true,
+        serializedName: "regionalCommunity",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const VirtualNetwork: msRest.CompositeMapper = {
   serializedName: "VirtualNetwork",
   type: {
@@ -16597,13 +15395,6 @@ export const VirtualNetwork: msRest.CompositeMapper = {
     className: "VirtualNetwork",
     modelProperties: {
       ...Resource.type.modelProperties,
-      extendedLocation: {
-        serializedName: "extendedLocation",
-        type: {
-          name: "Composite",
-          className: "ExtendedLocation"
-        }
-      },
       addressSpace: {
         serializedName: "properties.addressSpace",
         type: {
@@ -17593,19 +16384,6 @@ export const VirtualNetworkGateway: msRest.CompositeMapper = {
           name: "String"
         }
       },
-      virtualNetworkExtendedLocationResourceId: {
-        serializedName: "properties.virtualNetworkExtendedLocationResourceId",
-        type: {
-          name: "String"
-        }
-      },
-      extendedLocation: {
-        serializedName: "properties.extendedLocation",
-        type: {
-          name: "Composite",
-          className: "ExtendedLocation"
-        }
-      },
       etag: {
         readOnly: true,
         serializedName: "etag",
@@ -17853,7 +16631,6 @@ export const VirtualNetworkGatewayConnection: msRest.CompositeMapper = {
       virtualNetworkGateway1: {
         required: true,
         serializedName: "properties.virtualNetworkGateway1",
-        defaultValue: {},
         type: {
           name: "Composite",
           className: "VirtualNetworkGateway"
@@ -17896,12 +16673,6 @@ export const VirtualNetworkGatewayConnection: msRest.CompositeMapper = {
         serializedName: "properties.dpdTimeoutSeconds",
         type: {
           name: "Number"
-        }
-      },
-      connectionMode: {
-        serializedName: "properties.connectionMode",
-        type: {
-          name: "String"
         }
       },
       sharedKey: {
@@ -18198,12 +16969,6 @@ export const VirtualNetworkGatewayConnectionListEntity: msRest.CompositeMapper =
         serializedName: "properties.routingWeight",
         type: {
           name: "Number"
-        }
-      },
-      connectionMode: {
-        serializedName: "properties.connectionMode",
-        type: {
-          name: "String"
         }
       },
       sharedKey: {
@@ -18861,51 +17626,6 @@ export const VpnSiteLink: msRest.CompositeMapper = {
   }
 };
 
-export const O365BreakOutCategoryPolicies: msRest.CompositeMapper = {
-  serializedName: "O365BreakOutCategoryPolicies",
-  type: {
-    name: "Composite",
-    className: "O365BreakOutCategoryPolicies",
-    modelProperties: {
-      allow: {
-        serializedName: "allow",
-        type: {
-          name: "Boolean"
-        }
-      },
-      optimize: {
-        serializedName: "optimize",
-        type: {
-          name: "Boolean"
-        }
-      },
-      default: {
-        serializedName: "default",
-        type: {
-          name: "Boolean"
-        }
-      }
-    }
-  }
-};
-
-export const O365PolicyProperties: msRest.CompositeMapper = {
-  serializedName: "O365PolicyProperties",
-  type: {
-    name: "Composite",
-    className: "O365PolicyProperties",
-    modelProperties: {
-      breakOutCategories: {
-        serializedName: "breakOutCategories",
-        type: {
-          name: "Composite",
-          className: "O365BreakOutCategoryPolicies"
-        }
-      }
-    }
-  }
-};
-
 export const VpnSite: msRest.CompositeMapper = {
   serializedName: "VpnSite",
   type: {
@@ -18976,13 +17696,6 @@ export const VpnSite: msRest.CompositeMapper = {
               className: "VpnSiteLink"
             }
           }
-        }
-      },
-      o365Policy: {
-        serializedName: "properties.o365Policy",
-        type: {
-          name: "Composite",
-          className: "O365PolicyProperties"
         }
       },
       etag: {
@@ -19232,87 +17945,6 @@ export const BgpConnection: msRest.CompositeMapper = {
   }
 };
 
-export const PeerRoute: msRest.CompositeMapper = {
-  serializedName: "PeerRoute",
-  type: {
-    name: "Composite",
-    className: "PeerRoute",
-    modelProperties: {
-      localAddress: {
-        readOnly: true,
-        serializedName: "localAddress",
-        type: {
-          name: "String"
-        }
-      },
-      network: {
-        readOnly: true,
-        serializedName: "network",
-        type: {
-          name: "String"
-        }
-      },
-      nextHop: {
-        readOnly: true,
-        serializedName: "nextHop",
-        type: {
-          name: "String"
-        }
-      },
-      sourcePeer: {
-        readOnly: true,
-        serializedName: "sourcePeer",
-        type: {
-          name: "String"
-        }
-      },
-      origin: {
-        readOnly: true,
-        serializedName: "origin",
-        type: {
-          name: "String"
-        }
-      },
-      asPath: {
-        readOnly: true,
-        serializedName: "asPath",
-        type: {
-          name: "String"
-        }
-      },
-      weight: {
-        readOnly: true,
-        serializedName: "weight",
-        type: {
-          name: "Number"
-        }
-      }
-    }
-  }
-};
-
-export const PeerRouteList: msRest.CompositeMapper = {
-  serializedName: "PeerRouteList",
-  type: {
-    name: "Composite",
-    className: "PeerRouteList",
-    modelProperties: {
-      value: {
-        serializedName: "value",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "PeerRoute"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
 export const HubIpConfiguration: msRest.CompositeMapper = {
   serializedName: "HubIpConfiguration",
   type: {
@@ -19523,12 +18155,6 @@ export const VirtualHub: msRest.CompositeMapper = {
           }
         }
       },
-      allowBranchToBranchTraffic: {
-        serializedName: "properties.allowBranchToBranchTraffic",
-        type: {
-          name: "Boolean"
-        }
-      },
       etag: {
         readOnly: true,
         serializedName: "etag",
@@ -19558,12 +18184,6 @@ export const VpnSiteLinkConnection: msRest.CompositeMapper = {
         serializedName: "properties.routingWeight",
         type: {
           name: "Number"
-        }
-      },
-      vpnLinkConnectionMode: {
-        serializedName: "properties.vpnLinkConnectionMode",
-        type: {
-          name: "String"
         }
       },
       connectionStatus: {
@@ -19645,30 +18265,6 @@ export const VpnSiteLinkConnection: msRest.CompositeMapper = {
         serializedName: "properties.provisioningState",
         type: {
           name: "String"
-        }
-      },
-      ingressNatRules: {
-        serializedName: "properties.ingressNatRules",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "SubResource"
-            }
-          }
-        }
-      },
-      egressNatRules: {
-        serializedName: "properties.egressNatRules",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "SubResource"
-            }
-          }
         }
       },
       name: {
@@ -19963,156 +18559,6 @@ export const VpnConnection: msRest.CompositeMapper = {
   }
 };
 
-export const VpnGatewayIpConfiguration: msRest.CompositeMapper = {
-  serializedName: "VpnGatewayIpConfiguration",
-  type: {
-    name: "Composite",
-    className: "VpnGatewayIpConfiguration",
-    modelProperties: {
-      id: {
-        serializedName: "id",
-        type: {
-          name: "String"
-        }
-      },
-      publicIpAddress: {
-        serializedName: "publicIpAddress",
-        type: {
-          name: "String"
-        }
-      },
-      privateIpAddress: {
-        serializedName: "privateIpAddress",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const VpnNatRuleMapping: msRest.CompositeMapper = {
-  serializedName: "VpnNatRuleMapping",
-  type: {
-    name: "Composite",
-    className: "VpnNatRuleMapping",
-    modelProperties: {
-      addressSpace: {
-        serializedName: "addressSpace",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const VpnGatewayNatRule: msRest.CompositeMapper = {
-  serializedName: "VpnGatewayNatRule",
-  type: {
-    name: "Composite",
-    className: "VpnGatewayNatRule",
-    modelProperties: {
-      ...SubResource.type.modelProperties,
-      provisioningState: {
-        readOnly: true,
-        serializedName: "properties.provisioningState",
-        type: {
-          name: "String"
-        }
-      },
-      vpnGatewayNatRulePropertiesType: {
-        serializedName: "properties.type",
-        type: {
-          name: "String"
-        }
-      },
-      mode: {
-        serializedName: "properties.mode",
-        type: {
-          name: "String"
-        }
-      },
-      internalMappings: {
-        serializedName: "properties.internalMappings",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "VpnNatRuleMapping"
-            }
-          }
-        }
-      },
-      externalMappings: {
-        serializedName: "properties.externalMappings",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "VpnNatRuleMapping"
-            }
-          }
-        }
-      },
-      ipConfigurationId: {
-        serializedName: "properties.ipConfigurationId",
-        type: {
-          name: "String"
-        }
-      },
-      egressVpnSiteLinkConnections: {
-        readOnly: true,
-        serializedName: "properties.egressVpnSiteLinkConnections",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "SubResource"
-            }
-          }
-        }
-      },
-      ingressVpnSiteLinkConnections: {
-        readOnly: true,
-        serializedName: "properties.ingressVpnSiteLinkConnections",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "SubResource"
-            }
-          }
-        }
-      },
-      name: {
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      etag: {
-        readOnly: true,
-        serializedName: "etag",
-        type: {
-          name: "String"
-        }
-      },
-      type: {
-        readOnly: true,
-        serializedName: "type",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
 export const VpnGateway: msRest.CompositeMapper = {
   serializedName: "VpnGateway",
   type: {
@@ -20159,126 +18605,9 @@ export const VpnGateway: msRest.CompositeMapper = {
           name: "Number"
         }
       },
-      ipConfigurations: {
-        readOnly: true,
-        serializedName: "properties.ipConfigurations",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "VpnGatewayIpConfiguration"
-            }
-          }
-        }
-      },
-      isRoutingPreferenceInternet: {
-        serializedName: "properties.isRoutingPreferenceInternet",
-        type: {
-          name: "Boolean"
-        }
-      },
-      natRules: {
-        serializedName: "properties.natRules",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "VpnGatewayNatRule"
-            }
-          }
-        }
-      },
       etag: {
         readOnly: true,
         serializedName: "etag",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const VpnConnectionPacketCaptureStartParameters: msRest.CompositeMapper = {
-  serializedName: "VpnConnectionPacketCaptureStartParameters",
-  type: {
-    name: "Composite",
-    className: "VpnConnectionPacketCaptureStartParameters",
-    modelProperties: {
-      filterData: {
-        serializedName: "filterData",
-        type: {
-          name: "String"
-        }
-      },
-      linkConnectionNames: {
-        serializedName: "linkConnectionNames",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
-export const VpnConnectionPacketCaptureStopParameters: msRest.CompositeMapper = {
-  serializedName: "VpnConnectionPacketCaptureStopParameters",
-  type: {
-    name: "Composite",
-    className: "VpnConnectionPacketCaptureStopParameters",
-    modelProperties: {
-      sasUrl: {
-        serializedName: "sasUrl",
-        type: {
-          name: "String"
-        }
-      },
-      linkConnectionNames: {
-        serializedName: "linkConnectionNames",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
-export const VpnGatewayPacketCaptureStartParameters: msRest.CompositeMapper = {
-  serializedName: "VpnGatewayPacketCaptureStartParameters",
-  type: {
-    name: "Composite",
-    className: "VpnGatewayPacketCaptureStartParameters",
-    modelProperties: {
-      filterData: {
-        serializedName: "filterData",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const VpnGatewayPacketCaptureStopParameters: msRest.CompositeMapper = {
-  serializedName: "VpnGatewayPacketCaptureStopParameters",
-  type: {
-    name: "Composite",
-    className: "VpnGatewayPacketCaptureStopParameters",
-    modelProperties: {
-      sasUrl: {
-        serializedName: "sasUrl",
         type: {
           name: "String"
         }
@@ -20689,12 +19018,6 @@ export const P2SConnectionConfiguration: msRest.CompositeMapper = {
           className: "RoutingConfiguration"
         }
       },
-      enableInternetSecurity: {
-        serializedName: "properties.enableInternetSecurity",
-        type: {
-          name: "Boolean"
-        }
-      },
       provisioningState: {
         readOnly: true,
         serializedName: "properties.provisioningState",
@@ -20823,12 +19146,6 @@ export const P2SVpnGateway: msRest.CompositeMapper = {
               name: "String"
             }
           }
-        }
-      },
-      isRoutingPreferenceInternet: {
-        serializedName: "properties.isRoutingPreferenceInternet",
-        type: {
-          name: "Boolean"
         }
       },
       etag: {
@@ -21235,12 +19552,6 @@ export const ExpressRouteConnection: msRest.CompositeMapper = {
           name: "Boolean"
         }
       },
-      expressRouteGatewayBypass: {
-        serializedName: "properties.expressRouteGatewayBypass",
-        type: {
-          name: "Boolean"
-        }
-      },
       routingConfiguration: {
         serializedName: "properties.routingConfiguration",
         type: {
@@ -21437,7 +19748,8 @@ export const EffectiveRoutesParameters: msRest.CompositeMapper = {
       resourceId: {
         serializedName: "resourceId",
         type: {
-          name: "String"
+          name: "Composite",
+          className: "Resource"
         }
       },
       virtualWanResourceType: {
@@ -22146,34 +20458,6 @@ export const AzureFirewallFqdnTagListResult: msRest.CompositeMapper = {
   }
 };
 
-export const AzureWebCategoryListResult: msRest.CompositeMapper = {
-  serializedName: "AzureWebCategoryListResult",
-  type: {
-    name: "Composite",
-    className: "AzureWebCategoryListResult",
-    modelProperties: {
-      value: {
-        serializedName: "",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "AzureWebCategory"
-            }
-          }
-        }
-      },
-      nextLink: {
-        serializedName: "nextLink",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
 export const BastionHostListResult: msRest.CompositeMapper = {
   serializedName: "BastionHostListResult",
   type: {
@@ -22286,34 +20570,6 @@ export const BastionSessionDeleteResult: msRest.CompositeMapper = {
   }
 };
 
-export const CustomIpPrefixListResult: msRest.CompositeMapper = {
-  serializedName: "CustomIpPrefixListResult",
-  type: {
-    name: "Composite",
-    className: "CustomIpPrefixListResult",
-    modelProperties: {
-      value: {
-        serializedName: "",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "CustomIpPrefix"
-            }
-          }
-        }
-      },
-      nextLink: {
-        serializedName: "nextLink",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
 export const DdosProtectionPlanListResult: msRest.CompositeMapper = {
   serializedName: "DdosProtectionPlanListResult",
   type: {
@@ -22328,35 +20584,6 @@ export const DdosProtectionPlanListResult: msRest.CompositeMapper = {
             type: {
               name: "Composite",
               className: "DdosProtectionPlan"
-            }
-          }
-        }
-      },
-      nextLink: {
-        readOnly: true,
-        serializedName: "nextLink",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const DscpConfigurationListResult: msRest.CompositeMapper = {
-  serializedName: "DscpConfigurationListResult",
-  type: {
-    name: "Composite",
-    className: "DscpConfigurationListResult",
-    modelProperties: {
-      value: {
-        serializedName: "",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "DscpConfiguration"
             }
           }
         }
@@ -24494,34 +22721,6 @@ export const ListVpnSiteLinkConnectionsResult: msRest.CompositeMapper = {
             type: {
               name: "Composite",
               className: "VpnSiteLinkConnection"
-            }
-          }
-        }
-      },
-      nextLink: {
-        serializedName: "nextLink",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const ListVpnGatewayNatRulesResult: msRest.CompositeMapper = {
-  serializedName: "ListVpnGatewayNatRulesResult",
-  type: {
-    name: "Composite",
-    className: "ListVpnGatewayNatRulesResult",
-    modelProperties: {
-      value: {
-        serializedName: "",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "VpnGatewayNatRule"
             }
           }
         }
