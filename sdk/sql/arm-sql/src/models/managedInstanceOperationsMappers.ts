@@ -13,6 +13,7 @@ export {
   ManagedDatabase,
   ManagedDatabaseRestoreDetailsResult,
   ManagedInstanceOperation,
+  ManagedInstanceOperationListResult,
   ManagedInstanceOperationParametersPair,
   ManagedInstanceOperationSteps,
   PrivateEndpointConnectionProperties,

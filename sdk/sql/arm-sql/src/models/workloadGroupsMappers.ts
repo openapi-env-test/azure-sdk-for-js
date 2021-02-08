@@ -35,5 +35,6 @@ export {
   UpsertManagedServerOperationParameters,
   UpsertManagedServerOperationStep,
   WorkloadClassifier,
-  WorkloadGroup
+  WorkloadGroup,
+  WorkloadGroupListResult
 } from "../models/mappers";

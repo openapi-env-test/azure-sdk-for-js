@@ -24,6 +24,7 @@ export {
   Server,
   ServerAzureADAdministrator,
   ServerOperation,
+  ServerOperationListResult,
   ServerPrivateEndpointConnection,
   Sku,
   SyncGroup,
