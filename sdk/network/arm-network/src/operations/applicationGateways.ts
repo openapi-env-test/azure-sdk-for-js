@@ -91,32 +91,9 @@ export class ApplicationGateways {
    * @param [options] The optional parameters
    * @returns Promise<Models.ApplicationGatewaysUpdateTagsResponse>
    */
-  updateTags(resourceGroupName: string, applicationGatewayName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.ApplicationGatewaysUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param applicationGatewayName The name of the application gateway.
-   * @param parameters Parameters supplied to update application gateway tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, applicationGatewayName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.ApplicationGateway>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param applicationGatewayName The name of the application gateway.
-   * @param parameters Parameters supplied to update application gateway tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, applicationGatewayName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ApplicationGateway>): void;
-  updateTags(resourceGroupName: string, applicationGatewayName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ApplicationGateway>, callback?: msRest.ServiceCallback<Models.ApplicationGateway>): Promise<Models.ApplicationGatewaysUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        applicationGatewayName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.ApplicationGatewaysUpdateTagsResponse>;
+  updateTags(resourceGroupName: string, applicationGatewayName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.ApplicationGatewaysUpdateTagsResponse> {
+    return this.beginUpdateTags(resourceGroupName,applicationGatewayName,parameters,options)
+      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.ApplicationGatewaysUpdateTagsResponse>;
   }
 
   /**
@@ -205,92 +182,6 @@ export class ApplicationGateways {
   backendHealth(resourceGroupName: string, applicationGatewayName: string, options?: Models.ApplicationGatewaysBackendHealthOptionalParams): Promise<Models.ApplicationGatewaysBackendHealthResponse> {
     return this.beginBackendHealth(resourceGroupName,applicationGatewayName,options)
       .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.ApplicationGatewaysBackendHealthResponse>;
-  }
-
-  /**
-   * Gets the backend health for given combination of backend pool and http setting of the specified
-   * application gateway in a resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param applicationGatewayName The name of the application gateway.
-   * @param probeRequest Request body for on-demand test probe operation.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ApplicationGatewaysBackendHealthOnDemandResponse>
-   */
-  backendHealthOnDemand(resourceGroupName: string, applicationGatewayName: string, probeRequest: Models.ApplicationGatewayOnDemandProbe, options?: Models.ApplicationGatewaysBackendHealthOnDemandOptionalParams): Promise<Models.ApplicationGatewaysBackendHealthOnDemandResponse> {
-    return this.beginBackendHealthOnDemand(resourceGroupName,applicationGatewayName,probeRequest,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.ApplicationGatewaysBackendHealthOnDemandResponse>;
-  }
-
-  /**
-   * Lists all available server variables.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ApplicationGatewaysListAvailableServerVariablesResponse>
-   */
-  listAvailableServerVariables(options?: msRest.RequestOptionsBase): Promise<Models.ApplicationGatewaysListAvailableServerVariablesResponse>;
-  /**
-   * @param callback The callback
-   */
-  listAvailableServerVariables(callback: msRest.ServiceCallback<string[]>): void;
-  /**
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listAvailableServerVariables(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<string[]>): void;
-  listAvailableServerVariables(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<string[]>, callback?: msRest.ServiceCallback<string[]>): Promise<Models.ApplicationGatewaysListAvailableServerVariablesResponse> {
-    return this.client.sendOperationRequest(
-      {
-        options
-      },
-      listAvailableServerVariablesOperationSpec,
-      callback) as Promise<Models.ApplicationGatewaysListAvailableServerVariablesResponse>;
-  }
-
-  /**
-   * Lists all available request headers.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ApplicationGatewaysListAvailableRequestHeadersResponse>
-   */
-  listAvailableRequestHeaders(options?: msRest.RequestOptionsBase): Promise<Models.ApplicationGatewaysListAvailableRequestHeadersResponse>;
-  /**
-   * @param callback The callback
-   */
-  listAvailableRequestHeaders(callback: msRest.ServiceCallback<string[]>): void;
-  /**
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listAvailableRequestHeaders(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<string[]>): void;
-  listAvailableRequestHeaders(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<string[]>, callback?: msRest.ServiceCallback<string[]>): Promise<Models.ApplicationGatewaysListAvailableRequestHeadersResponse> {
-    return this.client.sendOperationRequest(
-      {
-        options
-      },
-      listAvailableRequestHeadersOperationSpec,
-      callback) as Promise<Models.ApplicationGatewaysListAvailableRequestHeadersResponse>;
-  }
-
-  /**
-   * Lists all available response headers.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ApplicationGatewaysListAvailableResponseHeadersResponse>
-   */
-  listAvailableResponseHeaders(options?: msRest.RequestOptionsBase): Promise<Models.ApplicationGatewaysListAvailableResponseHeadersResponse>;
-  /**
-   * @param callback The callback
-   */
-  listAvailableResponseHeaders(callback: msRest.ServiceCallback<string[]>): void;
-  /**
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listAvailableResponseHeaders(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<string[]>): void;
-  listAvailableResponseHeaders(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<string[]>, callback?: msRest.ServiceCallback<string[]>): Promise<Models.ApplicationGatewaysListAvailableResponseHeadersResponse> {
-    return this.client.sendOperationRequest(
-      {
-        options
-      },
-      listAvailableResponseHeadersOperationSpec,
-      callback) as Promise<Models.ApplicationGatewaysListAvailableResponseHeadersResponse>;
   }
 
   /**
@@ -432,6 +323,26 @@ export class ApplicationGateways {
   }
 
   /**
+   * Updates the specified application gateway tags.
+   * @param resourceGroupName The name of the resource group.
+   * @param applicationGatewayName The name of the application gateway.
+   * @param parameters Parameters supplied to update application gateway tags.
+   * @param [options] The optional parameters
+   * @returns Promise<msRestAzure.LROPoller>
+   */
+  beginUpdateTags(resourceGroupName: string, applicationGatewayName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+    return this.client.sendLRORequest(
+      {
+        resourceGroupName,
+        applicationGatewayName,
+        parameters,
+        options
+      },
+      beginUpdateTagsOperationSpec,
+      options);
+  }
+
+  /**
    * Starts the specified application gateway.
    * @param resourceGroupName The name of the resource group.
    * @param applicationGatewayName The name of the application gateway.
@@ -482,27 +393,6 @@ export class ApplicationGateways {
         options
       },
       beginBackendHealthOperationSpec,
-      options);
-  }
-
-  /**
-   * Gets the backend health for given combination of backend pool and http setting of the specified
-   * application gateway in a resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param applicationGatewayName The name of the application gateway.
-   * @param probeRequest Request body for on-demand test probe operation.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginBackendHealthOnDemand(resourceGroupName: string, applicationGatewayName: string, probeRequest: Models.ApplicationGatewayOnDemandProbe, options?: Models.ApplicationGatewaysBeginBackendHealthOnDemandOptionalParams): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        applicationGatewayName,
-        probeRequest,
-        options
-      },
-      beginBackendHealthOnDemandOperationSpec,
       options);
   }
 
@@ -618,38 +508,6 @@ const getOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.applicationGatewayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.ApplicationGateway
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
 const listOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways",
@@ -692,105 +550,6 @@ const listAllOperationSpec: msRest.OperationSpec = {
     },
     default: {
       bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const listAvailableServerVariablesOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableServerVariables",
-  urlParameters: [
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      }
-    },
-    default: {
-      bodyMapper: Mappers.ErrorModel
-    }
-  },
-  serializer
-};
-
-const listAvailableRequestHeadersOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableRequestHeaders",
-  urlParameters: [
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      }
-    },
-    default: {
-      bodyMapper: Mappers.ErrorModel
-    }
-  },
-  serializer
-};
-
-const listAvailableResponseHeadersOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableResponseHeaders",
-  urlParameters: [
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      }
-    },
-    default: {
-      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer
@@ -949,6 +708,38 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
+const beginUpdateTagsOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PATCH",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.applicationGatewayName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "parameters",
+    mapper: {
+      ...Mappers.TagsObject,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.ApplicationGateway
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
 const beginStartOperationSpec: msRest.OperationSpec = {
   httpMethod: "POST",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/start",
@@ -1015,40 +806,6 @@ const beginBackendHealthOperationSpec: msRest.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.ApplicationGatewayBackendHealth
-    },
-    202: {},
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const beginBackendHealthOnDemandOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/getBackendHealthOnDemand",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.applicationGatewayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0,
-    Parameters.expand
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "probeRequest",
-    mapper: {
-      ...Mappers.ApplicationGatewayOnDemandProbe,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.ApplicationGatewayBackendHealthOnDemand
     },
     202: {},
     default: {

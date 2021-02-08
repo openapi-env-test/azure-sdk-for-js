@@ -84,42 +84,6 @@ export class DdosProtectionPlans {
   }
 
   /**
-   * Update a DDoS protection plan tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param ddosProtectionPlanName The name of the DDoS protection plan.
-   * @param parameters Parameters supplied to the update DDoS protection plan resource tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.DdosProtectionPlansUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, ddosProtectionPlanName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.DdosProtectionPlansUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param ddosProtectionPlanName The name of the DDoS protection plan.
-   * @param parameters Parameters supplied to the update DDoS protection plan resource tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, ddosProtectionPlanName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.DdosProtectionPlan>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param ddosProtectionPlanName The name of the DDoS protection plan.
-   * @param parameters Parameters supplied to the update DDoS protection plan resource tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, ddosProtectionPlanName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.DdosProtectionPlan>): void;
-  updateTags(resourceGroupName: string, ddosProtectionPlanName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.DdosProtectionPlan>, callback?: msRest.ServiceCallback<Models.DdosProtectionPlan>): Promise<Models.DdosProtectionPlansUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        ddosProtectionPlanName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.DdosProtectionPlansUpdateTagsResponse>;
-  }
-
-  /**
    * Gets all DDoS protection plans in a subscription.
    * @param [options] The optional parameters
    * @returns Promise<Models.DdosProtectionPlansListResponse>
@@ -282,38 +246,6 @@ const getOperationSpec: msRest.OperationSpec = {
   headerParameters: [
     Parameters.acceptLanguage
   ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.DdosProtectionPlan
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ddosProtectionPlans/{ddosProtectionPlanName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.ddosProtectionPlanName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
   responses: {
     200: {
       bodyMapper: Mappers.DdosProtectionPlan
