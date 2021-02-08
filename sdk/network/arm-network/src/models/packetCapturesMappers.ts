@@ -7,7 +7,6 @@
  */
 
 export {
-  discriminators,
   ErrorDetails,
   ErrorResponse,
   PacketCapture,

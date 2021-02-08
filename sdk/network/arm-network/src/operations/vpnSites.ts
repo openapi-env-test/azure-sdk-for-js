@@ -79,32 +79,9 @@ export class VpnSites {
    * @param [options] The optional parameters
    * @returns Promise<Models.VpnSitesUpdateTagsResponse>
    */
-  updateTags(resourceGroupName: string, vpnSiteName: string, vpnSiteParameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.VpnSitesUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The resource group name of the VpnSite.
-   * @param vpnSiteName The name of the VpnSite being updated.
-   * @param vpnSiteParameters Parameters supplied to update VpnSite tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, vpnSiteName: string, vpnSiteParameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.VpnSite>): void;
-  /**
-   * @param resourceGroupName The resource group name of the VpnSite.
-   * @param vpnSiteName The name of the VpnSite being updated.
-   * @param vpnSiteParameters Parameters supplied to update VpnSite tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, vpnSiteName: string, vpnSiteParameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.VpnSite>): void;
-  updateTags(resourceGroupName: string, vpnSiteName: string, vpnSiteParameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.VpnSite>, callback?: msRest.ServiceCallback<Models.VpnSite>): Promise<Models.VpnSitesUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        vpnSiteName,
-        vpnSiteParameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.VpnSitesUpdateTagsResponse>;
+  updateTags(resourceGroupName: string, vpnSiteName: string, vpnSiteParameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.VpnSitesUpdateTagsResponse> {
+    return this.beginUpdateTags(resourceGroupName,vpnSiteName,vpnSiteParameters,options)
+      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VpnSitesUpdateTagsResponse>;
   }
 
   /**
@@ -188,6 +165,26 @@ export class VpnSites {
         options
       },
       beginCreateOrUpdateOperationSpec,
+      options);
+  }
+
+  /**
+   * Updates VpnSite tags.
+   * @param resourceGroupName The resource group name of the VpnSite.
+   * @param vpnSiteName The name of the VpnSite being updated.
+   * @param vpnSiteParameters Parameters supplied to update VpnSite tags.
+   * @param [options] The optional parameters
+   * @returns Promise<msRestAzure.LROPoller>
+   */
+  beginUpdateTags(resourceGroupName: string, vpnSiteName: string, vpnSiteParameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+    return this.client.sendLRORequest(
+      {
+        resourceGroupName,
+        vpnSiteName,
+        vpnSiteParameters,
+        options
+      },
+      beginUpdateTagsOperationSpec,
       options);
   }
 
@@ -287,39 +284,7 @@ const getOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.VpnSite
     },
     default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnSites/{vpnSiteName}",
-  urlParameters: [
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.vpnSiteName
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "vpnSiteParameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.VpnSite
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer
@@ -343,7 +308,7 @@ const listByResourceGroupOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.ListVpnSitesResult
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer
@@ -366,7 +331,7 @@ const listOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.ListVpnSitesResult
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer
@@ -401,7 +366,42 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.VpnSite
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.ErrorModel
+    }
+  },
+  serializer
+};
+
+const beginUpdateTagsOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PATCH",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnSites/{vpnSiteName}",
+  urlParameters: [
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName,
+    Parameters.vpnSiteName
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "vpnSiteParameters",
+    mapper: {
+      ...Mappers.TagsObject,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.VpnSite
+    },
+    201: {
+      bodyMapper: Mappers.VpnSite
+    },
+    default: {
+      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer
@@ -426,7 +426,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     202: {},
     204: {},
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer
@@ -450,7 +450,7 @@ const listByResourceGroupNextOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.ListVpnSitesResult
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer
@@ -474,7 +474,7 @@ const listNextOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.ListVpnSitesResult
     },
     default: {
-      bodyMapper: Mappers.CloudError
+      bodyMapper: Mappers.ErrorModel
     }
   },
   serializer

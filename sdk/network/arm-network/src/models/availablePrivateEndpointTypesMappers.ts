@@ -7,7 +7,6 @@
  */
 
 export {
-  discriminators,
   AvailablePrivateEndpointType,
   AvailablePrivateEndpointTypesResult,
   CloudError

@@ -35,7 +35,7 @@ export class ConnectionMonitors {
    * @param [options] The optional parameters
    * @returns Promise<Models.ConnectionMonitorsCreateOrUpdateResponse>
    */
-  createOrUpdate(resourceGroupName: string, networkWatcherName: string, connectionMonitorName: string, parameters: Models.ConnectionMonitor, options?: Models.ConnectionMonitorsCreateOrUpdateOptionalParams): Promise<Models.ConnectionMonitorsCreateOrUpdateResponse> {
+  createOrUpdate(resourceGroupName: string, networkWatcherName: string, connectionMonitorName: string, parameters: Models.ConnectionMonitor, options?: msRest.RequestOptionsBase): Promise<Models.ConnectionMonitorsCreateOrUpdateResponse> {
     return this.beginCreateOrUpdate(resourceGroupName,networkWatcherName,connectionMonitorName,parameters,options)
       .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.ConnectionMonitorsCreateOrUpdateResponse>;
   }
@@ -87,46 +87,6 @@ export class ConnectionMonitors {
   deleteMethod(resourceGroupName: string, networkWatcherName: string, connectionMonitorName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
     return this.beginDeleteMethod(resourceGroupName,networkWatcherName,connectionMonitorName,options)
       .then(lroPoller => lroPoller.pollUntilFinished());
-  }
-
-  /**
-   * Update tags of the specified connection monitor.
-   * @param resourceGroupName The name of the resource group.
-   * @param networkWatcherName The name of the network watcher.
-   * @param connectionMonitorName The name of the connection monitor.
-   * @param parameters Parameters supplied to update connection monitor tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ConnectionMonitorsUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, networkWatcherName: string, connectionMonitorName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.ConnectionMonitorsUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param networkWatcherName The name of the network watcher.
-   * @param connectionMonitorName The name of the connection monitor.
-   * @param parameters Parameters supplied to update connection monitor tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, networkWatcherName: string, connectionMonitorName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.ConnectionMonitorResult>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param networkWatcherName The name of the network watcher.
-   * @param connectionMonitorName The name of the connection monitor.
-   * @param parameters Parameters supplied to update connection monitor tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, networkWatcherName: string, connectionMonitorName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ConnectionMonitorResult>): void;
-  updateTags(resourceGroupName: string, networkWatcherName: string, connectionMonitorName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ConnectionMonitorResult>, callback?: msRest.ServiceCallback<Models.ConnectionMonitorResult>): Promise<Models.ConnectionMonitorsUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        networkWatcherName,
-        connectionMonitorName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.ConnectionMonitorsUpdateTagsResponse>;
   }
 
   /**
@@ -209,7 +169,7 @@ export class ConnectionMonitors {
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
-  beginCreateOrUpdate(resourceGroupName: string, networkWatcherName: string, connectionMonitorName: string, parameters: Models.ConnectionMonitor, options?: Models.ConnectionMonitorsBeginCreateOrUpdateOptionalParams): Promise<msRestAzure.LROPoller> {
+  beginCreateOrUpdate(resourceGroupName: string, networkWatcherName: string, connectionMonitorName: string, parameters: Models.ConnectionMonitor, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
     return this.client.sendLRORequest(
       {
         resourceGroupName,
@@ -331,39 +291,6 @@ const getOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.networkWatcherName,
-    Parameters.connectionMonitorName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.ConnectionMonitorResult
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  serializer
-};
-
 const listOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors",
@@ -399,8 +326,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0,
-    Parameters.migrate
+    Parameters.apiVersion0
   ],
   headerParameters: [
     Parameters.acceptLanguage
