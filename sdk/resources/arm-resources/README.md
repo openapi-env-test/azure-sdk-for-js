@@ -1,6 +1,6 @@
-## Azure ResourceManagementClient SDK for JavaScript
+## Azure PolicyClient SDK for JavaScript
 
-This package contains an isomorphic SDK for ResourceManagementClient.
+This package contains an isomorphic SDK for PolicyClient.
 
 ### Currently supported environments
 
@@ -15,7 +15,7 @@ npm install @azure/arm-resources
 
 ### How to use
 
-#### nodejs - Authentication, client creation and list operations as an example written in TypeScript.
+#### nodejs - client creation and getByPolicyMode dataPolicyManifests as an example written in TypeScript.
 
 ##### Install @azure/ms-rest-nodeauth
 
@@ -26,16 +26,16 @@ npm install @azure/ms-rest-nodeauth@"^3.0.0"
 
 ##### Sample code
 
+While the below sample uses the interactive login, other authentication options can be found in the [README.md file of @azure/ms-rest-nodeauth](https://www.npmjs.com/package/@azure/ms-rest-nodeauth) package
 ```typescript
-import * as msRest from "@azure/ms-rest-js";
-import * as msRestAzure from "@azure/ms-rest-azure-js";
-import * as msRestNodeAuth from "@azure/ms-rest-nodeauth";
-import { ResourceManagementClient, ResourceManagementModels, ResourceManagementMappers } from "@azure/arm-resources";
+const msRestNodeAuth = require("@azure/ms-rest-nodeauth");
+const { PolicyClient } = require("@azure/arm-resources");
 const subscriptionId = process.env["AZURE_SUBSCRIPTION_ID"];
 
 msRestNodeAuth.interactiveLogin().then((creds) => {
-  const client = new ResourceManagementClient(creds, subscriptionId);
-  client.operations.list().then((result) => {
+  const client = new PolicyClient(creds, subscriptionId);
+  const policyMode = "testpolicyMode";
+  client.dataPolicyManifests.getByPolicyMode(policyMode).then((result) => {
     console.log("The result is:");
     console.log(result);
   });
@@ -44,7 +44,7 @@ msRestNodeAuth.interactiveLogin().then((creds) => {
 });
 ```
 
-#### browser - Authentication, client creation and list operations as an example written in JavaScript.
+#### browser - Authentication, client creation and getByPolicyMode dataPolicyManifests as an example written in JavaScript.
 
 ##### Install @azure/ms-rest-browserauth
 
@@ -77,8 +77,9 @@ See https://github.com/Azure/ms-rest-browserauth to learn how to authenticate to
           // may cause redirects
           authManager.login();
         }
-        const client = new Azure.ArmResources.ResourceManagementClient(res.creds, subscriptionId);
-        client.operations.list().then((result) => {
+        const client = new Azure.ArmResources.PolicyClient(res.creds, subscriptionId);
+        const policyMode = "testpolicyMode";
+        client.dataPolicyManifests.getByPolicyMode(policyMode).then((result) => {
           console.log("The result is:");
           console.log(result);
         }).catch((err) => {
