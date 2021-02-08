@@ -74,49 +74,13 @@ export class VirtualNetworks {
    * Creates or updates a virtual network in the specified resource group.
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
-   * @param parameters Parameters supplied to the create or update virtual network operation.
+   * @param parameters Parameters supplied to the create or update virtual network operation
    * @param [options] The optional parameters
    * @returns Promise<Models.VirtualNetworksCreateOrUpdateResponse>
    */
   createOrUpdate(resourceGroupName: string, virtualNetworkName: string, parameters: Models.VirtualNetwork, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworksCreateOrUpdateResponse> {
     return this.beginCreateOrUpdate(resourceGroupName,virtualNetworkName,parameters,options)
       .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualNetworksCreateOrUpdateResponse>;
-  }
-
-  /**
-   * Updates a virtual network tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param parameters Parameters supplied to update virtual network tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworksUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, virtualNetworkName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworksUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param parameters Parameters supplied to update virtual network tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, virtualNetworkName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.VirtualNetwork>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param parameters Parameters supplied to update virtual network tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, virtualNetworkName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.VirtualNetwork>): void;
-  updateTags(resourceGroupName: string, virtualNetworkName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.VirtualNetwork>, callback?: msRest.ServiceCallback<Models.VirtualNetwork>): Promise<Models.VirtualNetworksUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        virtualNetworkName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.VirtualNetworksUpdateTagsResponse>;
   }
 
   /**
@@ -175,32 +139,28 @@ export class VirtualNetworks {
    * Checks whether a private IP address is available for use.
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
-   * @param ipAddress The private IP address to be verified.
    * @param [options] The optional parameters
    * @returns Promise<Models.VirtualNetworksCheckIPAddressAvailabilityResponse>
    */
-  checkIPAddressAvailability(resourceGroupName: string, virtualNetworkName: string, ipAddress: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworksCheckIPAddressAvailabilityResponse>;
+  checkIPAddressAvailability(resourceGroupName: string, virtualNetworkName: string, options?: Models.VirtualNetworksCheckIPAddressAvailabilityOptionalParams): Promise<Models.VirtualNetworksCheckIPAddressAvailabilityResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
-   * @param ipAddress The private IP address to be verified.
    * @param callback The callback
    */
-  checkIPAddressAvailability(resourceGroupName: string, virtualNetworkName: string, ipAddress: string, callback: msRest.ServiceCallback<Models.IPAddressAvailabilityResult>): void;
+  checkIPAddressAvailability(resourceGroupName: string, virtualNetworkName: string, callback: msRest.ServiceCallback<Models.IPAddressAvailabilityResult>): void;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
-   * @param ipAddress The private IP address to be verified.
    * @param options The optional parameters
    * @param callback The callback
    */
-  checkIPAddressAvailability(resourceGroupName: string, virtualNetworkName: string, ipAddress: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.IPAddressAvailabilityResult>): void;
-  checkIPAddressAvailability(resourceGroupName: string, virtualNetworkName: string, ipAddress: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.IPAddressAvailabilityResult>, callback?: msRest.ServiceCallback<Models.IPAddressAvailabilityResult>): Promise<Models.VirtualNetworksCheckIPAddressAvailabilityResponse> {
+  checkIPAddressAvailability(resourceGroupName: string, virtualNetworkName: string, options: Models.VirtualNetworksCheckIPAddressAvailabilityOptionalParams, callback: msRest.ServiceCallback<Models.IPAddressAvailabilityResult>): void;
+  checkIPAddressAvailability(resourceGroupName: string, virtualNetworkName: string, options?: Models.VirtualNetworksCheckIPAddressAvailabilityOptionalParams | msRest.ServiceCallback<Models.IPAddressAvailabilityResult>, callback?: msRest.ServiceCallback<Models.IPAddressAvailabilityResult>): Promise<Models.VirtualNetworksCheckIPAddressAvailabilityResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
         virtualNetworkName,
-        ipAddress,
         options
       },
       checkIPAddressAvailabilityOperationSpec,
@@ -261,7 +221,7 @@ export class VirtualNetworks {
    * Creates or updates a virtual network in the specified resource group.
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
-   * @param parameters Parameters supplied to the create or update virtual network operation.
+   * @param parameters Parameters supplied to the create or update virtual network operation
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -379,38 +339,6 @@ const getOperationSpec: msRest.OperationSpec = {
   headerParameters: [
     Parameters.acceptLanguage
   ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.VirtualNetwork
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
   responses: {
     200: {
       bodyMapper: Mappers.VirtualNetwork

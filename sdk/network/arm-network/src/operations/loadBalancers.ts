@@ -84,42 +84,6 @@ export class LoadBalancers {
   }
 
   /**
-   * Updates a load balancer tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param loadBalancerName The name of the load balancer.
-   * @param parameters Parameters supplied to update load balancer tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.LoadBalancersUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, loadBalancerName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.LoadBalancersUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param loadBalancerName The name of the load balancer.
-   * @param parameters Parameters supplied to update load balancer tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, loadBalancerName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.LoadBalancer>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param loadBalancerName The name of the load balancer.
-   * @param parameters Parameters supplied to update load balancer tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, loadBalancerName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.LoadBalancer>): void;
-  updateTags(resourceGroupName: string, loadBalancerName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.LoadBalancer>, callback?: msRest.ServiceCallback<Models.LoadBalancer>): Promise<Models.LoadBalancersUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        loadBalancerName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.LoadBalancersUpdateTagsResponse>;
-  }
-
-  /**
    * Gets all the load balancers in a subscription.
    * @param [options] The optional parameters
    * @returns Promise<Models.LoadBalancersListAllResponse>
@@ -283,38 +247,6 @@ const getOperationSpec: msRest.OperationSpec = {
   headerParameters: [
     Parameters.acceptLanguage
   ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.LoadBalancer
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.loadBalancerName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
   responses: {
     200: {
       bodyMapper: Mappers.LoadBalancer

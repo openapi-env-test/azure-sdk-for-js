@@ -40,7 +40,7 @@ export class ExpressRouteCircuitPeerings {
   }
 
   /**
-   * Gets the specified peering for the express route circuit.
+   * Gets the specified authorization from the specified express route circuit.
    * @param resourceGroupName The name of the resource group.
    * @param circuitName The name of the express route circuit.
    * @param peeringName The name of the peering.

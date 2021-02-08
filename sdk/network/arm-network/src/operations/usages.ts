@@ -26,7 +26,7 @@ export class Usages {
   }
 
   /**
-   * List network usages for a subscription.
+   * Lists compute usages for a subscription.
    * @param location The location where resource usage is queried.
    * @param [options] The optional parameters
    * @returns Promise<Models.UsagesListResponse>
@@ -54,7 +54,7 @@ export class Usages {
   }
 
   /**
-   * List network usages for a subscription.
+   * Lists compute usages for a subscription.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.UsagesListNextResponse>

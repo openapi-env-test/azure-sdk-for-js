@@ -84,42 +84,6 @@ export class LocalNetworkGateways {
   }
 
   /**
-   * Updates a local network gateway tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param localNetworkGatewayName The name of the local network gateway.
-   * @param parameters Parameters supplied to update local network gateway tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.LocalNetworkGatewaysUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, localNetworkGatewayName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.LocalNetworkGatewaysUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param localNetworkGatewayName The name of the local network gateway.
-   * @param parameters Parameters supplied to update local network gateway tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, localNetworkGatewayName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.LocalNetworkGateway>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param localNetworkGatewayName The name of the local network gateway.
-   * @param parameters Parameters supplied to update local network gateway tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, localNetworkGatewayName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.LocalNetworkGateway>): void;
-  updateTags(resourceGroupName: string, localNetworkGatewayName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.LocalNetworkGateway>, callback?: msRest.ServiceCallback<Models.LocalNetworkGateway>): Promise<Models.LocalNetworkGatewaysUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        localNetworkGatewayName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.LocalNetworkGatewaysUpdateTagsResponse>;
-  }
-
-  /**
    * Gets all the local network gateways in a resource group.
    * @param resourceGroupName The name of the resource group.
    * @param [options] The optional parameters
@@ -230,38 +194,6 @@ const getOperationSpec: msRest.OperationSpec = {
   headerParameters: [
     Parameters.acceptLanguage
   ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.LocalNetworkGateway
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways/{localNetworkGatewayName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.localNetworkGatewayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
   responses: {
     200: {
       bodyMapper: Mappers.LocalNetworkGateway

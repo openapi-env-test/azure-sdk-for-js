@@ -7,9 +7,7 @@
  */
 
 export {
-  discriminators,
-  ErrorDetails,
-  ErrorResponse,
+  CloudError,
   PacketCapture,
   PacketCaptureFilter,
   PacketCaptureListResult,
