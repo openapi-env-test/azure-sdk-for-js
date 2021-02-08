@@ -1031,6 +1031,12 @@ export const StorageAccountCreateParameters: msRest.CompositeMapper = {
         type: {
           name: "String"
         }
+      },
+      allowSharedKeyAccess: {
+        serializedName: "properties.allowSharedKeyAccess",
+        type: {
+          name: "Boolean"
+        }
       }
     }
   }
@@ -1738,6 +1744,12 @@ export const StorageAccount: msRest.CompositeMapper = {
         type: {
           name: "String"
         }
+      },
+      allowSharedKeyAccess: {
+        serializedName: "properties.allowSharedKeyAccess",
+        type: {
+          name: "Boolean"
+        }
       }
     }
   }
@@ -1916,6 +1928,12 @@ export const StorageAccountUpdateParameters: msRest.CompositeMapper = {
         serializedName: "properties.minimumTlsVersion",
         type: {
           name: "String"
+        }
+      },
+      allowSharedKeyAccess: {
+        serializedName: "properties.allowSharedKeyAccess",
+        type: {
+          name: "Boolean"
         }
       },
       kind: {
@@ -2319,6 +2337,51 @@ export const ManagementPolicySnapShot: msRest.CompositeMapper = {
     name: "Composite",
     className: "ManagementPolicySnapShot",
     modelProperties: {
+      tierToCool: {
+        serializedName: "tierToCool",
+        type: {
+          name: "Composite",
+          className: "DateAfterCreation"
+        }
+      },
+      tierToArchive: {
+        serializedName: "tierToArchive",
+        type: {
+          name: "Composite",
+          className: "DateAfterCreation"
+        }
+      },
+      deleteProperty: {
+        serializedName: "delete",
+        type: {
+          name: "Composite",
+          className: "DateAfterCreation"
+        }
+      }
+    }
+  }
+};
+
+export const ManagementPolicyVersion: msRest.CompositeMapper = {
+  serializedName: "ManagementPolicyVersion",
+  type: {
+    name: "Composite",
+    className: "ManagementPolicyVersion",
+    modelProperties: {
+      tierToCool: {
+        serializedName: "tierToCool",
+        type: {
+          name: "Composite",
+          className: "DateAfterCreation"
+        }
+      },
+      tierToArchive: {
+        serializedName: "tierToArchive",
+        type: {
+          name: "Composite",
+          className: "DateAfterCreation"
+        }
+      },
       deleteProperty: {
         serializedName: "delete",
         type: {
@@ -2348,6 +2411,13 @@ export const ManagementPolicyAction: msRest.CompositeMapper = {
         type: {
           name: "Composite",
           className: "ManagementPolicySnapShot"
+        }
+      },
+      version: {
+        serializedName: "version",
+        type: {
+          name: "Composite",
+          className: "ManagementPolicyVersion"
         }
       }
     }
@@ -3687,6 +3757,16 @@ export const ChangeFeed: msRest.CompositeMapper = {
         serializedName: "enabled",
         type: {
           name: "Boolean"
+        }
+      },
+      retentionInDays: {
+        serializedName: "retentionInDays",
+        constraints: {
+          InclusiveMaximum: 146000,
+          InclusiveMinimum: 1
+        },
+        type: {
+          name: "Number"
         }
       }
     }

@@ -625,6 +625,13 @@ export interface StorageAccountCreateParameters {
    * is TLS 1.0 for this property. Possible values include: 'TLS1_0', 'TLS1_1', 'TLS1_2'
    */
   minimumTlsVersion?: MinimumTlsVersion;
+  /**
+   * Indicates whether the storage account permits requests to be authorized with the account
+   * access key via Shared Key. If false, then all requests, including shared access signatures,
+   * must be authorized with Azure Active Directory (Azure AD). The default value is null, which is
+   * equivalent to true.
+   */
+  allowSharedKeyAccess?: boolean;
 }
 
 /**
@@ -1101,6 +1108,13 @@ export interface StorageAccount extends TrackedResource {
    * is TLS 1.0 for this property. Possible values include: 'TLS1_0', 'TLS1_1', 'TLS1_2'
    */
   minimumTlsVersion?: MinimumTlsVersion;
+  /**
+   * Indicates whether the storage account permits requests to be authorized with the account
+   * access key via Shared Key. If false, then all requests, including shared access signatures,
+   * must be authorized with Azure Active Directory (Azure AD). The default value is null, which is
+   * equivalent to true.
+   */
+  allowSharedKeyAccess?: boolean;
 }
 
 /**
@@ -1213,6 +1227,13 @@ export interface StorageAccountUpdateParameters {
    * is TLS 1.0 for this property. Possible values include: 'TLS1_0', 'TLS1_1', 'TLS1_2'
    */
   minimumTlsVersion?: MinimumTlsVersion;
+  /**
+   * Indicates whether the storage account permits requests to be authorized with the account
+   * access key via Shared Key. If false, then all requests, including shared access signatures,
+   * must be authorized with Azure Active Directory (Azure AD). The default value is null, which is
+   * equivalent to true.
+   */
+  allowSharedKeyAccess?: boolean;
   /**
    * Optional. Indicates the type of storage account. Currently only StorageV2 value supported by
    * server. Possible values include: 'Storage', 'StorageV2', 'BlobStorage', 'FileStorage',
@@ -1415,7 +1436,8 @@ export interface ListServiceSasResponse {
 }
 
 /**
- * Object to define the number of days after last modification.
+ * Object to define the number of days after object last modification Or last access. Properties
+ * daysAfterModificationGreaterThan and daysAfterLastAccessTimeGreaterThan are mutually exclusive.
  */
 export interface DateAfterModification {
   /**
@@ -1467,7 +1489,36 @@ export interface DateAfterCreation {
  */
 export interface ManagementPolicySnapShot {
   /**
+   * The function to tier blob snapshot to cool storage. Support blob snapshot currently at Hot
+   * tier
+   */
+  tierToCool?: DateAfterCreation;
+  /**
+   * The function to tier blob snapshot to archive storage. Support blob snapshot currently at Hot
+   * or Cool tier
+   */
+  tierToArchive?: DateAfterCreation;
+  /**
    * The function to delete the blob snapshot
+   */
+  deleteProperty?: DateAfterCreation;
+}
+
+/**
+ * Management policy action for blob version.
+ */
+export interface ManagementPolicyVersion {
+  /**
+   * The function to tier blob version to cool storage. Support blob version currently at Hot tier
+   */
+  tierToCool?: DateAfterCreation;
+  /**
+   * The function to tier blob version to archive storage. Support blob version currently at Hot or
+   * Cool tier
+   */
+  tierToArchive?: DateAfterCreation;
+  /**
+   * The function to delete the blob version
    */
   deleteProperty?: DateAfterCreation;
 }
@@ -1484,6 +1535,10 @@ export interface ManagementPolicyAction {
    * The management policy action for snapshot
    */
   snapshot?: ManagementPolicySnapShot;
+  /**
+   * The management policy action for version
+   */
+  version?: ManagementPolicyVersion;
 }
 
 /**
@@ -1516,7 +1571,8 @@ export interface ManagementPolicyFilter {
    */
   prefixMatch?: string[];
   /**
-   * An array of predefined enum values. Only blockBlob is supported.
+   * An array of predefined enum values. Currently blockBlob supports all tiering and delete
+   * actions. Only delete actions are supported for appendBlob.
    */
   blobTypes: string[];
   /**
@@ -2290,6 +2346,12 @@ export interface ChangeFeed {
    * Indicates whether change feed event logging is enabled for the Blob service.
    */
   enabled?: boolean;
+  /**
+   * Indicates the duration of changeFeed retention in days. Minimum value is 1 day and maximum
+   * value is 146000 days (400 years). A null value indicates an infinite retention of the change
+   * feed.
+   */
+  retentionInDays?: number;
 }
 
 /**
