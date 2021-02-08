@@ -7,7 +7,5 @@
  */
 
 export {
-  CloudError,
-  Recommendation,
-  RecommendationRule
+  CloudError
 } from "../models/mappers";

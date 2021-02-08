@@ -8,6 +8,5 @@
 
 export {
   CloudError,
-  Recommendation,
-  RecommendationRule
+  CsmMoveResourceEnvelope
 } from "../models/mappers";
