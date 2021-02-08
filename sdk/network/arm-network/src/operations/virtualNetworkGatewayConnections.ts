@@ -85,19 +85,6 @@ export class VirtualNetworkGatewayConnections {
   }
 
   /**
-   * Updates a virtual network gateway connection tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayConnectionName The name of the virtual network gateway connection.
-   * @param parameters Parameters supplied to update virtual network gateway connection tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworkGatewayConnectionsUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, virtualNetworkGatewayConnectionName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworkGatewayConnectionsUpdateTagsResponse> {
-    return this.beginUpdateTags(resourceGroupName,virtualNetworkGatewayConnectionName,parameters,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualNetworkGatewayConnectionsUpdateTagsResponse>;
-  }
-
-  /**
    * The Put VirtualNetworkGatewayConnectionSharedKey operation sets the virtual network gateway
    * connection shared key for passed virtual network gateway connection in the specified resource
    * group through Network resource provider.
@@ -196,45 +183,6 @@ export class VirtualNetworkGatewayConnections {
   }
 
   /**
-   * Starts packet capture on virtual network gateway connection in the specified resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayConnectionName The name of the virtual network gateway connection.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworkGatewayConnectionsStartPacketCaptureResponse>
-   */
-  startPacketCapture(resourceGroupName: string, virtualNetworkGatewayConnectionName: string, options?: Models.VirtualNetworkGatewayConnectionsStartPacketCaptureOptionalParams): Promise<Models.VirtualNetworkGatewayConnectionsStartPacketCaptureResponse> {
-    return this.beginStartPacketCapture(resourceGroupName,virtualNetworkGatewayConnectionName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualNetworkGatewayConnectionsStartPacketCaptureResponse>;
-  }
-
-  /**
-   * Stops packet capture on virtual network gateway connection in the specified resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayConnectionName The name of the virtual network gateway Connection.
-   * @param parameters Virtual network gateway packet capture parameters supplied to stop packet
-   * capture on gateway connection.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworkGatewayConnectionsStopPacketCaptureResponse>
-   */
-  stopPacketCapture(resourceGroupName: string, virtualNetworkGatewayConnectionName: string, parameters: Models.VpnPacketCaptureStopParameters, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworkGatewayConnectionsStopPacketCaptureResponse> {
-    return this.beginStopPacketCapture(resourceGroupName,virtualNetworkGatewayConnectionName,parameters,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualNetworkGatewayConnectionsStopPacketCaptureResponse>;
-  }
-
-  /**
-   * Lists IKE Security Associations for the virtual network gateway connection in the specified
-   * resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayConnectionName The name of the virtual network gateway Connection.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworkGatewayConnectionsGetIkeSasResponse>
-   */
-  getIkeSas(resourceGroupName: string, virtualNetworkGatewayConnectionName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworkGatewayConnectionsGetIkeSasResponse> {
-    return this.beginGetIkeSas(resourceGroupName,virtualNetworkGatewayConnectionName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualNetworkGatewayConnectionsGetIkeSasResponse>;
-  }
-
-  /**
    * Creates or updates a virtual network gateway connection in the specified resource group.
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkGatewayConnectionName The name of the virtual network gateway connection.
@@ -270,26 +218,6 @@ export class VirtualNetworkGatewayConnections {
         options
       },
       beginDeleteMethodOperationSpec,
-      options);
-  }
-
-  /**
-   * Updates a virtual network gateway connection tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayConnectionName The name of the virtual network gateway connection.
-   * @param parameters Parameters supplied to update virtual network gateway connection tags.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginUpdateTags(resourceGroupName: string, virtualNetworkGatewayConnectionName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        virtualNetworkGatewayConnectionName,
-        parameters,
-        options
-      },
-      beginUpdateTagsOperationSpec,
       options);
   }
 
@@ -337,64 +265,6 @@ export class VirtualNetworkGatewayConnections {
         options
       },
       beginResetSharedKeyOperationSpec,
-      options);
-  }
-
-  /**
-   * Starts packet capture on virtual network gateway connection in the specified resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayConnectionName The name of the virtual network gateway connection.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginStartPacketCapture(resourceGroupName: string, virtualNetworkGatewayConnectionName: string, options?: Models.VirtualNetworkGatewayConnectionsBeginStartPacketCaptureOptionalParams): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        virtualNetworkGatewayConnectionName,
-        options
-      },
-      beginStartPacketCaptureOperationSpec,
-      options);
-  }
-
-  /**
-   * Stops packet capture on virtual network gateway connection in the specified resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayConnectionName The name of the virtual network gateway Connection.
-   * @param parameters Virtual network gateway packet capture parameters supplied to stop packet
-   * capture on gateway connection.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginStopPacketCapture(resourceGroupName: string, virtualNetworkGatewayConnectionName: string, parameters: Models.VpnPacketCaptureStopParameters, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        virtualNetworkGatewayConnectionName,
-        parameters,
-        options
-      },
-      beginStopPacketCaptureOperationSpec,
-      options);
-  }
-
-  /**
-   * Lists IKE Security Associations for the virtual network gateway connection in the specified
-   * resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayConnectionName The name of the virtual network gateway Connection.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginGetIkeSas(resourceGroupName: string, virtualNetworkGatewayConnectionName: string, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        virtualNetworkGatewayConnectionName,
-        options
-      },
-      beginGetIkeSasOperationSpec,
       options);
   }
 
@@ -564,39 +434,6 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
-const beginUpdateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkGatewayConnectionName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.VirtualNetworkGatewayConnection
-    },
-    202: {},
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
 const beginSetSharedKeyOperationSpec: msRest.OperationSpec = {
   httpMethod: "PUT",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey",
@@ -660,113 +497,6 @@ const beginResetSharedKeyOperationSpec: msRest.OperationSpec = {
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const beginStartPacketCaptureOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/startPacketCapture",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkGatewayConnectionName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: [
-      "options",
-      "parameters"
-    ],
-    mapper: Mappers.VpnPacketCaptureStartParameters
-  },
-  responses: {
-    200: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "String"
-        }
-      }
-    },
-    202: {},
-    default: {
-      bodyMapper: Mappers.ErrorModel
-    }
-  },
-  serializer
-};
-
-const beginStopPacketCaptureOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/stopPacketCapture",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkGatewayConnectionName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.VpnPacketCaptureStopParameters,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "String"
-        }
-      }
-    },
-    202: {},
-    default: {
-      bodyMapper: Mappers.ErrorModel
-    }
-  },
-  serializer
-};
-
-const beginGetIkeSasOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/getikesas",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkGatewayConnectionName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "String"
-        }
-      }
-    },
-    202: {},
-    default: {
-      bodyMapper: Mappers.ErrorResponse
     }
   },
   serializer

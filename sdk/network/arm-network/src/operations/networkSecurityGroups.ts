@@ -84,42 +84,6 @@ export class NetworkSecurityGroups {
   }
 
   /**
-   * Updates a network security group tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param networkSecurityGroupName The name of the network security group.
-   * @param parameters Parameters supplied to update network security group tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.NetworkSecurityGroupsUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, networkSecurityGroupName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.NetworkSecurityGroupsUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param networkSecurityGroupName The name of the network security group.
-   * @param parameters Parameters supplied to update network security group tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, networkSecurityGroupName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.NetworkSecurityGroup>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param networkSecurityGroupName The name of the network security group.
-   * @param parameters Parameters supplied to update network security group tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, networkSecurityGroupName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.NetworkSecurityGroup>): void;
-  updateTags(resourceGroupName: string, networkSecurityGroupName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.NetworkSecurityGroup>, callback?: msRest.ServiceCallback<Models.NetworkSecurityGroup>): Promise<Models.NetworkSecurityGroupsUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        networkSecurityGroupName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.NetworkSecurityGroupsUpdateTagsResponse>;
-  }
-
-  /**
    * Gets all network security groups in a subscription.
    * @param [options] The optional parameters
    * @returns Promise<Models.NetworkSecurityGroupsListAllResponse>
@@ -283,38 +247,6 @@ const getOperationSpec: msRest.OperationSpec = {
   headerParameters: [
     Parameters.acceptLanguage
   ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.NetworkSecurityGroup
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.networkSecurityGroupName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
   responses: {
     200: {
       bodyMapper: Mappers.NetworkSecurityGroup

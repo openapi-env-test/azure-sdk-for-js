@@ -107,42 +107,6 @@ export class NetworkWatchers {
   }
 
   /**
-   * Updates a network watcher tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param networkWatcherName The name of the network watcher.
-   * @param parameters Parameters supplied to update network watcher tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.NetworkWatchersUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, networkWatcherName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.NetworkWatchersUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param networkWatcherName The name of the network watcher.
-   * @param parameters Parameters supplied to update network watcher tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, networkWatcherName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.NetworkWatcher>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param networkWatcherName The name of the network watcher.
-   * @param parameters Parameters supplied to update network watcher tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, networkWatcherName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.NetworkWatcher>): void;
-  updateTags(resourceGroupName: string, networkWatcherName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.NetworkWatcher>, callback?: msRest.ServiceCallback<Models.NetworkWatcher>): Promise<Models.NetworkWatchersUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        networkWatcherName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.NetworkWatchersUpdateTagsResponse>;
-  }
-
-  /**
    * Gets all network watchers by resource group.
    * @param resourceGroupName The name of the resource group.
    * @param [options] The optional parameters
@@ -270,7 +234,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * Initiate troubleshooting on a specified resource.
+   * Initiate troubleshooting on a specified resource
    * @param resourceGroupName The name of the resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that define the resource to troubleshoot.
@@ -283,7 +247,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * Get the last completed troubleshooting result on a specified resource.
+   * Get the last completed troubleshooting result on a specified resource
    * @param resourceGroupName The name of the resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that define the resource to query the troubleshooting result.
@@ -296,7 +260,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * Configures flow log and traffic analytics (optional) on a specified resource.
+   * Configures flow log on a specified resource.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that define the configuration of flow log.
@@ -309,11 +273,10 @@ export class NetworkWatchers {
   }
 
   /**
-   * Queries status of flow log and traffic analytics (optional) on a specified resource.
+   * Queries status of flow log on a specified resource.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
-   * @param parameters Parameters that define a resource to query flow log and traffic analytics
-   * (optional) status.
+   * @param parameters Parameters that define a resource to query flow log status.
    * @param [options] The optional parameters
    * @returns Promise<Models.NetworkWatchersGetFlowLogStatusResponse>
    */
@@ -334,52 +297,6 @@ export class NetworkWatchers {
   checkConnectivity(resourceGroupName: string, networkWatcherName: string, parameters: Models.ConnectivityParameters, options?: msRest.RequestOptionsBase): Promise<Models.NetworkWatchersCheckConnectivityResponse> {
     return this.beginCheckConnectivity(resourceGroupName,networkWatcherName,parameters,options)
       .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.NetworkWatchersCheckConnectivityResponse>;
-  }
-
-  /**
-   * NOTE: This feature is currently in preview and still being tested for stability. Gets the
-   * relative latency score for internet service providers from a specified location to Azure
-   * regions.
-   * @param resourceGroupName The name of the network watcher resource group.
-   * @param networkWatcherName The name of the network watcher resource.
-   * @param parameters Parameters that determine Azure reachability report configuration.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.NetworkWatchersGetAzureReachabilityReportResponse>
-   */
-  getAzureReachabilityReport(resourceGroupName: string, networkWatcherName: string, parameters: Models.AzureReachabilityReportParameters, options?: msRest.RequestOptionsBase): Promise<Models.NetworkWatchersGetAzureReachabilityReportResponse> {
-    return this.beginGetAzureReachabilityReport(resourceGroupName,networkWatcherName,parameters,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.NetworkWatchersGetAzureReachabilityReportResponse>;
-  }
-
-  /**
-   * NOTE: This feature is currently in preview and still being tested for stability. Lists all
-   * available internet service providers for a specified Azure region.
-   * @param resourceGroupName The name of the network watcher resource group.
-   * @param networkWatcherName The name of the network watcher resource.
-   * @param parameters Parameters that scope the list of available providers.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.NetworkWatchersListAvailableProvidersResponse>
-   */
-  listAvailableProviders(resourceGroupName: string, networkWatcherName: string, parameters: Models.AvailableProvidersListParameters, options?: msRest.RequestOptionsBase): Promise<Models.NetworkWatchersListAvailableProvidersResponse> {
-    return this.beginListAvailableProviders(resourceGroupName,networkWatcherName,parameters,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.NetworkWatchersListAvailableProvidersResponse>;
-  }
-
-  /**
-   * Gets Network Configuration Diagnostic data to help customers understand and debug network
-   * behavior. It provides detailed information on what security rules were applied to a specified
-   * traffic flow and the result of evaluating these rules. Customers must provide details of a flow
-   * like source, destination, protocol, etc. The API returns whether traffic was allowed or denied,
-   * the rules evaluated for the specified flow and the evaluation results.
-   * @param resourceGroupName The name of the resource group.
-   * @param networkWatcherName The name of the network watcher.
-   * @param parameters Parameters to get network configuration diagnostic.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.NetworkWatchersGetNetworkConfigurationDiagnosticResponse>
-   */
-  getNetworkConfigurationDiagnostic(resourceGroupName: string, networkWatcherName: string, parameters: Models.NetworkConfigurationDiagnosticParameters, options?: msRest.RequestOptionsBase): Promise<Models.NetworkWatchersGetNetworkConfigurationDiagnosticResponse> {
-    return this.beginGetNetworkConfigurationDiagnostic(resourceGroupName,networkWatcherName,parameters,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.NetworkWatchersGetNetworkConfigurationDiagnosticResponse>;
   }
 
   /**
@@ -461,7 +378,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * Initiate troubleshooting on a specified resource.
+   * Initiate troubleshooting on a specified resource
    * @param resourceGroupName The name of the resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that define the resource to troubleshoot.
@@ -481,7 +398,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * Get the last completed troubleshooting result on a specified resource.
+   * Get the last completed troubleshooting result on a specified resource
    * @param resourceGroupName The name of the resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that define the resource to query the troubleshooting result.
@@ -501,7 +418,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * Configures flow log and traffic analytics (optional) on a specified resource.
+   * Configures flow log on a specified resource.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that define the configuration of flow log.
@@ -521,11 +438,10 @@ export class NetworkWatchers {
   }
 
   /**
-   * Queries status of flow log and traffic analytics (optional) on a specified resource.
+   * Queries status of flow log on a specified resource.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
-   * @param parameters Parameters that define a resource to query flow log and traffic analytics
-   * (optional) status.
+   * @param parameters Parameters that define a resource to query flow log status.
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -561,73 +477,6 @@ export class NetworkWatchers {
       beginCheckConnectivityOperationSpec,
       options);
   }
-
-  /**
-   * NOTE: This feature is currently in preview and still being tested for stability. Gets the
-   * relative latency score for internet service providers from a specified location to Azure
-   * regions.
-   * @param resourceGroupName The name of the network watcher resource group.
-   * @param networkWatcherName The name of the network watcher resource.
-   * @param parameters Parameters that determine Azure reachability report configuration.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginGetAzureReachabilityReport(resourceGroupName: string, networkWatcherName: string, parameters: Models.AzureReachabilityReportParameters, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        networkWatcherName,
-        parameters,
-        options
-      },
-      beginGetAzureReachabilityReportOperationSpec,
-      options);
-  }
-
-  /**
-   * NOTE: This feature is currently in preview and still being tested for stability. Lists all
-   * available internet service providers for a specified Azure region.
-   * @param resourceGroupName The name of the network watcher resource group.
-   * @param networkWatcherName The name of the network watcher resource.
-   * @param parameters Parameters that scope the list of available providers.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginListAvailableProviders(resourceGroupName: string, networkWatcherName: string, parameters: Models.AvailableProvidersListParameters, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        networkWatcherName,
-        parameters,
-        options
-      },
-      beginListAvailableProvidersOperationSpec,
-      options);
-  }
-
-  /**
-   * Gets Network Configuration Diagnostic data to help customers understand and debug network
-   * behavior. It provides detailed information on what security rules were applied to a specified
-   * traffic flow and the result of evaluating these rules. Customers must provide details of a flow
-   * like source, destination, protocol, etc. The API returns whether traffic was allowed or denied,
-   * the rules evaluated for the specified flow and the evaluation results.
-   * @param resourceGroupName The name of the resource group.
-   * @param networkWatcherName The name of the network watcher.
-   * @param parameters Parameters to get network configuration diagnostic.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginGetNetworkConfigurationDiagnostic(resourceGroupName: string, networkWatcherName: string, parameters: Models.NetworkConfigurationDiagnosticParameters, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        networkWatcherName,
-        parameters,
-        options
-      },
-      beginGetNetworkConfigurationDiagnosticOperationSpec,
-      options);
-  }
 }
 
 // Operation Specifications
@@ -661,7 +510,7 @@ const createOrUpdateOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.NetworkWatcher
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.CloudError
     }
   },
   serializer
@@ -686,39 +535,7 @@ const getOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.NetworkWatcher
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.networkWatcherName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.NetworkWatcher
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.CloudError
     }
   },
   serializer
@@ -742,7 +559,7 @@ const listOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.NetworkWatcherListResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.CloudError
     }
   },
   serializer
@@ -765,7 +582,7 @@ const listAllOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.NetworkWatcherListResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.CloudError
     }
   },
   serializer
@@ -797,7 +614,7 @@ const getTopologyOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.Topology
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.CloudError
     }
   },
   serializer
@@ -821,7 +638,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     202: {},
     204: {},
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.CloudError
     }
   },
   serializer
@@ -856,7 +673,7 @@ const beginVerifyIPFlowOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.VerificationIPFlowResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.CloudError
     }
   },
   serializer
@@ -891,7 +708,7 @@ const beginGetNextHopOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.NextHopResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.CloudError
     }
   },
   serializer
@@ -926,7 +743,7 @@ const beginGetVMSecurityRulesOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.SecurityGroupViewResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.CloudError
     }
   },
   serializer
@@ -961,7 +778,7 @@ const beginGetTroubleshootingOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.TroubleshootingResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.CloudError
     }
   },
   serializer
@@ -996,7 +813,7 @@ const beginGetTroubleshootingResultOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.TroubleshootingResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.CloudError
     }
   },
   serializer
@@ -1031,7 +848,7 @@ const beginSetFlowLogConfigurationOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.FlowLogInformation
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.CloudError
     }
   },
   serializer
@@ -1066,7 +883,7 @@ const beginGetFlowLogStatusOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.FlowLogInformation
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.CloudError
     }
   },
   serializer
@@ -1101,112 +918,7 @@ const beginCheckConnectivityOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.ConnectivityInformation
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  serializer
-};
-
-const beginGetAzureReachabilityReportOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/azureReachabilityReport",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.networkWatcherName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.AzureReachabilityReportParameters,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.AzureReachabilityReport
-    },
-    202: {
-      bodyMapper: Mappers.AzureReachabilityReport
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  serializer
-};
-
-const beginListAvailableProvidersOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/availableProvidersList",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.networkWatcherName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.AvailableProvidersListParameters,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.AvailableProvidersList
-    },
-    202: {
-      bodyMapper: Mappers.AvailableProvidersList
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  serializer
-};
-
-const beginGetNetworkConfigurationDiagnosticOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/networkConfigurationDiagnostic",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.networkWatcherName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.NetworkConfigurationDiagnosticParameters,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.NetworkConfigurationDiagnosticResponse
-    },
-    202: {
-      bodyMapper: Mappers.NetworkConfigurationDiagnosticResponse
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.CloudError
     }
   },
   serializer

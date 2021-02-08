@@ -84,19 +84,6 @@ export class VirtualNetworkGateways {
   }
 
   /**
-   * Updates a virtual network gateway tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param parameters Parameters supplied to update virtual network gateway tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworkGatewaysUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, virtualNetworkGatewayName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworkGatewaysUpdateTagsResponse> {
-    return this.beginUpdateTags(resourceGroupName,virtualNetworkGatewayName,parameters,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualNetworkGatewaysUpdateTagsResponse>;
-  }
-
-  /**
    * Gets all virtual network gateways by resource group.
    * @param resourceGroupName The name of the resource group.
    * @param [options] The optional parameters
@@ -169,18 +156,6 @@ export class VirtualNetworkGateways {
   }
 
   /**
-   * Resets the VPN client shared key of the virtual network gateway in the specified resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param [options] The optional parameters
-   * @returns Promise<msRest.RestResponse>
-   */
-  resetVpnClientSharedKey(resourceGroupName: string, virtualNetworkGatewayName: string, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
-    return this.beginResetVpnClientSharedKey(resourceGroupName,virtualNetworkGatewayName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished());
-  }
-
-  /**
    * Generates VPN client package for P2S client of the virtual network gateway in the specified
    * resource group.
    * @param resourceGroupName The name of the resource group.
@@ -236,38 +211,6 @@ export class VirtualNetworkGateways {
   }
 
   /**
-   * Gets a xml format representation for supported vpn devices.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworkGatewaysSupportedVpnDevicesResponse>
-   */
-  supportedVpnDevices(resourceGroupName: string, virtualNetworkGatewayName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworkGatewaysSupportedVpnDevicesResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param callback The callback
-   */
-  supportedVpnDevices(resourceGroupName: string, virtualNetworkGatewayName: string, callback: msRest.ServiceCallback<string>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  supportedVpnDevices(resourceGroupName: string, virtualNetworkGatewayName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<string>): void;
-  supportedVpnDevices(resourceGroupName: string, virtualNetworkGatewayName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<string>, callback?: msRest.ServiceCallback<string>): Promise<Models.VirtualNetworkGatewaysSupportedVpnDevicesResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        virtualNetworkGatewayName,
-        options
-      },
-      supportedVpnDevicesOperationSpec,
-      callback) as Promise<Models.VirtualNetworkGatewaysSupportedVpnDevicesResponse>;
-  }
-
-  /**
    * This operation retrieves a list of routes the virtual network gateway has learned, including
    * routes learned from BGP peers.
    * @param resourceGroupName The name of the resource group.
@@ -285,133 +228,13 @@ export class VirtualNetworkGateways {
    * specified peer.
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param peer The IP address of the peer.
+   * @param peer The IP address of the peer
    * @param [options] The optional parameters
    * @returns Promise<Models.VirtualNetworkGatewaysGetAdvertisedRoutesResponse>
    */
   getAdvertisedRoutes(resourceGroupName: string, virtualNetworkGatewayName: string, peer: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworkGatewaysGetAdvertisedRoutesResponse> {
     return this.beginGetAdvertisedRoutes(resourceGroupName,virtualNetworkGatewayName,peer,options)
       .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualNetworkGatewaysGetAdvertisedRoutesResponse>;
-  }
-
-  /**
-   * The Set VpnclientIpsecParameters operation sets the vpnclient ipsec policy for P2S client of
-   * virtual network gateway in the specified resource group through Network resource provider.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param vpnclientIpsecParams Parameters supplied to the Begin Set vpnclient ipsec parameters of
-   * Virtual Network Gateway P2S client operation through Network resource provider.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworkGatewaysSetVpnclientIpsecParametersResponse>
-   */
-  setVpnclientIpsecParameters(resourceGroupName: string, virtualNetworkGatewayName: string, vpnclientIpsecParams: Models.VpnClientIPsecParameters, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworkGatewaysSetVpnclientIpsecParametersResponse> {
-    return this.beginSetVpnclientIpsecParameters(resourceGroupName,virtualNetworkGatewayName,vpnclientIpsecParams,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualNetworkGatewaysSetVpnclientIpsecParametersResponse>;
-  }
-
-  /**
-   * The Get VpnclientIpsecParameters operation retrieves information about the vpnclient ipsec
-   * policy for P2S client of virtual network gateway in the specified resource group through Network
-   * resource provider.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The virtual network gateway name.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworkGatewaysGetVpnclientIpsecParametersResponse>
-   */
-  getVpnclientIpsecParameters(resourceGroupName: string, virtualNetworkGatewayName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworkGatewaysGetVpnclientIpsecParametersResponse> {
-    return this.beginGetVpnclientIpsecParameters(resourceGroupName,virtualNetworkGatewayName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualNetworkGatewaysGetVpnclientIpsecParametersResponse>;
-  }
-
-  /**
-   * Gets a xml format representation for vpn device configuration script.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayConnectionName The name of the virtual network gateway connection
-   * for which the configuration script is generated.
-   * @param parameters Parameters supplied to the generate vpn device script operation.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworkGatewaysVpnDeviceConfigurationScriptResponse>
-   */
-  vpnDeviceConfigurationScript(resourceGroupName: string, virtualNetworkGatewayConnectionName: string, parameters: Models.VpnDeviceScriptParameters, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworkGatewaysVpnDeviceConfigurationScriptResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayConnectionName The name of the virtual network gateway connection
-   * for which the configuration script is generated.
-   * @param parameters Parameters supplied to the generate vpn device script operation.
-   * @param callback The callback
-   */
-  vpnDeviceConfigurationScript(resourceGroupName: string, virtualNetworkGatewayConnectionName: string, parameters: Models.VpnDeviceScriptParameters, callback: msRest.ServiceCallback<string>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayConnectionName The name of the virtual network gateway connection
-   * for which the configuration script is generated.
-   * @param parameters Parameters supplied to the generate vpn device script operation.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  vpnDeviceConfigurationScript(resourceGroupName: string, virtualNetworkGatewayConnectionName: string, parameters: Models.VpnDeviceScriptParameters, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<string>): void;
-  vpnDeviceConfigurationScript(resourceGroupName: string, virtualNetworkGatewayConnectionName: string, parameters: Models.VpnDeviceScriptParameters, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<string>, callback?: msRest.ServiceCallback<string>): Promise<Models.VirtualNetworkGatewaysVpnDeviceConfigurationScriptResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        virtualNetworkGatewayConnectionName,
-        parameters,
-        options
-      },
-      vpnDeviceConfigurationScriptOperationSpec,
-      callback) as Promise<Models.VirtualNetworkGatewaysVpnDeviceConfigurationScriptResponse>;
-  }
-
-  /**
-   * Starts packet capture on virtual network gateway in the specified resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworkGatewaysStartPacketCaptureResponse>
-   */
-  startPacketCapture(resourceGroupName: string, virtualNetworkGatewayName: string, options?: Models.VirtualNetworkGatewaysStartPacketCaptureOptionalParams): Promise<Models.VirtualNetworkGatewaysStartPacketCaptureResponse> {
-    return this.beginStartPacketCapture(resourceGroupName,virtualNetworkGatewayName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualNetworkGatewaysStartPacketCaptureResponse>;
-  }
-
-  /**
-   * Stops packet capture on virtual network gateway in the specified resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param parameters Virtual network gateway packet capture parameters supplied to stop packet
-   * capture on gateway.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworkGatewaysStopPacketCaptureResponse>
-   */
-  stopPacketCapture(resourceGroupName: string, virtualNetworkGatewayName: string, parameters: Models.VpnPacketCaptureStopParameters, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworkGatewaysStopPacketCaptureResponse> {
-    return this.beginStopPacketCapture(resourceGroupName,virtualNetworkGatewayName,parameters,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualNetworkGatewaysStopPacketCaptureResponse>;
-  }
-
-  /**
-   * Get VPN client connection health detail per P2S client connection of the virtual network gateway
-   * in the specified resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworkGatewaysGetVpnclientConnectionHealthResponse>
-   */
-  getVpnclientConnectionHealth(resourceGroupName: string, virtualNetworkGatewayName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworkGatewaysGetVpnclientConnectionHealthResponse> {
-    return this.beginGetVpnclientConnectionHealth(resourceGroupName,virtualNetworkGatewayName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.VirtualNetworkGatewaysGetVpnclientConnectionHealthResponse>;
-  }
-
-  /**
-   * Disconnect vpn connections of virtual network gateway in the specified resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param request The parameters are supplied to disconnect vpn connections.
-   * @param [options] The optional parameters
-   * @returns Promise<msRest.RestResponse>
-   */
-  disconnectVirtualNetworkGatewayVpnConnections(resourceGroupName: string, virtualNetworkGatewayName: string, request: Models.P2SVpnConnectionRequest, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
-    return this.beginDisconnectVirtualNetworkGatewayVpnConnections(resourceGroupName,virtualNetworkGatewayName,request,options)
-      .then(lroPoller => lroPoller.pollUntilFinished());
   }
 
   /**
@@ -453,26 +276,6 @@ export class VirtualNetworkGateways {
   }
 
   /**
-   * Updates a virtual network gateway tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param parameters Parameters supplied to update virtual network gateway tags.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginUpdateTags(resourceGroupName: string, virtualNetworkGatewayName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        virtualNetworkGatewayName,
-        parameters,
-        options
-      },
-      beginUpdateTagsOperationSpec,
-      options);
-  }
-
-  /**
    * Resets the primary of the virtual network gateway in the specified resource group.
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkGatewayName The name of the virtual network gateway.
@@ -487,24 +290,6 @@ export class VirtualNetworkGateways {
         options
       },
       beginResetOperationSpec,
-      options);
-  }
-
-  /**
-   * Resets the VPN client shared key of the virtual network gateway in the specified resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginResetVpnClientSharedKey(resourceGroupName: string, virtualNetworkGatewayName: string, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        virtualNetworkGatewayName,
-        options
-      },
-      beginResetVpnClientSharedKeyOperationSpec,
       options);
   }
 
@@ -613,7 +398,7 @@ export class VirtualNetworkGateways {
    * specified peer.
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param peer The IP address of the peer.
+   * @param peer The IP address of the peer
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -626,126 +411,6 @@ export class VirtualNetworkGateways {
         options
       },
       beginGetAdvertisedRoutesOperationSpec,
-      options);
-  }
-
-  /**
-   * The Set VpnclientIpsecParameters operation sets the vpnclient ipsec policy for P2S client of
-   * virtual network gateway in the specified resource group through Network resource provider.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param vpnclientIpsecParams Parameters supplied to the Begin Set vpnclient ipsec parameters of
-   * Virtual Network Gateway P2S client operation through Network resource provider.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginSetVpnclientIpsecParameters(resourceGroupName: string, virtualNetworkGatewayName: string, vpnclientIpsecParams: Models.VpnClientIPsecParameters, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        virtualNetworkGatewayName,
-        vpnclientIpsecParams,
-        options
-      },
-      beginSetVpnclientIpsecParametersOperationSpec,
-      options);
-  }
-
-  /**
-   * The Get VpnclientIpsecParameters operation retrieves information about the vpnclient ipsec
-   * policy for P2S client of virtual network gateway in the specified resource group through Network
-   * resource provider.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The virtual network gateway name.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginGetVpnclientIpsecParameters(resourceGroupName: string, virtualNetworkGatewayName: string, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        virtualNetworkGatewayName,
-        options
-      },
-      beginGetVpnclientIpsecParametersOperationSpec,
-      options);
-  }
-
-  /**
-   * Starts packet capture on virtual network gateway in the specified resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginStartPacketCapture(resourceGroupName: string, virtualNetworkGatewayName: string, options?: Models.VirtualNetworkGatewaysBeginStartPacketCaptureOptionalParams): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        virtualNetworkGatewayName,
-        options
-      },
-      beginStartPacketCaptureOperationSpec,
-      options);
-  }
-
-  /**
-   * Stops packet capture on virtual network gateway in the specified resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param parameters Virtual network gateway packet capture parameters supplied to stop packet
-   * capture on gateway.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginStopPacketCapture(resourceGroupName: string, virtualNetworkGatewayName: string, parameters: Models.VpnPacketCaptureStopParameters, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        virtualNetworkGatewayName,
-        parameters,
-        options
-      },
-      beginStopPacketCaptureOperationSpec,
-      options);
-  }
-
-  /**
-   * Get VPN client connection health detail per P2S client connection of the virtual network gateway
-   * in the specified resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginGetVpnclientConnectionHealth(resourceGroupName: string, virtualNetworkGatewayName: string, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        virtualNetworkGatewayName,
-        options
-      },
-      beginGetVpnclientConnectionHealthOperationSpec,
-      options);
-  }
-
-  /**
-   * Disconnect vpn connections of virtual network gateway in the specified resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkGatewayName The name of the virtual network gateway.
-   * @param request The parameters are supplied to disconnect vpn connections.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginDisconnectVirtualNetworkGatewayVpnConnections(resourceGroupName: string, virtualNetworkGatewayName: string, request: Models.P2SVpnConnectionRequest, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        virtualNetworkGatewayName,
-        request,
-        options
-      },
-      beginDisconnectVirtualNetworkGatewayVpnConnectionsOperationSpec,
       options);
   }
 
@@ -882,73 +547,6 @@ const listConnectionsOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
-const supportedVpnDevicesOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/supportedvpndevices",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkGatewayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "String"
-        }
-      }
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const vpnDeviceConfigurationScriptOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkGatewayConnectionName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.VpnDeviceScriptParameters,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "String"
-        }
-      }
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
 const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
   httpMethod: "PUT",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}",
@@ -1009,39 +607,6 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
-const beginUpdateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkGatewayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.VirtualNetworkGateway
-    },
-    202: {},
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
 const beginResetOperationSpec: msRest.OperationSpec = {
   httpMethod: "POST",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/reset",
@@ -1061,30 +626,6 @@ const beginResetOperationSpec: msRest.OperationSpec = {
     200: {
       bodyMapper: Mappers.VirtualNetworkGateway
     },
-    202: {},
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const beginResetVpnClientSharedKeyOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/resetvpnclientsharedkey",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkGatewayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -1272,197 +813,6 @@ const beginGetAdvertisedRoutesOperationSpec: msRest.OperationSpec = {
     200: {
       bodyMapper: Mappers.GatewayRouteListResult
     },
-    202: {},
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const beginSetVpnclientIpsecParametersOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/setvpnclientipsecparameters",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkGatewayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "vpnclientIpsecParams",
-    mapper: {
-      ...Mappers.VpnClientIPsecParameters,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.VpnClientIPsecParameters
-    },
-    202: {},
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const beginGetVpnclientIpsecParametersOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkGatewayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.VpnClientIPsecParameters
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const beginStartPacketCaptureOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startPacketCapture",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkGatewayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: [
-      "options",
-      "parameters"
-    ],
-    mapper: Mappers.VpnPacketCaptureStartParameters
-  },
-  responses: {
-    200: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "String"
-        }
-      }
-    },
-    202: {},
-    default: {
-      bodyMapper: Mappers.ErrorModel
-    }
-  },
-  serializer
-};
-
-const beginStopPacketCaptureOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopPacketCapture",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkGatewayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.VpnPacketCaptureStopParameters,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "String"
-        }
-      }
-    },
-    202: {},
-    default: {
-      bodyMapper: Mappers.ErrorModel
-    }
-  },
-  serializer
-};
-
-const beginGetVpnclientConnectionHealthOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getVpnClientConnectionHealth",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkGatewayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.VpnClientConnectionHealthDetailListResult
-    },
-    202: {},
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const beginDisconnectVirtualNetworkGatewayVpnConnectionsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/disconnectVirtualNetworkGatewayVpnConnections",
-  urlParameters: [
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkGatewayName
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "request",
-    mapper: {
-      ...Mappers.P2SVpnConnectionRequest,
-      required: true
-    }
-  },
-  responses: {
-    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
