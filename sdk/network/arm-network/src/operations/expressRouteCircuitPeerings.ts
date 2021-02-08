@@ -27,7 +27,7 @@ export class ExpressRouteCircuitPeerings {
   }
 
   /**
-   * Deletes the specified peering from the specified express route circuit.
+   * The delete peering operation deletes the specified peering from the ExpressRouteCircuit.
    * @param resourceGroupName The name of the resource group.
    * @param circuitName The name of the express route circuit.
    * @param peeringName The name of the peering.
@@ -40,7 +40,7 @@ export class ExpressRouteCircuitPeerings {
   }
 
   /**
-   * Gets the specified peering for the express route circuit.
+   * The GET peering operation retrieves the specified authorization from the ExpressRouteCircuit.
    * @param resourceGroupName The name of the resource group.
    * @param circuitName The name of the express route circuit.
    * @param peeringName The name of the peering.
@@ -76,12 +76,12 @@ export class ExpressRouteCircuitPeerings {
   }
 
   /**
-   * Creates or updates a peering in the specified express route circuits.
+   * The Put Peering operation creates/updates an peering in the specified ExpressRouteCircuits
    * @param resourceGroupName The name of the resource group.
    * @param circuitName The name of the express route circuit.
    * @param peeringName The name of the peering.
-   * @param peeringParameters Parameters supplied to the create or update express route circuit
-   * peering operation.
+   * @param peeringParameters Parameters supplied to the create/update ExpressRouteCircuit Peering
+   * operation
    * @param [options] The optional parameters
    * @returns Promise<Models.ExpressRouteCircuitPeeringsCreateOrUpdateResponse>
    */
@@ -91,22 +91,22 @@ export class ExpressRouteCircuitPeerings {
   }
 
   /**
-   * Gets all peerings in a specified express route circuit.
+   * The List peering operation retrieves all the peerings in an ExpressRouteCircuit.
    * @param resourceGroupName The name of the resource group.
-   * @param circuitName The name of the express route circuit.
+   * @param circuitName The name of the circuit.
    * @param [options] The optional parameters
    * @returns Promise<Models.ExpressRouteCircuitPeeringsListResponse>
    */
   list(resourceGroupName: string, circuitName: string, options?: msRest.RequestOptionsBase): Promise<Models.ExpressRouteCircuitPeeringsListResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
-   * @param circuitName The name of the express route circuit.
+   * @param circuitName The name of the circuit.
    * @param callback The callback
    */
   list(resourceGroupName: string, circuitName: string, callback: msRest.ServiceCallback<Models.ExpressRouteCircuitPeeringListResult>): void;
   /**
    * @param resourceGroupName The name of the resource group.
-   * @param circuitName The name of the express route circuit.
+   * @param circuitName The name of the circuit.
    * @param options The optional parameters
    * @param callback The callback
    */
@@ -123,7 +123,7 @@ export class ExpressRouteCircuitPeerings {
   }
 
   /**
-   * Deletes the specified peering from the specified express route circuit.
+   * The delete peering operation deletes the specified peering from the ExpressRouteCircuit.
    * @param resourceGroupName The name of the resource group.
    * @param circuitName The name of the express route circuit.
    * @param peeringName The name of the peering.
@@ -143,12 +143,12 @@ export class ExpressRouteCircuitPeerings {
   }
 
   /**
-   * Creates or updates a peering in the specified express route circuits.
+   * The Put Peering operation creates/updates an peering in the specified ExpressRouteCircuits
    * @param resourceGroupName The name of the resource group.
    * @param circuitName The name of the express route circuit.
    * @param peeringName The name of the peering.
-   * @param peeringParameters Parameters supplied to the create or update express route circuit
-   * peering operation.
+   * @param peeringParameters Parameters supplied to the create/update ExpressRouteCircuit Peering
+   * operation
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -166,7 +166,7 @@ export class ExpressRouteCircuitPeerings {
   }
 
   /**
-   * Gets all peerings in a specified express route circuit.
+   * The List peering operation retrieves all the peerings in an ExpressRouteCircuit.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.ExpressRouteCircuitPeeringsListNextResponse>
@@ -206,7 +206,7 @@ const getOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -231,7 +231,7 @@ const listOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -257,7 +257,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -283,7 +283,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -317,7 +317,7 @@ const listNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage

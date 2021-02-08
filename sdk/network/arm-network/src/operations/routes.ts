@@ -27,7 +27,7 @@ export class Routes {
   }
 
   /**
-   * Deletes the specified route from a route table.
+   * The delete route operation deletes the specified route from a route table.
    * @param resourceGroupName The name of the resource group.
    * @param routeTableName The name of the route table.
    * @param routeName The name of the route.
@@ -40,7 +40,7 @@ export class Routes {
   }
 
   /**
-   * Gets the specified route from a route table.
+   * The Get route operation retrieves information about the specified route from the route table.
    * @param resourceGroupName The name of the resource group.
    * @param routeTableName The name of the route table.
    * @param routeName The name of the route.
@@ -76,11 +76,11 @@ export class Routes {
   }
 
   /**
-   * Creates or updates a route in the specified route table.
+   * The Put route operation creates/updates a route in the specified route table
    * @param resourceGroupName The name of the resource group.
    * @param routeTableName The name of the route table.
    * @param routeName The name of the route.
-   * @param routeParameters Parameters supplied to the create or update route operation.
+   * @param routeParameters Parameters supplied to the create/update route operation
    * @param [options] The optional parameters
    * @returns Promise<Models.RoutesCreateOrUpdateResponse>
    */
@@ -90,7 +90,7 @@ export class Routes {
   }
 
   /**
-   * Gets all routes in a route table.
+   * The List network security rule operation retrieves all the routes in a route table.
    * @param resourceGroupName The name of the resource group.
    * @param routeTableName The name of the route table.
    * @param [options] The optional parameters
@@ -122,7 +122,7 @@ export class Routes {
   }
 
   /**
-   * Deletes the specified route from a route table.
+   * The delete route operation deletes the specified route from a route table.
    * @param resourceGroupName The name of the resource group.
    * @param routeTableName The name of the route table.
    * @param routeName The name of the route.
@@ -142,11 +142,11 @@ export class Routes {
   }
 
   /**
-   * Creates or updates a route in the specified route table.
+   * The Put route operation creates/updates a route in the specified route table
    * @param resourceGroupName The name of the resource group.
    * @param routeTableName The name of the route table.
    * @param routeName The name of the route.
-   * @param routeParameters Parameters supplied to the create or update route operation.
+   * @param routeParameters Parameters supplied to the create/update route operation
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -164,7 +164,7 @@ export class Routes {
   }
 
   /**
-   * Gets all routes in a route table.
+   * The List network security rule operation retrieves all the routes in a route table.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.RoutesListNextResponse>
@@ -204,7 +204,7 @@ const getOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -229,7 +229,7 @@ const listOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -255,7 +255,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -281,7 +281,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -315,7 +315,7 @@ const listNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage

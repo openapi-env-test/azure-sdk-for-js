@@ -27,7 +27,7 @@ export class ApplicationGateways {
   }
 
   /**
-   * Deletes the specified application gateway.
+   * The delete application gateway operation deletes the specified application gateway.
    * @param resourceGroupName The name of the resource group.
    * @param applicationGatewayName The name of the application gateway.
    * @param [options] The optional parameters
@@ -39,7 +39,8 @@ export class ApplicationGateways {
   }
 
   /**
-   * Gets the specified application gateway.
+   * The Get application gateway operation retrieves information about the specified application
+   * gateway.
    * @param resourceGroupName The name of the resource group.
    * @param applicationGatewayName The name of the application gateway.
    * @param [options] The optional parameters
@@ -71,10 +72,10 @@ export class ApplicationGateways {
   }
 
   /**
-   * Creates or updates the specified application gateway.
+   * The Put ApplicationGateway operation creates/updates a ApplicationGateway
    * @param resourceGroupName The name of the resource group.
-   * @param applicationGatewayName The name of the application gateway.
-   * @param parameters Parameters supplied to the create or update application gateway operation.
+   * @param applicationGatewayName The name of the ApplicationGateway.
+   * @param parameters Parameters supplied to the create/delete ApplicationGateway operation
    * @param [options] The optional parameters
    * @returns Promise<Models.ApplicationGatewaysCreateOrUpdateResponse>
    */
@@ -84,43 +85,8 @@ export class ApplicationGateways {
   }
 
   /**
-   * Updates the specified application gateway tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param applicationGatewayName The name of the application gateway.
-   * @param parameters Parameters supplied to update application gateway tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ApplicationGatewaysUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, applicationGatewayName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.ApplicationGatewaysUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param applicationGatewayName The name of the application gateway.
-   * @param parameters Parameters supplied to update application gateway tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, applicationGatewayName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.ApplicationGateway>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param applicationGatewayName The name of the application gateway.
-   * @param parameters Parameters supplied to update application gateway tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, applicationGatewayName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ApplicationGateway>): void;
-  updateTags(resourceGroupName: string, applicationGatewayName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ApplicationGateway>, callback?: msRest.ServiceCallback<Models.ApplicationGateway>): Promise<Models.ApplicationGatewaysUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        applicationGatewayName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.ApplicationGatewaysUpdateTagsResponse>;
-  }
-
-  /**
-   * Lists all application gateways in a resource group.
+   * The List ApplicationGateway operation retrieves all the application gateways in a resource
+   * group.
    * @param resourceGroupName The name of the resource group.
    * @param [options] The optional parameters
    * @returns Promise<Models.ApplicationGatewaysListResponse>
@@ -148,7 +114,7 @@ export class ApplicationGateways {
   }
 
   /**
-   * Gets all the application gateways in a subscription.
+   * The List application gateway operation retrieves all the application gateways in a subscription.
    * @param [options] The optional parameters
    * @returns Promise<Models.ApplicationGatewaysListAllResponse>
    */
@@ -172,7 +138,8 @@ export class ApplicationGateways {
   }
 
   /**
-   * Starts the specified application gateway.
+   * The Start ApplicationGateway operation starts application gateway in the specified resource
+   * group through Network resource provider.
    * @param resourceGroupName The name of the resource group.
    * @param applicationGatewayName The name of the application gateway.
    * @param [options] The optional parameters
@@ -184,7 +151,8 @@ export class ApplicationGateways {
   }
 
   /**
-   * Stops the specified application gateway in a resource group.
+   * The STOP ApplicationGateway operation stops application gateway in the specified resource group
+   * through Network resource provider.
    * @param resourceGroupName The name of the resource group.
    * @param applicationGatewayName The name of the application gateway.
    * @param [options] The optional parameters
@@ -196,205 +164,7 @@ export class ApplicationGateways {
   }
 
   /**
-   * Gets the backend health of the specified application gateway in a resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param applicationGatewayName The name of the application gateway.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ApplicationGatewaysBackendHealthResponse>
-   */
-  backendHealth(resourceGroupName: string, applicationGatewayName: string, options?: Models.ApplicationGatewaysBackendHealthOptionalParams): Promise<Models.ApplicationGatewaysBackendHealthResponse> {
-    return this.beginBackendHealth(resourceGroupName,applicationGatewayName,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.ApplicationGatewaysBackendHealthResponse>;
-  }
-
-  /**
-   * Gets the backend health for given combination of backend pool and http setting of the specified
-   * application gateway in a resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param applicationGatewayName The name of the application gateway.
-   * @param probeRequest Request body for on-demand test probe operation.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ApplicationGatewaysBackendHealthOnDemandResponse>
-   */
-  backendHealthOnDemand(resourceGroupName: string, applicationGatewayName: string, probeRequest: Models.ApplicationGatewayOnDemandProbe, options?: Models.ApplicationGatewaysBackendHealthOnDemandOptionalParams): Promise<Models.ApplicationGatewaysBackendHealthOnDemandResponse> {
-    return this.beginBackendHealthOnDemand(resourceGroupName,applicationGatewayName,probeRequest,options)
-      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.ApplicationGatewaysBackendHealthOnDemandResponse>;
-  }
-
-  /**
-   * Lists all available server variables.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ApplicationGatewaysListAvailableServerVariablesResponse>
-   */
-  listAvailableServerVariables(options?: msRest.RequestOptionsBase): Promise<Models.ApplicationGatewaysListAvailableServerVariablesResponse>;
-  /**
-   * @param callback The callback
-   */
-  listAvailableServerVariables(callback: msRest.ServiceCallback<string[]>): void;
-  /**
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listAvailableServerVariables(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<string[]>): void;
-  listAvailableServerVariables(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<string[]>, callback?: msRest.ServiceCallback<string[]>): Promise<Models.ApplicationGatewaysListAvailableServerVariablesResponse> {
-    return this.client.sendOperationRequest(
-      {
-        options
-      },
-      listAvailableServerVariablesOperationSpec,
-      callback) as Promise<Models.ApplicationGatewaysListAvailableServerVariablesResponse>;
-  }
-
-  /**
-   * Lists all available request headers.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ApplicationGatewaysListAvailableRequestHeadersResponse>
-   */
-  listAvailableRequestHeaders(options?: msRest.RequestOptionsBase): Promise<Models.ApplicationGatewaysListAvailableRequestHeadersResponse>;
-  /**
-   * @param callback The callback
-   */
-  listAvailableRequestHeaders(callback: msRest.ServiceCallback<string[]>): void;
-  /**
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listAvailableRequestHeaders(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<string[]>): void;
-  listAvailableRequestHeaders(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<string[]>, callback?: msRest.ServiceCallback<string[]>): Promise<Models.ApplicationGatewaysListAvailableRequestHeadersResponse> {
-    return this.client.sendOperationRequest(
-      {
-        options
-      },
-      listAvailableRequestHeadersOperationSpec,
-      callback) as Promise<Models.ApplicationGatewaysListAvailableRequestHeadersResponse>;
-  }
-
-  /**
-   * Lists all available response headers.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ApplicationGatewaysListAvailableResponseHeadersResponse>
-   */
-  listAvailableResponseHeaders(options?: msRest.RequestOptionsBase): Promise<Models.ApplicationGatewaysListAvailableResponseHeadersResponse>;
-  /**
-   * @param callback The callback
-   */
-  listAvailableResponseHeaders(callback: msRest.ServiceCallback<string[]>): void;
-  /**
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listAvailableResponseHeaders(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<string[]>): void;
-  listAvailableResponseHeaders(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<string[]>, callback?: msRest.ServiceCallback<string[]>): Promise<Models.ApplicationGatewaysListAvailableResponseHeadersResponse> {
-    return this.client.sendOperationRequest(
-      {
-        options
-      },
-      listAvailableResponseHeadersOperationSpec,
-      callback) as Promise<Models.ApplicationGatewaysListAvailableResponseHeadersResponse>;
-  }
-
-  /**
-   * Lists all available web application firewall rule sets.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ApplicationGatewaysListAvailableWafRuleSetsResponse>
-   */
-  listAvailableWafRuleSets(options?: msRest.RequestOptionsBase): Promise<Models.ApplicationGatewaysListAvailableWafRuleSetsResponse>;
-  /**
-   * @param callback The callback
-   */
-  listAvailableWafRuleSets(callback: msRest.ServiceCallback<Models.ApplicationGatewayAvailableWafRuleSetsResult>): void;
-  /**
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listAvailableWafRuleSets(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ApplicationGatewayAvailableWafRuleSetsResult>): void;
-  listAvailableWafRuleSets(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ApplicationGatewayAvailableWafRuleSetsResult>, callback?: msRest.ServiceCallback<Models.ApplicationGatewayAvailableWafRuleSetsResult>): Promise<Models.ApplicationGatewaysListAvailableWafRuleSetsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        options
-      },
-      listAvailableWafRuleSetsOperationSpec,
-      callback) as Promise<Models.ApplicationGatewaysListAvailableWafRuleSetsResponse>;
-  }
-
-  /**
-   * Lists available Ssl options for configuring Ssl policy.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ApplicationGatewaysListAvailableSslOptionsResponse>
-   */
-  listAvailableSslOptions(options?: msRest.RequestOptionsBase): Promise<Models.ApplicationGatewaysListAvailableSslOptionsResponse>;
-  /**
-   * @param callback The callback
-   */
-  listAvailableSslOptions(callback: msRest.ServiceCallback<Models.ApplicationGatewayAvailableSslOptions>): void;
-  /**
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listAvailableSslOptions(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ApplicationGatewayAvailableSslOptions>): void;
-  listAvailableSslOptions(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ApplicationGatewayAvailableSslOptions>, callback?: msRest.ServiceCallback<Models.ApplicationGatewayAvailableSslOptions>): Promise<Models.ApplicationGatewaysListAvailableSslOptionsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        options
-      },
-      listAvailableSslOptionsOperationSpec,
-      callback) as Promise<Models.ApplicationGatewaysListAvailableSslOptionsResponse>;
-  }
-
-  /**
-   * Lists all SSL predefined policies for configuring Ssl policy.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ApplicationGatewaysListAvailableSslPredefinedPoliciesResponse>
-   */
-  listAvailableSslPredefinedPolicies(options?: msRest.RequestOptionsBase): Promise<Models.ApplicationGatewaysListAvailableSslPredefinedPoliciesResponse>;
-  /**
-   * @param callback The callback
-   */
-  listAvailableSslPredefinedPolicies(callback: msRest.ServiceCallback<Models.ApplicationGatewayAvailableSslPredefinedPolicies>): void;
-  /**
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listAvailableSslPredefinedPolicies(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ApplicationGatewayAvailableSslPredefinedPolicies>): void;
-  listAvailableSslPredefinedPolicies(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ApplicationGatewayAvailableSslPredefinedPolicies>, callback?: msRest.ServiceCallback<Models.ApplicationGatewayAvailableSslPredefinedPolicies>): Promise<Models.ApplicationGatewaysListAvailableSslPredefinedPoliciesResponse> {
-    return this.client.sendOperationRequest(
-      {
-        options
-      },
-      listAvailableSslPredefinedPoliciesOperationSpec,
-      callback) as Promise<Models.ApplicationGatewaysListAvailableSslPredefinedPoliciesResponse>;
-  }
-
-  /**
-   * Gets Ssl predefined policy with the specified policy name.
-   * @param predefinedPolicyName Name of Ssl predefined policy.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ApplicationGatewaysGetSslPredefinedPolicyResponse>
-   */
-  getSslPredefinedPolicy(predefinedPolicyName: string, options?: msRest.RequestOptionsBase): Promise<Models.ApplicationGatewaysGetSslPredefinedPolicyResponse>;
-  /**
-   * @param predefinedPolicyName Name of Ssl predefined policy.
-   * @param callback The callback
-   */
-  getSslPredefinedPolicy(predefinedPolicyName: string, callback: msRest.ServiceCallback<Models.ApplicationGatewaySslPredefinedPolicy>): void;
-  /**
-   * @param predefinedPolicyName Name of Ssl predefined policy.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  getSslPredefinedPolicy(predefinedPolicyName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ApplicationGatewaySslPredefinedPolicy>): void;
-  getSslPredefinedPolicy(predefinedPolicyName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ApplicationGatewaySslPredefinedPolicy>, callback?: msRest.ServiceCallback<Models.ApplicationGatewaySslPredefinedPolicy>): Promise<Models.ApplicationGatewaysGetSslPredefinedPolicyResponse> {
-    return this.client.sendOperationRequest(
-      {
-        predefinedPolicyName,
-        options
-      },
-      getSslPredefinedPolicyOperationSpec,
-      callback) as Promise<Models.ApplicationGatewaysGetSslPredefinedPolicyResponse>;
-  }
-
-  /**
-   * Deletes the specified application gateway.
+   * The delete application gateway operation deletes the specified application gateway.
    * @param resourceGroupName The name of the resource group.
    * @param applicationGatewayName The name of the application gateway.
    * @param [options] The optional parameters
@@ -412,10 +182,10 @@ export class ApplicationGateways {
   }
 
   /**
-   * Creates or updates the specified application gateway.
+   * The Put ApplicationGateway operation creates/updates a ApplicationGateway
    * @param resourceGroupName The name of the resource group.
-   * @param applicationGatewayName The name of the application gateway.
-   * @param parameters Parameters supplied to the create or update application gateway operation.
+   * @param applicationGatewayName The name of the ApplicationGateway.
+   * @param parameters Parameters supplied to the create/delete ApplicationGateway operation
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -432,7 +202,8 @@ export class ApplicationGateways {
   }
 
   /**
-   * Starts the specified application gateway.
+   * The Start ApplicationGateway operation starts application gateway in the specified resource
+   * group through Network resource provider.
    * @param resourceGroupName The name of the resource group.
    * @param applicationGatewayName The name of the application gateway.
    * @param [options] The optional parameters
@@ -450,7 +221,8 @@ export class ApplicationGateways {
   }
 
   /**
-   * Stops the specified application gateway in a resource group.
+   * The STOP ApplicationGateway operation stops application gateway in the specified resource group
+   * through Network resource provider.
    * @param resourceGroupName The name of the resource group.
    * @param applicationGatewayName The name of the application gateway.
    * @param [options] The optional parameters
@@ -468,46 +240,8 @@ export class ApplicationGateways {
   }
 
   /**
-   * Gets the backend health of the specified application gateway in a resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param applicationGatewayName The name of the application gateway.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginBackendHealth(resourceGroupName: string, applicationGatewayName: string, options?: Models.ApplicationGatewaysBeginBackendHealthOptionalParams): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        applicationGatewayName,
-        options
-      },
-      beginBackendHealthOperationSpec,
-      options);
-  }
-
-  /**
-   * Gets the backend health for given combination of backend pool and http setting of the specified
-   * application gateway in a resource group.
-   * @param resourceGroupName The name of the resource group.
-   * @param applicationGatewayName The name of the application gateway.
-   * @param probeRequest Request body for on-demand test probe operation.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginBackendHealthOnDemand(resourceGroupName: string, applicationGatewayName: string, probeRequest: Models.ApplicationGatewayOnDemandProbe, options?: Models.ApplicationGatewaysBeginBackendHealthOnDemandOptionalParams): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        applicationGatewayName,
-        probeRequest,
-        options
-      },
-      beginBackendHealthOnDemandOperationSpec,
-      options);
-  }
-
-  /**
-   * Lists all application gateways in a resource group.
+   * The List ApplicationGateway operation retrieves all the application gateways in a resource
+   * group.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.ApplicationGatewaysListNextResponse>
@@ -535,7 +269,7 @@ export class ApplicationGateways {
   }
 
   /**
-   * Gets all the application gateways in a subscription.
+   * The List application gateway operation retrieves all the application gateways in a subscription.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.ApplicationGatewaysListAllNextResponse>
@@ -561,34 +295,6 @@ export class ApplicationGateways {
       listAllNextOperationSpec,
       callback) as Promise<Models.ApplicationGatewaysListAllNextResponse>;
   }
-
-  /**
-   * Lists all SSL predefined policies for configuring Ssl policy.
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.ApplicationGatewaysListAvailableSslPredefinedPoliciesNextResponse>
-   */
-  listAvailableSslPredefinedPoliciesNext(nextPageLink: string, options?: msRest.RequestOptionsBase): Promise<Models.ApplicationGatewaysListAvailableSslPredefinedPoliciesNextResponse>;
-  /**
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param callback The callback
-   */
-  listAvailableSslPredefinedPoliciesNext(nextPageLink: string, callback: msRest.ServiceCallback<Models.ApplicationGatewayAvailableSslPredefinedPolicies>): void;
-  /**
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listAvailableSslPredefinedPoliciesNext(nextPageLink: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ApplicationGatewayAvailableSslPredefinedPolicies>): void;
-  listAvailableSslPredefinedPoliciesNext(nextPageLink: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ApplicationGatewayAvailableSslPredefinedPolicies>, callback?: msRest.ServiceCallback<Models.ApplicationGatewayAvailableSslPredefinedPolicies>): Promise<Models.ApplicationGatewaysListAvailableSslPredefinedPoliciesNextResponse> {
-    return this.client.sendOperationRequest(
-      {
-        nextPageLink,
-        options
-      },
-      listAvailableSslPredefinedPoliciesNextOperationSpec,
-      callback) as Promise<Models.ApplicationGatewaysListAvailableSslPredefinedPoliciesNextResponse>;
-  }
 }
 
 // Operation Specifications
@@ -602,43 +308,11 @@ const getOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
   ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.ApplicationGateway
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.applicationGatewayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
   responses: {
     200: {
       bodyMapper: Mappers.ApplicationGateway
@@ -658,7 +332,7 @@ const listOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -681,7 +355,7 @@ const listAllOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -689,198 +363,6 @@ const listAllOperationSpec: msRest.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.ApplicationGatewayListResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const listAvailableServerVariablesOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableServerVariables",
-  urlParameters: [
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      }
-    },
-    default: {
-      bodyMapper: Mappers.ErrorModel
-    }
-  },
-  serializer
-};
-
-const listAvailableRequestHeadersOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableRequestHeaders",
-  urlParameters: [
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      }
-    },
-    default: {
-      bodyMapper: Mappers.ErrorModel
-    }
-  },
-  serializer
-};
-
-const listAvailableResponseHeadersOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableResponseHeaders",
-  urlParameters: [
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: {
-        serializedName: "parsedResponse",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      }
-    },
-    default: {
-      bodyMapper: Mappers.ErrorModel
-    }
-  },
-  serializer
-};
-
-const listAvailableWafRuleSetsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets",
-  urlParameters: [
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.ApplicationGatewayAvailableWafRuleSetsResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const listAvailableSslOptionsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default",
-  urlParameters: [
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.ApplicationGatewayAvailableSslOptions
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const listAvailableSslPredefinedPoliciesOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies",
-  urlParameters: [
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.ApplicationGatewayAvailableSslPredefinedPolicies
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const getSslPredefinedPolicyOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies/{predefinedPolicyName}",
-  urlParameters: [
-    Parameters.subscriptionId,
-    Parameters.predefinedPolicyName
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.ApplicationGatewaySslPredefinedPolicy
     },
     default: {
       bodyMapper: Mappers.CloudError
@@ -898,7 +380,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -923,7 +405,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -958,13 +440,12 @@ const beginStartOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
   ],
   responses: {
-    200: {},
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -982,74 +463,13 @@ const beginStopOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
   ],
   responses: {
     200: {},
-    202: {},
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const beginBackendHealthOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/backendhealth",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.applicationGatewayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0,
-    Parameters.expand
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.ApplicationGatewayBackendHealth
-    },
-    202: {},
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const beginBackendHealthOnDemandOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/getBackendHealthOnDemand",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.applicationGatewayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0,
-    Parameters.expand
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "probeRequest",
-    mapper: {
-      ...Mappers.ApplicationGatewayOnDemandProbe,
-      required: true
-    }
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.ApplicationGatewayBackendHealthOnDemand
-    },
     202: {},
     default: {
       bodyMapper: Mappers.CloudError
@@ -1066,7 +486,7 @@ const listNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -1090,7 +510,7 @@ const listAllNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -1098,30 +518,6 @@ const listAllNextOperationSpec: msRest.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.ApplicationGatewayListResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const listAvailableSslPredefinedPoliciesNextOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  baseUrl: "https://management.azure.com",
-  path: "{nextLink}",
-  urlParameters: [
-    Parameters.nextPageLink
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.ApplicationGatewayAvailableSslPredefinedPolicies
     },
     default: {
       bodyMapper: Mappers.CloudError

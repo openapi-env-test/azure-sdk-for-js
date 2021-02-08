@@ -27,7 +27,7 @@ export class SecurityRules {
   }
 
   /**
-   * Deletes the specified network security rule.
+   * The delete network security rule operation deletes the specified network security rule.
    * @param resourceGroupName The name of the resource group.
    * @param networkSecurityGroupName The name of the network security group.
    * @param securityRuleName The name of the security rule.
@@ -40,7 +40,8 @@ export class SecurityRules {
   }
 
   /**
-   * Get the specified network security rule.
+   * The Get NetworkSecurityRule operation retrieves information about the specified network security
+   * rule.
    * @param resourceGroupName The name of the resource group.
    * @param networkSecurityGroupName The name of the network security group.
    * @param securityRuleName The name of the security rule.
@@ -76,12 +77,13 @@ export class SecurityRules {
   }
 
   /**
-   * Creates or updates a security rule in the specified network security group.
+   * The Put network security rule operation creates/updates a security rule in the specified network
+   * security group
    * @param resourceGroupName The name of the resource group.
    * @param networkSecurityGroupName The name of the network security group.
    * @param securityRuleName The name of the security rule.
-   * @param securityRuleParameters Parameters supplied to the create or update network security rule
-   * operation.
+   * @param securityRuleParameters Parameters supplied to the create/update network security rule
+   * operation
    * @param [options] The optional parameters
    * @returns Promise<Models.SecurityRulesCreateOrUpdateResponse>
    */
@@ -91,7 +93,8 @@ export class SecurityRules {
   }
 
   /**
-   * Gets all security rules in a network security group.
+   * The List network security rule operation retrieves all the security rules in a network security
+   * group.
    * @param resourceGroupName The name of the resource group.
    * @param networkSecurityGroupName The name of the network security group.
    * @param [options] The optional parameters
@@ -123,7 +126,7 @@ export class SecurityRules {
   }
 
   /**
-   * Deletes the specified network security rule.
+   * The delete network security rule operation deletes the specified network security rule.
    * @param resourceGroupName The name of the resource group.
    * @param networkSecurityGroupName The name of the network security group.
    * @param securityRuleName The name of the security rule.
@@ -143,12 +146,13 @@ export class SecurityRules {
   }
 
   /**
-   * Creates or updates a security rule in the specified network security group.
+   * The Put network security rule operation creates/updates a security rule in the specified network
+   * security group
    * @param resourceGroupName The name of the resource group.
    * @param networkSecurityGroupName The name of the network security group.
    * @param securityRuleName The name of the security rule.
-   * @param securityRuleParameters Parameters supplied to the create or update network security rule
-   * operation.
+   * @param securityRuleParameters Parameters supplied to the create/update network security rule
+   * operation
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -166,7 +170,8 @@ export class SecurityRules {
   }
 
   /**
-   * Gets all security rules in a network security group.
+   * The List network security rule operation retrieves all the security rules in a network security
+   * group.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.SecurityRulesListNextResponse>
@@ -206,7 +211,7 @@ const getOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -231,7 +236,7 @@ const listOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -257,7 +262,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -283,7 +288,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -317,7 +322,7 @@ const listNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage

@@ -27,7 +27,8 @@ export class ExpressRouteCircuitAuthorizations {
   }
 
   /**
-   * Deletes the specified authorization from the specified express route circuit.
+   * The delete authorization operation deletes the specified authorization from the specified
+   * ExpressRouteCircuit.
    * @param resourceGroupName The name of the resource group.
    * @param circuitName The name of the express route circuit.
    * @param authorizationName The name of the authorization.
@@ -40,7 +41,8 @@ export class ExpressRouteCircuitAuthorizations {
   }
 
   /**
-   * Gets the specified authorization from the specified express route circuit.
+   * The GET authorization operation retrieves the specified authorization from the specified
+   * ExpressRouteCircuit.
    * @param resourceGroupName The name of the resource group.
    * @param circuitName The name of the express route circuit.
    * @param authorizationName The name of the authorization.
@@ -76,12 +78,13 @@ export class ExpressRouteCircuitAuthorizations {
   }
 
   /**
-   * Creates or updates an authorization in the specified express route circuit.
+   * The Put Authorization operation creates/updates an authorization in the specified
+   * ExpressRouteCircuits
    * @param resourceGroupName The name of the resource group.
    * @param circuitName The name of the express route circuit.
    * @param authorizationName The name of the authorization.
-   * @param authorizationParameters Parameters supplied to the create or update express route circuit
-   * authorization operation.
+   * @param authorizationParameters Parameters supplied to the create/update
+   * ExpressRouteCircuitAuthorization operation
    * @param [options] The optional parameters
    * @returns Promise<Models.ExpressRouteCircuitAuthorizationsCreateOrUpdateResponse>
    */
@@ -91,7 +94,7 @@ export class ExpressRouteCircuitAuthorizations {
   }
 
   /**
-   * Gets all authorizations in an express route circuit.
+   * The List authorization operation retrieves all the authorizations in an ExpressRouteCircuit.
    * @param resourceGroupName The name of the resource group.
    * @param circuitName The name of the circuit.
    * @param [options] The optional parameters
@@ -123,7 +126,8 @@ export class ExpressRouteCircuitAuthorizations {
   }
 
   /**
-   * Deletes the specified authorization from the specified express route circuit.
+   * The delete authorization operation deletes the specified authorization from the specified
+   * ExpressRouteCircuit.
    * @param resourceGroupName The name of the resource group.
    * @param circuitName The name of the express route circuit.
    * @param authorizationName The name of the authorization.
@@ -143,12 +147,13 @@ export class ExpressRouteCircuitAuthorizations {
   }
 
   /**
-   * Creates or updates an authorization in the specified express route circuit.
+   * The Put Authorization operation creates/updates an authorization in the specified
+   * ExpressRouteCircuits
    * @param resourceGroupName The name of the resource group.
    * @param circuitName The name of the express route circuit.
    * @param authorizationName The name of the authorization.
-   * @param authorizationParameters Parameters supplied to the create or update express route circuit
-   * authorization operation.
+   * @param authorizationParameters Parameters supplied to the create/update
+   * ExpressRouteCircuitAuthorization operation
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -166,7 +171,7 @@ export class ExpressRouteCircuitAuthorizations {
   }
 
   /**
-   * Gets all authorizations in an express route circuit.
+   * The List authorization operation retrieves all the authorizations in an ExpressRouteCircuit.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.ExpressRouteCircuitAuthorizationsListNextResponse>
@@ -206,7 +211,7 @@ const getOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -231,7 +236,7 @@ const listOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -257,7 +262,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -283,7 +288,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -317,7 +322,7 @@ const listNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage

@@ -27,7 +27,7 @@ export class Subnets {
   }
 
   /**
-   * Deletes the specified subnet.
+   * The delete subnet operation deletes the specified subnet.
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
    * @param subnetName The name of the subnet.
@@ -40,14 +40,14 @@ export class Subnets {
   }
 
   /**
-   * Gets the specified subnet by virtual network and resource group.
+   * The Get subnet operation retrieves information about the specified subnet.
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
    * @param subnetName The name of the subnet.
    * @param [options] The optional parameters
    * @returns Promise<Models.SubnetsGetResponse>
    */
-  get(resourceGroupName: string, virtualNetworkName: string, subnetName: string, options?: Models.SubnetsGetOptionalParams): Promise<Models.SubnetsGetResponse>;
+  get(resourceGroupName: string, virtualNetworkName: string, subnetName: string, options?: msRest.RequestOptionsBase): Promise<Models.SubnetsGetResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
@@ -62,8 +62,8 @@ export class Subnets {
    * @param options The optional parameters
    * @param callback The callback
    */
-  get(resourceGroupName: string, virtualNetworkName: string, subnetName: string, options: Models.SubnetsGetOptionalParams, callback: msRest.ServiceCallback<Models.Subnet>): void;
-  get(resourceGroupName: string, virtualNetworkName: string, subnetName: string, options?: Models.SubnetsGetOptionalParams | msRest.ServiceCallback<Models.Subnet>, callback?: msRest.ServiceCallback<Models.Subnet>): Promise<Models.SubnetsGetResponse> {
+  get(resourceGroupName: string, virtualNetworkName: string, subnetName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.Subnet>): void;
+  get(resourceGroupName: string, virtualNetworkName: string, subnetName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.Subnet>, callback?: msRest.ServiceCallback<Models.Subnet>): Promise<Models.SubnetsGetResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
@@ -76,11 +76,11 @@ export class Subnets {
   }
 
   /**
-   * Creates or updates a subnet in the specified virtual network.
+   * The Put Subnet operation creates/updates a subnet in the specified virtual network
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
    * @param subnetName The name of the subnet.
-   * @param subnetParameters Parameters supplied to the create or update subnet operation.
+   * @param subnetParameters Parameters supplied to the create/update Subnet operation
    * @param [options] The optional parameters
    * @returns Promise<Models.SubnetsCreateOrUpdateResponse>
    */
@@ -90,37 +90,7 @@ export class Subnets {
   }
 
   /**
-   * Prepares a subnet by applying network intent policies.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param subnetName The name of the subnet.
-   * @param prepareNetworkPoliciesRequestParameters Parameters supplied to prepare subnet by applying
-   * network intent policies.
-   * @param [options] The optional parameters
-   * @returns Promise<msRest.RestResponse>
-   */
-  prepareNetworkPolicies(resourceGroupName: string, virtualNetworkName: string, subnetName: string, prepareNetworkPoliciesRequestParameters: Models.PrepareNetworkPoliciesRequest, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
-    return this.beginPrepareNetworkPolicies(resourceGroupName,virtualNetworkName,subnetName,prepareNetworkPoliciesRequestParameters,options)
-      .then(lroPoller => lroPoller.pollUntilFinished());
-  }
-
-  /**
-   * Unprepares a subnet by removing network intent policies.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param subnetName The name of the subnet.
-   * @param unprepareNetworkPoliciesRequestParameters Parameters supplied to unprepare subnet to
-   * remove network intent policies.
-   * @param [options] The optional parameters
-   * @returns Promise<msRest.RestResponse>
-   */
-  unprepareNetworkPolicies(resourceGroupName: string, virtualNetworkName: string, subnetName: string, unprepareNetworkPoliciesRequestParameters: Models.UnprepareNetworkPoliciesRequest, options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse> {
-    return this.beginUnprepareNetworkPolicies(resourceGroupName,virtualNetworkName,subnetName,unprepareNetworkPoliciesRequestParameters,options)
-      .then(lroPoller => lroPoller.pollUntilFinished());
-  }
-
-  /**
-   * Gets all subnets in a virtual network.
+   * The List subnets operation retrieves all the subnets in a virtual network.
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
    * @param [options] The optional parameters
@@ -152,7 +122,7 @@ export class Subnets {
   }
 
   /**
-   * Deletes the specified subnet.
+   * The delete subnet operation deletes the specified subnet.
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
    * @param subnetName The name of the subnet.
@@ -172,11 +142,11 @@ export class Subnets {
   }
 
   /**
-   * Creates or updates a subnet in the specified virtual network.
+   * The Put Subnet operation creates/updates a subnet in the specified virtual network
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
    * @param subnetName The name of the subnet.
-   * @param subnetParameters Parameters supplied to the create or update subnet operation.
+   * @param subnetParameters Parameters supplied to the create/update Subnet operation
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -194,53 +164,7 @@ export class Subnets {
   }
 
   /**
-   * Prepares a subnet by applying network intent policies.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param subnetName The name of the subnet.
-   * @param prepareNetworkPoliciesRequestParameters Parameters supplied to prepare subnet by applying
-   * network intent policies.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginPrepareNetworkPolicies(resourceGroupName: string, virtualNetworkName: string, subnetName: string, prepareNetworkPoliciesRequestParameters: Models.PrepareNetworkPoliciesRequest, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        virtualNetworkName,
-        subnetName,
-        prepareNetworkPoliciesRequestParameters,
-        options
-      },
-      beginPrepareNetworkPoliciesOperationSpec,
-      options);
-  }
-
-  /**
-   * Unprepares a subnet by removing network intent policies.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param subnetName The name of the subnet.
-   * @param unprepareNetworkPoliciesRequestParameters Parameters supplied to unprepare subnet to
-   * remove network intent policies.
-   * @param [options] The optional parameters
-   * @returns Promise<msRestAzure.LROPoller>
-   */
-  beginUnprepareNetworkPolicies(resourceGroupName: string, virtualNetworkName: string, subnetName: string, unprepareNetworkPoliciesRequestParameters: Models.UnprepareNetworkPoliciesRequest, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
-    return this.client.sendLRORequest(
-      {
-        resourceGroupName,
-        virtualNetworkName,
-        subnetName,
-        unprepareNetworkPoliciesRequestParameters,
-        options
-      },
-      beginUnprepareNetworkPoliciesOperationSpec,
-      options);
-  }
-
-  /**
-   * Gets all subnets in a virtual network.
+   * The List subnets operation retrieves all the subnets in a virtual network.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.SubnetsListNextResponse>
@@ -272,7 +196,7 @@ export class Subnets {
 const serializer = new msRest.Serializer(Mappers);
 const getOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}/subnets/{subnetName}",
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.virtualNetworkName,
@@ -280,8 +204,7 @@ const getOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0,
-    Parameters.expand
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -299,14 +222,14 @@ const getOperationSpec: msRest.OperationSpec = {
 
 const listOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}/subnets",
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.virtualNetworkName,
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -324,7 +247,7 @@ const listOperationSpec: msRest.OperationSpec = {
 
 const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
   httpMethod: "DELETE",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}/subnets/{subnetName}",
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.virtualNetworkName,
@@ -332,7 +255,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -350,7 +273,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
 
 const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
   httpMethod: "PUT",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}/subnets/{subnetName}",
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.virtualNetworkName,
@@ -358,7 +281,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -384,70 +307,6 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
-const beginPrepareNetworkPoliciesOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/PrepareNetworkPolicies",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkName,
-    Parameters.subnetName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "prepareNetworkPoliciesRequestParameters",
-    mapper: {
-      ...Mappers.PrepareNetworkPoliciesRequest,
-      required: true
-    }
-  },
-  responses: {
-    200: {},
-    202: {},
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const beginUnprepareNetworkPoliciesOperationSpec: msRest.OperationSpec = {
-  httpMethod: "POST",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/UnprepareNetworkPolicies",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkName,
-    Parameters.subnetName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "unprepareNetworkPoliciesRequestParameters",
-    mapper: {
-      ...Mappers.UnprepareNetworkPoliciesRequest,
-      required: true
-    }
-  },
-  responses: {
-    200: {},
-    202: {},
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
 const listNextOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
   baseUrl: "https://management.azure.com",
@@ -456,7 +315,7 @@ const listNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage

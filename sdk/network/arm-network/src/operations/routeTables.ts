@@ -27,7 +27,7 @@ export class RouteTables {
   }
 
   /**
-   * Deletes the specified route table.
+   * The Delete RouteTable operation deletes the specified Route Table
    * @param resourceGroupName The name of the resource group.
    * @param routeTableName The name of the route table.
    * @param [options] The optional parameters
@@ -39,13 +39,13 @@ export class RouteTables {
   }
 
   /**
-   * Gets the specified route table.
+   * The Get RouteTables operation retrieves information about the specified route table.
    * @param resourceGroupName The name of the resource group.
    * @param routeTableName The name of the route table.
    * @param [options] The optional parameters
    * @returns Promise<Models.RouteTablesGetResponse>
    */
-  get(resourceGroupName: string, routeTableName: string, options?: Models.RouteTablesGetOptionalParams): Promise<Models.RouteTablesGetResponse>;
+  get(resourceGroupName: string, routeTableName: string, options?: msRest.RequestOptionsBase): Promise<Models.RouteTablesGetResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param routeTableName The name of the route table.
@@ -58,8 +58,8 @@ export class RouteTables {
    * @param options The optional parameters
    * @param callback The callback
    */
-  get(resourceGroupName: string, routeTableName: string, options: Models.RouteTablesGetOptionalParams, callback: msRest.ServiceCallback<Models.RouteTable>): void;
-  get(resourceGroupName: string, routeTableName: string, options?: Models.RouteTablesGetOptionalParams | msRest.ServiceCallback<Models.RouteTable>, callback?: msRest.ServiceCallback<Models.RouteTable>): Promise<Models.RouteTablesGetResponse> {
+  get(resourceGroupName: string, routeTableName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.RouteTable>): void;
+  get(resourceGroupName: string, routeTableName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.RouteTable>, callback?: msRest.ServiceCallback<Models.RouteTable>): Promise<Models.RouteTablesGetResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
@@ -71,10 +71,10 @@ export class RouteTables {
   }
 
   /**
-   * Create or updates a route table in a specified resource group.
+   * The Put RouteTable operation creates/updates a route table in the specified resource group.
    * @param resourceGroupName The name of the resource group.
    * @param routeTableName The name of the route table.
-   * @param parameters Parameters supplied to the create or update route table operation.
+   * @param parameters Parameters supplied to the create/update Route Table operation
    * @param [options] The optional parameters
    * @returns Promise<Models.RouteTablesCreateOrUpdateResponse>
    */
@@ -84,43 +84,7 @@ export class RouteTables {
   }
 
   /**
-   * Updates a route table tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param routeTableName The name of the route table.
-   * @param parameters Parameters supplied to update route table tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.RouteTablesUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, routeTableName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.RouteTablesUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param routeTableName The name of the route table.
-   * @param parameters Parameters supplied to update route table tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, routeTableName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.RouteTable>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param routeTableName The name of the route table.
-   * @param parameters Parameters supplied to update route table tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, routeTableName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.RouteTable>): void;
-  updateTags(resourceGroupName: string, routeTableName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.RouteTable>, callback?: msRest.ServiceCallback<Models.RouteTable>): Promise<Models.RouteTablesUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        routeTableName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.RouteTablesUpdateTagsResponse>;
-  }
-
-  /**
-   * Gets all route tables in a resource group.
+   * The list RouteTables returns all route tables in a resource group
    * @param resourceGroupName The name of the resource group.
    * @param [options] The optional parameters
    * @returns Promise<Models.RouteTablesListResponse>
@@ -148,7 +112,7 @@ export class RouteTables {
   }
 
   /**
-   * Gets all route tables in a subscription.
+   * The list RouteTables returns all route tables in a subscription
    * @param [options] The optional parameters
    * @returns Promise<Models.RouteTablesListAllResponse>
    */
@@ -172,7 +136,7 @@ export class RouteTables {
   }
 
   /**
-   * Deletes the specified route table.
+   * The Delete RouteTable operation deletes the specified Route Table
    * @param resourceGroupName The name of the resource group.
    * @param routeTableName The name of the route table.
    * @param [options] The optional parameters
@@ -190,10 +154,10 @@ export class RouteTables {
   }
 
   /**
-   * Create or updates a route table in a specified resource group.
+   * The Put RouteTable operation creates/updates a route table in the specified resource group.
    * @param resourceGroupName The name of the resource group.
    * @param routeTableName The name of the route table.
-   * @param parameters Parameters supplied to the create or update route table operation.
+   * @param parameters Parameters supplied to the create/update Route Table operation
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -210,7 +174,7 @@ export class RouteTables {
   }
 
   /**
-   * Gets all route tables in a resource group.
+   * The list RouteTables returns all route tables in a resource group
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.RouteTablesListNextResponse>
@@ -238,7 +202,7 @@ export class RouteTables {
   }
 
   /**
-   * Gets all route tables in a subscription.
+   * The list RouteTables returns all route tables in a subscription
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.RouteTablesListAllNextResponse>
@@ -277,44 +241,11 @@ const getOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0,
-    Parameters.expand
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
   ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.RouteTable
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeTables/{routeTableName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.routeTableName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
   responses: {
     200: {
       bodyMapper: Mappers.RouteTable
@@ -334,7 +265,7 @@ const listOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -357,7 +288,7 @@ const listAllOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -382,7 +313,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -407,7 +338,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -441,7 +372,7 @@ const listNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -465,7 +396,7 @@ const listAllNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage

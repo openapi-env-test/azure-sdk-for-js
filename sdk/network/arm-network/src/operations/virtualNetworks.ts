@@ -27,7 +27,7 @@ export class VirtualNetworks {
   }
 
   /**
-   * Deletes the specified virtual network.
+   * The Delete VirtualNetwork operation deletes the specified virtual network
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
    * @param [options] The optional parameters
@@ -39,13 +39,13 @@ export class VirtualNetworks {
   }
 
   /**
-   * Gets the specified virtual network by resource group.
+   * The Get VirtualNetwork operation retrieves information about the specified virtual network.
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
    * @param [options] The optional parameters
    * @returns Promise<Models.VirtualNetworksGetResponse>
    */
-  get(resourceGroupName: string, virtualNetworkName: string, options?: Models.VirtualNetworksGetOptionalParams): Promise<Models.VirtualNetworksGetResponse>;
+  get(resourceGroupName: string, virtualNetworkName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworksGetResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
@@ -58,8 +58,8 @@ export class VirtualNetworks {
    * @param options The optional parameters
    * @param callback The callback
    */
-  get(resourceGroupName: string, virtualNetworkName: string, options: Models.VirtualNetworksGetOptionalParams, callback: msRest.ServiceCallback<Models.VirtualNetwork>): void;
-  get(resourceGroupName: string, virtualNetworkName: string, options?: Models.VirtualNetworksGetOptionalParams | msRest.ServiceCallback<Models.VirtualNetwork>, callback?: msRest.ServiceCallback<Models.VirtualNetwork>): Promise<Models.VirtualNetworksGetResponse> {
+  get(resourceGroupName: string, virtualNetworkName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.VirtualNetwork>): void;
+  get(resourceGroupName: string, virtualNetworkName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.VirtualNetwork>, callback?: msRest.ServiceCallback<Models.VirtualNetwork>): Promise<Models.VirtualNetworksGetResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
@@ -71,10 +71,11 @@ export class VirtualNetworks {
   }
 
   /**
-   * Creates or updates a virtual network in the specified resource group.
+   * The Put VirtualNetwork operation creates/updates a virtual network in the specified resource
+   * group.
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
-   * @param parameters Parameters supplied to the create or update virtual network operation.
+   * @param parameters Parameters supplied to the create/update Virtual Network operation
    * @param [options] The optional parameters
    * @returns Promise<Models.VirtualNetworksCreateOrUpdateResponse>
    */
@@ -84,43 +85,7 @@ export class VirtualNetworks {
   }
 
   /**
-   * Updates a virtual network tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param parameters Parameters supplied to update virtual network tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworksUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, virtualNetworkName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworksUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param parameters Parameters supplied to update virtual network tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, virtualNetworkName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.VirtualNetwork>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param parameters Parameters supplied to update virtual network tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, virtualNetworkName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.VirtualNetwork>): void;
-  updateTags(resourceGroupName: string, virtualNetworkName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.VirtualNetwork>, callback?: msRest.ServiceCallback<Models.VirtualNetwork>): Promise<Models.VirtualNetworksUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        virtualNetworkName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.VirtualNetworksUpdateTagsResponse>;
-  }
-
-  /**
-   * Gets all virtual networks in a subscription.
+   * The list VirtualNetwork returns all Virtual Networks in a subscription
    * @param [options] The optional parameters
    * @returns Promise<Models.VirtualNetworksListAllResponse>
    */
@@ -144,7 +109,7 @@ export class VirtualNetworks {
   }
 
   /**
-   * Gets all virtual networks in a resource group.
+   * The list VirtualNetwork returns all Virtual Networks in a resource group
    * @param resourceGroupName The name of the resource group.
    * @param [options] The optional parameters
    * @returns Promise<Models.VirtualNetworksListResponse>
@@ -172,75 +137,7 @@ export class VirtualNetworks {
   }
 
   /**
-   * Checks whether a private IP address is available for use.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param ipAddress The private IP address to be verified.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworksCheckIPAddressAvailabilityResponse>
-   */
-  checkIPAddressAvailability(resourceGroupName: string, virtualNetworkName: string, ipAddress: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworksCheckIPAddressAvailabilityResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param ipAddress The private IP address to be verified.
-   * @param callback The callback
-   */
-  checkIPAddressAvailability(resourceGroupName: string, virtualNetworkName: string, ipAddress: string, callback: msRest.ServiceCallback<Models.IPAddressAvailabilityResult>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param ipAddress The private IP address to be verified.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  checkIPAddressAvailability(resourceGroupName: string, virtualNetworkName: string, ipAddress: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.IPAddressAvailabilityResult>): void;
-  checkIPAddressAvailability(resourceGroupName: string, virtualNetworkName: string, ipAddress: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.IPAddressAvailabilityResult>, callback?: msRest.ServiceCallback<Models.IPAddressAvailabilityResult>): Promise<Models.VirtualNetworksCheckIPAddressAvailabilityResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        virtualNetworkName,
-        ipAddress,
-        options
-      },
-      checkIPAddressAvailabilityOperationSpec,
-      callback) as Promise<Models.VirtualNetworksCheckIPAddressAvailabilityResponse>;
-  }
-
-  /**
-   * Lists usage stats.
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworksListUsageResponse>
-   */
-  listUsage(resourceGroupName: string, virtualNetworkName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworksListUsageResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param callback The callback
-   */
-  listUsage(resourceGroupName: string, virtualNetworkName: string, callback: msRest.ServiceCallback<Models.VirtualNetworkListUsageResult>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param virtualNetworkName The name of the virtual network.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listUsage(resourceGroupName: string, virtualNetworkName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.VirtualNetworkListUsageResult>): void;
-  listUsage(resourceGroupName: string, virtualNetworkName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.VirtualNetworkListUsageResult>, callback?: msRest.ServiceCallback<Models.VirtualNetworkListUsageResult>): Promise<Models.VirtualNetworksListUsageResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        virtualNetworkName,
-        options
-      },
-      listUsageOperationSpec,
-      callback) as Promise<Models.VirtualNetworksListUsageResponse>;
-  }
-
-  /**
-   * Deletes the specified virtual network.
+   * The Delete VirtualNetwork operation deletes the specified virtual network
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
    * @param [options] The optional parameters
@@ -258,10 +155,11 @@ export class VirtualNetworks {
   }
 
   /**
-   * Creates or updates a virtual network in the specified resource group.
+   * The Put VirtualNetwork operation creates/updates a virtual network in the specified resource
+   * group.
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
-   * @param parameters Parameters supplied to the create or update virtual network operation.
+   * @param parameters Parameters supplied to the create/update Virtual Network operation
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -278,7 +176,7 @@ export class VirtualNetworks {
   }
 
   /**
-   * Gets all virtual networks in a subscription.
+   * The list VirtualNetwork returns all Virtual Networks in a subscription
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.VirtualNetworksListAllNextResponse>
@@ -306,7 +204,7 @@ export class VirtualNetworks {
   }
 
   /**
-   * Gets all virtual networks in a resource group.
+   * The list VirtualNetwork returns all Virtual Networks in a resource group
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.VirtualNetworksListNextResponse>
@@ -332,85 +230,24 @@ export class VirtualNetworks {
       listNextOperationSpec,
       callback) as Promise<Models.VirtualNetworksListNextResponse>;
   }
-
-  /**
-   * Lists usage stats.
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.VirtualNetworksListUsageNextResponse>
-   */
-  listUsageNext(nextPageLink: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworksListUsageNextResponse>;
-  /**
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param callback The callback
-   */
-  listUsageNext(nextPageLink: string, callback: msRest.ServiceCallback<Models.VirtualNetworkListUsageResult>): void;
-  /**
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listUsageNext(nextPageLink: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.VirtualNetworkListUsageResult>): void;
-  listUsageNext(nextPageLink: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.VirtualNetworkListUsageResult>, callback?: msRest.ServiceCallback<Models.VirtualNetworkListUsageResult>): Promise<Models.VirtualNetworksListUsageNextResponse> {
-    return this.client.sendOperationRequest(
-      {
-        nextPageLink,
-        options
-      },
-      listUsageNextOperationSpec,
-      callback) as Promise<Models.VirtualNetworksListUsageNextResponse>;
-  }
 }
 
 // Operation Specifications
 const serializer = new msRest.Serializer(Mappers);
 const getOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}",
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.virtualNetworkName,
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0,
-    Parameters.expand
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
   ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.VirtualNetwork
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
   responses: {
     200: {
       bodyMapper: Mappers.VirtualNetwork
@@ -424,12 +261,12 @@ const updateTagsOperationSpec: msRest.OperationSpec = {
 
 const listAllOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualNetworks",
+  path: "subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualnetworks",
   urlParameters: [
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -447,13 +284,13 @@ const listAllOperationSpec: msRest.OperationSpec = {
 
 const listOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks",
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -469,67 +306,16 @@ const listOperationSpec: msRest.OperationSpec = {
   serializer
 };
 
-const checkIPAddressAvailabilityOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/CheckIPAddressAvailability",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.ipAddress,
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.IPAddressAvailabilityResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const listUsageOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/usages",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.virtualNetworkName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.VirtualNetworkListUsageResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
 const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
   httpMethod: "DELETE",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}",
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.virtualNetworkName,
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -547,14 +333,14 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
 
 const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
   httpMethod: "PUT",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}",
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.virtualNetworkName,
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -588,7 +374,7 @@ const listAllNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -612,7 +398,7 @@ const listNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -620,30 +406,6 @@ const listNextOperationSpec: msRest.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.VirtualNetworkListResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const listUsageNextOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  baseUrl: "https://management.azure.com",
-  path: "{nextLink}",
-  urlParameters: [
-    Parameters.nextPageLink
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.VirtualNetworkListUsageResult
     },
     default: {
       bodyMapper: Mappers.CloudError

@@ -26,7 +26,8 @@ export class ExpressRouteServiceProviders {
   }
 
   /**
-   * Gets all the available express route service providers.
+   * The List ExpressRouteServiceProvider operation retrieves all the available
+   * ExpressRouteServiceProviders.
    * @param [options] The optional parameters
    * @returns Promise<Models.ExpressRouteServiceProvidersListResponse>
    */
@@ -50,7 +51,8 @@ export class ExpressRouteServiceProviders {
   }
 
   /**
-   * Gets all the available express route service providers.
+   * The List ExpressRouteServiceProvider operation retrieves all the available
+   * ExpressRouteServiceProviders.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.ExpressRouteServiceProvidersListNextResponse>
@@ -87,7 +89,7 @@ const listOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -111,7 +113,7 @@ const listNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage

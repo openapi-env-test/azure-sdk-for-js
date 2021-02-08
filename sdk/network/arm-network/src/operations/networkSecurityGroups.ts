@@ -27,7 +27,7 @@ export class NetworkSecurityGroups {
   }
 
   /**
-   * Deletes the specified network security group.
+   * The Delete NetworkSecurityGroup operation deletes the specified network security group
    * @param resourceGroupName The name of the resource group.
    * @param networkSecurityGroupName The name of the network security group.
    * @param [options] The optional parameters
@@ -39,13 +39,14 @@ export class NetworkSecurityGroups {
   }
 
   /**
-   * Gets the specified network security group.
+   * The Get NetworkSecurityGroups operation retrieves information about the specified network
+   * security group.
    * @param resourceGroupName The name of the resource group.
    * @param networkSecurityGroupName The name of the network security group.
    * @param [options] The optional parameters
    * @returns Promise<Models.NetworkSecurityGroupsGetResponse>
    */
-  get(resourceGroupName: string, networkSecurityGroupName: string, options?: Models.NetworkSecurityGroupsGetOptionalParams): Promise<Models.NetworkSecurityGroupsGetResponse>;
+  get(resourceGroupName: string, networkSecurityGroupName: string, options?: msRest.RequestOptionsBase): Promise<Models.NetworkSecurityGroupsGetResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
    * @param networkSecurityGroupName The name of the network security group.
@@ -58,8 +59,8 @@ export class NetworkSecurityGroups {
    * @param options The optional parameters
    * @param callback The callback
    */
-  get(resourceGroupName: string, networkSecurityGroupName: string, options: Models.NetworkSecurityGroupsGetOptionalParams, callback: msRest.ServiceCallback<Models.NetworkSecurityGroup>): void;
-  get(resourceGroupName: string, networkSecurityGroupName: string, options?: Models.NetworkSecurityGroupsGetOptionalParams | msRest.ServiceCallback<Models.NetworkSecurityGroup>, callback?: msRest.ServiceCallback<Models.NetworkSecurityGroup>): Promise<Models.NetworkSecurityGroupsGetResponse> {
+  get(resourceGroupName: string, networkSecurityGroupName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.NetworkSecurityGroup>): void;
+  get(resourceGroupName: string, networkSecurityGroupName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.NetworkSecurityGroup>, callback?: msRest.ServiceCallback<Models.NetworkSecurityGroup>): Promise<Models.NetworkSecurityGroupsGetResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
@@ -71,10 +72,11 @@ export class NetworkSecurityGroups {
   }
 
   /**
-   * Creates or updates a network security group in the specified resource group.
+   * The Put NetworkSecurityGroup operation creates/updates a network security group in the specified
+   * resource group.
    * @param resourceGroupName The name of the resource group.
    * @param networkSecurityGroupName The name of the network security group.
-   * @param parameters Parameters supplied to the create or update network security group operation.
+   * @param parameters Parameters supplied to the create/update Network Security Group operation
    * @param [options] The optional parameters
    * @returns Promise<Models.NetworkSecurityGroupsCreateOrUpdateResponse>
    */
@@ -84,43 +86,7 @@ export class NetworkSecurityGroups {
   }
 
   /**
-   * Updates a network security group tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param networkSecurityGroupName The name of the network security group.
-   * @param parameters Parameters supplied to update network security group tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.NetworkSecurityGroupsUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, networkSecurityGroupName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.NetworkSecurityGroupsUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param networkSecurityGroupName The name of the network security group.
-   * @param parameters Parameters supplied to update network security group tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, networkSecurityGroupName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.NetworkSecurityGroup>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param networkSecurityGroupName The name of the network security group.
-   * @param parameters Parameters supplied to update network security group tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, networkSecurityGroupName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.NetworkSecurityGroup>): void;
-  updateTags(resourceGroupName: string, networkSecurityGroupName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.NetworkSecurityGroup>, callback?: msRest.ServiceCallback<Models.NetworkSecurityGroup>): Promise<Models.NetworkSecurityGroupsUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        networkSecurityGroupName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.NetworkSecurityGroupsUpdateTagsResponse>;
-  }
-
-  /**
-   * Gets all network security groups in a subscription.
+   * The list NetworkSecurityGroups returns all network security groups in a subscription
    * @param [options] The optional parameters
    * @returns Promise<Models.NetworkSecurityGroupsListAllResponse>
    */
@@ -144,7 +110,7 @@ export class NetworkSecurityGroups {
   }
 
   /**
-   * Gets all network security groups in a resource group.
+   * The list NetworkSecurityGroups returns all network security groups in a resource group
    * @param resourceGroupName The name of the resource group.
    * @param [options] The optional parameters
    * @returns Promise<Models.NetworkSecurityGroupsListResponse>
@@ -172,7 +138,7 @@ export class NetworkSecurityGroups {
   }
 
   /**
-   * Deletes the specified network security group.
+   * The Delete NetworkSecurityGroup operation deletes the specified network security group
    * @param resourceGroupName The name of the resource group.
    * @param networkSecurityGroupName The name of the network security group.
    * @param [options] The optional parameters
@@ -190,10 +156,11 @@ export class NetworkSecurityGroups {
   }
 
   /**
-   * Creates or updates a network security group in the specified resource group.
+   * The Put NetworkSecurityGroup operation creates/updates a network security group in the specified
+   * resource group.
    * @param resourceGroupName The name of the resource group.
    * @param networkSecurityGroupName The name of the network security group.
-   * @param parameters Parameters supplied to the create or update network security group operation.
+   * @param parameters Parameters supplied to the create/update Network Security Group operation
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -210,7 +177,7 @@ export class NetworkSecurityGroups {
   }
 
   /**
-   * Gets all network security groups in a subscription.
+   * The list NetworkSecurityGroups returns all network security groups in a subscription
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.NetworkSecurityGroupsListAllNextResponse>
@@ -238,7 +205,7 @@ export class NetworkSecurityGroups {
   }
 
   /**
-   * Gets all network security groups in a resource group.
+   * The list NetworkSecurityGroups returns all network security groups in a resource group
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.NetworkSecurityGroupsListNextResponse>
@@ -277,44 +244,11 @@ const getOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0,
-    Parameters.expand
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
   ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.NetworkSecurityGroup
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.networkSecurityGroupName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
   responses: {
     200: {
       bodyMapper: Mappers.NetworkSecurityGroup
@@ -333,7 +267,7 @@ const listAllOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -357,7 +291,7 @@ const listOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -382,7 +316,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -407,7 +341,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -441,7 +375,7 @@ const listAllNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -465,7 +399,7 @@ const listNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage

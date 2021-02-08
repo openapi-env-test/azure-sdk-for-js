@@ -27,10 +27,12 @@ export class LocalNetworkGateways {
   }
 
   /**
-   * Creates or updates a local network gateway in the specified resource group.
+   * The Put LocalNetworkGateway operation creates/updates a local network gateway in the specified
+   * resource group through Network resource provider.
    * @param resourceGroupName The name of the resource group.
    * @param localNetworkGatewayName The name of the local network gateway.
-   * @param parameters Parameters supplied to the create or update local network gateway operation.
+   * @param parameters Parameters supplied to the Begin Create or update Local Network Gateway
+   * operation through Network resource provider.
    * @param [options] The optional parameters
    * @returns Promise<Models.LocalNetworkGatewaysCreateOrUpdateResponse>
    */
@@ -40,7 +42,8 @@ export class LocalNetworkGateways {
   }
 
   /**
-   * Gets the specified local network gateway in a resource group.
+   * The Get LocalNetworkGateway operation retrieves information about the specified local network
+   * gateway through Network resource provider.
    * @param resourceGroupName The name of the resource group.
    * @param localNetworkGatewayName The name of the local network gateway.
    * @param [options] The optional parameters
@@ -72,7 +75,8 @@ export class LocalNetworkGateways {
   }
 
   /**
-   * Deletes the specified local network gateway.
+   * The Delete LocalNetworkGateway operation deletes the specified local network Gateway through
+   * Network resource provider.
    * @param resourceGroupName The name of the resource group.
    * @param localNetworkGatewayName The name of the local network gateway.
    * @param [options] The optional parameters
@@ -84,43 +88,7 @@ export class LocalNetworkGateways {
   }
 
   /**
-   * Updates a local network gateway tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param localNetworkGatewayName The name of the local network gateway.
-   * @param parameters Parameters supplied to update local network gateway tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.LocalNetworkGatewaysUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, localNetworkGatewayName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.LocalNetworkGatewaysUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param localNetworkGatewayName The name of the local network gateway.
-   * @param parameters Parameters supplied to update local network gateway tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, localNetworkGatewayName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.LocalNetworkGateway>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param localNetworkGatewayName The name of the local network gateway.
-   * @param parameters Parameters supplied to update local network gateway tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, localNetworkGatewayName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.LocalNetworkGateway>): void;
-  updateTags(resourceGroupName: string, localNetworkGatewayName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.LocalNetworkGateway>, callback?: msRest.ServiceCallback<Models.LocalNetworkGateway>): Promise<Models.LocalNetworkGatewaysUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        localNetworkGatewayName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.LocalNetworkGatewaysUpdateTagsResponse>;
-  }
-
-  /**
-   * Gets all the local network gateways in a resource group.
+   * The List LocalNetworkGateways operation retrieves all the local network gateways stored.
    * @param resourceGroupName The name of the resource group.
    * @param [options] The optional parameters
    * @returns Promise<Models.LocalNetworkGatewaysListResponse>
@@ -148,10 +116,12 @@ export class LocalNetworkGateways {
   }
 
   /**
-   * Creates or updates a local network gateway in the specified resource group.
+   * The Put LocalNetworkGateway operation creates/updates a local network gateway in the specified
+   * resource group through Network resource provider.
    * @param resourceGroupName The name of the resource group.
    * @param localNetworkGatewayName The name of the local network gateway.
-   * @param parameters Parameters supplied to the create or update local network gateway operation.
+   * @param parameters Parameters supplied to the Begin Create or update Local Network Gateway
+   * operation through Network resource provider.
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -168,7 +138,8 @@ export class LocalNetworkGateways {
   }
 
   /**
-   * Deletes the specified local network gateway.
+   * The Delete LocalNetworkGateway operation deletes the specified local network Gateway through
+   * Network resource provider.
    * @param resourceGroupName The name of the resource group.
    * @param localNetworkGatewayName The name of the local network gateway.
    * @param [options] The optional parameters
@@ -186,7 +157,7 @@ export class LocalNetworkGateways {
   }
 
   /**
-   * Gets all the local network gateways in a resource group.
+   * The List LocalNetworkGateways operation retrieves all the local network gateways stored.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.LocalNetworkGatewaysListNextResponse>
@@ -225,43 +196,11 @@ const getOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
   ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.LocalNetworkGateway
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways/{localNetworkGatewayName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.localNetworkGatewayName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
   responses: {
     200: {
       bodyMapper: Mappers.LocalNetworkGateway
@@ -281,7 +220,7 @@ const listOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -306,7 +245,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -334,14 +273,14 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
 
 const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
   httpMethod: "DELETE",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways/{localNetworkGatewayName}",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways/{localNetworkGatewayName}/",
   urlParameters: [
     Parameters.resourceGroupName,
     Parameters.localNetworkGatewayName,
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -365,7 +304,7 @@ const listNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage

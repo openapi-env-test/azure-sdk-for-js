@@ -27,9 +27,9 @@ export class LoadBalancers {
   }
 
   /**
-   * Deletes the specified load balancer.
+   * The delete loadbalancer operation deletes the specified loadbalancer.
    * @param resourceGroupName The name of the resource group.
-   * @param loadBalancerName The name of the load balancer.
+   * @param loadBalancerName The name of the loadBalancer.
    * @param [options] The optional parameters
    * @returns Promise<msRest.RestResponse>
    */
@@ -39,27 +39,27 @@ export class LoadBalancers {
   }
 
   /**
-   * Gets the specified load balancer.
+   * The Get network interface operation retrieves information about the specified network interface.
    * @param resourceGroupName The name of the resource group.
-   * @param loadBalancerName The name of the load balancer.
+   * @param loadBalancerName The name of the loadBalancer.
    * @param [options] The optional parameters
    * @returns Promise<Models.LoadBalancersGetResponse>
    */
-  get(resourceGroupName: string, loadBalancerName: string, options?: Models.LoadBalancersGetOptionalParams): Promise<Models.LoadBalancersGetResponse>;
+  get(resourceGroupName: string, loadBalancerName: string, options?: msRest.RequestOptionsBase): Promise<Models.LoadBalancersGetResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
-   * @param loadBalancerName The name of the load balancer.
+   * @param loadBalancerName The name of the loadBalancer.
    * @param callback The callback
    */
   get(resourceGroupName: string, loadBalancerName: string, callback: msRest.ServiceCallback<Models.LoadBalancer>): void;
   /**
    * @param resourceGroupName The name of the resource group.
-   * @param loadBalancerName The name of the load balancer.
+   * @param loadBalancerName The name of the loadBalancer.
    * @param options The optional parameters
    * @param callback The callback
    */
-  get(resourceGroupName: string, loadBalancerName: string, options: Models.LoadBalancersGetOptionalParams, callback: msRest.ServiceCallback<Models.LoadBalancer>): void;
-  get(resourceGroupName: string, loadBalancerName: string, options?: Models.LoadBalancersGetOptionalParams | msRest.ServiceCallback<Models.LoadBalancer>, callback?: msRest.ServiceCallback<Models.LoadBalancer>): Promise<Models.LoadBalancersGetResponse> {
+  get(resourceGroupName: string, loadBalancerName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.LoadBalancer>): void;
+  get(resourceGroupName: string, loadBalancerName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.LoadBalancer>, callback?: msRest.ServiceCallback<Models.LoadBalancer>): Promise<Models.LoadBalancersGetResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
@@ -71,10 +71,10 @@ export class LoadBalancers {
   }
 
   /**
-   * Creates or updates a load balancer.
+   * The Put LoadBalancer operation creates/updates a LoadBalancer
    * @param resourceGroupName The name of the resource group.
-   * @param loadBalancerName The name of the load balancer.
-   * @param parameters Parameters supplied to the create or update load balancer operation.
+   * @param loadBalancerName The name of the loadBalancer.
+   * @param parameters Parameters supplied to the create/delete LoadBalancer operation
    * @param [options] The optional parameters
    * @returns Promise<Models.LoadBalancersCreateOrUpdateResponse>
    */
@@ -84,43 +84,7 @@ export class LoadBalancers {
   }
 
   /**
-   * Updates a load balancer tags.
-   * @param resourceGroupName The name of the resource group.
-   * @param loadBalancerName The name of the load balancer.
-   * @param parameters Parameters supplied to update load balancer tags.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.LoadBalancersUpdateTagsResponse>
-   */
-  updateTags(resourceGroupName: string, loadBalancerName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.LoadBalancersUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param loadBalancerName The name of the load balancer.
-   * @param parameters Parameters supplied to update load balancer tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, loadBalancerName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.LoadBalancer>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param loadBalancerName The name of the load balancer.
-   * @param parameters Parameters supplied to update load balancer tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, loadBalancerName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.LoadBalancer>): void;
-  updateTags(resourceGroupName: string, loadBalancerName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.LoadBalancer>, callback?: msRest.ServiceCallback<Models.LoadBalancer>): Promise<Models.LoadBalancersUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        loadBalancerName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.LoadBalancersUpdateTagsResponse>;
-  }
-
-  /**
-   * Gets all the load balancers in a subscription.
+   * The List loadBalancer operation retrieves all the load balancers in a subscription.
    * @param [options] The optional parameters
    * @returns Promise<Models.LoadBalancersListAllResponse>
    */
@@ -144,7 +108,7 @@ export class LoadBalancers {
   }
 
   /**
-   * Gets all the load balancers in a resource group.
+   * The List loadBalancer operation retrieves all the load balancers in a resource group.
    * @param resourceGroupName The name of the resource group.
    * @param [options] The optional parameters
    * @returns Promise<Models.LoadBalancersListResponse>
@@ -172,9 +136,9 @@ export class LoadBalancers {
   }
 
   /**
-   * Deletes the specified load balancer.
+   * The delete loadbalancer operation deletes the specified loadbalancer.
    * @param resourceGroupName The name of the resource group.
-   * @param loadBalancerName The name of the load balancer.
+   * @param loadBalancerName The name of the loadBalancer.
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -190,10 +154,10 @@ export class LoadBalancers {
   }
 
   /**
-   * Creates or updates a load balancer.
+   * The Put LoadBalancer operation creates/updates a LoadBalancer
    * @param resourceGroupName The name of the resource group.
-   * @param loadBalancerName The name of the load balancer.
-   * @param parameters Parameters supplied to the create or update load balancer operation.
+   * @param loadBalancerName The name of the loadBalancer.
+   * @param parameters Parameters supplied to the create/delete LoadBalancer operation
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -210,7 +174,7 @@ export class LoadBalancers {
   }
 
   /**
-   * Gets all the load balancers in a subscription.
+   * The List loadBalancer operation retrieves all the load balancers in a subscription.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.LoadBalancersListAllNextResponse>
@@ -238,7 +202,7 @@ export class LoadBalancers {
   }
 
   /**
-   * Gets all the load balancers in a resource group.
+   * The List loadBalancer operation retrieves all the load balancers in a resource group.
    * @param nextPageLink The NextLink from the previous successful call to List operation.
    * @param [options] The optional parameters
    * @returns Promise<Models.LoadBalancersListNextResponse>
@@ -277,44 +241,11 @@ const getOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0,
-    Parameters.expand
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
   ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.LoadBalancer
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.loadBalancerName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
   responses: {
     200: {
       bodyMapper: Mappers.LoadBalancer
@@ -333,7 +264,7 @@ const listAllOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -357,7 +288,7 @@ const listOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -382,7 +313,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -407,7 +338,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -441,7 +372,7 @@ const listAllNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
@@ -465,7 +396,7 @@ const listNextOperationSpec: msRest.OperationSpec = {
     Parameters.nextPageLink
   ],
   queryParameters: [
-    Parameters.apiVersion0
+    Parameters.apiVersion
   ],
   headerParameters: [
     Parameters.acceptLanguage
