@@ -15,7 +15,7 @@ npm install @azure/arm-appservice
 
 ### How to use
 
-#### nodejs - Authentication, client creation and list appServiceCertificateOrders as an example written in TypeScript.
+#### nodejs - client creation and list appServiceEnvironments as an example written in TypeScript.
 
 ##### Install @azure/ms-rest-nodeauth
 
@@ -26,16 +26,15 @@ npm install @azure/ms-rest-nodeauth@"^3.0.0"
 
 ##### Sample code
 
+While the below sample uses the interactive login, other authentication options can be found in the [README.md file of @azure/ms-rest-nodeauth](https://www.npmjs.com/package/@azure/ms-rest-nodeauth) package
 ```typescript
-import * as msRest from "@azure/ms-rest-js";
-import * as msRestAzure from "@azure/ms-rest-azure-js";
-import * as msRestNodeAuth from "@azure/ms-rest-nodeauth";
-import { WebSiteManagementClient, WebSiteManagementModels, WebSiteManagementMappers } from "@azure/arm-appservice";
+const msRestNodeAuth = require("@azure/ms-rest-nodeauth");
+const { WebSiteManagementClient } = require("@azure/arm-appservice");
 const subscriptionId = process.env["AZURE_SUBSCRIPTION_ID"];
 
 msRestNodeAuth.interactiveLogin().then((creds) => {
   const client = new WebSiteManagementClient(creds, subscriptionId);
-  client.appServiceCertificateOrders.list().then((result) => {
+  client.appServiceEnvironments.list().then((result) => {
     console.log("The result is:");
     console.log(result);
   });
@@ -44,7 +43,7 @@ msRestNodeAuth.interactiveLogin().then((creds) => {
 });
 ```
 
-#### browser - Authentication, client creation and list appServiceCertificateOrders as an example written in JavaScript.
+#### browser - Authentication, client creation and list appServiceEnvironments as an example written in JavaScript.
 
 ##### Install @azure/ms-rest-browserauth
 
@@ -78,7 +77,7 @@ See https://github.com/Azure/ms-rest-browserauth to learn how to authenticate to
           authManager.login();
         }
         const client = new Azure.ArmAppservice.WebSiteManagementClient(res.creds, subscriptionId);
-        client.appServiceCertificateOrders.list().then((result) => {
+        client.appServiceEnvironments.list().then((result) => {
           console.log("The result is:");
           console.log(result);
         }).catch((err) => {
