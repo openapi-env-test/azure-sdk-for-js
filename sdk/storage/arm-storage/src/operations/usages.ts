@@ -26,6 +26,30 @@ export class Usages {
   }
 
   /**
+   * Gets the current usage count and the limit for the resources under the subscription.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.UsagesListResponse>
+   */
+  list(options?: msRest.RequestOptionsBase): Promise<Models.UsagesListResponse>;
+  /**
+   * @param callback The callback
+   */
+  list(callback: msRest.ServiceCallback<Models.UsageListResult>): void;
+  /**
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  list(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.UsageListResult>): void;
+  list(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.UsageListResult>, callback?: msRest.ServiceCallback<Models.UsageListResult>): Promise<Models.UsagesListResponse> {
+    return this.client.sendOperationRequest(
+      {
+        options
+      },
+      listOperationSpec,
+      callback) as Promise<Models.UsagesListResponse>;
+  }
+
+  /**
    * Gets the current usage count and the limit for the resources of the location under the
    * subscription.
    * @param location The location of the Azure Storage resource.
@@ -57,6 +81,29 @@ export class Usages {
 
 // Operation Specifications
 const serializer = new msRest.Serializer(Mappers);
+const listOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages",
+  urlParameters: [
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {
+      bodyMapper: Mappers.UsageListResult
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
 const listByLocationOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
   path: "subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages",
