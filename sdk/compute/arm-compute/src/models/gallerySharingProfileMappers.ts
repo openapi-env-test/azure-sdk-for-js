@@ -41,7 +41,6 @@ export {
   GalleryImageIdentifier,
   GalleryImageUpdate,
   GalleryImageVersion,
-  GalleryImageVersionList,
   GalleryImageVersionPublishingProfile,
   GalleryImageVersionStorageProfile,
   GalleryImageVersionUpdate,

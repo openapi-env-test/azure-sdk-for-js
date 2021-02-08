@@ -15,7 +15,7 @@ npm install @azure/arm-compute
 
 ### How to use
 
-#### nodejs - Authentication, client creation and list operations as an example written in TypeScript.
+#### nodejs - client creation and get disks as an example written in TypeScript.
 
 ##### Install @azure/ms-rest-nodeauth
 
@@ -26,16 +26,17 @@ npm install @azure/ms-rest-nodeauth@"^3.0.0"
 
 ##### Sample code
 
+While the below sample uses the interactive login, other authentication options can be found in the [README.md file of @azure/ms-rest-nodeauth](https://www.npmjs.com/package/@azure/ms-rest-nodeauth) package
 ```typescript
-import * as msRest from "@azure/ms-rest-js";
-import * as msRestAzure from "@azure/ms-rest-azure-js";
-import * as msRestNodeAuth from "@azure/ms-rest-nodeauth";
-import { ComputeManagementClient, ComputeManagementModels, ComputeManagementMappers } from "@azure/arm-compute";
+const msRestNodeAuth = require("@azure/ms-rest-nodeauth");
+const { ComputeManagementClient } = require("@azure/arm-compute");
 const subscriptionId = process.env["AZURE_SUBSCRIPTION_ID"];
 
 msRestNodeAuth.interactiveLogin().then((creds) => {
   const client = new ComputeManagementClient(creds, subscriptionId);
-  client.operations.list().then((result) => {
+  const resourceGroupName = "testresourceGroupName";
+  const diskName = "testdiskName";
+  client.disks.get(resourceGroupName, diskName).then((result) => {
     console.log("The result is:");
     console.log(result);
   });
@@ -44,7 +45,7 @@ msRestNodeAuth.interactiveLogin().then((creds) => {
 });
 ```
 
-#### browser - Authentication, client creation and list operations as an example written in JavaScript.
+#### browser - Authentication, client creation and get disks as an example written in JavaScript.
 
 ##### Install @azure/ms-rest-browserauth
 
@@ -78,7 +79,9 @@ See https://github.com/Azure/ms-rest-browserauth to learn how to authenticate to
           authManager.login();
         }
         const client = new Azure.ArmCompute.ComputeManagementClient(res.creds, subscriptionId);
-        client.operations.list().then((result) => {
+        const resourceGroupName = "testresourceGroupName";
+        const diskName = "testdiskName";
+        client.disks.get(resourceGroupName, diskName).then((result) => {
           console.log("The result is:");
           console.log(result);
         }).catch((err) => {
