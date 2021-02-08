@@ -27,7 +27,6 @@ class NetworkManagementClient extends NetworkManagementClientContext {
   availableServiceAliases: operations.AvailableServiceAliases;
   azureFirewalls: operations.AzureFirewalls;
   azureFirewallFqdnTags: operations.AzureFirewallFqdnTags;
-  webCategories: operations.WebCategories;
   bastionHosts: operations.BastionHosts;
   customIPPrefixes: operations.CustomIPPrefixes;
   ddosCustomPolicies: operations.DdosCustomPolicies;
@@ -113,7 +112,6 @@ class NetworkManagementClient extends NetworkManagementClientContext {
   vpnConnections: operations.VpnConnections;
   vpnSiteLinkConnections: operations.VpnSiteLinkConnections;
   vpnLinkConnections: operations.VpnLinkConnections;
-  natRules: operations.NatRules;
   p2sVpnGateways: operations.P2sVpnGateways;
   vpnServerConfigurationsAssociatedWithVirtualWan: operations.VpnServerConfigurationsAssociatedWithVirtualWan;
   virtualHubRouteTableV2s: operations.VirtualHubRouteTableV2s;
@@ -143,7 +141,6 @@ class NetworkManagementClient extends NetworkManagementClientContext {
     this.availableServiceAliases = new operations.AvailableServiceAliases(this);
     this.azureFirewalls = new operations.AzureFirewalls(this);
     this.azureFirewallFqdnTags = new operations.AzureFirewallFqdnTags(this);
-    this.webCategories = new operations.WebCategories(this);
     this.bastionHosts = new operations.BastionHosts(this);
     this.customIPPrefixes = new operations.CustomIPPrefixes(this);
     this.ddosCustomPolicies = new operations.DdosCustomPolicies(this);
@@ -229,7 +226,6 @@ class NetworkManagementClient extends NetworkManagementClientContext {
     this.vpnConnections = new operations.VpnConnections(this);
     this.vpnSiteLinkConnections = new operations.VpnSiteLinkConnections(this);
     this.vpnLinkConnections = new operations.VpnLinkConnections(this);
-    this.natRules = new operations.NatRules(this);
     this.p2sVpnGateways = new operations.P2sVpnGateways(this);
     this.vpnServerConfigurationsAssociatedWithVirtualWan = new operations.VpnServerConfigurationsAssociatedWithVirtualWan(this);
     this.virtualHubRouteTableV2s = new operations.VirtualHubRouteTableV2s(this);
