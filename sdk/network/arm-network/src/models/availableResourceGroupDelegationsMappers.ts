@@ -7,7 +7,6 @@
  */
 
 export {
-  discriminators,
   AvailableDelegation,
   AvailableDelegationsResult,
   CloudError

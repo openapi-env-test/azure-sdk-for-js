@@ -17,7 +17,6 @@ const packageVersion = "23.2.0";
 export class NetworkManagementClientContext extends msRestAzure.AzureServiceClient {
   credentials: msRest.ServiceClientCredentials;
   subscriptionId: string;
-  apiVersion?: string;
 
   /**
    * Initializes a new instance of the NetworkManagementClient class.
@@ -37,7 +36,7 @@ export class NetworkManagementClientContext extends msRestAzure.AzureServiceClie
     if (!options) {
       options = {};
     }
-    if (!options.userAgent) {
+    if(!options.userAgent) {
       const defaultUserAgent = msRestAzure.getDefaultUserAgentValue();
       options.userAgent = `${packageName}/${packageVersion} ${defaultUserAgent}`;
     }
@@ -51,10 +50,10 @@ export class NetworkManagementClientContext extends msRestAzure.AzureServiceClie
     this.credentials = credentials;
     this.subscriptionId = subscriptionId;
 
-    if (options.acceptLanguage !== null && options.acceptLanguage !== undefined) {
+    if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) {
       this.acceptLanguage = options.acceptLanguage;
     }
-    if (options.longRunningOperationRetryTimeout !== null && options.longRunningOperationRetryTimeout !== undefined) {
+    if(options.longRunningOperationRetryTimeout !== null && options.longRunningOperationRetryTimeout !== undefined) {
       this.longRunningOperationRetryTimeout = options.longRunningOperationRetryTimeout;
     }
   }
