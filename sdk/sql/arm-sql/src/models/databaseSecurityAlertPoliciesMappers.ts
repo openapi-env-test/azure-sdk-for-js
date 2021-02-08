@@ -7,9 +7,9 @@
  */
 
 export {
-  AdministratorListResult,
   BaseResource,
   CloudError,
+  DatabaseSecurityAlertListResult,
   DatabaseSecurityAlertPolicy,
   InstancePool,
   ManagedDatabase,

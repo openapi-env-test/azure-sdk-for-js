@@ -7,7 +7,6 @@
  */
 
 export {
-  AdministratorListResult,
   BaseResource,
   CloudError,
   DatabaseSecurityAlertPolicy,
@@ -16,6 +15,7 @@ export {
   ManagedDatabaseRestoreDetailsResult,
   ManagedInstance,
   ManagedInstanceLongTermRetentionBackup,
+  ManagedInstanceLongTermRetentionBackupListResult,
   ManagedInstanceLongTermRetentionPolicy,
   ManagedInstanceOperation,
   ManagedInstanceOperationParametersPair,
