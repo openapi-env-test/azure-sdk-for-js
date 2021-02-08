@@ -29,7 +29,7 @@ export class PublicIPAddresses {
   /**
    * Deletes the specified public IP address.
    * @param resourceGroupName The name of the resource group.
-   * @param publicIpAddressName The name of the public IP address.
+   * @param publicIpAddressName The name of the subnet.
    * @param [options] The optional parameters
    * @returns Promise<msRest.RestResponse>
    */
@@ -41,20 +41,20 @@ export class PublicIPAddresses {
   /**
    * Gets the specified public IP address in a specified resource group.
    * @param resourceGroupName The name of the resource group.
-   * @param publicIpAddressName The name of the public IP address.
+   * @param publicIpAddressName The name of the subnet.
    * @param [options] The optional parameters
    * @returns Promise<Models.PublicIPAddressesGetResponse>
    */
   get(resourceGroupName: string, publicIpAddressName: string, options?: Models.PublicIPAddressesGetOptionalParams): Promise<Models.PublicIPAddressesGetResponse>;
   /**
    * @param resourceGroupName The name of the resource group.
-   * @param publicIpAddressName The name of the public IP address.
+   * @param publicIpAddressName The name of the subnet.
    * @param callback The callback
    */
   get(resourceGroupName: string, publicIpAddressName: string, callback: msRest.ServiceCallback<Models.PublicIPAddress>): void;
   /**
    * @param resourceGroupName The name of the resource group.
-   * @param publicIpAddressName The name of the public IP address.
+   * @param publicIpAddressName The name of the subnet.
    * @param options The optional parameters
    * @param callback The callback
    */
@@ -91,32 +91,9 @@ export class PublicIPAddresses {
    * @param [options] The optional parameters
    * @returns Promise<Models.PublicIPAddressesUpdateTagsResponse>
    */
-  updateTags(resourceGroupName: string, publicIpAddressName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.PublicIPAddressesUpdateTagsResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param publicIpAddressName The name of the public IP address.
-   * @param parameters Parameters supplied to update public IP address tags.
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, publicIpAddressName: string, parameters: Models.TagsObject, callback: msRest.ServiceCallback<Models.PublicIPAddress>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param publicIpAddressName The name of the public IP address.
-   * @param parameters Parameters supplied to update public IP address tags.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateTags(resourceGroupName: string, publicIpAddressName: string, parameters: Models.TagsObject, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PublicIPAddress>): void;
-  updateTags(resourceGroupName: string, publicIpAddressName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PublicIPAddress>, callback?: msRest.ServiceCallback<Models.PublicIPAddress>): Promise<Models.PublicIPAddressesUpdateTagsResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        publicIpAddressName,
-        parameters,
-        options
-      },
-      updateTagsOperationSpec,
-      callback) as Promise<Models.PublicIPAddressesUpdateTagsResponse>;
+  updateTags(resourceGroupName: string, publicIpAddressName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<Models.PublicIPAddressesUpdateTagsResponse> {
+    return this.beginUpdateTags(resourceGroupName,publicIpAddressName,parameters,options)
+      .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.PublicIPAddressesUpdateTagsResponse>;
   }
 
   /**
@@ -297,134 +274,9 @@ export class PublicIPAddresses {
   }
 
   /**
-   * Gets information about all public IP addresses on a cloud service level.
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.PublicIPAddressesListCloudServicePublicIPAddressesResponse>
-   */
-  listCloudServicePublicIPAddresses(resourceGroupName: string, cloudServiceName: string, options?: msRest.RequestOptionsBase): Promise<Models.PublicIPAddressesListCloudServicePublicIPAddressesResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param callback The callback
-   */
-  listCloudServicePublicIPAddresses(resourceGroupName: string, cloudServiceName: string, callback: msRest.ServiceCallback<Models.PublicIPAddressListResult>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listCloudServicePublicIPAddresses(resourceGroupName: string, cloudServiceName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PublicIPAddressListResult>): void;
-  listCloudServicePublicIPAddresses(resourceGroupName: string, cloudServiceName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PublicIPAddressListResult>, callback?: msRest.ServiceCallback<Models.PublicIPAddressListResult>): Promise<Models.PublicIPAddressesListCloudServicePublicIPAddressesResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        cloudServiceName,
-        options
-      },
-      listCloudServicePublicIPAddressesOperationSpec,
-      callback) as Promise<Models.PublicIPAddressesListCloudServicePublicIPAddressesResponse>;
-  }
-
-  /**
-   * Gets information about all public IP addresses in a role instance IP configuration in a cloud
-   * service.
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param roleInstanceName The name of role instance.
-   * @param networkInterfaceName The network interface name.
-   * @param ipConfigurationName The IP configuration name.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.PublicIPAddressesListCloudServiceRoleInstancePublicIPAddressesResponse>
-   */
-  listCloudServiceRoleInstancePublicIPAddresses(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, networkInterfaceName: string, ipConfigurationName: string, options?: msRest.RequestOptionsBase): Promise<Models.PublicIPAddressesListCloudServiceRoleInstancePublicIPAddressesResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param roleInstanceName The name of role instance.
-   * @param networkInterfaceName The network interface name.
-   * @param ipConfigurationName The IP configuration name.
-   * @param callback The callback
-   */
-  listCloudServiceRoleInstancePublicIPAddresses(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, networkInterfaceName: string, ipConfigurationName: string, callback: msRest.ServiceCallback<Models.PublicIPAddressListResult>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param roleInstanceName The name of role instance.
-   * @param networkInterfaceName The network interface name.
-   * @param ipConfigurationName The IP configuration name.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listCloudServiceRoleInstancePublicIPAddresses(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, networkInterfaceName: string, ipConfigurationName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PublicIPAddressListResult>): void;
-  listCloudServiceRoleInstancePublicIPAddresses(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, networkInterfaceName: string, ipConfigurationName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PublicIPAddressListResult>, callback?: msRest.ServiceCallback<Models.PublicIPAddressListResult>): Promise<Models.PublicIPAddressesListCloudServiceRoleInstancePublicIPAddressesResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        cloudServiceName,
-        roleInstanceName,
-        networkInterfaceName,
-        ipConfigurationName,
-        options
-      },
-      listCloudServiceRoleInstancePublicIPAddressesOperationSpec,
-      callback) as Promise<Models.PublicIPAddressesListCloudServiceRoleInstancePublicIPAddressesResponse>;
-  }
-
-  /**
-   * Get the specified public IP address in a cloud service.
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param roleInstanceName The role instance name.
-   * @param networkInterfaceName The name of the network interface.
-   * @param ipConfigurationName The name of the IP configuration.
-   * @param publicIpAddressName The name of the public IP Address.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.PublicIPAddressesGetCloudServicePublicIPAddressResponse>
-   */
-  getCloudServicePublicIPAddress(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, networkInterfaceName: string, ipConfigurationName: string, publicIpAddressName: string, options?: Models.PublicIPAddressesGetCloudServicePublicIPAddressOptionalParams): Promise<Models.PublicIPAddressesGetCloudServicePublicIPAddressResponse>;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param roleInstanceName The role instance name.
-   * @param networkInterfaceName The name of the network interface.
-   * @param ipConfigurationName The name of the IP configuration.
-   * @param publicIpAddressName The name of the public IP Address.
-   * @param callback The callback
-   */
-  getCloudServicePublicIPAddress(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, networkInterfaceName: string, ipConfigurationName: string, publicIpAddressName: string, callback: msRest.ServiceCallback<Models.PublicIPAddress>): void;
-  /**
-   * @param resourceGroupName The name of the resource group.
-   * @param cloudServiceName The name of the cloud service.
-   * @param roleInstanceName The role instance name.
-   * @param networkInterfaceName The name of the network interface.
-   * @param ipConfigurationName The name of the IP configuration.
-   * @param publicIpAddressName The name of the public IP Address.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  getCloudServicePublicIPAddress(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, networkInterfaceName: string, ipConfigurationName: string, publicIpAddressName: string, options: Models.PublicIPAddressesGetCloudServicePublicIPAddressOptionalParams, callback: msRest.ServiceCallback<Models.PublicIPAddress>): void;
-  getCloudServicePublicIPAddress(resourceGroupName: string, cloudServiceName: string, roleInstanceName: string, networkInterfaceName: string, ipConfigurationName: string, publicIpAddressName: string, options?: Models.PublicIPAddressesGetCloudServicePublicIPAddressOptionalParams | msRest.ServiceCallback<Models.PublicIPAddress>, callback?: msRest.ServiceCallback<Models.PublicIPAddress>): Promise<Models.PublicIPAddressesGetCloudServicePublicIPAddressResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        cloudServiceName,
-        roleInstanceName,
-        networkInterfaceName,
-        ipConfigurationName,
-        publicIpAddressName,
-        options
-      },
-      getCloudServicePublicIPAddressOperationSpec,
-      callback) as Promise<Models.PublicIPAddressesGetCloudServicePublicIPAddressResponse>;
-  }
-
-  /**
    * Deletes the specified public IP address.
    * @param resourceGroupName The name of the resource group.
-   * @param publicIpAddressName The name of the public IP address.
+   * @param publicIpAddressName The name of the subnet.
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
@@ -456,6 +308,26 @@ export class PublicIPAddresses {
         options
       },
       beginCreateOrUpdateOperationSpec,
+      options);
+  }
+
+  /**
+   * Updates public IP address tags.
+   * @param resourceGroupName The name of the resource group.
+   * @param publicIpAddressName The name of the public IP address.
+   * @param parameters Parameters supplied to update public IP address tags.
+   * @param [options] The optional parameters
+   * @returns Promise<msRestAzure.LROPoller>
+   */
+  beginUpdateTags(resourceGroupName: string, publicIpAddressName: string, parameters: Models.TagsObject, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
+    return this.client.sendLRORequest(
+      {
+        resourceGroupName,
+        publicIpAddressName,
+        parameters,
+        options
+      },
+      beginUpdateTagsOperationSpec,
       options);
   }
 
@@ -573,64 +445,6 @@ export class PublicIPAddresses {
       listVirtualMachineScaleSetVMPublicIPAddressesNextOperationSpec,
       callback) as Promise<Models.PublicIPAddressesListVirtualMachineScaleSetVMPublicIPAddressesNextResponse>;
   }
-
-  /**
-   * Gets information about all public IP addresses on a cloud service level.
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param [options] The optional parameters
-   * @returns Promise<Models.PublicIPAddressesListCloudServicePublicIPAddressesNextResponse>
-   */
-  listCloudServicePublicIPAddressesNext(nextPageLink: string, options?: msRest.RequestOptionsBase): Promise<Models.PublicIPAddressesListCloudServicePublicIPAddressesNextResponse>;
-  /**
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param callback The callback
-   */
-  listCloudServicePublicIPAddressesNext(nextPageLink: string, callback: msRest.ServiceCallback<Models.PublicIPAddressListResult>): void;
-  /**
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listCloudServicePublicIPAddressesNext(nextPageLink: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PublicIPAddressListResult>): void;
-  listCloudServicePublicIPAddressesNext(nextPageLink: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PublicIPAddressListResult>, callback?: msRest.ServiceCallback<Models.PublicIPAddressListResult>): Promise<Models.PublicIPAddressesListCloudServicePublicIPAddressesNextResponse> {
-    return this.client.sendOperationRequest(
-      {
-        nextPageLink,
-        options
-      },
-      listCloudServicePublicIPAddressesNextOperationSpec,
-      callback) as Promise<Models.PublicIPAddressesListCloudServicePublicIPAddressesNextResponse>;
-  }
-
-  /**
-   * Gets information about all public IP addresses in a role instance IP configuration in a cloud
-   * service.
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param [options] The optional parameters
-   * @returns
-   * Promise<Models.PublicIPAddressesListCloudServiceRoleInstancePublicIPAddressesNextResponse>
-   */
-  listCloudServiceRoleInstancePublicIPAddressesNext(nextPageLink: string, options?: msRest.RequestOptionsBase): Promise<Models.PublicIPAddressesListCloudServiceRoleInstancePublicIPAddressesNextResponse>;
-  /**
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param callback The callback
-   */
-  listCloudServiceRoleInstancePublicIPAddressesNext(nextPageLink: string, callback: msRest.ServiceCallback<Models.PublicIPAddressListResult>): void;
-  /**
-   * @param nextPageLink The NextLink from the previous successful call to List operation.
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  listCloudServiceRoleInstancePublicIPAddressesNext(nextPageLink: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PublicIPAddressListResult>): void;
-  listCloudServiceRoleInstancePublicIPAddressesNext(nextPageLink: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PublicIPAddressListResult>, callback?: msRest.ServiceCallback<Models.PublicIPAddressListResult>): Promise<Models.PublicIPAddressesListCloudServiceRoleInstancePublicIPAddressesNextResponse> {
-    return this.client.sendOperationRequest(
-      {
-        nextPageLink,
-        options
-      },
-      listCloudServiceRoleInstancePublicIPAddressesNextOperationSpec,
-      callback) as Promise<Models.PublicIPAddressesListCloudServiceRoleInstancePublicIPAddressesNextResponse>;
-  }
 }
 
 // Operation Specifications
@@ -650,38 +464,6 @@ const getOperationSpec: msRest.OperationSpec = {
   headerParameters: [
     Parameters.acceptLanguage
   ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.PublicIPAddress
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const updateTagsOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PATCH",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.publicIpAddressName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  requestBody: {
-    parameterPath: "parameters",
-    mapper: {
-      ...Mappers.TagsObject,
-      required: true
-    }
-  },
   responses: {
     200: {
       bodyMapper: Mappers.PublicIPAddress
@@ -823,89 +605,6 @@ const getVirtualMachineScaleSetPublicIPAddressOperationSpec: msRest.OperationSpe
   serializer
 };
 
-const listCloudServicePublicIPAddressesOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/publicipaddresses",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.cloudServiceName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.PublicIPAddressListResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const listCloudServiceRoleInstancePublicIPAddressesOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.cloudServiceName,
-    Parameters.roleInstanceName,
-    Parameters.networkInterfaceName,
-    Parameters.ipConfigurationName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.PublicIPAddressListResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const getCloudServicePublicIPAddressOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses/{publicIpAddressName}",
-  urlParameters: [
-    Parameters.resourceGroupName,
-    Parameters.cloudServiceName,
-    Parameters.roleInstanceName,
-    Parameters.networkInterfaceName,
-    Parameters.ipConfigurationName,
-    Parameters.publicIpAddressName,
-    Parameters.subscriptionId
-  ],
-  queryParameters: [
-    Parameters.apiVersion0,
-    Parameters.expand
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.PublicIPAddress
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
 const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
   httpMethod: "DELETE",
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}",
@@ -957,6 +656,38 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
       bodyMapper: Mappers.PublicIPAddress
     },
     201: {
+      bodyMapper: Mappers.PublicIPAddress
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const beginUpdateTagsOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PATCH",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.publicIpAddressName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "parameters",
+    mapper: {
+      ...Mappers.TagsObject,
+      required: true
+    }
+  },
+  responses: {
+    200: {
       bodyMapper: Mappers.PublicIPAddress
     },
     default: {
@@ -1047,54 +778,6 @@ const listVirtualMachineScaleSetVMPublicIPAddressesNextOperationSpec: msRest.Ope
   ],
   queryParameters: [
     Parameters.apiVersion1
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.PublicIPAddressListResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const listCloudServicePublicIPAddressesNextOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  baseUrl: "https://management.azure.com",
-  path: "{nextLink}",
-  urlParameters: [
-    Parameters.nextPageLink
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
-  ],
-  headerParameters: [
-    Parameters.acceptLanguage
-  ],
-  responses: {
-    200: {
-      bodyMapper: Mappers.PublicIPAddressListResult
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  serializer
-};
-
-const listCloudServiceRoleInstancePublicIPAddressesNextOperationSpec: msRest.OperationSpec = {
-  httpMethod: "GET",
-  baseUrl: "https://management.azure.com",
-  path: "{nextLink}",
-  urlParameters: [
-    Parameters.nextPageLink
-  ],
-  queryParameters: [
-    Parameters.apiVersion0
   ],
   headerParameters: [
     Parameters.acceptLanguage
