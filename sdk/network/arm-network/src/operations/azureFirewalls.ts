@@ -270,7 +270,7 @@ const getOperationSpec: msRest.OperationSpec = {
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}",
   urlParameters: [
     Parameters.resourceGroupName,
-    Parameters.azureFirewallName0,
+    Parameters.azureFirewallName,
     Parameters.subscriptionId
   ],
   queryParameters: [
@@ -342,7 +342,7 @@ const beginDeleteMethodOperationSpec: msRest.OperationSpec = {
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}",
   urlParameters: [
     Parameters.resourceGroupName,
-    Parameters.azureFirewallName0,
+    Parameters.azureFirewallName,
     Parameters.subscriptionId
   ],
   queryParameters: [
@@ -367,7 +367,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}",
   urlParameters: [
     Parameters.resourceGroupName,
-    Parameters.azureFirewallName1,
+    Parameters.azureFirewallName,
     Parameters.subscriptionId
   ],
   queryParameters: [
@@ -402,7 +402,7 @@ const beginUpdateTagsOperationSpec: msRest.OperationSpec = {
   path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}",
   urlParameters: [
     Parameters.resourceGroupName,
-    Parameters.azureFirewallName0,
+    Parameters.azureFirewallName,
     Parameters.subscriptionId
   ],
   queryParameters: [

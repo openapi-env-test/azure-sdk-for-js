@@ -337,9 +337,8 @@ export class NetworkWatchers {
   }
 
   /**
-   * NOTE: This feature is currently in preview and still being tested for stability. Gets the
-   * relative latency score for internet service providers from a specified location to Azure
-   * regions.
+   * Gets the relative latency score for internet service providers from a specified location to
+   * Azure regions.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that determine Azure reachability report configuration.
@@ -352,8 +351,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * NOTE: This feature is currently in preview and still being tested for stability. Lists all
-   * available internet service providers for a specified Azure region.
+   * Lists all available internet service providers for a specified Azure region.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that scope the list of available providers.
@@ -563,9 +561,8 @@ export class NetworkWatchers {
   }
 
   /**
-   * NOTE: This feature is currently in preview and still being tested for stability. Gets the
-   * relative latency score for internet service providers from a specified location to Azure
-   * regions.
+   * Gets the relative latency score for internet service providers from a specified location to
+   * Azure regions.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that determine Azure reachability report configuration.
@@ -585,8 +582,7 @@ export class NetworkWatchers {
   }
 
   /**
-   * NOTE: This feature is currently in preview and still being tested for stability. Lists all
-   * available internet service providers for a specified Azure region.
+   * Lists all available internet service providers for a specified Azure region.
    * @param resourceGroupName The name of the network watcher resource group.
    * @param networkWatcherName The name of the network watcher resource.
    * @param parameters Parameters that scope the list of available providers.
