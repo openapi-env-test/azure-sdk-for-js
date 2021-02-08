@@ -15,7 +15,7 @@ npm install @azure/arm-sql
 
 ### How to use
 
-#### nodejs - Authentication, client creation and get recoverableDatabases as an example written in TypeScript.
+#### nodejs - client creation and listByDatabase databaseOperations as an example written in TypeScript.
 
 ##### Install @azure/ms-rest-nodeauth
 
@@ -26,11 +26,10 @@ npm install @azure/ms-rest-nodeauth@"^3.0.0"
 
 ##### Sample code
 
+While the below sample uses the interactive login, other authentication options can be found in the [README.md file of @azure/ms-rest-nodeauth](https://www.npmjs.com/package/@azure/ms-rest-nodeauth) package
 ```typescript
-import * as msRest from "@azure/ms-rest-js";
-import * as msRestAzure from "@azure/ms-rest-azure-js";
-import * as msRestNodeAuth from "@azure/ms-rest-nodeauth";
-import { SqlManagementClient, SqlManagementModels, SqlManagementMappers } from "@azure/arm-sql";
+const msRestNodeAuth = require("@azure/ms-rest-nodeauth");
+const { SqlManagementClient } = require("@azure/arm-sql");
 const subscriptionId = process.env["AZURE_SUBSCRIPTION_ID"];
 
 msRestNodeAuth.interactiveLogin().then((creds) => {
@@ -38,7 +37,7 @@ msRestNodeAuth.interactiveLogin().then((creds) => {
   const resourceGroupName = "testresourceGroupName";
   const serverName = "testserverName";
   const databaseName = "testdatabaseName";
-  client.recoverableDatabases.get(resourceGroupName, serverName, databaseName).then((result) => {
+  client.databaseOperations.listByDatabase(resourceGroupName, serverName, databaseName).then((result) => {
     console.log("The result is:");
     console.log(result);
   });
@@ -47,7 +46,7 @@ msRestNodeAuth.interactiveLogin().then((creds) => {
 });
 ```
 
-#### browser - Authentication, client creation and get recoverableDatabases as an example written in JavaScript.
+#### browser - Authentication, client creation and listByDatabase databaseOperations as an example written in JavaScript.
 
 ##### Install @azure/ms-rest-browserauth
 
@@ -84,7 +83,7 @@ See https://github.com/Azure/ms-rest-browserauth to learn how to authenticate to
         const resourceGroupName = "testresourceGroupName";
         const serverName = "testserverName";
         const databaseName = "testdatabaseName";
-        client.recoverableDatabases.get(resourceGroupName, serverName, databaseName).then((result) => {
+        client.databaseOperations.listByDatabase(resourceGroupName, serverName, databaseName).then((result) => {
           console.log("The result is:");
           console.log(result);
         }).catch((err) => {
