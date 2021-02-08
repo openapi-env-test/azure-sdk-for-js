@@ -1,6 +1,6 @@
-## Azure ManagementLockClient SDK for JavaScript
+## Azure PolicyClient SDK for JavaScript
 
-This package contains an isomorphic SDK for ManagementLockClient.
+This package contains an isomorphic SDK for PolicyClient.
 
 ### Currently supported environments
 
@@ -15,26 +15,27 @@ npm install @azure/arm-locks
 
 ### How to use
 
-#### nodejs - Authentication, client creation and list authorizationOperations as an example written in TypeScript.
+#### nodejs - client creation and getByPolicyMode dataPolicyManifests as an example written in TypeScript.
 
 ##### Install @azure/ms-rest-nodeauth
 
+- Please install minimum version of `"@azure/ms-rest-nodeauth": "^3.0.0"`.
 ```bash
-npm install @azure/ms-rest-nodeauth
+npm install @azure/ms-rest-nodeauth@"^3.0.0"
 ```
 
 ##### Sample code
 
+While the below sample uses the interactive login, other authentication options can be found in the [README.md file of @azure/ms-rest-nodeauth](https://www.npmjs.com/package/@azure/ms-rest-nodeauth) package
 ```typescript
-import * as msRest from "@azure/ms-rest-js";
-import * as msRestAzure from "@azure/ms-rest-azure-js";
-import * as msRestNodeAuth from "@azure/ms-rest-nodeauth";
-import { ManagementLockClient, ManagementLockModels, ManagementLockMappers } from "@azure/arm-locks";
+const msRestNodeAuth = require("@azure/ms-rest-nodeauth");
+const { PolicyClient } = require("@azure/arm-locks");
 const subscriptionId = process.env["AZURE_SUBSCRIPTION_ID"];
 
 msRestNodeAuth.interactiveLogin().then((creds) => {
-  const client = new ManagementLockClient(creds, subscriptionId);
-  client.authorizationOperations.list().then((result) => {
+  const client = new PolicyClient(creds, subscriptionId);
+  const policyMode = "testpolicyMode";
+  client.dataPolicyManifests.getByPolicyMode(policyMode).then((result) => {
     console.log("The result is:");
     console.log(result);
   });
@@ -43,7 +44,7 @@ msRestNodeAuth.interactiveLogin().then((creds) => {
 });
 ```
 
-#### browser - Authentication, client creation and list authorizationOperations as an example written in JavaScript.
+#### browser - Authentication, client creation and getByPolicyMode dataPolicyManifests as an example written in JavaScript.
 
 ##### Install @azure/ms-rest-browserauth
 
@@ -76,8 +77,9 @@ See https://github.com/Azure/ms-rest-browserauth to learn how to authenticate to
           // may cause redirects
           authManager.login();
         }
-        const client = new Azure.ArmLocks.ManagementLockClient(res.creds, subscriptionId);
-        client.authorizationOperations.list().then((result) => {
+        const client = new Azure.ArmLocks.PolicyClient(res.creds, subscriptionId);
+        const policyMode = "testpolicyMode";
+        client.dataPolicyManifests.getByPolicyMode(policyMode).then((result) => {
           console.log("The result is:");
           console.log(result);
         }).catch((err) => {
@@ -95,4 +97,4 @@ See https://github.com/Azure/ms-rest-browserauth to learn how to authenticate to
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Flocks%2Farm-locks%2FREADME.png)
+![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/locks/arm-locks/README.png)
