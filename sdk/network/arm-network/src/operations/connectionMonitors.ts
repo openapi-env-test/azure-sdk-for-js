@@ -35,7 +35,7 @@ export class ConnectionMonitors {
    * @param [options] The optional parameters
    * @returns Promise<Models.ConnectionMonitorsCreateOrUpdateResponse>
    */
-  createOrUpdate(resourceGroupName: string, networkWatcherName: string, connectionMonitorName: string, parameters: Models.ConnectionMonitor, options?: Models.ConnectionMonitorsCreateOrUpdateOptionalParams): Promise<Models.ConnectionMonitorsCreateOrUpdateResponse> {
+  createOrUpdate(resourceGroupName: string, networkWatcherName: string, connectionMonitorName: string, parameters: Models.ConnectionMonitor, options?: msRest.RequestOptionsBase): Promise<Models.ConnectionMonitorsCreateOrUpdateResponse> {
     return this.beginCreateOrUpdate(resourceGroupName,networkWatcherName,connectionMonitorName,parameters,options)
       .then(lroPoller => lroPoller.pollUntilFinished()) as Promise<Models.ConnectionMonitorsCreateOrUpdateResponse>;
   }
@@ -209,7 +209,7 @@ export class ConnectionMonitors {
    * @param [options] The optional parameters
    * @returns Promise<msRestAzure.LROPoller>
    */
-  beginCreateOrUpdate(resourceGroupName: string, networkWatcherName: string, connectionMonitorName: string, parameters: Models.ConnectionMonitor, options?: Models.ConnectionMonitorsBeginCreateOrUpdateOptionalParams): Promise<msRestAzure.LROPoller> {
+  beginCreateOrUpdate(resourceGroupName: string, networkWatcherName: string, connectionMonitorName: string, parameters: Models.ConnectionMonitor, options?: msRest.RequestOptionsBase): Promise<msRestAzure.LROPoller> {
     return this.client.sendLRORequest(
       {
         resourceGroupName,
@@ -399,8 +399,7 @@ const beginCreateOrUpdateOperationSpec: msRest.OperationSpec = {
     Parameters.subscriptionId
   ],
   queryParameters: [
-    Parameters.apiVersion0,
-    Parameters.migrate
+    Parameters.apiVersion0
   ],
   headerParameters: [
     Parameters.acceptLanguage
