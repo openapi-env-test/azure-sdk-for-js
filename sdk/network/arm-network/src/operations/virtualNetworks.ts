@@ -240,6 +240,38 @@ export class VirtualNetworks {
   }
 
   /**
+   * Get a list of bastion hosts accessible from the given network.
+   * @param resourceGroupName The name of the resource group.
+   * @param virtualNetworkName The name of the virtual network.
+   * @param [options] The optional parameters
+   * @returns Promise<Models.VirtualNetworksGetBastionHostsResponse>
+   */
+  getBastionHosts(resourceGroupName: string, virtualNetworkName: string, options?: msRest.RequestOptionsBase): Promise<Models.VirtualNetworksGetBastionHostsResponse>;
+  /**
+   * @param resourceGroupName The name of the resource group.
+   * @param virtualNetworkName The name of the virtual network.
+   * @param callback The callback
+   */
+  getBastionHosts(resourceGroupName: string, virtualNetworkName: string, callback: msRest.ServiceCallback<Models.BastionHostListResult>): void;
+  /**
+   * @param resourceGroupName The name of the resource group.
+   * @param virtualNetworkName The name of the virtual network.
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  getBastionHosts(resourceGroupName: string, virtualNetworkName: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.BastionHostListResult>): void;
+  getBastionHosts(resourceGroupName: string, virtualNetworkName: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.BastionHostListResult>, callback?: msRest.ServiceCallback<Models.BastionHostListResult>): Promise<Models.VirtualNetworksGetBastionHostsResponse> {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        virtualNetworkName,
+        options
+      },
+      getBastionHostsOperationSpec,
+      callback) as Promise<Models.VirtualNetworksGetBastionHostsResponse>;
+  }
+
+  /**
    * Deletes the specified virtual network.
    * @param resourceGroupName The name of the resource group.
    * @param virtualNetworkName The name of the virtual network.
@@ -512,6 +544,31 @@ const listUsageOperationSpec: msRest.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.VirtualNetworkListUsageResult
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const getBastionHostsOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/bastionHosts",
+  urlParameters: [
+    Parameters.resourceGroupName,
+    Parameters.virtualNetworkName,
+    Parameters.subscriptionId
+  ],
+  queryParameters: [
+    Parameters.apiVersion0
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  responses: {
+    200: {
+      bodyMapper: Mappers.BastionHostListResult
     },
     default: {
       bodyMapper: Mappers.CloudError
