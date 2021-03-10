@@ -737,6 +737,18 @@ export const sourceControlType: msRest.OperationURLParameter = {
     }
   }
 };
+export const stackOsType: msRest.OperationQueryParameter = {
+  parameterPath: [
+    "options",
+    "stackOsType"
+  ],
+  mapper: {
+    serializedName: "stackOsType",
+    type: {
+      name: "String"
+    }
+  }
+};
 export const startTime: msRest.OperationQueryParameter = {
   parameterPath: [
     "options",

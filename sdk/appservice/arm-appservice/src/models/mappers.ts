@@ -2922,6 +2922,12 @@ export const Site: msRest.CompositeMapper = {
           name: "Uuid"
         }
       },
+      storageAccountRequired: {
+        serializedName: "properties.storageAccountRequired",
+        type: {
+          name: "Boolean"
+        }
+      },
       identity: {
         serializedName: "identity",
         type: {
@@ -6407,6 +6413,30 @@ export const DiagnosticDetectorResponse: msRest.CompositeMapper = {
   }
 };
 
+export const AppInsightsWebAppStackSettings: msRest.CompositeMapper = {
+  serializedName: "AppInsightsWebAppStackSettings",
+  type: {
+    name: "Composite",
+    className: "AppInsightsWebAppStackSettings",
+    modelProperties: {
+      isSupported: {
+        readOnly: true,
+        serializedName: "isSupported",
+        type: {
+          name: "Boolean"
+        }
+      },
+      isDefaultOff: {
+        readOnly: true,
+        serializedName: "isDefaultOff",
+        type: {
+          name: "Boolean"
+        }
+      }
+    }
+  }
+};
+
 export const StackMinorVersion: msRest.CompositeMapper = {
   serializedName: "StackMinorVersion",
   type: {
@@ -6604,6 +6634,721 @@ export const ApplicationStackResource: msRest.CompositeMapper = {
               className: "ApplicationStack"
             }
           }
+        }
+      }
+    }
+  }
+};
+
+export const GitHubActionWebAppStackSettings: msRest.CompositeMapper = {
+  serializedName: "GitHubActionWebAppStackSettings",
+  type: {
+    name: "Composite",
+    className: "GitHubActionWebAppStackSettings",
+    modelProperties: {
+      isSupported: {
+        readOnly: true,
+        serializedName: "isSupported",
+        type: {
+          name: "Boolean"
+        }
+      },
+      supportedVersion: {
+        readOnly: true,
+        serializedName: "supportedVersion",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const SiteConfigPropertiesDictionary: msRest.CompositeMapper = {
+  serializedName: "SiteConfigPropertiesDictionary",
+  type: {
+    name: "Composite",
+    className: "SiteConfigPropertiesDictionary",
+    modelProperties: {
+      use32BitWorkerProcess: {
+        readOnly: true,
+        serializedName: "use32BitWorkerProcess",
+        type: {
+          name: "Boolean"
+        }
+      },
+      linuxFxVersion: {
+        readOnly: true,
+        serializedName: "linuxFxVersion",
+        type: {
+          name: "String"
+        }
+      },
+      javaVersion: {
+        readOnly: true,
+        serializedName: "javaVersion",
+        type: {
+          name: "String"
+        }
+      },
+      powerShellVersion: {
+        readOnly: true,
+        serializedName: "powerShellVersion",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const FunctionAppRuntimeSettings: msRest.CompositeMapper = {
+  serializedName: "FunctionAppRuntimeSettings",
+  type: {
+    name: "Composite",
+    className: "FunctionAppRuntimeSettings",
+    modelProperties: {
+      runtimeVersion: {
+        readOnly: true,
+        serializedName: "runtimeVersion",
+        type: {
+          name: "String"
+        }
+      },
+      remoteDebuggingSupported: {
+        readOnly: true,
+        serializedName: "remoteDebuggingSupported",
+        type: {
+          name: "Boolean"
+        }
+      },
+      appInsightsSettings: {
+        readOnly: true,
+        serializedName: "appInsightsSettings",
+        type: {
+          name: "Composite",
+          className: "AppInsightsWebAppStackSettings"
+        }
+      },
+      gitHubActionSettings: {
+        readOnly: true,
+        serializedName: "gitHubActionSettings",
+        type: {
+          name: "Composite",
+          className: "GitHubActionWebAppStackSettings"
+        }
+      },
+      appSettingsDictionary: {
+        readOnly: true,
+        serializedName: "appSettingsDictionary",
+        type: {
+          name: "Dictionary",
+          value: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      },
+      siteConfigPropertiesDictionary: {
+        readOnly: true,
+        serializedName: "siteConfigPropertiesDictionary",
+        type: {
+          name: "Composite",
+          className: "SiteConfigPropertiesDictionary"
+        }
+      },
+      supportedFunctionsExtensionVersions: {
+        readOnly: true,
+        serializedName: "supportedFunctionsExtensionVersions",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      },
+      isPreview: {
+        readOnly: true,
+        serializedName: "isPreview",
+        type: {
+          name: "Boolean"
+        }
+      },
+      isDeprecated: {
+        readOnly: true,
+        serializedName: "isDeprecated",
+        type: {
+          name: "Boolean"
+        }
+      },
+      isHidden: {
+        readOnly: true,
+        serializedName: "isHidden",
+        type: {
+          name: "Boolean"
+        }
+      },
+      endOfLifeDate: {
+        readOnly: true,
+        serializedName: "endOfLifeDate",
+        type: {
+          name: "DateTime"
+        }
+      },
+      isAutoUpdate: {
+        readOnly: true,
+        serializedName: "isAutoUpdate",
+        type: {
+          name: "Boolean"
+        }
+      },
+      isEarlyAccess: {
+        readOnly: true,
+        serializedName: "isEarlyAccess",
+        type: {
+          name: "Boolean"
+        }
+      },
+      isDefault: {
+        readOnly: true,
+        serializedName: "isDefault",
+        type: {
+          name: "Boolean"
+        }
+      }
+    }
+  }
+};
+
+export const FunctionAppRuntimes: msRest.CompositeMapper = {
+  serializedName: "FunctionAppRuntimes",
+  type: {
+    name: "Composite",
+    className: "FunctionAppRuntimes",
+    modelProperties: {
+      linuxRuntimeSettings: {
+        readOnly: true,
+        serializedName: "linuxRuntimeSettings",
+        type: {
+          name: "Composite",
+          className: "FunctionAppRuntimeSettings"
+        }
+      },
+      windowsRuntimeSettings: {
+        readOnly: true,
+        serializedName: "windowsRuntimeSettings",
+        type: {
+          name: "Composite",
+          className: "FunctionAppRuntimeSettings"
+        }
+      }
+    }
+  }
+};
+
+export const FunctionAppMinorVersion: msRest.CompositeMapper = {
+  serializedName: "FunctionAppMinorVersion",
+  type: {
+    name: "Composite",
+    className: "FunctionAppMinorVersion",
+    modelProperties: {
+      displayText: {
+        readOnly: true,
+        serializedName: "displayText",
+        type: {
+          name: "String"
+        }
+      },
+      value: {
+        readOnly: true,
+        serializedName: "value",
+        type: {
+          name: "String"
+        }
+      },
+      stackSettings: {
+        readOnly: true,
+        serializedName: "stackSettings",
+        type: {
+          name: "Composite",
+          className: "FunctionAppRuntimes"
+        }
+      }
+    }
+  }
+};
+
+export const FunctionAppMajorVersion: msRest.CompositeMapper = {
+  serializedName: "FunctionAppMajorVersion",
+  type: {
+    name: "Composite",
+    className: "FunctionAppMajorVersion",
+    modelProperties: {
+      displayText: {
+        readOnly: true,
+        serializedName: "displayText",
+        type: {
+          name: "String"
+        }
+      },
+      value: {
+        readOnly: true,
+        serializedName: "value",
+        type: {
+          name: "String"
+        }
+      },
+      minorVersions: {
+        readOnly: true,
+        serializedName: "minorVersions",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "FunctionAppMinorVersion"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const FunctionAppStack: msRest.CompositeMapper = {
+  serializedName: "FunctionAppStack",
+  type: {
+    name: "Composite",
+    className: "FunctionAppStack",
+    modelProperties: {
+      ...ProxyOnlyResource.type.modelProperties,
+      location: {
+        readOnly: true,
+        serializedName: "location",
+        type: {
+          name: "String"
+        }
+      },
+      displayText: {
+        readOnly: true,
+        serializedName: "properties.displayText",
+        type: {
+          name: "String"
+        }
+      },
+      value: {
+        readOnly: true,
+        serializedName: "properties.value",
+        type: {
+          name: "String"
+        }
+      },
+      majorVersions: {
+        readOnly: true,
+        serializedName: "properties.majorVersions",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "FunctionAppMajorVersion"
+            }
+          }
+        }
+      },
+      preferredOs: {
+        readOnly: true,
+        serializedName: "properties.preferredOs",
+        type: {
+          name: "Enum",
+          allowedValues: [
+            "windows",
+            "linux"
+          ]
+        }
+      }
+    }
+  }
+};
+
+export const LinuxJavaContainerSettings: msRest.CompositeMapper = {
+  serializedName: "LinuxJavaContainerSettings",
+  type: {
+    name: "Composite",
+    className: "LinuxJavaContainerSettings",
+    modelProperties: {
+      java11Runtime: {
+        readOnly: true,
+        serializedName: "java11Runtime",
+        type: {
+          name: "String"
+        }
+      },
+      java8Runtime: {
+        readOnly: true,
+        serializedName: "java8Runtime",
+        type: {
+          name: "String"
+        }
+      },
+      isPreview: {
+        readOnly: true,
+        serializedName: "isPreview",
+        type: {
+          name: "Boolean"
+        }
+      },
+      isDeprecated: {
+        readOnly: true,
+        serializedName: "isDeprecated",
+        type: {
+          name: "Boolean"
+        }
+      },
+      isHidden: {
+        readOnly: true,
+        serializedName: "isHidden",
+        type: {
+          name: "Boolean"
+        }
+      },
+      endOfLifeDate: {
+        readOnly: true,
+        serializedName: "endOfLifeDate",
+        type: {
+          name: "DateTime"
+        }
+      },
+      isAutoUpdate: {
+        readOnly: true,
+        serializedName: "isAutoUpdate",
+        type: {
+          name: "Boolean"
+        }
+      },
+      isEarlyAccess: {
+        readOnly: true,
+        serializedName: "isEarlyAccess",
+        type: {
+          name: "Boolean"
+        }
+      }
+    }
+  }
+};
+
+export const WebAppRuntimeSettings: msRest.CompositeMapper = {
+  serializedName: "WebAppRuntimeSettings",
+  type: {
+    name: "Composite",
+    className: "WebAppRuntimeSettings",
+    modelProperties: {
+      runtimeVersion: {
+        readOnly: true,
+        serializedName: "runtimeVersion",
+        type: {
+          name: "String"
+        }
+      },
+      remoteDebuggingSupported: {
+        readOnly: true,
+        serializedName: "remoteDebuggingSupported",
+        type: {
+          name: "Boolean"
+        }
+      },
+      appInsightsSettings: {
+        readOnly: true,
+        serializedName: "appInsightsSettings",
+        type: {
+          name: "Composite",
+          className: "AppInsightsWebAppStackSettings"
+        }
+      },
+      gitHubActionSettings: {
+        readOnly: true,
+        serializedName: "gitHubActionSettings",
+        type: {
+          name: "Composite",
+          className: "GitHubActionWebAppStackSettings"
+        }
+      },
+      isPreview: {
+        readOnly: true,
+        serializedName: "isPreview",
+        type: {
+          name: "Boolean"
+        }
+      },
+      isDeprecated: {
+        readOnly: true,
+        serializedName: "isDeprecated",
+        type: {
+          name: "Boolean"
+        }
+      },
+      isHidden: {
+        readOnly: true,
+        serializedName: "isHidden",
+        type: {
+          name: "Boolean"
+        }
+      },
+      endOfLifeDate: {
+        readOnly: true,
+        serializedName: "endOfLifeDate",
+        type: {
+          name: "DateTime"
+        }
+      },
+      isAutoUpdate: {
+        readOnly: true,
+        serializedName: "isAutoUpdate",
+        type: {
+          name: "Boolean"
+        }
+      },
+      isEarlyAccess: {
+        readOnly: true,
+        serializedName: "isEarlyAccess",
+        type: {
+          name: "Boolean"
+        }
+      }
+    }
+  }
+};
+
+export const WindowsJavaContainerSettings: msRest.CompositeMapper = {
+  serializedName: "WindowsJavaContainerSettings",
+  type: {
+    name: "Composite",
+    className: "WindowsJavaContainerSettings",
+    modelProperties: {
+      javaContainer: {
+        readOnly: true,
+        serializedName: "javaContainer",
+        type: {
+          name: "String"
+        }
+      },
+      javaContainerVersion: {
+        readOnly: true,
+        serializedName: "javaContainerVersion",
+        type: {
+          name: "String"
+        }
+      },
+      isPreview: {
+        readOnly: true,
+        serializedName: "isPreview",
+        type: {
+          name: "Boolean"
+        }
+      },
+      isDeprecated: {
+        readOnly: true,
+        serializedName: "isDeprecated",
+        type: {
+          name: "Boolean"
+        }
+      },
+      isHidden: {
+        readOnly: true,
+        serializedName: "isHidden",
+        type: {
+          name: "Boolean"
+        }
+      },
+      endOfLifeDate: {
+        readOnly: true,
+        serializedName: "endOfLifeDate",
+        type: {
+          name: "DateTime"
+        }
+      },
+      isAutoUpdate: {
+        readOnly: true,
+        serializedName: "isAutoUpdate",
+        type: {
+          name: "Boolean"
+        }
+      },
+      isEarlyAccess: {
+        readOnly: true,
+        serializedName: "isEarlyAccess",
+        type: {
+          name: "Boolean"
+        }
+      }
+    }
+  }
+};
+
+export const WebAppRuntimes: msRest.CompositeMapper = {
+  serializedName: "WebAppRuntimes",
+  type: {
+    name: "Composite",
+    className: "WebAppRuntimes",
+    modelProperties: {
+      linuxRuntimeSettings: {
+        readOnly: true,
+        serializedName: "linuxRuntimeSettings",
+        type: {
+          name: "Composite",
+          className: "WebAppRuntimeSettings"
+        }
+      },
+      windowsRuntimeSettings: {
+        readOnly: true,
+        serializedName: "windowsRuntimeSettings",
+        type: {
+          name: "Composite",
+          className: "WebAppRuntimeSettings"
+        }
+      },
+      linuxContainerSettings: {
+        readOnly: true,
+        serializedName: "linuxContainerSettings",
+        type: {
+          name: "Composite",
+          className: "LinuxJavaContainerSettings"
+        }
+      },
+      windowsContainerSettings: {
+        readOnly: true,
+        serializedName: "windowsContainerSettings",
+        type: {
+          name: "Composite",
+          className: "WindowsJavaContainerSettings"
+        }
+      }
+    }
+  }
+};
+
+export const WebAppMinorVersion: msRest.CompositeMapper = {
+  serializedName: "WebAppMinorVersion",
+  type: {
+    name: "Composite",
+    className: "WebAppMinorVersion",
+    modelProperties: {
+      displayText: {
+        readOnly: true,
+        serializedName: "displayText",
+        type: {
+          name: "String"
+        }
+      },
+      value: {
+        readOnly: true,
+        serializedName: "value",
+        type: {
+          name: "String"
+        }
+      },
+      stackSettings: {
+        readOnly: true,
+        serializedName: "stackSettings",
+        type: {
+          name: "Composite",
+          className: "WebAppRuntimes"
+        }
+      }
+    }
+  }
+};
+
+export const WebAppMajorVersion: msRest.CompositeMapper = {
+  serializedName: "WebAppMajorVersion",
+  type: {
+    name: "Composite",
+    className: "WebAppMajorVersion",
+    modelProperties: {
+      displayText: {
+        readOnly: true,
+        serializedName: "displayText",
+        type: {
+          name: "String"
+        }
+      },
+      value: {
+        readOnly: true,
+        serializedName: "value",
+        type: {
+          name: "String"
+        }
+      },
+      minorVersions: {
+        readOnly: true,
+        serializedName: "minorVersions",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "WebAppMinorVersion"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const WebAppStack: msRest.CompositeMapper = {
+  serializedName: "WebAppStack",
+  type: {
+    name: "Composite",
+    className: "WebAppStack",
+    modelProperties: {
+      ...ProxyOnlyResource.type.modelProperties,
+      location: {
+        readOnly: true,
+        serializedName: "location",
+        type: {
+          name: "String"
+        }
+      },
+      displayText: {
+        readOnly: true,
+        serializedName: "properties.displayText",
+        type: {
+          name: "String"
+        }
+      },
+      value: {
+        readOnly: true,
+        serializedName: "properties.value",
+        type: {
+          name: "String"
+        }
+      },
+      majorVersions: {
+        readOnly: true,
+        serializedName: "properties.majorVersions",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "WebAppMajorVersion"
+            }
+          }
+        }
+      },
+      preferredOs: {
+        readOnly: true,
+        serializedName: "properties.preferredOs",
+        type: {
+          name: "Enum",
+          allowedValues: [
+            "windows",
+            "linux"
+          ]
         }
       }
     }
@@ -15716,6 +16461,66 @@ export const ApplicationStackCollection: msRest.CompositeMapper = {
             type: {
               name: "Composite",
               className: "ApplicationStackResource"
+            }
+          }
+        }
+      },
+      nextLink: {
+        readOnly: true,
+        serializedName: "nextLink",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const FunctionAppStackCollection: msRest.CompositeMapper = {
+  serializedName: "FunctionAppStackCollection",
+  type: {
+    name: "Composite",
+    className: "FunctionAppStackCollection",
+    modelProperties: {
+      value: {
+        required: true,
+        serializedName: "",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "FunctionAppStack"
+            }
+          }
+        }
+      },
+      nextLink: {
+        readOnly: true,
+        serializedName: "nextLink",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const WebAppStackCollection: msRest.CompositeMapper = {
+  serializedName: "WebAppStackCollection",
+  type: {
+    name: "Composite",
+    className: "WebAppStackCollection",
+    modelProperties: {
+      value: {
+        required: true,
+        serializedName: "",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "WebAppStack"
             }
           }
         }

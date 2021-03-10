@@ -1823,6 +1823,10 @@ export interface Site extends Resource {
    * **NOTE: This property will not be serialized. It can only be populated by the server.**
    */
   readonly inProgressOperationId?: string;
+  /**
+   * Checks if Customer provided storage account is required
+   */
+  storageAccountRequired?: boolean;
   identity?: ManagedServiceIdentity;
 }
 
@@ -3691,6 +3695,24 @@ export interface DiagnosticDetectorResponse extends ProxyOnlyResource {
 }
 
 /**
+ * App Insights Web App stack settings.
+ */
+export interface AppInsightsWebAppStackSettings {
+  /**
+   * <code>true</code> if remote Application Insights is supported for the stack; otherwise,
+   * <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isSupported?: boolean;
+  /**
+   * <code>true</code> if Application Insights is disabled by default for the stack; otherwise,
+   * <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isDefaultOff?: boolean;
+}
+
+/**
  * Application stack minor version.
  */
 export interface StackMinorVersion {
@@ -3801,6 +3823,463 @@ export interface ApplicationStackResource extends ProxyOnlyResource {
    * List of frameworks associated with application stack.
    */
   frameworks?: ApplicationStack[];
+}
+
+/**
+ * GitHub Actions Web App stack settings.
+ */
+export interface GitHubActionWebAppStackSettings {
+  /**
+   * <code>true</code> if GitHub Actions is supported for the stack; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isSupported?: boolean;
+  /**
+   * The minor version that is supported for GitHub Actions.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly supportedVersion?: string;
+}
+
+/**
+ * Site config properties dictionary.
+ */
+export interface SiteConfigPropertiesDictionary {
+  /**
+   * <code>true</code> if use32BitWorkerProcess should be set to true for the stack; otherwise,
+   * <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly use32BitWorkerProcess?: boolean;
+  /**
+   * LinuxFxVersion configuration setting.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly linuxFxVersion?: string;
+  /**
+   * JavaVersion configuration setting.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly javaVersion?: string;
+  /**
+   * PowerShellVersion configuration setting.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly powerShellVersion?: string;
+}
+
+/**
+ * Function App runtime settings.
+ */
+export interface FunctionAppRuntimeSettings {
+  /**
+   * Function App stack minor version (runtime only).
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly runtimeVersion?: string;
+  /**
+   * <code>true</code> if remote debugging is supported for the stack; otherwise,
+   * <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly remoteDebuggingSupported?: boolean;
+  /**
+   * Application Insights settings associated with the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly appInsightsSettings?: AppInsightsWebAppStackSettings;
+  /**
+   * GitHub Actions settings associated with the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly gitHubActionSettings?: GitHubActionWebAppStackSettings;
+  /**
+   * Application settings associated with the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly appSettingsDictionary?: { [propertyName: string]: string };
+  /**
+   * Configuration settings associated with the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly siteConfigPropertiesDictionary?: SiteConfigPropertiesDictionary;
+  /**
+   * List of supported Functions extension versions.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly supportedFunctionsExtensionVersions?: string[];
+  /**
+   * <code>true</code> if the stack is in preview; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isPreview?: boolean;
+  /**
+   * <code>true</code> if the stack is deprecated; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isDeprecated?: boolean;
+  /**
+   * <code>true</code> if the stack should be hidden; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isHidden?: boolean;
+  /**
+   * End-of-life date for the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly endOfLifeDate?: Date;
+  /**
+   * <code>true</code> if the stack version is auto-updated; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isAutoUpdate?: boolean;
+  /**
+   * <code>true</code> if the minor version is early-access; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isEarlyAccess?: boolean;
+  /**
+   * <code>true</code> if the minor version the default; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isDefault?: boolean;
+}
+
+/**
+ * Function App stack runtimes.
+ */
+export interface FunctionAppRuntimes {
+  /**
+   * Linux-specific settings associated with the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly linuxRuntimeSettings?: FunctionAppRuntimeSettings;
+  /**
+   * Windows-specific settings associated with the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly windowsRuntimeSettings?: FunctionAppRuntimeSettings;
+}
+
+/**
+ * Function App stack minor version.
+ */
+export interface FunctionAppMinorVersion {
+  /**
+   * Function App stack (display only).
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly displayText?: string;
+  /**
+   * Function App stack name.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly value?: string;
+  /**
+   * Settings associated with the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly stackSettings?: FunctionAppRuntimes;
+}
+
+/**
+ * Function App stack major version.
+ */
+export interface FunctionAppMajorVersion {
+  /**
+   * Function App stack major version (display only).
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly displayText?: string;
+  /**
+   * Function App stack major version name.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly value?: string;
+  /**
+   * Minor versions associated with the major version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly minorVersions?: FunctionAppMinorVersion[];
+}
+
+/**
+ * Function App Stack.
+ */
+export interface FunctionAppStack extends ProxyOnlyResource {
+  /**
+   * Function App stack location.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly location?: string;
+  /**
+   * Function App stack (display only).
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly displayText?: string;
+  /**
+   * Function App stack name.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly value?: string;
+  /**
+   * List of major versions available.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly majorVersions?: FunctionAppMajorVersion[];
+  /**
+   * Function App stack preferred OS. Possible values include: 'windows', 'linux'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly preferredOs?: StackOsTypes;
+}
+
+/**
+ * Linux Java Container settings.
+ */
+export interface LinuxJavaContainerSettings {
+  /**
+   * Java 11 version (runtime only).
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly java11Runtime?: string;
+  /**
+   * Java 8 version (runtime only).
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly java8Runtime?: string;
+  /**
+   * <code>true</code> if the stack is in preview; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isPreview?: boolean;
+  /**
+   * <code>true</code> if the stack is deprecated; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isDeprecated?: boolean;
+  /**
+   * <code>true</code> if the stack should be hidden; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isHidden?: boolean;
+  /**
+   * End-of-life date for the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly endOfLifeDate?: Date;
+  /**
+   * <code>true</code> if the stack version is auto-updated; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isAutoUpdate?: boolean;
+  /**
+   * <code>true</code> if the minor version is early-access; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isEarlyAccess?: boolean;
+}
+
+/**
+ * Web App runtime settings.
+ */
+export interface WebAppRuntimeSettings {
+  /**
+   * Web App stack minor version (runtime only).
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly runtimeVersion?: string;
+  /**
+   * <code>true</code> if remote debugging is supported for the stack; otherwise,
+   * <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly remoteDebuggingSupported?: boolean;
+  /**
+   * Application Insights settings associated with the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly appInsightsSettings?: AppInsightsWebAppStackSettings;
+  /**
+   * GitHub Actions settings associated with the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly gitHubActionSettings?: GitHubActionWebAppStackSettings;
+  /**
+   * <code>true</code> if the stack is in preview; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isPreview?: boolean;
+  /**
+   * <code>true</code> if the stack is deprecated; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isDeprecated?: boolean;
+  /**
+   * <code>true</code> if the stack should be hidden; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isHidden?: boolean;
+  /**
+   * End-of-life date for the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly endOfLifeDate?: Date;
+  /**
+   * <code>true</code> if the stack version is auto-updated; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isAutoUpdate?: boolean;
+  /**
+   * <code>true</code> if the minor version is early-access; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isEarlyAccess?: boolean;
+}
+
+/**
+ * Windows Java Container settings.
+ */
+export interface WindowsJavaContainerSettings {
+  /**
+   * Java container (runtime only).
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly javaContainer?: string;
+  /**
+   * Java container version (runtime only).
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly javaContainerVersion?: string;
+  /**
+   * <code>true</code> if the stack is in preview; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isPreview?: boolean;
+  /**
+   * <code>true</code> if the stack is deprecated; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isDeprecated?: boolean;
+  /**
+   * <code>true</code> if the stack should be hidden; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isHidden?: boolean;
+  /**
+   * End-of-life date for the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly endOfLifeDate?: Date;
+  /**
+   * <code>true</code> if the stack version is auto-updated; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isAutoUpdate?: boolean;
+  /**
+   * <code>true</code> if the minor version is early-access; otherwise, <code>false</code>.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly isEarlyAccess?: boolean;
+}
+
+/**
+ * Web App stack runtimes.
+ */
+export interface WebAppRuntimes {
+  /**
+   * Linux-specific settings associated with the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly linuxRuntimeSettings?: WebAppRuntimeSettings;
+  /**
+   * Windows-specific settings associated with the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly windowsRuntimeSettings?: WebAppRuntimeSettings;
+  /**
+   * Linux-specific settings associated with the Java container minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly linuxContainerSettings?: LinuxJavaContainerSettings;
+  /**
+   * Windows-specific settings associated with the Java container minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly windowsContainerSettings?: WindowsJavaContainerSettings;
+}
+
+/**
+ * Web App stack minor version.
+ */
+export interface WebAppMinorVersion {
+  /**
+   * Web App stack minor version (display only).
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly displayText?: string;
+  /**
+   * Web App stack major version name.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly value?: string;
+  /**
+   * Settings associated with the minor version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly stackSettings?: WebAppRuntimes;
+}
+
+/**
+ * Web App stack major version.
+ */
+export interface WebAppMajorVersion {
+  /**
+   * Web App stack major version (display only).
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly displayText?: string;
+  /**
+   * Web App stack major version name.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly value?: string;
+  /**
+   * Minor versions associated with the major version.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly minorVersions?: WebAppMinorVersion[];
+}
+
+/**
+ * Web App stack.
+ */
+export interface WebAppStack extends ProxyOnlyResource {
+  /**
+   * Web App stack location.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly location?: string;
+  /**
+   * Web App stack (display only).
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly displayText?: string;
+  /**
+   * Web App stack name.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly value?: string;
+  /**
+   * List of major versions available.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly majorVersions?: WebAppMajorVersion[];
+  /**
+   * Web App stack preferred OS. Possible values include: 'windows', 'linux'
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly preferredOs?: StackOsTypes;
 }
 
 /**
@@ -8737,6 +9216,46 @@ export interface ProviderGetAvailableStacksOptionalParams extends msRest.Request
 /**
  * Optional Parameters.
  */
+export interface ProviderGetFunctionAppStacksOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * Possible values include: 'Windows', 'Linux', 'All'
+   */
+  stackOsType?: StackOsType;
+}
+
+/**
+ * Optional Parameters.
+ */
+export interface ProviderGetFunctionAppStacksForLocationOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * Possible values include: 'Windows', 'Linux', 'All'
+   */
+  stackOsType?: StackOsType1;
+}
+
+/**
+ * Optional Parameters.
+ */
+export interface ProviderGetWebAppStacksForLocationOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * Possible values include: 'Windows', 'Linux', 'All'
+   */
+  stackOsType?: StackOsType2;
+}
+
+/**
+ * Optional Parameters.
+ */
+export interface ProviderGetWebAppStacksOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * Possible values include: 'Windows', 'Linux', 'All'
+   */
+  stackOsType?: StackOsType3;
+}
+
+/**
+ * Optional Parameters.
+ */
 export interface ProviderGetAvailableStacksOnPremOptionalParams extends msRest.RequestOptionsBase {
   /**
    * Possible values include: 'Windows', 'Linux', 'WindowsFunctions', 'LinuxFunctions'
@@ -8752,6 +9271,46 @@ export interface ProviderGetAvailableStacksNextOptionalParams extends msRest.Req
    * Possible values include: 'Windows', 'Linux', 'WindowsFunctions', 'LinuxFunctions'
    */
   osTypeSelected?: OsTypeSelected;
+}
+
+/**
+ * Optional Parameters.
+ */
+export interface ProviderGetFunctionAppStacksNextOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * Possible values include: 'Windows', 'Linux', 'All'
+   */
+  stackOsType?: StackOsType;
+}
+
+/**
+ * Optional Parameters.
+ */
+export interface ProviderGetFunctionAppStacksForLocationNextOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * Possible values include: 'Windows', 'Linux', 'All'
+   */
+  stackOsType?: StackOsType1;
+}
+
+/**
+ * Optional Parameters.
+ */
+export interface ProviderGetWebAppStacksForLocationNextOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * Possible values include: 'Windows', 'Linux', 'All'
+   */
+  stackOsType?: StackOsType2;
+}
+
+/**
+ * Optional Parameters.
+ */
+export interface ProviderGetWebAppStacksNextOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * Possible values include: 'Windows', 'Linux', 'All'
+   */
+  stackOsType?: StackOsType3;
 }
 
 /**
@@ -9810,6 +10369,32 @@ export interface ApplicationStackCollection extends Array<ApplicationStackResour
 
 /**
  * @interface
+ * Collection of Function app Stacks
+ * @extends Array<FunctionAppStack>
+ */
+export interface FunctionAppStackCollection extends Array<FunctionAppStack> {
+  /**
+   * Link to next page of resources.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly nextLink?: string;
+}
+
+/**
+ * @interface
+ * Collection of Web app Stacks
+ * @extends Array<WebAppStack>
+ */
+export interface WebAppStackCollection extends Array<WebAppStack> {
+  /**
+   * Link to next page of resources.
+   * **NOTE: This property will not be serialized. It can only be populated by the server.**
+   */
+  readonly nextLink?: string;
+}
+
+/**
+ * @interface
  * Collection of recommendations.
  * @extends Array<Recommendation>
  */
@@ -10700,6 +11285,14 @@ export type SolutionType = 'QuickSolution' | 'DeepInvestigation' | 'BestPractice
 export type RenderingType = 'NoGraph' | 'Table' | 'TimeSeries' | 'TimeSeriesPerInstance';
 
 /**
+ * Defines values for StackOsTypes.
+ * Possible values include: 'windows', 'linux'
+ * @readonly
+ * @enum {string}
+ */
+export type StackOsTypes = 'windows' | 'linux';
+
+/**
  * Defines values for ResourceScopeType.
  * Possible values include: 'ServerFarm', 'Subscription', 'WebSite'
  * @readonly
@@ -10992,6 +11585,38 @@ export type SkuName = 'Free' | 'Shared' | 'Basic' | 'Standard' | 'Premium' | 'Dy
  * @enum {string}
  */
 export type OsTypeSelected = 'Windows' | 'Linux' | 'WindowsFunctions' | 'LinuxFunctions';
+
+/**
+ * Defines values for StackOsType.
+ * Possible values include: 'Windows', 'Linux', 'All'
+ * @readonly
+ * @enum {string}
+ */
+export type StackOsType = 'Windows' | 'Linux' | 'All';
+
+/**
+ * Defines values for StackOsType1.
+ * Possible values include: 'Windows', 'Linux', 'All'
+ * @readonly
+ * @enum {string}
+ */
+export type StackOsType1 = 'Windows' | 'Linux' | 'All';
+
+/**
+ * Defines values for StackOsType2.
+ * Possible values include: 'Windows', 'Linux', 'All'
+ * @readonly
+ * @enum {string}
+ */
+export type StackOsType2 = 'Windows' | 'Linux' | 'All';
+
+/**
+ * Defines values for StackOsType3.
+ * Possible values include: 'Windows', 'Linux', 'All'
+ * @readonly
+ * @enum {string}
+ */
+export type StackOsType3 = 'Windows' | 'Linux' | 'All';
 
 /**
  * Defines values for OsTypeSelected1.
@@ -12742,6 +13367,66 @@ export type ProviderGetAvailableStacksResponse = ApplicationStackCollection & {
 };
 
 /**
+ * Contains response data for the getFunctionAppStacks operation.
+ */
+export type ProviderGetFunctionAppStacksResponse = FunctionAppStackCollection & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: FunctionAppStackCollection;
+    };
+};
+
+/**
+ * Contains response data for the getFunctionAppStacksForLocation operation.
+ */
+export type ProviderGetFunctionAppStacksForLocationResponse = FunctionAppStackCollection & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: FunctionAppStackCollection;
+    };
+};
+
+/**
+ * Contains response data for the getWebAppStacksForLocation operation.
+ */
+export type ProviderGetWebAppStacksForLocationResponse = WebAppStackCollection & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: WebAppStackCollection;
+    };
+};
+
+/**
  * Contains response data for the listOperations operation.
  */
 export type ProviderListOperationsResponse = CsmOperationCollection & {
@@ -12758,6 +13443,26 @@ export type ProviderListOperationsResponse = CsmOperationCollection & {
        * The response body as parsed JSON or XML
        */
       parsedBody: CsmOperationCollection;
+    };
+};
+
+/**
+ * Contains response data for the getWebAppStacks operation.
+ */
+export type ProviderGetWebAppStacksResponse = WebAppStackCollection & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: WebAppStackCollection;
     };
 };
 
@@ -12802,6 +13507,66 @@ export type ProviderGetAvailableStacksNextResponse = ApplicationStackCollection 
 };
 
 /**
+ * Contains response data for the getFunctionAppStacksNext operation.
+ */
+export type ProviderGetFunctionAppStacksNextResponse = FunctionAppStackCollection & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: FunctionAppStackCollection;
+    };
+};
+
+/**
+ * Contains response data for the getFunctionAppStacksForLocationNext operation.
+ */
+export type ProviderGetFunctionAppStacksForLocationNextResponse = FunctionAppStackCollection & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: FunctionAppStackCollection;
+    };
+};
+
+/**
+ * Contains response data for the getWebAppStacksForLocationNext operation.
+ */
+export type ProviderGetWebAppStacksForLocationNextResponse = WebAppStackCollection & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: WebAppStackCollection;
+    };
+};
+
+/**
  * Contains response data for the listOperationsNext operation.
  */
 export type ProviderListOperationsNextResponse = CsmOperationCollection & {
@@ -12818,6 +13583,26 @@ export type ProviderListOperationsNextResponse = CsmOperationCollection & {
        * The response body as parsed JSON or XML
        */
       parsedBody: CsmOperationCollection;
+    };
+};
+
+/**
+ * Contains response data for the getWebAppStacksNext operation.
+ */
+export type ProviderGetWebAppStacksNextResponse = WebAppStackCollection & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: WebAppStackCollection;
     };
 };
 
