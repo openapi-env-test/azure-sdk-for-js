@@ -7,7 +7,7 @@
 import { execSync } from "child_process";
 import fs from "fs";
 import * as path from "path";
-import { contains, npmInstall, npmRunTest } from "./common";
+import { contains, npmInstall, npmRunBuild, npmRunTest } from "./common";
 import { Logger } from "./logger";
 import { getPackageInformationFromPackageJsons, PackageInfo } from "./packages";
 import { findReadmeTypeScriptMdFilePaths, getAbsolutePackageFolderPathFromReadmeFileContents, getPackageNamesFromReadmeTypeScriptMdFileContents } from "./readme";
@@ -83,6 +83,57 @@ export async function generateSdk(azureRestAPISpecsRoot: string, azureSDKForJSRe
             _logger.log();
         }
     }
+}
+
+export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot: string, readmeMd: string, use?: string, useDebugger?: boolean) {
+    _logger.log(`>>>>>>>>>>>>>>>>>>> Start: "${readmeMd}" >>>>>>>>>>>>>>>>>>>>>>>>>`);
+
+    let cmd = `autorest --typescript --typescript-sdks-folder=${azureSDKForJSRepoRoot} --license-header=MICROSOFT_MIT_NO_VERSION ${readmeMd}`;
+    if (use) {
+        cmd += ` --use=${use}`;
+    } else {
+        const localAutorestTypeScriptFolderPath = path.resolve(azureSDKForJSRepoRoot, '..', 'autorest.typescript');
+        if (fs.existsSync(localAutorestTypeScriptFolderPath) && fs.lstatSync(localAutorestTypeScriptFolderPath).isDirectory()) {
+            cmd += ` --use=${localAutorestTypeScriptFolderPath}`;
+        }
+    }
+
+    if (useDebugger) {
+        cmd += ` --typescript.debugger`;
+    }
+
+    try {
+        _logger.log('Executing command:');
+        _logger.log('------------------------------------------------------------');
+        _logger.log(cmd);
+        _logger.log('------------------------------------------------------------');
+
+        const commandOutput = execSync(cmd, { encoding: "utf8" });
+        _logger.log(commandOutput);
+
+        _logger.log('Installing dependencies...');
+        const typeScriptReadmeFilePath = readmeMd.replace('readme.md', 'readme.typescript.md');
+        const typeScriptReadmeFileContents: string = await fs.promises.readFile(typeScriptReadmeFilePath, { encoding: 'utf8' });
+        const packageFolderPath: string | undefined = getAbsolutePackageFolderPathFromReadmeFileContents(azureSDKForJSRepoRoot, typeScriptReadmeFileContents);
+        if (!packageFolderPath) {
+            _logger.log('Error:');
+            _logger.log(`Could not determine the generated package folder's path from ${typeScriptReadmeFilePath}.`);
+        } else {
+            await npmInstall(packageFolderPath);
+            await npmRunTest(packageFolderPath);
+            await npmRunBuild(packageFolderPath);
+            _logger.log('Generating Changelog and Bumping Version...');
+            const relativePackageFolderPath: string = packageFolderPath.replace(azureSDKForJSRepoRoot, '');
+            const outputOfGeneratingChangelogAndBumpingVersion = execSync(`js-sdk-changlog-tool ${relativePackageFolderPath}`,{ encoding: "utf8" });
+            console.log(outputOfGeneratingChangelogAndBumpingVersion);
+        }
+    } catch (err) {
+        _logger.log('Error:');
+        _logger.log(`An error occurred while generating client for readme file: "${readmeMd}":\nErr: ${err}\nStderr: "${err.stderr}"`);
+    }
+
+    _logger.log(`>>>>>>>>>>>>>>>>>>> End: "${readmeMd}" >>>>>>>>>>>>>>>>>>>>>>>>>`);
+    _logger.log();
 }
 
 function getPackageConfig(azureSdkForJsRoot: string, packageInfo: PackageInfo, include?: RegExp, exclude?: RegExp): { content: any; path: string } | undefined {
