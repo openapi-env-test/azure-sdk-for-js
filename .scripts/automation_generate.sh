@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -x
-pwd
 inputCofig=`cat $1`
 specFolder=`echo $inputCofig | jq .specFolder`
 specFolderTrim=`echo $specFolder | sed 's/\"//g'`
@@ -14,3 +13,4 @@ do
   wholePath=$specFolderTrim/$readmeFileTrim
   gulp automation_generate --use @microsoft.azure/autorest.typescript@4.2.2 --readme $wholePath
 done
+

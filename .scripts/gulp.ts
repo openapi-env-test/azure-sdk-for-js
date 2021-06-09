@@ -124,7 +124,7 @@ export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoo
             await npmRunBuild(packageFolderPath);
             _logger.log('Generating Changelog and Bumping Version...');
             const relativePackageFolderPath: string = packageFolderPath.replace(azureSDKForJSRepoRoot, '');
-            const outputOfGeneratingChangelogAndBumpingVersion = execSync(`js-sdk-changlog-tool ${relativePackageFolderPath}`,{ encoding: "utf8" });
+            const outputOfGeneratingChangelogAndBumpingVersion = execSync(`js-sdk-changelog-tool ${relativePackageFolderPath}`,{ encoding: "utf8" });
             console.log(outputOfGeneratingChangelogAndBumpingVersion);
         }
     } catch (err) {
