@@ -2,7 +2,7 @@
 inputCofig=$1
 specFolder=`jq .specFolder $inputCofig`
 specFolderTrim=`echo $specFolder | sed 's/\"//g'`
-npm install -g js-sdk-changlog-tool
+npm install -g js-sdk-changelog-tool
 npm install -g gulp-cli
 
 for readmeFile in `jq .relatedReadmeMdFiles $inputCofig | jq .[]`;
