@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -x
+pwd
 inputCofig=`cat $1`
 specFolder=`echo $inputCofig | jq .specFolder`
 specFolderTrim=`echo $specFolder | sed 's/\"//g'`
