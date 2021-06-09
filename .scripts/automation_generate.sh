@@ -5,7 +5,7 @@ specFolderTrim=`echo $specFolder | sed 's/\"//g'`
 npm install -g js-sdk-changelog-tool
 npm install -g gulp-cli
 
-for readmeFile in `jq .relatedReadmeMdFiles $inputCofig | jq .[]`;
+for readmeFile in `echo $inputCofig | jq .relatedReadmeMdFiles | jq .[]`;
 do
   readmeFileTrim=`echo $readmeFile | sed 's/\"//g'`
   wholePath=$specFolderTrim/$readmeFileTrim
