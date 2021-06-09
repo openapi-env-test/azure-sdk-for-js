@@ -1,7 +1,7 @@
 {
   "advancedOptions": {
     "createSdkPullRequests": true,
-    "generationCallMode": "one-per-configs"
+    "generationCallMode": "one-per-config"
   },
   "generateOptions": {
     "generateScript": {
