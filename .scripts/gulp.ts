@@ -178,7 +178,7 @@ export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoo
             }
             if (relativePackageFolderPath) {
                 outputPackageInfo.path.push(relativePackageFolderPath);
-                outputPackageInfo.artifacts.push(relativePackageFolderPath);
+                // outputPackageInfo.artifacts.push(relativePackageFolderPath);
             }
         }
     } catch (err) {
