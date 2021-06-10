@@ -118,7 +118,7 @@ export async function automationGenerate(azureSDKForJSRepoRoot: string, inputJso
                 "hasBreakingChange": true
             },
             "artifacts": [],
-            "result": "success"
+            "result": "succeeded"
         };
         await generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot, path.join(specFolder, readmeMd), use, useDebugger, outputPackageInfo);
         outputJson.packages.push(outputPackageInfo);
