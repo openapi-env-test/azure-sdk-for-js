@@ -11,7 +11,7 @@ import * as path from "path";
 import PluginError from "plugin-error";
 import { Argv, CommandLineOptions, getCommandLineOptions } from "./.scripts/commandLine";
 import { endsWith, getPackageFolderPaths, packagesToIgnore } from "./.scripts/common";
-import { generateSdk, generateSdkAndChangelogAndBumpVersion, setAutoPublish, setVersion } from "./.scripts/gulp";
+import { automationGenerate, generateSdk, generateSdkAndChangelogAndBumpVersion, setAutoPublish, setVersion } from "./.scripts/gulp";
 import { Logger } from "./.scripts/logger";
 import { findMissingSdks } from "./.scripts/packages";
 import { getPackageFolderPathFromPackageArgument } from "./.scripts/readme";
@@ -78,7 +78,7 @@ gulp.task('default', async () => {
   _logger.log('  --package');
   _logger.log('    NPM package to regenerate. If no package is specified, then all packages will be regenerated.');
   _logger.log();
-  _logger.log('gulp automation_generate [--use <autorest.typescript root>] [--readme <readme name>]');
+  _logger.log('gulp codegen_and_changelog [--use <autorest.typescript root>] [--readme <readme name>]');
   _logger.log('  --use');
   _logger.log('    Root location of autorest.typescript repository. If this is not specified, then the latest installed generator for TypeScript will be used.');
   _logger.log('  --readme');
@@ -156,8 +156,8 @@ gulp.task('codegen', async () => {
   await generateSdk(argv.azureRestAPISpecsRoot, argv.azureSDKForJSRepoRoot, argv.package, argv.use, argv.debugger);
 });
 
-// This task is used to generate libraries based on the mappings specified above.
-gulp.task('automation_generate', async () => {
+// This task is used to generate libraries, changelog and bump version based on the mappings specified above.
+gulp.task('codegen_and_changelog', async () => {
   interface CodegenOptions {
     debugger: boolean | undefined;
     use: string | undefined;
@@ -182,10 +182,47 @@ gulp.task('automation_generate', async () => {
           description: "Specifies location of readme.md fpr the generator to use"
         }
       })
-      .usage("Example: gulp automation_generate --readmeMd ../azure-rest-api-specs/specification/cdn/something/readme.md")
+      .usage("Example: gulp codegen_and_changelog --readmeMd ../azure-rest-api-specs/specification/cdn/something/readme.md")
       .argv as any;
 
   await generateSdkAndChangelogAndBumpVersion(argv.azureSDKForJSRepoRoot, argv.readme, argv.use, argv.debugger);
+});
+
+// This task is used in swagger pipeline.
+gulp.task('automation_generate', async () => {
+  interface CodegenOptions {
+    debugger: boolean | undefined;
+    use: string | undefined;
+    inputJson: string;
+    outputJson: string
+  }
+
+  _logger.log(`Passed arguments: ${Argv.print()}`);
+  const argv: (CodegenOptions & Argv.RepositoryOptions)
+    = Argv.construct(Argv.Options.Repository)
+    .options({
+      "debugger": {
+        boolean: true,
+        alias: ["d", "use-debugger"],
+        description: "Enables debugger attaching to autorest.typescript process"
+      },
+      "use": {
+        string: true,
+        description: "Specifies location for the generator to use"
+      },
+      "inputJson": {
+        string: true,
+        description: "input.json provided by swagger pipeline"
+      },
+      "outputJson": {
+        string: true,
+        description: "output.json provided by swagger pipeline"
+      }
+    })
+    .usage("Example: gulp codegen_and_changelog --inputJson input.json --outputJson output.json")
+    .argv as any;
+
+  await automationGenerate(argv.azureSDKForJSRepoRoot, argv.inputJson, argv.outputJson, argv.use, argv.debugger);
 });
 
 function pack(): void {

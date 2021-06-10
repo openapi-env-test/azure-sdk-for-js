@@ -85,7 +85,48 @@ export async function generateSdk(azureRestAPISpecsRoot: string, azureSDKForJSRe
     }
 }
 
-export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot: string, readmeMd: string, use?: string, useDebugger?: boolean) {
+interface OutputPackageInfo {
+    packageName: string;
+    path: string[];
+    readmeMd: string[];
+    changelog: {
+        content: string;
+        hasBreakingChange: boolean;
+    };
+    artifacts: string[];
+    result: string;
+}
+
+export async function automationGenerate(azureSDKForJSRepoRoot: string, inputJsonPath: string, outputJsonPath: string, use?: string, useDebugger?: boolean) {
+    const inputJson = JSON.parse(fs.readFileSync(inputJsonPath, {encoding: 'utf-8'}));
+    const specFolder: string = inputJson['specFolder'];
+    const readmeFiles: string[] = inputJson['relatedReadmeMdFiles'];
+    const outputJson = {
+        packages: []
+    };
+    for (const readmeMd of readmeFiles) {
+        const outputPackageInfo: OutputPackageInfo = {
+            "packageName": "",
+            "path": [
+            ],
+            "readmeMd": [
+              readmeMd
+            ],
+            "changelog": {
+                "content": "",
+                "hasBreakingChange": true
+            },
+            "artifacts": [],
+            "result": "success"
+        };
+        await generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot, path.join(specFolder, readmeMd), use, useDebugger, outputPackageInfo);
+        outputJson.packages.push(outputPackageInfo);
+    }
+
+    fs.writeFileSync(outputJsonPath, JSON.stringify(outputJson), {encoding: 'utf-8'})
+}
+
+export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot: string, readmeMd: string, use?: string, useDebugger?: boolean, outputPackageInfo?: OutputPackageInfo) {
     _logger.log(`>>>>>>>>>>>>>>>>>>> Start: "${readmeMd}" >>>>>>>>>>>>>>>>>>>>>>>>>`);
 
     let cmd = `autorest --typescript --typescript-sdks-folder=${azureSDKForJSRepoRoot} --license-header=MICROSOFT_MIT_NO_VERSION ${readmeMd}`;
@@ -115,6 +156,7 @@ export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoo
         const typeScriptReadmeFilePath = readmeMd.replace('readme.md', 'readme.typescript.md');
         const typeScriptReadmeFileContents: string = await fs.promises.readFile(typeScriptReadmeFilePath, { encoding: 'utf8' });
         const packageFolderPath: string | undefined = getAbsolutePackageFolderPathFromReadmeFileContents(azureSDKForJSRepoRoot, typeScriptReadmeFileContents);
+        const relativePackageFolderPath = packageFolderPath?.replace(azureSDKForJSRepoRoot, '');
         if (!packageFolderPath) {
             _logger.log('Error:');
             _logger.log(`Could not determine the generated package folder's path from ${typeScriptReadmeFilePath}.`);
@@ -123,13 +165,21 @@ export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoo
             await npmRunTest(packageFolderPath);
             await npmRunBuild(packageFolderPath);
             _logger.log('Generating Changelog and Bumping Version...');
-            const relativePackageFolderPath: string = packageFolderPath.replace(azureSDKForJSRepoRoot, '');
             const outputOfGeneratingChangelogAndBumpingVersion = execSync(`js-sdk-changelog-tool ${relativePackageFolderPath}`,{ encoding: "utf8" });
             console.log(outputOfGeneratingChangelogAndBumpingVersion);
+        }
+        if (outputPackageInfo && !packageFolderPath && !relativePackageFolderPath) {
+            const packageJson = JSON.parse(fs.readFileSync(path.join(packageFolderPath, 'package.json'), {encoding: 'utf-8'}));
+            outputPackageInfo.packageName = packageJson.name;
+            outputPackageInfo.path.push(relativePackageFolderPath);
+            outputPackageInfo.artifacts.push(relativePackageFolderPath);
         }
     } catch (err) {
         _logger.log('Error:');
         _logger.log(`An error occurred while generating client for readme file: "${readmeMd}":\nErr: ${err}\nStderr: "${err.stderr}"`);
+        if(outputPackageInfo) {
+            outputPackageInfo.readmeMd = "failed";
+        }
     }
 
     _logger.log(`>>>>>>>>>>>>>>>>>>> End: "${readmeMd}" >>>>>>>>>>>>>>>>>>>>>>>>>`);
