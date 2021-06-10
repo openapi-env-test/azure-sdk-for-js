@@ -101,8 +101,9 @@ export async function automationGenerate(azureSDKForJSRepoRoot: string, inputJso
     const inputJson = JSON.parse(fs.readFileSync(inputJsonPath, {encoding: 'utf-8'}));
     const specFolder: string = inputJson['specFolder'];
     const readmeFiles: string[] = inputJson['relatedReadmeMdFiles'];
+    const packages: OutputPackageInfo[] = [];
     const outputJson = {
-        packages: []
+        packages: packages
     };
     for (const readmeMd of readmeFiles) {
         const outputPackageInfo: OutputPackageInfo = {
@@ -166,19 +167,25 @@ export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoo
             await npmRunBuild(packageFolderPath);
             _logger.log('Generating Changelog and Bumping Version...');
             const outputOfGeneratingChangelogAndBumpingVersion = execSync(`js-sdk-changelog-tool ${relativePackageFolderPath}`,{ encoding: "utf8" });
-            console.log(outputOfGeneratingChangelogAndBumpingVersion);
+            _logger.log(outputOfGeneratingChangelogAndBumpingVersion);
         }
-        if (outputPackageInfo && !packageFolderPath && !relativePackageFolderPath) {
-            const packageJson = JSON.parse(fs.readFileSync(path.join(packageFolderPath, 'package.json'), {encoding: 'utf-8'}));
-            outputPackageInfo.packageName = packageJson.name;
-            outputPackageInfo.path.push(relativePackageFolderPath);
-            outputPackageInfo.artifacts.push(relativePackageFolderPath);
+        _logger.log(`outputPackageInfo: ${outputPackageInfo}`);
+        if (outputPackageInfo) {
+            _logger.log(`packageFolderPath ${packageFolderPath}`);
+            if (packageFolderPath) {
+                const packageJson = JSON.parse(fs.readFileSync(path.join(packageFolderPath, 'package.json'), {encoding: 'utf-8'}));
+                outputPackageInfo.packageName = packageJson.name;
+            }
+            if (relativePackageFolderPath) {
+                outputPackageInfo.path.push(relativePackageFolderPath);
+                outputPackageInfo.artifacts.push(relativePackageFolderPath);
+            }
         }
     } catch (err) {
         _logger.log('Error:');
         _logger.log(`An error occurred while generating client for readme file: "${readmeMd}":\nErr: ${err}\nStderr: "${err.stderr}"`);
         if(outputPackageInfo) {
-            outputPackageInfo.readmeMd = "failed";
+            outputPackageInfo.result = "failed";
         }
     }
 
