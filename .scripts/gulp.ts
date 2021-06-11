@@ -159,9 +159,6 @@ export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoo
         const packageFolderPath: string | undefined = getAbsolutePackageFolderPathFromReadmeFileContents(azureSDKForJSRepoRoot, typeScriptReadmeFileContents);
         if (packageFolderPath) {
             const relativePackageFolderPath = path.relative(azureSDKForJSRepoRoot, packageFolderPath);
-            _logger.log(`packageFolderPath ${packageFolderPath}`);
-            _logger.log(`azureSDKForJSRepoRoot ${azureSDKForJSRepoRoot}`);
-            _logger.log(`relativePackageFolderPath ${relativePackageFolderPath}`);
             await npmInstall(packageFolderPath);
             await npmRunTest(packageFolderPath);
             await npmRunBuild(packageFolderPath);
