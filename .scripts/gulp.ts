@@ -201,7 +201,9 @@ export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoo
                 _logger.log(`An error occurred while generating client for readme file: "${absoluteReadmeMd}":\nErr: ${e}\nStderr: "${e.stderr}"`);
                 outputPackageInfo.result = 'failed';
             } finally {
-                outputJson.packages.push(outputPackageInfo);
+                if (outputJson) {
+                    outputJson.packages.push(outputPackageInfo);
+                }
             }
         }
     } catch (err) {

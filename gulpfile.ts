@@ -185,7 +185,7 @@ gulp.task('codegen_and_changelog', async () => {
       .usage("Example: gulp codegen_and_changelog --readmeMd ../azure-rest-api-specs/specification/cdn/something/readme.md")
       .argv as any;
 
-  await generateSdkAndChangelogAndBumpVersion(argv.azureSDKForJSRepoRoot, argv.readme, argv.use, argv.debugger);
+  await generateSdkAndChangelogAndBumpVersion(argv.azureSDKForJSRepoRoot, argv.readme,　'', argv.use, argv.debugger);
 });
 
 // This task is used in swagger pipeline.
