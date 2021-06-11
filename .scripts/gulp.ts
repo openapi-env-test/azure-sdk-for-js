@@ -107,22 +107,7 @@ export async function automationGenerate(azureSDKForJSRepoRoot: string, inputJso
         packages: packages
     };
     for (const readmeMd of readmeFiles) {
-        const outputPackageInfo: OutputPackageInfo = {
-            "packageName": "",
-            "path": [
-            ],
-            "readmeMd": [
-              readmeMd
-            ],
-            "changelog": {
-                "content": "",
-                "hasBreakingChange": false
-            },
-            "artifacts": [],
-            "result": "succeeded"
-        };
         await generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot, path.join(specFolder, readmeMd), readmeMd, use, useDebugger, outputJson);
-        outputJson.packages.push(outputPackageInfo);
     }
 
     fs.writeFileSync(outputJsonPath, JSON.stringify(outputJson, undefined, '  '), {encoding: 'utf-8'})
