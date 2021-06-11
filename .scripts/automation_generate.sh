@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -x
 # install some libraries
+npm install -g @microsoft/rush
 rush update
 
 # generate
