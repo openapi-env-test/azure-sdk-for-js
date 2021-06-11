@@ -121,17 +121,17 @@ export async function automationGenerate(azureSDKForJSRepoRoot: string, inputJso
             "artifacts": [],
             "result": "succeeded"
         };
-        await generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot, path.join(specFolder, readmeMd), use, useDebugger, outputPackageInfo);
+        await generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot, path.join(specFolder, readmeMd), readmeMd, use, useDebugger, outputJson);
         outputJson.packages.push(outputPackageInfo);
     }
 
     fs.writeFileSync(outputJsonPath, JSON.stringify(outputJson, undefined, '  '), {encoding: 'utf-8'})
 }
 
-export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot: string, readmeMd: string, use?: string, useDebugger?: boolean, outputPackageInfo?: OutputPackageInfo) {
-    _logger.log(`>>>>>>>>>>>>>>>>>>> Start: "${readmeMd}" >>>>>>>>>>>>>>>>>>>>>>>>>`);
+export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot: string, absoluteReadmeMd: string, relativeReadmeMd: string, use?: string, useDebugger?: boolean, outputJson?: any) {
+    _logger.log(`>>>>>>>>>>>>>>>>>>> Start: "${absoluteReadmeMd}" >>>>>>>>>>>>>>>>>>>>>>>>>`);
 
-    let cmd = `autorest --version=V2 --typescript --typescript-sdks-folder=${azureSDKForJSRepoRoot} --license-header=MICROSOFT_MIT_NO_VERSION ${readmeMd}`;
+    let cmd = `autorest --version=V2 --typescript --typescript-sdks-folder=${azureSDKForJSRepoRoot} --license-header=MICROSOFT_MIT_NO_VERSION ${absoluteReadmeMd}`;
     if (use) {
         cmd += ` --use=${use}`;
     } else {
@@ -155,49 +155,61 @@ export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoo
         _logger.log(commandOutput);
 
         const changedPackageDirectories: Set<string> = await getChangedPackageDirectory();
-        for (const a of changedPackageDirectories) {
-            _logger.log(a);
-        }
-
-
         for (const changedPackageDirectory of changedPackageDirectories) {
-            const packageFolderPath: string = path.join(azureSDKForJSRepoRoot, changedPackageDirectory);
-            _logger.log(`Installing dependencies for ${changedPackageDirectory}...`);
-            if (packageFolderPath) {
-                await npmInstall(packageFolderPath);
-                await npmRunTest(packageFolderPath);
-                await npmRunBuild(packageFolderPath);
-                _logger.log('Generating Changelog and Bumping Version...');
-                const changelog: Changelog | undefined = await generateChangelogAndBumpVersion(changedPackageDirectory);
-                await npmPack(packageFolderPath);
-                if (outputPackageInfo) {
-                    if (changelog) {
-                        outputPackageInfo.changelog.hasBreakingChange = changelog.hasBreakingChange;
-                        outputPackageInfo.changelog.content = changelog.displayChangeLog();
-                    }
-                    const packageJson = JSON.parse(fs.readFileSync(path.join(packageFolderPath, 'package.json'), {encoding: 'utf-8'}));
-                    outputPackageInfo.packageName = packageJson.name;
-                    outputPackageInfo.path.push(path.dirname(changedPackageDirectory));
-                    for (const file of fs.readdirSync(packageFolderPath)) {
-                        if (file.startsWith('azure-arm') && file.endsWith('.tgz')) {
-                            outputPackageInfo.artifacts.push(path.join(changedPackageDirectory, file));
+            const outputPackageInfo: OutputPackageInfo = {
+                "packageName": "",
+                "path": [],
+                "readmeMd": [
+                    relativeReadmeMd
+                ],
+                "changelog": {
+                    "content": "",
+                    "hasBreakingChange": false
+                },
+                "artifacts": [],
+                "result": "succeeded"
+            };
+            try {
+                const packageFolderPath: string = path.join(azureSDKForJSRepoRoot, changedPackageDirectory);
+                _logger.log(`Installing dependencies for ${changedPackageDirectory}...`);
+                if (packageFolderPath) {
+                    await npmInstall(packageFolderPath);
+                    await npmRunTest(packageFolderPath);
+                    await npmRunBuild(packageFolderPath);
+                    _logger.log('Generating Changelog and Bumping Version...');
+                    const changelog: Changelog | undefined = await generateChangelogAndBumpVersion(changedPackageDirectory);
+                    await npmPack(packageFolderPath);
+                    if (outputJson) {
+                        if (changelog) {
+                            outputPackageInfo.changelog.hasBreakingChange = changelog.hasBreakingChange;
+                            outputPackageInfo.changelog.content = changelog.displayChangeLog();
+                        }
+                        const packageJson = JSON.parse(fs.readFileSync(path.join(packageFolderPath, 'package.json'), { encoding: 'utf-8' }));
+                        outputPackageInfo.packageName = packageJson.name;
+                        outputPackageInfo.path.push(path.dirname(changedPackageDirectory));
+                        for (const file of fs.readdirSync(packageFolderPath)) {
+                            if (file.startsWith('azure-arm') && file.endsWith('.tgz')) {
+                                outputPackageInfo.artifacts.push(path.join(changedPackageDirectory, file));
+                            }
                         }
                     }
+                } else {
+                    throw 'find undefined packageFolderPath'
                 }
-            } else {
+            } catch (e) {
                 _logger.log('Error:');
-                _logger.log(`Could not determine the generated package folder's path from ${changedPackageDirectories}.`);
+                _logger.log(`An error occurred while generating client for readme file: "${absoluteReadmeMd}":\nErr: ${e}\nStderr: "${e.stderr}"`);
+                outputPackageInfo.result = 'failed';
+            } finally {
+                outputJson.packages.push(outputPackageInfo);
             }
         }
     } catch (err) {
         _logger.log('Error:');
-        _logger.log(`An error occurred while generating client for readme file: "${readmeMd}":\nErr: ${err}\nStderr: "${err.stderr}"`);
-        if(outputPackageInfo) {
-            outputPackageInfo.result = "failed";
-        }
+        _logger.log(`An error occurred while generating client for readme file: "${absoluteReadmeMd}":\nErr: ${err}\nStderr: "${err.stderr}"`);
     }
 
-    _logger.log(`>>>>>>>>>>>>>>>>>>> End: "${readmeMd}" >>>>>>>>>>>>>>>>>>>>>>>>>`);
+    _logger.log(`>>>>>>>>>>>>>>>>>>> End: "${absoluteReadmeMd}" >>>>>>>>>>>>>>>>>>>>>>>>>`);
     _logger.log();
 }
 
