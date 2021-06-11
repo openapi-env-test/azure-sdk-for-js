@@ -7,12 +7,12 @@
 import { execSync } from "child_process";
 import fs from "fs";
 import * as path from "path";
-import { contains, npmInstall, npmRunBuild, npmRunTest } from "./common";
+import { contains, npmInstall, npmPack, npmRunBuild, npmRunTest } from "./common";
 import { Logger } from "./logger";
 import { getPackageInformationFromPackageJsons, PackageInfo } from "./packages";
 import { findReadmeTypeScriptMdFilePaths, getAbsolutePackageFolderPathFromReadmeFileContents, getPackageNamesFromReadmeTypeScriptMdFileContents } from "./readme";
 import { NPMViewResult, NPMScope } from "@ts-common/azure-js-dev-tools";
-
+import { Changelog, generateChangelogAndBumpVersion } from "js-sdk-changelog-tool";
 const _logger = Logger.get();
 
 function containsPackageName(packageNames: string[], packageName: string): boolean {
@@ -115,7 +115,7 @@ export async function automationGenerate(azureSDKForJSRepoRoot: string, inputJso
             ],
             "changelog": {
                 "content": "",
-                "hasBreakingChange": true
+                "hasBreakingChange": false
             },
             "artifacts": [],
             "result": "succeeded"
@@ -124,7 +124,7 @@ export async function automationGenerate(azureSDKForJSRepoRoot: string, inputJso
         outputJson.packages.push(outputPackageInfo);
     }
 
-    fs.writeFileSync(outputJsonPath, JSON.stringify(outputJson), {encoding: 'utf-8'})
+    fs.writeFileSync(outputJsonPath, JSON.stringify(outputJson, undefined, '  '), {encoding: 'utf-8'})
 }
 
 export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot: string, readmeMd: string, use?: string, useDebugger?: boolean, outputPackageInfo?: OutputPackageInfo) {
@@ -157,29 +157,34 @@ export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoo
         const typeScriptReadmeFilePath = readmeMd.replace('readme.md', 'readme.typescript.md');
         const typeScriptReadmeFileContents: string = await fs.promises.readFile(typeScriptReadmeFilePath, { encoding: 'utf8' });
         const packageFolderPath: string | undefined = getAbsolutePackageFolderPathFromReadmeFileContents(azureSDKForJSRepoRoot, typeScriptReadmeFileContents);
-        const relativePackageFolderPath = packageFolderPath?.replace(azureSDKForJSRepoRoot, '');
-        if (!packageFolderPath) {
-            _logger.log('Error:');
-            _logger.log(`Could not determine the generated package folder's path from ${typeScriptReadmeFilePath}.`);
-        } else {
+        if (packageFolderPath) {
+            const relativePackageFolderPath = path.relative(azureSDKForJSRepoRoot, packageFolderPath);
+            _logger.log(`packageFolderPath ${packageFolderPath}`);
+            _logger.log(`azureSDKForJSRepoRoot ${azureSDKForJSRepoRoot}`);
+            _logger.log(`relativePackageFolderPath ${relativePackageFolderPath}`);
             await npmInstall(packageFolderPath);
             await npmRunTest(packageFolderPath);
             await npmRunBuild(packageFolderPath);
+            await npmPack(packageFolderPath);
             _logger.log('Generating Changelog and Bumping Version...');
-            const outputOfGeneratingChangelogAndBumpingVersion = execSync(`js-sdk-changelog-tool ${relativePackageFolderPath}`,{ encoding: "utf8" });
-            _logger.log(outputOfGeneratingChangelogAndBumpingVersion);
-        }
-        _logger.log(`outputPackageInfo: ${outputPackageInfo}`);
-        if (outputPackageInfo) {
-            _logger.log(`packageFolderPath ${packageFolderPath}`);
-            if (packageFolderPath) {
+            const changelog: Changelog | undefined = await generateChangelogAndBumpVersion(relativePackageFolderPath);
+            if (outputPackageInfo) {
+                if (changelog) {
+                    outputPackageInfo.changelog.hasBreakingChange = changelog.hasBreakingChange;
+                    outputPackageInfo.changelog.content = changelog.displayChangeLog();
+                }
                 const packageJson = JSON.parse(fs.readFileSync(path.join(packageFolderPath, 'package.json'), {encoding: 'utf-8'}));
                 outputPackageInfo.packageName = packageJson.name;
+                outputPackageInfo.path.push(path.dirname(relativePackageFolderPath));
+                for (const file of fs.readdirSync(packageFolderPath)) {
+                    if (file.startsWith('azure-arm') && file.endsWith('.tgz')) {
+                        outputPackageInfo.artifacts.push(path.join(relativePackageFolderPath, file));
+                    }
+                }
             }
-            if (relativePackageFolderPath) {
-                outputPackageInfo.path.push(relativePackageFolderPath);
-                // outputPackageInfo.artifacts.push(relativePackageFolderPath);
-            }
+        } else {
+            _logger.log('Error:');
+            _logger.log(`Could not determine the generated package folder's path from ${typeScriptReadmeFilePath}.`);
         }
     } catch (err) {
         _logger.log('Error:');

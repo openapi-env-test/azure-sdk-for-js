@@ -67,6 +67,10 @@ export async function npmRunTest(packageFolderPath: string): Promise<void> {
   }
 }
 
+export function npmPack(packageFolderPath: string) : void {
+  execute("npm pack", packageFolderPath);
+}
+
 export async function getChildDirectories(parent: string): Promise<string[]> {
   const allChildren = await fs.readdir(parent);
   const childDirectories = [];
