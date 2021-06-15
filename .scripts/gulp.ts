@@ -13,7 +13,7 @@ import { getPackageInformationFromPackageJsons, PackageInfo } from "./packages";
 import { findReadmeTypeScriptMdFilePaths, getAbsolutePackageFolderPathFromReadmeFileContents, getPackageNamesFromReadmeTypeScriptMdFileContents } from "./readme";
 import { NPMViewResult, NPMScope } from "@ts-common/azure-js-dev-tools";
 import { Changelog, generateChangelogAndBumpVersion } from "js-sdk-changelog-tool";
-import { getChangedPackageDirectory } from "./git";
+import { getChangedPackageDirectory, getLastCommitId } from "./git";
 const _logger = Logger.get();
 
 function containsPackageName(packageNames: string[], packageName: string): boolean {
@@ -98,22 +98,34 @@ interface OutputPackageInfo {
     result: string;
 }
 
-export async function automationGenerateInPipeline(azureSDKForJSRepoRoot: string, inputJsonPath: string, outputJsonPath: string, gitCommitId: string, use?: string, useDebugger?: boolean) {
+export async function automationGenerateInPipeline(azureSDKForJSRepoRoot: string, inputJsonPath: string, outputJsonPath: string, use?: string, useDebugger?: boolean) {
     const inputJson = JSON.parse(fs.readFileSync(inputJsonPath, {encoding: 'utf-8'}));
     const specFolder: string = inputJson['specFolder'];
     const readmeFiles: string[] = inputJson['relatedReadmeMdFiles'];
+    const gitCommitId: string = await getLastCommitId(specFolder);
     const packages: OutputPackageInfo[] = [];
     const outputJson = {
         packages: packages
     };
     for (const readmeMd of readmeFiles) {
-        await generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot, path.join(specFolder, readmeMd), readmeMd, use, useDebugger, outputJson, gitCommitId);
+        await generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot, path.join(specFolder, readmeMd), readmeMd, gitCommitId, use, useDebugger, outputJson);
     }
 
     fs.writeFileSync(outputJsonPath, JSON.stringify(outputJson, undefined, '  '), {encoding: 'utf-8'})
 }
 
-export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot: string, absoluteReadmeMd: string, relativeReadmeMd: string, use?: string, useDebugger?: boolean, outputJson?: any, gitCommitId?: string) {
+export async function automationGenerateInLocal(azureSDKForJSRepoRoot: string, absoluteReadmeMd: string, use?: string, useDebugger?: boolean) {
+    const regexResult = /^(.*\/azure-rest-api-specs)\/(specification.*)/.exec(absoluteReadmeMd);
+    if (!regexResult || regexResult.length !== 3) {
+        _logger.logError(`Cannot Parse readme file path: ${absoluteReadmeMd}`);
+    } else {
+        const gitCommitId = await getLastCommitId(regexResult[1]);
+        const relativeReadmeMd = regexResult[2];
+        await generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot, absoluteReadmeMd, relativeReadmeMd, gitCommitId, use, useDebugger);
+    }
+}
+
+export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot: string, absoluteReadmeMd: string, relativeReadmeMd: string, gitCommitId: string, use?: string, useDebugger?: boolean, outputJson?: any) {
     _logger.log(`>>>>>>>>>>>>>>>>>>> Start: "${absoluteReadmeMd}" >>>>>>>>>>>>>>>>>>>>>>>>>`);
 
     let cmd = `autorest --version=V2 --typescript --typescript-sdks-folder=${azureSDKForJSRepoRoot} --license-header=MICROSOFT_MIT_NO_VERSION ${absoluteReadmeMd}`;
@@ -179,11 +191,10 @@ export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoo
                         }
                     }
                     const metaInfo = {
-                        commit: gitCommitId? gitCommitId: '',
+                        commit: gitCommitId,
                         readme: relativeReadmeMd,
                         autorest_command: cmd
                     };
-                    _logger.log(JSON.stringify(metaInfo, undefined, '  '));
                     fs.writeFileSync(path.join(packageFolderPath, '_meta.json'), JSON.stringify(metaInfo, undefined, '  '), {encoding: 'utf-8'});
                 } else {
                     throw 'find undefined packageFolderPath'

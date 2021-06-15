@@ -1,6 +1,10 @@
 import simpleGit, {SimpleGit} from 'simple-git';
+import { execSync } from "child_process";
+import { Logger } from "./logger";
 
+const _logger = Logger.get();
 const git: SimpleGit = simpleGit();
+const path = require('path');
 
 export async function getChangedPackageDirectory() {
   const changedPackageDirectories: Set<string> = new Set<string>();
@@ -16,4 +20,15 @@ export async function getChangedPackageDirectory() {
     }
   }
   return changedPackageDirectories;
+}
+
+
+export async function getLastCommitId(repository: string) {
+  let commitId = '';
+  try {
+    commitId = execSync(`git --git-dir=${path.join(repository, '.git')} log --format=%H -n 1`, { encoding: "utf8" });
+  } catch (e) {
+    _logger.log(`cannot get commit id from ${repository}`);
+  }
+  return commitId.trim();
 }
