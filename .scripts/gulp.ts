@@ -98,7 +98,7 @@ interface OutputPackageInfo {
     result: string;
 }
 
-export async function automationGenerate(azureSDKForJSRepoRoot: string, inputJsonPath: string, outputJsonPath: string, use?: string, useDebugger?: boolean) {
+export async function automationGenerateInPipeline(azureSDKForJSRepoRoot: string, inputJsonPath: string, outputJsonPath: string, gitCommitId: string, use?: string, useDebugger?: boolean) {
     const inputJson = JSON.parse(fs.readFileSync(inputJsonPath, {encoding: 'utf-8'}));
     const specFolder: string = inputJson['specFolder'];
     const readmeFiles: string[] = inputJson['relatedReadmeMdFiles'];
@@ -107,13 +107,13 @@ export async function automationGenerate(azureSDKForJSRepoRoot: string, inputJso
         packages: packages
     };
     for (const readmeMd of readmeFiles) {
-        await generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot, path.join(specFolder, readmeMd), readmeMd, use, useDebugger, outputJson);
+        await generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot, path.join(specFolder, readmeMd), readmeMd, use, useDebugger, outputJson, gitCommitId);
     }
 
     fs.writeFileSync(outputJsonPath, JSON.stringify(outputJson, undefined, '  '), {encoding: 'utf-8'})
 }
 
-export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot: string, absoluteReadmeMd: string, relativeReadmeMd: string, use?: string, useDebugger?: boolean, outputJson?: any) {
+export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoot: string, absoluteReadmeMd: string, relativeReadmeMd: string, use?: string, useDebugger?: boolean, outputJson?: any, gitCommitId?: string) {
     _logger.log(`>>>>>>>>>>>>>>>>>>> Start: "${absoluteReadmeMd}" >>>>>>>>>>>>>>>>>>>>>>>>>`);
 
     let cmd = `autorest --version=V2 --typescript --typescript-sdks-folder=${azureSDKForJSRepoRoot} --license-header=MICROSOFT_MIT_NO_VERSION ${absoluteReadmeMd}`;
@@ -178,6 +178,13 @@ export async function generateSdkAndChangelogAndBumpVersion(azureSDKForJSRepoRoo
                             }
                         }
                     }
+                    const metaInfo = {
+                        commit: gitCommitId? gitCommitId: '',
+                        readme: relativeReadmeMd,
+                        autorest_command: cmd
+                    };
+                    _logger.log(JSON.stringify(metaInfo, undefined, '  '));
+                    fs.writeFileSync(path.join(packageFolderPath, '_meta.json'), JSON.stringify(metaInfo, undefined, '  '), {encoding: 'utf-8'});
                 } else {
                     throw 'find undefined packageFolderPath'
                 }

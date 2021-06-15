@@ -11,7 +11,7 @@ import * as path from "path";
 import PluginError from "plugin-error";
 import { Argv, CommandLineOptions, getCommandLineOptions } from "./.scripts/commandLine";
 import { endsWith, getPackageFolderPaths, packagesToIgnore } from "./.scripts/common";
-import { automationGenerate, generateSdk, generateSdkAndChangelogAndBumpVersion, setAutoPublish, setVersion } from "./.scripts/gulp";
+import { automationGenerateInPipeline, generateSdk, generateSdkAndChangelogAndBumpVersion, setAutoPublish, setVersion } from "./.scripts/gulp";
 import { Logger } from "./.scripts/logger";
 import { findMissingSdks } from "./.scripts/packages";
 import { getPackageFolderPathFromPackageArgument } from "./.scripts/readme";
@@ -83,6 +83,16 @@ gulp.task('default', async () => {
   _logger.log('    Root location of autorest.typescript repository. If this is not specified, then the latest installed generator for TypeScript will be used.');
   _logger.log('  --readme');
   _logger.log('    readme file path.');
+  _logger.log();
+  _logger.log('gulp automation_generate_in_pipeline [--use <autorest.typescript root>] [--inputJson <inputJson name>] [--outputJson <outputJson name>] [--gitCommitId <gitCommitId id>]');
+  _logger.log('  --use');
+  _logger.log('    Root location of autorest.typescript repository. If this is not specified, then the latest installed generator for TypeScript will be used.');
+  _logger.log('  --inputJson');
+  _logger.log('    input.json provided by swagger pipeline.');
+  _logger.log('  --outputJson');
+  _logger.log('    output.json provided by swagger pipeline.');
+  _logger.log('  --gitCommitId');
+  _logger.log('    git last commit id of azure-rest-api-specs.');
   _logger.log();
   _logger.log('gulp pack [--package <package name>] [--whatif] [--to-pack <to-pack option>] [--drop <drop folder path>]');
   _logger.log('  --package');
@@ -189,12 +199,13 @@ gulp.task('codegen_and_changelog', async () => {
 });
 
 // This task is used in swagger pipeline.
-gulp.task('automation_generate', async () => {
+gulp.task('automation_generate_in_pipeline', async () => {
   interface CodegenOptions {
     debugger: boolean | undefined;
     use: string | undefined;
     inputJson: string;
-    outputJson: string
+    outputJson: string;
+    gitCommitId: string;
   }
 
   _logger.log(`Passed arguments: ${Argv.print()}`);
@@ -217,12 +228,16 @@ gulp.task('automation_generate', async () => {
       "outputJson": {
         string: true,
         description: "output.json provided by swagger pipeline"
+      },
+      "gitCommitId": {
+        string: true,
+        description: "git last commit id of azure-rest-api-specs"
       }
     })
-    .usage("Example: gulp codegen_and_changelog --inputJson input.json --outputJson output.json")
+    .usage("Example: gulp automation_generate --inputJson input.json --outputJson output.json --gitCommitId aaaaaaaaaaa")
     .argv as any;
 
-  await automationGenerate(argv.azureSDKForJSRepoRoot, argv.inputJson, argv.outputJson, argv.use, argv.debugger);
+  await automationGenerateInPipeline(argv.azureSDKForJSRepoRoot, argv.inputJson, argv.outputJson, argv.gitCommitId, argv.use, argv.debugger);
 });
 
 function pack(): void {
