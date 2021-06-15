@@ -102,7 +102,7 @@ export async function automationGenerateInPipeline(azureSDKForJSRepoRoot: string
     const inputJson = JSON.parse(fs.readFileSync(inputJsonPath, {encoding: 'utf-8'}));
     const specFolder: string = inputJson['specFolder'];
     const readmeFiles: string[] = inputJson['relatedReadmeMdFiles'];
-    const gitCommitId: string = await getLastCommitId(specFolder);
+    const gitCommitId: string = inputJson['headSha'];
     const packages: OutputPackageInfo[] = [];
     const outputJson = {
         packages: packages
