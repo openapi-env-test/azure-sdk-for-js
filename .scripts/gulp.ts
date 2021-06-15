@@ -103,12 +103,13 @@ export async function automationGenerateInPipeline(azureSDKForJSRepoRoot: string
     const specFolder: string = inputJson['specFolder'];
     const readmeFiles: string[] = inputJson['relatedReadmeMdFiles'];
     const gitCommitId: string = inputJson['headSha'];
+    const repoHttpsUrl: string = inputJson['repoHttpsUrl'];
     const packages: OutputPackageInfo[] = [];
     const outputJson = {
         packages: packages
     };
     for (const readmeMd of readmeFiles) {
-        await generateSdkAutomatically(azureSDKForJSRepoRoot, path.join(specFolder, readmeMd), readmeMd, gitCommitId, undefined, use, useDebugger, outputJson);
+        await generateSdkAutomatically(azureSDKForJSRepoRoot, path.join(specFolder, readmeMd), readmeMd, gitCommitId, undefined, use, useDebugger, outputJson, repoHttpsUrl);
     }
 
     fs.writeFileSync(outputJsonPath, JSON.stringify(outputJson, undefined, '  '), {encoding: 'utf-8'})
@@ -125,7 +126,7 @@ export async function automationGenerateInLocal(azureSDKForJSRepoRoot: string, a
     }
 }
 
-export async function generateSdkAutomatically(azureSDKForJSRepoRoot: string, absoluteReadmeMd: string, relativeReadmeMd: string, gitCommitId: string, tag?: string, use?: string, useDebugger?: boolean, outputJson?: any) {
+export async function generateSdkAutomatically(azureSDKForJSRepoRoot: string, absoluteReadmeMd: string, relativeReadmeMd: string, gitCommitId: string, tag?: string, use?: string, useDebugger?: boolean, outputJson?: any, swaggerRepoUrl?: string) {
     _logger.log(`>>>>>>>>>>>>>>>>>>> Start: "${absoluteReadmeMd}" >>>>>>>>>>>>>>>>>>>>>>>>>`);
 
     let cmd = `autorest --version=V2 --typescript --typescript-sdks-folder=${azureSDKForJSRepoRoot} --license-header=MICROSOFT_MIT_NO_VERSION ${absoluteReadmeMd}`;
@@ -195,12 +196,18 @@ export async function generateSdkAutomatically(azureSDKForJSRepoRoot: string, ab
                             }
                         }
                     }
-                    const metaInfo = {
+                    const metaInfo: any = {
                         commit: gitCommitId,
                         readme: relativeReadmeMd,
-                        tag: tag? tag : "default",
-                        autorest_command: cmd
+                        autorest_command: cmd,
+                        repository_url: swaggerRepoUrl? `${swaggerRepoUrl}.git` : 'https://github.com/Azure/azure-rest-api-specs.git'
                     };
+                    if (tag) {
+                        metaInfo['tag'] = tag;
+                    }
+                    if (use) {
+                        metaInfo['use'] = use;
+                    }
                     fs.writeFileSync(path.join(packageFolderPath, '_meta.json'), JSON.stringify(metaInfo, undefined, '  '), {encoding: 'utf-8'});
                 } else {
                     throw 'find undefined packageFolderPath'
