@@ -83,6 +83,8 @@ gulp.task('default', async () => {
   _logger.log('    Root location of autorest.typescript repository. If this is not specified, then the latest installed generator for TypeScript will be used.');
   _logger.log('  --readme');
   _logger.log('    readme file path.');
+  _logger.log('  --tag');
+  _logger.log('    tag used in generating codes.');
   _logger.log();
   _logger.log('gulp automation_generate_in_pipeline [--use <autorest.typescript root>] [--inputJson <inputJson name>] [--outputJson <outputJson name>]');
   _logger.log('  --use');
@@ -169,6 +171,7 @@ gulp.task('automation_generate_in_local', async () => {
   interface CodegenOptions {
     debugger: boolean | undefined;
     use: string | undefined;
+    tag: string | undefined;
     readme: string
   }
 
@@ -185,6 +188,10 @@ gulp.task('automation_generate_in_local', async () => {
           string: true,
           description: "Specifies location for the generator to use"
         },
+        "tag": {
+          string: true,
+          description: "Specifies tag for the generator to use"
+        },
         "readme": {
           string: true,
           description: "Specifies location of readme.md fpr the generator to use"
@@ -193,7 +200,7 @@ gulp.task('automation_generate_in_local', async () => {
       .usage("Example: gulp automation_generate_in_local --readmeMd ../azure-rest-api-specs/specification/cdn/something/readme.md")
       .argv as any;
 
-  await automationGenerateInLocal(argv.azureSDKForJSRepoRoot, argv.readme, argv.use, argv.debugger);
+  await automationGenerateInLocal(argv.azureSDKForJSRepoRoot, argv.readme, argv.tag, argv.use, argv.debugger);
 });
 
 // This task is used in swagger pipeline.
