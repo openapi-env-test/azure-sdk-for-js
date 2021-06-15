@@ -1,0 +1,5 @@
+{
+  "commit": "6c93aed55698e5fa4c31fca6bf2af72a57de1bb6",
+  "readme": "specification/iotspaces/resource-manager/readme.md",
+  "autorest_command": "autorest --version=V2 --typescript --typescript-sdks-folder=/home/vsts/work/1/s/azure-sdk-for-js --license-header=MICROSOFT_MIT_NO_VERSION ../azure-rest-api-specs/specification/iotspaces/resource-manager/readme.md --use=@microsoft.azure/autorest.typescript@4.2.2"
+}
