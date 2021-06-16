@@ -1,0 +1,7 @@
+{
+  "commit": "a8d3eac5f4692ae04bf54b6ff4fbb60197e66a55",
+  "readme": "specification/iotspaces/resource-manager/readme.md",
+  "autorest_command": "autorest --version=V2 --typescript --typescript-sdks-folder=/home/vsts/work/1/s/azure-sdk-for-js --license-header=MICROSOFT_MIT_NO_VERSION ../azure-rest-api-specs/specification/iotspaces/resource-manager/readme.md --use=@microsoft.azure/autorest.typescript@4.2.2",
+  "repository_url": "https://github.com/openapi-env-test/azure-rest-api-specs.git",
+  "use": "@microsoft.azure/autorest.typescript@4.2.2"
+}
