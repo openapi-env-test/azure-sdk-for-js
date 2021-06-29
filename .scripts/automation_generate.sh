@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# rush update
-#npm install -g @microsoft/rush
-#rush update
+# rush install
+npm install -g @microsoft/rush
 npm install
 # generate
-gulp automation_generate_in_pipeline --inputJson $1 --outputJson $2 --use @microsoft.azure/autorest.typescript@4.2.2
+npm install -g azure-track2-js-sdk-release-tools
+track2-codegen-automation-for-pipeline --inputJson=$1 --outputJson=$2 --use==@autorest/typescript@6.0.0-beta.5
