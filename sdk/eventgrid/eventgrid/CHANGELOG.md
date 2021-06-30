@@ -1,26 +1,19 @@
 # Release History
 
-## 4.3.0 (Unreleased)
+## 4.4.0 (Unreleased)
+
+### Features Added
+- With the dropping of support for Node.js versions that are no longer in LTS, the dependency on `@types/node` has been updated to version 12. Read our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
+
+### Breaking Changes
+
+### Key Bugs Fixed
+
+## 4.3.0 (2021-06-08)
 
 ### New Features
 
-- Added new System Events:
-  - `Microsoft.AgFoodPlatform.ApplicationDataChanged`
-  - `Microsoft.AgFoodPlatform.BoundaryChanged`
-  - `Microsoft.AgFoodPlatform.CropChanged`
-  - `Microsoft.AgFoodPlatform.CropVarietyChanged`
-  - `Microsoft.AgFoodPlatform.FarmChanged`
-  - `Microsoft.AgFoodPlatform.FarmOperationDataIngestionJobStatusChanged`
-  - `Microsoft.AgFoodPlatform.FarmerChanged`
-  - `Microsoft.AgFoodPlatform.FieldChanged`
-  - `Microsoft.AgFoodPlatform.HarvestDataChanged`
-  - `Microsoft.AgFoodPlatform.PlantingDataChanged`
-  - `Microsoft.AgFoodPlatform.SatelliteDataIngestionJobStatusChanged`
-  - `Microsoft.AgFoodPlatform.SeasonChanged`
-  - `Microsoft.AgFoodPlatform.SeasonalFieldChanged`
-  - `Microsoft.AgFoodPlatform.TillageDataChanged`
-  - `Microsoft.AgFoodPlatform.WeatherDataIngestionJobStatusChanged`
-  - `Microsoft.Storage.BlobInventoryPolicyCompleted`
+- Added new System Event: `Microsoft.Storage.BlobInventoryPolicyCompleted`
 
 ### Key Bug Fixes
 
