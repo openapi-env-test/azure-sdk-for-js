@@ -7,17 +7,19 @@
 import { AzureNamedKeyCredential } from '@azure/core-auth';
 import { AzureSASCredential } from '@azure/core-auth';
 import { CommonClientOptions } from '@azure/core-client';
+import * as coreClient from '@azure/core-client';
 import { NamedKeyCredential } from '@azure/core-auth';
 import { OperationOptions } from '@azure/core-client';
 import { PagedAsyncIterableIterator } from '@azure/core-paging';
 import { Pipeline } from '@azure/core-rest-pipeline';
 import { SASCredential } from '@azure/core-auth';
+import { TokenCredential } from '@azure/core-auth';
 
 // @public
 export interface AccessPolicy {
-    expiry: Date;
-    permission: string;
-    start: Date;
+    expiry?: Date;
+    permission?: string;
+    start?: Date;
 }
 
 // @public
@@ -209,7 +211,7 @@ export interface ServiceSetPropertiesHeaders {
 export type SetAccessPolicyResponse = TableSetAccessPolicyHeaders;
 
 // @public
-export interface SetPropertiesOptions extends OperationOptions {
+export interface SetPropertiesOptions extends coreClient.OperationOptions {
     requestId?: string;
     timeout?: number;
 }
@@ -219,13 +221,15 @@ export type SetPropertiesResponse = ServiceSetPropertiesHeaders;
 
 // @public
 export interface SignedIdentifier {
-    accessPolicy: AccessPolicy;
+    accessPolicy?: AccessPolicy;
     id: string;
 }
 
 // @public
 export class TableClient {
-    constructor(url: string, tableName: string, credential: NamedKeyCredential | SASCredential, options?: TableServiceClientOptions);
+    constructor(url: string, tableName: string, credential: NamedKeyCredential, options?: TableServiceClientOptions);
+    constructor(url: string, tableName: string, credential: SASCredential, options?: TableServiceClientOptions);
+    constructor(url: string, tableName: string, credential: TokenCredential, options?: TableServiceClientOptions);
     constructor(url: string, tableName: string, options?: TableServiceClientOptions);
     createEntity<T extends object>(entity: TableEntity<T>, options?: OperationOptions): Promise<CreateTableEntityResponse>;
     createTable(options?: OperationOptions): Promise<void>;
@@ -357,7 +361,9 @@ export interface TableSasSignatureValues {
 
 // @public
 export class TableServiceClient {
-    constructor(url: string, credential: NamedKeyCredential | SASCredential, options?: TableServiceClientOptions);
+    constructor(url: string, credential: NamedKeyCredential, options?: TableServiceClientOptions);
+    constructor(url: string, credential: SASCredential, options?: TableServiceClientOptions);
+    constructor(url: string, credential: TokenCredential, options?: TableServiceClientOptions);
     constructor(url: string, options?: TableServiceClientOptions);
     createTable(name: string, options?: OperationOptions): Promise<void>;
     deleteTable(name: string, options?: OperationOptions): Promise<void>;
