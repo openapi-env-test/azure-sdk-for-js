@@ -3,6 +3,11 @@
     "createSdkPullRequests": true,
     "generationCallMode": "one-per-config"
   },
+  "initOptions": {
+    "initScript": {
+      "path": "sh .scripts/automation_init.sh"
+    }
+  },
   "generateOptions": {
     "generateScript": {
       "path": "sh .scripts/automation_generate.sh",
