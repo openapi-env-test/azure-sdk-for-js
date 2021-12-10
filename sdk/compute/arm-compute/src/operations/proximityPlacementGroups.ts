@@ -287,7 +287,7 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.ProximityPlacementGroup
     }
   },
-  requestBody: Parameters.parameters2,
+  requestBody: Parameters.parameters1,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
@@ -308,7 +308,7 @@ const updateOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.ProximityPlacementGroup
     }
   },
-  requestBody: Parameters.parameters3,
+  requestBody: Parameters.parameters2,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,

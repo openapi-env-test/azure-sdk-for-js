@@ -467,7 +467,7 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.DedicatedHost
     }
   },
-  requestBody: Parameters.parameters6,
+  requestBody: Parameters.parameters5,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
@@ -498,7 +498,7 @@ const updateOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.DedicatedHost
     }
   },
-  requestBody: Parameters.parameters7,
+  requestBody: Parameters.parameters6,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,

@@ -98,7 +98,6 @@ export interface AvailabilitySetListResult {
 
 // @public
 export interface AvailabilitySets {
-    createOrUpdate(resourceGroupName: string, availabilitySetName: string, parameters: AvailabilitySet, options?: AvailabilitySetsCreateOrUpdateOptionalParams): Promise<AvailabilitySetsCreateOrUpdateResponse>;
     delete(resourceGroupName: string, availabilitySetName: string, options?: AvailabilitySetsDeleteOptionalParams): Promise<void>;
     get(resourceGroupName: string, availabilitySetName: string, options?: AvailabilitySetsGetOptionalParams): Promise<AvailabilitySetsGetResponse>;
     list(resourceGroupName: string, options?: AvailabilitySetsListOptionalParams): PagedAsyncIterableIterator<AvailabilitySet>;
@@ -106,13 +105,6 @@ export interface AvailabilitySets {
     listBySubscription(options?: AvailabilitySetsListBySubscriptionOptionalParams): PagedAsyncIterableIterator<AvailabilitySet>;
     update(resourceGroupName: string, availabilitySetName: string, parameters: AvailabilitySetUpdate, options?: AvailabilitySetsUpdateOptionalParams): Promise<AvailabilitySetsUpdateResponse>;
 }
-
-// @public
-export interface AvailabilitySetsCreateOrUpdateOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type AvailabilitySetsCreateOrUpdateResponse = AvailabilitySet;
 
 // @public
 export interface AvailabilitySetsDeleteOptionalParams extends coreClient.OperationOptions {
