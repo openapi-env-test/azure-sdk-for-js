@@ -80,6 +80,12 @@ export interface Sku {
   capacity?: number;
 }
 
+/** The Update Resource model definition. */
+export interface UpdateResource {
+  /** Resource tags */
+  tags?: { [propertyName: string]: string };
+}
+
 /** The Resource model definition. */
 export interface Resource {
   /**
@@ -99,12 +105,6 @@ export interface Resource {
   readonly type?: string;
   /** Resource location */
   location: string;
-  /** Resource tags */
-  tags?: { [propertyName: string]: string };
-}
-
-/** The Update Resource model definition. */
-export interface UpdateResource {
   /** Resource tags */
   tags?: { [propertyName: string]: string };
 }
@@ -4155,6 +4155,326 @@ export type VirtualMachineScaleSetUpdateNetworkConfiguration = SubResource & {
   deleteOption?: DeleteOptions;
 };
 
+/** Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated. */
+export type AvailabilitySetUpdate = UpdateResource & {
+  /** Sku of the availability set */
+  sku?: Sku;
+  /** Update Domain count. */
+  platformUpdateDomainCount?: number;
+  /** Fault Domain count. */
+  platformFaultDomainCount?: number;
+  /** A list of references to all virtual machines in the availability set. */
+  virtualMachines?: SubResource[];
+  /** Specifies information about the proximity placement group that the availability set should be assigned to. <br><br>Minimum api-version: 2018-04-01. */
+  proximityPlacementGroup?: SubResource;
+  /**
+   * The resource status information.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly statuses?: InstanceViewStatus[];
+};
+
+/** Specifies information about the proximity placement group. */
+export type ProximityPlacementGroupUpdate = UpdateResource & {};
+
+/** Specifies information about the dedicated host group that the dedicated host should be assigned to. Only tags may be updated. */
+export type DedicatedHostGroupUpdate = UpdateResource & {
+  /** Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone. */
+  zones?: string[];
+  /** Number of fault domains that the host group can span. */
+  platformFaultDomainCount?: number;
+  /**
+   * A list of references to all dedicated hosts in the dedicated host group.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly hosts?: SubResourceReadOnly[];
+  /**
+   * The dedicated host group instance view, which has the list of instance view of the dedicated hosts under the dedicated host group.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly instanceView?: DedicatedHostGroupInstanceView;
+  /** Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'false' when not provided. <br><br>Minimum api-version: 2020-06-01. */
+  supportAutomaticPlacement?: boolean;
+};
+
+/** Specifies information about the dedicated host. Only tags, autoReplaceOnFailure and licenseType may be updated. */
+export type DedicatedHostUpdate = UpdateResource & {
+  /** Fault domain of the dedicated host within a dedicated host group. */
+  platformFaultDomain?: number;
+  /** Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided. */
+  autoReplaceOnFailure?: boolean;
+  /**
+   * A unique id generated and assigned to the dedicated host by the platform. <br><br> Does not change throughout the lifetime of the host.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly hostId?: string;
+  /**
+   * A list of references to all virtual machines in the Dedicated Host.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly virtualMachines?: SubResourceReadOnly[];
+  /** Specifies the software license type that will be applied to the VMs deployed on the dedicated host. <br><br> Possible values are: <br><br> **None** <br><br> **Windows_Server_Hybrid** <br><br> **Windows_Server_Perpetual** <br><br> Default: **None** */
+  licenseType?: DedicatedHostLicenseTypes;
+  /**
+   * The date when the host was first provisioned.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly provisioningTime?: Date;
+  /**
+   * The provisioning state, which only appears in the response.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly provisioningState?: string;
+  /**
+   * The dedicated host instance view.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly instanceView?: DedicatedHostInstanceView;
+};
+
+/** Specifies information about the SSH public key. */
+export type SshPublicKeyUpdateResource = UpdateResource & {
+  /** SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format. */
+  publicKey?: string;
+};
+
+/** Describes a Virtual Machine Extension. */
+export type VirtualMachineExtensionUpdate = UpdateResource & {
+  /** How the extension handler should be forced to update even if the extension configuration has not changed. */
+  forceUpdateTag?: string;
+  /** The name of the extension handler publisher. */
+  publisher?: string;
+  /** Specifies the type of the extension; an example is "CustomScriptExtension". */
+  type?: string;
+  /** Specifies the version of the script handler. */
+  typeHandlerVersion?: string;
+  /** Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true. */
+  autoUpgradeMinorVersion?: boolean;
+  /** Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available. */
+  enableAutomaticUpgrade?: boolean;
+  /** Json formatted public settings for the extension. */
+  settings?: Record<string, unknown>;
+  /** The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. */
+  protectedSettings?: Record<string, unknown>;
+  /** Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false. */
+  suppressFailures?: boolean;
+};
+
+/** The source user image virtual hard disk. Only tags may be updated. */
+export type ImageUpdate = UpdateResource & {
+  /** The source virtual machine from which Image is created. */
+  sourceVirtualMachine?: SubResource;
+  /** Specifies the storage settings for the virtual machine disks. */
+  storageProfile?: ImageStorageProfile;
+  /**
+   * The provisioning state.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly provisioningState?: string;
+  /** Specifies the HyperVGenerationType of the VirtualMachine created from the image. From API Version 2019-03-01 if the image source is a blob, then we need the user to specify the value, if the source is managed resource like disk or snapshot, we may require the user to specify the property if we cannot deduce it from the source managed resource. */
+  hyperVGeneration?: HyperVGenerationTypes;
+};
+
+/** Describes a Virtual Machine Update. */
+export type VirtualMachineUpdate = UpdateResource & {
+  /** Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**. */
+  plan?: Plan;
+  /** The identity of the virtual machine, if configured. */
+  identity?: VirtualMachineIdentity;
+  /** The virtual machine zones. */
+  zones?: string[];
+  /** Specifies the hardware settings for the virtual machine. */
+  hardwareProfile?: HardwareProfile;
+  /** Specifies the storage settings for the virtual machine disks. */
+  storageProfile?: StorageProfile;
+  /** Specifies additional capabilities enabled or disabled on the virtual machine. */
+  additionalCapabilities?: AdditionalCapabilities;
+  /** Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned. */
+  osProfile?: OSProfile;
+  /** Specifies the network interfaces of the virtual machine. */
+  networkProfile?: NetworkProfile;
+  /** Specifies the Security related profile settings for the virtual machine. */
+  securityProfile?: SecurityProfile;
+  /** Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15. */
+  diagnosticsProfile?: DiagnosticsProfile;
+  /** Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). <br><br> For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates) <br><br> Currently, a VM can only be added to availability set at creation time. The availability set to which the VM is being added should be under the same resource group as the availability set resource. An existing VM cannot be added to an availability set. <br><br>This property cannot exist along with a non-null properties.virtualMachineScaleSet reference. */
+  availabilitySet?: SubResource;
+  /** Specifies information about the virtual machine scale set that the virtual machine should be assigned to. Virtual machines specified in the same virtual machine scale set are allocated to different nodes to maximize availability. Currently, a VM can only be added to virtual machine scale set at creation time. An existing VM cannot be added to a virtual machine scale set. <br><br>This property cannot exist along with a non-null properties.availabilitySet reference. <br><br>Minimum api‐version: 2019‐03‐01 */
+  virtualMachineScaleSet?: SubResource;
+  /** Specifies information about the proximity placement group that the virtual machine should be assigned to. <br><br>Minimum api-version: 2018-04-01. */
+  proximityPlacementGroup?: SubResource;
+  /** Specifies the priority for the virtual machine. <br><br>Minimum api-version: 2019-03-01 */
+  priority?: VirtualMachinePriorityTypes;
+  /** Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. <br><br>For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. <br><br>For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview. */
+  evictionPolicy?: VirtualMachineEvictionPolicyTypes;
+  /** Specifies the billing related details of a Azure Spot virtual machine. <br><br>Minimum api-version: 2019-03-01. */
+  billingProfile?: BillingProfile;
+  /** Specifies information about the dedicated host that the virtual machine resides in. <br><br>Minimum api-version: 2018-10-01. */
+  host?: SubResource;
+  /** Specifies information about the dedicated host group that the virtual machine resides in. <br><br>Minimum api-version: 2020-06-01. <br><br>NOTE: User cannot specify both host and hostGroup properties. */
+  hostGroup?: SubResource;
+  /**
+   * The provisioning state, which only appears in the response.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly provisioningState?: string;
+  /**
+   * The virtual machine instance view.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly instanceView?: VirtualMachineInstanceView;
+  /** Specifies that the image or disk that is being used was licensed on-premises. <br><br> Possible values for Windows Server operating system are: <br><br> Windows_Client <br><br> Windows_Server <br><br> Possible values for Linux Server operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS (for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing) <br><br> [Azure Hybrid Use Benefit for Linux Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux) <br><br> Minimum api-version: 2015-06-15 */
+  licenseType?: string;
+  /**
+   * Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly vmId?: string;
+  /** Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). <br><br> Minimum api-version: 2020-06-01 */
+  extensionsTimeBudget?: string;
+  /** Specifies the scale set logical fault domain into which the Virtual Machine will be created. By default, the Virtual Machine will by automatically assigned to a fault domain that best maintains balance across available fault domains.<br><li>This is applicable only if the 'virtualMachineScaleSet' property of this Virtual Machine is set.<li>The Virtual Machine Scale Set that is referenced, must have 'platformFaultDomainCount' &gt; 1.<li>This property cannot be updated once the Virtual Machine is created.<li>Fault domain assignment can be viewed in the Virtual Machine Instance View.<br><br>Minimum api‐version: 2020‐12‐01 */
+  platformFaultDomain?: number;
+  /** Specifies Scheduled Event related configurations. */
+  scheduledEventsProfile?: ScheduledEventsProfile;
+  /** UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01 */
+  userData?: string;
+  /** Specifies information about the capacity reservation that is used to allocate virtual machine. <br><br>Minimum api-version: 2021-04-01. */
+  capacityReservation?: CapacityReservationProfile;
+  /** Specifies the gallery applications that should be made available to the VM/VMSS */
+  applicationProfile?: ApplicationProfile;
+};
+
+/** Update Restore Point collection parameters. */
+export type RestorePointCollectionUpdate = UpdateResource & {
+  /** The properties of the source resource that this restore point collection is created from. */
+  source?: RestorePointCollectionSourceProperties;
+  /**
+   * The provisioning state of the restore point collection.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly provisioningState?: string;
+  /**
+   * The unique id of the restore point collection.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly restorePointCollectionId?: string;
+  /**
+   * A list containing all restore points created under this restore point collection.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly restorePoints?: RestorePoint[];
+};
+
+/** Specifies information about the capacity reservation group. Only tags can be updated. */
+export type CapacityReservationGroupUpdate = UpdateResource & {
+  /**
+   * A list of all capacity reservation resource ids that belong to capacity reservation group.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly capacityReservations?: SubResourceReadOnly[];
+  /**
+   * A list of references to all virtual machines associated to the capacity reservation group.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly virtualMachinesAssociated?: SubResourceReadOnly[];
+  /**
+   * The capacity reservation group instance view which has the list of instance views for all the capacity reservations that belong to the capacity reservation group.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly instanceView?: CapacityReservationGroupInstanceView;
+};
+
+/** Specifies information about the capacity reservation. Only tags and sku.capacity can be updated. */
+export type CapacityReservationUpdate = UpdateResource & {
+  /** SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values. */
+  sku?: Sku;
+  /**
+   * A unique id generated and assigned to the capacity reservation by the platform which does not change throughout the lifetime of the resource.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly reservationId?: string;
+  /**
+   * A list of all virtual machine resource ids that are associated with the capacity reservation.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly virtualMachinesAssociated?: SubResourceReadOnly[];
+  /**
+   * The date time when the capacity reservation was last updated.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly provisioningTime?: Date;
+  /**
+   * The provisioning state, which only appears in the response.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly provisioningState?: string;
+  /**
+   * The Capacity reservation instance view.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly instanceView?: CapacityReservationInstanceView;
+};
+
+/** Describes a Virtual Machine Scale Set. */
+export type VirtualMachineScaleSetUpdate = UpdateResource & {
+  /** The virtual machine scale set sku. */
+  sku?: Sku;
+  /** The purchase plan when deploying a virtual machine scale set from VM Marketplace images. */
+  plan?: Plan;
+  /** The identity of the virtual machine scale set, if configured. */
+  identity?: VirtualMachineScaleSetIdentity;
+  /** The upgrade policy. */
+  upgradePolicy?: UpgradePolicy;
+  /** Policy for automatic repairs. */
+  automaticRepairsPolicy?: AutomaticRepairsPolicy;
+  /** The virtual machine profile. */
+  virtualMachineProfile?: VirtualMachineScaleSetUpdateVMProfile;
+  /** Specifies whether the Virtual Machine Scale Set should be overprovisioned. */
+  overprovision?: boolean;
+  /** When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs. */
+  doNotRunExtensionsOnOverprovisionedVMs?: boolean;
+  /** When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true. */
+  singlePlacementGroup?: boolean;
+  /** Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type. */
+  additionalCapabilities?: AdditionalCapabilities;
+  /** Specifies the policies applied when scaling in Virtual Machines in the Virtual Machine Scale Set. */
+  scaleInPolicy?: ScaleInPolicy;
+  /** Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01. */
+  proximityPlacementGroup?: SubResource;
+};
+
+/** Describes a Virtual Machine run command. */
+export type VirtualMachineRunCommandUpdate = UpdateResource & {
+  /** The source of the run command script. */
+  source?: VirtualMachineRunCommandScriptSource;
+  /** The parameters used by the script. */
+  parameters?: RunCommandInputParameter[];
+  /** The parameters used by the script. */
+  protectedParameters?: RunCommandInputParameter[];
+  /** Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. */
+  asyncExecution?: boolean;
+  /** Specifies the user account on the VM when executing the run command. */
+  runAsUser?: string;
+  /** Specifies the user account password on the VM when executing the run command. */
+  runAsPassword?: string;
+  /** The timeout in seconds to execute the run command. */
+  timeoutInSeconds?: number;
+  /** Specifies the Azure storage blob where script output stream will be uploaded. */
+  outputBlobUri?: string;
+  /** Specifies the Azure storage blob where script error stream will be uploaded. */
+  errorBlobUri?: string;
+  /**
+   * The provisioning state, which only appears in the response.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly provisioningState?: string;
+  /**
+   * The virtual machine run command instance view.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly instanceView?: VirtualMachineRunCommandInstanceView;
+};
+
 /** Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). <br><br> For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set. */
 export type AvailabilitySet = Resource & {
   /** Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'. */
@@ -4970,326 +5290,6 @@ export type GalleryApplicationVersion = Resource & {
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly replicationStatus?: ReplicationStatus;
-};
-
-/** Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated. */
-export type AvailabilitySetUpdate = UpdateResource & {
-  /** Sku of the availability set */
-  sku?: Sku;
-  /** Update Domain count. */
-  platformUpdateDomainCount?: number;
-  /** Fault Domain count. */
-  platformFaultDomainCount?: number;
-  /** A list of references to all virtual machines in the availability set. */
-  virtualMachines?: SubResource[];
-  /** Specifies information about the proximity placement group that the availability set should be assigned to. <br><br>Minimum api-version: 2018-04-01. */
-  proximityPlacementGroup?: SubResource;
-  /**
-   * The resource status information.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly statuses?: InstanceViewStatus[];
-};
-
-/** Specifies information about the proximity placement group. */
-export type ProximityPlacementGroupUpdate = UpdateResource & {};
-
-/** Specifies information about the dedicated host group that the dedicated host should be assigned to. Only tags may be updated. */
-export type DedicatedHostGroupUpdate = UpdateResource & {
-  /** Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone. */
-  zones?: string[];
-  /** Number of fault domains that the host group can span. */
-  platformFaultDomainCount?: number;
-  /**
-   * A list of references to all dedicated hosts in the dedicated host group.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly hosts?: SubResourceReadOnly[];
-  /**
-   * The dedicated host group instance view, which has the list of instance view of the dedicated hosts under the dedicated host group.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly instanceView?: DedicatedHostGroupInstanceView;
-  /** Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'false' when not provided. <br><br>Minimum api-version: 2020-06-01. */
-  supportAutomaticPlacement?: boolean;
-};
-
-/** Specifies information about the dedicated host. Only tags, autoReplaceOnFailure and licenseType may be updated. */
-export type DedicatedHostUpdate = UpdateResource & {
-  /** Fault domain of the dedicated host within a dedicated host group. */
-  platformFaultDomain?: number;
-  /** Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided. */
-  autoReplaceOnFailure?: boolean;
-  /**
-   * A unique id generated and assigned to the dedicated host by the platform. <br><br> Does not change throughout the lifetime of the host.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly hostId?: string;
-  /**
-   * A list of references to all virtual machines in the Dedicated Host.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly virtualMachines?: SubResourceReadOnly[];
-  /** Specifies the software license type that will be applied to the VMs deployed on the dedicated host. <br><br> Possible values are: <br><br> **None** <br><br> **Windows_Server_Hybrid** <br><br> **Windows_Server_Perpetual** <br><br> Default: **None** */
-  licenseType?: DedicatedHostLicenseTypes;
-  /**
-   * The date when the host was first provisioned.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly provisioningTime?: Date;
-  /**
-   * The provisioning state, which only appears in the response.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly provisioningState?: string;
-  /**
-   * The dedicated host instance view.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly instanceView?: DedicatedHostInstanceView;
-};
-
-/** Specifies information about the SSH public key. */
-export type SshPublicKeyUpdateResource = UpdateResource & {
-  /** SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format. */
-  publicKey?: string;
-};
-
-/** Describes a Virtual Machine Extension. */
-export type VirtualMachineExtensionUpdate = UpdateResource & {
-  /** How the extension handler should be forced to update even if the extension configuration has not changed. */
-  forceUpdateTag?: string;
-  /** The name of the extension handler publisher. */
-  publisher?: string;
-  /** Specifies the type of the extension; an example is "CustomScriptExtension". */
-  type?: string;
-  /** Specifies the version of the script handler. */
-  typeHandlerVersion?: string;
-  /** Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true. */
-  autoUpgradeMinorVersion?: boolean;
-  /** Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available. */
-  enableAutomaticUpgrade?: boolean;
-  /** Json formatted public settings for the extension. */
-  settings?: Record<string, unknown>;
-  /** The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. */
-  protectedSettings?: Record<string, unknown>;
-  /** Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false. */
-  suppressFailures?: boolean;
-};
-
-/** The source user image virtual hard disk. Only tags may be updated. */
-export type ImageUpdate = UpdateResource & {
-  /** The source virtual machine from which Image is created. */
-  sourceVirtualMachine?: SubResource;
-  /** Specifies the storage settings for the virtual machine disks. */
-  storageProfile?: ImageStorageProfile;
-  /**
-   * The provisioning state.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly provisioningState?: string;
-  /** Specifies the HyperVGenerationType of the VirtualMachine created from the image. From API Version 2019-03-01 if the image source is a blob, then we need the user to specify the value, if the source is managed resource like disk or snapshot, we may require the user to specify the property if we cannot deduce it from the source managed resource. */
-  hyperVGeneration?: HyperVGenerationTypes;
-};
-
-/** Describes a Virtual Machine Update. */
-export type VirtualMachineUpdate = UpdateResource & {
-  /** Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**. */
-  plan?: Plan;
-  /** The identity of the virtual machine, if configured. */
-  identity?: VirtualMachineIdentity;
-  /** The virtual machine zones. */
-  zones?: string[];
-  /** Specifies the hardware settings for the virtual machine. */
-  hardwareProfile?: HardwareProfile;
-  /** Specifies the storage settings for the virtual machine disks. */
-  storageProfile?: StorageProfile;
-  /** Specifies additional capabilities enabled or disabled on the virtual machine. */
-  additionalCapabilities?: AdditionalCapabilities;
-  /** Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned. */
-  osProfile?: OSProfile;
-  /** Specifies the network interfaces of the virtual machine. */
-  networkProfile?: NetworkProfile;
-  /** Specifies the Security related profile settings for the virtual machine. */
-  securityProfile?: SecurityProfile;
-  /** Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15. */
-  diagnosticsProfile?: DiagnosticsProfile;
-  /** Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). <br><br> For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates) <br><br> Currently, a VM can only be added to availability set at creation time. The availability set to which the VM is being added should be under the same resource group as the availability set resource. An existing VM cannot be added to an availability set. <br><br>This property cannot exist along with a non-null properties.virtualMachineScaleSet reference. */
-  availabilitySet?: SubResource;
-  /** Specifies information about the virtual machine scale set that the virtual machine should be assigned to. Virtual machines specified in the same virtual machine scale set are allocated to different nodes to maximize availability. Currently, a VM can only be added to virtual machine scale set at creation time. An existing VM cannot be added to a virtual machine scale set. <br><br>This property cannot exist along with a non-null properties.availabilitySet reference. <br><br>Minimum api‐version: 2019‐03‐01 */
-  virtualMachineScaleSet?: SubResource;
-  /** Specifies information about the proximity placement group that the virtual machine should be assigned to. <br><br>Minimum api-version: 2018-04-01. */
-  proximityPlacementGroup?: SubResource;
-  /** Specifies the priority for the virtual machine. <br><br>Minimum api-version: 2019-03-01 */
-  priority?: VirtualMachinePriorityTypes;
-  /** Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. <br><br>For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. <br><br>For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview. */
-  evictionPolicy?: VirtualMachineEvictionPolicyTypes;
-  /** Specifies the billing related details of a Azure Spot virtual machine. <br><br>Minimum api-version: 2019-03-01. */
-  billingProfile?: BillingProfile;
-  /** Specifies information about the dedicated host that the virtual machine resides in. <br><br>Minimum api-version: 2018-10-01. */
-  host?: SubResource;
-  /** Specifies information about the dedicated host group that the virtual machine resides in. <br><br>Minimum api-version: 2020-06-01. <br><br>NOTE: User cannot specify both host and hostGroup properties. */
-  hostGroup?: SubResource;
-  /**
-   * The provisioning state, which only appears in the response.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly provisioningState?: string;
-  /**
-   * The virtual machine instance view.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly instanceView?: VirtualMachineInstanceView;
-  /** Specifies that the image or disk that is being used was licensed on-premises. <br><br> Possible values for Windows Server operating system are: <br><br> Windows_Client <br><br> Windows_Server <br><br> Possible values for Linux Server operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS (for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing) <br><br> [Azure Hybrid Use Benefit for Linux Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux) <br><br> Minimum api-version: 2015-06-15 */
-  licenseType?: string;
-  /**
-   * Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly vmId?: string;
-  /** Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). <br><br> Minimum api-version: 2020-06-01 */
-  extensionsTimeBudget?: string;
-  /** Specifies the scale set logical fault domain into which the Virtual Machine will be created. By default, the Virtual Machine will by automatically assigned to a fault domain that best maintains balance across available fault domains.<br><li>This is applicable only if the 'virtualMachineScaleSet' property of this Virtual Machine is set.<li>The Virtual Machine Scale Set that is referenced, must have 'platformFaultDomainCount' &gt; 1.<li>This property cannot be updated once the Virtual Machine is created.<li>Fault domain assignment can be viewed in the Virtual Machine Instance View.<br><br>Minimum api‐version: 2020‐12‐01 */
-  platformFaultDomain?: number;
-  /** Specifies Scheduled Event related configurations. */
-  scheduledEventsProfile?: ScheduledEventsProfile;
-  /** UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01 */
-  userData?: string;
-  /** Specifies information about the capacity reservation that is used to allocate virtual machine. <br><br>Minimum api-version: 2021-04-01. */
-  capacityReservation?: CapacityReservationProfile;
-  /** Specifies the gallery applications that should be made available to the VM/VMSS */
-  applicationProfile?: ApplicationProfile;
-};
-
-/** Update Restore Point collection parameters. */
-export type RestorePointCollectionUpdate = UpdateResource & {
-  /** The properties of the source resource that this restore point collection is created from. */
-  source?: RestorePointCollectionSourceProperties;
-  /**
-   * The provisioning state of the restore point collection.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly provisioningState?: string;
-  /**
-   * The unique id of the restore point collection.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly restorePointCollectionId?: string;
-  /**
-   * A list containing all restore points created under this restore point collection.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly restorePoints?: RestorePoint[];
-};
-
-/** Specifies information about the capacity reservation group. Only tags can be updated. */
-export type CapacityReservationGroupUpdate = UpdateResource & {
-  /**
-   * A list of all capacity reservation resource ids that belong to capacity reservation group.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly capacityReservations?: SubResourceReadOnly[];
-  /**
-   * A list of references to all virtual machines associated to the capacity reservation group.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly virtualMachinesAssociated?: SubResourceReadOnly[];
-  /**
-   * The capacity reservation group instance view which has the list of instance views for all the capacity reservations that belong to the capacity reservation group.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly instanceView?: CapacityReservationGroupInstanceView;
-};
-
-/** Specifies information about the capacity reservation. Only tags and sku.capacity can be updated. */
-export type CapacityReservationUpdate = UpdateResource & {
-  /** SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values. */
-  sku?: Sku;
-  /**
-   * A unique id generated and assigned to the capacity reservation by the platform which does not change throughout the lifetime of the resource.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly reservationId?: string;
-  /**
-   * A list of all virtual machine resource ids that are associated with the capacity reservation.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly virtualMachinesAssociated?: SubResourceReadOnly[];
-  /**
-   * The date time when the capacity reservation was last updated.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly provisioningTime?: Date;
-  /**
-   * The provisioning state, which only appears in the response.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly provisioningState?: string;
-  /**
-   * The Capacity reservation instance view.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly instanceView?: CapacityReservationInstanceView;
-};
-
-/** Describes a Virtual Machine Scale Set. */
-export type VirtualMachineScaleSetUpdate = UpdateResource & {
-  /** The virtual machine scale set sku. */
-  sku?: Sku;
-  /** The purchase plan when deploying a virtual machine scale set from VM Marketplace images. */
-  plan?: Plan;
-  /** The identity of the virtual machine scale set, if configured. */
-  identity?: VirtualMachineScaleSetIdentity;
-  /** The upgrade policy. */
-  upgradePolicy?: UpgradePolicy;
-  /** Policy for automatic repairs. */
-  automaticRepairsPolicy?: AutomaticRepairsPolicy;
-  /** The virtual machine profile. */
-  virtualMachineProfile?: VirtualMachineScaleSetUpdateVMProfile;
-  /** Specifies whether the Virtual Machine Scale Set should be overprovisioned. */
-  overprovision?: boolean;
-  /** When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs. */
-  doNotRunExtensionsOnOverprovisionedVMs?: boolean;
-  /** When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true. */
-  singlePlacementGroup?: boolean;
-  /** Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type. */
-  additionalCapabilities?: AdditionalCapabilities;
-  /** Specifies the policies applied when scaling in Virtual Machines in the Virtual Machine Scale Set. */
-  scaleInPolicy?: ScaleInPolicy;
-  /** Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01. */
-  proximityPlacementGroup?: SubResource;
-};
-
-/** Describes a Virtual Machine run command. */
-export type VirtualMachineRunCommandUpdate = UpdateResource & {
-  /** The source of the run command script. */
-  source?: VirtualMachineRunCommandScriptSource;
-  /** The parameters used by the script. */
-  parameters?: RunCommandInputParameter[];
-  /** The parameters used by the script. */
-  protectedParameters?: RunCommandInputParameter[];
-  /** Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. */
-  asyncExecution?: boolean;
-  /** Specifies the user account on the VM when executing the run command. */
-  runAsUser?: string;
-  /** Specifies the user account password on the VM when executing the run command. */
-  runAsPassword?: string;
-  /** The timeout in seconds to execute the run command. */
-  timeoutInSeconds?: number;
-  /** Specifies the Azure storage blob where script output stream will be uploaded. */
-  outputBlobUri?: string;
-  /** Specifies the Azure storage blob where script error stream will be uploaded. */
-  errorBlobUri?: string;
-  /**
-   * The provisioning state, which only appears in the response.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly provisioningState?: string;
-  /**
-   * The virtual machine run command instance view.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly instanceView?: VirtualMachineRunCommandInstanceView;
 };
 
 /** Describes a Virtual Machine Scale Set Extension. */
@@ -7610,13 +7610,6 @@ export interface OperationsListOptionalParams
 
 /** Contains response data for the list operation. */
 export type OperationsListResponse = ComputeOperationListResult;
-
-/** Optional parameters. */
-export interface AvailabilitySetsCreateOrUpdateOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the createOrUpdate operation. */
-export type AvailabilitySetsCreateOrUpdateResponse = AvailabilitySet;
 
 /** Optional parameters. */
 export interface AvailabilitySetsUpdateOptionalParams

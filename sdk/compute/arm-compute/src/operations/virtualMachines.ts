@@ -1842,7 +1842,7 @@ const captureOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.VirtualMachineCaptureResult
     }
   },
-  requestBody: Parameters.parameters10,
+  requestBody: Parameters.parameters9,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
@@ -1872,7 +1872,7 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.VirtualMachine
     }
   },
-  requestBody: Parameters.parameters11,
+  requestBody: Parameters.parameters10,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
@@ -1902,7 +1902,7 @@ const updateOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.VirtualMachine
     }
   },
-  requestBody: Parameters.parameters12,
+  requestBody: Parameters.parameters11,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
@@ -2143,7 +2143,7 @@ const reimageOperationSpec: coreClient.OperationSpec = {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/reimage",
   httpMethod: "POST",
   responses: { 200: {}, 201: {}, 202: {}, 204: {} },
-  requestBody: Parameters.parameters13,
+  requestBody: Parameters.parameters12,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
@@ -2290,7 +2290,7 @@ const runCommandOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.RunCommandResult
     }
   },
-  requestBody: Parameters.parameters14,
+  requestBody: Parameters.parameters13,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
