@@ -13,8 +13,6 @@ import {
   AvailabilitySetsListOptionalParams,
   VirtualMachineSize,
   AvailabilitySetsListAvailableSizesOptionalParams,
-  AvailabilitySetsCreateOrUpdateOptionalParams,
-  AvailabilitySetsCreateOrUpdateResponse,
   AvailabilitySetUpdate,
   AvailabilitySetsUpdateOptionalParams,
   AvailabilitySetsUpdateResponse,
@@ -54,19 +52,6 @@ export interface AvailabilitySets {
     availabilitySetName: string,
     options?: AvailabilitySetsListAvailableSizesOptionalParams
   ): PagedAsyncIterableIterator<VirtualMachineSize>;
-  /**
-   * Create or update an availability set.
-   * @param resourceGroupName The name of the resource group.
-   * @param availabilitySetName The name of the availability set.
-   * @param parameters Parameters supplied to the Create Availability Set operation.
-   * @param options The options parameters.
-   */
-  createOrUpdate(
-    resourceGroupName: string,
-    availabilitySetName: string,
-    parameters: AvailabilitySet,
-    options?: AvailabilitySetsCreateOrUpdateOptionalParams
-  ): Promise<AvailabilitySetsCreateOrUpdateResponse>;
   /**
    * Update an availability set.
    * @param resourceGroupName The name of the resource group.

@@ -1825,7 +1825,7 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.VirtualMachineScaleSet
     }
   },
-  requestBody: Parameters.parameters15,
+  requestBody: Parameters.parameters14,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
@@ -1855,7 +1855,7 @@ const updateOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.VirtualMachineScaleSet
     }
   },
-  requestBody: Parameters.parameters16,
+  requestBody: Parameters.parameters15,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
@@ -2183,7 +2183,7 @@ const convertToSinglePlacementGroupOperationSpec: coreClient.OperationSpec = {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/convertToSinglePlacementGroup",
   httpMethod: "POST",
   responses: { 200: {} },
-  requestBody: Parameters.parameters17,
+  requestBody: Parameters.parameters16,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
@@ -2200,7 +2200,7 @@ const setOrchestrationServiceStateOperationSpec: coreClient.OperationSpec = {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/setOrchestrationServiceState",
   httpMethod: "POST",
   responses: { 200: {}, 201: {}, 202: {}, 204: {} },
-  requestBody: Parameters.parameters18,
+  requestBody: Parameters.parameters17,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,

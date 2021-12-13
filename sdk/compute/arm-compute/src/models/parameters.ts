@@ -12,7 +12,6 @@ import {
   OperationQueryParameter
 } from "@azure/core-client";
 import {
-  AvailabilitySet as AvailabilitySetMapper,
   AvailabilitySetUpdate as AvailabilitySetUpdateMapper,
   ProximityPlacementGroup as ProximityPlacementGroupMapper,
   ProximityPlacementGroupUpdate as ProximityPlacementGroupUpdateMapper,
@@ -133,7 +132,7 @@ export const contentType: OperationParameter = {
 
 export const parameters: OperationParameter = {
   parameterPath: "parameters",
-  mapper: AvailabilitySetMapper
+  mapper: AvailabilitySetUpdateMapper
 };
 
 export const resourceGroupName: OperationURLParameter = {
@@ -169,11 +168,6 @@ export const subscriptionId: OperationURLParameter = {
   }
 };
 
-export const parameters1: OperationParameter = {
-  parameterPath: "parameters",
-  mapper: AvailabilitySetUpdateMapper
-};
-
 export const expand: OperationQueryParameter = {
   parameterPath: ["options", "expand"],
   mapper: {
@@ -196,7 +190,7 @@ export const nextLink: OperationURLParameter = {
   skipEncoding: true
 };
 
-export const parameters2: OperationParameter = {
+export const parameters1: OperationParameter = {
   parameterPath: "parameters",
   mapper: ProximityPlacementGroupMapper
 };
@@ -212,7 +206,7 @@ export const proximityPlacementGroupName: OperationURLParameter = {
   }
 };
 
-export const parameters3: OperationParameter = {
+export const parameters2: OperationParameter = {
   parameterPath: "parameters",
   mapper: ProximityPlacementGroupUpdateMapper
 };
@@ -227,7 +221,7 @@ export const includeColocationStatus: OperationQueryParameter = {
   }
 };
 
-export const parameters4: OperationParameter = {
+export const parameters3: OperationParameter = {
   parameterPath: "parameters",
   mapper: DedicatedHostGroupMapper
 };
@@ -243,7 +237,7 @@ export const hostGroupName: OperationURLParameter = {
   }
 };
 
-export const parameters5: OperationParameter = {
+export const parameters4: OperationParameter = {
   parameterPath: "parameters",
   mapper: DedicatedHostGroupUpdateMapper
 };
@@ -259,7 +253,7 @@ export const expand1: OperationQueryParameter = {
   }
 };
 
-export const parameters6: OperationParameter = {
+export const parameters5: OperationParameter = {
   parameterPath: "parameters",
   mapper: DedicatedHostMapper
 };
@@ -275,12 +269,12 @@ export const hostName: OperationURLParameter = {
   }
 };
 
-export const parameters7: OperationParameter = {
+export const parameters6: OperationParameter = {
   parameterPath: "parameters",
   mapper: DedicatedHostUpdateMapper
 };
 
-export const parameters8: OperationParameter = {
+export const parameters7: OperationParameter = {
   parameterPath: "parameters",
   mapper: SshPublicKeyResourceMapper
 };
@@ -296,7 +290,7 @@ export const sshPublicKeyName: OperationURLParameter = {
   }
 };
 
-export const parameters9: OperationParameter = {
+export const parameters8: OperationParameter = {
   parameterPath: "parameters",
   mapper: SshPublicKeyUpdateResourceMapper
 };
@@ -454,17 +448,17 @@ export const location1: OperationURLParameter = {
   }
 };
 
-export const parameters10: OperationParameter = {
+export const parameters9: OperationParameter = {
   parameterPath: "parameters",
   mapper: VirtualMachineCaptureParametersMapper
 };
 
-export const parameters11: OperationParameter = {
+export const parameters10: OperationParameter = {
   parameterPath: "parameters",
   mapper: VirtualMachineMapper
 };
 
-export const parameters12: OperationParameter = {
+export const parameters11: OperationParameter = {
   parameterPath: "parameters",
   mapper: VirtualMachineUpdateMapper
 };
@@ -510,7 +504,7 @@ export const skipShutdown: OperationQueryParameter = {
   }
 };
 
-export const parameters13: OperationParameter = {
+export const parameters12: OperationParameter = {
   parameterPath: ["options", "parameters"],
   mapper: VirtualMachineReimageParametersMapper
 };
@@ -530,7 +524,7 @@ export const installPatchesInput: OperationParameter = {
   mapper: VirtualMachineInstallPatchesParametersMapper
 };
 
-export const parameters14: OperationParameter = {
+export const parameters13: OperationParameter = {
   parameterPath: "parameters",
   mapper: RunCommandInputMapper
 };
@@ -547,7 +541,7 @@ export const accept1: OperationParameter = {
   }
 };
 
-export const parameters15: OperationParameter = {
+export const parameters14: OperationParameter = {
   parameterPath: "parameters",
   mapper: VirtualMachineScaleSetMapper
 };
@@ -563,7 +557,7 @@ export const vmScaleSetName: OperationURLParameter = {
   }
 };
 
-export const parameters16: OperationParameter = {
+export const parameters15: OperationParameter = {
   parameterPath: "parameters",
   mapper: VirtualMachineScaleSetUpdateMapper
 };
@@ -604,17 +598,17 @@ export const platformUpdateDomain: OperationQueryParameter = {
   }
 };
 
-export const parameters17: OperationParameter = {
+export const parameters16: OperationParameter = {
   parameterPath: "parameters",
   mapper: VMScaleSetConvertToSinglePlacementGroupInputMapper
 };
 
-export const parameters18: OperationParameter = {
+export const parameters17: OperationParameter = {
   parameterPath: "parameters",
   mapper: OrchestrationServiceStateInputMapper
 };
 
-export const parameters19: OperationParameter = {
+export const parameters18: OperationParameter = {
   parameterPath: "parameters",
   mapper: ImageMapper
 };
@@ -630,12 +624,12 @@ export const imageName: OperationURLParameter = {
   }
 };
 
-export const parameters20: OperationParameter = {
+export const parameters19: OperationParameter = {
   parameterPath: "parameters",
   mapper: ImageUpdateMapper
 };
 
-export const parameters21: OperationParameter = {
+export const parameters20: OperationParameter = {
   parameterPath: "parameters",
   mapper: RestorePointCollectionMapper
 };
@@ -651,7 +645,7 @@ export const restorePointCollectionName: OperationURLParameter = {
   }
 };
 
-export const parameters22: OperationParameter = {
+export const parameters21: OperationParameter = {
   parameterPath: "parameters",
   mapper: RestorePointCollectionUpdateMapper
 };
@@ -666,7 +660,7 @@ export const expand3: OperationQueryParameter = {
   }
 };
 
-export const parameters23: OperationParameter = {
+export const parameters22: OperationParameter = {
   parameterPath: "parameters",
   mapper: RestorePointMapper
 };
@@ -682,7 +676,7 @@ export const restorePointName: OperationURLParameter = {
   }
 };
 
-export const parameters24: OperationParameter = {
+export const parameters23: OperationParameter = {
   parameterPath: "parameters",
   mapper: CapacityReservationGroupMapper
 };
@@ -698,7 +692,7 @@ export const capacityReservationGroupName: OperationURLParameter = {
   }
 };
 
-export const parameters25: OperationParameter = {
+export const parameters24: OperationParameter = {
   parameterPath: "parameters",
   mapper: CapacityReservationGroupUpdateMapper
 };
@@ -723,7 +717,7 @@ export const expand5: OperationQueryParameter = {
   }
 };
 
-export const parameters26: OperationParameter = {
+export const parameters25: OperationParameter = {
   parameterPath: "parameters",
   mapper: CapacityReservationMapper
 };
@@ -739,7 +733,7 @@ export const capacityReservationName: OperationURLParameter = {
   }
 };
 
-export const parameters27: OperationParameter = {
+export const parameters26: OperationParameter = {
   parameterPath: "parameters",
   mapper: CapacityReservationUpdateMapper
 };
@@ -801,7 +795,7 @@ export const vmScaleSetVMReimageInput: OperationParameter = {
   mapper: VirtualMachineScaleSetVMReimageParametersMapper
 };
 
-export const parameters28: OperationParameter = {
+export const parameters27: OperationParameter = {
   parameterPath: "parameters",
   mapper: VirtualMachineScaleSetVMMapper
 };
@@ -827,12 +821,12 @@ export const select: OperationQueryParameter = {
   }
 };
 
-export const parameters29: OperationParameter = {
+export const parameters28: OperationParameter = {
   parameterPath: "parameters",
   mapper: RequestRateByIntervalInputMapper
 };
 
-export const parameters30: OperationParameter = {
+export const parameters29: OperationParameter = {
   parameterPath: "parameters",
   mapper: ThrottledRequestsInputMapper
 };
@@ -1237,22 +1231,22 @@ export const roleName: OperationURLParameter = {
   }
 };
 
-export const parameters31: OperationParameter = {
+export const parameters30: OperationParameter = {
   parameterPath: ["options", "parameters"],
   mapper: CloudServiceMapper
 };
 
-export const parameters32: OperationParameter = {
+export const parameters31: OperationParameter = {
   parameterPath: ["options", "parameters"],
   mapper: CloudServiceUpdateMapper
 };
 
-export const parameters33: OperationParameter = {
+export const parameters32: OperationParameter = {
   parameterPath: ["options", "parameters"],
   mapper: RoleInstancesMapper
 };
 
-export const parameters34: OperationParameter = {
+export const parameters33: OperationParameter = {
   parameterPath: ["options", "parameters"],
   mapper: UpdateDomainMapper
 };
