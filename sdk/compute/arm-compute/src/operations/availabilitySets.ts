@@ -20,8 +20,6 @@ import {
   AvailabilitySetsListOptionalParams,
   VirtualMachineSize,
   AvailabilitySetsListAvailableSizesOptionalParams,
-  AvailabilitySetsCreateOrUpdateOptionalParams,
-  AvailabilitySetsCreateOrUpdateResponse,
   AvailabilitySetUpdate,
   AvailabilitySetsUpdateOptionalParams,
   AvailabilitySetsUpdateResponse,
@@ -202,25 +200,6 @@ export class AvailabilitySetsImpl implements AvailabilitySets {
   }
 
   /**
-   * Create or update an availability set.
-   * @param resourceGroupName The name of the resource group.
-   * @param availabilitySetName The name of the availability set.
-   * @param parameters Parameters supplied to the Create Availability Set operation.
-   * @param options The options parameters.
-   */
-  createOrUpdate(
-    resourceGroupName: string,
-    availabilitySetName: string,
-    parameters: AvailabilitySet,
-    options?: AvailabilitySetsCreateOrUpdateOptionalParams
-  ): Promise<AvailabilitySetsCreateOrUpdateResponse> {
-    return this.client.sendOperationRequest(
-      { resourceGroupName, availabilitySetName, parameters, options },
-      createOrUpdateOperationSpec
-    );
-  }
-
-  /**
    * Update an availability set.
    * @param resourceGroupName The name of the resource group.
    * @param availabilitySetName The name of the availability set.
@@ -354,27 +333,6 @@ export class AvailabilitySetsImpl implements AvailabilitySets {
 // Operation Specifications
 const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const createOrUpdateOperationSpec: coreClient.OperationSpec = {
-  path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
-  httpMethod: "PUT",
-  responses: {
-    200: {
-      bodyMapper: Mappers.AvailabilitySet
-    }
-  },
-  requestBody: Parameters.parameters,
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.resourceGroupName,
-    Parameters.availabilitySetName,
-    Parameters.subscriptionId
-  ],
-  headerParameters: [Parameters.accept, Parameters.contentType],
-  mediaType: "json",
-  serializer
-};
 const updateOperationSpec: coreClient.OperationSpec = {
   path:
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
@@ -384,7 +342,7 @@ const updateOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.AvailabilitySet
     }
   },
-  requestBody: Parameters.parameters1,
+  requestBody: Parameters.parameters,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,

@@ -1277,7 +1277,7 @@ const updateOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.VirtualMachineScaleSetVM
     }
   },
-  requestBody: Parameters.parameters28,
+  requestBody: Parameters.parameters27,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
@@ -1503,7 +1503,7 @@ const runCommandOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.RunCommandResult
     }
   },
-  requestBody: Parameters.parameters14,
+  requestBody: Parameters.parameters13,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,

@@ -344,7 +344,7 @@ const createOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.SshPublicKeyResource
     }
   },
-  requestBody: Parameters.parameters8,
+  requestBody: Parameters.parameters7,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
@@ -365,7 +365,7 @@ const updateOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.SshPublicKeyResource
     }
   },
-  requestBody: Parameters.parameters9,
+  requestBody: Parameters.parameters8,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
