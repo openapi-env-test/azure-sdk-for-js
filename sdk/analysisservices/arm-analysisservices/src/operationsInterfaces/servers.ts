@@ -58,7 +58,7 @@ export interface Servers {
     options?: ServersListOptionalParams
   ): PagedAsyncIterableIterator<AnalysisServicesServer>;
   /**
-   * Gets details about the specified Analysis Services server.
+   * Gets details about the specified Analysis  server.
    * @param resourceGroupName The name of the Azure Resource group of which a given Analysis Services
    *                          server is part. This name must be at least 1 character in length, and no more than 90.
    * @param serverName The name of the Analysis Services server. It must be a minimum of 3 characters,
