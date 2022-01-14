@@ -10,13 +10,9 @@ import {
   env,
   record,
   RecorderEnvironmentSetup,
-  Recorder,
-  delay,
-  isPlaybackMode
+  Recorder
 } from "@azure-tools/test-recorder";
 import * as assert from "assert";
-import { ClientSecretCredential } from "@azure/identity";
-import { ConsumptionManagementClient } from "../src/consumptionManagementClient";
 
 const recorderEnvSetup: RecorderEnvironmentSetup = {
   replaceableVariables: {
@@ -35,99 +31,18 @@ const recorderEnvSetup: RecorderEnvironmentSetup = {
   queryParametersToSkip: []
 };
 
-export const testPollingOptions = {
-  updateIntervalInMs: isPlaybackMode() ? 0 : undefined,
-};
-
 describe("My test", () => {
   let recorder: Recorder;
-  let subscriptionId: string;
-  let client: ConsumptionManagementClient;
-  let location: string;
-  let resourceGroup: string;
-  let budgetName: string;
-  let vmName: string;
-  let scope: string;
 
   beforeEach(async function() {
     recorder = record(this, recorderEnvSetup);
-    subscriptionId = env.SUBSCRIPTION_ID;
-    // This is an example of how the environment variables are used
-    const credential = new ClientSecretCredential(
-      env.AZURE_TENANT_ID,
-      env.AZURE_CLIENT_ID,
-      env.AZURE_CLIENT_SECRET
-    );
-    client = new ConsumptionManagementClient(credential, subscriptionId);
-    location = "eastus";
-    resourceGroup = "myjstest";
-    budgetName = "mybudgetxxxy";
-    vmName = "myvmxxx";
-    scope = "/subscriptions/" + subscriptionId + "/resourceGroups/" + resourceGroup;
   });
 
   afterEach(async function() {
     await recorder.stop();
   });
 
-  it("budgets create test", async function() {
-    const res = await client.budgets.createOrUpdate(scope,budgetName,{
-      category: "Cost",
-        amount: 100,
-        timeGrain: "Monthly",
-        timePeriod: {
-            startDate: new Date("2021-11-01T00:00:00Z"),
-            endDate: new Date("2021-11-31T00:00:00Z")
-        },
-        filter: {
-            and: [
-                {
-                    dimensions: {
-                        name: "ResourceId",
-                        operator: "In",
-                        values: [
-                            "/subscriptions/"+subscriptionId+"/resourceGroups/"+resourceGroup+"/providers/Microsoft.Compute/virtualMachines/"+vmName
-                        ]
-                    }
-                },
-                {
-                    tags: {
-                        name: "category",
-                        operator: "In",
-                        values: [
-                            "Dev",
-                            "Prod"
-                        ]
-                    }
-                }
-            ]
-        },
-        notifications: {
-            Actual_GreaterThan_80_Percent: {
-                enabled: true,
-                operator: "GreaterThan",
-                threshold: 80,
-                contactEmails: [
-                    "johndoe@contoso.com",
-                    "janesmith@contoso.com"
-                ],
-                contactRoles: [
-                    "Contributor",
-                    "Reader"
-                ],
-                thresholdType: "Actual"
-            }
-        }
-    });
-    assert.equal(res.name,budgetName);
-  });
-
-  it("budgets get test", async function() {
-    const res = await client.budgets.get(scope,budgetName);
-    assert.equal(res.name,budgetName);
-  });
-
-  it("budgets delete test", async function() {
-    const res = await client.budgets.delete(scope,budgetName);
+  it("sample test", async function() {
+    console.log("Hi, I'm a test!");
   });
 });

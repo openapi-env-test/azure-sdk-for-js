@@ -11,7 +11,7 @@ import { UsageDetails } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
-import { ConsumptionManagementClientContext } from "../consumptionManagementClientContext";
+import { ConsumptionManagementClient } from "../consumptionManagementClient";
 import {
   UsageDetailUnion,
   UsageDetailsListNextOptionalParams,
@@ -23,13 +23,13 @@ import {
 /// <reference lib="esnext.asynciterable" />
 /** Class containing UsageDetails operations. */
 export class UsageDetailsImpl implements UsageDetails {
-  private readonly client: ConsumptionManagementClientContext;
+  private readonly client: ConsumptionManagementClient;
 
   /**
    * Initialize a new instance of the class UsageDetails class.
    * @param client Reference to the service client
    */
-  constructor(client: ConsumptionManagementClientContext) {
+  constructor(client: ConsumptionManagementClient) {
     this.client = client;
   }
 
@@ -177,6 +177,7 @@ const listOperationSpec: coreClient.OperationSpec = {
     200: {
       bodyMapper: Mappers.UsageDetailsListResult
     },
+    204: {},
     default: {
       bodyMapper: Mappers.ErrorResponse
     }
@@ -200,6 +201,7 @@ const listNextOperationSpec: coreClient.OperationSpec = {
     200: {
       bodyMapper: Mappers.UsageDetailsListResult
     },
+    204: {},
     default: {
       bodyMapper: Mappers.ErrorResponse
     }
