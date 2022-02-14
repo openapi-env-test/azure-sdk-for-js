@@ -1661,12 +1661,6 @@ export const ErrorModel: coreClient.CompositeMapper = {
             }
           }
         }
-      },
-      innerError: {
-        serializedName: "innerError",
-        type: {
-          name: "String"
-        }
       }
     }
   }
