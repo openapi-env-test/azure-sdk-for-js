@@ -3,4 +3,4 @@
 npm install -g @microsoft/rush
 rush install
 # install release tools
-npm install -g dw-llc-release-tool
+npm install -g azure-tools-js-sdk-release-tools
