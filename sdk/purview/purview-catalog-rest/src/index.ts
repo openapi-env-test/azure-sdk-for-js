@@ -1,13 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import PurviewCatalog from "./purviewCatalog";
+import PurviewCatalogClient from "./purviewCatalogClient";
 
-export * from "./purviewCatalog";
+export * from "./purviewCatalogClient";
 export * from "./parameters";
 export * from "./responses";
+export * from "./clientDefinitions";
 export * from "./models";
 export * from "./outputModels";
 export * from "./pollingHelper";
 
-export default PurviewCatalog;
+export default PurviewCatalogClient;
