@@ -3,21 +3,27 @@
 
 import { getClient, ClientOptions } from "@azure-rest/core-client";
 import { TokenCredential } from "@azure/core-auth";
-import { PurviewMetadataPoliciesRestClient } from "./clientDefinitions";
+import { PurviewMetadataPoliciesClientRestClient } from "./clientDefinitions";
 
 export function PurviewMetadataPoliciesClient(
   Endpoint: string,
   credentials: TokenCredential,
   options: ClientOptions = {}
-): PurviewMetadataPoliciesRestClient {
+): PurviewMetadataPoliciesClientRestClient {
   const baseUrl = options.baseUrl ?? `${Endpoint}/policyStore`;
   options.apiVersion = options.apiVersion ?? "2021-07-01-preview";
   options = {
     ...options,
     credentials: {
-      scopes: ["https://purview.azure.net/.default"],
-    },
+      scopes: ["https://purview.azure.net/.default"]
+    }
   };
 
-  return getClient(baseUrl, credentials, options) as PurviewMetadataPoliciesRestClient;
+  const client = getClient(
+    baseUrl,
+    credentials,
+    options
+  ) as PurviewMetadataPoliciesClientRestClient;
+
+  return client;
 }
