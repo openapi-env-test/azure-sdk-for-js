@@ -71,6 +71,7 @@ export interface AccountProperties {
   publicNetworkAccess?: PublicNetworkAccess;
 }
 
+/** External Cloud Service connectors */
 export interface CloudConnectors {
   /**
    * AWS external identifier.
@@ -205,6 +206,22 @@ export interface Identity {
   readonly tenantId?: string;
   /** Identity Type */
   type?: Type;
+  /** User Assigned Identities */
+  userAssignedIdentities?: { [propertyName: string]: UserAssignedIdentity };
+}
+
+/** Uses client ID and Principal ID */
+export interface UserAssignedIdentity {
+  /**
+   * Gets or Sets Client ID
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly clientId?: string;
+  /**
+   * Gets or Sets Principal ID
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly principalId?: string;
 }
 
 /** Metadata pertaining to creation and last modification of the resource. */
@@ -276,6 +293,8 @@ export interface ErrorModel {
 
 /** The account update properties. */
 export interface AccountUpdateParameters {
+  /** Identity related info to add/remove userAssignedIdentities. */
+  identity?: Identity;
   /** The account properties. */
   properties?: AccountProperties;
   /** Tags on the azure resource. */
@@ -661,7 +680,9 @@ export type Name = string;
 
 /** Known values of {@link Type} that the service accepts. */
 export enum KnownType {
-  SystemAssigned = "SystemAssigned"
+  None = "None",
+  SystemAssigned = "SystemAssigned",
+  UserAssigned = "UserAssigned"
 }
 
 /**
@@ -669,7 +690,9 @@ export enum KnownType {
  * {@link KnownType} can be used interchangeably with Type,
  *  this enum contains the known values that the service supports.
  * ### Known values supported by the service
- * **SystemAssigned**
+ * **None** \
+ * **SystemAssigned** \
+ * **UserAssigned**
  */
 export type Type = string;
 
@@ -764,13 +787,6 @@ export interface AccountsListBySubscriptionOptionalParams
 
 /** Contains response data for the listBySubscription operation. */
 export type AccountsListBySubscriptionResponse = AccountList;
-
-/** Optional parameters. */
-export interface AccountsGetOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the get operation. */
-export type AccountsGetResponse = Account;
 
 /** Optional parameters. */
 export interface AccountsCreateOrUpdateOptionalParams

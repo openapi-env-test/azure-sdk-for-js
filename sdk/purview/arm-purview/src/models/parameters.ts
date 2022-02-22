@@ -88,17 +88,6 @@ export const skipToken: OperationQueryParameter = {
   }
 };
 
-export const accountName: OperationURLParameter = {
-  parameterPath: "accountName",
-  mapper: {
-    serializedName: "accountName",
-    required: true,
-    type: {
-      name: "String"
-    }
-  }
-};
-
 export const contentType: OperationParameter = {
   parameterPath: ["options", "contentType"],
   mapper: {
@@ -114,6 +103,17 @@ export const contentType: OperationParameter = {
 export const account: OperationParameter = {
   parameterPath: "account",
   mapper: AccountMapper
+};
+
+export const accountName: OperationURLParameter = {
+  parameterPath: "accountName",
+  mapper: {
+    serializedName: "accountName",
+    required: true,
+    type: {
+      name: "String"
+    }
+  }
 };
 
 export const accountUpdateParameters: OperationParameter = {

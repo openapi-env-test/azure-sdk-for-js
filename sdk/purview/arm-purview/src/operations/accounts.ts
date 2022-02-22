@@ -22,8 +22,6 @@ import {
   AccountsListBySubscriptionOptionalParams,
   AccountsListByResourceGroupResponse,
   AccountsListBySubscriptionResponse,
-  AccountsGetOptionalParams,
-  AccountsGetResponse,
   AccountsCreateOrUpdateOptionalParams,
   AccountsCreateOrUpdateResponse,
   AccountsDeleteOptionalParams,
@@ -174,23 +172,6 @@ export class AccountsImpl implements Accounts {
     return this.client.sendOperationRequest(
       { options },
       listBySubscriptionOperationSpec
-    );
-  }
-
-  /**
-   * Get an account
-   * @param resourceGroupName The resource group name.
-   * @param accountName The name of the account.
-   * @param options The options parameters.
-   */
-  get(
-    resourceGroupName: string,
-    accountName: string,
-    options?: AccountsGetOptionalParams
-  ): Promise<AccountsGetResponse> {
-    return this.client.sendOperationRequest(
-      { resourceGroupName, accountName, options },
-      getOperationSpec
     );
   }
 
@@ -574,28 +555,6 @@ const listBySubscriptionOperationSpec: coreClient.OperationSpec = {
   },
   queryParameters: [Parameters.apiVersion, Parameters.skipToken],
   urlParameters: [Parameters.$host, Parameters.subscriptionId],
-  headerParameters: [Parameters.accept],
-  serializer
-};
-const getOperationSpec: coreClient.OperationSpec = {
-  path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}",
-  httpMethod: "GET",
-  responses: {
-    200: {
-      bodyMapper: Mappers.Account
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponseModel
-    }
-  },
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.accountName
-  ],
   headerParameters: [Parameters.accept],
   serializer
 };

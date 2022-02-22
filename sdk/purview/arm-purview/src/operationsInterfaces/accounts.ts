@@ -12,8 +12,6 @@ import {
   Account,
   AccountsListByResourceGroupOptionalParams,
   AccountsListBySubscriptionOptionalParams,
-  AccountsGetOptionalParams,
-  AccountsGetResponse,
   AccountsCreateOrUpdateOptionalParams,
   AccountsCreateOrUpdateResponse,
   AccountsDeleteOptionalParams,
@@ -48,17 +46,6 @@ export interface Accounts {
   listBySubscription(
     options?: AccountsListBySubscriptionOptionalParams
   ): PagedAsyncIterableIterator<Account>;
-  /**
-   * Get an account
-   * @param resourceGroupName The resource group name.
-   * @param accountName The name of the account.
-   * @param options The options parameters.
-   */
-  get(
-    resourceGroupName: string,
-    accountName: string,
-    options?: AccountsGetOptionalParams
-  ): Promise<AccountsGetResponse>;
   /**
    * Creates or updates an account
    * @param resourceGroupName The resource group name.
