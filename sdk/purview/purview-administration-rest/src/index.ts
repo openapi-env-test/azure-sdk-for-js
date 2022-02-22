@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import * as PurviewAccount from "./account";
-import * as PurviewMetadataPolicies from "./metadataPolicies";
+import * as PurviewAccountClient from "./account";
+import * as PurviewMetadataPoliciesClient from "./metadataPolicies";
 
-export { PurviewAccount };
-export { PurviewMetadataPolicies };
-export { PurviewAccountClient } from "./account/purviewAccount";
-export { PurviewMetadataPoliciesClient } from "./metadataPolicies/purviewMetadataPolicies";
+export { PurviewAccountClient as PurviewAccountClientClient } from "./account/purviewAccountClient";
+export { PurviewMetadataPoliciesClient as PurviewMetadataPoliciesClientClient } from "./metadataPolicies/purviewMetadataPoliciesClient";
+export { PurviewAccountClient, PurviewMetadataPoliciesClient };
