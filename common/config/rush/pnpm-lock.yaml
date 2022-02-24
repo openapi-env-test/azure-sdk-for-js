@@ -12966,7 +12966,7 @@ packages:
     dev: false
 
   file:projects/container-registry.tgz:
-    resolution: {integrity: sha512-DBJrNjfBDQPpuhuC1CK2Tf09gwxZR8AFbUUmjOkxzU4Ra4+k8WNYyADJUQPWDxUnCg+/wckXoRZL/jkX39lpSg==, tarball: file:projects/container-registry.tgz}
+    resolution: {integrity: sha512-EFTZnQnEhHbqmL1CZJWw7bgI7vYq4WRTRkjsjf8ixNAarMw/NVp3eLd+skni99Hs4F+x4ZhIihyjSIExV5yLJA==, tarball: file:projects/container-registry.tgz}
     name: '@rush-temp/container-registry'
     version: 0.0.0
     dependencies:
@@ -13007,7 +13007,6 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - debug
-      - encoding
       - supports-color
       - utf-8-validate
     dev: false
@@ -13601,7 +13600,7 @@ packages:
     dev: false
 
   file:projects/data-tables.tgz:
-    resolution: {integrity: sha512-DaRzGWNUMNnkx5XtovGZ1VfqT6XHzNoh6ivGkD3kWQEGRtv11tnZ75Aguv/eG/3SromlH20PiCA+RQWcLm3FLQ==, tarball: file:projects/data-tables.tgz}
+    resolution: {integrity: sha512-TEbNW856SR3kFwVpkaq6xq+/lScXvhz1tDQwNF6qBlgQOSMwk5VnR+R82rTsPT0G9gSoTWrnox0ZpAja5SolDA==, tarball: file:projects/data-tables.tgz}
     name: '@rush-temp/data-tables'
     version: 0.0.0
     dependencies:
@@ -13646,7 +13645,6 @@ packages:
       - '@swc/wasm'
       - bufferutil
       - debug
-      - encoding
       - supports-color
       - utf-8-validate
     dev: false
@@ -13965,7 +13963,7 @@ packages:
     dev: false
 
   file:projects/eventhubs-checkpointstore-blob.tgz:
-    resolution: {integrity: sha512-Zjderk9z4yJ2X0VCX+Bg2mv4sRQQVGvPYhz4bqwQe8ekduCFek0KT0230RKdGANBSmWtYN/zbxmPbjexRtOv8A==, tarball: file:projects/eventhubs-checkpointstore-blob.tgz}
+    resolution: {integrity: sha512-/D9UB0TNxhGrAggxo5vIN6OmKdenUTYw+XbUlwEbi7efhTrXpxmBXPBZ9fDjYvWWurgmrcB5BmDbs79tY6R8Ow==, tarball: file:projects/eventhubs-checkpointstore-blob.tgz}
     name: '@rush-temp/eventhubs-checkpointstore-blob'
     version: 0.0.0
     dependencies:
@@ -14219,11 +14217,12 @@ packages:
     dev: false
 
   file:projects/iot-device-update.tgz:
-    resolution: {integrity: sha512-rsm9IpQrX4PDeRoGSnfHltpD9jmpulpHFNu/lxAyTKHQPAk2Ji9ag1panuQZwQp+2ASA3AoA6DzbB2Q2Mx29cQ==, tarball: file:projects/iot-device-update.tgz}
+    resolution: {integrity: sha512-ty14zPFl4MoUtWMXqzjwjL8uV94A5GdYvw1FNQsC9CR0RwMWSUMzDbeobbuZtsB8bagmde7dswrB01MMF3hkcg==, tarball: file:projects/iot-device-update.tgz}
     name: '@rush-temp/iot-device-update'
     version: 0.0.0
     dependencies:
       '@azure-rest/core-client': 1.0.0-beta.7
+      '@azure-tools/test-recorder': 1.0.2
       '@microsoft/api-extractor': 7.19.4
       '@types/chai': 4.3.0
       '@types/mocha': 7.0.2
@@ -14248,9 +14247,9 @@ packages:
       karma-sourcemap-loader: 0.3.8
       mkdirp: 1.0.4
       mocha: 7.2.0
-      mocha-junit-reporter: 1.23.3_mocha@7.2.0
-      nyc: 14.1.1
-      prettier: 2.2.1
+      mocha-junit-reporter: 2.0.2_mocha@7.2.0
+      nyc: 15.1.0
+      prettier: 2.5.1
       rimraf: 3.0.2
       source-map-support: 0.5.21
       tslib: 2.3.1
@@ -14259,6 +14258,7 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - debug
+      - encoding
       - supports-color
       - utf-8-validate
     dev: false
@@ -15306,7 +15306,7 @@ packages:
     dev: false
 
   file:projects/purview-scanning.tgz:
-    resolution: {integrity: sha512-WnLaSRZ6CxnvKrbs6jpe/E/bwaNuNKvHFrC2xf1hNtmbCQffNmeVdCa0GHmsZ/GUruKGIIfeqKTw+cYOBeW0/Q==, tarball: file:projects/purview-scanning.tgz}
+    resolution: {integrity: sha512-CEnv0KgIVbcMcXzCebG7kDGpFwuBDO560s0N+wFTuY+PnKvNUy7frjaJUCOppWcB6hKIR0knN/idwA1GvH02DA==, tarball: file:projects/purview-scanning.tgz}
     name: '@rush-temp/purview-scanning'
     version: 0.0.0
     dependencies:
@@ -15346,7 +15346,6 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - debug
-      - encoding
       - supports-color
       - utf-8-validate
     dev: false
@@ -15786,7 +15785,7 @@ packages:
     dev: false
 
   file:projects/storage-file-share.tgz:
-    resolution: {integrity: sha512-Wxf71HaHGk3OUsxKZVuBej88ap8Pft5N//7ZiLUVN3If1B+1fCanIE/T52XQhsyBXWsgvQFKFTehFLaryX4eIQ==, tarball: file:projects/storage-file-share.tgz}
+    resolution: {integrity: sha512-2ZH8fLmpPVmWUGAVGdmZ8P0MjIFOKfaaovnt9M901HdH6hzf7cA0zDJWrYWUdyBdWlJWr9/lcc7hNJgNHvRADw==, tarball: file:projects/storage-file-share.tgz}
     name: '@rush-temp/storage-file-share'
     version: 0.0.0
     dependencies:

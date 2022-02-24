@@ -23,7 +23,7 @@ export interface Deployment {
     groupId: string;
     isCanceled?: boolean;
     isRetried?: boolean;
-    startDateTime: string;
+    startDateTime: Date | string;
     updateId: UpdateId;
 }
 
@@ -982,10 +982,6 @@ export interface DeviceTagsListOutput {
 }
 
 // @public (undocumented)
-function DeviceUpdate(endpoint: string, credentials: TokenCredential, options?: ClientOptions): DeviceUpdateRestClient;
-export default DeviceUpdate;
-
-// @public (undocumented)
 export interface DeviceUpdateAgentId {
     deviceId: string;
     moduleId?: string;
@@ -996,6 +992,15 @@ export interface DeviceUpdateAgentIdOutput {
     deviceId: string;
     moduleId?: string;
 }
+
+// @public (undocumented)
+function DeviceUpdateClient(endpoint: string, credentials: TokenCredential, options?: ClientOptions): DeviceUpdateClientRestClient;
+export default DeviceUpdateClient;
+
+// @public (undocumented)
+export type DeviceUpdateClientRestClient = Client & {
+    path: Routes;
+};
 
 // @public (undocumented)
 export interface DeviceUpdateDeleteUpdate202Headers {
@@ -1386,11 +1391,6 @@ export interface DeviceUpdateListVersionsQueryParam {
 export interface DeviceUpdateListVersionsQueryParamProperties {
     $filter?: string;
 }
-
-// @public (undocumented)
-export type DeviceUpdateRestClient = Client & {
-    path: Routes;
-};
 
 // @public (undocumented)
 export interface ErrorModelOutput {

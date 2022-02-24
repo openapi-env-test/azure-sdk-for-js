@@ -1,14 +1,14 @@
-# Azure Device Update for IoT Hub Rest Client library for JavaScript
+# Azure  Iot Device Update REST client library for JavaScript
 
-The library provides access to the Device Update for IoT Hub service that enables customers to publish updates for their IoT devices to the cloud, and then deploy these updates to their devices (approve updates to groups of devices managed and provisioned in IoT Hub).
+[Service Description]
 
-**Please rely heavily on the [service's documentation][device_update_product_documentation] and our [REST client docs][rest_client] to use this library**
+**Please rely heavily on the [service's documentation][product_documentation] and our [REST client docs][rest_client] to use this library**
 
 Key links:
 - [Source code][source_code]
 - [Package (NPM)][npm]
 - [API reference documentation][ref_docs]
-- [Product documentation][device_update_product_documentation]
+- [Product documentation][product_documentation]
 
 ## Getting started
 
@@ -18,27 +18,30 @@ Key links:
 
 ### Prerequisites
 
-- Microsoft Azure Subscription: To call Microsoft Azure services, you need to create an [Azure subscription][azure_subscription]
-- Device Update for IoT Hub instance
-- Azure IoT Hub instance
+- You must have an [Azure subscription][azure_subscription] and a resource to use this package.
+
+#### Create a Resource
+
+Follow [these][resource] instructions to create your resource
 
 ### Install the `@azure-rest/iot-device-update` package
 
-Install the Azure Iot Device Update client library for JavaScript with `npm`:
+Install the Azure  Iot Device Update client library for JavaScript with `npm`:
 
 ```bash
 npm install @azure-rest/iot-device-update
 ```
 
-### Create and authenticate a `DeviceUpdate`
+### Create and authenticate a undefined
 
 To use an [Azure Active Directory (AAD) token credential][authenticate_with_token],
 provide an instance of the desired credential type obtained from the
 [@azure/identity][azure_identity_credentials] library.
 
-To authenticate with AAD, you must first `npm` install [`@azure/identity`][azure_identity_npm].
+To authenticate with AAD, you must first `npm` install [`@azure/identity`][azure_identity_npm] and
+[enable AAD authentication on your resource][enable_aad]
 
-After installation, you can choose which type of [credential][azure_identity_credentials] from `@azure/identity` to use.
+After setup, you can choose which type of [credential][azure_identity_credentials] from `@azure/identity` to use.
 As an example, [DefaultAzureCredential][default_azure_credential]
 can be used to authenticate the client:
 
@@ -48,10 +51,10 @@ AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET
 Use the returned token credential to authenticate the client:
 
 ```typescript
-import DeviceUpdate from "@azure-rest/iot-device-update";
+import undefined from "@azure-rest/iot-device-update";
 import { DefaultAzureCredential } from "@azure/identity";
-const client = DeviceUpdate(
-  "https://<my-instance-id>.api.adu.microsoft.com",
+const client = undefined(
+  "<my-endpoint>",
   new DefaultAzureCredential()
 );
 ```
@@ -64,23 +67,24 @@ This client is one of our REST clients. We highly recommend you read how to use 
 
 ## Examples
 
-The following section shows you how to initialize and authenticate your client, then get all devices.
+The following section shows you how to initialize and authenticate your client, then get all of your type-defs.
 
-- [Get All Devices](#get-all-devices "Get All Devices")
+- [Get All Type Definitions](#get-all-type-definitions "Get All Type Definitions")
 
 ```typescript
-import DeviceUpdate from "@azure-rest/iot-device-update";
+import undefined from "@azure-rest/iot-device-update";
 import { DefaultAzureCredential } from "@azure/identity";
 
 async function main() {
-  console.log("== List devices ==");
-  const client = DeviceUpdate(endpoint, new DefaultAzureCredential());
+  const client = undefined(endpoint, new DefaultAzureCredential());
 
-  const result = await client
-    .path("/deviceupdate/{instanceId}/management/devices", instanceId)
-    .get();
+  const result = await client.path("<my-path>").get();
 
-  console.log(result);
+  if (result.status !== "200") {
+    throw result;
+  }
+
+  console.log(result).join("\n"));
 }
 
 main().catch(console.error);
@@ -110,15 +114,15 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fdeviceupdate%2Fiot-device-update%2FREADME.png)
-
-[device_update_product_documentation]: https://docs.microsoft.com/azure/iot-hub-device-update/
+[product_documentation]: https://azure.microsoft.com/services/deviceupdate/
 [rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/main/documentation/rest-clients.md
 [source_code]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/deviceupdate/iot-device-update-rest
 [npm]: https://www.npmjs.com/org/azure-rest
 [ref_docs]: https://azure.github.io/azure-sdk-for-js
 [azure_subscription]: https://azure.microsoft.com/free/
+[resource]: https://docs.microsoft.com/azure/deviceupdate/sample-url
 [authenticate_with_token]: https://docs.microsoft.com/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-an-authentication-token
 [azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#credentials
 [azure_identity_npm]: https://www.npmjs.com/package/@azure/identity
+[enable_aad]: https://docs.microsoft.com/azure/deviceupdate/sample-url
 [default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
