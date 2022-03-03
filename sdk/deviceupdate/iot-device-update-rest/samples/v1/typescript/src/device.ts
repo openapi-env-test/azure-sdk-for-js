@@ -8,7 +8,7 @@
  * @azsdk-weight 40
  */
 
-import DeviceUpdate from "@azure-rest/iot-device-update";
+import DeviceUpdateClient from "@azure-rest/iot-device-update";
 import { DefaultAzureCredential } from "@azure/identity";
 import dotenv from "dotenv";
 
@@ -22,7 +22,7 @@ async function main() {
 
   const credentials = new DefaultAzureCredential();
 
-  const client = DeviceUpdate(endpoint, credentials);
+  const client = DeviceUpdateClient(endpoint, credentials);
 
   const result = await client
     .path("/deviceupdate/{instanceId}/management/devices", instanceId)

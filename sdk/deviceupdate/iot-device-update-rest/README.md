@@ -48,9 +48,9 @@ AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET
 Use the returned token credential to authenticate the client:
 
 ```typescript
-import DeviceUpdate from "@azure-rest/iot-device-update";
+import DeviceUpdateClient from "@azure-rest/iot-device-update";
 import { DefaultAzureCredential } from "@azure/identity";
-const client = DeviceUpdate(
+const client = DeviceUpdateClient(
   "https://<my-instance-id>.api.adu.microsoft.com",
   new DefaultAzureCredential()
 );
@@ -69,12 +69,12 @@ The following section shows you how to initialize and authenticate your client, 
 - [Get All Devices](#get-all-devices "Get All Devices")
 
 ```typescript
-import DeviceUpdate from "@azure-rest/iot-device-update";
+import DeviceUpdateClient from "@azure-rest/iot-device-update";
 import { DefaultAzureCredential } from "@azure/identity";
 
 async function main() {
   console.log("== List devices ==");
-  const client = DeviceUpdate(endpoint, new DefaultAzureCredential());
+  const client = DeviceUpdateClient(endpoint, new DefaultAzureCredential());
 
   const result = await client
     .path("/deviceupdate/{instanceId}/management/devices", instanceId)
