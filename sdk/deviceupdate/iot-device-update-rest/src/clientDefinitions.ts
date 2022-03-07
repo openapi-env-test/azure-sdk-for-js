@@ -28,7 +28,6 @@ import {
   DeviceManagementCreateOrUpdateGroupParameters,
   DeviceManagementDeleteGroupParameters,
   DeviceManagementGetGroupUpdateComplianceParameters,
-  DeviceManagementListBestUpdatesForGroupParameters,
   DeviceManagementListDeploymentsForGroupParameters,
   DeviceManagementGetDeploymentParameters,
   DeviceManagementCreateOrUpdateDeploymentParameters,
@@ -100,8 +99,6 @@ import {
   DeviceManagementDeleteGroupdefaultResponse,
   DeviceManagementGetGroupUpdateCompliance200Response,
   DeviceManagementGetGroupUpdateCompliancedefaultResponse,
-  DeviceManagementListBestUpdatesForGroup200Response,
-  DeviceManagementListBestUpdatesForGroupdefaultResponse,
   DeviceManagementListDeploymentsForGroup200Response,
   DeviceManagementListDeploymentsForGroupdefaultResponse,
   DeviceManagementGetDeployment200Response,
@@ -379,16 +376,6 @@ export interface DeviceManagementGetGroupUpdateCompliance {
   >;
 }
 
-export interface DeviceManagementListBestUpdatesForGroup {
-  /** Get the best available updates for a group and a count of how many devices need each update. */
-  get(
-    options?: DeviceManagementListBestUpdatesForGroupParameters
-  ): Promise<
-    | DeviceManagementListBestUpdatesForGroup200Response
-    | DeviceManagementListBestUpdatesForGroupdefaultResponse
-  >;
-}
-
 export interface DeviceManagementListDeploymentsForGroup {
   /** Gets a list of deployments for a group. */
   get(
@@ -643,12 +630,6 @@ export interface Routes {
     instanceId: string,
     groupId: string
   ): DeviceManagementGetGroupUpdateCompliance;
-  /** Resource for '/deviceupdate/\{instanceId\}/management/groups/\{groupId\}/bestUpdates' has methods for the following verbs: get */
-  (
-    path: "/deviceupdate/{instanceId}/management/groups/{groupId}/bestUpdates",
-    instanceId: string,
-    groupId: string
-  ): DeviceManagementListBestUpdatesForGroup;
   /** Resource for '/deviceupdate/\{instanceId\}/management/groups/\{groupId\}/deployments' has methods for the following verbs: get */
   (
     path: "/deviceupdate/{instanceId}/management/groups/{groupId}/deployments",
