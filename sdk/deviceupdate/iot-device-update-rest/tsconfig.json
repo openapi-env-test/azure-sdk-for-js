@@ -2,16 +2,10 @@
   "extends": "../../../tsconfig.package",
   "compilerOptions": {
     "outDir": "./dist-esm",
-    "declarationDir": "./types",
-    "paths": {
-      "@azure-rest/iot-device-update": [
-        "./src/index"
-      ]
-    }
+    "declarationDir": "./types"
   },
   "include": [
     "src/**/*.ts",
-    "test/**/*.ts",
-    "samples-dev/**/*.ts"
+    "./test/**/*.ts"
   ]
 }
