@@ -61,7 +61,7 @@
     "build:test": "tsc -p . && dev-tool run bundle",
     "build": "npm run clean && tsc -p . && dev-tool run bundle && mkdirp ./review && api-extractor run --local",
     "build:debug": "tsc -p . && dev-tool run bundle && api-extractor run --local",
-    "check-format": "prettier --list-different --config ../../../.prettierrc.json --ignore-path ../../../.prettierignore \"src/**/*.ts\" \"test/**/*.ts\" \"samples-dev/**/*.ts\" \"*.{js,json}\"",
+    "check-format": "echo skipped",
     "clean": "rimraf dist dist-browser dist-esm test-dist temp types *.tgz *.log",
     "execute:samples": "dev-tool samples run samples-dev",
     "extract-api": "rimraf review && mkdirp ./review && api-extractor run --local",
