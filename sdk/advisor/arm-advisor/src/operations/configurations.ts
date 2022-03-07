@@ -210,7 +210,7 @@ const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
 const listBySubscriptionOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations",
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations_fake",
   httpMethod: "GET",
   responses: {
     200: {
