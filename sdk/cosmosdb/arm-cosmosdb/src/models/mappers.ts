@@ -1973,6 +1973,12 @@ export const KeyWrapMetadata: coreClient.CompositeMapper = {
         type: {
           name: "String"
         }
+      },
+      algorithm: {
+        serializedName: "algorithm",
+        type: {
+          name: "String"
+        }
       }
     }
   }
@@ -4249,6 +4255,12 @@ export const MongoUserDefinitionCreateUpdateParameters: coreClient.CompositeMapp
           name: "String"
         }
       },
+      displayName: {
+        serializedName: "properties.displayName",
+        type: {
+          name: "String"
+        }
+      },
       password: {
         serializedName: "properties.password",
         type: {
@@ -5487,6 +5499,13 @@ export const RestorableTablePropertiesResource: coreClient.CompositeMapper = {
     modelProperties: {
       rid: {
         serializedName: "_rid",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      displayName: {
+        serializedName: "displayName",
         readOnly: true,
         type: {
           name: "String"
@@ -7750,6 +7769,12 @@ export const MongoUserDefinitionGetResults: coreClient.CompositeMapper = {
       ...ARMProxyResource.type.modelProperties,
       userName: {
         serializedName: "properties.userName",
+        type: {
+          name: "String"
+        }
+      },
+      displayName: {
+        serializedName: "properties.displayName",
         type: {
           name: "String"
         }
