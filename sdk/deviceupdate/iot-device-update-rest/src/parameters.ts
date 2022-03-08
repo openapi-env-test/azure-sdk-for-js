@@ -176,18 +176,6 @@ export type DeviceManagementCreateOrUpdateGroupParameters = DeviceManagementCrea
 export type DeviceManagementDeleteGroupParameters = RequestParameters;
 export type DeviceManagementGetGroupUpdateComplianceParameters = RequestParameters;
 
-export interface DeviceManagementListBestUpdatesForGroupQueryParamProperties {
-  /** Restricts the set of bestUpdates returned. You can filter on update Provider, Name and Version property. */
-  $filter?: string;
-}
-
-export interface DeviceManagementListBestUpdatesForGroupQueryParam {
-  queryParameters?: DeviceManagementListBestUpdatesForGroupQueryParamProperties;
-}
-
-export type DeviceManagementListBestUpdatesForGroupParameters = DeviceManagementListBestUpdatesForGroupQueryParam &
-  RequestParameters;
-
 export interface DeviceManagementListDeploymentsForGroupQueryParamProperties {
   /** Restricts the set of deployments returned. You can filter on update Provider, Name and Version property. */
   $filter?: string;
