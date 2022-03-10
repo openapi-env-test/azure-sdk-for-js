@@ -1973,6 +1973,12 @@ export const KeyWrapMetadata: coreClient.CompositeMapper = {
         type: {
           name: "String"
         }
+      },
+      algorithm: {
+        serializedName: "algorithm",
+        type: {
+          name: "String"
+        }
       }
     }
   }
@@ -4245,6 +4251,12 @@ export const MongoUserDefinitionCreateUpdateParameters: coreClient.CompositeMapp
     modelProperties: {
       userName: {
         serializedName: "properties.userName",
+        type: {
+          name: "String"
+        }
+      },
+      displayName: {
+        serializedName: "properties.displayName",
         type: {
           name: "String"
         }
@@ -7750,6 +7762,12 @@ export const MongoUserDefinitionGetResults: coreClient.CompositeMapper = {
       ...ARMProxyResource.type.modelProperties,
       userName: {
         serializedName: "properties.userName",
+        type: {
+          name: "String"
+        }
+      },
+      displayName: {
+        serializedName: "properties.displayName",
         type: {
           name: "String"
         }

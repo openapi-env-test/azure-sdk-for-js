@@ -1899,6 +1899,7 @@ export type KeyKind = string;
 
 // @public
 export interface KeyWrapMetadata {
+    algorithm?: string;
     name?: string;
     type?: string;
     value?: string;
@@ -2819,6 +2820,7 @@ export type MongoRoleDefinitionType = "BuiltInRole" | "CustomRole";
 export interface MongoUserDefinitionCreateUpdateParameters {
     customData?: string;
     databaseName?: string;
+    displayName?: string;
     mechanisms?: string;
     password?: string;
     roles?: Role[];
@@ -2828,6 +2830,7 @@ export interface MongoUserDefinitionCreateUpdateParameters {
 // @public
 export type MongoUserDefinitionGetResults = ARMProxyResource & {
     userName?: string;
+    displayName?: string;
     password?: string;
     databaseName?: string;
     customData?: string;

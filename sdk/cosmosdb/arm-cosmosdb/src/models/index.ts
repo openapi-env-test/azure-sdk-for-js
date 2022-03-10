@@ -842,6 +842,8 @@ export interface KeyWrapMetadata {
   type?: string;
   /** Reference / link to the KeyEncryptionKey. */
   value?: string;
+  /** Algorithm used in wrapping and unwrapping of the data encryption key. */
+  algorithm?: string;
 }
 
 /** The resource model definition for a ARM proxy resource. It will have everything other than required location and tags */
@@ -1644,6 +1646,8 @@ export interface MongoRoleDefinitionListResult {
 export interface MongoUserDefinitionCreateUpdateParameters {
   /** The user name for User Definition. */
   userName?: string;
+  /** The display name for User Definition. */
+  displayName?: string;
   /** The password for User Definition. Response does not contain user password. */
   password?: string;
   /** The database name for which access is being granted for this User Definition. */
@@ -3048,6 +3052,8 @@ export type MongoRoleDefinitionGetResults = ARMProxyResource & {
 export type MongoUserDefinitionGetResults = ARMProxyResource & {
   /** The user name for User Definition. */
   userName?: string;
+  /** The display name for User Definition. */
+  displayName?: string;
   /** The password for User Definition. Response does not contain user password. */
   password?: string;
   /** The database name for which access is being granted for this User Definition. */
