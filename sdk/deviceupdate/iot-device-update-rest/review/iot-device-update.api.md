@@ -574,41 +574,6 @@ export interface DeviceManagementImportDevicesQueryParamProperties {
 }
 
 // @public (undocumented)
-export interface DeviceManagementListBestUpdatesForGroup {
-    get(options?: DeviceManagementListBestUpdatesForGroupParameters): Promise<DeviceManagementListBestUpdatesForGroup200Response | DeviceManagementListBestUpdatesForGroupdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementListBestUpdatesForGroup200Response extends HttpResponse {
-    // (undocumented)
-    body: UpdatableDevicesListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementListBestUpdatesForGroupdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementListBestUpdatesForGroupParameters = DeviceManagementListBestUpdatesForGroupQueryParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementListBestUpdatesForGroupQueryParam {
-    // (undocumented)
-    queryParameters?: DeviceManagementListBestUpdatesForGroupQueryParamProperties;
-}
-
-// @public (undocumented)
-export interface DeviceManagementListBestUpdatesForGroupQueryParamProperties {
-    $filter?: string;
-}
-
-// @public (undocumented)
 export interface DeviceManagementListDeploymentDevices {
     get(options?: DeviceManagementListDeploymentDevicesParameters): Promise<DeviceManagementListDeploymentDevices200Response | DeviceManagementListDeploymentDevicesdefaultResponse>;
 }
@@ -1572,7 +1537,6 @@ export interface Routes {
     (path: "/deviceupdate/{instanceId}/management/groups", instanceId: string): DeviceManagementListGroups;
     (path: "/deviceupdate/{instanceId}/management/groups/{groupId}", instanceId: string, groupId: string): DeviceManagementGetGroup;
     (path: "/deviceupdate/{instanceId}/management/groups/{groupId}/updateCompliance", instanceId: string, groupId: string): DeviceManagementGetGroupUpdateCompliance;
-    (path: "/deviceupdate/{instanceId}/management/groups/{groupId}/bestUpdates", instanceId: string, groupId: string): DeviceManagementListBestUpdatesForGroup;
     (path: "/deviceupdate/{instanceId}/management/groups/{groupId}/deployments", instanceId: string, groupId: string): DeviceManagementListDeploymentsForGroup;
     (path: "/deviceupdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}", instanceId: string, groupId: string, deploymentId: string): DeviceManagementGetDeployment;
     (path: "/deviceupdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}/status", instanceId: string, groupId: string, deploymentId: string): DeviceManagementGetDeploymentStatus;
@@ -1607,18 +1571,6 @@ export interface StepResultOutput {
 export interface StringsListOutput {
     nextLink?: string;
     value: Array<string>;
-}
-
-// @public (undocumented)
-export interface UpdatableDevicesListOutput {
-    nextLink?: string;
-    value: Array<UpdatableDevicesOutput>;
-}
-
-// @public (undocumented)
-export interface UpdatableDevicesOutput {
-    deviceCount: number;
-    updateId: UpdateIdOutput;
 }
 
 // @public (undocumented)
