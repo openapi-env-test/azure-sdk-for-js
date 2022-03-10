@@ -21,7 +21,6 @@ import {
   DeviceTagOutput,
   GroupsListOutput,
   GroupOutput,
-  UpdatableDevicesListOutput,
   DeploymentsListOutput,
   DeploymentOutput,
   DeploymentStatusOutput,
@@ -404,20 +403,6 @@ export interface DeviceManagementGetGroupUpdateCompliance200Response
 
 /** Get group update compliance information such as how many devices are on their latest update, how many need new updates, and how many are in progress on receiving a new update. */
 export interface DeviceManagementGetGroupUpdateCompliancedefaultResponse
-  extends HttpResponse {
-  status: "500";
-  body: ErrorResponseOutput;
-}
-
-/** Get the best available updates for a group and a count of how many devices need each update. */
-export interface DeviceManagementListBestUpdatesForGroup200Response
-  extends HttpResponse {
-  status: "200";
-  body: UpdatableDevicesListOutput;
-}
-
-/** Get the best available updates for a group and a count of how many devices need each update. */
-export interface DeviceManagementListBestUpdatesForGroupdefaultResponse
   extends HttpResponse {
   status: "500";
   body: ErrorResponseOutput;
