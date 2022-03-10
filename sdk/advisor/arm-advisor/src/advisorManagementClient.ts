@@ -8,20 +8,8 @@
 
 import * as coreClient from "@azure/core-client";
 import * as coreAuth from "@azure/core-auth";
-import {
-  RecommendationMetadataImpl,
-  ConfigurationsImpl,
-  RecommendationsImpl,
-  OperationsImpl,
-  SuppressionsImpl
-} from "./operations";
-import {
-  RecommendationMetadata,
-  Configurations,
-  Recommendations,
-  Operations,
-  Suppressions
-} from "./operationsInterfaces";
+import { OperationsImpl, AdvisorScoresImpl } from "./operations";
+import { Operations, AdvisorScores } from "./operationsInterfaces";
 import { AdvisorManagementClientOptionalParams } from "./models";
 
 export class AdvisorManagementClient extends coreClient.ServiceClient {
@@ -56,7 +44,7 @@ export class AdvisorManagementClient extends coreClient.ServiceClient {
       credential: credentials
     };
 
-    const packageDetails = `azsdk-js-arm-advisor/3.0.0`;
+    const packageDetails = `azsdk-js-arm-advisor/4.0.0`;
     const userAgentPrefix =
       options.userAgentOptions && options.userAgentOptions.userAgentPrefix
         ? `${options.userAgentOptions.userAgentPrefix} ${packageDetails}`
@@ -79,17 +67,11 @@ export class AdvisorManagementClient extends coreClient.ServiceClient {
 
     // Assigning values to Constant parameters
     this.$host = options.$host || "https://management.azure.com";
-    this.apiVersion = options.apiVersion || "2020-01-01";
-    this.recommendationMetadata = new RecommendationMetadataImpl(this);
-    this.configurations = new ConfigurationsImpl(this);
-    this.recommendations = new RecommendationsImpl(this);
+    this.apiVersion = options.apiVersion || "2022-07-01";
     this.operations = new OperationsImpl(this);
-    this.suppressions = new SuppressionsImpl(this);
+    this.advisorScores = new AdvisorScoresImpl(this);
   }
 
-  recommendationMetadata: RecommendationMetadata;
-  configurations: Configurations;
-  recommendations: Recommendations;
   operations: Operations;
-  suppressions: Suppressions;
+  advisorScores: AdvisorScores;
 }

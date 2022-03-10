@@ -14,19 +14,13 @@ export class AdvisorManagementClient extends coreClient.ServiceClient {
     $host: string;
     constructor(credentials: coreAuth.TokenCredential, subscriptionId: string, options?: AdvisorManagementClientOptionalParams);
     // (undocumented)
-    apiVersion: string;
+    advisorScores: AdvisorScores;
     // (undocumented)
-    configurations: Configurations;
+    apiVersion: string;
     // (undocumented)
     operations: Operations;
     // (undocumented)
-    recommendationMetadata: RecommendationMetadata;
-    // (undocumented)
-    recommendations: Recommendations;
-    // (undocumented)
     subscriptionId: string;
-    // (undocumented)
-    suppressions: Suppressions;
 }
 
 // @public
@@ -35,6 +29,40 @@ export interface AdvisorManagementClientOptionalParams extends coreClient.Servic
     apiVersion?: string;
     endpoint?: string;
 }
+
+// @public
+export interface AdvisorScoreEntity {
+    id?: string;
+    name?: string;
+    properties?: AdvisorScoreEntityProperties;
+    type?: string;
+}
+
+// @public
+export interface AdvisorScoreEntityProperties {
+    lastRefreshedScore?: ScoreEntity;
+    timeSeries?: TimeSeriesEntityItem[];
+}
+
+// @public
+export interface AdvisorScores {
+    get(name: string, options?: AdvisorScoresGetOptionalParams): Promise<AdvisorScoresGetResponse>;
+    list(options?: AdvisorScoresListOptionalParams): Promise<AdvisorScoresListResponse>;
+}
+
+// @public
+export interface AdvisorScoresGetOptionalParams extends coreClient.OperationOptions {
+}
+
+// @public
+export type AdvisorScoresGetResponse = AdvisorScoreEntity;
+
+// @public
+export interface AdvisorScoresListOptionalParams extends coreClient.OperationOptions {
+}
+
+// @public
+export type AdvisorScoresListResponse = PathsW6Fm20SubscriptionsSubscriptionidProvidersMicrosoftAdvisorAdvisorscoreGetResponses200ContentApplicationJsonSchema;
 
 // @public (undocumented)
 export interface ArmErrorResponse {
@@ -48,173 +76,13 @@ export interface ARMErrorResponseBody {
 }
 
 // @public
-export type Category = string;
-
-// @public
-export type ConfigData = Resource & {
-    exclude?: boolean;
-    lowCpuThreshold?: CpuThreshold;
-    digests?: DigestConfig[];
-};
-
-// @public
-export interface ConfigurationListResult {
-    nextLink?: string;
-    value?: ConfigData[];
-}
-
-// @public
-export type ConfigurationName = string;
-
-// @public
-export interface Configurations {
-    createInResourceGroup(configurationName: ConfigurationName, resourceGroup: string, configContract: ConfigData, options?: ConfigurationsCreateInResourceGroupOptionalParams): Promise<ConfigurationsCreateInResourceGroupResponse>;
-    createInSubscription(configurationName: ConfigurationName, configContract: ConfigData, options?: ConfigurationsCreateInSubscriptionOptionalParams): Promise<ConfigurationsCreateInSubscriptionResponse>;
-    listByResourceGroup(resourceGroup: string, options?: ConfigurationsListByResourceGroupOptionalParams): PagedAsyncIterableIterator<ConfigData>;
-    listBySubscription(options?: ConfigurationsListBySubscriptionOptionalParams): PagedAsyncIterableIterator<ConfigData>;
-}
-
-// @public
-export interface ConfigurationsCreateInResourceGroupOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type ConfigurationsCreateInResourceGroupResponse = ConfigData;
-
-// @public
-export interface ConfigurationsCreateInSubscriptionOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type ConfigurationsCreateInSubscriptionResponse = ConfigData;
-
-// @public
-export interface ConfigurationsListByResourceGroupOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type ConfigurationsListByResourceGroupResponse = ConfigurationListResult;
-
-// @public
-export interface ConfigurationsListBySubscriptionNextOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type ConfigurationsListBySubscriptionNextResponse = ConfigurationListResult;
-
-// @public
-export interface ConfigurationsListBySubscriptionOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type ConfigurationsListBySubscriptionResponse = ConfigurationListResult;
-
-// @public
-export type CpuThreshold = string;
-
-// @public
-export interface DigestConfig {
-    actionGroupResourceId?: string;
-    categories?: Category[];
-    frequency?: number;
-    language?: string;
-    name?: string;
-    state?: DigestConfigState;
-}
-
-// @public
-export type DigestConfigState = string;
-
-// @public
-export type Impact = string;
-
-// @public
-export enum KnownCategory {
+export enum KnownTimeSeriesEntityItemAggregationLevel {
     // (undocumented)
-    Cost = "Cost",
+    Day = "day",
     // (undocumented)
-    HighAvailability = "HighAvailability",
+    Month = "month",
     // (undocumented)
-    OperationalExcellence = "OperationalExcellence",
-    // (undocumented)
-    Performance = "Performance",
-    // (undocumented)
-    Security = "Security"
-}
-
-// @public
-export enum KnownConfigurationName {
-    // (undocumented)
-    Default = "default"
-}
-
-// @public
-export enum KnownCpuThreshold {
-    // (undocumented)
-    Fifteen = "15",
-    // (undocumented)
-    Five = "5",
-    // (undocumented)
-    Ten = "10",
-    // (undocumented)
-    Twenty = "20"
-}
-
-// @public
-export enum KnownDigestConfigState {
-    // (undocumented)
-    Active = "Active",
-    // (undocumented)
-    Disabled = "Disabled"
-}
-
-// @public
-export enum KnownImpact {
-    // (undocumented)
-    High = "High",
-    // (undocumented)
-    Low = "Low",
-    // (undocumented)
-    Medium = "Medium"
-}
-
-// @public
-export enum KnownRisk {
-    // (undocumented)
-    Error = "Error",
-    // (undocumented)
-    None = "None",
-    // (undocumented)
-    Warning = "Warning"
-}
-
-// @public
-export enum KnownScenario {
-    // (undocumented)
-    Alerts = "Alerts"
-}
-
-// @public
-export interface MetadataEntity {
-    applicableScenarios?: Scenario[];
-    dependsOn?: string[];
-    displayName?: string;
-    id?: string;
-    name?: string;
-    supportedValues?: MetadataSupportedValueDetail[];
-    type?: string;
-}
-
-// @public
-export interface MetadataEntityListResult {
-    nextLink?: string;
-    value?: MetadataEntity[];
-}
-
-// @public
-export interface MetadataSupportedValueDetail {
-    displayName?: string;
-    id?: string;
+    Week = "week"
 }
 
 // @public
@@ -256,210 +124,30 @@ export interface OperationsListOptionalParams extends coreClient.OperationOption
 // @public
 export type OperationsListResponse = OperationEntityListResult;
 
-// @public
-export interface RecommendationMetadata {
-    get(name: string, options?: RecommendationMetadataGetOptionalParams): Promise<RecommendationMetadataGetResponse>;
-    list(options?: RecommendationMetadataListOptionalParams): PagedAsyncIterableIterator<MetadataEntity>;
-}
-
-// @public
-export interface RecommendationMetadataGetOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RecommendationMetadataGetResponse = MetadataEntity;
-
-// @public
-export interface RecommendationMetadataListNextOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RecommendationMetadataListNextResponse = MetadataEntityListResult;
-
-// @public
-export interface RecommendationMetadataListOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RecommendationMetadataListResponse = MetadataEntityListResult;
-
-// @public
-export interface Recommendations {
-    generate(options?: RecommendationsGenerateOptionalParams): Promise<RecommendationsGenerateResponse>;
-    get(resourceUri: string, recommendationId: string, options?: RecommendationsGetOptionalParams): Promise<RecommendationsGetResponse>;
-    getGenerateStatus(operationId: string, options?: RecommendationsGetGenerateStatusOptionalParams): Promise<void>;
-    list(options?: RecommendationsListOptionalParams): PagedAsyncIterableIterator<ResourceRecommendationBase>;
-}
-
-// @public
-export interface RecommendationsGenerateHeaders {
-    location?: string;
-    retryAfter?: string;
-}
-
-// @public
-export interface RecommendationsGenerateOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RecommendationsGenerateResponse = RecommendationsGenerateHeaders;
-
-// @public
-export interface RecommendationsGetGenerateStatusOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export interface RecommendationsGetOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RecommendationsGetResponse = ResourceRecommendationBase;
-
-// @public
-export interface RecommendationsListNextOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-    skipToken?: string;
-    top?: number;
-}
-
-// @public
-export type RecommendationsListNextResponse = ResourceRecommendationBaseListResult;
-
-// @public
-export interface RecommendationsListOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-    skipToken?: string;
-    top?: number;
-}
-
-// @public
-export type RecommendationsListResponse = ResourceRecommendationBaseListResult;
-
-// @public
-export interface Resource {
-    readonly id?: string;
-    readonly name?: string;
-    readonly type?: string;
-}
-
-// @public
-export interface ResourceMetadata {
-    action?: {
-        [propertyName: string]: Record<string, unknown>;
-    };
-    plural?: string;
-    resourceId?: string;
-    singular?: string;
-    source?: string;
-}
-
-// @public
-export type ResourceRecommendationBase = Resource & {
-    category?: Category;
-    impact?: Impact;
-    impactedField?: string;
-    impactedValue?: string;
-    lastUpdated?: Date;
-    metadata?: {
-        [propertyName: string]: Record<string, unknown>;
-    };
-    recommendationTypeId?: string;
-    risk?: Risk;
-    shortDescription?: ShortDescription;
-    suppressionIds?: string[];
-    extendedProperties?: {
-        [propertyName: string]: string;
-    };
-    resourceMetadata?: ResourceMetadata;
-    description?: string;
-    label?: string;
-    learnMoreLink?: string;
-    potentialBenefits?: string;
-    actions?: {
-        [propertyName: string]: Record<string, unknown>;
-    }[];
-    remediation?: {
-        [propertyName: string]: Record<string, unknown>;
-    };
-    exposedMetadataProperties?: {
-        [propertyName: string]: Record<string, unknown>;
-    };
-};
-
-// @public
-export interface ResourceRecommendationBaseListResult {
+// @public (undocumented)
+export interface PathsW6Fm20SubscriptionsSubscriptionidProvidersMicrosoftAdvisorAdvisorscoreGetResponses200ContentApplicationJsonSchema {
     nextLink?: string;
-    value?: ResourceRecommendationBase[];
+    value?: AdvisorScoreEntity[];
 }
 
 // @public
-export type Risk = string;
-
-// @public
-export type Scenario = string;
-
-// @public
-export interface ShortDescription {
-    problem?: string;
-    solution?: string;
+export interface ScoreEntity {
+    readonly categoryCount?: number;
+    consumptionUnits?: number;
+    date?: string;
+    impactedResourceCount?: number;
+    potentialScoreIncrease?: number;
+    score?: number;
 }
 
 // @public
-export type SuppressionContract = Resource & {
-    suppressionId?: string;
-    ttl?: string;
-    readonly expirationTimeStamp?: Date;
-};
-
-// @public
-export interface SuppressionContractListResult {
-    nextLink?: string;
-    value?: SuppressionContract[];
+export interface TimeSeriesEntityItem {
+    aggregationLevel?: TimeSeriesEntityItemAggregationLevel;
+    scoreHistory?: ScoreEntity[];
 }
 
 // @public
-export interface Suppressions {
-    create(resourceUri: string, recommendationId: string, name: string, suppressionContract: SuppressionContract, options?: SuppressionsCreateOptionalParams): Promise<SuppressionsCreateResponse>;
-    delete(resourceUri: string, recommendationId: string, name: string, options?: SuppressionsDeleteOptionalParams): Promise<void>;
-    get(resourceUri: string, recommendationId: string, name: string, options?: SuppressionsGetOptionalParams): Promise<SuppressionsGetResponse>;
-    list(options?: SuppressionsListOptionalParams): PagedAsyncIterableIterator<SuppressionContract>;
-}
-
-// @public
-export interface SuppressionsCreateOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type SuppressionsCreateResponse = SuppressionContract;
-
-// @public
-export interface SuppressionsDeleteOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export interface SuppressionsGetOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type SuppressionsGetResponse = SuppressionContract;
-
-// @public
-export interface SuppressionsListNextOptionalParams extends coreClient.OperationOptions {
-    skipToken?: string;
-    top?: number;
-}
-
-// @public
-export type SuppressionsListNextResponse = SuppressionContractListResult;
-
-// @public
-export interface SuppressionsListOptionalParams extends coreClient.OperationOptions {
-    skipToken?: string;
-    top?: number;
-}
-
-// @public
-export type SuppressionsListResponse = SuppressionContractListResult;
+export type TimeSeriesEntityItemAggregationLevel = string;
 
 // (No @packageDocumentation comment for this package)
 

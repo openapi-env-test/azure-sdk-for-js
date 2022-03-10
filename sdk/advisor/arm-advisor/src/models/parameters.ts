@@ -11,10 +11,6 @@ import {
   OperationURLParameter,
   OperationQueryParameter
 } from "@azure/core-client";
-import {
-  ConfigData as ConfigDataMapper,
-  SuppressionContract as SuppressionContractMapper
-} from "../models/mappers";
 
 export const accept: OperationParameter = {
   parameterPath: "accept",
@@ -40,21 +36,10 @@ export const $host: OperationURLParameter = {
   skipEncoding: true
 };
 
-export const name: OperationURLParameter = {
-  parameterPath: "name",
-  mapper: {
-    serializedName: "name",
-    required: true,
-    type: {
-      name: "String"
-    }
-  }
-};
-
 export const apiVersion: OperationQueryParameter = {
   parameterPath: "apiVersion",
   mapper: {
-    defaultValue: "2020-01-01",
+    defaultValue: "2022-07-01",
     isConstant: true,
     serializedName: "api-version",
     type: {
@@ -86,109 +71,13 @@ export const subscriptionId: OperationURLParameter = {
   }
 };
 
-export const contentType: OperationParameter = {
-  parameterPath: ["options", "contentType"],
+export const name: OperationURLParameter = {
+  parameterPath: "name",
   mapper: {
-    defaultValue: "application/json",
-    isConstant: true,
-    serializedName: "Content-Type",
-    type: {
-      name: "String"
-    }
-  }
-};
-
-export const configContract: OperationParameter = {
-  parameterPath: "configContract",
-  mapper: ConfigDataMapper
-};
-
-export const configurationName: OperationURLParameter = {
-  parameterPath: "configurationName",
-  mapper: {
-    serializedName: "configurationName",
+    serializedName: "name",
     required: true,
     type: {
       name: "String"
     }
   }
-};
-
-export const resourceGroup: OperationURLParameter = {
-  parameterPath: "resourceGroup",
-  mapper: {
-    serializedName: "resourceGroup",
-    required: true,
-    type: {
-      name: "String"
-    }
-  }
-};
-
-export const operationId: OperationURLParameter = {
-  parameterPath: "operationId",
-  mapper: {
-    serializedName: "operationId",
-    required: true,
-    type: {
-      name: "Uuid"
-    }
-  }
-};
-
-export const filter: OperationQueryParameter = {
-  parameterPath: ["options", "filter"],
-  mapper: {
-    serializedName: "$filter",
-    type: {
-      name: "String"
-    }
-  }
-};
-
-export const top: OperationQueryParameter = {
-  parameterPath: ["options", "top"],
-  mapper: {
-    serializedName: "$top",
-    type: {
-      name: "Number"
-    }
-  }
-};
-
-export const skipToken: OperationQueryParameter = {
-  parameterPath: ["options", "skipToken"],
-  mapper: {
-    serializedName: "$skipToken",
-    type: {
-      name: "String"
-    }
-  }
-};
-
-export const resourceUri: OperationURLParameter = {
-  parameterPath: "resourceUri",
-  mapper: {
-    serializedName: "resourceUri",
-    required: true,
-    type: {
-      name: "String"
-    }
-  }
-};
-
-export const recommendationId: OperationURLParameter = {
-  parameterPath: "recommendationId",
-  mapper: {
-    serializedName: "recommendationId",
-    required: true,
-    type: {
-      name: "String"
-    }
-  }
-};
-
-export const suppressionContract: OperationParameter = {
-  parameterPath: "suppressionContract",
-  mapper: SuppressionContractMapper
 };
