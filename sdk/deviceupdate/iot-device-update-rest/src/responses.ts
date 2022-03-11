@@ -601,14 +601,14 @@ export interface DeviceManagementGetLogCollectionOperationDetailedStatusdefaultR
 }
 
 /** Stops a deployment. */
-export interface DeviceManagementStopDeployment200Response
+export interface DeviceManagementStopDeploymentAAA200Response
   extends HttpResponse {
   status: "200";
   body: DeploymentOutput;
 }
 
 /** Stops a deployment. */
-export interface DeviceManagementStopDeploymentdefaultResponse
+export interface DeviceManagementStopDeploymentAAAdefaultResponse
   extends HttpResponse {
   status: "500";
   body: ErrorResponseOutput;
