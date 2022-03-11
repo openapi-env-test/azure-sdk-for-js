@@ -291,20 +291,6 @@ export interface GroupOutput {
   deviceClassId?: string;
 }
 
-export interface UpdatableDevicesListOutput {
-  /** The collection of pageable items. */
-  value: Array<UpdatableDevicesOutput>;
-  /** The link to the next page of items. */
-  nextLink?: string;
-}
-
-export interface UpdatableDevicesOutput {
-  /** Update identity. */
-  updateId: UpdateIdOutput;
-  /** Total number of devices for which the update is applicable. */
-  deviceCount: number;
-}
-
 export interface DeploymentsListOutput {
   /** The collection of pageable items. */
   value: Array<DeploymentOutput>;
