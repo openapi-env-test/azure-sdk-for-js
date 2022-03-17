@@ -272,16 +272,16 @@ export type DeviceManagementGetLogCollectionOperationParameters = RequestParamet
 export type DeviceManagementListLogCollectionOperationsParameters = RequestParameters;
 export type DeviceManagementGetLogCollectionOperationDetailedStatusParameters = RequestParameters;
 
-export interface DeviceManagementStopDeploymentQueryParamProperties {
+export interface DeviceManagementStopDeploymentAAAQueryParamProperties {
   /** Cancel deployment action. */
   action: "cancel";
 }
 
-export interface DeviceManagementStopDeploymentQueryParam {
-  queryParameters: DeviceManagementStopDeploymentQueryParamProperties;
+export interface DeviceManagementStopDeploymentAAAQueryParam {
+  queryParameters: DeviceManagementStopDeploymentAAAQueryParamProperties;
 }
 
-export type DeviceManagementStopDeploymentParameters = DeviceManagementStopDeploymentQueryParam &
+export type DeviceManagementStopDeploymentAAAParameters = DeviceManagementStopDeploymentAAAQueryParam &
   RequestParameters;
 
 export interface DeviceManagementRetryDeploymentQueryParamProperties {
