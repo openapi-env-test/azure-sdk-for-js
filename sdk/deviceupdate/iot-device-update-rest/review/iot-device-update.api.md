@@ -1557,7 +1557,7 @@ export interface Routes {
     (path: "/deviceupdate/{instanceId}/updates/providers/{provider}/names", instanceId: string, provider: string): DeviceUpdateListNames;
     (path: "/deviceupdate/{instanceId}/updates/providers/{provider}/names/{name}/versions", instanceId: string, provider: string, name: string): DeviceUpdateListVersions;
     (path: "/deviceupdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files", instanceId: string, provider: string, name: string, version: string): DeviceUpdateListFiles;
-    (path: "/deviceupdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files/{fileId}", instanceId: string, provider: string, name: string, version: string, fileId: string): DeviceUpdateGetFile;
+    (path: "/deviceupdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files/{fileIdAAA}", instanceId: string, provider: string, name: string, version: string, fileIdAAA: string): DeviceUpdateGetFile;
     (path: "/deviceupdate/{instanceId}/updates/operations", instanceId: string): DeviceUpdateListOperations;
     (path: "/deviceupdate/{instanceId}/updates/operations/{operationId}", instanceId: string, operationId: string): DeviceUpdateGetOperation;
     (path: "/deviceupdate/{instanceId}/management/deviceclasses", instanceId: string): DeviceManagementListDeviceClasses;

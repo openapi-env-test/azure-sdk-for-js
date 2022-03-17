@@ -555,14 +555,14 @@ export interface Routes {
     name: string,
     version: string
   ): DeviceUpdateListFiles;
-  /** Resource for '/deviceupdate/\{instanceId\}/updates/providers/\{provider\}/names/\{name\}/versions/\{version\}/files/\{fileId\}' has methods for the following verbs: get */
+  /** Resource for '/deviceupdate/\{instanceId\}/updates/providers/\{provider\}/names/\{name\}/versions/\{version\}/files/\{fileIdAAA\}' has methods for the following verbs: get */
   (
-    path: "/deviceupdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files/{fileId}",
+    path: "/deviceupdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files/{fileIdAAA}",
     instanceId: string,
     provider: string,
     name: string,
     version: string,
-    fileId: string
+    fileIdAAA: string
   ): DeviceUpdateGetFile;
   /** Resource for '/deviceupdate/\{instanceId\}/updates/operations' has methods for the following verbs: get */
   (
