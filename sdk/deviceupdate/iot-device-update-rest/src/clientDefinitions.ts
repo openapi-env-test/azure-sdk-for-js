@@ -41,7 +41,7 @@ import {
   DeviceManagementGetLogCollectionOperationParameters,
   DeviceManagementListLogCollectionOperationsParameters,
   DeviceManagementGetLogCollectionOperationDetailedStatusParameters,
-  DeviceManagementStopDeploymentParameters,
+  DeviceManagementStopDeploymentAAAParameters,
   DeviceManagementRetryDeploymentParameters
 } from "./parameters";
 import {
@@ -127,8 +127,8 @@ import {
   DeviceManagementListLogCollectionOperationsdefaultResponse,
   DeviceManagementGetLogCollectionOperationDetailedStatus200Response,
   DeviceManagementGetLogCollectionOperationDetailedStatusdefaultResponse,
-  DeviceManagementStopDeployment200Response,
-  DeviceManagementStopDeploymentdefaultResponse,
+  DeviceManagementStopDeploymentAAA200Response,
+  DeviceManagementStopDeploymentAAAdefaultResponse,
   DeviceManagementRetryDeployment200Response,
   DeviceManagementRetryDeploymentdefaultResponse
 } from "./responses";
@@ -424,12 +424,12 @@ export interface DeviceManagementGetDeployment {
   /** Stops a deployment. */
   post(
     options:
-      | DeviceManagementStopDeploymentParameters
+      | DeviceManagementStopDeploymentAAAParameters
       | DeviceManagementRetryDeploymentParameters
   ):
     | Promise<
-        | DeviceManagementStopDeployment200Response
-        | DeviceManagementStopDeploymentdefaultResponse
+        | DeviceManagementStopDeploymentAAA200Response
+        | DeviceManagementStopDeploymentAAAdefaultResponse
       >
     | Promise<
         | DeviceManagementRetryDeployment200Response
