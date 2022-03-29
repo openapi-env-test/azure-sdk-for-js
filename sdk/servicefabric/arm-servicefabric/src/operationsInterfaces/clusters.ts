@@ -17,8 +17,6 @@ import {
   ClustersUpdateOptionalParams,
   ClustersUpdateResponse,
   ClustersDeleteOptionalParams,
-  ClustersListByResourceGroupOptionalParams,
-  ClustersListByResourceGroupResponse,
   ClustersListOptionalParams,
   ClustersListResponse,
   ClustersListUpgradableVersionsOptionalParams,
@@ -114,16 +112,6 @@ export interface Clusters {
     clusterName: string,
     options?: ClustersDeleteOptionalParams
   ): Promise<void>;
-  /**
-   * Gets all Service Fabric cluster resources created or in the process of being created in the resource
-   * group.
-   * @param resourceGroupName The name of the resource group.
-   * @param options The options parameters.
-   */
-  listByResourceGroup(
-    resourceGroupName: string,
-    options?: ClustersListByResourceGroupOptionalParams
-  ): Promise<ClustersListByResourceGroupResponse>;
   /**
    * Gets all Service Fabric cluster resources created or in the process of being created in the
    * subscription.

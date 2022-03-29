@@ -1,15 +1,20 @@
 # Release History
+    
+## 3.0.0 (2022-03-29)
+    
+**Features**
 
-## 2.0.1 (Unreleased)
+  - Added Type Alias ClusterVersionsEnvironment
+  - Added Enum KnownClusterVersionsEnvironment
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Removed operation Clusters.listByResourceGroup
+  - Operation ClusterVersions.getByEnvironment has a new signature
+  - Operation ClusterVersions.listByEnvironment has a new signature
+  - Removed Enum KnownEnum14
+    
+    
 ## 2.0.0 (2021-12-13)
 
 The package of @azure/arm-servicefabric is using our next generation design principles since version 2.0.0, which contains breaking changes.

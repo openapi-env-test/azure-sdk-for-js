@@ -418,7 +418,6 @@ export interface Clusters {
     delete(resourceGroupName: string, clusterName: string, options?: ClustersDeleteOptionalParams): Promise<void>;
     get(resourceGroupName: string, clusterName: string, options?: ClustersGetOptionalParams): Promise<ClustersGetResponse>;
     list(options?: ClustersListOptionalParams): Promise<ClustersListResponse>;
-    listByResourceGroup(resourceGroupName: string, options?: ClustersListByResourceGroupOptionalParams): Promise<ClustersListByResourceGroupResponse>;
     listUpgradableVersions(resourceGroupName: string, clusterName: string, options?: ClustersListUpgradableVersionsOptionalParams): Promise<ClustersListUpgradableVersionsResponse>;
 }
 
@@ -441,13 +440,6 @@ export interface ClustersGetOptionalParams extends coreClient.OperationOptions {
 
 // @public
 export type ClustersGetResponse = Cluster;
-
-// @public
-export interface ClustersListByResourceGroupOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type ClustersListByResourceGroupResponse = ClusterListResult;
 
 // @public
 export interface ClustersListOptionalParams extends coreClient.OperationOptions {
@@ -541,10 +533,13 @@ export interface ClusterVersionDetails {
 // @public
 export interface ClusterVersions {
     get(location: string, clusterVersion: string, options?: ClusterVersionsGetOptionalParams): Promise<ClusterVersionsGetResponse>;
-    getByEnvironment(location: string, environment: Enum14, clusterVersion: string, options?: ClusterVersionsGetByEnvironmentOptionalParams): Promise<ClusterVersionsGetByEnvironmentResponse>;
+    getByEnvironment(location: string, environment: ClusterVersionsEnvironment, clusterVersion: string, options?: ClusterVersionsGetByEnvironmentOptionalParams): Promise<ClusterVersionsGetByEnvironmentResponse>;
     list(location: string, options?: ClusterVersionsListOptionalParams): Promise<ClusterVersionsListResponse>;
-    listByEnvironment(location: string, environment: Enum14, options?: ClusterVersionsListByEnvironmentOptionalParams): Promise<ClusterVersionsListByEnvironmentResponse>;
+    listByEnvironment(location: string, environment: ClusterVersionsEnvironment, options?: ClusterVersionsListByEnvironmentOptionalParams): Promise<ClusterVersionsListByEnvironmentResponse>;
 }
+
+// @public
+export type ClusterVersionsEnvironment = string;
 
 // @public
 export interface ClusterVersionsGetByEnvironmentOptionalParams extends coreClient.OperationOptions {
@@ -592,9 +587,6 @@ export interface EndpointRangeDescription {
     endPort: number;
     startPort: number;
 }
-
-// @public
-export type Enum14 = string;
 
 // @public
 export interface ErrorModel {
@@ -671,6 +663,14 @@ export enum KnownClusterUpgradeCadence {
 }
 
 // @public
+export enum KnownClusterVersionsEnvironment {
+    // (undocumented)
+    Linux = "Linux",
+    // (undocumented)
+    Windows = "Windows"
+}
+
+// @public
 export enum KnownDurabilityLevel {
     // (undocumented)
     Bronze = "Bronze",
@@ -678,14 +678,6 @@ export enum KnownDurabilityLevel {
     Gold = "Gold",
     // (undocumented)
     Silver = "Silver"
-}
-
-// @public
-export enum KnownEnum14 {
-    // (undocumented)
-    Linux = "Linux",
-    // (undocumented)
-    Windows = "Windows"
 }
 
 // @public

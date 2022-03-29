@@ -1138,7 +1138,7 @@ export type StatefulServiceProperties = ServiceResourceProperties & {
 export type StatelessServiceProperties = ServiceResourceProperties & {
   /** The instance count. */
   instanceCount?: number;
-  /** Delay duration for RequestDrain feature to ensures that the endpoint advertised by the stateless instance is removed before the delay starts prior to closing the instance. This delay enables existing requests to drain gracefully before the instance actually goes down (https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-application-upgrade-advanced#avoid-connection-drops-during-stateless-service-planned-downtime-preview). It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds. */
+  /** Delay duration for RequestDrain feature to ensures that the endpoint advertised by the stateless instance is removed before the delay starts prior to closing the instance. This delay enables existing requests to drain gracefully before the instance actually goes down (https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-application-upgrade-advanced#avoid-connection-drops-during-stateless-service-planned-downtime-preview). It is represented in ISO 8601 format (hh:mm:ss.s). */
   instanceCloseDelayDuration?: string;
 };
 
@@ -1160,7 +1160,7 @@ export type StatefulServiceUpdateProperties = ServiceResourceUpdateProperties & 
 export type StatelessServiceUpdateProperties = ServiceResourceUpdateProperties & {
   /** The instance count. */
   instanceCount?: number;
-  /** Delay duration for RequestDrain feature to ensures that the endpoint advertised by the stateless instance is removed before the delay starts prior to closing the instance. This delay enables existing requests to drain gracefully before the instance actually goes down (https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-application-upgrade-advanced#avoid-connection-drops-during-stateless-service-planned-downtime-preview). It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds. */
+  /** Delay duration for RequestDrain feature to ensures that the endpoint advertised by the stateless instance is removed before the delay starts prior to closing the instance. This delay enables existing requests to drain gracefully before the instance actually goes down (https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-application-upgrade-advanced#avoid-connection-drops-during-stateless-service-planned-downtime-preview). It is first interpreted as a string representing an ISO 8601 duration. It is represented in ISO 8601 format (hh:mm:ss.s). */
   instanceCloseDelayDuration?: string;
 };
 
@@ -1446,21 +1446,21 @@ export enum KnownNotificationChannel {
  */
 export type NotificationChannel = string;
 
-/** Known values of {@link Enum14} that the service accepts. */
-export enum KnownEnum14 {
+/** Known values of {@link ClusterVersionsEnvironment} that the service accepts. */
+export enum KnownClusterVersionsEnvironment {
   Windows = "Windows",
   Linux = "Linux"
 }
 
 /**
- * Defines values for Enum14. \
- * {@link KnownEnum14} can be used interchangeably with Enum14,
+ * Defines values for ClusterVersionsEnvironment. \
+ * {@link KnownClusterVersionsEnvironment} can be used interchangeably with ClusterVersionsEnvironment,
  *  this enum contains the known values that the service supports.
  * ### Known values supported by the service
  * **Windows** \
  * **Linux**
  */
-export type Enum14 = string;
+export type ClusterVersionsEnvironment = string;
 
 /** Known values of {@link ArmUpgradeFailureAction} that the service accepts. */
 export enum KnownArmUpgradeFailureAction {
@@ -1709,13 +1709,6 @@ export type ClustersUpdateResponse = Cluster;
 /** Optional parameters. */
 export interface ClustersDeleteOptionalParams
   extends coreClient.OperationOptions {}
-
-/** Optional parameters. */
-export interface ClustersListByResourceGroupOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the listByResourceGroup operation. */
-export type ClustersListByResourceGroupResponse = ClusterListResult;
 
 /** Optional parameters. */
 export interface ClustersListOptionalParams

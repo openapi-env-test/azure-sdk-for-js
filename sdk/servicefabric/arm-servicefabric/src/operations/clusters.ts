@@ -23,8 +23,6 @@ import {
   ClustersUpdateOptionalParams,
   ClustersUpdateResponse,
   ClustersDeleteOptionalParams,
-  ClustersListByResourceGroupOptionalParams,
-  ClustersListByResourceGroupResponse,
   ClustersListOptionalParams,
   ClustersListResponse,
   ClustersListUpgradableVersionsOptionalParams,
@@ -261,22 +259,6 @@ export class ClustersImpl implements Clusters {
   }
 
   /**
-   * Gets all Service Fabric cluster resources created or in the process of being created in the resource
-   * group.
-   * @param resourceGroupName The name of the resource group.
-   * @param options The options parameters.
-   */
-  listByResourceGroup(
-    resourceGroupName: string,
-    options?: ClustersListByResourceGroupOptionalParams
-  ): Promise<ClustersListByResourceGroupResponse> {
-    return this.client.sendOperationRequest(
-      { resourceGroupName, options },
-      listByResourceGroupOperationSpec
-    );
-  }
-
-  /**
    * Gets all Service Fabric cluster resources created or in the process of being created in the
    * subscription.
    * @param options The options parameters.
@@ -411,27 +393,6 @@ const deleteOperationSpec: coreClient.OperationSpec = {
     Parameters.$host,
     Parameters.resourceGroupName,
     Parameters.clusterName,
-    Parameters.subscriptionId
-  ],
-  headerParameters: [Parameters.accept],
-  serializer
-};
-const listByResourceGroupOperationSpec: coreClient.OperationSpec = {
-  path:
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters",
-  httpMethod: "GET",
-  responses: {
-    200: {
-      bodyMapper: Mappers.ClusterListResult
-    },
-    default: {
-      bodyMapper: Mappers.ErrorModel
-    }
-  },
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.resourceGroupName,
     Parameters.subscriptionId
   ],
   headerParameters: [Parameters.accept],
