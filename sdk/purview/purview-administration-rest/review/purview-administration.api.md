@@ -19,52 +19,52 @@ interface AccessKeyOptions {
 }
 
 // @public (undocumented)
-interface AccessKeys {
+interface AccessKeysOutput {
     atlasKafkaPrimaryEndpoint?: string;
     atlasKafkaSecondaryEndpoint?: string;
 }
 
 // @public (undocumented)
-interface Account {
-    id?: string;
-    identity?: Identity;
-    location?: string;
-    name?: string;
-    properties?: AccountProperties;
-    sku?: AccountSku;
-    systemData?: AccountSystemData;
-    tags?: Record<string, string>;
-    type?: string;
-}
-
-// @public (undocumented)
-interface AccountEndpoints {
+interface AccountEndpointsOutput {
     catalog?: string;
     guardian?: string;
     scan?: string;
 }
 
 // @public (undocumented)
-interface AccountProperties {
-    cloudConnectors?: CloudConnectors;
-    createdAt?: Date;
+interface AccountOutput {
+    id?: string;
+    identity?: IdentityOutput;
+    location?: string;
+    name?: string;
+    properties?: AccountPropertiesOutput;
+    sku?: AccountSkuOutput;
+    systemData?: AccountSystemDataOutput;
+    tags?: Record<string, string>;
+    type?: string;
+}
+
+// @public (undocumented)
+interface AccountPropertiesEndpointsOutput extends AccountEndpointsOutput {
+}
+
+// @public (undocumented)
+interface AccountPropertiesManagedResourcesOutput extends ManagedResourcesOutput {
+}
+
+// @public (undocumented)
+interface AccountPropertiesOutput {
+    cloudConnectors?: CloudConnectorsOutput;
+    createdAt?: string;
     createdBy?: string;
     createdByObjectId?: string;
-    endpoints?: AccountPropertiesEndpoints;
+    endpoints?: AccountPropertiesEndpointsOutput;
     friendlyName?: string;
     managedResourceGroupName?: string;
-    managedResources?: AccountPropertiesManagedResources;
-    privateEndpointConnections?: Array<PrivateEndpointConnection>;
+    managedResources?: AccountPropertiesManagedResourcesOutput;
+    privateEndpointConnections?: Array<PrivateEndpointConnectionOutput>;
     provisioningState?: "Unknown" | "Creating" | "Moving" | "Deleting" | "SoftDeleting" | "SoftDeleted" | "Failed" | "Succeeded" | "Canceled";
     publicNetworkAccess?: "NotSpecified" | "Enabled" | "Disabled";
-}
-
-// @public (undocumented)
-interface AccountPropertiesEndpoints extends AccountEndpoints {
-}
-
-// @public (undocumented)
-interface AccountPropertiesManagedResources extends ManagedResources {
 }
 
 // @public (undocumented)
@@ -75,7 +75,7 @@ interface AccountsGetAccessKeys {
 // @public
 interface AccountsGetAccessKeys200Response extends HttpResponse {
     // (undocumented)
-    body: AccessKeys;
+    body: AccessKeysOutput;
     // (undocumented)
     status: "200";
 }
@@ -83,7 +83,7 @@ interface AccountsGetAccessKeys200Response extends HttpResponse {
 // @public
 interface AccountsGetAccessKeysdefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel;
+    body: ErrorResponseModelOutput;
     // (undocumented)
     status: "500";
 }
@@ -100,7 +100,7 @@ interface AccountsGetAccountProperties {
 // @public
 interface AccountsGetAccountProperties200Response extends HttpResponse {
     // (undocumented)
-    body: Account;
+    body: AccountOutput;
     // (undocumented)
     status: "200";
 }
@@ -108,7 +108,7 @@ interface AccountsGetAccountProperties200Response extends HttpResponse {
 // @public
 interface AccountsGetAccountPropertiesdefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel;
+    body: ErrorResponseModelOutput;
     // (undocumented)
     status: "500";
 }
@@ -117,7 +117,7 @@ interface AccountsGetAccountPropertiesdefaultResponse extends HttpResponse {
 type AccountsGetAccountPropertiesParameters = RequestParameters;
 
 // @public (undocumented)
-interface AccountSku {
+interface AccountSkuOutput {
     capacity?: number;
     name?: "Standard";
 }
@@ -130,7 +130,7 @@ interface AccountsRegenerateAccessKey {
 // @public
 interface AccountsRegenerateAccessKey200Response extends HttpResponse {
     // (undocumented)
-    body: AccessKeys;
+    body: AccessKeysOutput;
     // (undocumented)
     status: "200";
 }
@@ -144,18 +144,23 @@ interface AccountsRegenerateAccessKeyBodyParam {
 // @public
 interface AccountsRegenerateAccessKeydefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel;
+    body: ErrorResponseModelOutput;
     // (undocumented)
     status: "500";
 }
 
 // @public (undocumented)
-type AccountsRegenerateAccessKeyParameters = AccountsRegenerateAccessKeyBodyParam & RequestParameters;
+interface AccountsRegenerateAccessKeyMediaTypesParam {
+    contentType?: "application/json";
+}
+
+// @public (undocumented)
+type AccountsRegenerateAccessKeyParameters = AccountsRegenerateAccessKeyMediaTypesParam & AccountsRegenerateAccessKeyBodyParam & RequestParameters;
 
 // @public
 interface AccountsUpdateAccountProperties200Response extends HttpResponse {
     // (undocumented)
-    body: Account;
+    body: AccountOutput;
     // (undocumented)
     status: "200";
 }
@@ -169,21 +174,36 @@ interface AccountsUpdateAccountPropertiesBodyParam {
 // @public
 interface AccountsUpdateAccountPropertiesdefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel;
+    body: ErrorResponseModelOutput;
     // (undocumented)
     status: "500";
 }
 
 // @public (undocumented)
-type AccountsUpdateAccountPropertiesParameters = AccountsUpdateAccountPropertiesBodyParam & RequestParameters;
+interface AccountsUpdateAccountPropertiesMediaTypesParam {
+    contentType?: "application/json";
+}
+
+// @public (undocumented)
+type AccountsUpdateAccountPropertiesParameters = AccountsUpdateAccountPropertiesMediaTypesParam & AccountsUpdateAccountPropertiesBodyParam & RequestParameters;
 
 // @public (undocumented)
 interface AccountSystemData extends SystemData {
 }
 
 // @public (undocumented)
+interface AccountSystemDataOutput extends SystemDataOutput {
+}
+
+// @public (undocumented)
 interface AdvancedResourceSet {
-    modifiedAt?: Date;
+    modifiedAt?: Date | string;
+    resourceSetProcessing?: "Default" | "Advanced";
+}
+
+// @public (undocumented)
+interface AdvancedResourceSetOutput {
+    modifiedAt?: string;
     resourceSetProcessing?: "Default" | "Advanced";
 }
 
@@ -197,8 +217,25 @@ interface AttributeMatcher {
 }
 
 // @public (undocumented)
+interface AttributeMatcherOutput {
+    attributeName?: string;
+    attributeValueExcludedIn?: Array<string>;
+    attributeValueExcludes?: string;
+    attributeValueIncludedIn?: Array<string>;
+    attributeValueIncludes?: string;
+}
+
+// @public (undocumented)
 interface AttributeRule {
     dnfCondition?: Array<Array<AttributeMatcher>>;
+    id?: string;
+    kind?: "decisionrule" | "attributerule";
+    name?: string;
+}
+
+// @public (undocumented)
+interface AttributeRuleOutput {
+    dnfCondition?: Array<Array<AttributeMatcherOutput>>;
     id?: string;
     kind?: "decisionrule" | "attributerule";
     name?: string;
@@ -216,7 +253,7 @@ declare namespace Client_2 {
         ResourceSetRulesGetResourceSetRule,
         ResourceSetRulesListResourceSetRules,
         Routes,
-        PurviewAccountRestClient
+        PurviewAccountClientLike
     }
 }
 
@@ -226,12 +263,12 @@ declare namespace Client_3 {
         MetadataPolicyListAll,
         MetadataPolicyUpdate,
         Routes_2 as Routes,
-        PurviewMetadataPoliciesRestClient
+        PurviewMetadataPoliciesClientLike
     }
 }
 
 // @public (undocumented)
-interface CloudConnectors {
+interface CloudConnectorsOutput {
     awsExternalId?: string;
 }
 
@@ -246,27 +283,37 @@ interface Collection {
 }
 
 // @public (undocumented)
-interface CollectionList {
+interface CollectionListOutput {
     count?: number;
     nextLink?: string;
-    value: Array<Collection>;
+    value: Array<CollectionOutput>;
 }
 
 // @public (undocumented)
-interface CollectionNameResponse {
+interface CollectionNameResponseListOutput {
+    count?: number;
+    nextLink?: string;
+    value: Array<CollectionNameResponseOutput>;
+}
+
+// @public (undocumented)
+interface CollectionNameResponseOutput {
     friendlyName?: string;
     name?: string;
 }
 
 // @public (undocumented)
-interface CollectionNameResponseList {
-    count?: number;
-    nextLink?: string;
-    value: Array<CollectionNameResponse>;
+interface CollectionOutput {
+    collectionProvisioningState?: "Unknown" | "Creating" | "Moving" | "Deleting" | "Failed" | "Succeeded";
+    description?: string;
+    friendlyName?: string;
+    name?: string;
+    parentCollection?: CollectionReferenceOutput;
+    systemData?: CollectionSystemDataOutput;
 }
 
 // @public (undocumented)
-interface CollectionPathResponse {
+interface CollectionPathResponseOutput {
     parentFriendlyNameChain?: Array<string>;
     parentNameChain?: Array<string>;
 }
@@ -283,10 +330,22 @@ interface CollectionReference_2 {
     type?: string;
 }
 
+// @public (undocumented)
+interface CollectionReferenceOutput {
+    referenceName?: string;
+    type?: string;
+}
+
+// @public (undocumented)
+interface CollectionReferenceOutput_2 {
+    referenceName?: string;
+    type?: string;
+}
+
 // @public
 interface CollectionsCreateOrUpdateCollection200Response extends HttpResponse {
     // (undocumented)
-    body: Collection;
+    body: CollectionOutput;
     // (undocumented)
     status: "200";
 }
@@ -300,13 +359,18 @@ interface CollectionsCreateOrUpdateCollectionBodyParam {
 // @public
 interface CollectionsCreateOrUpdateCollectiondefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel;
+    body: ErrorResponseModelOutput;
     // (undocumented)
     status: "500";
 }
 
 // @public (undocumented)
-type CollectionsCreateOrUpdateCollectionParameters = CollectionsCreateOrUpdateCollectionBodyParam & RequestParameters;
+interface CollectionsCreateOrUpdateCollectionMediaTypesParam {
+    contentType?: "application/json";
+}
+
+// @public (undocumented)
+type CollectionsCreateOrUpdateCollectionParameters = CollectionsCreateOrUpdateCollectionMediaTypesParam & CollectionsCreateOrUpdateCollectionBodyParam & RequestParameters;
 
 // @public
 interface CollectionsDeleteCollection204Response extends HttpResponse {
@@ -319,7 +383,7 @@ interface CollectionsDeleteCollection204Response extends HttpResponse {
 // @public
 interface CollectionsDeleteCollectiondefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel;
+    body: ErrorResponseModelOutput;
     // (undocumented)
     status: "500";
 }
@@ -337,7 +401,7 @@ interface CollectionsGetCollection {
 // @public
 interface CollectionsGetCollection200Response extends HttpResponse {
     // (undocumented)
-    body: Collection;
+    body: CollectionOutput;
     // (undocumented)
     status: "200";
 }
@@ -345,7 +409,7 @@ interface CollectionsGetCollection200Response extends HttpResponse {
 // @public
 interface CollectionsGetCollectiondefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel;
+    body: ErrorResponseModelOutput;
     // (undocumented)
     status: "500";
 }
@@ -361,7 +425,7 @@ interface CollectionsGetCollectionPath {
 // @public
 interface CollectionsGetCollectionPath200Response extends HttpResponse {
     // (undocumented)
-    body: CollectionPathResponse;
+    body: CollectionPathResponseOutput;
     // (undocumented)
     status: "200";
 }
@@ -369,7 +433,7 @@ interface CollectionsGetCollectionPath200Response extends HttpResponse {
 // @public
 interface CollectionsGetCollectionPathdefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel;
+    body: ErrorResponseModelOutput;
     // (undocumented)
     status: "500";
 }
@@ -385,7 +449,7 @@ interface CollectionsListChildCollectionNames {
 // @public
 interface CollectionsListChildCollectionNames200Response extends HttpResponse {
     // (undocumented)
-    body: CollectionNameResponseList;
+    body: CollectionNameResponseListOutput;
     // (undocumented)
     status: "200";
 }
@@ -393,7 +457,7 @@ interface CollectionsListChildCollectionNames200Response extends HttpResponse {
 // @public
 interface CollectionsListChildCollectionNamesdefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel;
+    body: ErrorResponseModelOutput;
     // (undocumented)
     status: "500";
 }
@@ -421,7 +485,7 @@ interface CollectionsListCollections {
 // @public
 interface CollectionsListCollections200Response extends HttpResponse {
     // (undocumented)
-    body: CollectionList;
+    body: CollectionListOutput;
     // (undocumented)
     status: "200";
 }
@@ -429,7 +493,7 @@ interface CollectionsListCollections200Response extends HttpResponse {
 // @public
 interface CollectionsListCollectionsdefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel;
+    body: ErrorResponseModelOutput;
     // (undocumented)
     status: "500";
 }
@@ -454,7 +518,31 @@ interface CollectionSystemData extends SystemData {
 }
 
 // @public (undocumented)
+interface CollectionSystemDataOutput extends SystemDataOutput {
+}
+
+// @public (undocumented)
 interface ComplexReplacerConfig {
+    // (undocumented)
+    createdBy?: string;
+    // (undocumented)
+    description?: string;
+    // (undocumented)
+    disabled?: boolean;
+    // (undocumented)
+    disableRecursiveReplacerApplication?: boolean;
+    // (undocumented)
+    lastUpdatedTimestamp?: number;
+    // (undocumented)
+    modifiedBy?: string;
+    // (undocumented)
+    name?: string;
+    // (undocumented)
+    typeName?: string;
+}
+
+// @public (undocumented)
+interface ComplexReplacerConfigOutput {
     // (undocumented)
     createdBy?: string;
     // (undocumented)
@@ -486,37 +574,70 @@ interface DecisionRule {
 }
 
 // @public (undocumented)
-interface ErrorModel {
+interface DecisionRuleOutput {
+    dnfCondition?: Array<Array<AttributeMatcherOutput>>;
+    effect?: "Deny" | "Permit";
+    kind?: "decisionrule" | "attributerule";
+}
+
+// @public (undocumented)
+interface ErrorModelOutput {
     code?: string;
-    details?: Array<ErrorModel>;
+    details?: Array<ErrorModelOutput>;
     message?: string;
     target?: string;
 }
 
 // @public (undocumented)
-interface ErrorModel_2 {
+interface ErrorModelOutput_2 {
     code: string;
-    details?: Array<ErrorModel_2>;
+    details?: Array<ErrorModelOutput_2>;
     message: string;
     target?: string;
 }
 
 // @public (undocumented)
-interface ErrorResponseModel {
-    error?: ErrorResponseModelError;
+interface ErrorResponseModelErrorOutput extends ErrorModelOutput {
 }
 
 // @public (undocumented)
-interface ErrorResponseModel_2 {
-    error: ErrorModel_2;
+interface ErrorResponseModelOutput {
+    error?: ErrorResponseModelErrorOutput;
 }
 
 // @public (undocumented)
-interface ErrorResponseModelError extends ErrorModel {
+interface ErrorResponseModelOutput_2 {
+    error: ErrorModelOutput_2;
 }
 
 // @public (undocumented)
 interface FastRegex {
+    // (undocumented)
+    maxDigits?: number;
+    // (undocumented)
+    maxLetters?: number;
+    // (undocumented)
+    minDashes?: number;
+    // (undocumented)
+    minDigits?: number;
+    // (undocumented)
+    minDigitsOrLetters?: number;
+    // (undocumented)
+    minDots?: number;
+    // (undocumented)
+    minHex?: number;
+    // (undocumented)
+    minLetters?: number;
+    // (undocumented)
+    minUnderscores?: number;
+    // (undocumented)
+    options?: number;
+    // (undocumented)
+    regexStr?: string;
+}
+
+// @public (undocumented)
+interface FastRegexOutput {
     // (undocumented)
     maxDigits?: number;
     // (undocumented)
@@ -557,6 +678,22 @@ interface Filter {
     path: string;
 }
 
+// @public (undocumented)
+interface FilterOutput {
+    // (undocumented)
+    createdBy?: string;
+    // (undocumented)
+    filterType?: "Pattern" | "Regex";
+    // (undocumented)
+    lastUpdatedTimestamp?: number;
+    // (undocumented)
+    modifiedBy?: string;
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    path: string;
+}
+
 // @public
 type GetArrayType<T> = T extends Array<infer TData> ? TData : never;
 
@@ -576,14 +713,14 @@ type GetPage_2<TPage> = (pageLink: string, maxPageSize?: number) => Promise<{
 }>;
 
 // @public (undocumented)
-interface Identity {
+interface IdentityOutput {
     principalId?: string;
     tenantId?: string;
     type?: "SystemAssigned";
 }
 
 // @public (undocumented)
-interface ManagedResources {
+interface ManagedResourcesOutput {
     eventHubNamespace?: string;
     resourceGroup?: string;
     storageAccount?: string;
@@ -601,7 +738,7 @@ interface MetadataPolicy {
 // @public
 interface MetadataPolicyGet200Response extends HttpResponse {
     // (undocumented)
-    body: MetadataPolicy;
+    body: MetadataPolicyOutput;
     // (undocumented)
     status: "200";
 }
@@ -614,7 +751,7 @@ interface MetadataPolicyGetdefaultHeaders {
 // @public
 interface MetadataPolicyGetdefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel_2;
+    body: ErrorResponseModelOutput_2;
     // (undocumented)
     headers: RawHttpHeaders & MetadataPolicyGetdefaultHeaders;
     // (undocumented)
@@ -625,14 +762,6 @@ interface MetadataPolicyGetdefaultResponse extends HttpResponse {
 type MetadataPolicyGetParameters = RequestParameters;
 
 // @public (undocumented)
-interface MetadataPolicyList {
-    // (undocumented)
-    nextLink?: string;
-    // (undocumented)
-    values: Array<MetadataPolicy>;
-}
-
-// @public (undocumented)
 interface MetadataPolicyListAll {
     get(options?: MetadataPolicyListAllParameters): Promise<MetadataPolicyListAll200Response | MetadataPolicyListAlldefaultResponse>;
 }
@@ -640,7 +769,7 @@ interface MetadataPolicyListAll {
 // @public
 interface MetadataPolicyListAll200Response extends HttpResponse {
     // (undocumented)
-    body: MetadataPolicyList;
+    body: MetadataPolicyListOutput;
     // (undocumented)
     status: "200";
 }
@@ -653,7 +782,7 @@ interface MetadataPolicyListAlldefaultHeaders {
 // @public
 interface MetadataPolicyListAlldefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel_2;
+    body: ErrorResponseModelOutput_2;
     // (undocumented)
     headers: RawHttpHeaders & MetadataPolicyListAlldefaultHeaders;
     // (undocumented)
@@ -675,10 +804,36 @@ interface MetadataPolicyListAllQueryParamProperties {
 }
 
 // @public (undocumented)
+interface MetadataPolicyListOutput {
+    // (undocumented)
+    nextLink?: string;
+    // (undocumented)
+    values: Array<MetadataPolicyOutput>;
+}
+
+// @public (undocumented)
+interface MetadataPolicyOutput {
+    id?: string;
+    name?: string;
+    // (undocumented)
+    properties?: MetadataPolicyPropertiesOutput;
+    version?: number;
+}
+
+// @public (undocumented)
 interface MetadataPolicyProperties {
     attributeRules?: Array<AttributeRule>;
     collection?: CollectionReference_2;
     decisionRules?: Array<DecisionRule>;
+    description?: string;
+    parentCollectionName?: string;
+}
+
+// @public (undocumented)
+interface MetadataPolicyPropertiesOutput {
+    attributeRules?: Array<AttributeRuleOutput>;
+    collection?: CollectionReferenceOutput_2;
+    decisionRules?: Array<DecisionRuleOutput>;
     description?: string;
     parentCollectionName?: string;
 }
@@ -692,7 +847,7 @@ interface MetadataPolicyUpdate {
 // @public
 interface MetadataPolicyUpdate200Response extends HttpResponse {
     // (undocumented)
-    body: MetadataPolicy;
+    body: MetadataPolicyOutput;
     // (undocumented)
     status: "200";
 }
@@ -710,7 +865,7 @@ interface MetadataPolicyUpdatedefaultHeaders {
 // @public
 interface MetadataPolicyUpdatedefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel_2;
+    body: ErrorResponseModelOutput_2;
     // (undocumented)
     headers: RawHttpHeaders & MetadataPolicyUpdatedefaultHeaders;
     // (undocumented)
@@ -718,30 +873,35 @@ interface MetadataPolicyUpdatedefaultResponse extends HttpResponse {
 }
 
 // @public (undocumented)
-type MetadataPolicyUpdateParameters = MetadataPolicyUpdateBodyParam & RequestParameters;
+interface MetadataPolicyUpdateMediaTypesParam {
+    contentType?: "application/json";
+}
 
 // @public (undocumented)
-interface MetadataRole {
+type MetadataPolicyUpdateParameters = MetadataPolicyUpdateMediaTypesParam & MetadataPolicyUpdateBodyParam & RequestParameters;
+
+// @public (undocumented)
+interface MetadataRoleListOutput {
+    // (undocumented)
+    nextLink?: string;
+    // (undocumented)
+    values: Array<MetadataRoleOutput>;
+}
+
+// @public (undocumented)
+interface MetadataRoleOutput {
     id?: string;
     name?: string;
     // (undocumented)
-    properties?: MetadataRoleProperties;
+    properties?: MetadataRolePropertiesOutput;
     type?: string;
 }
 
 // @public (undocumented)
-interface MetadataRoleList {
-    // (undocumented)
-    nextLink?: string;
-    // (undocumented)
-    values: Array<MetadataRole>;
-}
-
-// @public (undocumented)
-interface MetadataRoleProperties {
-    cnfCondition?: Array<Array<AttributeMatcher>>;
+interface MetadataRolePropertiesOutput {
+    cnfCondition?: Array<Array<AttributeMatcherOutput>>;
     description?: string;
-    dnfCondition?: Array<Array<AttributeMatcher>>;
+    dnfCondition?: Array<Array<AttributeMatcherOutput>>;
     friendlyName?: string;
     provisioningState?: string;
     roleType?: string;
@@ -756,7 +916,7 @@ interface MetadataRolesList {
 // @public
 interface MetadataRolesList200Response extends HttpResponse {
     // (undocumented)
-    body: MetadataRoleList;
+    body: MetadataRoleListOutput;
     // (undocumented)
     status: "200";
 }
@@ -769,7 +929,7 @@ interface MetadataRolesListdefaultHeaders {
 // @public
 interface MetadataRolesListdefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel_2;
+    body: ErrorResponseModelOutput_2;
     // (undocumented)
     headers: RawHttpHeaders & MetadataRolesListdefaultHeaders;
     // (undocumented)
@@ -781,34 +941,13 @@ type MetadataRolesListParameters = RequestParameters;
 
 declare namespace Models {
     export {
-        Account,
-        Identity,
-        AccountProperties,
-        CloudConnectors,
-        AccountEndpoints,
-        AccountPropertiesEndpoints,
-        ManagedResources,
-        AccountPropertiesManagedResources,
-        PrivateEndpointConnection,
-        PrivateEndpointConnectionProperties,
-        PrivateEndpoint,
-        PrivateLinkServiceConnectionState,
-        AccountSku,
-        SystemData,
         AccountSystemData,
-        ErrorResponseModel,
-        ErrorModel,
-        ErrorResponseModelError,
+        SystemData,
         DataPlaneAccountUpdateParameters,
-        AccessKeys,
         AccessKeyOptions,
         Collection,
         CollectionReference,
         CollectionSystemData,
-        CollectionList,
-        CollectionNameResponseList,
-        CollectionNameResponse,
-        CollectionPathResponse,
         ResourceSetRuleConfig,
         AdvancedResourceSet,
         PathPatternExtractorConfig,
@@ -818,20 +957,13 @@ declare namespace Models {
         FastRegex,
         RegexReplacer,
         ScopedRule,
-        Rule,
-        ResourceSetRuleConfigList
+        Rule
     }
 }
 
 declare namespace Models_2 {
     export {
-        MetadataRoleList,
-        MetadataRole,
-        MetadataRoleProperties,
         AttributeMatcher,
-        ErrorResponseModel_2 as ErrorResponseModel,
-        ErrorModel_2 as ErrorModel,
-        MetadataPolicyList,
         MetadataPolicy,
         MetadataPolicyProperties,
         DecisionRule,
@@ -862,11 +994,112 @@ interface NormalizationRule {
     version?: number;
 }
 
+// @public (undocumented)
+interface NormalizationRuleOutput {
+    // (undocumented)
+    description?: string;
+    // (undocumented)
+    disabled?: boolean;
+    // (undocumented)
+    dynamicReplacement?: boolean;
+    // (undocumented)
+    entityTypes?: Array<string>;
+    // (undocumented)
+    lastUpdatedTimestamp?: number;
+    // (undocumented)
+    name?: string;
+    // (undocumented)
+    regex?: FastRegexOutput;
+    // (undocumented)
+    replaceWith?: string;
+    // (undocumented)
+    version?: number;
+}
+
+declare namespace OutputModels {
+    export {
+        AccountOutput,
+        IdentityOutput,
+        AccountPropertiesOutput,
+        CloudConnectorsOutput,
+        AccountPropertiesEndpointsOutput,
+        AccountEndpointsOutput,
+        AccountPropertiesManagedResourcesOutput,
+        ManagedResourcesOutput,
+        PrivateEndpointConnectionOutput,
+        PrivateEndpointConnectionPropertiesOutput,
+        PrivateEndpointOutput,
+        PrivateLinkServiceConnectionStateOutput,
+        AccountSkuOutput,
+        AccountSystemDataOutput,
+        SystemDataOutput,
+        ErrorResponseModelOutput,
+        ErrorResponseModelErrorOutput,
+        ErrorModelOutput,
+        AccessKeysOutput,
+        CollectionOutput,
+        CollectionReferenceOutput,
+        CollectionSystemDataOutput,
+        CollectionListOutput,
+        CollectionNameResponseListOutput,
+        CollectionNameResponseOutput,
+        CollectionPathResponseOutput,
+        ResourceSetRuleConfigOutput,
+        AdvancedResourceSetOutput,
+        PathPatternExtractorConfigOutput,
+        FilterOutput,
+        ComplexReplacerConfigOutput,
+        NormalizationRuleOutput,
+        FastRegexOutput,
+        RegexReplacerOutput,
+        ScopedRuleOutput,
+        RuleOutput,
+        ResourceSetRuleConfigListOutput
+    }
+}
+
+declare namespace OutputModels_2 {
+    export {
+        MetadataRoleListOutput,
+        MetadataRoleOutput,
+        MetadataRolePropertiesOutput,
+        AttributeMatcherOutput,
+        ErrorResponseModelOutput_2 as ErrorResponseModelOutput,
+        ErrorModelOutput_2 as ErrorModelOutput,
+        MetadataPolicyListOutput,
+        MetadataPolicyOutput,
+        MetadataPolicyPropertiesOutput,
+        DecisionRuleOutput,
+        AttributeRuleOutput,
+        CollectionReferenceOutput_2 as CollectionReferenceOutput
+    }
+}
+
 // @public
 function paginate<TResponse extends PathUncheckedResponse>(client: Client, initialResponse: TResponse, options?: PagingOptions<TResponse>): PagedAsyncIterableIterator<PaginateReturn<TResponse>>;
 
 // @public
 function paginate_2<TResponse extends PathUncheckedResponse>(client: Client, initialResponse: TResponse, options?: PagingOptions_2<TResponse>): PagedAsyncIterableIterator<PaginateReturn_2<TResponse>>;
+
+declare namespace PaginateHelper {
+    export {
+        paginate,
+        GetArrayType,
+        GetPage,
+        PagingOptions,
+        PaginateReturn
+    }
+}
+
+declare namespace PaginateHelper_2 {
+    export {
+        paginate_2 as paginate,
+        GetArrayType_2 as GetArrayType,
+        GetPage_2 as GetPage,
+        PagingOptions_2 as PagingOptions,
+        PaginateReturn_2 as PaginateReturn
+    }
+}
 
 // @public
 type PaginateReturn<TResult> = TResult extends {
@@ -886,26 +1119,6 @@ type PaginateReturn_2<TResult> = TResult extends {
     };
 } ? GetArrayType_2<TPage> : Array<unknown>;
 
-declare namespace Pagination {
-    export {
-        paginate,
-        GetArrayType,
-        GetPage,
-        PagingOptions,
-        PaginateReturn
-    }
-}
-
-declare namespace Pagination_2 {
-    export {
-        paginate_2 as paginate,
-        GetArrayType_2 as GetArrayType,
-        GetPage_2 as GetPage,
-        PagingOptions_2 as PagingOptions,
-        PaginateReturn_2 as PaginateReturn
-    }
-}
-
 // @public
 interface PagingOptions<TResponse> {
     customGetPage?: GetPage<PaginateReturn<TResponse>[]>;
@@ -920,12 +1133,15 @@ declare namespace Parameters_2 {
     export {
         AccountsGetAccountPropertiesParameters,
         AccountsUpdateAccountPropertiesBodyParam,
+        AccountsUpdateAccountPropertiesMediaTypesParam,
         AccountsUpdateAccountPropertiesParameters,
         AccountsGetAccessKeysParameters,
         AccountsRegenerateAccessKeyBodyParam,
+        AccountsRegenerateAccessKeyMediaTypesParam,
         AccountsRegenerateAccessKeyParameters,
         CollectionsGetCollectionParameters,
         CollectionsCreateOrUpdateCollectionBodyParam,
+        CollectionsCreateOrUpdateCollectionMediaTypesParam,
         CollectionsCreateOrUpdateCollectionParameters,
         CollectionsDeleteCollectionParameters,
         CollectionsListCollectionsQueryParamProperties,
@@ -937,6 +1153,7 @@ declare namespace Parameters_2 {
         CollectionsGetCollectionPathParameters,
         ResourceSetRulesGetResourceSetRuleParameters,
         ResourceSetRulesCreateOrUpdateResourceSetRuleBodyParam,
+        ResourceSetRulesCreateOrUpdateResourceSetRuleMediaTypesParam,
         ResourceSetRulesCreateOrUpdateResourceSetRuleParameters,
         ResourceSetRulesDeleteResourceSetRuleParameters,
         ResourceSetRulesListResourceSetRulesQueryParamProperties,
@@ -952,6 +1169,7 @@ declare namespace Parameters_3 {
         MetadataPolicyListAllQueryParam,
         MetadataPolicyListAllParameters,
         MetadataPolicyUpdateBodyParam,
+        MetadataPolicyUpdateMediaTypesParam,
         MetadataPolicyUpdateParameters,
         MetadataPolicyGetParameters
     }
@@ -984,69 +1202,97 @@ interface PathPatternExtractorConfig {
 }
 
 // @public (undocumented)
-interface PrivateEndpoint {
-    id?: string;
+interface PathPatternExtractorConfigOutput {
+    // (undocumented)
+    acceptedPatterns?: Array<FilterOutput>;
+    // (undocumented)
+    complexReplacers?: Array<ComplexReplacerConfigOutput>;
+    // (undocumented)
+    createdBy: string;
+    // (undocumented)
+    enableDefaultPatterns: boolean;
+    // (undocumented)
+    lastUpdatedTimestamp?: number;
+    // (undocumented)
+    modifiedBy?: string;
+    // (undocumented)
+    normalizationRules?: Array<NormalizationRuleOutput>;
+    // (undocumented)
+    regexReplacers?: Array<RegexReplacerOutput>;
+    // (undocumented)
+    rejectedPatterns?: Array<FilterOutput>;
+    // (undocumented)
+    scopedRules?: Array<ScopedRuleOutput>;
+    // (undocumented)
+    version?: number;
 }
 
 // @public (undocumented)
-interface PrivateEndpointConnection {
+interface PrivateEndpointConnectionOutput {
     id?: string;
     name?: string;
-    properties?: PrivateEndpointConnectionProperties;
+    properties?: PrivateEndpointConnectionPropertiesOutput;
     type?: string;
 }
 
 // @public (undocumented)
-interface PrivateEndpointConnectionProperties {
-    privateEndpoint?: PrivateEndpoint;
-    privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
+interface PrivateEndpointConnectionPropertiesOutput {
+    privateEndpoint?: PrivateEndpointOutput;
+    privateLinkServiceConnectionState?: PrivateLinkServiceConnectionStateOutput;
     provisioningState?: string;
 }
 
 // @public (undocumented)
-interface PrivateLinkServiceConnectionState {
+interface PrivateEndpointOutput {
+    id?: string;
+}
+
+// @public (undocumented)
+interface PrivateLinkServiceConnectionStateOutput {
     actionsRequired?: string;
     description?: string;
     status?: "Unknown" | "Pending" | "Approved" | "Rejected" | "Disconnected";
 }
 
-declare namespace PurviewAccount {
+declare namespace PurviewAccountClient {
     export {
-        Models,
-        Pagination,
+        PurviewAccountClientClient as PurviewAccountClient,
         Parameters_2 as Parameters,
-        Client_2 as Client,
         Responses,
-        PurviewAccountClient
+        Client_2 as Client,
+        Models,
+        OutputModels,
+        PaginateHelper
     }
 }
-export { PurviewAccount }
+export { PurviewAccountClient }
 
 // @public (undocumented)
-export function PurviewAccountClient(endpoint: string, credentials: TokenCredential, options?: ClientOptions): PurviewAccountRestClient;
+export function PurviewAccountClientClient(endpoint: string, credentials: TokenCredential, options?: ClientOptions): PurviewAccountClientLike;
 
 // @public (undocumented)
-type PurviewAccountRestClient = Client & {
+type PurviewAccountClientLike = Client & {
     path: Routes;
 };
 
-declare namespace PurviewMetadataPolicies {
+declare namespace PurviewMetadataPoliciesClient {
     export {
-        PurviewMetadataPoliciesClient,
-        Models_2 as Models,
-        Pagination_2 as Pagination,
+        PurviewMetadataPoliciesClientClient as PurviewMetadataPoliciesClient,
         Parameters_3 as Parameters,
+        Responses_2 as Responses,
         Client_3 as Client,
-        Responses_2 as Responses
+        Models_2 as Models,
+        OutputModels_2 as OutputModels,
+        PaginateHelper_2 as PaginateHelper
     }
 }
-export { PurviewMetadataPolicies }
+export { PurviewMetadataPoliciesClient }
 
 // @public (undocumented)
-export function PurviewMetadataPoliciesClient(Endpoint: string, credentials: TokenCredential, options?: ClientOptions): PurviewMetadataPoliciesRestClient;
+export function PurviewMetadataPoliciesClientClient(Endpoint: string, credentials: TokenCredential, options?: ClientOptions): PurviewMetadataPoliciesClientLike;
 
 // @public (undocumented)
-type PurviewMetadataPoliciesRestClient = Client & {
+type PurviewMetadataPoliciesClientLike = Client & {
     path: Routes_2;
 };
 
@@ -1077,6 +1323,32 @@ interface RegexReplacer {
 }
 
 // @public (undocumented)
+interface RegexReplacerOutput {
+    // (undocumented)
+    condition?: string;
+    // (undocumented)
+    createdBy?: string;
+    // (undocumented)
+    description?: string;
+    // (undocumented)
+    disabled: boolean;
+    // (undocumented)
+    disableRecursiveReplacerApplication?: boolean;
+    // (undocumented)
+    doNotReplaceRegex?: FastRegexOutput;
+    // (undocumented)
+    lastUpdatedTimestamp?: number;
+    // (undocumented)
+    modifiedBy?: string;
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    regex?: FastRegexOutput;
+    // (undocumented)
+    replaceWith?: string;
+}
+
+// @public (undocumented)
 interface ResourceSetRuleConfig {
     advancedResourceSet?: AdvancedResourceSet;
     name?: string;
@@ -1084,16 +1356,23 @@ interface ResourceSetRuleConfig {
 }
 
 // @public (undocumented)
-interface ResourceSetRuleConfigList {
+interface ResourceSetRuleConfigListOutput {
     count?: number;
     nextLink?: string;
-    value: Array<ResourceSetRuleConfig>;
+    value: Array<ResourceSetRuleConfigOutput>;
+}
+
+// @public (undocumented)
+interface ResourceSetRuleConfigOutput {
+    advancedResourceSet?: AdvancedResourceSetOutput;
+    name?: string;
+    pathPatternConfig?: PathPatternExtractorConfigOutput;
 }
 
 // @public
 interface ResourceSetRulesCreateOrUpdateResourceSetRule200Response extends HttpResponse {
     // (undocumented)
-    body: ResourceSetRuleConfig;
+    body: ResourceSetRuleConfigOutput;
     // (undocumented)
     status: "200";
 }
@@ -1107,13 +1386,18 @@ interface ResourceSetRulesCreateOrUpdateResourceSetRuleBodyParam {
 // @public
 interface ResourceSetRulesCreateOrUpdateResourceSetRuledefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel;
+    body: ErrorResponseModelOutput;
     // (undocumented)
     status: "500";
 }
 
 // @public (undocumented)
-type ResourceSetRulesCreateOrUpdateResourceSetRuleParameters = ResourceSetRulesCreateOrUpdateResourceSetRuleBodyParam & RequestParameters;
+interface ResourceSetRulesCreateOrUpdateResourceSetRuleMediaTypesParam {
+    contentType?: "application/json";
+}
+
+// @public (undocumented)
+type ResourceSetRulesCreateOrUpdateResourceSetRuleParameters = ResourceSetRulesCreateOrUpdateResourceSetRuleMediaTypesParam & ResourceSetRulesCreateOrUpdateResourceSetRuleBodyParam & RequestParameters;
 
 // @public
 interface ResourceSetRulesDeleteResourceSetRule200Response extends HttpResponse {
@@ -1134,7 +1418,7 @@ interface ResourceSetRulesDeleteResourceSetRule204Response extends HttpResponse 
 // @public
 interface ResourceSetRulesDeleteResourceSetRuledefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel;
+    body: ErrorResponseModelOutput;
     // (undocumented)
     status: "500";
 }
@@ -1152,7 +1436,7 @@ interface ResourceSetRulesGetResourceSetRule {
 // @public
 interface ResourceSetRulesGetResourceSetRule200Response extends HttpResponse {
     // (undocumented)
-    body: ResourceSetRuleConfig;
+    body: ResourceSetRuleConfigOutput;
     // (undocumented)
     status: "200";
 }
@@ -1160,7 +1444,7 @@ interface ResourceSetRulesGetResourceSetRule200Response extends HttpResponse {
 // @public
 interface ResourceSetRulesGetResourceSetRuledefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel;
+    body: ErrorResponseModelOutput;
     // (undocumented)
     status: "500";
 }
@@ -1176,7 +1460,7 @@ interface ResourceSetRulesListResourceSetRules {
 // @public
 interface ResourceSetRulesListResourceSetRules200Response extends HttpResponse {
     // (undocumented)
-    body: ResourceSetRuleConfigList;
+    body: ResourceSetRuleConfigListOutput;
     // (undocumented)
     status: "200";
 }
@@ -1184,7 +1468,7 @@ interface ResourceSetRulesListResourceSetRules200Response extends HttpResponse {
 // @public
 interface ResourceSetRulesListResourceSetRulesdefaultResponse extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseModel;
+    body: ErrorResponseModelOutput;
     // (undocumented)
     status: "500";
 }
@@ -1290,6 +1574,20 @@ interface Rule {
 }
 
 // @public (undocumented)
+interface RuleOutput {
+    // (undocumented)
+    displayName?: string;
+    // (undocumented)
+    isResourceSet?: boolean;
+    // (undocumented)
+    lastUpdatedTimestamp?: number;
+    // (undocumented)
+    name?: string;
+    // (undocumented)
+    qualifiedName: string;
+}
+
+// @public (undocumented)
 interface ScopedRule {
     // (undocumented)
     bindingUrl: string;
@@ -1300,11 +1598,31 @@ interface ScopedRule {
 }
 
 // @public (undocumented)
+interface ScopedRuleOutput {
+    // (undocumented)
+    bindingUrl: string;
+    // (undocumented)
+    rules?: Array<RuleOutput>;
+    // (undocumented)
+    storeType: string;
+}
+
+// @public (undocumented)
 interface SystemData {
-    createdAt?: Date;
+    createdAt?: Date | string;
     createdBy?: string;
     createdByType?: "User" | "Application" | "ManagedIdentity" | "Key";
-    lastModifiedAt?: Date;
+    lastModifiedAt?: Date | string;
+    lastModifiedBy?: string;
+    lastModifiedByType?: "User" | "Application" | "ManagedIdentity" | "Key";
+}
+
+// @public (undocumented)
+interface SystemDataOutput {
+    createdAt?: string;
+    createdBy?: string;
+    createdByType?: "User" | "Application" | "ManagedIdentity" | "Key";
+    lastModifiedAt?: string;
     lastModifiedBy?: string;
     lastModifiedByType?: "User" | "Application" | "ManagedIdentity" | "Key";
 }
