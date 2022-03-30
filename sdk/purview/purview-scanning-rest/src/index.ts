@@ -1,12 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import PurviewScanning from "./purviewScanning";
+import PurviewScanningClient from "./purviewScanningClient";
 
-export * from "./purviewScanning";
-export * from "./models";
+export * from "./purviewScanningClient";
 export * from "./parameters";
 export * from "./responses";
+export * from "./clientDefinitions";
+export * from "./models";
+export * from "./outputModels";
 export * from "./paginateHelper";
 
-export default PurviewScanning;
+export default PurviewScanningClient;

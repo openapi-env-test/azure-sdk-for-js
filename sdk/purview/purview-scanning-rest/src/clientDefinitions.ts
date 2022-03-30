@@ -36,7 +36,7 @@ import {
   SystemScanRulesetsListVersionsByDataSourceParameters,
   TriggersGetTriggerParameters,
   TriggersCreateTriggerParameters,
-  TriggersDeleteTriggerParameters,
+  TriggersDeleteTriggerParameters
 } from "./parameters";
 import {
   KeyVaultConnectionsGet200Response,
@@ -120,20 +120,24 @@ import {
   TriggersCreateTriggerdefaultResponse,
   TriggersDeleteTrigger200Response,
   TriggersDeleteTrigger204Response,
-  TriggersDeleteTriggerdefaultResponse,
+  TriggersDeleteTriggerdefaultResponse
 } from "./responses";
-import { getClient, ClientOptions, Client } from "@azure-rest/core-client";
-import { TokenCredential } from "@azure/core-auth";
+import { Client } from "@azure-rest/core-client";
 
 export interface KeyVaultConnectionsGet {
   /** Gets key vault information */
   get(
     options?: KeyVaultConnectionsGetParameters
-  ): Promise<KeyVaultConnectionsGet200Response | KeyVaultConnectionsGetdefaultResponse>;
+  ): Promise<
+    KeyVaultConnectionsGet200Response | KeyVaultConnectionsGetdefaultResponse
+  >;
   /** Creates an instance of a key vault connection */
   put(
     options: KeyVaultConnectionsCreateParameters
-  ): Promise<KeyVaultConnectionsCreate200Response | KeyVaultConnectionsCreatedefaultResponse>;
+  ): Promise<
+    | KeyVaultConnectionsCreate200Response
+    | KeyVaultConnectionsCreatedefaultResponse
+  >;
   /** Deletes the key vault connection associated with the account */
   delete(
     options?: KeyVaultConnectionsDeleteParameters
@@ -148,14 +152,19 @@ export interface KeyVaultConnectionsListAll {
   /** List key vault connections in account */
   get(
     options?: KeyVaultConnectionsListAllParameters
-  ): Promise<KeyVaultConnectionsListAll200Response | KeyVaultConnectionsListAlldefaultResponse>;
+  ): Promise<
+    | KeyVaultConnectionsListAll200Response
+    | KeyVaultConnectionsListAlldefaultResponse
+  >;
 }
 
 export interface ClassificationRulesGet {
   /** Get a classification rule */
   get(
     options?: ClassificationRulesGetParameters
-  ): Promise<ClassificationRulesGet200Response | ClassificationRulesGetdefaultResponse>;
+  ): Promise<
+    ClassificationRulesGet200Response | ClassificationRulesGetdefaultResponse
+  >;
   /** Creates or Updates a classification rule */
   put(
     options?: ClassificationRulesCreateOrUpdateParameters
@@ -178,7 +187,10 @@ export interface ClassificationRulesListAll {
   /** List classification rules in Account */
   get(
     options?: ClassificationRulesListAllParameters
-  ): Promise<ClassificationRulesListAll200Response | ClassificationRulesListAlldefaultResponse>;
+  ): Promise<
+    | ClassificationRulesListAll200Response
+    | ClassificationRulesListAlldefaultResponse
+  >;
 }
 
 export interface ClassificationRulesListVersionsByClassificationRuleName {
@@ -218,7 +230,9 @@ export interface DataSourcesCreateOrUpdate {
   delete(
     options?: DataSourcesDeleteParameters
   ): Promise<
-    DataSourcesDelete200Response | DataSourcesDelete204Response | DataSourcesDeletedefaultResponse
+    | DataSourcesDelete200Response
+    | DataSourcesDelete204Response
+    | DataSourcesDeletedefaultResponse
   >;
 }
 
@@ -231,7 +245,9 @@ export interface DataSourcesListAll {
 
 export interface FiltersGet {
   /** Get a filter */
-  get(options?: FiltersGetParameters): Promise<FiltersGet200Response | FiltersGetdefaultResponse>;
+  get(
+    options?: FiltersGetParameters
+  ): Promise<FiltersGet200Response | FiltersGetdefaultResponse>;
   /** Creates or updates a filter */
   put(
     options?: FiltersCreateOrUpdateParameters
@@ -252,18 +268,24 @@ export interface ScansCreateOrUpdate {
     | ScansCreateOrUpdatedefaultResponse
   >;
   /** Gets a scan information */
-  get(options?: ScansGetParameters): Promise<ScansGet200Response | ScansGetdefaultResponse>;
+  get(
+    options?: ScansGetParameters
+  ): Promise<ScansGet200Response | ScansGetdefaultResponse>;
   /** Deletes the scan associated with the data source */
   delete(
     options?: ScansDeleteParameters
-  ): Promise<ScansDelete200Response | ScansDelete204Response | ScansDeletedefaultResponse>;
+  ): Promise<
+    ScansDelete200Response | ScansDelete204Response | ScansDeletedefaultResponse
+  >;
 }
 
 export interface ScansListByDataSource {
   /** List scans in data source */
   get(
     options?: ScansListByDataSourceParameters
-  ): Promise<ScansListByDataSource200Response | ScansListByDataSourcedefaultResponse>;
+  ): Promise<
+    ScansListByDataSource200Response | ScansListByDataSourcedefaultResponse
+  >;
 }
 
 export interface ScanResultRunScan {
@@ -277,14 +299,19 @@ export interface ScanResultCancelScan {
   /** Cancels a scan */
   post(
     options?: ScanResultCancelScanParameters
-  ): Promise<ScanResultCancelScan202Response | ScanResultCancelScandefaultResponse>;
+  ): Promise<
+    ScanResultCancelScan202Response | ScanResultCancelScandefaultResponse
+  >;
 }
 
 export interface ScanResultListScanHistory {
   /** Lists the scan history of a scan */
   get(
     options?: ScanResultListScanHistoryParameters
-  ): Promise<ScanResultListScanHistory200Response | ScanResultListScanHistorydefaultResponse>;
+  ): Promise<
+    | ScanResultListScanHistory200Response
+    | ScanResultListScanHistorydefaultResponse
+  >;
 }
 
 export interface ScanRulesetsGet {
@@ -314,21 +341,28 @@ export interface ScanRulesetsListAll {
   /** List scan rulesets in Data catalog */
   get(
     options?: ScanRulesetsListAllParameters
-  ): Promise<ScanRulesetsListAll200Response | ScanRulesetsListAlldefaultResponse>;
+  ): Promise<
+    ScanRulesetsListAll200Response | ScanRulesetsListAlldefaultResponse
+  >;
 }
 
 export interface SystemScanRulesetsListAll {
   /** List all system scan rulesets for an account */
   get(
     options?: SystemScanRulesetsListAllParameters
-  ): Promise<SystemScanRulesetsListAll200Response | SystemScanRulesetsListAlldefaultResponse>;
+  ): Promise<
+    | SystemScanRulesetsListAll200Response
+    | SystemScanRulesetsListAlldefaultResponse
+  >;
 }
 
 export interface SystemScanRulesetsGet {
   /** Get a system scan ruleset for a data source */
   get(
     options?: SystemScanRulesetsGetParameters
-  ): Promise<SystemScanRulesetsGet200Response | SystemScanRulesetsGetdefaultResponse>;
+  ): Promise<
+    SystemScanRulesetsGet200Response | SystemScanRulesetsGetdefaultResponse
+  >;
 }
 
 export interface SystemScanRulesetsGetByVersion {
@@ -336,7 +370,8 @@ export interface SystemScanRulesetsGetByVersion {
   get(
     options?: SystemScanRulesetsGetByVersionParameters
   ): Promise<
-    SystemScanRulesetsGetByVersion200Response | SystemScanRulesetsGetByVersiondefaultResponse
+    | SystemScanRulesetsGetByVersion200Response
+    | SystemScanRulesetsGetByVersiondefaultResponse
   >;
 }
 
@@ -344,7 +379,10 @@ export interface SystemScanRulesetsGetLatest {
   /** Get the latest version of a system scan ruleset */
   get(
     options?: SystemScanRulesetsGetLatestParameters
-  ): Promise<SystemScanRulesetsGetLatest200Response | SystemScanRulesetsGetLatestdefaultResponse>;
+  ): Promise<
+    | SystemScanRulesetsGetLatest200Response
+    | SystemScanRulesetsGetLatestdefaultResponse
+  >;
 }
 
 export interface SystemScanRulesetsListVersionsByDataSource {
@@ -382,7 +420,10 @@ export interface TriggersGetTrigger {
 
 export interface Routes {
   /** Resource for '/azureKeyVaults/\{keyVaultName\}' has methods for the following verbs: get, put, delete */
-  (path: "/azureKeyVaults/{keyVaultName}", keyVaultName: string): KeyVaultConnectionsGet;
+  (
+    path: "/azureKeyVaults/{keyVaultName}",
+    keyVaultName: string
+  ): KeyVaultConnectionsGet;
   /** Resource for '/azureKeyVaults' has methods for the following verbs: get */
   (path: "/azureKeyVaults"): KeyVaultConnectionsListAll;
   /** Resource for '/classificationrules/\{classificationRuleName\}' has methods for the following verbs: get, put, delete */
@@ -401,10 +442,13 @@ export interface Routes {
   (
     path: "/classificationrules/{classificationRuleName}/versions/{classificationRuleVersion}/:tag",
     classificationRuleName: string,
-    classificationRuleVersion: string
+    classificationRuleVersion: number
   ): ClassificationRulesTagClassificationVersion;
   /** Resource for '/datasources/\{dataSourceName\}' has methods for the following verbs: put, get, delete */
-  (path: "/datasources/{dataSourceName}", dataSourceName: string): DataSourcesCreateOrUpdate;
+  (
+    path: "/datasources/{dataSourceName}",
+    dataSourceName: string
+  ): DataSourcesCreateOrUpdate;
   /** Resource for '/datasources' has methods for the following verbs: get */
   (path: "/datasources"): DataSourcesListAll;
   /** Resource for '/datasources/\{dataSourceName\}/scans/\{scanName\}/filters/custom' has methods for the following verbs: get, put */
@@ -420,7 +464,10 @@ export interface Routes {
     scanName: string
   ): ScansCreateOrUpdate;
   /** Resource for '/datasources/\{dataSourceName\}/scans' has methods for the following verbs: get */
-  (path: "/datasources/{dataSourceName}/scans", dataSourceName: string): ScansListByDataSource;
+  (
+    path: "/datasources/{dataSourceName}/scans",
+    dataSourceName: string
+  ): ScansListByDataSource;
   /** Resource for '/datasources/\{dataSourceName\}/scans/\{scanName\}/runs/\{runId\}' has methods for the following verbs: put */
   (
     path: "/datasources/{dataSourceName}/scans/{scanName}/runs/{runId}",
@@ -442,7 +489,10 @@ export interface Routes {
     scanName: string
   ): ScanResultListScanHistory;
   /** Resource for '/scanrulesets/\{scanRulesetName\}' has methods for the following verbs: get, put, delete */
-  (path: "/scanrulesets/{scanRulesetName}", scanRulesetName: string): ScanRulesetsGet;
+  (
+    path: "/scanrulesets/{scanRulesetName}",
+    scanRulesetName: string
+  ): ScanRulesetsGet;
   /** Resource for '/scanrulesets' has methods for the following verbs: get */
   (path: "/scanrulesets"): ScanRulesetsListAll;
   /** Resource for '/systemScanRulesets' has methods for the following verbs: get */
@@ -450,14 +500,45 @@ export interface Routes {
   /** Resource for '/systemScanRulesets/datasources/\{dataSourceType\}' has methods for the following verbs: get */
   (
     path: "/systemScanRulesets/datasources/{dataSourceType}",
-    dataSourceType: string
+    dataSourceType:
+      | "None"
+      | "AzureSubscription"
+      | "AzureResourceGroup"
+      | "AzureSynapseWorkspace"
+      | "AzureSynapse"
+      | "AdlsGen1"
+      | "AdlsGen2"
+      | "AmazonAccount"
+      | "AmazonS3"
+      | "AmazonSql"
+      | "AzureCosmosDb"
+      | "AzureDataExplorer"
+      | "AzureFileService"
+      | "AzureSqlDatabase"
+      | "AmazonPostgreSql"
+      | "AzurePostgreSql"
+      | "SqlServerDatabase"
+      | "AzureSqlDatabaseManagedInstance"
+      | "AzureSqlDataWarehouse"
+      | "AzureMySql"
+      | "AzureStorage"
+      | "Teradata"
+      | "Oracle"
+      | "SapS4Hana"
+      | "SapEcc"
+      | "PowerBI"
   ): SystemScanRulesetsGet;
   /** Resource for '/systemScanRulesets/versions/\{version\}' has methods for the following verbs: get */
-  (path: "/systemScanRulesets/versions/{version}", version: string): SystemScanRulesetsGetByVersion;
+  (
+    path: "/systemScanRulesets/versions/{version}",
+    version: number
+  ): SystemScanRulesetsGetByVersion;
   /** Resource for '/systemScanRulesets/versions/latest' has methods for the following verbs: get */
   (path: "/systemScanRulesets/versions/latest"): SystemScanRulesetsGetLatest;
   /** Resource for '/systemScanRulesets/versions' has methods for the following verbs: get */
-  (path: "/systemScanRulesets/versions"): SystemScanRulesetsListVersionsByDataSource;
+  (
+    path: "/systemScanRulesets/versions"
+  ): SystemScanRulesetsListVersionsByDataSource;
   /** Resource for '/datasources/\{dataSourceName\}/scans/\{scanName\}/triggers/default' has methods for the following verbs: get, put, delete */
   (
     path: "/datasources/{dataSourceName}/scans/{scanName}/triggers/default",
@@ -466,23 +547,6 @@ export interface Routes {
   ): TriggersGetTrigger;
 }
 
-export type PurviewScanningRestClient = Client & {
+export type PurviewScanningClientLike = Client & {
   path: Routes;
 };
-
-export default function PurviewScanning(
-  Endpoint: string,
-  credentials: TokenCredential,
-  options: ClientOptions = {}
-): PurviewScanningRestClient {
-  const baseUrl = options.baseUrl ?? `${Endpoint}`;
-  options.apiVersion = options.apiVersion ?? "2018-12-01-preview";
-  options = {
-    ...options,
-    credentials: {
-      scopes: ["https://purview.azure.net/.default"],
-    },
-  };
-
-  return getClient(baseUrl, credentials, options) as PurviewScanningRestClient;
-}
