@@ -543,6 +543,18 @@ packages:
       '@jridgewell/trace-mapping': 0.3.4
     dev: false
 
+  /@azure-rest/core-client/1.0.0-beta.8:
+    resolution: {integrity: sha512-QsKShzttXt6bYxQi5xfSB6B/i0I1qN2uHu78cA39IT6scmVzSq4u5GzzS5XjBR0wthZOu76eOBiyJq4Ldowydw==}
+    engines: {node: '>=12.0.0'}
+    dependencies:
+      '@azure/core-auth': 1.3.2
+      '@azure/core-rest-pipeline': 1.6.0
+      '@azure/core-util': 1.0.0-beta.1
+      tslib: 2.3.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@azure-tools/test-recorder/1.0.2:
     resolution: {integrity: sha512-s29YTbvD6Pr2sTgRLHXXs8zJZmFnGO0n0F1UICxYMmf8hItgXvSa9DwTx/qg7j3v65hrFn+gx9IedI7YkLE5KA==}
     engines: {node: '>=12.0.0'}
@@ -2898,6 +2910,13 @@ packages:
     resolution: {integrity: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==}
     engines: {node: '>= 4.5.0'}
     hasBin: true
+    dev: false
+
+  /autorest/3.6.1:
+    resolution: {integrity: sha512-tTOnfQq+LAyqnxFrOOnyCEaErXnjRTgduUN7a8LUv2u5deqDlI0zoJllHeIEYDZS2o2Kr1s8pDj2NxaFPOWldg==}
+    engines: {node: '>=12.0.0'}
+    hasBin: true
+    requiresBuild: true
     dev: false
 
   /available-typed-arrays/1.0.5:
@@ -16040,10 +16059,11 @@ packages:
     dev: false
 
   file:projects/purview-administration.tgz:
-    resolution: {integrity: sha512-H95LLn/yAypuI9TswrdCg1m7ejAowOTkyrB9Pb1UI96BuCtnnrQ4A7/cxmnFh0Pud1AsyW3u9Tgc7YYY06a76g==, tarball: file:projects/purview-administration.tgz}
+    resolution: {integrity: sha512-AwNyKcXBpsG/xTOhunKCmjL3tqN01Ry65JwsnbBolDiYQGfJA2xvv76Y/aTlez3RqM8NHgm6OvAjSpi58T5xkQ==, tarball: file:projects/purview-administration.tgz}
     name: '@rush-temp/purview-administration'
     version: 0.0.0
     dependencies:
+      '@azure-tools/test-recorder': 1.0.2
       '@azure/identity': 2.0.4
       '@microsoft/api-extractor': 7.19.4
       '@types/chai': 4.3.0
@@ -16060,6 +16080,8 @@ packages:
       karma-env-preprocessor: 0.1.1
       karma-firefox-launcher: 1.3.0
       karma-ie-launcher: 1.0.0_karma@6.3.17
+      karma-json-preprocessor: 0.3.3_karma@6.3.17
+      karma-json-to-file-reporter: 1.0.1
       karma-junit-reporter: 2.0.1_karma@6.3.17
       karma-mocha: 2.0.1
       karma-mocha-reporter: 2.2.5_karma@6.3.17
@@ -16077,20 +16099,24 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - debug
+      - encoding
       - supports-color
       - utf-8-validate
     dev: false
 
   file:projects/purview-catalog.tgz:
-    resolution: {integrity: sha512-DeWpQy0cIEH0VISm8r2SWrcFDhMkvWk/qYEnzdW78G44HiPZIFpOKBH6wpo9MxhqFdMCnI2vAGqZb/Rum+9LBg==, tarball: file:projects/purview-catalog.tgz}
+    resolution: {integrity: sha512-dpUxThl28kAWEmYxEE/QzIrppAJpgcfR8pALJP3zHHhXZlk1Iwh0O9cI6y7d4JdODS5GhJLIIpKmplDt+P98KA==, tarball: file:projects/purview-catalog.tgz}
     name: '@rush-temp/purview-catalog'
     version: 0.0.0
     dependencies:
+      '@azure-rest/core-client': 1.0.0-beta.8
+      '@azure-tools/test-recorder': 1.0.2
       '@azure/identity': 2.0.4
       '@microsoft/api-extractor': 7.19.4
       '@types/chai': 4.3.0
       '@types/mocha': 7.0.2
       '@types/node': 12.20.46
+      autorest: 3.6.1
       chai: 4.3.6
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -16102,6 +16128,8 @@ packages:
       karma-env-preprocessor: 0.1.1
       karma-firefox-launcher: 1.3.0
       karma-ie-launcher: 1.0.0_karma@6.3.17
+      karma-json-preprocessor: 0.3.3_karma@6.3.17
+      karma-json-to-file-reporter: 1.0.1
       karma-junit-reporter: 2.0.1_karma@6.3.17
       karma-mocha: 2.0.1
       karma-mocha-reporter: 2.2.5_karma@6.3.17
@@ -16115,24 +16143,29 @@ packages:
       rimraf: 3.0.2
       source-map-support: 0.5.21
       tslib: 2.3.1
+      typedoc: 0.15.2
       typescript: 4.2.4
     transitivePeerDependencies:
       - bufferutil
       - debug
+      - encoding
       - supports-color
       - utf-8-validate
     dev: false
 
   file:projects/purview-scanning.tgz:
-    resolution: {integrity: sha512-jt02DeIHltayh1smLOYyz2SenzS5329s4AXQQheijOYrj/nTWl8rFQGNZy+rdJxRv1HO9KfmEPN6ysEodIqRfg==, tarball: file:projects/purview-scanning.tgz}
+    resolution: {integrity: sha512-Amg3bcBWwAvipyXNtMk1zFnYy2dwapbz5x5yEzr5jresdC+3GZ7W5/MGF5d98a+bn54DPDRNAJgptn7jgAGHqg==, tarball: file:projects/purview-scanning.tgz}
     name: '@rush-temp/purview-scanning'
     version: 0.0.0
     dependencies:
+      '@azure-rest/core-client': 1.0.0-beta.8
+      '@azure-tools/test-recorder': 1.0.2
       '@azure/identity': 2.0.4
       '@microsoft/api-extractor': 7.19.4
       '@types/chai': 4.3.0
       '@types/mocha': 7.0.2
       '@types/node': 12.20.46
+      autorest: 3.6.1
       chai: 4.3.6
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -16144,6 +16177,8 @@ packages:
       karma-env-preprocessor: 0.1.1
       karma-firefox-launcher: 1.3.0
       karma-ie-launcher: 1.0.0_karma@6.3.17
+      karma-json-preprocessor: 0.3.3_karma@6.3.17
+      karma-json-to-file-reporter: 1.0.1
       karma-junit-reporter: 2.0.1_karma@6.3.17
       karma-mocha: 2.0.1
       karma-mocha-reporter: 2.2.5_karma@6.3.17
@@ -16157,10 +16192,12 @@ packages:
       rimraf: 3.0.2
       source-map-support: 0.5.21
       tslib: 2.3.1
+      typedoc: 0.15.2
       typescript: 4.2.4
     transitivePeerDependencies:
       - bufferutil
       - debug
+      - encoding
       - supports-color
       - utf-8-validate
     dev: false
