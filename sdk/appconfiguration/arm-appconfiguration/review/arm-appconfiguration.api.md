@@ -102,7 +102,6 @@ export interface ConfigurationStores {
     get(resourceGroupName: string, configStoreName: string, options?: ConfigurationStoresGetOptionalParams): Promise<ConfigurationStoresGetResponse>;
     getDeleted(location: string, configStoreName: string, options?: ConfigurationStoresGetDeletedOptionalParams): Promise<ConfigurationStoresGetDeletedResponse>;
     list(options?: ConfigurationStoresListOptionalParams): PagedAsyncIterableIterator<ConfigurationStore>;
-    listByResourceGroup(resourceGroupName: string, options?: ConfigurationStoresListByResourceGroupOptionalParams): PagedAsyncIterableIterator<ConfigurationStore>;
     listDeleted(options?: ConfigurationStoresListDeletedOptionalParams): PagedAsyncIterableIterator<DeletedConfigurationStore>;
     listKeys(resourceGroupName: string, configStoreName: string, options?: ConfigurationStoresListKeysOptionalParams): PagedAsyncIterableIterator<ApiKey>;
     regenerateKey(resourceGroupName: string, configStoreName: string, regenerateKeyParameters: RegenerateKeyParameters, options?: ConfigurationStoresRegenerateKeyOptionalParams): Promise<ConfigurationStoresRegenerateKeyResponse>;
@@ -136,22 +135,6 @@ export interface ConfigurationStoresGetOptionalParams extends coreClient.Operati
 
 // @public
 export type ConfigurationStoresGetResponse = ConfigurationStore;
-
-// @public
-export interface ConfigurationStoresListByResourceGroupNextOptionalParams extends coreClient.OperationOptions {
-    skipToken?: string;
-}
-
-// @public
-export type ConfigurationStoresListByResourceGroupNextResponse = ConfigurationStoreListResult;
-
-// @public
-export interface ConfigurationStoresListByResourceGroupOptionalParams extends coreClient.OperationOptions {
-    skipToken?: string;
-}
-
-// @public
-export type ConfigurationStoresListByResourceGroupResponse = ConfigurationStoreListResult;
 
 // @public
 export interface ConfigurationStoresListDeletedNextOptionalParams extends coreClient.OperationOptions {

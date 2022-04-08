@@ -11,7 +11,6 @@ import { PollerLike, PollOperationState } from "@azure/core-lro";
 import {
   ConfigurationStore,
   ConfigurationStoresListOptionalParams,
-  ConfigurationStoresListByResourceGroupOptionalParams,
   ApiKey,
   ConfigurationStoresListKeysOptionalParams,
   DeletedConfigurationStore,
@@ -41,15 +40,6 @@ export interface ConfigurationStores {
    */
   list(
     options?: ConfigurationStoresListOptionalParams
-  ): PagedAsyncIterableIterator<ConfigurationStore>;
-  /**
-   * Lists the configuration stores for a given resource group.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
-   * @param options The options parameters.
-   */
-  listByResourceGroup(
-    resourceGroupName: string,
-    options?: ConfigurationStoresListByResourceGroupOptionalParams
   ): PagedAsyncIterableIterator<ConfigurationStore>;
   /**
    * Lists the access key for the specified configuration store.
