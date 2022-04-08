@@ -22,9 +22,6 @@ import {
   AvailabilitySetsListAvailableSizesOptionalParams,
   AvailabilitySetsCreateOrUpdateOptionalParams,
   AvailabilitySetsCreateOrUpdateResponse,
-  AvailabilitySetUpdate,
-  AvailabilitySetsUpdateOptionalParams,
-  AvailabilitySetsUpdateResponse,
   AvailabilitySetsDeleteOptionalParams,
   AvailabilitySetsGetOptionalParams,
   AvailabilitySetsGetResponse,
@@ -221,25 +218,6 @@ export class AvailabilitySetsImpl implements AvailabilitySets {
   }
 
   /**
-   * Update an availability set.
-   * @param resourceGroupName The name of the resource group.
-   * @param availabilitySetName The name of the availability set.
-   * @param parameters Parameters supplied to the Update Availability Set operation.
-   * @param options The options parameters.
-   */
-  update(
-    resourceGroupName: string,
-    availabilitySetName: string,
-    parameters: AvailabilitySetUpdate,
-    options?: AvailabilitySetsUpdateOptionalParams
-  ): Promise<AvailabilitySetsUpdateResponse> {
-    return this.client.sendOperationRequest(
-      { resourceGroupName, availabilitySetName, parameters, options },
-      updateOperationSpec
-    );
-  }
-
-  /**
    * Delete an availability set.
    * @param resourceGroupName The name of the resource group.
    * @param availabilitySetName The name of the availability set.
@@ -367,30 +345,6 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
     }
   },
   requestBody: Parameters.parameters,
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.resourceGroupName,
-    Parameters.availabilitySetName,
-    Parameters.subscriptionId
-  ],
-  headerParameters: [Parameters.accept, Parameters.contentType],
-  mediaType: "json",
-  serializer
-};
-const updateOperationSpec: coreClient.OperationSpec = {
-  path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
-  httpMethod: "PATCH",
-  responses: {
-    200: {
-      bodyMapper: Mappers.AvailabilitySet
-    },
-    default: {
-      bodyMapper: Mappers.CloudError
-    }
-  },
-  requestBody: Parameters.parameters1,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
