@@ -768,16 +768,6 @@ export interface ConfigurationStoresListOptionalParams
 export type ConfigurationStoresListResponse = ConfigurationStoreListResult;
 
 /** Optional parameters. */
-export interface ConfigurationStoresListByResourceGroupOptionalParams
-  extends coreClient.OperationOptions {
-  /** A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls. */
-  skipToken?: string;
-}
-
-/** Contains response data for the listByResourceGroup operation. */
-export type ConfigurationStoresListByResourceGroupResponse = ConfigurationStoreListResult;
-
-/** Optional parameters. */
 export interface ConfigurationStoresGetOptionalParams
   extends coreClient.OperationOptions {}
 
@@ -866,16 +856,6 @@ export interface ConfigurationStoresListNextOptionalParams
 
 /** Contains response data for the listNext operation. */
 export type ConfigurationStoresListNextResponse = ConfigurationStoreListResult;
-
-/** Optional parameters. */
-export interface ConfigurationStoresListByResourceGroupNextOptionalParams
-  extends coreClient.OperationOptions {
-  /** A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls. */
-  skipToken?: string;
-}
-
-/** Contains response data for the listByResourceGroupNext operation. */
-export type ConfigurationStoresListByResourceGroupNextResponse = ConfigurationStoreListResult;
 
 /** Optional parameters. */
 export interface ConfigurationStoresListKeysNextOptionalParams
