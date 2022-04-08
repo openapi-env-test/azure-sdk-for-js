@@ -317,22 +317,6 @@ export const Resource: coreClient.CompositeMapper = {
   }
 };
 
-export const UpdateResource: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "UpdateResource",
-    modelProperties: {
-      tags: {
-        serializedName: "tags",
-        type: {
-          name: "Dictionary",
-          value: { type: { name: "String" } }
-        }
-      }
-    }
-  }
-};
-
 export const AvailabilitySetListResult: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -421,6 +405,22 @@ export const VirtualMachineSize: coreClient.CompositeMapper = {
         serializedName: "maxDataDiskCount",
         type: {
           name: "Number"
+        }
+      }
+    }
+  }
+};
+
+export const UpdateResource: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "UpdateResource",
+    modelProperties: {
+      tags: {
+        serializedName: "tags",
+        type: {
+          name: "Dictionary",
+          value: { type: { name: "String" } }
         }
       }
     }
@@ -13304,67 +13304,6 @@ export const GalleryApplicationVersion: coreClient.CompositeMapper = {
   }
 };
 
-export const AvailabilitySetUpdate: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "AvailabilitySetUpdate",
-    modelProperties: {
-      ...UpdateResource.type.modelProperties,
-      sku: {
-        serializedName: "sku",
-        type: {
-          name: "Composite",
-          className: "Sku"
-        }
-      },
-      platformUpdateDomainCount: {
-        serializedName: "properties.platformUpdateDomainCount",
-        type: {
-          name: "Number"
-        }
-      },
-      platformFaultDomainCount: {
-        serializedName: "properties.platformFaultDomainCount",
-        type: {
-          name: "Number"
-        }
-      },
-      virtualMachines: {
-        serializedName: "properties.virtualMachines",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "SubResource"
-            }
-          }
-        }
-      },
-      proximityPlacementGroup: {
-        serializedName: "properties.proximityPlacementGroup",
-        type: {
-          name: "Composite",
-          className: "SubResource"
-        }
-      },
-      statuses: {
-        serializedName: "properties.statuses",
-        readOnly: true,
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "InstanceViewStatus"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
 export const ProximityPlacementGroupUpdate: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -14181,6 +14120,67 @@ export const VirtualMachineRunCommandUpdate: coreClient.CompositeMapper = {
         type: {
           name: "Composite",
           className: "VirtualMachineRunCommandInstanceView"
+        }
+      }
+    }
+  }
+};
+
+export const AvailabilitySetUpdate: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AvailabilitySetUpdate",
+    modelProperties: {
+      ...UpdateResource.type.modelProperties,
+      sku: {
+        serializedName: "sku",
+        type: {
+          name: "Composite",
+          className: "Sku"
+        }
+      },
+      platformUpdateDomainCount: {
+        serializedName: "properties.platformUpdateDomainCount",
+        type: {
+          name: "Number"
+        }
+      },
+      platformFaultDomainCount: {
+        serializedName: "properties.platformFaultDomainCount",
+        type: {
+          name: "Number"
+        }
+      },
+      virtualMachines: {
+        serializedName: "properties.virtualMachines",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "SubResource"
+            }
+          }
+        }
+      },
+      proximityPlacementGroup: {
+        serializedName: "properties.proximityPlacementGroup",
+        type: {
+          name: "Composite",
+          className: "SubResource"
+        }
+      },
+      statuses: {
+        serializedName: "properties.statuses",
+        readOnly: true,
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "InstanceViewStatus"
+            }
+          }
         }
       }
     }

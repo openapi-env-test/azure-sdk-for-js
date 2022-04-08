@@ -112,7 +112,6 @@ export interface AvailabilitySets {
     list(resourceGroupName: string, options?: AvailabilitySetsListOptionalParams): PagedAsyncIterableIterator<AvailabilitySet>;
     listAvailableSizes(resourceGroupName: string, availabilitySetName: string, options?: AvailabilitySetsListAvailableSizesOptionalParams): PagedAsyncIterableIterator<VirtualMachineSize>;
     listBySubscription(options?: AvailabilitySetsListBySubscriptionOptionalParams): PagedAsyncIterableIterator<AvailabilitySet>;
-    update(resourceGroupName: string, availabilitySetName: string, parameters: AvailabilitySetUpdate, options?: AvailabilitySetsUpdateOptionalParams): Promise<AvailabilitySetsUpdateResponse>;
 }
 
 // @public
@@ -172,13 +171,6 @@ export interface AvailabilitySetsListOptionalParams extends coreClient.Operation
 
 // @public
 export type AvailabilitySetsListResponse = AvailabilitySetListResult;
-
-// @public
-export interface AvailabilitySetsUpdateOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type AvailabilitySetsUpdateResponse = AvailabilitySet;
 
 // @public
 export type AvailabilitySetUpdate = UpdateResource & {

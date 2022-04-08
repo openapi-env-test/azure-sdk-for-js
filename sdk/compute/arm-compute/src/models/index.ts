@@ -141,12 +141,6 @@ export interface Resource {
   tags?: { [propertyName: string]: string };
 }
 
-/** The Update Resource model definition. */
-export interface UpdateResource {
-  /** Resource tags */
-  tags?: { [propertyName: string]: string };
-}
-
 /** The List Availability Set operation response. */
 export interface AvailabilitySetListResult {
   /** The list of availability sets */
@@ -175,6 +169,12 @@ export interface VirtualMachineSize {
   memoryInMB?: number;
   /** The maximum number of data disks that can be attached to the virtual machine size. */
   maxDataDiskCount?: number;
+}
+
+/** The Update Resource model definition. */
+export interface UpdateResource {
+  /** Resource tags */
+  tags?: { [propertyName: string]: string };
 }
 
 /** The List Proximity Placement Group operation response. */
@@ -5154,25 +5154,6 @@ export type GalleryApplicationVersion = Resource & {
   readonly replicationStatus?: ReplicationStatus;
 };
 
-/** Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated. */
-export type AvailabilitySetUpdate = UpdateResource & {
-  /** Sku of the availability set */
-  sku?: Sku;
-  /** Update Domain count. */
-  platformUpdateDomainCount?: number;
-  /** Fault Domain count. */
-  platformFaultDomainCount?: number;
-  /** A list of references to all virtual machines in the availability set. */
-  virtualMachines?: SubResource[];
-  /** Specifies information about the proximity placement group that the availability set should be assigned to. <br><br>Minimum api-version: 2018-04-01. */
-  proximityPlacementGroup?: SubResource;
-  /**
-   * The resource status information.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly statuses?: InstanceViewStatus[];
-};
-
 /** Specifies information about the proximity placement group. */
 export type ProximityPlacementGroupUpdate = UpdateResource & {};
 
@@ -5489,6 +5470,25 @@ export type VirtualMachineRunCommandUpdate = UpdateResource & {
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly instanceView?: VirtualMachineRunCommandInstanceView;
+};
+
+/** Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated. */
+export type AvailabilitySetUpdate = UpdateResource & {
+  /** Sku of the availability set */
+  sku?: Sku;
+  /** Update Domain count. */
+  platformUpdateDomainCount?: number;
+  /** Fault Domain count. */
+  platformFaultDomainCount?: number;
+  /** A list of references to all virtual machines in the availability set. */
+  virtualMachines?: SubResource[];
+  /** Specifies information about the proximity placement group that the availability set should be assigned to. <br><br>Minimum api-version: 2018-04-01. */
+  proximityPlacementGroup?: SubResource;
+  /**
+   * The resource status information.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly statuses?: InstanceViewStatus[];
 };
 
 /** Describes a Virtual Machine Scale Set Extension. */
@@ -8043,13 +8043,6 @@ export interface AvailabilitySetsCreateOrUpdateOptionalParams
 
 /** Contains response data for the createOrUpdate operation. */
 export type AvailabilitySetsCreateOrUpdateResponse = AvailabilitySet;
-
-/** Optional parameters. */
-export interface AvailabilitySetsUpdateOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the update operation. */
-export type AvailabilitySetsUpdateResponse = AvailabilitySet;
 
 /** Optional parameters. */
 export interface AvailabilitySetsDeleteOptionalParams

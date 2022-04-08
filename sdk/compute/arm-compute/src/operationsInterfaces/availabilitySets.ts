@@ -15,9 +15,6 @@ import {
   AvailabilitySetsListAvailableSizesOptionalParams,
   AvailabilitySetsCreateOrUpdateOptionalParams,
   AvailabilitySetsCreateOrUpdateResponse,
-  AvailabilitySetUpdate,
-  AvailabilitySetsUpdateOptionalParams,
-  AvailabilitySetsUpdateResponse,
   AvailabilitySetsDeleteOptionalParams,
   AvailabilitySetsGetOptionalParams,
   AvailabilitySetsGetResponse
@@ -67,19 +64,6 @@ export interface AvailabilitySets {
     parameters: AvailabilitySet,
     options?: AvailabilitySetsCreateOrUpdateOptionalParams
   ): Promise<AvailabilitySetsCreateOrUpdateResponse>;
-  /**
-   * Update an availability set.
-   * @param resourceGroupName The name of the resource group.
-   * @param availabilitySetName The name of the availability set.
-   * @param parameters Parameters supplied to the Update Availability Set operation.
-   * @param options The options parameters.
-   */
-  update(
-    resourceGroupName: string,
-    availabilitySetName: string,
-    parameters: AvailabilitySetUpdate,
-    options?: AvailabilitySetsUpdateOptionalParams
-  ): Promise<AvailabilitySetsUpdateResponse>;
   /**
    * Delete an availability set.
    * @param resourceGroupName The name of the resource group.
