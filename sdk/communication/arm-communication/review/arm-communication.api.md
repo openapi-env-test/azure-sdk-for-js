@@ -76,6 +76,7 @@ export interface CommunicationServiceKeys {
     primaryKey?: string;
     secondaryConnectionString?: string;
     secondaryKey?: string;
+    testKey?: string;
 }
 
 // @public

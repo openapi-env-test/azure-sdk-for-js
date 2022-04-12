@@ -446,6 +446,12 @@ export const CommunicationServiceKeys: coreClient.CompositeMapper = {
           name: "String"
         }
       },
+      testKey: {
+        serializedName: "testKey",
+        type: {
+          name: "String"
+        }
+      },
       secondaryKey: {
         serializedName: "secondaryKey",
         type: {

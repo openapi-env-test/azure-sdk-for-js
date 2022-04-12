@@ -215,6 +215,8 @@ export interface TaggedResource {
 export interface CommunicationServiceKeys {
   /** The primary access key. */
   primaryKey?: string;
+  /** The test access key. */
+  testKey?: string;
   /** The secondary access key. */
   secondaryKey?: string;
   /** CommunicationService connection string constructed via the primaryKey */
