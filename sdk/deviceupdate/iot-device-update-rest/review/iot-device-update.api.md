@@ -216,7 +216,7 @@ export type DeviceManagementDeleteGroupParameters = RequestParameters;
 export interface DeviceManagementGetDeployment {
     delete(options?: DeviceManagementDeleteDeploymentParameters): Promise<DeviceManagementDeleteDeployment204Response | DeviceManagementDeleteDeploymentdefaultResponse>;
     get(options?: DeviceManagementGetDeploymentParameters): Promise<DeviceManagementGetDeployment200Response | DeviceManagementGetDeploymentdefaultResponse>;
-    post(options: DeviceManagementStopDeploymentParameters | DeviceManagementRetryDeploymentParameters): Promise<DeviceManagementStopDeployment200Response | DeviceManagementStopDeploymentdefaultResponse> | Promise<DeviceManagementRetryDeployment200Response | DeviceManagementRetryDeploymentdefaultResponse>;
+    post(options: DeviceManagementStopDeploymentAAAParameters | DeviceManagementRetryDeploymentParameters): Promise<DeviceManagementStopDeploymentAAA200Response | DeviceManagementStopDeploymentAAAdefaultResponse> | Promise<DeviceManagementRetryDeployment200Response | DeviceManagementRetryDeploymentdefaultResponse>;
     put(options: DeviceManagementCreateOrUpdateDeploymentParameters): Promise<DeviceManagementCreateOrUpdateDeployment200Response | DeviceManagementCreateOrUpdateDeploymentdefaultResponse>;
 }
 
@@ -901,7 +901,7 @@ export interface DeviceManagementRetryDeploymentQueryParamProperties {
 }
 
 // @public
-export interface DeviceManagementStopDeployment200Response extends HttpResponse {
+export interface DeviceManagementStopDeploymentAAA200Response extends HttpResponse {
     // (undocumented)
     body: DeploymentOutput;
     // (undocumented)
@@ -909,7 +909,7 @@ export interface DeviceManagementStopDeployment200Response extends HttpResponse 
 }
 
 // @public
-export interface DeviceManagementStopDeploymentdefaultResponse extends HttpResponse {
+export interface DeviceManagementStopDeploymentAAAdefaultResponse extends HttpResponse {
     // (undocumented)
     body: ErrorResponseOutput;
     // (undocumented)
@@ -917,16 +917,16 @@ export interface DeviceManagementStopDeploymentdefaultResponse extends HttpRespo
 }
 
 // @public (undocumented)
-export type DeviceManagementStopDeploymentParameters = DeviceManagementStopDeploymentQueryParam & RequestParameters;
+export type DeviceManagementStopDeploymentAAAParameters = DeviceManagementStopDeploymentAAAQueryParam & RequestParameters;
 
 // @public (undocumented)
-export interface DeviceManagementStopDeploymentQueryParam {
+export interface DeviceManagementStopDeploymentAAAQueryParam {
     // (undocumented)
-    queryParameters: DeviceManagementStopDeploymentQueryParamProperties;
+    queryParameters: DeviceManagementStopDeploymentAAAQueryParamProperties;
 }
 
 // @public (undocumented)
-export interface DeviceManagementStopDeploymentQueryParamProperties {
+export interface DeviceManagementStopDeploymentAAAQueryParamProperties {
     action: "cancel";
 }
 
