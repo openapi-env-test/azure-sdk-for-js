@@ -88,22 +88,6 @@ export const resourceGroupName: OperationURLParameter = {
   }
 };
 
-export const configStoreName: OperationURLParameter = {
-  parameterPath: "configStoreName",
-  mapper: {
-    constraints: {
-      Pattern: new RegExp("^[a-zA-Z0-9_-]*$"),
-      MaxLength: 50,
-      MinLength: 5
-    },
-    serializedName: "configStoreName",
-    required: true,
-    type: {
-      name: "String"
-    }
-  }
-};
-
 export const contentType: OperationParameter = {
   parameterPath: ["options", "contentType"],
   mapper: {
@@ -119,6 +103,22 @@ export const contentType: OperationParameter = {
 export const configStoreCreationParameters: OperationParameter = {
   parameterPath: "configStoreCreationParameters",
   mapper: ConfigurationStoreMapper
+};
+
+export const configStoreName: OperationURLParameter = {
+  parameterPath: "configStoreName",
+  mapper: {
+    constraints: {
+      Pattern: new RegExp("^[a-zA-Z0-9_-]*$"),
+      MaxLength: 50,
+      MinLength: 5
+    },
+    serializedName: "configStoreName",
+    required: true,
+    type: {
+      name: "String"
+    }
+  }
 };
 
 export const configStoreUpdateParameters: OperationParameter = {

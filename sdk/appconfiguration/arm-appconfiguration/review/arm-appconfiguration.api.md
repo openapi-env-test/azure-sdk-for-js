@@ -99,7 +99,6 @@ export interface ConfigurationStores {
     beginPurgeDeletedAndWait(location: string, configStoreName: string, options?: ConfigurationStoresPurgeDeletedOptionalParams): Promise<void>;
     beginUpdate(resourceGroupName: string, configStoreName: string, configStoreUpdateParameters: ConfigurationStoreUpdateParameters, options?: ConfigurationStoresUpdateOptionalParams): Promise<PollerLike<PollOperationState<ConfigurationStoresUpdateResponse>, ConfigurationStoresUpdateResponse>>;
     beginUpdateAndWait(resourceGroupName: string, configStoreName: string, configStoreUpdateParameters: ConfigurationStoreUpdateParameters, options?: ConfigurationStoresUpdateOptionalParams): Promise<ConfigurationStoresUpdateResponse>;
-    get(resourceGroupName: string, configStoreName: string, options?: ConfigurationStoresGetOptionalParams): Promise<ConfigurationStoresGetResponse>;
     getDeleted(location: string, configStoreName: string, options?: ConfigurationStoresGetDeletedOptionalParams): Promise<ConfigurationStoresGetDeletedResponse>;
     list(options?: ConfigurationStoresListOptionalParams): PagedAsyncIterableIterator<ConfigurationStore>;
     listByResourceGroup(resourceGroupName: string, options?: ConfigurationStoresListByResourceGroupOptionalParams): PagedAsyncIterableIterator<ConfigurationStore>;
@@ -129,13 +128,6 @@ export interface ConfigurationStoresGetDeletedOptionalParams extends coreClient.
 
 // @public
 export type ConfigurationStoresGetDeletedResponse = DeletedConfigurationStore;
-
-// @public
-export interface ConfigurationStoresGetOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type ConfigurationStoresGetResponse = ConfigurationStore;
 
 // @public
 export interface ConfigurationStoresListByResourceGroupNextOptionalParams extends coreClient.OperationOptions {

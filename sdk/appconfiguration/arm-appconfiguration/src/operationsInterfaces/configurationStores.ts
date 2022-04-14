@@ -16,8 +16,6 @@ import {
   ConfigurationStoresListKeysOptionalParams,
   DeletedConfigurationStore,
   ConfigurationStoresListDeletedOptionalParams,
-  ConfigurationStoresGetOptionalParams,
-  ConfigurationStoresGetResponse,
   ConfigurationStoresCreateOptionalParams,
   ConfigurationStoresCreateResponse,
   ConfigurationStoresDeleteOptionalParams,
@@ -69,17 +67,6 @@ export interface ConfigurationStores {
   listDeleted(
     options?: ConfigurationStoresListDeletedOptionalParams
   ): PagedAsyncIterableIterator<DeletedConfigurationStore>;
-  /**
-   * Gets the properties of the specified configuration store.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
-   * @param configStoreName The name of the configuration store.
-   * @param options The options parameters.
-   */
-  get(
-    resourceGroupName: string,
-    configStoreName: string,
-    options?: ConfigurationStoresGetOptionalParams
-  ): Promise<ConfigurationStoresGetResponse>;
   /**
    * Creates a configuration store with the specified parameters.
    * @param resourceGroupName The name of the resource group to which the container registry belongs.

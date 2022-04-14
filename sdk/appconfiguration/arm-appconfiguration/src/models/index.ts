@@ -778,13 +778,6 @@ export interface ConfigurationStoresListByResourceGroupOptionalParams
 export type ConfigurationStoresListByResourceGroupResponse = ConfigurationStoreListResult;
 
 /** Optional parameters. */
-export interface ConfigurationStoresGetOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the get operation. */
-export type ConfigurationStoresGetResponse = ConfigurationStore;
-
-/** Optional parameters. */
 export interface ConfigurationStoresCreateOptionalParams
   extends coreClient.OperationOptions {
   /** Delay to wait until next poll, in milliseconds. */
