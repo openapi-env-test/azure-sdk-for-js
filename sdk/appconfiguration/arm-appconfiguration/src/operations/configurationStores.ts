@@ -28,8 +28,6 @@ import {
   ConfigurationStoresListDeletedOptionalParams,
   ConfigurationStoresListResponse,
   ConfigurationStoresListByResourceGroupResponse,
-  ConfigurationStoresGetOptionalParams,
-  ConfigurationStoresGetResponse,
   ConfigurationStoresCreateOptionalParams,
   ConfigurationStoresCreateResponse,
   ConfigurationStoresDeleteOptionalParams,
@@ -293,23 +291,6 @@ export class ConfigurationStoresImpl implements ConfigurationStores {
     return this.client.sendOperationRequest(
       { resourceGroupName, options },
       listByResourceGroupOperationSpec
-    );
-  }
-
-  /**
-   * Gets the properties of the specified configuration store.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
-   * @param configStoreName The name of the configuration store.
-   * @param options The options parameters.
-   */
-  get(
-    resourceGroupName: string,
-    configStoreName: string,
-    options?: ConfigurationStoresGetOptionalParams
-  ): Promise<ConfigurationStoresGetResponse> {
-    return this.client.sendOperationRequest(
-      { resourceGroupName, configStoreName, options },
-      getOperationSpec
     );
   }
 
@@ -840,28 +821,6 @@ const listByResourceGroupOperationSpec: coreClient.OperationSpec = {
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName
-  ],
-  headerParameters: [Parameters.accept],
-  serializer
-};
-const getOperationSpec: coreClient.OperationSpec = {
-  path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}",
-  httpMethod: "GET",
-  responses: {
-    200: {
-      bodyMapper: Mappers.ConfigurationStore
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.configStoreName
   ],
   headerParameters: [Parameters.accept],
   serializer
