@@ -2,7 +2,8 @@
   "advancedOptions": {
     "createSdkPullRequests": true,
     "generationCallMode": "one-per-config",
-    "breakingChangeTracking": true
+    "breakingChangeTracking": true,
+    "closeIntegrationPR": true
   },
   "initOptions": {
     "initScript": {
