@@ -20,6 +20,8 @@ export class AdvisorManagementClient extends coreClient.ServiceClient {
     // (undocumented)
     operations: Operations;
     // (undocumented)
+    recommendation: Recommendation;
+    // (undocumented)
     recommendationMetadata: RecommendationMetadata;
     // (undocumented)
     recommendations: Recommendations;
@@ -257,17 +259,21 @@ export interface OperationsListOptionalParams extends coreClient.OperationOption
 export type OperationsListResponse = OperationEntityListResult;
 
 // @public
+export interface Recommendation {
+    get(name: string, options?: RecommendationGetOptionalParams): Promise<RecommendationGetResponse>;
+}
+
+// @public
+export interface RecommendationGetOptionalParams extends coreClient.OperationOptions {
+}
+
+// @public
+export type RecommendationGetResponse = MetadataEntity;
+
+// @public
 export interface RecommendationMetadata {
-    get(name: string, options?: RecommendationMetadataGetOptionalParams): Promise<RecommendationMetadataGetResponse>;
     list(options?: RecommendationMetadataListOptionalParams): PagedAsyncIterableIterator<MetadataEntity>;
 }
-
-// @public
-export interface RecommendationMetadataGetOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RecommendationMetadataGetResponse = MetadataEntity;
 
 // @public
 export interface RecommendationMetadataListNextOptionalParams extends coreClient.OperationOptions {

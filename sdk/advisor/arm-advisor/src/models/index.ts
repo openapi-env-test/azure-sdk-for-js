@@ -362,11 +362,11 @@ export enum KnownRisk {
 export type Risk = string;
 
 /** Optional parameters. */
-export interface RecommendationMetadataGetOptionalParams
+export interface RecommendationGetOptionalParams
   extends coreClient.OperationOptions {}
 
 /** Contains response data for the get operation. */
-export type RecommendationMetadataGetResponse = MetadataEntity;
+export type RecommendationGetResponse = MetadataEntity;
 
 /** Optional parameters. */
 export interface RecommendationMetadataListOptionalParams

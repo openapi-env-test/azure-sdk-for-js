@@ -1,15 +1,18 @@
 # Release History
+    
+## 4.0.0 (2022-04-26)
+    
+**Features**
 
-## 3.0.2 (Unreleased)
+  - Added operation group Recommendation
+  - Added Interface RecommendationGetOptionalParams
+  - Added Type Alias RecommendationGetResponse
+  - Class AdvisorManagementClient has a new parameter recommendation
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Removed operation RecommendationMetadata.get
+    
 ## 3.0.1 (2022-03-22)
 
 **features**
