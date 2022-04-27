@@ -1,15 +1,26 @@
 # Release History
+    
+## 8.1.0-beta.2 (2022-04-27)
+    
+**Features**
 
-## 8.0.1 (Unreleased)
-
-### Features Added
-
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Added operation group WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings
+  - Added Interface DedicatedSQLminimalTlsSettingsListResult
+  - Added Interface DedicatedSQLminimalTlsSettingsPatchInfo
+  - Added Interface WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsGetOptionalParams
+  - Added Interface WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListNextOptionalParams
+  - Added Interface WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListOptionalParams
+  - Added Interface WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsUpdateOptionalParams
+  - Added Type Alias DedicatedSQLminimalTlsSettings
+  - Added Type Alias DedicatedSQLMinimalTlsSettingsName
+  - Added Type Alias WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsGetResponse
+  - Added Type Alias WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListNextResponse
+  - Added Type Alias WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListResponse
+  - Added Type Alias WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsUpdateResponse
+  - Class SynapseManagementClient has a new parameter workspaceManagedSqlServerDedicatedSQLminimalTlsSettings
+  - Added Enum KnownDedicatedSQLMinimalTlsSettingsName
+    
+    
 ## 8.0.0 (2022-01-13)
 
 The package of @azure/arm-synapse is using our next generation design principles since version 8.0.0, which contains breaking changes.

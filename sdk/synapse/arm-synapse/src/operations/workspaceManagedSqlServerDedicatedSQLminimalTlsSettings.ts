@@ -7,7 +7,7 @@
  */
 
 import { PagedAsyncIterableIterator } from "@azure/core-paging";
-import { AzureADOnlyAuthentications } from "../operationsInterfaces";
+import { WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
@@ -15,26 +15,26 @@ import { SynapseManagementClient } from "../synapseManagementClient";
 import { PollerLike, PollOperationState, LroEngine } from "@azure/core-lro";
 import { LroImpl } from "../lroImpl";
 import {
-  AzureADOnlyAuthentication,
-  AzureADOnlyAuthenticationsListNextOptionalParams,
-  AzureADOnlyAuthenticationsListOptionalParams,
-  AzureADOnlyAuthenticationName,
-  AzureADOnlyAuthenticationsGetOptionalParams,
-  AzureADOnlyAuthenticationsGetResponse,
-  AzureADOnlyAuthenticationsCreateOptionalParams,
-  AzureADOnlyAuthenticationsCreateResponse,
-  AzureADOnlyAuthenticationsListResponse,
-  AzureADOnlyAuthenticationsListNextResponse
+  DedicatedSQLminimalTlsSettings,
+  WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListNextOptionalParams,
+  WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListOptionalParams,
+  DedicatedSQLMinimalTlsSettingsName,
+  WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsUpdateOptionalParams,
+  WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsUpdateResponse,
+  WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsGetOptionalParams,
+  WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsGetResponse,
+  WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListResponse,
+  WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListNextResponse
 } from "../models";
 
 /// <reference lib="esnext.asynciterable" />
-/** Class containing AzureADOnlyAuthentications operations. */
-export class AzureADOnlyAuthenticationsImpl
-  implements AzureADOnlyAuthentications {
+/** Class containing WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings operations. */
+export class WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsImpl
+  implements WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings {
   private readonly client: SynapseManagementClient;
 
   /**
-   * Initialize a new instance of the class AzureADOnlyAuthentications class.
+   * Initialize a new instance of the class WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings class.
    * @param client Reference to the service client
    */
   constructor(client: SynapseManagementClient) {
@@ -42,7 +42,7 @@ export class AzureADOnlyAuthenticationsImpl
   }
 
   /**
-   * Gets a list of Azure Active Directory only authentication property for a workspace
+   * List workspace managed sql server's minimal tls settings.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param workspaceName The name of the workspace.
    * @param options The options parameters.
@@ -50,8 +50,8 @@ export class AzureADOnlyAuthenticationsImpl
   public list(
     resourceGroupName: string,
     workspaceName: string,
-    options?: AzureADOnlyAuthenticationsListOptionalParams
-  ): PagedAsyncIterableIterator<AzureADOnlyAuthentication> {
+    options?: WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListOptionalParams
+  ): PagedAsyncIterableIterator<DedicatedSQLminimalTlsSettings> {
     const iter = this.listPagingAll(resourceGroupName, workspaceName, options);
     return {
       next() {
@@ -69,8 +69,8 @@ export class AzureADOnlyAuthenticationsImpl
   private async *listPagingPage(
     resourceGroupName: string,
     workspaceName: string,
-    options?: AzureADOnlyAuthenticationsListOptionalParams
-  ): AsyncIterableIterator<AzureADOnlyAuthentication[]> {
+    options?: WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListOptionalParams
+  ): AsyncIterableIterator<DedicatedSQLminimalTlsSettings[]> {
     let result = await this._list(resourceGroupName, workspaceName, options);
     yield result.value || [];
     let continuationToken = result.nextLink;
@@ -89,8 +89,8 @@ export class AzureADOnlyAuthenticationsImpl
   private async *listPagingAll(
     resourceGroupName: string,
     workspaceName: string,
-    options?: AzureADOnlyAuthenticationsListOptionalParams
-  ): AsyncIterableIterator<AzureADOnlyAuthentication> {
+    options?: WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListOptionalParams
+  ): AsyncIterableIterator<DedicatedSQLminimalTlsSettings> {
     for await (const page of this.listPagingPage(
       resourceGroupName,
       workspaceName,
@@ -101,53 +101,31 @@ export class AzureADOnlyAuthenticationsImpl
   }
 
   /**
-   * Gets a Azure Active Directory only authentication property
+   * Update workspace managed sql server's minimal tls settings.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param workspaceName The name of the workspace.
-   * @param azureADOnlyAuthenticationName name of the property
+   * @param dedicatedSQLminimalTlsSettingsName The name of the dedicated sql minimal tls settings.
+   * @param parameters minimal tls settings
    * @param options The options parameters.
    */
-  get(
+  async beginUpdate(
     resourceGroupName: string,
     workspaceName: string,
-    azureADOnlyAuthenticationName: AzureADOnlyAuthenticationName,
-    options?: AzureADOnlyAuthenticationsGetOptionalParams
-  ): Promise<AzureADOnlyAuthenticationsGetResponse> {
-    return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        workspaceName,
-        azureADOnlyAuthenticationName,
-        options
-      },
-      getOperationSpec
-    );
-  }
-
-  /**
-   * Create or Update a Azure Active Directory only authentication property for the workspaces
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param workspaceName The name of the workspace.
-   * @param azureADOnlyAuthenticationName name of the property
-   * @param azureADOnlyAuthenticationInfo Azure Active Directory Property
-   * @param options The options parameters.
-   */
-  async beginCreate(
-    resourceGroupName: string,
-    workspaceName: string,
-    azureADOnlyAuthenticationName: AzureADOnlyAuthenticationName,
-    azureADOnlyAuthenticationInfo: AzureADOnlyAuthentication,
-    options?: AzureADOnlyAuthenticationsCreateOptionalParams
+    dedicatedSQLminimalTlsSettingsName: DedicatedSQLMinimalTlsSettingsName,
+    parameters: DedicatedSQLminimalTlsSettings,
+    options?: WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsUpdateOptionalParams
   ): Promise<
     PollerLike<
-      PollOperationState<AzureADOnlyAuthenticationsCreateResponse>,
-      AzureADOnlyAuthenticationsCreateResponse
+      PollOperationState<
+        WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsUpdateResponse
+      >,
+      WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsUpdateResponse
     >
   > {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
-    ): Promise<AzureADOnlyAuthenticationsCreateResponse> => {
+    ): Promise<WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsUpdateResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
     const sendOperation = async (
@@ -188,48 +166,75 @@ export class AzureADOnlyAuthenticationsImpl
       {
         resourceGroupName,
         workspaceName,
-        azureADOnlyAuthenticationName,
-        azureADOnlyAuthenticationInfo,
+        dedicatedSQLminimalTlsSettingsName,
+        parameters,
         options
       },
-      createOperationSpec
+      updateOperationSpec
     );
     const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs,
-      lroResourceLocationConfig: "location"
+      intervalInMs: options?.updateIntervalInMs
     });
     await poller.poll();
     return poller;
   }
 
   /**
-   * Create or Update a Azure Active Directory only authentication property for the workspaces
+   * Update workspace managed sql server's minimal tls settings.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param workspaceName The name of the workspace.
-   * @param azureADOnlyAuthenticationName name of the property
-   * @param azureADOnlyAuthenticationInfo Azure Active Directory Property
+   * @param dedicatedSQLminimalTlsSettingsName The name of the dedicated sql minimal tls settings.
+   * @param parameters minimal tls settings
    * @param options The options parameters.
    */
-  async beginCreateAndWait(
+  async beginUpdateAndWait(
     resourceGroupName: string,
     workspaceName: string,
-    azureADOnlyAuthenticationName: AzureADOnlyAuthenticationName,
-    azureADOnlyAuthenticationInfo: AzureADOnlyAuthentication,
-    options?: AzureADOnlyAuthenticationsCreateOptionalParams
-  ): Promise<AzureADOnlyAuthenticationsCreateResponse> {
-    const poller = await this.beginCreate(
+    dedicatedSQLminimalTlsSettingsName: DedicatedSQLMinimalTlsSettingsName,
+    parameters: DedicatedSQLminimalTlsSettings,
+    options?: WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsUpdateOptionalParams
+  ): Promise<
+    WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsUpdateResponse
+  > {
+    const poller = await this.beginUpdate(
       resourceGroupName,
       workspaceName,
-      azureADOnlyAuthenticationName,
-      azureADOnlyAuthenticationInfo,
+      dedicatedSQLminimalTlsSettingsName,
+      parameters,
       options
     );
     return poller.pollUntilDone();
   }
 
   /**
-   * Gets a list of Azure Active Directory only authentication property for a workspace
+   * Get workspace managed sql server's minimal tls settings.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param workspaceName The name of the workspace.
+   * @param dedicatedSQLminimalTlsSettingsName The name of the dedicated sql minimal tls settings.
+   * @param options The options parameters.
+   */
+  get(
+    resourceGroupName: string,
+    workspaceName: string,
+    dedicatedSQLminimalTlsSettingsName: string,
+    options?: WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsGetOptionalParams
+  ): Promise<
+    WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsGetResponse
+  > {
+    return this.client.sendOperationRequest(
+      {
+        resourceGroupName,
+        workspaceName,
+        dedicatedSQLminimalTlsSettingsName,
+        options
+      },
+      getOperationSpec
+    );
+  }
+
+  /**
+   * List workspace managed sql server's minimal tls settings.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param workspaceName The name of the workspace.
    * @param options The options parameters.
@@ -237,8 +242,10 @@ export class AzureADOnlyAuthenticationsImpl
   private _list(
     resourceGroupName: string,
     workspaceName: string,
-    options?: AzureADOnlyAuthenticationsListOptionalParams
-  ): Promise<AzureADOnlyAuthenticationsListResponse> {
+    options?: WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListOptionalParams
+  ): Promise<
+    WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListResponse
+  > {
     return this.client.sendOperationRequest(
       { resourceGroupName, workspaceName, options },
       listOperationSpec
@@ -256,8 +263,10 @@ export class AzureADOnlyAuthenticationsImpl
     resourceGroupName: string,
     workspaceName: string,
     nextLink: string,
-    options?: AzureADOnlyAuthenticationsListNextOptionalParams
-  ): Promise<AzureADOnlyAuthenticationsListNextResponse> {
+    options?: WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListNextOptionalParams
+  ): Promise<
+    WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListNextResponse
+  > {
     return this.client.sendOperationRequest(
       { resourceGroupName, workspaceName, nextLink, options },
       listNextOperationSpec
@@ -267,70 +276,70 @@ export class AzureADOnlyAuthenticationsImpl
 // Operation Specifications
 const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getOperationSpec: coreClient.OperationSpec = {
+const updateOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/azureADOnlyAuthentications/{azureADOnlyAuthenticationName}",
-  httpMethod: "GET",
-  responses: {
-    200: {
-      bodyMapper: Mappers.AzureADOnlyAuthentication
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.workspaceName,
-    Parameters.azureADOnlyAuthenticationName
-  ],
-  headerParameters: [Parameters.accept],
-  serializer
-};
-const createOperationSpec: coreClient.OperationSpec = {
-  path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/azureADOnlyAuthentications/{azureADOnlyAuthenticationName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/dedicatedSQLminimalTlsSettings/{dedicatedSQLminimalTlsSettingsName}",
   httpMethod: "PUT",
   responses: {
     200: {
-      bodyMapper: Mappers.AzureADOnlyAuthentication
+      bodyMapper: Mappers.DedicatedSQLminimalTlsSettings
     },
     201: {
-      bodyMapper: Mappers.AzureADOnlyAuthentication
+      bodyMapper: Mappers.DedicatedSQLminimalTlsSettings
     },
     202: {
-      bodyMapper: Mappers.AzureADOnlyAuthentication
+      bodyMapper: Mappers.DedicatedSQLminimalTlsSettings
     },
     204: {
-      bodyMapper: Mappers.AzureADOnlyAuthentication
+      bodyMapper: Mappers.DedicatedSQLminimalTlsSettings
     },
     default: {
       bodyMapper: Mappers.ErrorResponse
     }
   },
-  requestBody: Parameters.azureADOnlyAuthenticationInfo,
+  requestBody: Parameters.parameters22,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.workspaceName,
-    Parameters.azureADOnlyAuthenticationName
+    Parameters.dedicatedSQLminimalTlsSettingsName
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
   mediaType: "json",
   serializer
 };
-const listOperationSpec: coreClient.OperationSpec = {
+const getOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/azureADOnlyAuthentications",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/dedicatedSQLminimalTlsSettings/{dedicatedSQLminimalTlsSettingsName}",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.AzureADOnlyAuthenticationListResult
+      bodyMapper: Mappers.DedicatedSQLminimalTlsSettings
+    },
+    default: {
+      bodyMapper: Mappers.ErrorResponse
+    }
+  },
+  queryParameters: [Parameters.apiVersion],
+  urlParameters: [
+    Parameters.$host,
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName,
+    Parameters.workspaceName,
+    Parameters.dedicatedSQLminimalTlsSettingsName1
+  ],
+  headerParameters: [Parameters.accept],
+  serializer
+};
+const listOperationSpec: coreClient.OperationSpec = {
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/dedicatedSQLminimalTlsSettings",
+  httpMethod: "GET",
+  responses: {
+    200: {
+      bodyMapper: Mappers.DedicatedSQLminimalTlsSettingsListResult
     },
     default: {
       bodyMapper: Mappers.ErrorResponse
@@ -351,7 +360,7 @@ const listNextOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.AzureADOnlyAuthenticationListResult
+      bodyMapper: Mappers.DedicatedSQLminimalTlsSettingsListResult
     },
     default: {
       bodyMapper: Mappers.ErrorResponse

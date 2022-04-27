@@ -51,6 +51,7 @@ export * from "./workspaceManagedSqlServerVulnerabilityAssessments";
 export * from "./workspaceManagedSqlServerEncryptionProtector";
 export * from "./workspaceManagedSqlServerUsages";
 export * from "./workspaceManagedSqlServerRecoverableSqlPools";
+export * from "./workspaceManagedSqlServerDedicatedSQLminimalTlsSettings";
 export * from "./workspaces";
 export * from "./workspaceAadAdmins";
 export * from "./workspaceSqlAadAdmins";
