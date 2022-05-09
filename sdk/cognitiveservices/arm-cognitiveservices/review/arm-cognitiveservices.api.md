@@ -15,7 +15,6 @@ export type Account = AzureEntityResource & {
     kind?: string;
     sku?: Sku;
     identity?: Identity;
-    readonly systemData?: SystemData;
     tags?: {
         [propertyName: string]: string;
     };
@@ -83,7 +82,9 @@ export interface AccountProperties {
 
 // @public
 export interface Accounts {
+    // (undocumented)
     beginCreate(resourceGroupName: string, accountName: string, account: Account, options?: AccountsCreateOptionalParams): Promise<PollerLike<PollOperationState<AccountsCreateResponse>, AccountsCreateResponse>>;
+    // (undocumented)
     beginCreateAndWait(resourceGroupName: string, accountName: string, account: Account, options?: AccountsCreateOptionalParams): Promise<AccountsCreateResponse>;
     beginDelete(resourceGroupName: string, accountName: string, options?: AccountsDeleteOptionalParams): Promise<PollerLike<PollOperationState<void>, void>>;
     beginDeleteAndWait(resourceGroupName: string, accountName: string, options?: AccountsDeleteOptionalParams): Promise<void>;

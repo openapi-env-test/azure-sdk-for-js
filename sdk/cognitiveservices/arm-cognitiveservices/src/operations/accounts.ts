@@ -227,8 +227,6 @@ export class AccountsImpl implements Accounts {
   }
 
   /**
-   * Create Cognitive Services Account. Accounts is a resource group wide resource type. It holds the
-   * keys for developer to access intelligent APIs. It's also the resource type for billing.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param accountName The name of Cognitive Services account.
    * @param account The parameters to provide for the created account.
@@ -298,8 +296,6 @@ export class AccountsImpl implements Accounts {
   }
 
   /**
-   * Create Cognitive Services Account. Accounts is a resource group wide resource type. It holds the
-   * keys for developer to access intelligent APIs. It's also the resource type for billing.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param accountName The name of Cognitive Services account.
    * @param account The parameters to provide for the created account.
