@@ -2956,6 +2956,13 @@ packages:
     hasBin: true
     dev: false
 
+  /autorest/3.6.1:
+    resolution: {integrity: sha512-tTOnfQq+LAyqnxFrOOnyCEaErXnjRTgduUN7a8LUv2u5deqDlI0zoJllHeIEYDZS2o2Kr1s8pDj2NxaFPOWldg==}
+    engines: {node: '>=12.0.0'}
+    hasBin: true
+    requiresBuild: true
+    dev: false
+
   /available-typed-arrays/1.0.5:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
     engines: {node: '>= 0.4'}
@@ -15349,7 +15356,7 @@ packages:
     dev: false
 
   file:projects/iot-device-update.tgz:
-    resolution: {integrity: sha512-6HV1NM9Lo62LnFyoV9psZqdV68+AXnSvcjrBzu2pylpsKh+7NVYKLiZFYysNg0qV0QjbxfeYHCcRiqRyt3YVXQ==, tarball: file:projects/iot-device-update.tgz}
+    resolution: {integrity: sha512-KRXFgQyRxRUmFYUY/LEMblV3nzK704GNRcHS37ifnt8JniMW/3aQ9yKrA+k0C3LXgNfQa/wxNrGueKIDispCtg==, tarball: file:projects/iot-device-update.tgz}
     name: '@rush-temp/iot-device-update'
     version: 0.0.0
     dependencies:
@@ -15358,6 +15365,7 @@ packages:
       '@types/chai': 4.3.0
       '@types/mocha': 7.0.2
       '@types/node': 12.20.47
+      autorest: 3.6.1
       chai: 4.3.6
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -15387,10 +15395,7 @@ packages:
       typedoc: 0.15.2
       typescript: 4.2.4
     transitivePeerDependencies:
-      - bufferutil
-      - debug
       - supports-color
-      - utf-8-validate
     dev: false
 
   file:projects/iot-modelsrepository.tgz:
