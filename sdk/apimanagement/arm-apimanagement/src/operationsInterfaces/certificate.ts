@@ -10,8 +10,8 @@ import { PagedAsyncIterableIterator } from "@azure/core-paging";
 import {
   CertificateContract,
   CertificateListByServiceOptionalParams,
-  CertificateGetEntityTagOptionalParams,
-  CertificateGetEntityTagResponse,
+  CertificateEntityTagOptionalParams,
+  CertificateEntityTagResponse,
   CertificateGetOptionalParams,
   CertificateGetResponse,
   CertificateCreateOrUpdateParameters,
@@ -44,12 +44,12 @@ export interface Certificate {
    *                      Management service instance.
    * @param options The options parameters.
    */
-  getEntityTag(
+  entityTag(
     resourceGroupName: string,
     serviceName: string,
     certificateId: string,
-    options?: CertificateGetEntityTagOptionalParams
-  ): Promise<CertificateGetEntityTagResponse>;
+    options?: CertificateEntityTagOptionalParams
+  ): Promise<CertificateEntityTagResponse>;
   /**
    * Gets the details of the certificate specified by its identifier.
    * @param resourceGroupName The name of the resource group.

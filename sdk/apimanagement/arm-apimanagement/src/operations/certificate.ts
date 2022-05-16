@@ -17,8 +17,8 @@ import {
   CertificateListByServiceNextOptionalParams,
   CertificateListByServiceOptionalParams,
   CertificateListByServiceResponse,
-  CertificateGetEntityTagOptionalParams,
-  CertificateGetEntityTagResponse,
+  CertificateEntityTagOptionalParams,
+  CertificateEntityTagResponse,
   CertificateGetOptionalParams,
   CertificateGetResponse,
   CertificateCreateOrUpdateParameters,
@@ -139,15 +139,15 @@ export class CertificateImpl implements Certificate {
    *                      Management service instance.
    * @param options The options parameters.
    */
-  getEntityTag(
+  entityTag(
     resourceGroupName: string,
     serviceName: string,
     certificateId: string,
-    options?: CertificateGetEntityTagOptionalParams
-  ): Promise<CertificateGetEntityTagResponse> {
+    options?: CertificateEntityTagOptionalParams
+  ): Promise<CertificateEntityTagResponse> {
     return this.client.sendOperationRequest(
       { resourceGroupName, serviceName, certificateId, options },
-      getEntityTagOperationSpec
+      entityTagOperationSpec
     );
   }
 
@@ -286,13 +286,13 @@ const listByServiceOperationSpec: coreClient.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getEntityTagOperationSpec: coreClient.OperationSpec = {
+const entityTagOperationSpec: coreClient.OperationSpec = {
   path:
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates/{certificateId}",
   httpMethod: "HEAD",
   responses: {
     200: {
-      headersMapper: Mappers.CertificateGetEntityTagHeaders
+      headersMapper: Mappers.CertificateEntityTagHeaders
     },
     default: {
       bodyMapper: Mappers.ErrorResponse

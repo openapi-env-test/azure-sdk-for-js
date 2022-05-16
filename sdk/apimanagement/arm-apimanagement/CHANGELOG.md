@@ -1,15 +1,38 @@
 # Release History
+    
+## 9.0.0 (2022-05-16)
+    
+**Features**
 
-## 8.0.2 (Unreleased)
+  - Added operation group GlobalSchema
+  - Added operation Certificate.entityTag
+  - Added Interface CertificateEntityTagHeaders
+  - Added Interface CertificateEntityTagOptionalParams
+  - Added Interface GlobalSchemaCollection
+  - Added Interface GlobalSchemaCreateOrUpdateHeaders
+  - Added Interface GlobalSchemaCreateOrUpdateOptionalParams
+  - Added Interface GlobalSchemaDeleteOptionalParams
+  - Added Interface GlobalSchemaGetEntityTagHeaders
+  - Added Interface GlobalSchemaGetEntityTagOptionalParams
+  - Added Interface GlobalSchemaGetHeaders
+  - Added Interface GlobalSchemaGetOptionalParams
+  - Added Interface GlobalSchemaListByServiceNextOptionalParams
+  - Added Interface GlobalSchemaListByServiceOptionalParams
+  - Added Type Alias CertificateEntityTagResponse
+  - Added Type Alias GlobalSchemaContract
+  - Added Type Alias GlobalSchemaCreateOrUpdateResponse
+  - Added Type Alias GlobalSchemaGetEntityTagResponse
+  - Added Type Alias GlobalSchemaGetResponse
+  - Added Type Alias GlobalSchemaListByServiceNextResponse
+  - Added Type Alias GlobalSchemaListByServiceResponse
+  - Added Type Alias SchemaType
+  - Class ApiManagementClient has a new parameter globalSchema
+  - Added Enum KnownSchemaType
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Removed operation Certificate.getEntityTag
+    
 ## 8.0.1 (2022-04-06)
 
 **features**
