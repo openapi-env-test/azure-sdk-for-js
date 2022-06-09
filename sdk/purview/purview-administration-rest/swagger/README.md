@@ -1,35 +1,32 @@
-# Azure Purview Catalog TypeScript Protocol Layer
+# JavaScript
 
 > see https://aka.ms/autorest
 
 ## Configuration
 
-```yaml $(purview-account) == true
-title: PurviewAccount
-description: Purview Account Client
-output-folder: ../src/account
-source-code-folder-path: ./
-input-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/purview/data-plane/Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json
-```
-
-```yaml $(purview-metadata) == true
-title: PurviewMetadataPolicies
-description: Purview Metadata Policies Client
-output-folder: ../src/metadataPolicies
-source-code-folder-path: ./
-input-file:  https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/purview/data-plane/Azure.Analytics.Purview.MetadataPolicies/preview/2021-07-01-preview/purviewMetadataPolicy.json
-```
-
-
-```yaml
-modelerfour.lenient-model-deduplication: true
-package-name: "@azure-rest/purview-administration"
-generate-metadata: false
+```yaml $(multi-client)
+package-name: '@azure-rest/purview-administration'
+generate-metadata: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-version: 1.0.0-beta.2
 rest-level-client: true
 add-credentials: true
-credential-scopes: "https://purview.azure.net/.default"
+credential-scopes: https://purview.azure.net/.default
+require:
+  - https://github.com/Azure/azure-rest-api-specs/blob/9e30496a8803beb5a84909997e5cd7ea0f242fd8/specification/purview/data-plane/readme.md
 use-extension:
-  "@autorest/typescript": "latest"
+  '@autorest/typescript': 6.0.0-beta.20
+tag: false
+batch:
+  - purview-account: true
+  - purview-metadata: true
+```
+```yaml $(purview-account)
+output-folder: ../
+source-code-folder-path: ./src/account
+title: PurviewAccount
+```
+```yaml $(purview-metadata)
+output-folder: ../
+source-code-folder-path: ./src/metadataPolicies
+title: PurviewMetadataPolicies
 ```

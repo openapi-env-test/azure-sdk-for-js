@@ -1,22 +1,21 @@
-# Azure IOT Device Update TypeScript Protocol Layer
+# JavaScript
 
 > see https://aka.ms/autorest
 
 ## Configuration
 
 ```yaml
-package-name: "@azure-rest/iot-device-update"
-title: DeviceUpdate
-description: Iot Device Update Client
-generate-metadata: false
+package-name: '@azure-rest/iot-device-update'
+generate-metadata: true
 license-header: MICROSOFT_MIT_NO_VERSION
 output-folder: ../
 source-code-folder-path: ./src
-input-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/deviceupdate/data-plane/Microsoft.DeviceUpdate/preview/2021-06-01-preview/deviceupdate.json
-package-version: 1.0.0-beta.1
+require:
+  - https://github.com/Azure/azure-rest-api-specs/blob/9e30496a8803beb5a84909997e5cd7ea0f242fd8/specification/deviceupdate/data-plane/readme.md
 rest-level-client: true
 add-credentials: true
 credential-scopes: https://api.adu.microsoft.com/.default
 use-extension:
-  "@autorest/typescript": "6.0.0-beta.15"
-```
+  '@autorest/typescript': 6.0.0-beta.20
+
+```  
