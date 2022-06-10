@@ -1,65 +1,69 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import { Client } from "@azure-rest/core-client";
 import {
-  AccountsGetAccessKeysParameters,
   AccountsGetAccountPropertiesParameters,
-  AccountsRegenerateAccessKeyParameters,
   AccountsUpdateAccountPropertiesParameters,
+  AccountsGetAccessKeysParameters,
+  AccountsRegenerateAccessKeyParameters,
+  CollectionsGetCollectionParameters,
   CollectionsCreateOrUpdateCollectionParameters,
   CollectionsDeleteCollectionParameters,
-  CollectionsGetCollectionParameters,
-  CollectionsGetCollectionPathParameters,
-  CollectionsListChildCollectionNamesParameters,
   CollectionsListCollectionsParameters,
+  CollectionsListChildCollectionNamesParameters,
+  CollectionsGetCollectionPathParameters,
+  ResourceSetRulesGetResourceSetRuleParameters,
   ResourceSetRulesCreateOrUpdateResourceSetRuleParameters,
   ResourceSetRulesDeleteResourceSetRuleParameters,
-  ResourceSetRulesGetResourceSetRuleParameters,
-  ResourceSetRulesListResourceSetRulesParameters,
+  ResourceSetRulesListResourceSetRulesParameters
 } from "./parameters";
 import {
-  AccountsGetAccessKeys200Response,
-  AccountsGetAccessKeysdefaultResponse,
   AccountsGetAccountProperties200Response,
   AccountsGetAccountPropertiesdefaultResponse,
-  AccountsRegenerateAccessKey200Response,
-  AccountsRegenerateAccessKeydefaultResponse,
   AccountsUpdateAccountProperties200Response,
   AccountsUpdateAccountPropertiesdefaultResponse,
+  AccountsGetAccessKeys200Response,
+  AccountsGetAccessKeysdefaultResponse,
+  AccountsRegenerateAccessKey200Response,
+  AccountsRegenerateAccessKeydefaultResponse,
+  CollectionsGetCollection200Response,
+  CollectionsGetCollectiondefaultResponse,
   CollectionsCreateOrUpdateCollection200Response,
   CollectionsCreateOrUpdateCollectiondefaultResponse,
   CollectionsDeleteCollection204Response,
   CollectionsDeleteCollectiondefaultResponse,
-  CollectionsGetCollection200Response,
-  CollectionsGetCollectiondefaultResponse,
-  CollectionsGetCollectionPath200Response,
-  CollectionsGetCollectionPathdefaultResponse,
-  CollectionsListChildCollectionNames200Response,
-  CollectionsListChildCollectionNamesdefaultResponse,
   CollectionsListCollections200Response,
   CollectionsListCollectionsdefaultResponse,
+  CollectionsListChildCollectionNames200Response,
+  CollectionsListChildCollectionNamesdefaultResponse,
+  CollectionsGetCollectionPath200Response,
+  CollectionsGetCollectionPathdefaultResponse,
+  ResourceSetRulesGetResourceSetRule200Response,
+  ResourceSetRulesGetResourceSetRuledefaultResponse,
   ResourceSetRulesCreateOrUpdateResourceSetRule200Response,
   ResourceSetRulesCreateOrUpdateResourceSetRuledefaultResponse,
   ResourceSetRulesDeleteResourceSetRule200Response,
   ResourceSetRulesDeleteResourceSetRule204Response,
   ResourceSetRulesDeleteResourceSetRuledefaultResponse,
-  ResourceSetRulesGetResourceSetRule200Response,
-  ResourceSetRulesGetResourceSetRuledefaultResponse,
   ResourceSetRulesListResourceSetRules200Response,
-  ResourceSetRulesListResourceSetRulesdefaultResponse,
+  ResourceSetRulesListResourceSetRulesdefaultResponse
 } from "./responses";
+import { Client } from "@azure-rest/core-client";
 
 export interface AccountsGetAccountProperties {
   /** Get an account */
   get(
     options?: AccountsGetAccountPropertiesParameters
-  ): Promise<AccountsGetAccountProperties200Response | AccountsGetAccountPropertiesdefaultResponse>;
+  ): Promise<
+    | AccountsGetAccountProperties200Response
+    | AccountsGetAccountPropertiesdefaultResponse
+  >;
   /** Updates an account */
   patch(
     options: AccountsUpdateAccountPropertiesParameters
   ): Promise<
-    AccountsUpdateAccountProperties200Response | AccountsUpdateAccountPropertiesdefaultResponse
+    | AccountsUpdateAccountProperties200Response
+    | AccountsUpdateAccountPropertiesdefaultResponse
   >;
 }
 
@@ -67,21 +71,29 @@ export interface AccountsGetAccessKeys {
   /** List the authorization keys associated with this account. */
   post(
     options?: AccountsGetAccessKeysParameters
-  ): Promise<AccountsGetAccessKeys200Response | AccountsGetAccessKeysdefaultResponse>;
+  ): Promise<
+    AccountsGetAccessKeys200Response | AccountsGetAccessKeysdefaultResponse
+  >;
 }
 
 export interface AccountsRegenerateAccessKey {
   /** Regenerate the authorization keys associated with this data catalog. */
   post(
     options: AccountsRegenerateAccessKeyParameters
-  ): Promise<AccountsRegenerateAccessKey200Response | AccountsRegenerateAccessKeydefaultResponse>;
+  ): Promise<
+    | AccountsRegenerateAccessKey200Response
+    | AccountsRegenerateAccessKeydefaultResponse
+  >;
 }
 
 export interface CollectionsGetCollection {
   /** Get a collection */
   get(
     options?: CollectionsGetCollectionParameters
-  ): Promise<CollectionsGetCollection200Response | CollectionsGetCollectiondefaultResponse>;
+  ): Promise<
+    | CollectionsGetCollection200Response
+    | CollectionsGetCollectiondefaultResponse
+  >;
   /** Creates or updates a collection entity. */
   put(
     options: CollectionsCreateOrUpdateCollectionParameters
@@ -92,14 +104,20 @@ export interface CollectionsGetCollection {
   /** Deletes a Collection entity. */
   delete(
     options?: CollectionsDeleteCollectionParameters
-  ): Promise<CollectionsDeleteCollection204Response | CollectionsDeleteCollectiondefaultResponse>;
+  ): Promise<
+    | CollectionsDeleteCollection204Response
+    | CollectionsDeleteCollectiondefaultResponse
+  >;
 }
 
 export interface CollectionsListCollections {
   /** List the collections in the account. */
   get(
     options?: CollectionsListCollectionsParameters
-  ): Promise<CollectionsListCollections200Response | CollectionsListCollectionsdefaultResponse>;
+  ): Promise<
+    | CollectionsListCollections200Response
+    | CollectionsListCollectionsdefaultResponse
+  >;
 }
 
 export interface CollectionsListChildCollectionNames {
@@ -116,7 +134,10 @@ export interface CollectionsGetCollectionPath {
   /** Gets the parent name and parent friendly name chains that represent the collection path. */
   get(
     options?: CollectionsGetCollectionPathParameters
-  ): Promise<CollectionsGetCollectionPath200Response | CollectionsGetCollectionPathdefaultResponse>;
+  ): Promise<
+    | CollectionsGetCollectionPath200Response
+    | CollectionsGetCollectionPathdefaultResponse
+  >;
 }
 
 export interface ResourceSetRulesGetResourceSetRule {
@@ -162,7 +183,10 @@ export interface Routes {
   /** Resource for '/regeneratekeys' has methods for the following verbs: post */
   (path: "/regeneratekeys"): AccountsRegenerateAccessKey;
   /** Resource for '/collections/\{collectionName\}' has methods for the following verbs: get, put, delete */
-  (path: "/collections/{collectionName}", collectionName: string): CollectionsGetCollection;
+  (
+    path: "/collections/{collectionName}",
+    collectionName: string
+  ): CollectionsGetCollection;
   /** Resource for '/collections' has methods for the following verbs: get */
   (path: "/collections"): CollectionsListCollections;
   /** Resource for '/collections/\{collectionName\}/getChildCollectionNames' has methods for the following verbs: get */
@@ -183,6 +207,6 @@ export interface Routes {
   (path: "/resourceSetRuleConfigs"): ResourceSetRulesListResourceSetRules;
 }
 
-export type PurviewAccountRestClient = Client & {
+export type PurviewAccountClient = Client & {
   path: Routes;
 };
