@@ -3,10 +3,10 @@
 
 import { RequestParameters } from "@azure-rest/core-client";
 import {
+  DataPlaneAccountUpdateParameters,
   AccessKeyOptions,
   Collection,
-  DataPlaneAccountUpdateParameters,
-  ResourceSetRuleConfig,
+  ResourceSetRuleConfig
 } from "./models";
 
 export type AccountsGetAccountPropertiesParameters = RequestParameters;
@@ -15,7 +15,13 @@ export interface AccountsUpdateAccountPropertiesBodyParam {
   body: DataPlaneAccountUpdateParameters;
 }
 
-export type AccountsUpdateAccountPropertiesParameters = AccountsUpdateAccountPropertiesBodyParam &
+export interface AccountsUpdateAccountPropertiesMediaTypesParam {
+  /** Request content type */
+  contentType?: "application/json";
+}
+
+export type AccountsUpdateAccountPropertiesParameters = AccountsUpdateAccountPropertiesMediaTypesParam &
+  AccountsUpdateAccountPropertiesBodyParam &
   RequestParameters;
 export type AccountsGetAccessKeysParameters = RequestParameters;
 
@@ -23,7 +29,13 @@ export interface AccountsRegenerateAccessKeyBodyParam {
   body: AccessKeyOptions;
 }
 
-export type AccountsRegenerateAccessKeyParameters = AccountsRegenerateAccessKeyBodyParam &
+export interface AccountsRegenerateAccessKeyMediaTypesParam {
+  /** Request content type */
+  contentType?: "application/json";
+}
+
+export type AccountsRegenerateAccessKeyParameters = AccountsRegenerateAccessKeyMediaTypesParam &
+  AccountsRegenerateAccessKeyBodyParam &
   RequestParameters;
 export type CollectionsGetCollectionParameters = RequestParameters;
 
@@ -31,8 +43,14 @@ export interface CollectionsCreateOrUpdateCollectionBodyParam {
   body: Collection;
 }
 
-export type CollectionsCreateOrUpdateCollectionParameters =
-  CollectionsCreateOrUpdateCollectionBodyParam & RequestParameters;
+export interface CollectionsCreateOrUpdateCollectionMediaTypesParam {
+  /** Request content type */
+  contentType?: "application/json";
+}
+
+export type CollectionsCreateOrUpdateCollectionParameters = CollectionsCreateOrUpdateCollectionMediaTypesParam &
+  CollectionsCreateOrUpdateCollectionBodyParam &
+  RequestParameters;
 export type CollectionsDeleteCollectionParameters = RequestParameters;
 
 export interface CollectionsListCollectionsQueryParamProperties {
@@ -54,8 +72,8 @@ export interface CollectionsListChildCollectionNamesQueryParam {
   queryParameters?: CollectionsListChildCollectionNamesQueryParamProperties;
 }
 
-export type CollectionsListChildCollectionNamesParameters =
-  CollectionsListChildCollectionNamesQueryParam & RequestParameters;
+export type CollectionsListChildCollectionNamesParameters = CollectionsListChildCollectionNamesQueryParam &
+  RequestParameters;
 export type CollectionsGetCollectionPathParameters = RequestParameters;
 export type ResourceSetRulesGetResourceSetRuleParameters = RequestParameters;
 
@@ -63,8 +81,14 @@ export interface ResourceSetRulesCreateOrUpdateResourceSetRuleBodyParam {
   body: ResourceSetRuleConfig;
 }
 
-export type ResourceSetRulesCreateOrUpdateResourceSetRuleParameters =
-  ResourceSetRulesCreateOrUpdateResourceSetRuleBodyParam & RequestParameters;
+export interface ResourceSetRulesCreateOrUpdateResourceSetRuleMediaTypesParam {
+  /** Request content type */
+  contentType?: "application/json";
+}
+
+export type ResourceSetRulesCreateOrUpdateResourceSetRuleParameters = ResourceSetRulesCreateOrUpdateResourceSetRuleMediaTypesParam &
+  ResourceSetRulesCreateOrUpdateResourceSetRuleBodyParam &
+  RequestParameters;
 export type ResourceSetRulesDeleteResourceSetRuleParameters = RequestParameters;
 
 export interface ResourceSetRulesListResourceSetRulesQueryParamProperties {
@@ -75,5 +99,5 @@ export interface ResourceSetRulesListResourceSetRulesQueryParam {
   queryParameters?: ResourceSetRulesListResourceSetRulesQueryParamProperties;
 }
 
-export type ResourceSetRulesListResourceSetRulesParameters =
-  ResourceSetRulesListResourceSetRulesQueryParam & RequestParameters;
+export type ResourceSetRulesListResourceSetRulesParameters = ResourceSetRulesListResourceSetRulesQueryParam &
+  RequestParameters;
