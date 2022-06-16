@@ -2,7 +2,7 @@
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure SignalRManagement client.
 
-REST API for Azure SignalR Service
+REST API for Azure SignalR Service. test
 
 [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/signalr/arm-signalr) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-signalr) |
