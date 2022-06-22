@@ -1,15 +1,19 @@
 # Release History
+    
+## 5.0.0-beta.1 (2022-06-22)
+    
+**Features**
 
-## 4.0.2 (Unreleased)
+  - Added Interface BillingProfileInfo
+  - Added Interface OperationsErrorDetails
+  - Added Interface OperationsErrorResponse
+  - Interface BillingProfileListResult has a new optional parameter totalCount
+  - Type Alias Agreement has a new parameter billingProfileInfo
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Removed Enum KnownAddressValidationStatus
+    
 ## 4.0.1 (2022-04-11)
 
   - Bug fix

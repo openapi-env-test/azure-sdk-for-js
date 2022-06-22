@@ -377,6 +377,11 @@ export interface BillingProfileListResult {
    */
   readonly value?: BillingProfile[];
   /**
+   * Total number of records.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly totalCount?: number;
+  /**
    * The link (url) to the next page of results.
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
@@ -671,60 +676,6 @@ export interface TransactionListResult {
   readonly nextLink?: string;
 }
 
-/** The list of billing operations and a URL link to get the next set of results. */
-export interface OperationListResult {
-  /**
-   * The list of billing operations supported by the Microsoft.Billing resource provider.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly value?: Operation[];
-  /**
-   * URL to get the next set of operation list results if there are any.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly nextLink?: string;
-}
-
-/** A Billing REST API operation. */
-export interface Operation {
-  /**
-   * Operation name: {provider}/{resource}/{operation}.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly name?: string;
-  /**
-   * Identifies if the operation is a data operation.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly isDataAction?: boolean;
-  /** The object that represents the operation. */
-  display?: OperationDisplay;
-}
-
-/** The object that represents the operation. */
-export interface OperationDisplay {
-  /**
-   * Service provider: Microsoft.Billing.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly provider?: string;
-  /**
-   * Resource on which the operation is performed such as invoice and billing subscription.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly resource?: string;
-  /**
-   * Operation type such as read, write and delete.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly operation?: string;
-  /**
-   * Description of operation.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly description?: string;
-}
-
 /** The list of role definitions. */
 export interface BillingRoleDefinitionListResult {
   /**
@@ -765,6 +716,16 @@ export interface AgreementListResult {
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly nextLink?: string;
+}
+
+/** Details about billing profile associated with agreement and available only for specific agreements. */
+export interface BillingProfileInfo {
+  /** The unique identifier for the billing profile. */
+  billingProfileId?: string;
+  /** The name of the billing profile */
+  billingProfileDisplayName?: string;
+  /** Billing account name. This property is available for a specific type of agreement. */
+  indirectRelationshipOrganizationName?: string;
 }
 
 /** The details about a participant. */
@@ -1014,6 +975,85 @@ export interface BillingPeriodsListResult {
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly nextLink?: string;
+}
+
+/** The list of billing operations and a URL link to get the next set of results. */
+export interface OperationListResult {
+  /**
+   * The list of billing operations supported by the Microsoft.Billing resource provider.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly value?: Operation[];
+  /**
+   * URL to get the next set of operation list results if there are any.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly nextLink?: string;
+}
+
+/** A Billing REST API operation. */
+export interface Operation {
+  /**
+   * Operation name: {provider}/{resource}/{operation}.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly name?: string;
+  /**
+   * Identifies if the operation is a data operation.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly isDataAction?: boolean;
+  /** The object that represents the operation. */
+  display?: OperationDisplay;
+}
+
+/** The object that represents the operation. */
+export interface OperationDisplay {
+  /**
+   * Service provider: Microsoft.Billing.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly provider?: string;
+  /**
+   * Resource on which the operation is performed such as invoice and billing subscription.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly resource?: string;
+  /**
+   * Operation type such as read, write and delete.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly operation?: string;
+  /**
+   * Description of operation.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly description?: string;
+}
+
+/** Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. */
+export interface OperationsErrorResponse {
+  /** The details of the error. */
+  error?: OperationsErrorDetails;
+}
+
+/** The details of the error. */
+export interface OperationsErrorDetails {
+  /**
+   * Error code.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly code?: string;
+  /**
+   * Error message indicating why the operation failed.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly message?: string;
+  /**
+   * The target of the particular error.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly target?: string;
 }
 
 /** The request parameters for creating a new billing profile. */
@@ -1917,6 +1957,11 @@ export type Agreement = Resource & {
    */
   readonly acceptanceMode?: AcceptanceMode;
   /**
+   * The list of billing profiles associated with agreement and present only for specific agreements.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly billingProfileInfo?: BillingProfileInfo;
+  /**
    * The date from which the agreement is effective.
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
@@ -2230,22 +2275,6 @@ export enum KnownSpendingLimitForBillingProfile {
  * **On**
  */
 export type SpendingLimitForBillingProfile = string;
-
-/** Known values of {@link AddressValidationStatus} that the service accepts. */
-export enum KnownAddressValidationStatus {
-  Valid = "Valid",
-  Invalid = "Invalid"
-}
-
-/**
- * Defines values for AddressValidationStatus. \
- * {@link KnownAddressValidationStatus} can be used interchangeably with AddressValidationStatus,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **Valid** \
- * **Invalid**
- */
-export type AddressValidationStatus = string;
 
 /** Known values of {@link BillingSubscriptionStatusType} that the service accepts. */
 export enum KnownBillingSubscriptionStatusType {
@@ -2690,6 +2719,8 @@ export enum KnownAcceptanceMode {
  * **ESignOffline**
  */
 export type AcceptanceMode = string;
+/** Defines values for AddressValidationStatus. */
+export type AddressValidationStatus = "Valid" | "Invalid";
 
 /** Optional parameters. */
 export interface BillingAccountsListOptionalParams
@@ -3337,20 +3368,6 @@ export interface BillingPropertyUpdateOptionalParams
 export type BillingPropertyUpdateResponse = BillingProperty;
 
 /** Optional parameters. */
-export interface OperationsListOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the list operation. */
-export type OperationsListResponse = OperationListResult;
-
-/** Optional parameters. */
-export interface OperationsListNextOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the listNext operation. */
-export type OperationsListNextResponse = OperationListResult;
-
-/** Optional parameters. */
 export interface BillingRoleDefinitionsGetByBillingAccountOptionalParams
   extends coreClient.OperationOptions {}
 
@@ -3646,6 +3663,20 @@ export interface BillingPeriodsListNextOptionalParams
 
 /** Contains response data for the listNext operation. */
 export type BillingPeriodsListNextResponse = BillingPeriodsListResult;
+
+/** Optional parameters. */
+export interface OperationsListOptionalParams
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the list operation. */
+export type OperationsListResponse = OperationListResult;
+
+/** Optional parameters. */
+export interface OperationsListNextOptionalParams
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the listNext operation. */
+export type OperationsListNextResponse = OperationListResult;
 
 /** Optional parameters. */
 export interface BillingManagementClientOptionalParams
