@@ -7,23 +7,35 @@
 import { Client } from '@azure-rest/core-client';
 import { ClientOptions } from '@azure-rest/core-client';
 import { HttpResponse } from '@azure-rest/core-client';
-import { LroEngineOptions } from '@azure/core-lro';
 import { PagedAsyncIterableIterator } from '@azure/core-paging';
 import { PathUncheckedResponse } from '@azure-rest/core-client';
-import { PollerLike } from '@azure/core-lro';
-import { PollOperationState } from '@azure/core-lro';
 import { RawHttpHeaders } from '@azure/core-rest-pipeline';
 import { RawHttpHeadersInput } from '@azure/core-rest-pipeline';
 import { RequestParameters } from '@azure-rest/core-client';
+import { StreamableMethod } from '@azure-rest/core-client';
 import { TokenCredential } from '@azure/core-auth';
+
+// @public (undocumented)
+export interface CompatibilityOutput {
+    deviceManufacturer: string;
+    deviceModel: string;
+}
+
+// @public (undocumented)
+function createClient(accountEndpoint: string, credentials: TokenCredential, options?: ClientOptions): DeviceUpdateClient;
+export default createClient;
 
 // @public (undocumented)
 export interface Deployment {
     deploymentId: string;
-    groupId: string;
+    deploymentType: "Complete" | "Download" | "Install";
+    deviceClassId?: string;
+    deviceGroupDefinition: Array<string>;
+    deviceGroupType: "All" | "Devices" | "DeviceGroupDefinitions";
     isCanceled?: boolean;
+    isCompleted?: boolean;
     isRetried?: boolean;
-    startDateTime: string;
+    startDateTime: Date | string;
     updateId: UpdateId;
 }
 
@@ -31,197 +43,139 @@ export interface Deployment {
 export interface DeploymentDeviceStateOutput {
     deviceId: string;
     deviceState: "Succeeded" | "InProgress" | "Failed" | "Canceled" | "Incompatible";
-    moduleId?: string;
     movedOnToNewDeployment: boolean;
     retryCount: number;
 }
 
 // @public (undocumented)
-export interface DeploymentDeviceStatesListOutput {
-    nextLink?: string;
-    value: Array<DeploymentDeviceStateOutput>;
-}
-
-// @public (undocumented)
 export interface DeploymentOutput {
     deploymentId: string;
-    groupId: string;
+    deploymentType: "Complete" | "Download" | "Install";
+    deviceClassId?: string;
+    deviceGroupDefinition: Array<string>;
+    deviceGroupType: "All" | "Devices" | "DeviceGroupDefinitions";
     isCanceled?: boolean;
+    isCompleted?: boolean;
     isRetried?: boolean;
     startDateTime: string;
     updateId: UpdateIdOutput;
 }
 
-// @public (undocumented)
-export interface DeploymentsListOutput {
-    nextLink?: string;
-    value: Array<DeploymentOutput>;
-}
-
-// @public (undocumented)
-export interface DeploymentStatusOutput {
-    deploymentState: "Active" | "Inactive" | "Canceled";
-    devicesCanceledCount?: number;
-    devicesCompletedFailedCount?: number;
-    devicesCompletedSucceededCount?: number;
-    devicesInProgressCount?: number;
-    totalDevices?: number;
-}
-
-// @public (undocumented)
-export interface DeviceClassesListOutput {
-    nextLink?: string;
-    value: Array<DeviceClassOutput>;
-}
-
-// @public (undocumented)
-export interface DeviceClassOutput {
-    bestCompatibleUpdateId: UpdateIdOutput;
-    compatProperties: Record<string, string>;
-    deviceClassId: string;
-}
-
-// @public (undocumented)
-export interface DeviceManagementCollectLogs {
-    get(options?: DeviceManagementGetLogCollectionOperationParameters): Promise<DeviceManagementGetLogCollectionOperation200Response | DeviceManagementGetLogCollectionOperationdefaultResponse>;
-    put(options: DeviceManagementCollectLogsParameters): Promise<DeviceManagementCollectLogs201Response | DeviceManagementCollectLogsdefaultResponse>;
-}
-
 // @public
-export interface DeviceManagementCollectLogs201Response extends HttpResponse {
-    // (undocumented)
-    body: LogCollectionOperationOutput;
-    // (undocumented)
-    status: "201";
-}
-
-// @public (undocumented)
-export interface DeviceManagementCollectLogsBodyParam {
-    body: LogCollectionOperation;
-}
-
-// @public
-export interface DeviceManagementCollectLogsdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export interface DeviceManagementCollectLogsMediaTypesParam {
-    contentType?: "application/json";
-}
-
-// @public (undocumented)
-export type DeviceManagementCollectLogsParameters = DeviceManagementCollectLogsMediaTypesParam & DeviceManagementCollectLogsBodyParam & RequestParameters;
-
-// @public
-export interface DeviceManagementCreateOrUpdateDeployment200Response extends HttpResponse {
+export interface DeploymentsCancelDeployment200Response extends HttpResponse {
     // (undocumented)
     body: DeploymentOutput;
     // (undocumented)
     status: "200";
 }
 
+// @public
+export interface DeploymentsCancelDeployment404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
 // @public (undocumented)
-export interface DeviceManagementCreateOrUpdateDeploymentBodyParam {
+export type DeploymentsCancelDeploymentParameters = DeploymentsCancelDeploymentQueryParam & RequestParameters;
+
+// @public (undocumented)
+export interface DeploymentsCancelDeploymentQueryParam {
+    // (undocumented)
+    queryParameters: DeploymentsCancelDeploymentQueryParamProperties;
+}
+
+// @public (undocumented)
+export interface DeploymentsCancelDeploymentQueryParamProperties {
+    action: "cancel";
+}
+
+// @public
+export interface DeploymentsCreateOrUpdateDeployment200Response extends HttpResponse {
+    // (undocumented)
+    body: DeploymentOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface DeploymentsCreateOrUpdateDeployment404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public (undocumented)
+export interface DeploymentsCreateOrUpdateDeploymentBodyParam {
     body: Deployment;
 }
 
-// @public
-export interface DeviceManagementCreateOrUpdateDeploymentdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
 // @public (undocumented)
-export interface DeviceManagementCreateOrUpdateDeploymentMediaTypesParam {
+export interface DeploymentsCreateOrUpdateDeploymentMediaTypesParam {
     contentType?: "application/json";
 }
 
 // @public (undocumented)
-export type DeviceManagementCreateOrUpdateDeploymentParameters = DeviceManagementCreateOrUpdateDeploymentMediaTypesParam & DeviceManagementCreateOrUpdateDeploymentBodyParam & RequestParameters;
+export type DeploymentsCreateOrUpdateDeploymentParameters = DeploymentsCreateOrUpdateDeploymentMediaTypesParam & DeploymentsCreateOrUpdateDeploymentBodyParam & RequestParameters;
 
 // @public
-export interface DeviceManagementCreateOrUpdateGroup200Response extends HttpResponse {
+export interface DeploymentsDeleteDeployment200Response extends HttpResponse {
     // (undocumented)
-    body: GroupOutput;
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface DeploymentsDeleteDeployment404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public (undocumented)
+export type DeploymentsDeleteDeploymentParameters = RequestParameters;
+
+// @public (undocumented)
+export interface DeploymentsGetAllDeployments {
+    get(options?: DeploymentsGetAllDeploymentsParameters): StreamableMethod<DeploymentsGetAllDeployments200Response>;
+}
+
+// @public
+export interface DeploymentsGetAllDeployments200Response extends HttpResponse {
+    // (undocumented)
+    body: PageableListOfDeploymentsOutput;
     // (undocumented)
     status: "200";
 }
 
 // @public (undocumented)
-export interface DeviceManagementCreateOrUpdateGroupBodyParam {
-    body: Group;
-}
+export type DeploymentsGetAllDeploymentsParameters = DeploymentsGetAllDeploymentsQueryParam & RequestParameters;
 
-// @public
-export interface DeviceManagementCreateOrUpdateGroupdefaultResponse extends HttpResponse {
+// @public (undocumented)
+export interface DeploymentsGetAllDeploymentsQueryParam {
     // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
+    queryParameters?: DeploymentsGetAllDeploymentsQueryParamProperties;
 }
 
 // @public (undocumented)
-export interface DeviceManagementCreateOrUpdateGroupMediaTypesParam {
-    contentType?: "application/json";
+export interface DeploymentsGetAllDeploymentsQueryParamProperties {
+    $filter?: string;
 }
 
 // @public (undocumented)
-export type DeviceManagementCreateOrUpdateGroupParameters = DeviceManagementCreateOrUpdateGroupMediaTypesParam & DeviceManagementCreateOrUpdateGroupBodyParam & RequestParameters;
-
-// @public
-export interface DeviceManagementDeleteDeployment204Response extends HttpResponse {
-    // (undocumented)
-    body: Record<string, unknown>;
-    // (undocumented)
-    status: "204";
+export interface DeploymentsGetDeployment {
+    delete(options?: DeploymentsDeleteDeploymentParameters): StreamableMethod<DeploymentsDeleteDeployment200Response | DeploymentsDeleteDeployment404Response>;
+    get(options?: DeploymentsGetDeploymentParameters): StreamableMethod<DeploymentsGetDeployment200Response | DeploymentsGetDeployment404Response>;
+    post(options: DeploymentsCancelDeploymentParameters | DeploymentsRetryDeploymentParameters): StreamableMethod<DeploymentsCancelDeployment200Response | DeploymentsCancelDeployment404Response> | StreamableMethod<DeploymentsRetryDeployment200Response | DeploymentsRetryDeployment404Response>;
+    put(options: DeploymentsCreateOrUpdateDeploymentParameters): StreamableMethod<DeploymentsCreateOrUpdateDeployment200Response | DeploymentsCreateOrUpdateDeployment404Response>;
 }
 
 // @public
-export interface DeviceManagementDeleteDeploymentdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementDeleteDeploymentParameters = RequestParameters;
-
-// @public
-export interface DeviceManagementDeleteGroup204Response extends HttpResponse {
-    // (undocumented)
-    body: Record<string, unknown>;
-    // (undocumented)
-    status: "204";
-}
-
-// @public
-export interface DeviceManagementDeleteGroupdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementDeleteGroupParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementGetDeployment {
-    delete(options?: DeviceManagementDeleteDeploymentParameters): Promise<DeviceManagementDeleteDeployment204Response | DeviceManagementDeleteDeploymentdefaultResponse>;
-    get(options?: DeviceManagementGetDeploymentParameters): Promise<DeviceManagementGetDeployment200Response | DeviceManagementGetDeploymentdefaultResponse>;
-    post(options: DeviceManagementStopDeploymentParameters | DeviceManagementRetryDeploymentParameters): Promise<DeviceManagementStopDeployment200Response | DeviceManagementStopDeploymentdefaultResponse> | Promise<DeviceManagementRetryDeployment200Response | DeviceManagementRetryDeploymentdefaultResponse>;
-    put(options: DeviceManagementCreateOrUpdateDeploymentParameters): Promise<DeviceManagementCreateOrUpdateDeployment200Response | DeviceManagementCreateOrUpdateDeploymentdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementGetDeployment200Response extends HttpResponse {
+export interface DeploymentsGetDeployment200Response extends HttpResponse {
     // (undocumented)
     body: DeploymentOutput;
     // (undocumented)
@@ -229,23 +183,58 @@ export interface DeviceManagementGetDeployment200Response extends HttpResponse {
 }
 
 // @public
-export interface DeviceManagementGetDeploymentdefaultResponse extends HttpResponse {
+export interface DeploymentsGetDeployment404Response extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseOutput;
+    body: Record<string, unknown>;
     // (undocumented)
-    status: "500";
+    status: "404";
 }
 
 // @public (undocumented)
-export type DeviceManagementGetDeploymentParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementGetDeploymentStatus {
-    get(options?: DeviceManagementGetDeploymentStatusParameters): Promise<DeviceManagementGetDeploymentStatus200Response | DeviceManagementGetDeploymentStatusdefaultResponse>;
+export interface DeploymentsGetDeploymentDevices {
+    get(options?: DeploymentsGetDeploymentDevicesParameters): StreamableMethod<DeploymentsGetDeploymentDevices200Response | DeploymentsGetDeploymentDevices404Response>;
 }
 
 // @public
-export interface DeviceManagementGetDeploymentStatus200Response extends HttpResponse {
+export interface DeploymentsGetDeploymentDevices200Response extends HttpResponse {
+    // (undocumented)
+    body: PageableListOfDeploymentDeviceStatesOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface DeploymentsGetDeploymentDevices404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public (undocumented)
+export type DeploymentsGetDeploymentDevicesParameters = DeploymentsGetDeploymentDevicesQueryParam & RequestParameters;
+
+// @public (undocumented)
+export interface DeploymentsGetDeploymentDevicesQueryParam {
+    // (undocumented)
+    queryParameters?: DeploymentsGetDeploymentDevicesQueryParamProperties;
+}
+
+// @public (undocumented)
+export interface DeploymentsGetDeploymentDevicesQueryParamProperties {
+    $filter?: string;
+}
+
+// @public (undocumented)
+export type DeploymentsGetDeploymentParameters = RequestParameters;
+
+// @public (undocumented)
+export interface DeploymentsGetDeploymentStatus {
+    get(options?: DeploymentsGetDeploymentStatusParameters): StreamableMethod<DeploymentsGetDeploymentStatus200Response | DeploymentsGetDeploymentStatus404Response>;
+}
+
+// @public
+export interface DeploymentsGetDeploymentStatus200Response extends HttpResponse {
     // (undocumented)
     body: DeploymentStatusOutput;
     // (undocumented)
@@ -253,625 +242,18 @@ export interface DeviceManagementGetDeploymentStatus200Response extends HttpResp
 }
 
 // @public
-export interface DeviceManagementGetDeploymentStatusdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementGetDeploymentStatusParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementGetDevice {
-    get(options?: DeviceManagementGetDeviceParameters): Promise<DeviceManagementGetDevice200Response | DeviceManagementGetDevicedefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementGetDevice200Response extends HttpResponse {
-    // (undocumented)
-    body: DeviceOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public (undocumented)
-export interface DeviceManagementGetDeviceClass {
-    get(options?: DeviceManagementGetDeviceClassParameters): Promise<DeviceManagementGetDeviceClass200Response | DeviceManagementGetDeviceClassdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementGetDeviceClass200Response extends HttpResponse {
-    // (undocumented)
-    body: DeviceClassOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementGetDeviceClassdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementGetDeviceClassParameters = RequestParameters;
-
-// @public
-export interface DeviceManagementGetDevicedefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export interface DeviceManagementGetDeviceModule {
-    get(options?: DeviceManagementGetDeviceModuleParameters): Promise<DeviceManagementGetDeviceModule200Response | DeviceManagementGetDeviceModuledefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementGetDeviceModule200Response extends HttpResponse {
-    // (undocumented)
-    body: DeviceOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementGetDeviceModuledefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementGetDeviceModuleParameters = RequestParameters;
-
-// @public (undocumented)
-export type DeviceManagementGetDeviceParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementGetDeviceTag {
-    get(options?: DeviceManagementGetDeviceTagParameters): Promise<DeviceManagementGetDeviceTag200Response | DeviceManagementGetDeviceTagdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementGetDeviceTag200Response extends HttpResponse {
-    // (undocumented)
-    body: DeviceTagOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementGetDeviceTagdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementGetDeviceTagParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementGetGroup {
-    delete(options?: DeviceManagementDeleteGroupParameters): Promise<DeviceManagementDeleteGroup204Response | DeviceManagementDeleteGroupdefaultResponse>;
-    get(options?: DeviceManagementGetGroupParameters): Promise<DeviceManagementGetGroup200Response | DeviceManagementGetGroupdefaultResponse>;
-    put(options: DeviceManagementCreateOrUpdateGroupParameters): Promise<DeviceManagementCreateOrUpdateGroup200Response | DeviceManagementCreateOrUpdateGroupdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementGetGroup200Response extends HttpResponse {
-    // (undocumented)
-    body: GroupOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementGetGroupdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementGetGroupParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementGetGroupUpdateCompliance {
-    get(options?: DeviceManagementGetGroupUpdateComplianceParameters): Promise<DeviceManagementGetGroupUpdateCompliance200Response | DeviceManagementGetGroupUpdateCompliancedefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementGetGroupUpdateCompliance200Response extends HttpResponse {
-    // (undocumented)
-    body: UpdateComplianceOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementGetGroupUpdateCompliancedefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementGetGroupUpdateComplianceParameters = RequestParameters;
-
-// @public
-export interface DeviceManagementGetLogCollectionOperation200Response extends HttpResponse {
-    // (undocumented)
-    body: LogCollectionOperationOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementGetLogCollectionOperationdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export interface DeviceManagementGetLogCollectionOperationDetailedStatus {
-    get(options?: DeviceManagementGetLogCollectionOperationDetailedStatusParameters): Promise<DeviceManagementGetLogCollectionOperationDetailedStatus200Response | DeviceManagementGetLogCollectionOperationDetailedStatusdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementGetLogCollectionOperationDetailedStatus200Response extends HttpResponse {
-    // (undocumented)
-    body: LogCollectionOperationDetailedStatusOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementGetLogCollectionOperationDetailedStatusdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementGetLogCollectionOperationDetailedStatusParameters = RequestParameters;
-
-// @public (undocumented)
-export type DeviceManagementGetLogCollectionOperationParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementGetOperation {
-    get(options?: DeviceManagementGetOperationParameters): Promise<DeviceManagementGetOperation200Response | DeviceManagementGetOperation304Response | DeviceManagementGetOperationdefaultResponse>;
-}
-
-// @public (undocumented)
-export interface DeviceManagementGetOperation200Headers {
-    "retry-after"?: string;
-}
-
-// @public
-export interface DeviceManagementGetOperation200Response extends HttpResponse {
-    // (undocumented)
-    body: DeviceOperationOutput;
-    // (undocumented)
-    headers: RawHttpHeaders & DeviceManagementGetOperation200Headers;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementGetOperation304Response extends HttpResponse {
+export interface DeploymentsGetDeploymentStatus404Response extends HttpResponse {
     // (undocumented)
     body: Record<string, unknown>;
     // (undocumented)
-    status: "304";
+    status: "404";
 }
+
+// @public (undocumented)
+export type DeploymentsGetDeploymentStatusParameters = RequestParameters;
 
 // @public
-export interface DeviceManagementGetOperationdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export interface DeviceManagementGetOperationHeaderParam {
-    // (undocumented)
-    headers: RawHttpHeadersInput & DeviceManagementGetOperationHeaders;
-}
-
-// @public (undocumented)
-export interface DeviceManagementGetOperationHeaders {
-    "If-None-Match"?: string;
-}
-
-// @public (undocumented)
-export type DeviceManagementGetOperationParameters = DeviceManagementGetOperationHeaderParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementGetUpdateCompliance {
-    get(options?: DeviceManagementGetUpdateComplianceParameters): Promise<DeviceManagementGetUpdateCompliance200Response | DeviceManagementGetUpdateCompliancedefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementGetUpdateCompliance200Response extends HttpResponse {
-    // (undocumented)
-    body: UpdateComplianceOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementGetUpdateCompliancedefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementGetUpdateComplianceParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementImportDevices202Headers {
-    "operation-location"?: string;
-}
-
-// @public
-export interface DeviceManagementImportDevices202Response extends HttpResponse {
-    // (undocumented)
-    body: Record<string, unknown>;
-    // (undocumented)
-    headers: RawHttpHeaders & DeviceManagementImportDevices202Headers;
-    // (undocumented)
-    status: "202";
-}
-
-// @public (undocumented)
-export interface DeviceManagementImportDevicesBodyParam {
-    body: "Devices" | "Modules" | "All";
-}
-
-// @public
-export interface DeviceManagementImportDevicesdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export interface DeviceManagementImportDevicesMediaTypesParam {
-    contentType?: "application/json";
-}
-
-// @public (undocumented)
-export type DeviceManagementImportDevicesParameters = DeviceManagementImportDevicesQueryParam & DeviceManagementImportDevicesMediaTypesParam & DeviceManagementImportDevicesBodyParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementImportDevicesQueryParam {
-    // (undocumented)
-    queryParameters: DeviceManagementImportDevicesQueryParamProperties;
-}
-
-// @public (undocumented)
-export interface DeviceManagementImportDevicesQueryParamProperties {
-    action: "import";
-}
-
-// @public (undocumented)
-export interface DeviceManagementListBestUpdatesForGroup {
-    get(options?: DeviceManagementListBestUpdatesForGroupParameters): Promise<DeviceManagementListBestUpdatesForGroup200Response | DeviceManagementListBestUpdatesForGroupdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementListBestUpdatesForGroup200Response extends HttpResponse {
-    // (undocumented)
-    body: UpdatableDevicesListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementListBestUpdatesForGroupdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementListBestUpdatesForGroupParameters = DeviceManagementListBestUpdatesForGroupQueryParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementListBestUpdatesForGroupQueryParam {
-    // (undocumented)
-    queryParameters?: DeviceManagementListBestUpdatesForGroupQueryParamProperties;
-}
-
-// @public (undocumented)
-export interface DeviceManagementListBestUpdatesForGroupQueryParamProperties {
-    $filter?: string;
-}
-
-// @public (undocumented)
-export interface DeviceManagementListDeploymentDevices {
-    get(options?: DeviceManagementListDeploymentDevicesParameters): Promise<DeviceManagementListDeploymentDevices200Response | DeviceManagementListDeploymentDevicesdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementListDeploymentDevices200Response extends HttpResponse {
-    // (undocumented)
-    body: DeploymentDeviceStatesListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementListDeploymentDevicesdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementListDeploymentDevicesParameters = DeviceManagementListDeploymentDevicesQueryParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementListDeploymentDevicesQueryParam {
-    // (undocumented)
-    queryParameters?: DeviceManagementListDeploymentDevicesQueryParamProperties;
-}
-
-// @public (undocumented)
-export interface DeviceManagementListDeploymentDevicesQueryParamProperties {
-    $filter?: string;
-}
-
-// @public (undocumented)
-export interface DeviceManagementListDeploymentsForGroup {
-    get(options?: DeviceManagementListDeploymentsForGroupParameters): Promise<DeviceManagementListDeploymentsForGroup200Response | DeviceManagementListDeploymentsForGroupdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementListDeploymentsForGroup200Response extends HttpResponse {
-    // (undocumented)
-    body: DeploymentsListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementListDeploymentsForGroupdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementListDeploymentsForGroupParameters = DeviceManagementListDeploymentsForGroupQueryParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementListDeploymentsForGroupQueryParam {
-    // (undocumented)
-    queryParameters?: DeviceManagementListDeploymentsForGroupQueryParamProperties;
-}
-
-// @public (undocumented)
-export interface DeviceManagementListDeploymentsForGroupQueryParamProperties {
-    $filter?: string;
-}
-
-// @public (undocumented)
-export interface DeviceManagementListDeviceClasses {
-    get(options?: DeviceManagementListDeviceClassesParameters): Promise<DeviceManagementListDeviceClasses200Response | DeviceManagementListDeviceClassesdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementListDeviceClasses200Response extends HttpResponse {
-    // (undocumented)
-    body: DeviceClassesListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementListDeviceClassesdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementListDeviceClassesParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementListDevices {
-    get(options?: DeviceManagementListDevicesParameters): Promise<DeviceManagementListDevices200Response | DeviceManagementListDevicesdefaultResponse>;
-    post(options: DeviceManagementImportDevicesParameters): Promise<DeviceManagementImportDevices202Response | DeviceManagementImportDevicesdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementListDevices200Response extends HttpResponse {
-    // (undocumented)
-    body: DevicesListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementListDevicesdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementListDevicesParameters = DeviceManagementListDevicesQueryParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementListDevicesQueryParam {
-    // (undocumented)
-    queryParameters?: DeviceManagementListDevicesQueryParamProperties;
-}
-
-// @public (undocumented)
-export interface DeviceManagementListDevicesQueryParamProperties {
-    $filter?: string;
-}
-
-// @public (undocumented)
-export interface DeviceManagementListDeviceTags {
-    get(options?: DeviceManagementListDeviceTagsParameters): Promise<DeviceManagementListDeviceTags200Response | DeviceManagementListDeviceTagsdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementListDeviceTags200Response extends HttpResponse {
-    // (undocumented)
-    body: DeviceTagsListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementListDeviceTagsdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementListDeviceTagsParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementListGroups {
-    get(options?: DeviceManagementListGroupsParameters): Promise<DeviceManagementListGroups200Response | DeviceManagementListGroupsdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementListGroups200Response extends HttpResponse {
-    // (undocumented)
-    body: GroupsListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementListGroupsdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementListGroupsParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementListInstallableUpdatesForDeviceClass {
-    get(options?: DeviceManagementListInstallableUpdatesForDeviceClassParameters): Promise<DeviceManagementListInstallableUpdatesForDeviceClass200Response | DeviceManagementListInstallableUpdatesForDeviceClassdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementListInstallableUpdatesForDeviceClass200Response extends HttpResponse {
-    // (undocumented)
-    body: UpdateIdsListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementListInstallableUpdatesForDeviceClassdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementListInstallableUpdatesForDeviceClassParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementListLogCollectionOperations {
-    get(options?: DeviceManagementListLogCollectionOperationsParameters): Promise<DeviceManagementListLogCollectionOperations200Response | DeviceManagementListLogCollectionOperationsdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementListLogCollectionOperations200Response extends HttpResponse {
-    // (undocumented)
-    body: LogCollectionOperationListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementListLogCollectionOperationsdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementListLogCollectionOperationsParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementListOperations {
-    get(options?: DeviceManagementListOperationsParameters): Promise<DeviceManagementListOperations200Response | DeviceManagementListOperationsdefaultResponse>;
-}
-
-// @public
-export interface DeviceManagementListOperations200Response extends HttpResponse {
-    // (undocumented)
-    body: DeviceOperationsListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementListOperationsdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceManagementListOperationsParameters = DeviceManagementListOperationsQueryParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementListOperationsQueryParam {
-    // (undocumented)
-    queryParameters?: DeviceManagementListOperationsQueryParamProperties;
-}
-
-// @public (undocumented)
-export interface DeviceManagementListOperationsQueryParamProperties {
-    $filter?: string;
-    $top?: number;
-}
-
-// @public
-export interface DeviceManagementRetryDeployment200Response extends HttpResponse {
+export interface DeploymentsRetryDeployment200Response extends HttpResponse {
     // (undocumented)
     body: DeploymentOutput;
     // (undocumented)
@@ -879,72 +261,44 @@ export interface DeviceManagementRetryDeployment200Response extends HttpResponse
 }
 
 // @public
-export interface DeviceManagementRetryDeploymentdefaultResponse extends HttpResponse {
+export interface DeploymentsRetryDeployment404Response extends HttpResponse {
     // (undocumented)
-    body: ErrorResponseOutput;
+    body: Record<string, unknown>;
     // (undocumented)
-    status: "500";
+    status: "404";
 }
 
 // @public (undocumented)
-export type DeviceManagementRetryDeploymentParameters = DeviceManagementRetryDeploymentQueryParam & RequestParameters;
+export type DeploymentsRetryDeploymentParameters = DeploymentsRetryDeploymentQueryParam & RequestParameters;
 
 // @public (undocumented)
-export interface DeviceManagementRetryDeploymentQueryParam {
+export interface DeploymentsRetryDeploymentQueryParam {
     // (undocumented)
-    queryParameters: DeviceManagementRetryDeploymentQueryParamProperties;
+    queryParameters: DeploymentsRetryDeploymentQueryParamProperties;
 }
 
 // @public (undocumented)
-export interface DeviceManagementRetryDeploymentQueryParamProperties {
+export interface DeploymentsRetryDeploymentQueryParamProperties {
     action: "retry";
 }
 
-// @public
-export interface DeviceManagementStopDeployment200Response extends HttpResponse {
-    // (undocumented)
-    body: DeploymentOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceManagementStopDeploymentdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
+// @public (undocumented)
+export interface DeploymentStatusOutput {
+    deploymentState: "Active" | "Superseded" | "Canceled";
+    devicesCanceledCount?: number;
+    devicesCompletedFailedCount?: number;
+    devicesCompletedSucceededCount?: number;
+    devicesIncompatibleCount?: number;
+    devicesInProgressCount?: number;
+    totalDevices?: number;
 }
 
 // @public (undocumented)
-export type DeviceManagementStopDeploymentParameters = DeviceManagementStopDeploymentQueryParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceManagementStopDeploymentQueryParam {
-    // (undocumented)
-    queryParameters: DeviceManagementStopDeploymentQueryParamProperties;
-}
-
-// @public (undocumented)
-export interface DeviceManagementStopDeploymentQueryParamProperties {
-    action: "cancel";
-}
-
-// @public (undocumented)
-export interface DeviceOperationOutput {
-    createdDateTime: string;
-    error?: ErrorModelOutput;
-    etag?: string;
-    lastActionDateTime: string;
-    operationId: string;
-    status: "Undefined" | "NotStarted" | "Running" | "Succeeded" | "Failed";
-    traceId?: string;
-}
-
-// @public (undocumented)
-export interface DeviceOperationsListOutput {
-    nextLink?: string;
-    value: Array<DeviceOperationOutput>;
+export interface DeviceClassOutput {
+    bestCompatibleUpdateId: UpdateIdOutput;
+    deviceClassId: string;
+    manufacturer: string;
+    model: string;
 }
 
 // @public (undocumented)
@@ -956,18 +310,362 @@ export interface DeviceOutput {
     installedUpdateId?: UpdateIdOutput;
     lastAttemptedUpdateId?: UpdateIdOutput;
     lastDeploymentId?: string;
-    lastInstallResult?: InstallResultOutput;
     manufacturer: string;
     model: string;
-    moduleId?: string;
     onLatestUpdate: boolean;
 }
 
-// @public (undocumented)
-export interface DevicesListOutput {
-    nextLink?: string;
-    value: Array<DeviceOutput>;
+// @public
+export interface DevicesCreateOrUpdateGroup200Response extends HttpResponse {
+    // (undocumented)
+    body: GroupOutput;
+    // (undocumented)
+    status: "200";
 }
+
+// @public
+export interface DevicesCreateOrUpdateGroup400Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "400";
+}
+
+// @public
+export interface DevicesCreateOrUpdateGroup404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public (undocumented)
+export interface DevicesCreateOrUpdateGroupBodyParam {
+    body: Group;
+}
+
+// @public (undocumented)
+export interface DevicesCreateOrUpdateGroupMediaTypesParam {
+    contentType?: "application/json";
+}
+
+// @public (undocumented)
+export type DevicesCreateOrUpdateGroupParameters = DevicesCreateOrUpdateGroupMediaTypesParam & DevicesCreateOrUpdateGroupBodyParam & RequestParameters;
+
+// @public
+export interface DevicesDeleteGroup200Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface DevicesDeleteGroup204Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "204";
+}
+
+// @public (undocumented)
+export type DevicesDeleteGroupParameters = RequestParameters;
+
+// @public (undocumented)
+export interface DevicesGetAllDeviceClasses {
+    get(options?: DevicesGetAllDeviceClassesParameters): StreamableMethod<DevicesGetAllDeviceClasses200Response>;
+}
+
+// @public
+export interface DevicesGetAllDeviceClasses200Response extends HttpResponse {
+    // (undocumented)
+    body: PageableListOfDeviceClassesOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public (undocumented)
+export type DevicesGetAllDeviceClassesParameters = RequestParameters;
+
+// @public (undocumented)
+export interface DevicesGetAllDevices {
+    get(options?: DevicesGetAllDevicesParameters): StreamableMethod<DevicesGetAllDevices200Response>;
+}
+
+// @public
+export interface DevicesGetAllDevices200Response extends HttpResponse {
+    // (undocumented)
+    body: PageableListOfDevicesOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public (undocumented)
+export type DevicesGetAllDevicesParameters = DevicesGetAllDevicesQueryParam & RequestParameters;
+
+// @public (undocumented)
+export interface DevicesGetAllDevicesQueryParam {
+    // (undocumented)
+    queryParameters?: DevicesGetAllDevicesQueryParamProperties;
+}
+
+// @public (undocumented)
+export interface DevicesGetAllDevicesQueryParamProperties {
+    $filter?: string;
+}
+
+// @public (undocumented)
+export interface DevicesGetAllDeviceTags {
+    get(options?: DevicesGetAllDeviceTagsParameters): StreamableMethod<DevicesGetAllDeviceTags200Response>;
+}
+
+// @public
+export interface DevicesGetAllDeviceTags200Response extends HttpResponse {
+    // (undocumented)
+    body: PageableListOfDeviceTagsOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public (undocumented)
+export type DevicesGetAllDeviceTagsParameters = RequestParameters;
+
+// @public (undocumented)
+export interface DevicesGetAllGroups {
+    get(options?: DevicesGetAllGroupsParameters): StreamableMethod<DevicesGetAllGroups200Response>;
+}
+
+// @public
+export interface DevicesGetAllGroups200Response extends HttpResponse {
+    // (undocumented)
+    body: PageableListOfGroupsOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public (undocumented)
+export type DevicesGetAllGroupsParameters = RequestParameters;
+
+// @public (undocumented)
+export interface DevicesGetDevice {
+    get(options?: DevicesGetDeviceParameters): StreamableMethod<DevicesGetDevice200Response | DevicesGetDevice404Response>;
+}
+
+// @public
+export interface DevicesGetDevice200Response extends HttpResponse {
+    // (undocumented)
+    body: DeviceOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface DevicesGetDevice404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public (undocumented)
+export interface DevicesGetDeviceClass {
+    get(options?: DevicesGetDeviceClassParameters): StreamableMethod<DevicesGetDeviceClass200Response | DevicesGetDeviceClass404Response>;
+}
+
+// @public
+export interface DevicesGetDeviceClass200Response extends HttpResponse {
+    // (undocumented)
+    body: DeviceClassOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface DevicesGetDeviceClass404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public (undocumented)
+export interface DevicesGetDeviceClassDeviceIds {
+    get(options?: DevicesGetDeviceClassDeviceIdsParameters): StreamableMethod<DevicesGetDeviceClassDeviceIds200Response | DevicesGetDeviceClassDeviceIds404Response>;
+}
+
+// @public
+export interface DevicesGetDeviceClassDeviceIds200Response extends HttpResponse {
+    // (undocumented)
+    body: PageableListOfStringsOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface DevicesGetDeviceClassDeviceIds404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public (undocumented)
+export type DevicesGetDeviceClassDeviceIdsParameters = RequestParameters;
+
+// @public (undocumented)
+export interface DevicesGetDeviceClassInstallableUpdates {
+    get(options?: DevicesGetDeviceClassInstallableUpdatesParameters): StreamableMethod<DevicesGetDeviceClassInstallableUpdates200Response | DevicesGetDeviceClassInstallableUpdates404Response>;
+}
+
+// @public
+export interface DevicesGetDeviceClassInstallableUpdates200Response extends HttpResponse {
+    // (undocumented)
+    body: PageableListOfUpdateIdsOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface DevicesGetDeviceClassInstallableUpdates404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public (undocumented)
+export type DevicesGetDeviceClassInstallableUpdatesParameters = RequestParameters;
+
+// @public (undocumented)
+export type DevicesGetDeviceClassParameters = RequestParameters;
+
+// @public (undocumented)
+export type DevicesGetDeviceParameters = RequestParameters;
+
+// @public (undocumented)
+export interface DevicesGetDeviceTag {
+    get(options?: DevicesGetDeviceTagParameters): StreamableMethod<DevicesGetDeviceTag200Response | DevicesGetDeviceTag404Response>;
+}
+
+// @public
+export interface DevicesGetDeviceTag200Response extends HttpResponse {
+    // (undocumented)
+    body: DeviceTagOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface DevicesGetDeviceTag404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public (undocumented)
+export type DevicesGetDeviceTagParameters = RequestParameters;
+
+// @public (undocumented)
+export interface DevicesGetGroup {
+    delete(options?: DevicesDeleteGroupParameters): StreamableMethod<DevicesDeleteGroup200Response | DevicesDeleteGroup204Response>;
+    get(options?: DevicesGetGroupParameters): StreamableMethod<DevicesGetGroup200Response | DevicesGetGroup404Response>;
+    put(options: DevicesCreateOrUpdateGroupParameters): StreamableMethod<DevicesCreateOrUpdateGroup200Response | DevicesCreateOrUpdateGroup400Response | DevicesCreateOrUpdateGroup404Response>;
+}
+
+// @public
+export interface DevicesGetGroup200Response extends HttpResponse {
+    // (undocumented)
+    body: GroupOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface DevicesGetGroup404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public (undocumented)
+export interface DevicesGetGroupBestUpdates {
+    get(options?: DevicesGetGroupBestUpdatesParameters): StreamableMethod<DevicesGetGroupBestUpdates200Response | DevicesGetGroupBestUpdates404Response>;
+}
+
+// @public
+export interface DevicesGetGroupBestUpdates200Response extends HttpResponse {
+    // (undocumented)
+    body: PageableListOfUpdatableDevicesOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface DevicesGetGroupBestUpdates404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public (undocumented)
+export type DevicesGetGroupBestUpdatesParameters = DevicesGetGroupBestUpdatesQueryParam & RequestParameters;
+
+// @public (undocumented)
+export interface DevicesGetGroupBestUpdatesQueryParam {
+    // (undocumented)
+    queryParameters?: DevicesGetGroupBestUpdatesQueryParamProperties;
+}
+
+// @public (undocumented)
+export interface DevicesGetGroupBestUpdatesQueryParamProperties {
+    $filter?: string;
+}
+
+// @public (undocumented)
+export type DevicesGetGroupParameters = RequestParameters;
+
+// @public (undocumented)
+export interface DevicesGetGroupUpdateCompliance {
+    get(options?: DevicesGetGroupUpdateComplianceParameters): StreamableMethod<DevicesGetGroupUpdateCompliance200Response | DevicesGetGroupUpdateCompliance404Response>;
+}
+
+// @public
+export interface DevicesGetGroupUpdateCompliance200Response extends HttpResponse {
+    // (undocumented)
+    body: UpdateComplianceOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface DevicesGetGroupUpdateCompliance404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public (undocumented)
+export type DevicesGetGroupUpdateComplianceParameters = RequestParameters;
+
+// @public (undocumented)
+export interface DevicesGetUpdateCompliance {
+    get(options?: DevicesGetUpdateComplianceParameters): StreamableMethod<DevicesGetUpdateCompliance200Response>;
+}
+
+// @public
+export interface DevicesGetUpdateCompliance200Response extends HttpResponse {
+    // (undocumented)
+    body: UpdateComplianceOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public (undocumented)
+export type DevicesGetUpdateComplianceParameters = RequestParameters;
 
 // @public (undocumented)
 export interface DeviceTagOutput {
@@ -976,419 +674,7 @@ export interface DeviceTagOutput {
 }
 
 // @public (undocumented)
-export interface DeviceTagsListOutput {
-    nextLink?: string;
-    value: Array<DeviceTagOutput>;
-}
-
-// @public (undocumented)
-function DeviceUpdate(endpoint: string, credentials: TokenCredential, options?: ClientOptions): DeviceUpdateRestClient;
-export default DeviceUpdate;
-
-// @public (undocumented)
-export interface DeviceUpdateAgentId {
-    deviceId: string;
-    moduleId?: string;
-}
-
-// @public (undocumented)
-export interface DeviceUpdateAgentIdOutput {
-    deviceId: string;
-    moduleId?: string;
-}
-
-// @public (undocumented)
-export interface DeviceUpdateDeleteUpdate202Headers {
-    "operation-location"?: string;
-}
-
-// @public
-export interface DeviceUpdateDeleteUpdate202Response extends HttpResponse {
-    // (undocumented)
-    body: Record<string, unknown>;
-    // (undocumented)
-    headers: RawHttpHeaders & DeviceUpdateDeleteUpdate202Headers;
-    // (undocumented)
-    status: "202";
-}
-
-// @public
-export interface DeviceUpdateDeleteUpdatedefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceUpdateDeleteUpdateParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceUpdateGetFile {
-    get(options?: DeviceUpdateGetFileParameters): Promise<DeviceUpdateGetFile200Response | DeviceUpdateGetFile304Response | DeviceUpdateGetFiledefaultResponse>;
-}
-
-// @public
-export interface DeviceUpdateGetFile200Response extends HttpResponse {
-    // (undocumented)
-    body: UpdateFileOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceUpdateGetFile304Response extends HttpResponse {
-    // (undocumented)
-    body: Record<string, unknown>;
-    // (undocumented)
-    status: "304";
-}
-
-// @public
-export interface DeviceUpdateGetFiledefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export interface DeviceUpdateGetFileHeaderParam {
-    // (undocumented)
-    headers: RawHttpHeadersInput & DeviceUpdateGetFileHeaders;
-}
-
-// @public (undocumented)
-export interface DeviceUpdateGetFileHeaders {
-    "If-None-Match"?: string;
-}
-
-// @public (undocumented)
-export type DeviceUpdateGetFileParameters = DeviceUpdateGetFileHeaderParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceUpdateGetOperation {
-    get(options?: DeviceUpdateGetOperationParameters): Promise<DeviceUpdateGetOperation200Response | DeviceUpdateGetOperation304Response | DeviceUpdateGetOperationdefaultResponse>;
-}
-
-// @public (undocumented)
-export interface DeviceUpdateGetOperation200Headers {
-    "retry-after"?: string;
-}
-
-// @public
-export interface DeviceUpdateGetOperation200Response extends HttpResponse {
-    // (undocumented)
-    body: UpdateOperationOutput;
-    // (undocumented)
-    headers: RawHttpHeaders & DeviceUpdateGetOperation200Headers;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceUpdateGetOperation304Response extends HttpResponse {
-    // (undocumented)
-    body: Record<string, unknown>;
-    // (undocumented)
-    status: "304";
-}
-
-// @public
-export interface DeviceUpdateGetOperationdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export interface DeviceUpdateGetOperationHeaderParam {
-    // (undocumented)
-    headers: RawHttpHeadersInput & DeviceUpdateGetOperationHeaders;
-}
-
-// @public (undocumented)
-export interface DeviceUpdateGetOperationHeaders {
-    "If-None-Match"?: string;
-}
-
-// @public (undocumented)
-export type DeviceUpdateGetOperationParameters = DeviceUpdateGetOperationHeaderParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceUpdateGetUpdate {
-    delete(options?: DeviceUpdateDeleteUpdateParameters): Promise<DeviceUpdateDeleteUpdate202Response | DeviceUpdateDeleteUpdatedefaultResponse>;
-    get(options?: DeviceUpdateGetUpdateParameters): Promise<DeviceUpdateGetUpdate200Response | DeviceUpdateGetUpdate304Response | DeviceUpdateGetUpdatedefaultResponse>;
-}
-
-// @public
-export interface DeviceUpdateGetUpdate200Response extends HttpResponse {
-    // (undocumented)
-    body: UpdateOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceUpdateGetUpdate304Response extends HttpResponse {
-    // (undocumented)
-    body: Record<string, unknown>;
-    // (undocumented)
-    status: "304";
-}
-
-// @public
-export interface DeviceUpdateGetUpdatedefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export interface DeviceUpdateGetUpdateHeaderParam {
-    // (undocumented)
-    headers: RawHttpHeadersInput & DeviceUpdateGetUpdateHeaders;
-}
-
-// @public (undocumented)
-export interface DeviceUpdateGetUpdateHeaders {
-    "If-None-Match"?: string;
-}
-
-// @public (undocumented)
-export type DeviceUpdateGetUpdateParameters = DeviceUpdateGetUpdateHeaderParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceUpdateImportUpdate {
-    get(options?: DeviceUpdateListUpdatesParameters): Promise<DeviceUpdateListUpdates200Response | DeviceUpdateListUpdatesdefaultResponse>;
-    post(options: DeviceUpdateImportUpdateParameters): Promise<DeviceUpdateImportUpdate202Response | DeviceUpdateImportUpdatedefaultResponse>;
-}
-
-// @public (undocumented)
-export interface DeviceUpdateImportUpdate202Headers {
-    "operation-location"?: string;
-}
-
-// @public
-export interface DeviceUpdateImportUpdate202Response extends HttpResponse {
-    // (undocumented)
-    body: UpdateOutput;
-    // (undocumented)
-    headers: RawHttpHeaders & DeviceUpdateImportUpdate202Headers;
-    // (undocumented)
-    status: "202";
-}
-
-// @public (undocumented)
-export interface DeviceUpdateImportUpdateBodyParam {
-    body: Array<ImportUpdateInputItem>;
-}
-
-// @public
-export interface DeviceUpdateImportUpdatedefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export interface DeviceUpdateImportUpdateMediaTypesParam {
-    contentType?: "application/json";
-}
-
-// @public (undocumented)
-export type DeviceUpdateImportUpdateParameters = DeviceUpdateImportUpdateQueryParam & DeviceUpdateImportUpdateMediaTypesParam & DeviceUpdateImportUpdateBodyParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceUpdateImportUpdateQueryParam {
-    // (undocumented)
-    queryParameters: DeviceUpdateImportUpdateQueryParamProperties;
-}
-
-// @public (undocumented)
-export interface DeviceUpdateImportUpdateQueryParamProperties {
-    action: "import";
-}
-
-// @public (undocumented)
-export interface DeviceUpdateListFiles {
-    get(options?: DeviceUpdateListFilesParameters): Promise<DeviceUpdateListFiles200Response | DeviceUpdateListFilesdefaultResponse>;
-}
-
-// @public
-export interface DeviceUpdateListFiles200Response extends HttpResponse {
-    // (undocumented)
-    body: StringsListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceUpdateListFilesdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceUpdateListFilesParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceUpdateListNames {
-    get(options?: DeviceUpdateListNamesParameters): Promise<DeviceUpdateListNames200Response | DeviceUpdateListNamesdefaultResponse>;
-}
-
-// @public
-export interface DeviceUpdateListNames200Response extends HttpResponse {
-    // (undocumented)
-    body: StringsListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceUpdateListNamesdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceUpdateListNamesParameters = RequestParameters;
-
-// @public (undocumented)
-export interface DeviceUpdateListOperations {
-    get(options?: DeviceUpdateListOperationsParameters): Promise<DeviceUpdateListOperations200Response | DeviceUpdateListOperationsdefaultResponse>;
-}
-
-// @public
-export interface DeviceUpdateListOperations200Response extends HttpResponse {
-    // (undocumented)
-    body: UpdateOperationsListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceUpdateListOperationsdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceUpdateListOperationsParameters = DeviceUpdateListOperationsQueryParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceUpdateListOperationsQueryParam {
-    // (undocumented)
-    queryParameters?: DeviceUpdateListOperationsQueryParamProperties;
-}
-
-// @public (undocumented)
-export interface DeviceUpdateListOperationsQueryParamProperties {
-    $filter?: string;
-    $top?: number;
-}
-
-// @public (undocumented)
-export interface DeviceUpdateListProviders {
-    get(options?: DeviceUpdateListProvidersParameters): Promise<DeviceUpdateListProviders200Response | DeviceUpdateListProvidersdefaultResponse>;
-}
-
-// @public
-export interface DeviceUpdateListProviders200Response extends HttpResponse {
-    // (undocumented)
-    body: StringsListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceUpdateListProvidersdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceUpdateListProvidersParameters = RequestParameters;
-
-// @public
-export interface DeviceUpdateListUpdates200Response extends HttpResponse {
-    // (undocumented)
-    body: UpdateListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceUpdateListUpdatesdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceUpdateListUpdatesParameters = DeviceUpdateListUpdatesQueryParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceUpdateListUpdatesQueryParam {
-    // (undocumented)
-    queryParameters?: DeviceUpdateListUpdatesQueryParamProperties;
-}
-
-// @public (undocumented)
-export interface DeviceUpdateListUpdatesQueryParamProperties {
-    $filter?: string;
-    $search?: string;
-}
-
-// @public (undocumented)
-export interface DeviceUpdateListVersions {
-    get(options?: DeviceUpdateListVersionsParameters): Promise<DeviceUpdateListVersions200Response | DeviceUpdateListVersionsdefaultResponse>;
-}
-
-// @public
-export interface DeviceUpdateListVersions200Response extends HttpResponse {
-    // (undocumented)
-    body: StringsListOutput;
-    // (undocumented)
-    status: "200";
-}
-
-// @public
-export interface DeviceUpdateListVersionsdefaultResponse extends HttpResponse {
-    // (undocumented)
-    body: ErrorResponseOutput;
-    // (undocumented)
-    status: "500";
-}
-
-// @public (undocumented)
-export type DeviceUpdateListVersionsParameters = DeviceUpdateListVersionsQueryParam & RequestParameters;
-
-// @public (undocumented)
-export interface DeviceUpdateListVersionsQueryParam {
-    // (undocumented)
-    queryParameters?: DeviceUpdateListVersionsQueryParamProperties;
-}
-
-// @public (undocumented)
-export interface DeviceUpdateListVersionsQueryParamProperties {
-    $filter?: string;
-}
-
-// @public (undocumented)
-export type DeviceUpdateRestClient = Client & {
+export type DeviceUpdateClient = Client & {
     path: Routes;
 };
 
@@ -1403,21 +689,23 @@ export interface ErrorModelOutput {
 }
 
 // @public (undocumented)
-export interface ErrorResponseOutput {
-    error: ErrorModelOutput;
-}
-
-// @public (undocumented)
 export interface FileImportMetadata {
     filename: string;
     url: string;
 }
 
-// @public
-export type GetArrayType<T> = T extends Array<infer TData> ? TData : never;
+// @public (undocumented)
+export interface FileOutput {
+    etag?: string;
+    fileId: string;
+    fileName: string;
+    hashes: Record<string, string>;
+    mimeType?: string;
+    sizeInBytes: number;
+}
 
 // @public
-export function getLongRunningPoller<TResult extends HttpResponse>(client: Client, initialResponse: TResult, options?: LroEngineOptions<TResult, PollOperationState<TResult>>): PollerLike<PollOperationState<TResult>, TResult>;
+export type GetArrayType<T> = T extends Array<infer TData> ? TData : never;
 
 // @public
 export type GetPage<TPage> = (pageLink: string, maxPageSize?: number) => Promise<{
@@ -1428,29 +716,19 @@ export type GetPage<TPage> = (pageLink: string, maxPageSize?: number) => Promise
 // @public (undocumented)
 export interface Group {
     createdDateTime: string;
-    deploymentId?: string;
-    deviceClassId?: string;
     deviceCount?: number;
     groupId: string;
-    groupType: "DeviceClassIdAndIoTHubTag" | "InvalidDeviceClassIdAndIoTHubTag" | "DefaultDeviceClassId";
+    groupType: "IoTHubTag";
     tags: Array<string>;
 }
 
 // @public (undocumented)
 export interface GroupOutput {
     createdDateTime: string;
-    deploymentId?: string;
-    deviceClassId?: string;
     deviceCount?: number;
     groupId: string;
-    groupType: "DeviceClassIdAndIoTHubTag" | "InvalidDeviceClassIdAndIoTHubTag" | "DefaultDeviceClassId";
+    groupType: "IoTHubTag";
     tags: Array<string>;
-}
-
-// @public (undocumented)
-export interface GroupsListOutput {
-    nextLink?: string;
-    value: Array<GroupOutput>;
 }
 
 // @public (undocumented)
@@ -1461,9 +739,8 @@ export interface ImportManifestMetadata {
 }
 
 // @public (undocumented)
-export interface ImportUpdateInputItem {
-    files?: Array<FileImportMetadata>;
-    friendlyName?: string;
+export interface ImportUpdateInput {
+    files: Array<FileImportMetadata>;
     importManifest: ImportManifestMetadata;
 }
 
@@ -1476,62 +753,76 @@ export interface InnerErrorOutput {
 }
 
 // @public (undocumented)
-export interface InstallResultOutput {
-    extendedResultCode: number;
-    resultCode: number;
-    resultDetails?: string;
-    stepResults?: Array<StepResultOutput>;
-}
-
-// @public (undocumented)
-export interface InstructionsOutput {
-    steps: Array<StepOutput>;
-}
-
-// @public (undocumented)
-export interface LogCollectionOperation {
-    createdDateTime?: string;
-    description?: string;
-    deviceList: Array<DeviceUpdateAgentId>;
-    lastActionDateTime?: string;
-    operationId?: string;
-    status?: "Undefined" | "NotStarted" | "Running" | "Succeeded" | "Failed";
-}
-
-// @public (undocumented)
-export interface LogCollectionOperationDetailedStatusOutput {
-    createdDateTime?: string;
-    description?: string;
-    deviceStatus?: Array<LogCollectionOperationDeviceStatusOutput>;
-    lastActionDateTime?: string;
-    operationId?: string;
-    status?: "Undefined" | "NotStarted" | "Running" | "Succeeded" | "Failed";
-}
-
-// @public (undocumented)
-export interface LogCollectionOperationDeviceStatusOutput {
-    deviceId: string;
-    extendedResultCode?: string;
-    logLocation?: string;
-    moduleId?: string;
-    resultCode?: string;
+export interface OperationOutput {
+    createdDateTime: string;
+    error?: ErrorModelOutput;
+    etag?: string;
+    lastActionDateTime: string;
+    operationId: string;
+    resourceLocation?: string;
     status: "Undefined" | "NotStarted" | "Running" | "Succeeded" | "Failed";
+    traceId?: string;
+    updateId?: UpdateIdOutput;
 }
 
 // @public (undocumented)
-export interface LogCollectionOperationListOutput {
+export interface PageableListOfDeploymentDeviceStatesOutput {
     nextLink?: string;
-    value: Array<LogCollectionOperationOutput>;
+    value?: Array<DeploymentDeviceStateOutput>;
 }
 
 // @public (undocumented)
-export interface LogCollectionOperationOutput {
-    createdDateTime?: string;
-    description?: string;
-    deviceList: Array<DeviceUpdateAgentIdOutput>;
-    lastActionDateTime?: string;
-    operationId?: string;
-    status?: "Undefined" | "NotStarted" | "Running" | "Succeeded" | "Failed";
+export interface PageableListOfDeploymentsOutput {
+    nextLink?: string;
+    value?: Array<DeploymentOutput>;
+}
+
+// @public (undocumented)
+export interface PageableListOfDeviceClassesOutput {
+    nextLink?: string;
+    value?: Array<DeviceClassOutput>;
+}
+
+// @public (undocumented)
+export interface PageableListOfDevicesOutput {
+    nextLink?: string;
+    value?: Array<DeviceOutput>;
+}
+
+// @public (undocumented)
+export interface PageableListOfDeviceTagsOutput {
+    nextLink?: string;
+    value?: Array<DeviceTagOutput>;
+}
+
+// @public (undocumented)
+export interface PageableListOfGroupsOutput {
+    nextLink?: string;
+    value?: Array<GroupOutput>;
+}
+
+// @public (undocumented)
+export interface PageableListOfOperationsOutput {
+    nextLink?: string;
+    value?: Array<OperationOutput>;
+}
+
+// @public (undocumented)
+export interface PageableListOfStringsOutput {
+    nextLink?: string;
+    value?: Array<string>;
+}
+
+// @public (undocumented)
+export interface PageableListOfUpdatableDevicesOutput {
+    nextLink?: string;
+    value?: Array<UpdatableDevicesOutput>;
+}
+
+// @public (undocumented)
+export interface PageableListOfUpdateIdsOutput {
+    nextLink?: string;
+    value?: Array<UpdateIdOutput>;
 }
 
 // @public
@@ -1551,68 +842,32 @@ export interface PagingOptions<TResponse> {
 
 // @public (undocumented)
 export interface Routes {
-    (path: "/deviceupdate/{instanceId}/updates", instanceId: string): DeviceUpdateImportUpdate;
-    (path: "/deviceupdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}", instanceId: string, provider: string, name: string, version: string): DeviceUpdateGetUpdate;
-    (path: "/deviceupdate/{instanceId}/updates/providers", instanceId: string): DeviceUpdateListProviders;
-    (path: "/deviceupdate/{instanceId}/updates/providers/{provider}/names", instanceId: string, provider: string): DeviceUpdateListNames;
-    (path: "/deviceupdate/{instanceId}/updates/providers/{provider}/names/{name}/versions", instanceId: string, provider: string, name: string): DeviceUpdateListVersions;
-    (path: "/deviceupdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files", instanceId: string, provider: string, name: string, version: string): DeviceUpdateListFiles;
-    (path: "/deviceupdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files/{fileId}", instanceId: string, provider: string, name: string, version: string, fileId: string): DeviceUpdateGetFile;
-    (path: "/deviceupdate/{instanceId}/updates/operations", instanceId: string): DeviceUpdateListOperations;
-    (path: "/deviceupdate/{instanceId}/updates/operations/{operationId}", instanceId: string, operationId: string): DeviceUpdateGetOperation;
-    (path: "/deviceupdate/{instanceId}/management/deviceclasses", instanceId: string): DeviceManagementListDeviceClasses;
-    (path: "/deviceupdate/{instanceId}/management/deviceclasses/{deviceClassId}", instanceId: string, deviceClassId: string): DeviceManagementGetDeviceClass;
-    (path: "/deviceupdate/{instanceId}/management/deviceclasses/{deviceClassId}/installableupdates", instanceId: string, deviceClassId: string): DeviceManagementListInstallableUpdatesForDeviceClass;
-    (path: "/deviceupdate/{instanceId}/management/devices", instanceId: string): DeviceManagementListDevices;
-    (path: "/deviceupdate/{instanceId}/management/devices/{deviceId}", instanceId: string, deviceId: string): DeviceManagementGetDevice;
-    (path: "/deviceupdate/{instanceId}/management/devices/{deviceId}/modules/{moduleId}", instanceId: string, deviceId: string, moduleId: string): DeviceManagementGetDeviceModule;
-    (path: "/deviceupdate/{instanceId}/management/updatecompliance", instanceId: string): DeviceManagementGetUpdateCompliance;
-    (path: "/deviceupdate/{instanceId}/management/devicetags", instanceId: string): DeviceManagementListDeviceTags;
-    (path: "/deviceupdate/{instanceId}/management/devicetags/{tagName}", instanceId: string, tagName: string): DeviceManagementGetDeviceTag;
-    (path: "/deviceupdate/{instanceId}/management/groups", instanceId: string): DeviceManagementListGroups;
-    (path: "/deviceupdate/{instanceId}/management/groups/{groupId}", instanceId: string, groupId: string): DeviceManagementGetGroup;
-    (path: "/deviceupdate/{instanceId}/management/groups/{groupId}/updateCompliance", instanceId: string, groupId: string): DeviceManagementGetGroupUpdateCompliance;
-    (path: "/deviceupdate/{instanceId}/management/groups/{groupId}/bestUpdates", instanceId: string, groupId: string): DeviceManagementListBestUpdatesForGroup;
-    (path: "/deviceupdate/{instanceId}/management/groups/{groupId}/deployments", instanceId: string, groupId: string): DeviceManagementListDeploymentsForGroup;
-    (path: "/deviceupdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}", instanceId: string, groupId: string, deploymentId: string): DeviceManagementGetDeployment;
-    (path: "/deviceupdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}/status", instanceId: string, groupId: string, deploymentId: string): DeviceManagementGetDeploymentStatus;
-    (path: "/deviceupdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}/devicestates", instanceId: string, groupId: string, deploymentId: string): DeviceManagementListDeploymentDevices;
-    (path: "/deviceupdate/{instanceId}/management/operations/{operationId}", instanceId: string, operationId: string): DeviceManagementGetOperation;
-    (path: "/deviceupdate/{instanceId}/management/operations", instanceId: string): DeviceManagementListOperations;
-    (path: "/deviceupdate/{instanceId}/management/deviceDiagnostics/logCollections/{operationId}", instanceId: string, operationId: string): DeviceManagementCollectLogs;
-    (path: "/deviceupdate/{instanceId}/management/deviceDiagnostics/logCollections", instanceId: string): DeviceManagementListLogCollectionOperations;
-    (path: "/deviceupdate/{instanceId}/management/deviceDiagnostics/logCollections/{operationId}/detailedStatus", instanceId: string, operationId: string): DeviceManagementGetLogCollectionOperationDetailedStatus;
-}
-
-// @public (undocumented)
-export interface StepOutput {
-    description?: string;
-    files?: Array<string>;
-    handler?: string;
-    handlerProperties?: Record<string, unknown>;
-    type?: "Inline" | "Reference";
-    updateId?: UpdateIdOutput;
-}
-
-// @public (undocumented)
-export interface StepResultOutput {
-    description?: string;
-    extendedResultCode: number;
-    resultCode: number;
-    resultDetails?: string;
-    updateId?: UpdateIdOutput;
-}
-
-// @public (undocumented)
-export interface StringsListOutput {
-    nextLink?: string;
-    value: Array<string>;
-}
-
-// @public (undocumented)
-export interface UpdatableDevicesListOutput {
-    nextLink?: string;
-    value: Array<UpdatableDevicesOutput>;
+    (path: "/deviceupdate/{instanceId}/v2/updates", instanceId: string): UpdatesImportUpdate;
+    (path: "/deviceupdate/{instanceId}/v2/updates/providers/{provider}/names/{name}/versions/{version}", instanceId: string, provider: string, name: string, version: string): UpdatesGetUpdate;
+    (path: "/deviceupdate/{instanceId}/v2/updates/providers", instanceId: string): UpdatesGetProviders;
+    (path: "/deviceupdate/{instanceId}/v2/updates/providers/{provider}/names", instanceId: string, provider: string): UpdatesGetNames;
+    (path: "/deviceupdate/{instanceId}/v2/updates/providers/{provider}/names/{name}/versions", instanceId: string, provider: string, name: string): UpdatesGetVersions;
+    (path: "/deviceupdate/{instanceId}/v2/updates/providers/{provider}/names/{name}/versions/{version}/files", instanceId: string, provider: string, name: string, version: string): UpdatesGetFiles;
+    (path: "/deviceupdate/{instanceId}/v2/updates/providers/{provider}/names/{name}/versions/{version}/files/{fileId}", instanceId: string, provider: string, name: string, version: string, fileId: string): UpdatesGetFile;
+    (path: "/deviceupdate/{instanceId}/v2/updates/operations", instanceId: string): UpdatesGetOperations;
+    (path: "/deviceupdate/{instanceId}/v2/updates/operations/{operationId}", instanceId: string, operationId: string): UpdatesGetOperation;
+    (path: "/deviceupdate/{instanceId}/v2/management/deviceclasses", instanceId: string): DevicesGetAllDeviceClasses;
+    (path: "/deviceupdate/{instanceId}/v2/management/deviceclasses/{deviceClassId}", instanceId: string, deviceClassId: string): DevicesGetDeviceClass;
+    (path: "/deviceupdate/{instanceId}/v2/management/deviceclasses/{deviceClassId}/deviceids", instanceId: string, deviceClassId: string): DevicesGetDeviceClassDeviceIds;
+    (path: "/deviceupdate/{instanceId}/v2/management/deviceclasses/{deviceClassId}/installableupdates", instanceId: string, deviceClassId: string): DevicesGetDeviceClassInstallableUpdates;
+    (path: "/deviceupdate/{instanceId}/v2/management/devices", instanceId: string): DevicesGetAllDevices;
+    (path: "/deviceupdate/{instanceId}/v2/management/devices/{deviceId}", instanceId: string, deviceId: string): DevicesGetDevice;
+    (path: "/deviceupdate/{instanceId}/v2/management/updatecompliance", instanceId: string): DevicesGetUpdateCompliance;
+    (path: "/deviceupdate/{instanceId}/v2/management/devicetags", instanceId: string): DevicesGetAllDeviceTags;
+    (path: "/deviceupdate/{instanceId}/v2/management/devicetags/{tagName}", instanceId: string, tagName: string): DevicesGetDeviceTag;
+    (path: "/deviceupdate/{instanceId}/v2/management/groups", instanceId: string): DevicesGetAllGroups;
+    (path: "/deviceupdate/{instanceId}/v2/management/groups/{groupId}", instanceId: string, groupId: string): DevicesGetGroup;
+    (path: "/deviceupdate/{instanceId}/v2/management/groups/{groupId}/updateCompliance", instanceId: string, groupId: string): DevicesGetGroupUpdateCompliance;
+    (path: "/deviceupdate/{instanceId}/v2/management/groups/{groupId}/bestUpdates", instanceId: string, groupId: string): DevicesGetGroupBestUpdates;
+    (path: "/deviceupdate/{instanceId}/v2/management/deployments", instanceId: string): DeploymentsGetAllDeployments;
+    (path: "/deviceupdate/{instanceId}/v2/management/deployments/{deploymentId}", instanceId: string, deploymentId: string): DeploymentsGetDeployment;
+    (path: "/deviceupdate/{instanceId}/v2/management/deployments/{deploymentId}/status", instanceId: string, deploymentId: string): DeploymentsGetDeploymentStatus;
+    (path: "/deviceupdate/{instanceId}/v2/management/deployments/{deploymentId}/devicestates", instanceId: string, deploymentId: string): DeploymentsGetDeploymentDevices;
 }
 
 // @public (undocumented)
@@ -1630,18 +885,6 @@ export interface UpdateComplianceOutput {
 }
 
 // @public (undocumented)
-export interface UpdateFileOutput {
-    etag?: string;
-    fileId: string;
-    fileName: string;
-    hashes: Record<string, string>;
-    mimeType?: string;
-    scanDetails?: string;
-    scanResult?: string;
-    sizeInBytes: number;
-}
-
-// @public (undocumented)
 export interface UpdateId {
     name: string;
     provider: string;
@@ -1656,52 +899,412 @@ export interface UpdateIdOutput {
 }
 
 // @public (undocumented)
-export interface UpdateIdsListOutput {
-    nextLink?: string;
-    value: Array<UpdateIdOutput>;
-}
-
-// @public (undocumented)
-export interface UpdateListOutput {
-    nextLink?: string;
-    value: Array<UpdateOutput>;
-}
-
-// @public (undocumented)
-export interface UpdateOperationOutput {
-    createdDateTime: string;
-    error?: ErrorModelOutput;
-    etag?: string;
-    lastActionDateTime: string;
-    operationId: string;
-    resourceLocation?: string;
-    status: "Undefined" | "NotStarted" | "Running" | "Succeeded" | "Failed";
-    traceId?: string;
-    updateId?: UpdateIdOutput;
-}
-
-// @public (undocumented)
-export interface UpdateOperationsListOutput {
-    nextLink?: string;
-    value: Array<UpdateOperationOutput>;
-}
-
-// @public (undocumented)
 export interface UpdateOutput {
-    compatibility: Array<Record<string, string>>;
+    compatibility: Array<CompatibilityOutput>;
     createdDateTime: string;
-    description?: string;
     etag?: string;
-    friendlyName?: string;
     importedDateTime: string;
-    installedCriteria?: string;
-    instructions?: InstructionsOutput;
-    isDeployable?: boolean;
+    installedCriteria: string;
     manifestVersion: string;
-    referencedBy?: Array<UpdateIdOutput>;
-    scanResult?: string;
     updateId: UpdateIdOutput;
-    updateType?: string;
+    updateType: string;
+}
+
+// @public (undocumented)
+export interface UpdatesDeleteUpdate202Headers {
+    "operation-location"?: string;
+    location?: string;
+}
+
+// @public
+export interface UpdatesDeleteUpdate202Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    headers: RawHttpHeaders & UpdatesDeleteUpdate202Headers;
+    // (undocumented)
+    status: "202";
+}
+
+// @public
+export interface UpdatesDeleteUpdate429Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "429";
+}
+
+// @public (undocumented)
+export type UpdatesDeleteUpdateParameters = RequestParameters;
+
+// @public (undocumented)
+export interface UpdatesGetFile {
+    get(options?: UpdatesGetFileParameters): StreamableMethod<UpdatesGetFile200Response | UpdatesGetFile304Response | UpdatesGetFile404Response | UpdatesGetFile429Response>;
+}
+
+// @public
+export interface UpdatesGetFile200Response extends HttpResponse {
+    // (undocumented)
+    body: FileOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface UpdatesGetFile304Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "304";
+}
+
+// @public
+export interface UpdatesGetFile404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public
+export interface UpdatesGetFile429Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "429";
+}
+
+// @public (undocumented)
+export interface UpdatesGetFileHeaderParam {
+    // (undocumented)
+    headers: RawHttpHeadersInput & UpdatesGetFileHeaders;
+}
+
+// @public (undocumented)
+export interface UpdatesGetFileHeaders {
+    "If-None-Match"?: string;
+}
+
+// @public (undocumented)
+export type UpdatesGetFileParameters = UpdatesGetFileHeaderParam & RequestParameters;
+
+// @public (undocumented)
+export interface UpdatesGetFiles {
+    get(options?: UpdatesGetFilesParameters): StreamableMethod<UpdatesGetFiles200Response | UpdatesGetFiles404Response | UpdatesGetFiles429Response>;
+}
+
+// @public
+export interface UpdatesGetFiles200Response extends HttpResponse {
+    // (undocumented)
+    body: PageableListOfStringsOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface UpdatesGetFiles404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public
+export interface UpdatesGetFiles429Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "429";
+}
+
+// @public (undocumented)
+export type UpdatesGetFilesParameters = RequestParameters;
+
+// @public (undocumented)
+export interface UpdatesGetNames {
+    get(options?: UpdatesGetNamesParameters): StreamableMethod<UpdatesGetNames200Response | UpdatesGetNames404Response | UpdatesGetNames429Response>;
+}
+
+// @public
+export interface UpdatesGetNames200Response extends HttpResponse {
+    // (undocumented)
+    body: PageableListOfStringsOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface UpdatesGetNames404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public
+export interface UpdatesGetNames429Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "429";
+}
+
+// @public (undocumented)
+export type UpdatesGetNamesParameters = RequestParameters;
+
+// @public (undocumented)
+export interface UpdatesGetOperation {
+    get(options?: UpdatesGetOperationParameters): StreamableMethod<UpdatesGetOperation200Response | UpdatesGetOperation304Response | UpdatesGetOperation404Response | UpdatesGetOperation429Response>;
+}
+
+// @public (undocumented)
+export interface UpdatesGetOperation200Headers {
+    "retry-after"?: string;
+}
+
+// @public
+export interface UpdatesGetOperation200Response extends HttpResponse {
+    // (undocumented)
+    body: OperationOutput;
+    // (undocumented)
+    headers: RawHttpHeaders & UpdatesGetOperation200Headers;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface UpdatesGetOperation304Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "304";
+}
+
+// @public
+export interface UpdatesGetOperation404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public
+export interface UpdatesGetOperation429Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "429";
+}
+
+// @public (undocumented)
+export interface UpdatesGetOperationHeaderParam {
+    // (undocumented)
+    headers: RawHttpHeadersInput & UpdatesGetOperationHeaders;
+}
+
+// @public (undocumented)
+export interface UpdatesGetOperationHeaders {
+    "If-None-Match"?: string;
+}
+
+// @public (undocumented)
+export type UpdatesGetOperationParameters = UpdatesGetOperationHeaderParam & RequestParameters;
+
+// @public (undocumented)
+export interface UpdatesGetOperations {
+    get(options?: UpdatesGetOperationsParameters): StreamableMethod<UpdatesGetOperations200Response | UpdatesGetOperations429Response>;
+}
+
+// @public
+export interface UpdatesGetOperations200Response extends HttpResponse {
+    // (undocumented)
+    body: PageableListOfOperationsOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface UpdatesGetOperations429Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "429";
+}
+
+// @public (undocumented)
+export type UpdatesGetOperationsParameters = UpdatesGetOperationsQueryParam & RequestParameters;
+
+// @public (undocumented)
+export interface UpdatesGetOperationsQueryParam {
+    // (undocumented)
+    queryParameters?: UpdatesGetOperationsQueryParamProperties;
+}
+
+// @public (undocumented)
+export interface UpdatesGetOperationsQueryParamProperties {
+    $filter?: string;
+    $top?: number;
+}
+
+// @public (undocumented)
+export interface UpdatesGetProviders {
+    get(options?: UpdatesGetProvidersParameters): StreamableMethod<UpdatesGetProviders200Response | UpdatesGetProviders429Response>;
+}
+
+// @public
+export interface UpdatesGetProviders200Response extends HttpResponse {
+    // (undocumented)
+    body: PageableListOfStringsOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface UpdatesGetProviders429Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "429";
+}
+
+// @public (undocumented)
+export type UpdatesGetProvidersParameters = RequestParameters;
+
+// @public (undocumented)
+export interface UpdatesGetUpdate {
+    delete(options?: UpdatesDeleteUpdateParameters): StreamableMethod<UpdatesDeleteUpdate202Response | UpdatesDeleteUpdate429Response>;
+    get(options?: UpdatesGetUpdateParameters): StreamableMethod<UpdatesGetUpdate200Response | UpdatesGetUpdate304Response | UpdatesGetUpdate404Response | UpdatesGetUpdate429Response>;
+}
+
+// @public
+export interface UpdatesGetUpdate200Response extends HttpResponse {
+    // (undocumented)
+    body: UpdateOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface UpdatesGetUpdate304Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "304";
+}
+
+// @public
+export interface UpdatesGetUpdate404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public
+export interface UpdatesGetUpdate429Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "429";
+}
+
+// @public (undocumented)
+export interface UpdatesGetUpdateHeaderParam {
+    // (undocumented)
+    headers: RawHttpHeadersInput & UpdatesGetUpdateHeaders;
+}
+
+// @public (undocumented)
+export interface UpdatesGetUpdateHeaders {
+    "If-None-Match"?: string;
+}
+
+// @public (undocumented)
+export type UpdatesGetUpdateParameters = UpdatesGetUpdateHeaderParam & RequestParameters;
+
+// @public (undocumented)
+export interface UpdatesGetVersions {
+    get(options?: UpdatesGetVersionsParameters): StreamableMethod<UpdatesGetVersions200Response | UpdatesGetVersions404Response | UpdatesGetVersions429Response>;
+}
+
+// @public
+export interface UpdatesGetVersions200Response extends HttpResponse {
+    // (undocumented)
+    body: PageableListOfStringsOutput;
+    // (undocumented)
+    status: "200";
+}
+
+// @public
+export interface UpdatesGetVersions404Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "404";
+}
+
+// @public
+export interface UpdatesGetVersions429Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "429";
+}
+
+// @public (undocumented)
+export type UpdatesGetVersionsParameters = RequestParameters;
+
+// @public (undocumented)
+export interface UpdatesImportUpdate {
+    post(options: UpdatesImportUpdateParameters): StreamableMethod<UpdatesImportUpdate202Response | UpdatesImportUpdate429Response>;
+}
+
+// @public (undocumented)
+export interface UpdatesImportUpdate202Headers {
+    "operation-location"?: string;
+    location?: string;
+}
+
+// @public
+export interface UpdatesImportUpdate202Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    headers: RawHttpHeaders & UpdatesImportUpdate202Headers;
+    // (undocumented)
+    status: "202";
+}
+
+// @public
+export interface UpdatesImportUpdate429Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
+    status: "429";
+}
+
+// @public (undocumented)
+export interface UpdatesImportUpdateBodyParam {
+    body: ImportUpdateInput;
+}
+
+// @public (undocumented)
+export interface UpdatesImportUpdateMediaTypesParam {
+    contentType?: "application/json";
+}
+
+// @public (undocumented)
+export type UpdatesImportUpdateParameters = UpdatesImportUpdateQueryParam & UpdatesImportUpdateMediaTypesParam & UpdatesImportUpdateBodyParam & RequestParameters;
+
+// @public (undocumented)
+export interface UpdatesImportUpdateQueryParam {
+    // (undocumented)
+    queryParameters: UpdatesImportUpdateQueryParamProperties;
+}
+
+// @public (undocumented)
+export interface UpdatesImportUpdateQueryParamProperties {
+    action: "import";
 }
 
 // (No @packageDocumentation comment for this package)
