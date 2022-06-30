@@ -2,7 +2,7 @@
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure StorageManagement client.
 
-The Azure Storage Management API.
+Azure Storage Management API.
 
 [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/storage/arm-storage) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-storage) |
