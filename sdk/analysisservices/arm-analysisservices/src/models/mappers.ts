@@ -946,7 +946,21 @@ export const AnalysisServicesServerProperties: coreClient.CompositeMapper = {
         serializedName: "provisioningState",
         readOnly: true,
         type: {
-          name: "String"
+          name: "Enum",
+          allowedValues: [
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Paused",
+            "Suspended",
+            "Provisioning",
+            "Updating",
+            "Suspending",
+            "Pausing",
+            "Resuming",
+            "Preparing",
+            "Scaling"
+          ]
         }
       },
       serverFullName: {
@@ -1035,7 +1049,21 @@ export const AnalysisServicesServer: coreClient.CompositeMapper = {
         serializedName: "properties.provisioningState",
         readOnly: true,
         type: {
-          name: "String"
+          name: "Enum",
+          allowedValues: [
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Paused",
+            "Suspended",
+            "Provisioning",
+            "Updating",
+            "Suspending",
+            "Pausing",
+            "Resuming",
+            "Preparing",
+            "Scaling"
+          ]
         }
       },
       serverFullName: {

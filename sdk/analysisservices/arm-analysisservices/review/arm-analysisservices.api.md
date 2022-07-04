@@ -139,7 +139,7 @@ export interface GatewayListStatusError {
 
 // @public
 export interface GatewayListStatusLive {
-    status?: "undefined";
+    status?: 0;
 }
 
 // @public
@@ -153,34 +153,6 @@ export interface IPv4FirewallRule {
 export interface IPv4FirewallSettings {
     enablePowerBIService?: boolean;
     firewallRules?: IPv4FirewallRule[];
-}
-
-// @public
-export enum KnownProvisioningState {
-    // (undocumented)
-    Deleting = "Deleting",
-    // (undocumented)
-    Failed = "Failed",
-    // (undocumented)
-    Paused = "Paused",
-    // (undocumented)
-    Pausing = "Pausing",
-    // (undocumented)
-    Preparing = "Preparing",
-    // (undocumented)
-    Provisioning = "Provisioning",
-    // (undocumented)
-    Resuming = "Resuming",
-    // (undocumented)
-    Scaling = "Scaling",
-    // (undocumented)
-    Succeeded = "Succeeded",
-    // (undocumented)
-    Suspended = "Suspended",
-    // (undocumented)
-    Suspending = "Suspending",
-    // (undocumented)
-    Updating = "Updating"
 }
 
 // @public
@@ -310,7 +282,7 @@ export interface OperationStatus {
 }
 
 // @public
-export type ProvisioningState = string;
+export type ProvisioningState = "Deleting" | "Succeeded" | "Failed" | "Paused" | "Suspended" | "Provisioning" | "Updating" | "Suspending" | "Pausing" | "Resuming" | "Preparing" | "Scaling";
 
 // @public
 export interface Resource {

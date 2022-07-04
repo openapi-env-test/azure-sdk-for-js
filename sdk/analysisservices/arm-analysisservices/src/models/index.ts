@@ -216,7 +216,7 @@ export interface SkuDetailsForExistingResource {
 /** Status of gateway is live. */
 export interface GatewayListStatusLive {
   /** Live message of list gateway. Status: 0 - Live */
-  status?: "undefined";
+  status?: 0;
 }
 
 /** Status of gateway is error. */
@@ -494,42 +494,6 @@ export enum KnownState {
  */
 export type State = string;
 
-/** Known values of {@link ProvisioningState} that the service accepts. */
-export enum KnownProvisioningState {
-  Deleting = "Deleting",
-  Succeeded = "Succeeded",
-  Failed = "Failed",
-  Paused = "Paused",
-  Suspended = "Suspended",
-  Provisioning = "Provisioning",
-  Updating = "Updating",
-  Suspending = "Suspending",
-  Pausing = "Pausing",
-  Resuming = "Resuming",
-  Preparing = "Preparing",
-  Scaling = "Scaling"
-}
-
-/**
- * Defines values for ProvisioningState. \
- * {@link KnownProvisioningState} can be used interchangeably with ProvisioningState,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **Deleting** \
- * **Succeeded** \
- * **Failed** \
- * **Paused** \
- * **Suspended** \
- * **Provisioning** \
- * **Updating** \
- * **Suspending** \
- * **Pausing** \
- * **Resuming** \
- * **Preparing** \
- * **Scaling**
- */
-export type ProvisioningState = string;
-
 /** Known values of {@link SkuTier} that the service accepts. */
 export enum KnownSkuTier {
   Development = "Development",
@@ -547,6 +511,20 @@ export enum KnownSkuTier {
  * **Standard**
  */
 export type SkuTier = string;
+/** Defines values for ProvisioningState. */
+export type ProvisioningState =
+  | "Deleting"
+  | "Succeeded"
+  | "Failed"
+  | "Paused"
+  | "Suspended"
+  | "Provisioning"
+  | "Updating"
+  | "Suspending"
+  | "Pausing"
+  | "Resuming"
+  | "Preparing"
+  | "Scaling";
 /** Defines values for ConnectionMode. */
 export type ConnectionMode = "All" | "ReadOnly";
 /** Defines values for ManagedMode. */
