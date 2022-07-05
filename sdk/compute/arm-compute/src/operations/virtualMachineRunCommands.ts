@@ -568,8 +568,8 @@ const listOperationSpec: coreClient.OperationSpec = {
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
-    Parameters.location,
-    Parameters.subscriptionId
+    Parameters.subscriptionId,
+    Parameters.location
   ],
   headerParameters: [Parameters.accept1],
   serializer
@@ -586,8 +586,8 @@ const getOperationSpec: coreClient.OperationSpec = {
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
-    Parameters.location,
     Parameters.subscriptionId,
+    Parameters.location,
     Parameters.commandId
   ],
   headerParameters: [Parameters.accept1],
@@ -618,9 +618,9 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.vmName,
+    Parameters.subscriptionId,
     Parameters.runCommandName
   ],
   headerParameters: [Parameters.contentType, Parameters.accept1],
@@ -652,9 +652,9 @@ const updateOperationSpec: coreClient.OperationSpec = {
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.vmName,
+    Parameters.subscriptionId,
     Parameters.runCommandName
   ],
   headerParameters: [Parameters.contentType, Parameters.accept1],
@@ -677,9 +677,9 @@ const deleteOperationSpec: coreClient.OperationSpec = {
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.vmName,
+    Parameters.subscriptionId,
     Parameters.runCommandName
   ],
   headerParameters: [Parameters.accept1],
@@ -697,12 +697,12 @@ const getByVirtualMachineOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.CloudError
     }
   },
-  queryParameters: [Parameters.apiVersion, Parameters.expand1],
+  queryParameters: [Parameters.apiVersion, Parameters.expand],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.vmName,
+    Parameters.subscriptionId,
     Parameters.runCommandName
   ],
   headerParameters: [Parameters.accept1],
@@ -720,12 +720,12 @@ const listByVirtualMachineOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.CloudError
     }
   },
-  queryParameters: [Parameters.apiVersion, Parameters.expand1],
+  queryParameters: [Parameters.apiVersion, Parameters.expand],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.vmName
+    Parameters.vmName,
+    Parameters.subscriptionId
   ],
   headerParameters: [Parameters.accept1],
   serializer
@@ -741,8 +741,8 @@ const listNextOperationSpec: coreClient.OperationSpec = {
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
-    Parameters.location,
     Parameters.subscriptionId,
+    Parameters.location,
     Parameters.nextLink
   ],
   headerParameters: [Parameters.accept1],
@@ -759,13 +759,13 @@ const listByVirtualMachineNextOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.CloudError
     }
   },
-  queryParameters: [Parameters.apiVersion, Parameters.expand1],
+  queryParameters: [Parameters.apiVersion, Parameters.expand],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId,
-    Parameters.nextLink,
     Parameters.resourceGroupName,
-    Parameters.vmName
+    Parameters.vmName,
+    Parameters.subscriptionId,
+    Parameters.nextLink
   ],
   headerParameters: [Parameters.accept1],
   serializer

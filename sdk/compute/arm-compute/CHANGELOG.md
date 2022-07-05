@@ -1,15 +1,355 @@
 # Release History
+    
+## 20.0.0 (2022-07-05)
+    
+**Features**
 
-## 18.0.1 (Unreleased)
+  - Added Type Alias DiskEncryptionSetParameters
+  - Added Type Alias ImageReference
+  - Added Type Alias ManagedDiskParameters
+  - Added Type Alias NetworkInterfaceReference
+  - Added Type Alias RunCommandDocument
+  - Added Type Alias VirtualMachine
+  - Added Type Alias VirtualMachineCaptureResult
+  - Added Type Alias VirtualMachineExtension
+  - Added Type Alias VirtualMachineExtensionUpdate
+  - Added Type Alias VirtualMachineRunCommand
+  - Added Type Alias VirtualMachineRunCommandUpdate
+  - Added Type Alias VirtualMachineUpdate
+  - Interface ComputeManagementClientOptionalParams has a new optional parameter apiVersion
+  - Class ComputeManagementClient has a new parameter apiVersion
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
+  - Removed operation group AvailabilitySets
+  - Removed operation group CapacityReservationGroups
+  - Removed operation group CapacityReservations
+  - Removed operation group CloudServiceOperatingSystems
+  - Removed operation group CloudServiceRoleInstances
+  - Removed operation group CloudServiceRoles
+  - Removed operation group CloudServices
+  - Removed operation group CloudServicesUpdateDomain
+  - Removed operation group CommunityGalleries
+  - Removed operation group CommunityGalleryImages
+  - Removed operation group CommunityGalleryImageVersions
+  - Removed operation group DedicatedHostGroups
+  - Removed operation group DedicatedHosts
+  - Removed operation group DiskAccesses
+  - Removed operation group DiskEncryptionSets
+  - Removed operation group DiskRestorePointOperations
+  - Removed operation group Disks
+  - Removed operation group Galleries
+  - Removed operation group GalleryApplications
+  - Removed operation group GalleryApplicationVersions
+  - Removed operation group GalleryImages
+  - Removed operation group GalleryImageVersions
+  - Removed operation group GallerySharingProfile
+  - Removed operation group Images
+  - Removed operation group LogAnalytics
+  - Removed operation group Operations
+  - Removed operation group ProximityPlacementGroups
+  - Removed operation group ResourceSkus
+  - Removed operation group RestorePointCollections
+  - Removed operation group RestorePoints
+  - Removed operation group SharedGalleries
+  - Removed operation group SharedGalleryImages
+  - Removed operation group SharedGalleryImageVersions
+  - Removed operation group Snapshots
+  - Removed operation group SshPublicKeys
+  - Removed operation group UsageOperations
+  - Removed operation group VirtualMachineExtensionImages
+  - Removed operation group VirtualMachineImages
+  - Removed operation group VirtualMachineImagesEdgeZone
+  - Removed operation group VirtualMachineScaleSetExtensions
+  - Removed operation group VirtualMachineScaleSetRollingUpgrades
+  - Removed operation group VirtualMachineScaleSets
+  - Removed operation group VirtualMachineScaleSetVMExtensions
+  - Removed operation group VirtualMachineSizes
+  - Removed operation VirtualMachineScaleSetVMs.beginDeallocate
+  - Removed operation VirtualMachineScaleSetVMs.beginDeallocateAndWait
+  - Removed operation VirtualMachineScaleSetVMs.beginDelete
+  - Removed operation VirtualMachineScaleSetVMs.beginDeleteAndWait
+  - Removed operation VirtualMachineScaleSetVMs.beginPerformMaintenance
+  - Removed operation VirtualMachineScaleSetVMs.beginPerformMaintenanceAndWait
+  - Removed operation VirtualMachineScaleSetVMs.beginPowerOff
+  - Removed operation VirtualMachineScaleSetVMs.beginPowerOffAndWait
+  - Removed operation VirtualMachineScaleSetVMs.beginRedeploy
+  - Removed operation VirtualMachineScaleSetVMs.beginRedeployAndWait
+  - Removed operation VirtualMachineScaleSetVMs.beginReimage
+  - Removed operation VirtualMachineScaleSetVMs.beginReimageAll
+  - Removed operation VirtualMachineScaleSetVMs.beginReimageAllAndWait
+  - Removed operation VirtualMachineScaleSetVMs.beginReimageAndWait
+  - Removed operation VirtualMachineScaleSetVMs.beginRestart
+  - Removed operation VirtualMachineScaleSetVMs.beginRestartAndWait
+  - Removed operation VirtualMachineScaleSetVMs.beginStart
+  - Removed operation VirtualMachineScaleSetVMs.beginStartAndWait
+  - Removed operation VirtualMachineScaleSetVMs.beginUpdate
+  - Removed operation VirtualMachineScaleSetVMs.beginUpdateAndWait
+  - Removed operation VirtualMachineScaleSetVMs.get
+  - Removed operation VirtualMachineScaleSetVMs.getInstanceView
+  - Removed operation VirtualMachineScaleSetVMs.list
+  - Removed operation VirtualMachineScaleSetVMs.retrieveBootDiagnosticsData
+  - Removed operation VirtualMachineScaleSetVMs.simulateEviction
+  - Class ComputeManagementClient no longer has parameter availabilitySets
+  - Class ComputeManagementClient no longer has parameter capacityReservationGroups
+  - Class ComputeManagementClient no longer has parameter capacityReservations
+  - Class ComputeManagementClient no longer has parameter cloudServiceOperatingSystems
+  - Class ComputeManagementClient no longer has parameter cloudServiceRoleInstances
+  - Class ComputeManagementClient no longer has parameter cloudServiceRoles
+  - Class ComputeManagementClient no longer has parameter cloudServices
+  - Class ComputeManagementClient no longer has parameter cloudServicesUpdateDomain
+  - Class ComputeManagementClient no longer has parameter communityGalleries
+  - Class ComputeManagementClient no longer has parameter communityGalleryImages
+  - Class ComputeManagementClient no longer has parameter communityGalleryImageVersions
+  - Class ComputeManagementClient no longer has parameter dedicatedHostGroups
+  - Class ComputeManagementClient no longer has parameter dedicatedHosts
+  - Class ComputeManagementClient no longer has parameter diskAccesses
+  - Class ComputeManagementClient no longer has parameter diskEncryptionSets
+  - Class ComputeManagementClient no longer has parameter diskRestorePointOperations
+  - Class ComputeManagementClient no longer has parameter disks
+  - Class ComputeManagementClient no longer has parameter galleries
+  - Class ComputeManagementClient no longer has parameter galleryApplications
+  - Class ComputeManagementClient no longer has parameter galleryApplicationVersions
+  - Class ComputeManagementClient no longer has parameter galleryImages
+  - Class ComputeManagementClient no longer has parameter galleryImageVersions
+  - Class ComputeManagementClient no longer has parameter gallerySharingProfile
+  - Class ComputeManagementClient no longer has parameter images
+  - Class ComputeManagementClient no longer has parameter logAnalytics
+  - Class ComputeManagementClient no longer has parameter operations
+  - Class ComputeManagementClient no longer has parameter proximityPlacementGroups
+  - Class ComputeManagementClient no longer has parameter resourceSkus
+  - Class ComputeManagementClient no longer has parameter restorePointCollections
+  - Class ComputeManagementClient no longer has parameter restorePoints
+  - Class ComputeManagementClient no longer has parameter sharedGalleries
+  - Class ComputeManagementClient no longer has parameter sharedGalleryImages
+  - Class ComputeManagementClient no longer has parameter sharedGalleryImageVersions
+  - Class ComputeManagementClient no longer has parameter snapshots
+  - Class ComputeManagementClient no longer has parameter sshPublicKeys
+  - Class ComputeManagementClient no longer has parameter usageOperations
+  - Class ComputeManagementClient no longer has parameter virtualMachineExtensionImages
+  - Class ComputeManagementClient no longer has parameter virtualMachineImages
+  - Class ComputeManagementClient no longer has parameter virtualMachineImagesEdgeZone
+  - Class ComputeManagementClient no longer has parameter virtualMachineScaleSetExtensions
+  - Class ComputeManagementClient no longer has parameter virtualMachineScaleSetRollingUpgrades
+  - Class ComputeManagementClient no longer has parameter virtualMachineScaleSets
+  - Class ComputeManagementClient no longer has parameter virtualMachineScaleSetVMExtensions
+  - Class ComputeManagementClient no longer has parameter virtualMachineSizes
+  - Removed Enum KnownAccessLevel
+  - Removed Enum KnownAggregatedReplicationState
+  - Removed Enum KnownArchitecture
+  - Removed Enum KnownArchitectureTypes
+  - Removed Enum KnownAvailabilitySetSkuTypes
+  - Removed Enum KnownCapacityReservationGroupInstanceViewTypes
+  - Removed Enum KnownCapacityReservationInstanceViewTypes
+  - Removed Enum KnownCloudServiceSlotType
+  - Removed Enum KnownCloudServiceUpgradeMode
+  - Removed Enum KnownConfidentialVMEncryptionType
+  - Removed Enum KnownConsistencyModeTypes
+  - Removed Enum KnownCopyCompletionErrorReason
+  - Removed Enum KnownDataAccessAuthMode
+  - Removed Enum KnownDiskCreateOption
+  - Removed Enum KnownDiskEncryptionSetIdentityType
+  - Removed Enum KnownDiskEncryptionSetType
+  - Removed Enum KnownDiskSecurityTypes
+  - Removed Enum KnownDiskState
+  - Removed Enum KnownDiskStorageAccountTypes
+  - Removed Enum KnownEncryptionType
+  - Removed Enum KnownExpandTypesForGetCapacityReservationGroups
+  - Removed Enum KnownExpandTypesForGetVMScaleSets
+  - Removed Enum KnownExtendedLocationType
+  - Removed Enum KnownGalleryExpandParams
+  - Removed Enum KnownGalleryExtendedLocationType
+  - Removed Enum KnownGalleryProvisioningState
+  - Removed Enum KnownGallerySharingPermissionTypes
+  - Removed Enum KnownHyperVGeneration
+  - Removed Enum KnownHyperVGenerationTypes
+  - Removed Enum KnownIPVersion
+  - Removed Enum KnownNetworkAccessPolicy
+  - Removed Enum KnownOperatingSystemType
+  - Removed Enum KnownOrchestrationMode
+  - Removed Enum KnownOrchestrationServiceNames
+  - Removed Enum KnownOrchestrationServiceState
+  - Removed Enum KnownOrchestrationServiceStateAction
+  - Removed Enum KnownPrivateEndpointConnectionProvisioningState
+  - Removed Enum KnownPrivateEndpointServiceConnectionStatus
+  - Removed Enum KnownProximityPlacementGroupType
+  - Removed Enum KnownPublicNetworkAccess
+  - Removed Enum KnownRepairAction
+  - Removed Enum KnownReplicationMode
+  - Removed Enum KnownReplicationState
+  - Removed Enum KnownReplicationStatusTypes
+  - Removed Enum KnownRestorePointCollectionExpandOptions
+  - Removed Enum KnownRestorePointExpandOptions
+  - Removed Enum KnownSelectPermissions
+  - Removed Enum KnownSharedGalleryHostCaching
+  - Removed Enum KnownSharedToValues
+  - Removed Enum KnownSharingProfileGroupTypes
+  - Removed Enum KnownSharingState
+  - Removed Enum KnownSharingUpdateOperationTypes
+  - Removed Enum KnownSnapshotStorageAccountTypes
+  - Removed Enum KnownStorageAccountType
+  - Removed Enum KnownVirtualMachineScaleSetScaleInRules
+  - Removed Enum KnownVmDiskTypes
+    
+    
+## 19.1.0 (2022-06-27)
+    
+**Features**
 
-### Bugs Fixed
+  - Added Interface AvailabilitySet
+  - Added Interface AvailabilitySetUpdate
+  - Added Interface CapacityReservation
+  - Added Interface CapacityReservationGroup
+  - Added Interface CapacityReservationGroupUpdate
+  - Added Interface CapacityReservationInstanceViewWithName
+  - Added Interface CapacityReservationUpdate
+  - Added Interface CommunityGallery
+  - Added Interface CommunityGalleryImage
+  - Added Interface CommunityGalleryImageVersion
+  - Added Interface DataDiskImageEncryption
+  - Added Interface DedicatedHost
+  - Added Interface DedicatedHostGroup
+  - Added Interface DedicatedHostGroupUpdate
+  - Added Interface DedicatedHostInstanceViewWithName
+  - Added Interface DedicatedHostUpdate
+  - Added Interface Disk
+  - Added Interface DiskAccess
+  - Added Interface DiskEncryptionSet
+  - Added Interface DiskEncryptionSetParameters
+  - Added Interface DiskRestorePoint
+  - Added Interface Gallery
+  - Added Interface GalleryApplication
+  - Added Interface GalleryApplicationUpdate
+  - Added Interface GalleryApplicationVersion
+  - Added Interface GalleryApplicationVersionPublishingProfile
+  - Added Interface GalleryApplicationVersionUpdate
+  - Added Interface GalleryDataDiskImage
+  - Added Interface GalleryImage
+  - Added Interface GalleryImageUpdate
+  - Added Interface GalleryImageVersion
+  - Added Interface GalleryImageVersionPublishingProfile
+  - Added Interface GalleryImageVersionUpdate
+  - Added Interface GalleryOSDiskImage
+  - Added Interface GalleryUpdate
+  - Added Interface Image_2
+  - Added Interface ImageDataDisk
+  - Added Interface ImageOSDisk
+  - Added Interface ImageReference
+  - Added Interface ImageUpdate
+  - Added Interface ManagedDiskParameters
+  - Added Interface NetworkInterfaceReference
+  - Added Interface OSDiskImageEncryption
+  - Added Interface PirSharedGalleryResource
+  - Added Interface ProximityPlacementGroup
+  - Added Interface ProximityPlacementGroupUpdate
+  - Added Interface RequestRateByIntervalInput
+  - Added Interface RestorePoint
+  - Added Interface RestorePointCollection
+  - Added Interface RestorePointCollectionUpdate
+  - Added Interface RollingUpgradeStatusInfo
+  - Added Interface RunCommandDocument
+  - Added Interface SharedGallery
+  - Added Interface SharedGalleryDataDiskImage
+  - Added Interface SharedGalleryImage
+  - Added Interface SharedGalleryImageVersion
+  - Added Interface SharedGalleryOSDiskImage
+  - Added Interface Snapshot
+  - Added Interface SshPublicKeyResource
+  - Added Interface SshPublicKeyUpdateResource
+  - Added Interface SubResourceWithColocationStatus
+  - Added Interface SystemData
+  - Added Interface ThrottledRequestsInput
+  - Added Interface VirtualMachine
+  - Added Interface VirtualMachineCaptureResult
+  - Added Interface VirtualMachineExtension
+  - Added Interface VirtualMachineExtensionImage
+  - Added Interface VirtualMachineExtensionUpdate
+  - Added Interface VirtualMachineImage
+  - Added Interface VirtualMachineImageResource
+  - Added Interface VirtualMachineRunCommand
+  - Added Interface VirtualMachineRunCommandUpdate
+  - Added Interface VirtualMachineScaleSet
+  - Added Interface VirtualMachineScaleSetExtension
+  - Added Interface VirtualMachineScaleSetExtensionUpdate
+  - Added Interface VirtualMachineScaleSetIPConfiguration
+  - Added Interface VirtualMachineScaleSetNetworkConfiguration
+  - Added Interface VirtualMachineScaleSetReimageParameters
+  - Added Interface VirtualMachineScaleSetUpdate
+  - Added Interface VirtualMachineScaleSetUpdateIPConfiguration
+  - Added Interface VirtualMachineScaleSetUpdateNetworkConfiguration
+  - Added Interface VirtualMachineScaleSetVM
+  - Added Interface VirtualMachineScaleSetVMExtension
+  - Added Interface VirtualMachineScaleSetVMExtensionUpdate
+  - Added Interface VirtualMachineScaleSetVMReimageParameters
+  - Added Interface VirtualMachineUpdate
+  - Added Type Alias CloudServiceSlotType
+  - Interface CloudService has a new optional parameter systemData
+  - Interface CloudServiceNetworkProfile has a new optional parameter slotType
+  - Added Enum KnownCloudServiceSlotType
+    
+    
+## 19.0.0 (2022-06-06)
+    
+**Features**
 
-### Other Changes
+  - Added operation CommunityGalleryImages.list
+  - Added operation CommunityGalleryImageVersions.list
+  - Added operation VirtualMachineImages.listByEdgeZone
+  - Added Interface CommunityGalleryImageList
+  - Added Interface CommunityGalleryImagesListNextOptionalParams
+  - Added Interface CommunityGalleryImagesListOptionalParams
+  - Added Interface CommunityGalleryImageVersionList
+  - Added Interface CommunityGalleryImageVersionsListNextOptionalParams
+  - Added Interface CommunityGalleryImageVersionsListOptionalParams
+  - Added Interface CopyCompletionError
+  - Added Interface SharedGalleryDiskImage
+  - Added Interface SharedGalleryImageVersionStorageProfile
+  - Added Interface UserArtifactSettings
+  - Added Interface VirtualMachineImagesListByEdgeZoneOptionalParams
+  - Added Interface VmImagesInEdgeZoneListResult
+  - Added Type Alias CommunityGalleryImagesListNextResponse
+  - Added Type Alias CommunityGalleryImagesListResponse
+  - Added Type Alias CommunityGalleryImageVersionsListNextResponse
+  - Added Type Alias CommunityGalleryImageVersionsListResponse
+  - Added Type Alias CopyCompletionErrorReason
+  - Added Type Alias GalleryProvisioningState
+  - Added Type Alias SharedGalleryDataDiskImage
+  - Added Type Alias SharedGalleryHostCaching
+  - Added Type Alias SharedGalleryOSDiskImage
+  - Added Type Alias VirtualMachineImagesListByEdgeZoneResponse
+  - Interface DiskEncryptionSetUpdate has a new optional parameter federatedClientId
+  - Interface EncryptionSetIdentity has a new optional parameter userAssignedIdentities
+  - Interface ImageDiskReference has a new optional parameter communityGalleryImageId
+  - Interface ImageDiskReference has a new optional parameter sharedGalleryImageId
+  - Type Alias CommunityGalleryImage has a new parameter architecture
+  - Type Alias CommunityGalleryImage has a new parameter privacyStatementUri
+  - Type Alias CommunityGalleryImage has a new parameter eula
+  - Type Alias CommunityGalleryImageVersion has a new parameter excludeFromLatest
+  - Type Alias CommunityGalleryImageVersion has a new parameter storageProfile
+  - Type Alias DiskEncryptionSet has a new parameter federatedClientId
+  - Type Alias DiskRestorePoint has a new parameter securityProfile
+  - Type Alias GalleryApplicationVersionPublishingProfile has a new parameter settings
+  - Type Alias SharedGalleryImage has a new parameter architecture
+  - Type Alias SharedGalleryImageVersion has a new parameter excludeFromLatest
+  - Type Alias SharedGalleryImageVersion has a new parameter storageProfile
+  - Type Alias Snapshot has a new parameter copyCompletionError
+  - Added Enum KnownCopyCompletionErrorReason
+  - Added Enum KnownGalleryProvisioningState
+  - Added Enum KnownSharedGalleryHostCaching
+  - Enum KnownDiskEncryptionSetIdentityType has a new value SystemAssignedUserAssigned
+  - Enum KnownDiskEncryptionSetIdentityType has a new value UserAssigned
+  - Enum KnownDiskStorageAccountTypes has a new value PremiumV2LRS
+  - Enum KnownGallerySharingPermissionTypes has a new value Community
 
+**Breaking Changes**
+
+  - Removed Enum KnownGalleryApplicationVersionPropertiesProvisioningState
+  - Removed Enum KnownGalleryImagePropertiesProvisioningState
+  - Removed Enum KnownGalleryImageVersionPropertiesProvisioningState
+  - Removed Enum KnownGalleryPropertiesProvisioningState
+  - Enum KnownSharingProfileGroupTypes no longer has value Community
+    
+    
 ## 18.0.0 (2022-05-23)
     
 **Features**
