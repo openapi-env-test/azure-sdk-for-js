@@ -25,7 +25,7 @@ export interface RecommendationMetadata {
     options?: RecommendationMetadataListOptionalParams
   ): PagedAsyncIterableIterator<MetadataEntity>;
   /**
-   * Gets the metadata entity.
+   * Gets the entity.
    * @param name Name of metadata entity.
    * @param options The options parameters.
    */
