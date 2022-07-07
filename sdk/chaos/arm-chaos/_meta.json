@@ -1,0 +1,8 @@
+{
+  "commit": "f5fe81a935f39db96a11faae5a76c43e18401a1b",
+  "readme": "specification/chaos/resource-manager/readme.md",
+  "autorest_command": "autorest --version=3.7.3 --typescript --modelerfour.lenient-model-deduplication --head-as-boolean=true --license-header=MICROSOFT_MIT_NO_VERSION --generate-test --typescript-sdks-folder=/mnt/vss/_work/1/s/azure-sdk-for-js ../azure-rest-api-specs/specification/chaos/resource-manager/readme.md --use=@autorest/typescript@6.0.0-alpha.20.20220608.1",
+  "repository_url": "https://github.com/openapi-env-test/azure-rest-api-specs.git",
+  "release_tool": "azure-tools-js-sdk-release-tools@2.3.5",
+  "use": "@autorest/typescript@6.0.0-alpha.20.20220608.1"
+}
