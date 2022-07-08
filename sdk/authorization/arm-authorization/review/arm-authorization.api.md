@@ -8,65 +8,17 @@ import * as coreAuth from '@azure/core-auth';
 import * as coreClient from '@azure/core-client';
 import { PagedAsyncIterableIterator } from '@azure/core-paging';
 
-// @public
-export type ApprovalMode = string;
-
-// @public
-export interface ApprovalSettings {
-    approvalMode?: ApprovalMode;
-    approvalStages?: ApprovalStage[];
-    isApprovalRequired?: boolean;
-    isApprovalRequiredForExtension?: boolean;
-    isRequestorJustificationRequired?: boolean;
-}
-
-// @public
-export interface ApprovalStage {
-    approvalStageTimeOutInDays?: number;
-    escalationApprovers?: UserSet[];
-    escalationTimeInMinutes?: number;
-    isApproverJustificationRequired?: boolean;
-    isEscalationEnabled?: boolean;
-    primaryApprovers?: UserSet[];
-}
-
-// @public
-export type AssignmentType = string;
-
 // @public (undocumented)
-export class AuthorizationManagementClient extends AuthorizationManagementClientContext {
-    constructor(credentials: coreAuth.TokenCredential, subscriptionId: string, options?: AuthorizationManagementClientOptionalParams);
-    // (undocumented)
-    eligibleChildResources: EligibleChildResources;
-    // (undocumented)
-    roleAssignments: RoleAssignments;
-    // (undocumented)
-    roleAssignmentScheduleInstances: RoleAssignmentScheduleInstances;
-    // (undocumented)
-    roleAssignmentScheduleRequests: RoleAssignmentScheduleRequests;
-    // (undocumented)
-    roleAssignmentSchedules: RoleAssignmentSchedules;
-    // (undocumented)
-    roleEligibilityScheduleInstances: RoleEligibilityScheduleInstances;
-    // (undocumented)
-    roleEligibilityScheduleRequests: RoleEligibilityScheduleRequests;
-    // (undocumented)
-    roleEligibilitySchedules: RoleEligibilitySchedules;
-    // (undocumented)
-    roleManagementPolicies: RoleManagementPolicies;
-    // (undocumented)
-    roleManagementPolicyAssignments: RoleManagementPolicyAssignments;
-}
-
-// @public (undocumented)
-export class AuthorizationManagementClientContext extends coreClient.ServiceClient {
+export class AuthorizationManagementClient extends coreClient.ServiceClient {
     // (undocumented)
     $host: string;
-    constructor(credentials: coreAuth.TokenCredential, subscriptionId: string, options?: AuthorizationManagementClientOptionalParams);
+    constructor(credentials: coreAuth.TokenCredential, options?: AuthorizationManagementClientOptionalParams);
     // (undocumented)
     apiVersion: string;
     // (undocumented)
-    subscriptionId: string;
+    roleAssignmentScheduleRequests: RoleAssignmentScheduleRequests;
+    // (undocumented)
+    roleEligibilityScheduleRequests: RoleEligibilityScheduleRequests;
 }
 
 // @public
@@ -88,63 +40,6 @@ export interface CloudErrorBody {
 }
 
 // @public
-export interface EligibleChildResource {
-    readonly id?: string;
-    readonly name?: string;
-    readonly type?: string;
-}
-
-// @public
-export interface EligibleChildResources {
-    list(scope: string, options?: EligibleChildResourcesGetOptionalParams): PagedAsyncIterableIterator<EligibleChildResource>;
-}
-
-// @public
-export interface EligibleChildResourcesGetNextOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-}
-
-// @public
-export type EligibleChildResourcesGetNextResponse = EligibleChildResourcesListResult;
-
-// @public
-export interface EligibleChildResourcesGetOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-}
-
-// @public
-export type EligibleChildResourcesGetResponse = EligibleChildResourcesListResult;
-
-// @public
-export interface EligibleChildResourcesListResult {
-    nextLink?: string;
-    value?: EligibleChildResource[];
-}
-
-// @public
-export type EnablementRules = string;
-
-// @public
-export interface ErrorAdditionalInfo {
-    readonly info?: Record<string, unknown>;
-    readonly type?: string;
-}
-
-// @public
-export interface ErrorDetail {
-    readonly additionalInfo?: ErrorAdditionalInfo[];
-    readonly code?: string;
-    readonly details?: ErrorDetail[];
-    readonly message?: string;
-    readonly target?: string;
-}
-
-// @public
-export interface ErrorResponse {
-    error?: ErrorDetail;
-}
-
-// @public (undocumented)
 export interface ExpandedProperties {
     principal?: ExpandedPropertiesPrincipal;
     roleDefinition?: ExpandedPropertiesRoleDefinition;
@@ -174,95 +69,17 @@ export interface ExpandedPropertiesScope {
 }
 
 // @public
-export enum KnownApprovalMode {
-    // (undocumented)
-    NoApproval = "NoApproval",
-    // (undocumented)
-    Parallel = "Parallel",
-    // (undocumented)
-    Serial = "Serial",
-    // (undocumented)
-    SingleStage = "SingleStage"
-}
-
-// @public
-export enum KnownAssignmentType {
-    // (undocumented)
-    Activated = "Activated",
-    // (undocumented)
-    Assigned = "Assigned"
-}
-
-// @public
-export enum KnownEnablementRules {
-    // (undocumented)
-    Justification = "Justification",
-    // (undocumented)
-    MultiFactorAuthentication = "MultiFactorAuthentication",
-    // (undocumented)
-    Ticketing = "Ticketing"
-}
-
-// @public
-export enum KnownMemberType {
-    // (undocumented)
-    Direct = "Direct",
-    // (undocumented)
-    Group = "Group",
-    // (undocumented)
-    Inherited = "Inherited"
-}
-
-// @public
-export enum KnownNotificationDeliveryMechanism {
-    // (undocumented)
-    Email = "Email"
-}
-
-// @public
-export enum KnownNotificationLevel {
-    // (undocumented)
-    All = "All",
-    // (undocumented)
-    Critical = "Critical",
-    // (undocumented)
-    None = "None"
-}
-
-// @public
 export enum KnownPrincipalType {
     // (undocumented)
-    Application = "Application",
-    // (undocumented)
     Device = "Device",
-    // (undocumented)
-    DirectoryObjectOrGroup = "DirectoryObjectOrGroup",
-    // (undocumented)
-    DirectoryRoleTemplate = "DirectoryRoleTemplate",
-    // (undocumented)
-    Everyone = "Everyone",
     // (undocumented)
     ForeignGroup = "ForeignGroup",
     // (undocumented)
     Group = "Group",
     // (undocumented)
-    MSI = "MSI",
-    // (undocumented)
     ServicePrincipal = "ServicePrincipal",
     // (undocumented)
-    Unknown = "Unknown",
-    // (undocumented)
     User = "User"
-}
-
-// @public
-export enum KnownRecipientType {
-    // (undocumented)
-    Admin = "Admin",
-    // (undocumented)
-    Approver = "Approver",
-    // (undocumented)
-    Requestor = "Requestor"
 }
 
 // @public
@@ -285,20 +102,6 @@ export enum KnownRequestType {
     SelfExtend = "SelfExtend",
     // (undocumented)
     SelfRenew = "SelfRenew"
-}
-
-// @public
-export enum KnownRoleManagementPolicyRuleType {
-    // (undocumented)
-    RoleManagementPolicyApprovalRule = "RoleManagementPolicyApprovalRule",
-    // (undocumented)
-    RoleManagementPolicyAuthenticationContextRule = "RoleManagementPolicyAuthenticationContextRule",
-    // (undocumented)
-    RoleManagementPolicyEnablementRule = "RoleManagementPolicyEnablementRule",
-    // (undocumented)
-    RoleManagementPolicyExpirationRule = "RoleManagementPolicyExpirationRule",
-    // (undocumented)
-    RoleManagementPolicyNotificationRule = "RoleManagementPolicyNotificationRule"
 }
 
 // @public
@@ -360,243 +163,10 @@ export enum KnownType {
 }
 
 // @public
-export enum KnownUserType {
-    // (undocumented)
-    Group = "Group",
-    // (undocumented)
-    User = "User"
-}
-
-// @public
-export type MemberType = string;
-
-// @public
-export type NotificationDeliveryMechanism = string;
-
-// @public
-export type NotificationLevel = string;
-
-// @public (undocumented)
-export interface PolicyAssignmentProperties {
-    policy?: PolicyAssignmentPropertiesPolicy;
-    roleDefinition?: PolicyAssignmentPropertiesRoleDefinition;
-    scope?: PolicyAssignmentPropertiesScope;
-}
-
-// @public
-export interface PolicyAssignmentPropertiesPolicy {
-    id?: string;
-    readonly lastModifiedBy?: Principal;
-    lastModifiedDateTime?: Date;
-}
-
-// @public
-export interface PolicyAssignmentPropertiesRoleDefinition {
-    displayName?: string;
-    id?: string;
-    type?: string;
-}
-
-// @public
-export interface PolicyAssignmentPropertiesScope {
-    displayName?: string;
-    id?: string;
-    type?: string;
-}
-
-// @public (undocumented)
-export interface PolicyProperties {
-    readonly scope?: PolicyPropertiesScope;
-}
-
-// @public
-export interface PolicyPropertiesScope {
-    displayName?: string;
-    id?: string;
-    type?: string;
-}
-
-// @public
-export interface Principal {
-    displayName?: string;
-    email?: string;
-    id?: string;
-    type?: string;
-}
-
-// @public
 export type PrincipalType = string;
 
 // @public
-export type RecipientType = string;
-
-// @public
 export type RequestType = string;
-
-// @public
-export interface RoleAssignment {
-    condition?: string;
-    conditionVersion?: string;
-    readonly createdBy?: string;
-    readonly createdOn?: Date;
-    delegatedManagedIdentityResourceId?: string;
-    description?: string;
-    readonly id?: string;
-    readonly name?: string;
-    principalId?: string;
-    principalType?: PrincipalType;
-    roleDefinitionId?: string;
-    readonly scope?: string;
-    readonly type?: string;
-    readonly updatedBy?: string;
-    readonly updatedOn?: Date;
-}
-
-// @public
-export interface RoleAssignmentCreateParameters {
-    condition?: string;
-    conditionVersion?: string;
-    readonly createdBy?: string;
-    readonly createdOn?: Date;
-    delegatedManagedIdentityResourceId?: string;
-    description?: string;
-    principalId: string;
-    principalType?: PrincipalType;
-    roleDefinitionId: string;
-    readonly scope?: string;
-    readonly updatedBy?: string;
-    readonly updatedOn?: Date;
-}
-
-// @public
-export interface RoleAssignmentFilter {
-    principalId?: string;
-}
-
-// @public
-export interface RoleAssignmentListResult {
-    readonly nextLink?: string;
-    value?: RoleAssignment[];
-}
-
-// @public
-export interface RoleAssignments {
-    create(scope: string, roleAssignmentName: string, parameters: RoleAssignmentCreateParameters, options?: RoleAssignmentsCreateOptionalParams): Promise<RoleAssignmentsCreateResponse>;
-    createById(roleAssignmentId: string, parameters: RoleAssignmentCreateParameters, options?: RoleAssignmentsCreateByIdOptionalParams): Promise<RoleAssignmentsCreateByIdResponse>;
-    delete(scope: string, roleAssignmentName: string, options?: RoleAssignmentsDeleteOptionalParams): Promise<RoleAssignmentsDeleteResponse>;
-    deleteById(roleAssignmentId: string, options?: RoleAssignmentsDeleteByIdOptionalParams): Promise<RoleAssignmentsDeleteByIdResponse>;
-    get(scope: string, roleAssignmentName: string, options?: RoleAssignmentsGetOptionalParams): Promise<RoleAssignmentsGetResponse>;
-    getById(roleAssignmentId: string, options?: RoleAssignmentsGetByIdOptionalParams): Promise<RoleAssignmentsGetByIdResponse>;
-    listForResource(resourceGroupName: string, resourceProviderNamespace: string, resourceType: string, resourceName: string, options?: RoleAssignmentsListForResourceOptionalParams): PagedAsyncIterableIterator<RoleAssignment>;
-    listForResourceGroup(resourceGroupName: string, options?: RoleAssignmentsListForResourceGroupOptionalParams): PagedAsyncIterableIterator<RoleAssignment>;
-    listForScope(scope: string, options?: RoleAssignmentsListForScopeOptionalParams): PagedAsyncIterableIterator<RoleAssignment>;
-    listForSubscription(options?: RoleAssignmentsListForSubscriptionOptionalParams): PagedAsyncIterableIterator<RoleAssignment>;
-    validate(scope: string, roleAssignmentName: string, parameters: RoleAssignmentCreateParameters, options?: RoleAssignmentsValidateOptionalParams): Promise<RoleAssignmentsValidateResponse>;
-    validateById(roleAssignmentId: string, parameters: RoleAssignmentCreateParameters, options?: RoleAssignmentsValidateByIdOptionalParams): Promise<RoleAssignmentsValidateByIdResponse>;
-}
-
-// @public
-export interface RoleAssignmentSchedule {
-    assignmentType?: AssignmentType;
-    condition?: string;
-    conditionVersion?: string;
-    createdOn?: Date;
-    endDateTime?: Date;
-    expandedProperties?: ExpandedProperties;
-    readonly id?: string;
-    linkedRoleEligibilityScheduleId?: string;
-    memberType?: MemberType;
-    readonly name?: string;
-    principalId?: string;
-    principalType?: PrincipalType;
-    roleAssignmentScheduleRequestId?: string;
-    roleDefinitionId?: string;
-    scope?: string;
-    startDateTime?: Date;
-    status?: Status;
-    readonly type?: string;
-    updatedOn?: Date;
-}
-
-// @public
-export interface RoleAssignmentScheduleFilter {
-    principalId?: string;
-    roleDefinitionId?: string;
-    status?: string;
-}
-
-// @public
-export interface RoleAssignmentScheduleInstance {
-    assignmentType?: AssignmentType;
-    condition?: string;
-    conditionVersion?: string;
-    createdOn?: Date;
-    endDateTime?: Date;
-    expandedProperties?: ExpandedProperties;
-    readonly id?: string;
-    linkedRoleEligibilityScheduleId?: string;
-    linkedRoleEligibilityScheduleInstanceId?: string;
-    memberType?: MemberType;
-    readonly name?: string;
-    originRoleAssignmentId?: string;
-    principalId?: string;
-    principalType?: PrincipalType;
-    roleAssignmentScheduleId?: string;
-    roleDefinitionId?: string;
-    scope?: string;
-    startDateTime?: Date;
-    status?: Status;
-    readonly type?: string;
-}
-
-// @public
-export interface RoleAssignmentScheduleInstanceFilter {
-    principalId?: string;
-    roleAssignmentScheduleId?: string;
-    roleDefinitionId?: string;
-    status?: string;
-}
-
-// @public
-export interface RoleAssignmentScheduleInstanceListResult {
-    nextLink?: string;
-    value?: RoleAssignmentScheduleInstance[];
-}
-
-// @public
-export interface RoleAssignmentScheduleInstances {
-    get(scope: string, roleAssignmentScheduleInstanceName: string, options?: RoleAssignmentScheduleInstancesGetOptionalParams): Promise<RoleAssignmentScheduleInstancesGetResponse>;
-    listForScope(scope: string, options?: RoleAssignmentScheduleInstancesListForScopeOptionalParams): PagedAsyncIterableIterator<RoleAssignmentScheduleInstance>;
-}
-
-// @public
-export interface RoleAssignmentScheduleInstancesGetOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleAssignmentScheduleInstancesGetResponse = RoleAssignmentScheduleInstance;
-
-// @public
-export interface RoleAssignmentScheduleInstancesListForScopeNextOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-}
-
-// @public
-export type RoleAssignmentScheduleInstancesListForScopeNextResponse = RoleAssignmentScheduleInstanceListResult;
-
-// @public
-export interface RoleAssignmentScheduleInstancesListForScopeOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-}
-
-// @public
-export type RoleAssignmentScheduleInstancesListForScopeResponse = RoleAssignmentScheduleInstanceListResult;
-
-// @public
-export interface RoleAssignmentScheduleListResult {
-    nextLink?: string;
-    value?: RoleAssignmentSchedule[];
-}
 
 // @public
 export interface RoleAssignmentScheduleRequest {
@@ -662,6 +232,7 @@ export interface RoleAssignmentScheduleRequests {
     create(scope: string, roleAssignmentScheduleRequestName: string, parameters: RoleAssignmentScheduleRequest, options?: RoleAssignmentScheduleRequestsCreateOptionalParams): Promise<RoleAssignmentScheduleRequestsCreateResponse>;
     get(scope: string, roleAssignmentScheduleRequestName: string, options?: RoleAssignmentScheduleRequestsGetOptionalParams): Promise<RoleAssignmentScheduleRequestsGetResponse>;
     listForScope(scope: string, options?: RoleAssignmentScheduleRequestsListForScopeOptionalParams): PagedAsyncIterableIterator<RoleAssignmentScheduleRequest>;
+    validate(scope: string, roleAssignmentScheduleRequestName: string, parameters: RoleAssignmentScheduleRequest, options?: RoleAssignmentScheduleRequestsValidateOptionalParams): Promise<RoleAssignmentScheduleRequestsValidateResponse>;
 }
 
 // @public
@@ -699,262 +270,11 @@ export interface RoleAssignmentScheduleRequestsListForScopeOptionalParams extend
 export type RoleAssignmentScheduleRequestsListForScopeResponse = RoleAssignmentScheduleRequestListResult;
 
 // @public
-export interface RoleAssignmentSchedules {
-    get(scope: string, roleAssignmentScheduleName: string, options?: RoleAssignmentSchedulesGetOptionalParams): Promise<RoleAssignmentSchedulesGetResponse>;
-    listForScope(scope: string, options?: RoleAssignmentSchedulesListForScopeOptionalParams): PagedAsyncIterableIterator<RoleAssignmentSchedule>;
+export interface RoleAssignmentScheduleRequestsValidateOptionalParams extends coreClient.OperationOptions {
 }
 
 // @public
-export interface RoleAssignmentSchedulesGetOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleAssignmentSchedulesGetResponse = RoleAssignmentSchedule;
-
-// @public
-export interface RoleAssignmentSchedulesListForScopeNextOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-}
-
-// @public
-export type RoleAssignmentSchedulesListForScopeNextResponse = RoleAssignmentScheduleListResult;
-
-// @public
-export interface RoleAssignmentSchedulesListForScopeOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-}
-
-// @public
-export type RoleAssignmentSchedulesListForScopeResponse = RoleAssignmentScheduleListResult;
-
-// @public
-export interface RoleAssignmentsCreateByIdOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleAssignmentsCreateByIdResponse = RoleAssignment;
-
-// @public
-export interface RoleAssignmentsCreateOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleAssignmentsCreateResponse = RoleAssignment;
-
-// @public
-export interface RoleAssignmentsDeleteByIdOptionalParams extends coreClient.OperationOptions {
-    tenantId?: string;
-}
-
-// @public
-export type RoleAssignmentsDeleteByIdResponse = RoleAssignment;
-
-// @public
-export interface RoleAssignmentsDeleteOptionalParams extends coreClient.OperationOptions {
-    tenantId?: string;
-}
-
-// @public
-export type RoleAssignmentsDeleteResponse = RoleAssignment;
-
-// @public
-export interface RoleAssignmentsGetByIdOptionalParams extends coreClient.OperationOptions {
-    tenantId?: string;
-}
-
-// @public
-export type RoleAssignmentsGetByIdResponse = RoleAssignment;
-
-// @public
-export interface RoleAssignmentsGetOptionalParams extends coreClient.OperationOptions {
-    tenantId?: string;
-}
-
-// @public
-export type RoleAssignmentsGetResponse = RoleAssignment;
-
-// @public
-export interface RoleAssignmentsListForResourceGroupNextOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-    tenantId?: string;
-}
-
-// @public
-export type RoleAssignmentsListForResourceGroupNextResponse = RoleAssignmentListResult;
-
-// @public
-export interface RoleAssignmentsListForResourceGroupOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-    tenantId?: string;
-}
-
-// @public
-export type RoleAssignmentsListForResourceGroupResponse = RoleAssignmentListResult;
-
-// @public
-export interface RoleAssignmentsListForResourceNextOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-    tenantId?: string;
-}
-
-// @public
-export type RoleAssignmentsListForResourceNextResponse = RoleAssignmentListResult;
-
-// @public
-export interface RoleAssignmentsListForResourceOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-    tenantId?: string;
-}
-
-// @public
-export type RoleAssignmentsListForResourceResponse = RoleAssignmentListResult;
-
-// @public
-export interface RoleAssignmentsListForScopeNextOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-    tenantId?: string;
-}
-
-// @public
-export type RoleAssignmentsListForScopeNextResponse = RoleAssignmentListResult;
-
-// @public
-export interface RoleAssignmentsListForScopeOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-    tenantId?: string;
-}
-
-// @public
-export type RoleAssignmentsListForScopeResponse = RoleAssignmentListResult;
-
-// @public
-export interface RoleAssignmentsListForSubscriptionNextOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-    tenantId?: string;
-}
-
-// @public
-export type RoleAssignmentsListForSubscriptionNextResponse = RoleAssignmentListResult;
-
-// @public
-export interface RoleAssignmentsListForSubscriptionOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-    tenantId?: string;
-}
-
-// @public
-export type RoleAssignmentsListForSubscriptionResponse = RoleAssignmentListResult;
-
-// @public
-export interface RoleAssignmentsValidateByIdOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleAssignmentsValidateByIdResponse = ValidationResponse;
-
-// @public
-export interface RoleAssignmentsValidateOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleAssignmentsValidateResponse = ValidationResponse;
-
-// @public
-export interface RoleEligibilitySchedule {
-    condition?: string;
-    conditionVersion?: string;
-    createdOn?: Date;
-    endDateTime?: Date;
-    expandedProperties?: ExpandedProperties;
-    readonly id?: string;
-    memberType?: MemberType;
-    readonly name?: string;
-    principalId?: string;
-    principalType?: PrincipalType;
-    roleDefinitionId?: string;
-    roleEligibilityScheduleRequestId?: string;
-    scope?: string;
-    startDateTime?: Date;
-    status?: Status;
-    readonly type?: string;
-    updatedOn?: Date;
-}
-
-// @public
-export interface RoleEligibilityScheduleFilter {
-    principalId?: string;
-    roleDefinitionId?: string;
-    status?: string;
-}
-
-// @public
-export interface RoleEligibilityScheduleInstance {
-    condition?: string;
-    conditionVersion?: string;
-    createdOn?: Date;
-    endDateTime?: Date;
-    expandedProperties?: ExpandedProperties;
-    readonly id?: string;
-    memberType?: MemberType;
-    readonly name?: string;
-    principalId?: string;
-    principalType?: PrincipalType;
-    roleDefinitionId?: string;
-    roleEligibilityScheduleId?: string;
-    scope?: string;
-    startDateTime?: Date;
-    status?: Status;
-    readonly type?: string;
-}
-
-// @public
-export interface RoleEligibilityScheduleInstanceFilter {
-    principalId?: string;
-    roleDefinitionId?: string;
-    roleEligibilityScheduleId?: string;
-    status?: string;
-}
-
-// @public
-export interface RoleEligibilityScheduleInstanceListResult {
-    nextLink?: string;
-    value?: RoleEligibilityScheduleInstance[];
-}
-
-// @public
-export interface RoleEligibilityScheduleInstances {
-    get(scope: string, roleEligibilityScheduleInstanceName: string, options?: RoleEligibilityScheduleInstancesGetOptionalParams): Promise<RoleEligibilityScheduleInstancesGetResponse>;
-    listForScope(scope: string, options?: RoleEligibilityScheduleInstancesListForScopeOptionalParams): PagedAsyncIterableIterator<RoleEligibilityScheduleInstance>;
-}
-
-// @public
-export interface RoleEligibilityScheduleInstancesGetOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleEligibilityScheduleInstancesGetResponse = RoleEligibilityScheduleInstance;
-
-// @public
-export interface RoleEligibilityScheduleInstancesListForScopeNextOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-}
-
-// @public
-export type RoleEligibilityScheduleInstancesListForScopeNextResponse = RoleEligibilityScheduleInstanceListResult;
-
-// @public
-export interface RoleEligibilityScheduleInstancesListForScopeOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-}
-
-// @public
-export type RoleEligibilityScheduleInstancesListForScopeResponse = RoleEligibilityScheduleInstanceListResult;
-
-// @public
-export interface RoleEligibilityScheduleListResult {
-    nextLink?: string;
-    value?: RoleEligibilitySchedule[];
-}
+export type RoleAssignmentScheduleRequestsValidateResponse = RoleAssignmentScheduleRequest;
 
 // @public
 export interface RoleEligibilityScheduleRequest {
@@ -1019,6 +339,7 @@ export interface RoleEligibilityScheduleRequests {
     create(scope: string, roleEligibilityScheduleRequestName: string, parameters: RoleEligibilityScheduleRequest, options?: RoleEligibilityScheduleRequestsCreateOptionalParams): Promise<RoleEligibilityScheduleRequestsCreateResponse>;
     get(scope: string, roleEligibilityScheduleRequestName: string, options?: RoleEligibilityScheduleRequestsGetOptionalParams): Promise<RoleEligibilityScheduleRequestsGetResponse>;
     listForScope(scope: string, options?: RoleEligibilityScheduleRequestsListForScopeOptionalParams): PagedAsyncIterableIterator<RoleEligibilityScheduleRequest>;
+    validate(scope: string, roleEligibilityScheduleRequestName: string, parameters: RoleEligibilityScheduleRequest, options?: RoleEligibilityScheduleRequestsValidateOptionalParams): Promise<RoleEligibilityScheduleRequestsValidateResponse>;
 }
 
 // @public
@@ -1056,241 +377,17 @@ export interface RoleEligibilityScheduleRequestsListForScopeOptionalParams exten
 export type RoleEligibilityScheduleRequestsListForScopeResponse = RoleEligibilityScheduleRequestListResult;
 
 // @public
-export interface RoleEligibilitySchedules {
-    get(scope: string, roleEligibilityScheduleName: string, options?: RoleEligibilitySchedulesGetOptionalParams): Promise<RoleEligibilitySchedulesGetResponse>;
-    listForScope(scope: string, options?: RoleEligibilitySchedulesListForScopeOptionalParams): PagedAsyncIterableIterator<RoleEligibilitySchedule>;
+export interface RoleEligibilityScheduleRequestsValidateOptionalParams extends coreClient.OperationOptions {
 }
 
 // @public
-export interface RoleEligibilitySchedulesGetOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleEligibilitySchedulesGetResponse = RoleEligibilitySchedule;
-
-// @public
-export interface RoleEligibilitySchedulesListForScopeNextOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-}
-
-// @public
-export type RoleEligibilitySchedulesListForScopeNextResponse = RoleEligibilityScheduleListResult;
-
-// @public
-export interface RoleEligibilitySchedulesListForScopeOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-}
-
-// @public
-export type RoleEligibilitySchedulesListForScopeResponse = RoleEligibilityScheduleListResult;
-
-// @public
-export interface RoleManagementPolicies {
-    delete(scope: string, roleManagementPolicyName: string, options?: RoleManagementPoliciesDeleteOptionalParams): Promise<void>;
-    get(scope: string, roleManagementPolicyName: string, options?: RoleManagementPoliciesGetOptionalParams): Promise<RoleManagementPoliciesGetResponse>;
-    listForScope(scope: string, options?: RoleManagementPoliciesListForScopeOptionalParams): PagedAsyncIterableIterator<RoleManagementPolicy>;
-    update(scope: string, roleManagementPolicyName: string, parameters: RoleManagementPolicy, options?: RoleManagementPoliciesUpdateOptionalParams): Promise<RoleManagementPoliciesUpdateResponse>;
-}
-
-// @public
-export interface RoleManagementPoliciesDeleteOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export interface RoleManagementPoliciesGetOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleManagementPoliciesGetResponse = RoleManagementPolicy;
-
-// @public
-export interface RoleManagementPoliciesListForScopeNextOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleManagementPoliciesListForScopeNextResponse = RoleManagementPolicyListResult;
-
-// @public
-export interface RoleManagementPoliciesListForScopeOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleManagementPoliciesListForScopeResponse = RoleManagementPolicyListResult;
-
-// @public
-export interface RoleManagementPoliciesUpdateOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleManagementPoliciesUpdateResponse = RoleManagementPolicy;
-
-// @public
-export interface RoleManagementPolicy {
-    description?: string;
-    displayName?: string;
-    readonly effectiveRules?: RoleManagementPolicyRuleUnion[];
-    readonly id?: string;
-    isOrganizationDefault?: boolean;
-    readonly lastModifiedBy?: Principal;
-    readonly lastModifiedDateTime?: Date;
-    readonly name?: string;
-    readonly policyProperties?: PolicyProperties;
-    rules?: RoleManagementPolicyRuleUnion[];
-    scope?: string;
-    readonly type?: string;
-}
-
-// @public
-export type RoleManagementPolicyApprovalRule = RoleManagementPolicyRule & {
-    ruleType: "RoleManagementPolicyApprovalRule";
-    setting?: ApprovalSettings;
-};
-
-// @public
-export interface RoleManagementPolicyAssignment {
-    readonly id?: string;
-    readonly name?: string;
-    readonly policyAssignmentProperties?: PolicyAssignmentProperties;
-    policyId?: string;
-    roleDefinitionId?: string;
-    scope?: string;
-    readonly type?: string;
-}
-
-// @public
-export interface RoleManagementPolicyAssignmentListResult {
-    nextLink?: string;
-    value?: RoleManagementPolicyAssignment[];
-}
-
-// @public
-export interface RoleManagementPolicyAssignments {
-    create(scope: string, roleManagementPolicyAssignmentName: string, parameters: RoleManagementPolicyAssignment, options?: RoleManagementPolicyAssignmentsCreateOptionalParams): Promise<RoleManagementPolicyAssignmentsCreateResponse>;
-    delete(scope: string, roleManagementPolicyAssignmentName: string, options?: RoleManagementPolicyAssignmentsDeleteOptionalParams): Promise<void>;
-    get(scope: string, roleManagementPolicyAssignmentName: string, options?: RoleManagementPolicyAssignmentsGetOptionalParams): Promise<RoleManagementPolicyAssignmentsGetResponse>;
-    listForScope(scope: string, options?: RoleManagementPolicyAssignmentsListForScopeOptionalParams): PagedAsyncIterableIterator<RoleManagementPolicyAssignment>;
-}
-
-// @public
-export interface RoleManagementPolicyAssignmentsCreateOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleManagementPolicyAssignmentsCreateResponse = RoleManagementPolicyAssignment;
-
-// @public
-export interface RoleManagementPolicyAssignmentsDeleteOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export interface RoleManagementPolicyAssignmentsGetOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleManagementPolicyAssignmentsGetResponse = RoleManagementPolicyAssignment;
-
-// @public
-export interface RoleManagementPolicyAssignmentsListForScopeNextOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleManagementPolicyAssignmentsListForScopeNextResponse = RoleManagementPolicyAssignmentListResult;
-
-// @public
-export interface RoleManagementPolicyAssignmentsListForScopeOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RoleManagementPolicyAssignmentsListForScopeResponse = RoleManagementPolicyAssignmentListResult;
-
-// @public
-export type RoleManagementPolicyAuthenticationContextRule = RoleManagementPolicyRule & {
-    ruleType: "RoleManagementPolicyAuthenticationContextRule";
-    isEnabled?: boolean;
-    claimValue?: string;
-};
-
-// @public
-export type RoleManagementPolicyEnablementRule = RoleManagementPolicyRule & {
-    ruleType: "RoleManagementPolicyEnablementRule";
-    enabledRules?: EnablementRules[];
-};
-
-// @public
-export type RoleManagementPolicyExpirationRule = RoleManagementPolicyRule & {
-    ruleType: "RoleManagementPolicyExpirationRule";
-    isExpirationRequired?: boolean;
-    maximumDuration?: string;
-};
-
-// @public
-export interface RoleManagementPolicyListResult {
-    nextLink?: string;
-    value?: RoleManagementPolicy[];
-}
-
-// @public
-export type RoleManagementPolicyNotificationRule = RoleManagementPolicyRule & {
-    ruleType: "RoleManagementPolicyNotificationRule";
-    notificationType?: NotificationDeliveryMechanism;
-    notificationLevel?: NotificationLevel;
-    recipientType?: RecipientType;
-    notificationRecipients?: string[];
-    isDefaultRecipientsEnabled?: boolean;
-};
-
-// @public
-export interface RoleManagementPolicyRule {
-    id?: string;
-    ruleType: "RoleManagementPolicyApprovalRule" | "RoleManagementPolicyAuthenticationContextRule" | "RoleManagementPolicyEnablementRule" | "RoleManagementPolicyExpirationRule" | "RoleManagementPolicyNotificationRule";
-    target?: RoleManagementPolicyRuleTarget;
-}
-
-// @public
-export interface RoleManagementPolicyRuleTarget {
-    caller?: string;
-    enforcedSettings?: string[];
-    inheritableSettings?: string[];
-    level?: string;
-    operations?: string[];
-    targetObjects?: string[];
-}
-
-// @public
-export type RoleManagementPolicyRuleType = string;
-
-// @public (undocumented)
-export type RoleManagementPolicyRuleUnion = RoleManagementPolicyRule | RoleManagementPolicyApprovalRule | RoleManagementPolicyAuthenticationContextRule | RoleManagementPolicyEnablementRule | RoleManagementPolicyExpirationRule | RoleManagementPolicyNotificationRule;
+export type RoleEligibilityScheduleRequestsValidateResponse = RoleEligibilityScheduleRequest;
 
 // @public
 export type Status = string;
 
 // @public
 export type Type = string;
-
-// @public
-export interface UserSet {
-    description?: string;
-    id?: string;
-    isBackup?: boolean;
-    userType?: UserType;
-}
-
-// @public
-export type UserType = string;
-
-// @public
-export interface ValidationResponse {
-    errorInfo?: ValidationResponseErrorInfo;
-    readonly isValid?: boolean;
-}
-
-// @public
-export interface ValidationResponseErrorInfo {
-    readonly code?: string;
-    readonly message?: string;
-}
-
 
 // (No @packageDocumentation comment for this package)
 

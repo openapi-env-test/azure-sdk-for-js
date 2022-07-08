@@ -8,189 +8,6 @@
 
 import * as coreClient from "@azure/core-client";
 
-export type RoleManagementPolicyRuleUnion =
-  | RoleManagementPolicyRule
-  | RoleManagementPolicyApprovalRule
-  | RoleManagementPolicyAuthenticationContextRule
-  | RoleManagementPolicyEnablementRule
-  | RoleManagementPolicyExpirationRule
-  | RoleManagementPolicyNotificationRule;
-
-/** Role Assignment schedule */
-export interface RoleAssignmentSchedule {
-  /**
-   * The role assignment schedule Id.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly id?: string;
-  /**
-   * The role assignment schedule name.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly name?: string;
-  /**
-   * The role assignment schedule type.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly type?: string;
-  /** The role assignment schedule scope. */
-  scope?: string;
-  /** The role definition ID. */
-  roleDefinitionId?: string;
-  /** The principal ID. */
-  principalId?: string;
-  /** The principal type of the assigned principal ID. */
-  principalType?: PrincipalType;
-  /** The id of roleAssignmentScheduleRequest used to create this roleAssignmentSchedule */
-  roleAssignmentScheduleRequestId?: string;
-  /** The id of roleEligibilitySchedule used to activated this roleAssignmentSchedule */
-  linkedRoleEligibilityScheduleId?: string;
-  /** Assignment type of the role assignment schedule */
-  assignmentType?: AssignmentType;
-  /** Membership type of the role assignment schedule */
-  memberType?: MemberType;
-  /** The status of the role assignment schedule. */
-  status?: Status;
-  /** Start DateTime when role assignment schedule */
-  startDateTime?: Date;
-  /** End DateTime when role assignment schedule */
-  endDateTime?: Date;
-  /** The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container' */
-  condition?: string;
-  /** Version of the condition. Currently accepted value is '2.0' */
-  conditionVersion?: string;
-  /** DateTime when role assignment schedule was created */
-  createdOn?: Date;
-  /** DateTime when role assignment schedule was modified */
-  updatedOn?: Date;
-  /** Additional properties of principal, scope and role definition */
-  expandedProperties?: ExpandedProperties;
-}
-
-export interface ExpandedProperties {
-  /** Details of the resource scope */
-  scope?: ExpandedPropertiesScope;
-  /** Details of role definition */
-  roleDefinition?: ExpandedPropertiesRoleDefinition;
-  /** Details of the principal */
-  principal?: ExpandedPropertiesPrincipal;
-}
-
-/** Details of the resource scope */
-export interface ExpandedPropertiesScope {
-  /** Scope id of the resource */
-  id?: string;
-  /** Display name of the resource */
-  displayName?: string;
-  /** Type of the resource */
-  type?: string;
-}
-
-/** Details of role definition */
-export interface ExpandedPropertiesRoleDefinition {
-  /** Id of the role definition */
-  id?: string;
-  /** Display name of the role definition */
-  displayName?: string;
-  /** Type of the role definition */
-  type?: string;
-}
-
-/** Details of the principal */
-export interface ExpandedPropertiesPrincipal {
-  /** Id of the principal */
-  id?: string;
-  /** Display name of the principal */
-  displayName?: string;
-  /** Email id of the principal */
-  email?: string;
-  /** Type of the principal */
-  type?: string;
-}
-
-/** An error response from the service. */
-export interface CloudError {
-  /** An error response from the service. */
-  error?: CloudErrorBody;
-}
-
-/** An error response from the service. */
-export interface CloudErrorBody {
-  /** An identifier for the error. Codes are invariant and are intended to be consumed programmatically. */
-  code?: string;
-  /** A message describing the error, intended to be suitable for display in a user interface. */
-  message?: string;
-}
-
-/** Role assignment schedule list operation result. */
-export interface RoleAssignmentScheduleListResult {
-  /** Role assignment schedule list. */
-  value?: RoleAssignmentSchedule[];
-  /** The URL to use for getting the next set of results. */
-  nextLink?: string;
-}
-
-/** Role assignment schedule instance list operation result. */
-export interface RoleAssignmentScheduleInstanceListResult {
-  /** Role assignment schedule instance list. */
-  value?: RoleAssignmentScheduleInstance[];
-  /** The URL to use for getting the next set of results. */
-  nextLink?: string;
-}
-
-/** Information about current or upcoming role assignment schedule instance */
-export interface RoleAssignmentScheduleInstance {
-  /**
-   * The role assignment schedule instance ID.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly id?: string;
-  /**
-   * The role assignment schedule instance name.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly name?: string;
-  /**
-   * The role assignment schedule instance type.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly type?: string;
-  /** The role assignment schedule scope. */
-  scope?: string;
-  /** The role definition ID. */
-  roleDefinitionId?: string;
-  /** The principal ID. */
-  principalId?: string;
-  /** The principal type of the assigned principal ID. */
-  principalType?: PrincipalType;
-  /** Id of the master role assignment schedule */
-  roleAssignmentScheduleId?: string;
-  /** Role Assignment Id in external system */
-  originRoleAssignmentId?: string;
-  /** The status of the role assignment schedule instance. */
-  status?: Status;
-  /** The startDateTime of the role assignment schedule instance */
-  startDateTime?: Date;
-  /** The endDateTime of the role assignment schedule instance */
-  endDateTime?: Date;
-  /** roleEligibilityScheduleId used to activate */
-  linkedRoleEligibilityScheduleId?: string;
-  /** roleEligibilityScheduleInstanceId linked to this roleAssignmentScheduleInstance */
-  linkedRoleEligibilityScheduleInstanceId?: string;
-  /** Assignment type of the role assignment schedule */
-  assignmentType?: AssignmentType;
-  /** Membership type of the role assignment schedule */
-  memberType?: MemberType;
-  /** The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container' */
-  condition?: string;
-  /** Version of the condition. Currently accepted value is '2.0' */
-  conditionVersion?: string;
-  /** DateTime when role assignment schedule was created */
-  createdOn?: Date;
-  /** Additional properties of principal, scope and role definition */
-  expandedProperties?: ExpandedProperties;
-}
-
 /** Role Assignment schedule request */
 export interface RoleAssignmentScheduleRequest {
   /**
@@ -293,120 +110,68 @@ export interface RoleAssignmentScheduleRequestPropertiesTicketInfo {
   ticketSystem?: string;
 }
 
+/** Expanded info of resource, role and principal */
+export interface ExpandedProperties {
+  /** Details of the resource scope */
+  scope?: ExpandedPropertiesScope;
+  /** Details of role definition */
+  roleDefinition?: ExpandedPropertiesRoleDefinition;
+  /** Details of the principal */
+  principal?: ExpandedPropertiesPrincipal;
+}
+
+/** Details of the resource scope */
+export interface ExpandedPropertiesScope {
+  /** Scope id of the resource */
+  id?: string;
+  /** Display name of the resource */
+  displayName?: string;
+  /** Type of the resource */
+  type?: string;
+}
+
+/** Details of role definition */
+export interface ExpandedPropertiesRoleDefinition {
+  /** Id of the role definition */
+  id?: string;
+  /** Display name of the role definition */
+  displayName?: string;
+  /** Type of the role definition */
+  type?: string;
+}
+
+/** Details of the principal */
+export interface ExpandedPropertiesPrincipal {
+  /** Id of the principal */
+  id?: string;
+  /** Display name of the principal */
+  displayName?: string;
+  /** Email id of the principal */
+  email?: string;
+  /** Type of the principal */
+  type?: string;
+}
+
+/** An error response from the service. */
+export interface CloudError {
+  /** An error response from the service. */
+  error?: CloudErrorBody;
+}
+
+/** An error response from the service. */
+export interface CloudErrorBody {
+  /** An identifier for the error. Codes are invariant and are intended to be consumed programmatically. */
+  code?: string;
+  /** A message describing the error, intended to be suitable for display in a user interface. */
+  message?: string;
+}
+
 /** Role assignment schedule request list operation result. */
 export interface RoleAssignmentScheduleRequestListResult {
   /** Role assignment schedule request list. */
   value?: RoleAssignmentScheduleRequest[];
   /** The URL to use for getting the next set of results. */
   nextLink?: string;
-}
-
-/** Role eligibility schedule */
-export interface RoleEligibilitySchedule {
-  /**
-   * The role eligibility schedule Id.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly id?: string;
-  /**
-   * The role eligibility schedule name.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly name?: string;
-  /**
-   * The role eligibility schedule type.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly type?: string;
-  /** The role eligibility schedule scope. */
-  scope?: string;
-  /** The role definition ID. */
-  roleDefinitionId?: string;
-  /** The principal ID. */
-  principalId?: string;
-  /** The principal type of the assigned principal ID. */
-  principalType?: PrincipalType;
-  /** The id of roleEligibilityScheduleRequest used to create this roleAssignmentSchedule */
-  roleEligibilityScheduleRequestId?: string;
-  /** Membership type of the role eligibility schedule */
-  memberType?: MemberType;
-  /** The status of the role eligibility schedule. */
-  status?: Status;
-  /** Start DateTime when role eligibility schedule */
-  startDateTime?: Date;
-  /** End DateTime when role eligibility schedule */
-  endDateTime?: Date;
-  /** The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container' */
-  condition?: string;
-  /** Version of the condition. Currently accepted value is '2.0' */
-  conditionVersion?: string;
-  /** DateTime when role eligibility schedule was created */
-  createdOn?: Date;
-  /** DateTime when role eligibility schedule was modified */
-  updatedOn?: Date;
-  /** Additional properties of principal, scope and role definition */
-  expandedProperties?: ExpandedProperties;
-}
-
-/** role eligibility schedule list operation result. */
-export interface RoleEligibilityScheduleListResult {
-  /** role eligibility schedule list. */
-  value?: RoleEligibilitySchedule[];
-  /** The URL to use for getting the next set of results. */
-  nextLink?: string;
-}
-
-/** Role eligibility schedule instance list operation result. */
-export interface RoleEligibilityScheduleInstanceListResult {
-  /** Role eligibility schedule instance list. */
-  value?: RoleEligibilityScheduleInstance[];
-  /** The URL to use for getting the next set of results. */
-  nextLink?: string;
-}
-
-/** Information about current or upcoming role eligibility schedule instance */
-export interface RoleEligibilityScheduleInstance {
-  /**
-   * The role eligibility schedule instance ID.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly id?: string;
-  /**
-   * The role eligibility schedule instance name.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly name?: string;
-  /**
-   * The role eligibility schedule instance type.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly type?: string;
-  /** The role eligibility schedule scope. */
-  scope?: string;
-  /** The role definition ID. */
-  roleDefinitionId?: string;
-  /** The principal ID. */
-  principalId?: string;
-  /** The principal type of the assigned principal ID. */
-  principalType?: PrincipalType;
-  /** Id of the master role eligibility schedule */
-  roleEligibilityScheduleId?: string;
-  /** The status of the role eligibility schedule instance */
-  status?: Status;
-  /** The startDateTime of the role eligibility schedule instance */
-  startDateTime?: Date;
-  /** The endDateTime of the role eligibility schedule instance */
-  endDateTime?: Date;
-  /** Membership type of the role eligibility schedule */
-  memberType?: MemberType;
-  /** The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container' */
-  condition?: string;
-  /** Version of the condition. Currently accepted value is '2.0' */
-  conditionVersion?: string;
-  /** DateTime when role eligibility schedule was created */
-  createdOn?: Date;
-  /** Additional properties of principal, scope and role definition */
-  expandedProperties?: ExpandedProperties;
 }
 
 /** Role Eligibility schedule request */
@@ -517,439 +282,6 @@ export interface RoleEligibilityScheduleRequestListResult {
   nextLink?: string;
 }
 
-/** Role management policy */
-export interface RoleManagementPolicy {
-  /**
-   * The role management policy Id.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly id?: string;
-  /**
-   * The role management policy name.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly name?: string;
-  /**
-   * The role management policy type.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly type?: string;
-  /** The role management policy scope. */
-  scope?: string;
-  /** The role management policy display name. */
-  displayName?: string;
-  /** The role management policy description. */
-  description?: string;
-  /** The role management policy is default policy. */
-  isOrganizationDefault?: boolean;
-  /**
-   * The name of the entity last modified it
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly lastModifiedBy?: Principal;
-  /**
-   * The last modified date time.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly lastModifiedDateTime?: Date;
-  /** The rule applied to the policy. */
-  rules?: RoleManagementPolicyRuleUnion[];
-  /**
-   * The readonly computed rule applied to the policy.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly effectiveRules?: RoleManagementPolicyRuleUnion[];
-  /**
-   * Additional properties of scope
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly policyProperties?: PolicyProperties;
-}
-
-/** The name of the entity last modified it */
-export interface Principal {
-  /** The id of the principal made changes */
-  id?: string;
-  /** The name of the principal made changes */
-  displayName?: string;
-  /** Type of principal such as user , group etc */
-  type?: string;
-  /** Email of principal */
-  email?: string;
-}
-
-/** The role management policy rule. */
-export interface RoleManagementPolicyRule {
-  /** Polymorphic discriminator, which specifies the different types this object can be */
-  ruleType:
-    | "RoleManagementPolicyApprovalRule"
-    | "RoleManagementPolicyAuthenticationContextRule"
-    | "RoleManagementPolicyEnablementRule"
-    | "RoleManagementPolicyExpirationRule"
-    | "RoleManagementPolicyNotificationRule";
-  /** The id of the rule. */
-  id?: string;
-  /** The target of the current rule. */
-  target?: RoleManagementPolicyRuleTarget;
-}
-
-/** The role management policy rule target. */
-export interface RoleManagementPolicyRuleTarget {
-  /** The caller of the setting. */
-  caller?: string;
-  /** The type of operation. */
-  operations?: string[];
-  /** The assignment level to which it is applied. */
-  level?: string;
-  /** The list of target objects. */
-  targetObjects?: string[];
-  /** The list of inheritable settings. */
-  inheritableSettings?: string[];
-  /** The list of enforced settings. */
-  enforcedSettings?: string[];
-}
-
-export interface PolicyProperties {
-  /**
-   * Details of the resource scope
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly scope?: PolicyPropertiesScope;
-}
-
-/** Details of the resource scope */
-export interface PolicyPropertiesScope {
-  /** Scope id of the resource */
-  id?: string;
-  /** Display name of the resource */
-  displayName?: string;
-  /** Type of the resource */
-  type?: string;
-}
-
-/** Role management policy list operation result. */
-export interface RoleManagementPolicyListResult {
-  /** Role management policy list. */
-  value?: RoleManagementPolicy[];
-  /** The URL to use for getting the next set of results. */
-  nextLink?: string;
-}
-
-/** Role management policy */
-export interface RoleManagementPolicyAssignment {
-  /**
-   * The role management policy Id.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly id?: string;
-  /**
-   * The role management policy name.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly name?: string;
-  /**
-   * The role management policy type.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly type?: string;
-  /** The role management policy scope. */
-  scope?: string;
-  /** The role definition of management policy assignment. */
-  roleDefinitionId?: string;
-  /** The policy id role management policy assignment. */
-  policyId?: string;
-  /**
-   * Additional properties of scope, role definition and policy
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly policyAssignmentProperties?: PolicyAssignmentProperties;
-}
-
-export interface PolicyAssignmentProperties {
-  /** Details of the resource scope */
-  scope?: PolicyAssignmentPropertiesScope;
-  /** Details of role definition */
-  roleDefinition?: PolicyAssignmentPropertiesRoleDefinition;
-  /** Details of the policy */
-  policy?: PolicyAssignmentPropertiesPolicy;
-}
-
-/** Details of the resource scope */
-export interface PolicyAssignmentPropertiesScope {
-  /** Scope id of the resource */
-  id?: string;
-  /** Display name of the resource */
-  displayName?: string;
-  /** Type of the resource */
-  type?: string;
-}
-
-/** Details of role definition */
-export interface PolicyAssignmentPropertiesRoleDefinition {
-  /** Id of the role definition */
-  id?: string;
-  /** Display name of the role definition */
-  displayName?: string;
-  /** Type of the role definition */
-  type?: string;
-}
-
-/** Details of the policy */
-export interface PolicyAssignmentPropertiesPolicy {
-  /** Id of the policy */
-  id?: string;
-  /**
-   * The name of the entity last modified it
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly lastModifiedBy?: Principal;
-  /** The last modified date time. */
-  lastModifiedDateTime?: Date;
-}
-
-/** Role management policy assignment list operation result. */
-export interface RoleManagementPolicyAssignmentListResult {
-  /** Role management policy assignment list. */
-  value?: RoleManagementPolicyAssignment[];
-  /** The URL to use for getting the next set of results. */
-  nextLink?: string;
-}
-
-/** Eligible child resources list operation result. */
-export interface EligibleChildResourcesListResult {
-  /** Eligible child resource list. */
-  value?: EligibleChildResource[];
-  /** The URL to use for getting the next set of results. */
-  nextLink?: string;
-}
-
-/** Eligible child resource */
-export interface EligibleChildResource {
-  /**
-   * The resource scope Id.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly id?: string;
-  /**
-   * The resource name.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly name?: string;
-  /**
-   * The resource type.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly type?: string;
-}
-
-/** Role assignment list operation result. */
-export interface RoleAssignmentListResult {
-  /** Role assignment list. */
-  value?: RoleAssignment[];
-  /**
-   * The URL to use for getting the next set of results.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly nextLink?: string;
-}
-
-/** Role Assignments */
-export interface RoleAssignment {
-  /**
-   * The role assignment ID.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly id?: string;
-  /**
-   * The role assignment name.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly name?: string;
-  /**
-   * The role assignment type.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly type?: string;
-  /**
-   * The role assignment scope.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly scope?: string;
-  /** The role definition ID. */
-  roleDefinitionId?: string;
-  /** The principal ID. */
-  principalId?: string;
-  /** The principal type of the assigned principal ID. */
-  principalType?: PrincipalType;
-  /** Description of role assignment */
-  description?: string;
-  /** The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container' */
-  condition?: string;
-  /** Version of the condition. Currently accepted value is '2.0' */
-  conditionVersion?: string;
-  /**
-   * Time it was created
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly createdOn?: Date;
-  /**
-   * Time it was updated
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly updatedOn?: Date;
-  /**
-   * Id of the user who created the assignment
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly createdBy?: string;
-  /**
-   * Id of the user who updated the assignment
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly updatedBy?: string;
-  /** Id of the delegated managed identity resource */
-  delegatedManagedIdentityResourceId?: string;
-}
-
-/** Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.). */
-export interface ErrorResponse {
-  /** The error object. */
-  error?: ErrorDetail;
-}
-
-/** The error detail. */
-export interface ErrorDetail {
-  /**
-   * The error code.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly code?: string;
-  /**
-   * The error message.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly message?: string;
-  /**
-   * The error target.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly target?: string;
-  /**
-   * The error details.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly details?: ErrorDetail[];
-  /**
-   * The error additional info.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly additionalInfo?: ErrorAdditionalInfo[];
-}
-
-/** The resource management error additional info. */
-export interface ErrorAdditionalInfo {
-  /**
-   * The additional info type.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly type?: string;
-  /**
-   * The additional info.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly info?: Record<string, unknown>;
-}
-
-/** Role assignment create parameters. */
-export interface RoleAssignmentCreateParameters {
-  /**
-   * The role assignment scope.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly scope?: string;
-  /** The role definition ID. */
-  roleDefinitionId: string;
-  /** The principal ID. */
-  principalId: string;
-  /** The principal type of the assigned principal ID. */
-  principalType?: PrincipalType;
-  /** Description of role assignment */
-  description?: string;
-  /** The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container' */
-  condition?: string;
-  /** Version of the condition. Currently accepted value is '2.0' */
-  conditionVersion?: string;
-  /**
-   * Time it was created
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly createdOn?: Date;
-  /**
-   * Time it was updated
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly updatedOn?: Date;
-  /**
-   * Id of the user who created the assignment
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly createdBy?: string;
-  /**
-   * Id of the user who updated the assignment
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly updatedBy?: string;
-  /** Id of the delegated managed identity resource */
-  delegatedManagedIdentityResourceId?: string;
-}
-
-/** Validation response */
-export interface ValidationResponse {
-  /**
-   * Whether or not validation succeeded
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly isValid?: boolean;
-  /** Failed validation result details */
-  errorInfo?: ValidationResponseErrorInfo;
-}
-
-/** Failed validation result details */
-export interface ValidationResponseErrorInfo {
-  /**
-   * Error code indicating why validation failed
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly code?: string;
-  /**
-   * Message indicating why validation failed
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly message?: string;
-}
-
-/** Role assignment schedule filter */
-export interface RoleAssignmentScheduleFilter {
-  /** Returns role assignment schedule of the specific principal. */
-  principalId?: string;
-  /** Returns role assignment schedule of the specific role definition. */
-  roleDefinitionId?: string;
-  /** Returns role assignment schedule instances of the specific status. */
-  status?: string;
-}
-
-/** Role assignment schedule instance filter */
-export interface RoleAssignmentScheduleInstanceFilter {
-  /** Returns role assignment schedule instances of the specific principal. */
-  principalId?: string;
-  /** Returns role assignment schedule instances of the specific role definition. */
-  roleDefinitionId?: string;
-  /** Returns role assignment schedule instances of the specific status. */
-  status?: string;
-  /** Returns role assignment schedule instances belonging to a specific role assignment schedule. */
-  roleAssignmentScheduleId?: string;
-}
-
 /** Role assignment schedule request filter */
 export interface RoleAssignmentScheduleRequestFilter {
   /** Returns role assignment requests of the specific principal. */
@@ -960,28 +292,6 @@ export interface RoleAssignmentScheduleRequestFilter {
   requestorId?: string;
   /** Returns role assignment requests of specific status. */
   status?: string;
-}
-
-/** Role eligibility schedule filter */
-export interface RoleEligibilityScheduleFilter {
-  /** Returns role eligibility schedule of the specific principal. */
-  principalId?: string;
-  /** Returns role eligibility schedule of the specific role definition. */
-  roleDefinitionId?: string;
-  /** Returns role eligibility schedule of the specific status. */
-  status?: string;
-}
-
-/** Role eligibility schedule instance filter */
-export interface RoleEligibilityScheduleInstanceFilter {
-  /** Returns role eligibility schedule instances of the specific principal. */
-  principalId?: string;
-  /** Returns role eligibility schedule instances of the specific role definition. */
-  roleDefinitionId?: string;
-  /** Returns role eligibility schedule instances of the specific status. */
-  status?: string;
-  /** Returns role eligibility schedule instances belonging to a specific role eligibility schedule. */
-  roleEligibilityScheduleId?: string;
 }
 
 /** Role eligibility schedule request filter */
@@ -996,118 +306,12 @@ export interface RoleEligibilityScheduleRequestFilter {
   status?: string;
 }
 
-/** The approval settings. */
-export interface ApprovalSettings {
-  /** Determine whether approval is required or not. */
-  isApprovalRequired?: boolean;
-  /** Determine whether approval is required for assignment extension. */
-  isApprovalRequiredForExtension?: boolean;
-  /** Determine whether requestor justification required. */
-  isRequestorJustificationRequired?: boolean;
-  /** The type of rule */
-  approvalMode?: ApprovalMode;
-  /** The approval stages of the request. */
-  approvalStages?: ApprovalStage[];
-}
-
-/** The approval stage. */
-export interface ApprovalStage {
-  /** The time in days when approval request would be timed out. */
-  approvalStageTimeOutInDays?: number;
-  /** Determine whether approver need to provide justification for his decision. */
-  isApproverJustificationRequired?: boolean;
-  /** The time in minutes when the approval request would be escalated if the primary approver does not approves. */
-  escalationTimeInMinutes?: number;
-  /** The primary approver of the request. */
-  primaryApprovers?: UserSet[];
-  /** The value determine whether escalation feature is enabled. */
-  isEscalationEnabled?: boolean;
-  /** The escalation approver of the request. */
-  escalationApprovers?: UserSet[];
-}
-
-/** The detail of a user. */
-export interface UserSet {
-  /** The type of user. */
-  userType?: UserType;
-  /** The value indicating whether the user is a backup fallback approver */
-  isBackup?: boolean;
-  /** The object id of the user. */
-  id?: string;
-  /** The description of the user. */
-  description?: string;
-}
-
-/** Role Assignments filter */
-export interface RoleAssignmentFilter {
-  /** Returns role assignment of the specific principal. */
-  principalId?: string;
-}
-
-/** The role management policy rule. */
-export type RoleManagementPolicyApprovalRule = RoleManagementPolicyRule & {
-  /** Polymorphic discriminator, which specifies the different types this object can be */
-  ruleType: "RoleManagementPolicyApprovalRule";
-  /** The approval setting */
-  setting?: ApprovalSettings;
-};
-
-/** The role management policy rule. */
-export type RoleManagementPolicyAuthenticationContextRule = RoleManagementPolicyRule & {
-  /** Polymorphic discriminator, which specifies the different types this object can be */
-  ruleType: "RoleManagementPolicyAuthenticationContextRule";
-  /** The value indicating if rule is enabled. */
-  isEnabled?: boolean;
-  /** The claim value. */
-  claimValue?: string;
-};
-
-/** The role management policy rule. */
-export type RoleManagementPolicyEnablementRule = RoleManagementPolicyRule & {
-  /** Polymorphic discriminator, which specifies the different types this object can be */
-  ruleType: "RoleManagementPolicyEnablementRule";
-  /** The list of enabled rules. */
-  enabledRules?: EnablementRules[];
-};
-
-/** The role management policy rule. */
-export type RoleManagementPolicyExpirationRule = RoleManagementPolicyRule & {
-  /** Polymorphic discriminator, which specifies the different types this object can be */
-  ruleType: "RoleManagementPolicyExpirationRule";
-  /** The value indicating whether expiration is required. */
-  isExpirationRequired?: boolean;
-  /** The maximum duration of expiration in timespan. */
-  maximumDuration?: string;
-};
-
-/** The role management policy rule. */
-export type RoleManagementPolicyNotificationRule = RoleManagementPolicyRule & {
-  /** Polymorphic discriminator, which specifies the different types this object can be */
-  ruleType: "RoleManagementPolicyNotificationRule";
-  /** The type of notification. */
-  notificationType?: NotificationDeliveryMechanism;
-  /** The notification level. */
-  notificationLevel?: NotificationLevel;
-  /** The recipient type. */
-  recipientType?: RecipientType;
-  /** The list notification recipients. */
-  notificationRecipients?: string[];
-  /** Its value determine if the notification need to be sent to the recipient type specified in policy rule. */
-  isDefaultRecipientsEnabled?: boolean;
-};
-
 /** Known values of {@link PrincipalType} that the service accepts. */
 export enum KnownPrincipalType {
   User = "User",
   Group = "Group",
   ServicePrincipal = "ServicePrincipal",
-  Unknown = "Unknown",
-  DirectoryRoleTemplate = "DirectoryRoleTemplate",
   ForeignGroup = "ForeignGroup",
-  Application = "Application",
-  MSI = "MSI",
-  DirectoryObjectOrGroup = "DirectoryObjectOrGroup",
-  Everyone = "Everyone",
   Device = "Device"
 }
 
@@ -1119,50 +323,40 @@ export enum KnownPrincipalType {
  * **User** \
  * **Group** \
  * **ServicePrincipal** \
- * **Unknown** \
- * **DirectoryRoleTemplate** \
  * **ForeignGroup** \
- * **Application** \
- * **MSI** \
- * **DirectoryObjectOrGroup** \
- * **Everyone** \
  * **Device**
  */
 export type PrincipalType = string;
 
-/** Known values of {@link AssignmentType} that the service accepts. */
-export enum KnownAssignmentType {
-  Activated = "Activated",
-  Assigned = "Assigned"
+/** Known values of {@link RequestType} that the service accepts. */
+export enum KnownRequestType {
+  AdminAssign = "AdminAssign",
+  AdminRemove = "AdminRemove",
+  AdminUpdate = "AdminUpdate",
+  AdminExtend = "AdminExtend",
+  AdminRenew = "AdminRenew",
+  SelfActivate = "SelfActivate",
+  SelfDeactivate = "SelfDeactivate",
+  SelfExtend = "SelfExtend",
+  SelfRenew = "SelfRenew"
 }
 
 /**
- * Defines values for AssignmentType. \
- * {@link KnownAssignmentType} can be used interchangeably with AssignmentType,
+ * Defines values for RequestType. \
+ * {@link KnownRequestType} can be used interchangeably with RequestType,
  *  this enum contains the known values that the service supports.
  * ### Known values supported by the service
- * **Activated** \
- * **Assigned**
+ * **AdminAssign** \
+ * **AdminRemove** \
+ * **AdminUpdate** \
+ * **AdminExtend** \
+ * **AdminRenew** \
+ * **SelfActivate** \
+ * **SelfDeactivate** \
+ * **SelfExtend** \
+ * **SelfRenew**
  */
-export type AssignmentType = string;
-
-/** Known values of {@link MemberType} that the service accepts. */
-export enum KnownMemberType {
-  Inherited = "Inherited",
-  Direct = "Direct",
-  Group = "Group"
-}
-
-/**
- * Defines values for MemberType. \
- * {@link KnownMemberType} can be used interchangeably with MemberType,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **Inherited** \
- * **Direct** \
- * **Group**
- */
-export type MemberType = string;
+export type RequestType = string;
 
 /** Known values of {@link Status} that the service accepts. */
 export enum KnownStatus {
@@ -1220,36 +414,6 @@ export enum KnownStatus {
  */
 export type Status = string;
 
-/** Known values of {@link RequestType} that the service accepts. */
-export enum KnownRequestType {
-  AdminAssign = "AdminAssign",
-  AdminRemove = "AdminRemove",
-  AdminUpdate = "AdminUpdate",
-  AdminExtend = "AdminExtend",
-  AdminRenew = "AdminRenew",
-  SelfActivate = "SelfActivate",
-  SelfDeactivate = "SelfDeactivate",
-  SelfExtend = "SelfExtend",
-  SelfRenew = "SelfRenew"
-}
-
-/**
- * Defines values for RequestType. \
- * {@link KnownRequestType} can be used interchangeably with RequestType,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **AdminAssign** \
- * **AdminRemove** \
- * **AdminUpdate** \
- * **AdminExtend** \
- * **AdminRenew** \
- * **SelfActivate** \
- * **SelfDeactivate** \
- * **SelfExtend** \
- * **SelfRenew**
- */
-export type RequestType = string;
-
 /** Known values of {@link Type} that the service accepts. */
 export enum KnownType {
   AfterDuration = "AfterDuration",
@@ -1267,186 +431,6 @@ export enum KnownType {
  * **NoExpiration**
  */
 export type Type = string;
-
-/** Known values of {@link RoleManagementPolicyRuleType} that the service accepts. */
-export enum KnownRoleManagementPolicyRuleType {
-  RoleManagementPolicyApprovalRule = "RoleManagementPolicyApprovalRule",
-  RoleManagementPolicyAuthenticationContextRule = "RoleManagementPolicyAuthenticationContextRule",
-  RoleManagementPolicyEnablementRule = "RoleManagementPolicyEnablementRule",
-  RoleManagementPolicyExpirationRule = "RoleManagementPolicyExpirationRule",
-  RoleManagementPolicyNotificationRule = "RoleManagementPolicyNotificationRule"
-}
-
-/**
- * Defines values for RoleManagementPolicyRuleType. \
- * {@link KnownRoleManagementPolicyRuleType} can be used interchangeably with RoleManagementPolicyRuleType,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **RoleManagementPolicyApprovalRule** \
- * **RoleManagementPolicyAuthenticationContextRule** \
- * **RoleManagementPolicyEnablementRule** \
- * **RoleManagementPolicyExpirationRule** \
- * **RoleManagementPolicyNotificationRule**
- */
-export type RoleManagementPolicyRuleType = string;
-
-/** Known values of {@link ApprovalMode} that the service accepts. */
-export enum KnownApprovalMode {
-  SingleStage = "SingleStage",
-  Serial = "Serial",
-  Parallel = "Parallel",
-  NoApproval = "NoApproval"
-}
-
-/**
- * Defines values for ApprovalMode. \
- * {@link KnownApprovalMode} can be used interchangeably with ApprovalMode,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **SingleStage** \
- * **Serial** \
- * **Parallel** \
- * **NoApproval**
- */
-export type ApprovalMode = string;
-
-/** Known values of {@link UserType} that the service accepts. */
-export enum KnownUserType {
-  User = "User",
-  Group = "Group"
-}
-
-/**
- * Defines values for UserType. \
- * {@link KnownUserType} can be used interchangeably with UserType,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **User** \
- * **Group**
- */
-export type UserType = string;
-
-/** Known values of {@link EnablementRules} that the service accepts. */
-export enum KnownEnablementRules {
-  MultiFactorAuthentication = "MultiFactorAuthentication",
-  Justification = "Justification",
-  Ticketing = "Ticketing"
-}
-
-/**
- * Defines values for EnablementRules. \
- * {@link KnownEnablementRules} can be used interchangeably with EnablementRules,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **MultiFactorAuthentication** \
- * **Justification** \
- * **Ticketing**
- */
-export type EnablementRules = string;
-
-/** Known values of {@link NotificationDeliveryMechanism} that the service accepts. */
-export enum KnownNotificationDeliveryMechanism {
-  Email = "Email"
-}
-
-/**
- * Defines values for NotificationDeliveryMechanism. \
- * {@link KnownNotificationDeliveryMechanism} can be used interchangeably with NotificationDeliveryMechanism,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **Email**
- */
-export type NotificationDeliveryMechanism = string;
-
-/** Known values of {@link NotificationLevel} that the service accepts. */
-export enum KnownNotificationLevel {
-  None = "None",
-  Critical = "Critical",
-  All = "All"
-}
-
-/**
- * Defines values for NotificationLevel. \
- * {@link KnownNotificationLevel} can be used interchangeably with NotificationLevel,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **None** \
- * **Critical** \
- * **All**
- */
-export type NotificationLevel = string;
-
-/** Known values of {@link RecipientType} that the service accepts. */
-export enum KnownRecipientType {
-  Requestor = "Requestor",
-  Approver = "Approver",
-  Admin = "Admin"
-}
-
-/**
- * Defines values for RecipientType. \
- * {@link KnownRecipientType} can be used interchangeably with RecipientType,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **Requestor** \
- * **Approver** \
- * **Admin**
- */
-export type RecipientType = string;
-
-/** Optional parameters. */
-export interface RoleAssignmentSchedulesGetOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the get operation. */
-export type RoleAssignmentSchedulesGetResponse = RoleAssignmentSchedule;
-
-/** Optional parameters. */
-export interface RoleAssignmentSchedulesListForScopeOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role assignment schedules for the current user. Use $filter=asTarget() to return all role assignment schedules created for the current user. */
-  filter?: string;
-}
-
-/** Contains response data for the listForScope operation. */
-export type RoleAssignmentSchedulesListForScopeResponse = RoleAssignmentScheduleListResult;
-
-/** Optional parameters. */
-export interface RoleAssignmentSchedulesListForScopeNextOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role assignment schedules for the current user. Use $filter=asTarget() to return all role assignment schedules created for the current user. */
-  filter?: string;
-}
-
-/** Contains response data for the listForScopeNext operation. */
-export type RoleAssignmentSchedulesListForScopeNextResponse = RoleAssignmentScheduleListResult;
-
-/** Optional parameters. */
-export interface RoleAssignmentScheduleInstancesListForScopeOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal.  Use $filter=assignedTo('{userId}') to return all role assignment schedule instances for the user. Use $filter=asTarget() to return all role assignment schedule instances created for the current user. */
-  filter?: string;
-}
-
-/** Contains response data for the listForScope operation. */
-export type RoleAssignmentScheduleInstancesListForScopeResponse = RoleAssignmentScheduleInstanceListResult;
-
-/** Optional parameters. */
-export interface RoleAssignmentScheduleInstancesGetOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the get operation. */
-export type RoleAssignmentScheduleInstancesGetResponse = RoleAssignmentScheduleInstance;
-
-/** Optional parameters. */
-export interface RoleAssignmentScheduleInstancesListForScopeNextOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal.  Use $filter=assignedTo('{userId}') to return all role assignment schedule instances for the user. Use $filter=asTarget() to return all role assignment schedule instances created for the current user. */
-  filter?: string;
-}
-
-/** Contains response data for the listForScopeNext operation. */
-export type RoleAssignmentScheduleInstancesListForScopeNextResponse = RoleAssignmentScheduleInstanceListResult;
 
 /** Optional parameters. */
 export interface RoleAssignmentScheduleRequestsCreateOptionalParams
@@ -1477,6 +461,13 @@ export interface RoleAssignmentScheduleRequestsCancelOptionalParams
   extends coreClient.OperationOptions {}
 
 /** Optional parameters. */
+export interface RoleAssignmentScheduleRequestsValidateOptionalParams
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the validate operation. */
+export type RoleAssignmentScheduleRequestsValidateResponse = RoleAssignmentScheduleRequest;
+
+/** Optional parameters. */
 export interface RoleAssignmentScheduleRequestsListForScopeNextOptionalParams
   extends coreClient.OperationOptions {
   /** The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedule requests at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedule requests at, above or below the scope for the specified principal. Use $filter=asRequestor() to return all role assignment schedule requests requested by the current user. Use $filter=asTarget() to return all role assignment schedule requests created for the current user. Use $filter=asApprover() to return all role assignment schedule requests where the current user is an approver. */
@@ -1485,60 +476,6 @@ export interface RoleAssignmentScheduleRequestsListForScopeNextOptionalParams
 
 /** Contains response data for the listForScopeNext operation. */
 export type RoleAssignmentScheduleRequestsListForScopeNextResponse = RoleAssignmentScheduleRequestListResult;
-
-/** Optional parameters. */
-export interface RoleEligibilitySchedulesGetOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the get operation. */
-export type RoleEligibilitySchedulesGetResponse = RoleEligibilitySchedule;
-
-/** Optional parameters. */
-export interface RoleEligibilitySchedulesListForScopeOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role eligibility schedules at or above the scope. Use $filter=principalId eq {id} to return all role eligibility schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role eligibility schedules for the user. Use $filter=asTarget() to return all role eligibility schedules created for the current user. */
-  filter?: string;
-}
-
-/** Contains response data for the listForScope operation. */
-export type RoleEligibilitySchedulesListForScopeResponse = RoleEligibilityScheduleListResult;
-
-/** Optional parameters. */
-export interface RoleEligibilitySchedulesListForScopeNextOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role eligibility schedules at or above the scope. Use $filter=principalId eq {id} to return all role eligibility schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role eligibility schedules for the user. Use $filter=asTarget() to return all role eligibility schedules created for the current user. */
-  filter?: string;
-}
-
-/** Contains response data for the listForScopeNext operation. */
-export type RoleEligibilitySchedulesListForScopeNextResponse = RoleEligibilityScheduleListResult;
-
-/** Optional parameters. */
-export interface RoleEligibilityScheduleInstancesListForScopeOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role eligibility schedules for the user. Use $filter=asTarget() to return all role eligibility schedules created for the current user. */
-  filter?: string;
-}
-
-/** Contains response data for the listForScope operation. */
-export type RoleEligibilityScheduleInstancesListForScopeResponse = RoleEligibilityScheduleInstanceListResult;
-
-/** Optional parameters. */
-export interface RoleEligibilityScheduleInstancesGetOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the get operation. */
-export type RoleEligibilityScheduleInstancesGetResponse = RoleEligibilityScheduleInstance;
-
-/** Optional parameters. */
-export interface RoleEligibilityScheduleInstancesListForScopeNextOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role eligibility schedules for the user. Use $filter=asTarget() to return all role eligibility schedules created for the current user. */
-  filter?: string;
-}
-
-/** Contains response data for the listForScopeNext operation. */
-export type RoleEligibilityScheduleInstancesListForScopeNextResponse = RoleEligibilityScheduleInstanceListResult;
 
 /** Optional parameters. */
 export interface RoleEligibilityScheduleRequestsCreateOptionalParams
@@ -1569,6 +506,13 @@ export interface RoleEligibilityScheduleRequestsCancelOptionalParams
   extends coreClient.OperationOptions {}
 
 /** Optional parameters. */
+export interface RoleEligibilityScheduleRequestsValidateOptionalParams
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the validate operation. */
+export type RoleEligibilityScheduleRequestsValidateResponse = RoleEligibilityScheduleRequest;
+
+/** Optional parameters. */
 export interface RoleEligibilityScheduleRequestsListForScopeNextOptionalParams
   extends coreClient.OperationOptions {
   /** The filter to apply on the operation. Use $filter=atScope() to return all role eligibility schedule requests at or above the scope. Use $filter=principalId eq {id} to return all role eligibility schedule requests at, above or below the scope for the specified principal. Use $filter=asRequestor() to return all role eligibility schedule requests requested by the current user. Use $filter=asTarget() to return all role eligibility schedule requests created for the current user. Use $filter=asApprover() to return all role eligibility schedule requests where the current user is an approver. */
@@ -1577,254 +521,6 @@ export interface RoleEligibilityScheduleRequestsListForScopeNextOptionalParams
 
 /** Contains response data for the listForScopeNext operation. */
 export type RoleEligibilityScheduleRequestsListForScopeNextResponse = RoleEligibilityScheduleRequestListResult;
-
-/** Optional parameters. */
-export interface RoleManagementPoliciesGetOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the get operation. */
-export type RoleManagementPoliciesGetResponse = RoleManagementPolicy;
-
-/** Optional parameters. */
-export interface RoleManagementPoliciesUpdateOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the update operation. */
-export type RoleManagementPoliciesUpdateResponse = RoleManagementPolicy;
-
-/** Optional parameters. */
-export interface RoleManagementPoliciesDeleteOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Optional parameters. */
-export interface RoleManagementPoliciesListForScopeOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the listForScope operation. */
-export type RoleManagementPoliciesListForScopeResponse = RoleManagementPolicyListResult;
-
-/** Optional parameters. */
-export interface RoleManagementPoliciesListForScopeNextOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the listForScopeNext operation. */
-export type RoleManagementPoliciesListForScopeNextResponse = RoleManagementPolicyListResult;
-
-/** Optional parameters. */
-export interface RoleManagementPolicyAssignmentsGetOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the get operation. */
-export type RoleManagementPolicyAssignmentsGetResponse = RoleManagementPolicyAssignment;
-
-/** Optional parameters. */
-export interface RoleManagementPolicyAssignmentsCreateOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the create operation. */
-export type RoleManagementPolicyAssignmentsCreateResponse = RoleManagementPolicyAssignment;
-
-/** Optional parameters. */
-export interface RoleManagementPolicyAssignmentsDeleteOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Optional parameters. */
-export interface RoleManagementPolicyAssignmentsListForScopeOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the listForScope operation. */
-export type RoleManagementPolicyAssignmentsListForScopeResponse = RoleManagementPolicyAssignmentListResult;
-
-/** Optional parameters. */
-export interface RoleManagementPolicyAssignmentsListForScopeNextOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the listForScopeNext operation. */
-export type RoleManagementPolicyAssignmentsListForScopeNextResponse = RoleManagementPolicyAssignmentListResult;
-
-/** Optional parameters. */
-export interface EligibleChildResourcesGetOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=resourceType+eq+'Subscription' to filter on only resource of type = 'Subscription'. Use $filter=resourceType+eq+'subscription'+or+resourceType+eq+'resourcegroup' to filter on resource of type = 'Subscription' or 'ResourceGroup' */
-  filter?: string;
-}
-
-/** Contains response data for the get operation. */
-export type EligibleChildResourcesGetResponse = EligibleChildResourcesListResult;
-
-/** Optional parameters. */
-export interface EligibleChildResourcesGetNextOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=resourceType+eq+'Subscription' to filter on only resource of type = 'Subscription'. Use $filter=resourceType+eq+'subscription'+or+resourceType+eq+'resourcegroup' to filter on resource of type = 'Subscription' or 'ResourceGroup' */
-  filter?: string;
-}
-
-/** Contains response data for the getNext operation. */
-export type EligibleChildResourcesGetNextResponse = EligibleChildResourcesListResult;
-
-/** Optional parameters. */
-export interface RoleAssignmentsListForSubscriptionOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal. */
-  filter?: string;
-  /** Tenant ID for cross-tenant request */
-  tenantId?: string;
-}
-
-/** Contains response data for the listForSubscription operation. */
-export type RoleAssignmentsListForSubscriptionResponse = RoleAssignmentListResult;
-
-/** Optional parameters. */
-export interface RoleAssignmentsListForResourceGroupOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal. */
-  filter?: string;
-  /** Tenant ID for cross-tenant request */
-  tenantId?: string;
-}
-
-/** Contains response data for the listForResourceGroup operation. */
-export type RoleAssignmentsListForResourceGroupResponse = RoleAssignmentListResult;
-
-/** Optional parameters. */
-export interface RoleAssignmentsListForResourceOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal. */
-  filter?: string;
-  /** Tenant ID for cross-tenant request */
-  tenantId?: string;
-}
-
-/** Contains response data for the listForResource operation. */
-export type RoleAssignmentsListForResourceResponse = RoleAssignmentListResult;
-
-/** Optional parameters. */
-export interface RoleAssignmentsGetOptionalParams
-  extends coreClient.OperationOptions {
-  /** Tenant ID for cross-tenant request */
-  tenantId?: string;
-}
-
-/** Contains response data for the get operation. */
-export type RoleAssignmentsGetResponse = RoleAssignment;
-
-/** Optional parameters. */
-export interface RoleAssignmentsCreateOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the create operation. */
-export type RoleAssignmentsCreateResponse = RoleAssignment;
-
-/** Optional parameters. */
-export interface RoleAssignmentsDeleteOptionalParams
-  extends coreClient.OperationOptions {
-  /** Tenant ID for cross-tenant request */
-  tenantId?: string;
-}
-
-/** Contains response data for the delete operation. */
-export type RoleAssignmentsDeleteResponse = RoleAssignment;
-
-/** Optional parameters. */
-export interface RoleAssignmentsValidateOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the validate operation. */
-export type RoleAssignmentsValidateResponse = ValidationResponse;
-
-/** Optional parameters. */
-export interface RoleAssignmentsListForScopeOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal. */
-  filter?: string;
-  /** Tenant ID for cross-tenant request */
-  tenantId?: string;
-}
-
-/** Contains response data for the listForScope operation. */
-export type RoleAssignmentsListForScopeResponse = RoleAssignmentListResult;
-
-/** Optional parameters. */
-export interface RoleAssignmentsGetByIdOptionalParams
-  extends coreClient.OperationOptions {
-  /** Tenant ID for cross-tenant request */
-  tenantId?: string;
-}
-
-/** Contains response data for the getById operation. */
-export type RoleAssignmentsGetByIdResponse = RoleAssignment;
-
-/** Optional parameters. */
-export interface RoleAssignmentsCreateByIdOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the createById operation. */
-export type RoleAssignmentsCreateByIdResponse = RoleAssignment;
-
-/** Optional parameters. */
-export interface RoleAssignmentsDeleteByIdOptionalParams
-  extends coreClient.OperationOptions {
-  /** Tenant ID for cross-tenant request */
-  tenantId?: string;
-}
-
-/** Contains response data for the deleteById operation. */
-export type RoleAssignmentsDeleteByIdResponse = RoleAssignment;
-
-/** Optional parameters. */
-export interface RoleAssignmentsValidateByIdOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the validateById operation. */
-export type RoleAssignmentsValidateByIdResponse = ValidationResponse;
-
-/** Optional parameters. */
-export interface RoleAssignmentsListForSubscriptionNextOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal. */
-  filter?: string;
-  /** Tenant ID for cross-tenant request */
-  tenantId?: string;
-}
-
-/** Contains response data for the listForSubscriptionNext operation. */
-export type RoleAssignmentsListForSubscriptionNextResponse = RoleAssignmentListResult;
-
-/** Optional parameters. */
-export interface RoleAssignmentsListForResourceGroupNextOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal. */
-  filter?: string;
-  /** Tenant ID for cross-tenant request */
-  tenantId?: string;
-}
-
-/** Contains response data for the listForResourceGroupNext operation. */
-export type RoleAssignmentsListForResourceGroupNextResponse = RoleAssignmentListResult;
-
-/** Optional parameters. */
-export interface RoleAssignmentsListForResourceNextOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal. */
-  filter?: string;
-  /** Tenant ID for cross-tenant request */
-  tenantId?: string;
-}
-
-/** Contains response data for the listForResourceNext operation. */
-export type RoleAssignmentsListForResourceNextResponse = RoleAssignmentListResult;
-
-/** Optional parameters. */
-export interface RoleAssignmentsListForScopeNextOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal. */
-  filter?: string;
-  /** Tenant ID for cross-tenant request */
-  tenantId?: string;
-}
-
-/** Contains response data for the listForScopeNext operation. */
-export type RoleAssignmentsListForScopeNextResponse = RoleAssignmentListResult;
 
 /** Optional parameters. */
 export interface AuthorizationManagementClientOptionalParams

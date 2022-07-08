@@ -6,13 +6,12 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import "@azure/core-paging";
 import { PagedAsyncIterableIterator } from "@azure/core-paging";
 import { RoleEligibilityScheduleRequests } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
-import { AuthorizationManagementClientContext } from "../authorizationManagementClientContext";
+import { AuthorizationManagementClient } from "../authorizationManagementClient";
 import {
   RoleEligibilityScheduleRequest,
   RoleEligibilityScheduleRequestsListForScopeNextOptionalParams,
@@ -23,6 +22,8 @@ import {
   RoleEligibilityScheduleRequestsGetResponse,
   RoleEligibilityScheduleRequestsListForScopeResponse,
   RoleEligibilityScheduleRequestsCancelOptionalParams,
+  RoleEligibilityScheduleRequestsValidateOptionalParams,
+  RoleEligibilityScheduleRequestsValidateResponse,
   RoleEligibilityScheduleRequestsListForScopeNextResponse
 } from "../models";
 
@@ -30,13 +31,13 @@ import {
 /** Class containing RoleEligibilityScheduleRequests operations. */
 export class RoleEligibilityScheduleRequestsImpl
   implements RoleEligibilityScheduleRequests {
-  private readonly client: AuthorizationManagementClientContext;
+  private readonly client: AuthorizationManagementClient;
 
   /**
    * Initialize a new instance of the class RoleEligibilityScheduleRequests class.
    * @param client Reference to the service client
    */
-  constructor(client: AuthorizationManagementClientContext) {
+  constructor(client: AuthorizationManagementClient) {
     this.client = client;
   }
 
@@ -163,6 +164,25 @@ export class RoleEligibilityScheduleRequestsImpl
   }
 
   /**
+   * Validates a new role eligibility schedule request.
+   * @param scope The scope of the role eligibility request to validate.
+   * @param roleEligibilityScheduleRequestName The name of the role eligibility request to validate.
+   * @param parameters Parameters for the role eligibility schedule request.
+   * @param options The options parameters.
+   */
+  validate(
+    scope: string,
+    roleEligibilityScheduleRequestName: string,
+    parameters: RoleEligibilityScheduleRequest,
+    options?: RoleEligibilityScheduleRequestsValidateOptionalParams
+  ): Promise<RoleEligibilityScheduleRequestsValidateResponse> {
+    return this.client.sendOperationRequest(
+      { scope, roleEligibilityScheduleRequestName, parameters, options },
+      validateOperationSpec
+    );
+  }
+
+  /**
    * ListForScopeNext
    * @param scope The scope of the role eligibility schedule requests.
    * @param nextLink The nextLink from the previous successful call to the ListForScope method.
@@ -201,7 +221,7 @@ const createOperationSpec: coreClient.OperationSpec = {
     Parameters.scope,
     Parameters.roleEligibilityScheduleRequestName
   ],
-  headerParameters: [Parameters.accept, Parameters.contentType],
+  headerParameters: [Parameters.contentType, Parameters.accept],
   mediaType: "json",
   serializer
 };
@@ -260,6 +280,29 @@ const cancelOperationSpec: coreClient.OperationSpec = {
     Parameters.roleEligibilityScheduleRequestName
   ],
   headerParameters: [Parameters.accept],
+  serializer
+};
+const validateOperationSpec: coreClient.OperationSpec = {
+  path:
+    "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}/validate",
+  httpMethod: "POST",
+  responses: {
+    200: {
+      bodyMapper: Mappers.RoleEligibilityScheduleRequest
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  requestBody: Parameters.parameters1,
+  queryParameters: [Parameters.apiVersion],
+  urlParameters: [
+    Parameters.$host,
+    Parameters.scope,
+    Parameters.roleEligibilityScheduleRequestName
+  ],
+  headerParameters: [Parameters.contentType, Parameters.accept],
+  mediaType: "json",
   serializer
 };
 const listForScopeNextOperationSpec: coreClient.OperationSpec = {
