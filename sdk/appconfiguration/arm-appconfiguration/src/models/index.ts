@@ -115,78 +115,35 @@ export interface Sku {
   name: string;
 }
 
-/** Metadata pertaining to creation and last modification of the resource. */
-export interface SystemData {
-  /** The identity that created the resource. */
-  createdBy?: string;
-  /** The type of identity that created the resource. */
-  createdByType?: CreatedByType;
-  /** The timestamp of resource creation (UTC). */
-  createdAt?: Date;
-  /** The identity that last modified the resource. */
-  lastModifiedBy?: string;
-  /** The type of identity that last modified the resource. */
-  lastModifiedByType?: CreatedByType;
-  /** The timestamp of resource last modification (UTC) */
-  lastModifiedAt?: Date;
-}
-
-/** Common fields that are returned in the response for all Azure Resource Manager resources */
+/** An Azure resource. */
 export interface Resource {
   /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   * The resource ID.
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly id?: string;
   /**
-   * The name of the resource
+   * The name of the resource.
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly name?: string;
   /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+   * The type of the resource.
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly type?: string;
+  /** The location of the resource. This cannot be changed after the resource is created. */
+  location: string;
+  /** The tags of the resource. */
+  tags?: { [propertyName: string]: string };
 }
 
-/** Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. */
-export interface ErrorResponse {
-  /** The details of the error. */
-  error?: ErrorDetails;
-}
-
-/** The details of the error. */
-export interface ErrorDetails {
-  /**
-   * Error code.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly code?: string;
-  /**
-   * Error message indicating why the operation failed.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly message?: string;
-  /**
-   * The error additional info.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly additionalInfo?: ErrorAdditionalInfo[];
-}
-
-/** The resource management error additional info. */
-export interface ErrorAdditionalInfo {
-  /**
-   * The additional info type.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly type?: string;
-  /**
-   * The additional info.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly info?: Record<string, unknown>;
+/** AppConfiguration error object. */
+export interface ErrorModel {
+  /** Error code. */
+  code?: string;
+  /** Error message. */
+  message?: string;
 }
 
 /** The parameters for updating a configuration store. */
@@ -199,12 +156,8 @@ export interface ConfigurationStoreUpdateParameters {
   tags?: { [propertyName: string]: string };
   /** The encryption settings of the configuration store. */
   encryption?: EncryptionProperties;
-  /** Disables all authentication methods other than AAD authentication. */
-  disableLocalAuth?: boolean;
   /** Control permission for data plane traffic coming from public networks while private endpoint is enabled. */
   publicNetworkAccess?: PublicNetworkAccess;
-  /** Property specifying whether protection against purge is enabled for this configuration store. */
-  enablePurgeProtection?: boolean;
 }
 
 /** Parameters used for checking whether a resource name is available. */
@@ -294,14 +247,8 @@ export interface OperationDefinitionListResult {
 export interface OperationDefinition {
   /** Operation name: {provider}/{resource}/{operation}. */
   name?: string;
-  /** Indicates whether the operation is a data action */
-  isDataAction?: boolean;
   /** The display information for the configuration store operation. */
   display?: OperationDefinitionDisplay;
-  /** Origin of the operation */
-  origin?: string;
-  /** Properties of the operation */
-  properties?: OperationProperties;
 }
 
 /** The display information for a configuration store operation. */
@@ -319,58 +266,60 @@ export interface OperationDefinitionDisplay {
   description?: string;
 }
 
-/** Extra Operation properties */
-export interface OperationProperties {
-  /** Service specifications of the operation */
-  serviceSpecification?: ServiceSpecification;
+/** The parameters used to list a configuration store key-value */
+export interface ListKeyValueParameters {
+  /** The key to retrieve. */
+  key: string;
+  /** The label of the key. */
+  label?: string;
 }
 
-/** Service specification payload */
-export interface ServiceSpecification {
-  /** Specifications of the Log for Azure Monitoring */
-  logSpecifications?: LogSpecification[];
-  /** Specifications of the Metrics for Azure Monitoring */
-  metricSpecifications?: MetricSpecification[];
-}
-
-/** Specifications of the Log for Azure Monitoring */
-export interface LogSpecification {
-  /** Name of the log */
-  name?: string;
-  /** Localized friendly display name of the log */
-  displayName?: string;
-  /** Blob duration of the log */
-  blobDuration?: string;
-}
-
-/** Specifications of the Metrics for Azure Monitoring */
-export interface MetricSpecification {
-  /** Name of the metric */
-  name?: string;
-  /** Localized friendly display name of the metric */
-  displayName?: string;
-  /** Localized friendly description of the metric */
-  displayDescription?: string;
-  /** Unit that makes sense for the metric */
-  unit?: string;
-  /** Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count. */
-  aggregationType?: string;
-  /** Internal metric name. */
-  internalMetricName?: string;
-  /** Dimensions of the metric */
-  dimensions?: MetricDimension[];
-  /** Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published. */
-  fillGapWithZero?: boolean;
-}
-
-/** Specifications of the Dimension of metrics */
-export interface MetricDimension {
-  /** Name of the dimension */
-  name?: string;
-  /** Localized friendly display name of the dimension */
-  displayName?: string;
-  /** Internal name of the dimension. */
-  internalName?: string;
+/** The result of a request to retrieve a key-value from the specified configuration store. */
+export interface KeyValue {
+  /**
+   * The primary identifier of a key-value.
+   * The key is used in unison with the label to uniquely identify a key-value.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly key?: string;
+  /**
+   * A value used to group key-values.
+   * The label is used in unison with the key to uniquely identify a key-value.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly label?: string;
+  /**
+   * The value of the key-value.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly value?: string;
+  /**
+   * The content type of the key-value's value.
+   * Providing a proper content-type can enable transformations of values when they are retrieved by applications.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly contentType?: string;
+  /**
+   * An ETag indicating the state of a key-value within a configuration store.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly eTag?: string;
+  /**
+   * The last time a modifying operation was performed on the given key-value.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly lastModified?: Date;
+  /**
+   * A value indicating whether the key-value is locked.
+   * A locked key-value may not be modified until it is unlocked.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly locked?: boolean;
+  /**
+   * A dictionary of tags that can help identify what a key-value may be applicable for.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly tags?: { [propertyName: string]: string };
 }
 
 /** A list of private endpoint connections */
@@ -451,146 +400,12 @@ export interface PrivateLinkResource {
   readonly requiredZoneNames?: string[];
 }
 
-/** The result of a request to list key-values. */
-export interface KeyValueListResult {
-  /** The collection value. */
-  value?: KeyValue[];
-  /** The URI that can be used to request the next set of paged results. */
-  nextLink?: string;
-}
-
-/** The key-value resource along with all resource properties. */
-export interface KeyValue {
-  /**
-   * The resource ID.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly id?: string;
-  /**
-   * The name of the resource.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly name?: string;
-  /**
-   * The type of the resource.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly type?: string;
-  /**
-   * The primary identifier of a key-value.
-   * The key is used in unison with the label to uniquely identify a key-value.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly key?: string;
-  /**
-   * A value used to group key-values.
-   * The label is used in unison with the key to uniquely identify a key-value.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly label?: string;
-  /** The value of the key-value. */
-  value?: string;
-  /**
-   * The content type of the key-value's value.
-   * Providing a proper content-type can enable transformations of values when they are retrieved by applications.
-   */
-  contentType?: string;
-  /**
-   * An ETag indicating the state of a key-value within a configuration store.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly eTag?: string;
-  /**
-   * The last time a modifying operation was performed on the given key-value.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly lastModified?: Date;
-  /**
-   * A value indicating whether the key-value is locked.
-   * A locked key-value may not be modified until it is unlocked.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly locked?: boolean;
-  /** A dictionary of tags that can help identify what a key-value may be applicable for. */
-  tags?: { [propertyName: string]: string };
-}
-
-/** List of deleted configuration stores */
-export interface DeletedConfigurationStoreListResult {
-  /** The list of deleted configuration store. */
-  value?: DeletedConfigurationStore[];
-  /** The URL to get the next set of deleted configuration stores. */
-  nextLink?: string;
-}
-
-/** Deleted configuration store information with extended details. */
-export interface DeletedConfigurationStore {
-  /**
-   * The resource ID for the deleted configuration store.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly id?: string;
-  /**
-   * The name of the configuration store.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly name?: string;
-  /**
-   * The resource type of the configuration store.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly type?: string;
-  /**
-   * The resource id of the original configuration store.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly configurationStoreId?: string;
-  /**
-   * The location of the original configuration store.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly location?: string;
-  /**
-   * The deleted date.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly deletionDate?: Date;
-  /**
-   * The scheduled purged date.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly scheduledPurgeDate?: Date;
-  /**
-   * Tags of the original configuration store.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly tags?: { [propertyName: string]: string };
-  /**
-   * Purge protection status of the original configuration store.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly purgeProtectionEnabled?: boolean;
-}
-
-/** The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location' */
-export type TrackedResource = Resource & {
-  /** Resource tags. */
-  tags?: { [propertyName: string]: string };
-  /** The geo-location where the resource lives */
-  location: string;
-};
-
 /** The configuration store along with all resource properties. The Configuration Store will have all information to begin utilizing it. */
-export type ConfigurationStore = TrackedResource & {
+export type ConfigurationStore = Resource & {
   /** The managed identity information, if configured. */
   identity?: ResourceIdentity;
   /** The sku of the configuration store. */
   sku: Sku;
-  /**
-   * Resource system metadata.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly systemData?: SystemData;
   /**
    * The provisioning state of the configuration store.
    * NOTE: This property will not be serialized. It can only be populated by the server.
@@ -615,14 +430,6 @@ export type ConfigurationStore = TrackedResource & {
   readonly privateEndpointConnections?: PrivateEndpointConnectionReference[];
   /** Control permission for data plane traffic coming from public networks while private endpoint is enabled. */
   publicNetworkAccess?: PublicNetworkAccess;
-  /** Disables all authentication methods other than AAD authentication. */
-  disableLocalAuth?: boolean;
-  /** The amount of time in days that the configuration store will be retained when it is soft deleted. */
-  softDeleteRetentionInDays?: number;
-  /** Property specifying whether protection against purge is enabled for this configuration store. */
-  enablePurgeProtection?: boolean;
-  /** Indicates whether the configuration store need to be recovered. */
-  createMode?: CreateMode;
 };
 
 /** Known values of {@link IdentityType} that the service accepts. */
@@ -721,26 +528,6 @@ export enum KnownPublicNetworkAccess {
  */
 export type PublicNetworkAccess = string;
 
-/** Known values of {@link CreatedByType} that the service accepts. */
-export enum KnownCreatedByType {
-  User = "User",
-  Application = "Application",
-  ManagedIdentity = "ManagedIdentity",
-  Key = "Key"
-}
-
-/**
- * Defines values for CreatedByType. \
- * {@link KnownCreatedByType} can be used interchangeably with CreatedByType,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **User** \
- * **Application** \
- * **ManagedIdentity** \
- * **Key**
- */
-export type CreatedByType = string;
-
 /** Known values of {@link ConfigurationResourceType} that the service accepts. */
 export enum KnownConfigurationResourceType {
   MicrosoftAppConfigurationConfigurationStores = "Microsoft.AppConfiguration/configurationStores"
@@ -754,8 +541,6 @@ export enum KnownConfigurationResourceType {
  * **Microsoft.AppConfiguration\/configurationStores**
  */
 export type ConfigurationResourceType = string;
-/** Defines values for CreateMode. */
-export type CreateMode = "Recover" | "Default";
 
 /** Optional parameters. */
 export interface ConfigurationStoresListOptionalParams
@@ -835,27 +620,11 @@ export interface ConfigurationStoresRegenerateKeyOptionalParams
 export type ConfigurationStoresRegenerateKeyResponse = ApiKey;
 
 /** Optional parameters. */
-export interface ConfigurationStoresListDeletedOptionalParams
+export interface ConfigurationStoresListKeyValueOptionalParams
   extends coreClient.OperationOptions {}
 
-/** Contains response data for the listDeleted operation. */
-export type ConfigurationStoresListDeletedResponse = DeletedConfigurationStoreListResult;
-
-/** Optional parameters. */
-export interface ConfigurationStoresGetDeletedOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the getDeleted operation. */
-export type ConfigurationStoresGetDeletedResponse = DeletedConfigurationStore;
-
-/** Optional parameters. */
-export interface ConfigurationStoresPurgeDeletedOptionalParams
-  extends coreClient.OperationOptions {
-  /** Delay to wait until next poll, in milliseconds. */
-  updateIntervalInMs?: number;
-  /** A serialized poller which can be used to resume an existing paused Long-Running-Operation. */
-  resumeFrom?: string;
-}
+/** Contains response data for the listKeyValue operation. */
+export type ConfigurationStoresListKeyValueResponse = KeyValue;
 
 /** Optional parameters. */
 export interface ConfigurationStoresListNextOptionalParams
@@ -888,13 +657,6 @@ export interface ConfigurationStoresListKeysNextOptionalParams
 export type ConfigurationStoresListKeysNextResponse = ApiKeyListResult;
 
 /** Optional parameters. */
-export interface ConfigurationStoresListDeletedNextOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the listDeletedNext operation. */
-export type ConfigurationStoresListDeletedNextResponse = DeletedConfigurationStoreListResult;
-
-/** Optional parameters. */
 export interface OperationsCheckNameAvailabilityOptionalParams
   extends coreClient.OperationOptions {}
 
@@ -910,13 +672,6 @@ export interface OperationsListOptionalParams
 
 /** Contains response data for the list operation. */
 export type OperationsListResponse = OperationDefinitionListResult;
-
-/** Optional parameters. */
-export interface OperationsRegionalCheckNameAvailabilityOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the regionalCheckNameAvailability operation. */
-export type OperationsRegionalCheckNameAvailabilityResponse = NameAvailabilityStatus;
 
 /** Optional parameters. */
 export interface OperationsListNextOptionalParams
@@ -990,52 +745,6 @@ export interface PrivateLinkResourcesListByConfigurationStoreNextOptionalParams
 
 /** Contains response data for the listByConfigurationStoreNext operation. */
 export type PrivateLinkResourcesListByConfigurationStoreNextResponse = PrivateLinkResourceListResult;
-
-/** Optional parameters. */
-export interface KeyValuesListByConfigurationStoreOptionalParams
-  extends coreClient.OperationOptions {
-  /** A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls. */
-  skipToken?: string;
-}
-
-/** Contains response data for the listByConfigurationStore operation. */
-export type KeyValuesListByConfigurationStoreResponse = KeyValueListResult;
-
-/** Optional parameters. */
-export interface KeyValuesGetOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the get operation. */
-export type KeyValuesGetResponse = KeyValue;
-
-/** Optional parameters. */
-export interface KeyValuesCreateOrUpdateOptionalParams
-  extends coreClient.OperationOptions {
-  /** The parameters for creating a key-value. */
-  keyValueParameters?: KeyValue;
-}
-
-/** Contains response data for the createOrUpdate operation. */
-export type KeyValuesCreateOrUpdateResponse = KeyValue;
-
-/** Optional parameters. */
-export interface KeyValuesDeleteOptionalParams
-  extends coreClient.OperationOptions {
-  /** Delay to wait until next poll, in milliseconds. */
-  updateIntervalInMs?: number;
-  /** A serialized poller which can be used to resume an existing paused Long-Running-Operation. */
-  resumeFrom?: string;
-}
-
-/** Optional parameters. */
-export interface KeyValuesListByConfigurationStoreNextOptionalParams
-  extends coreClient.OperationOptions {
-  /** A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls. */
-  skipToken?: string;
-}
-
-/** Contains response data for the listByConfigurationStoreNext operation. */
-export type KeyValuesListByConfigurationStoreNextResponse = KeyValueListResult;
 
 /** Optional parameters. */
 export interface AppConfigurationManagementClientOptionalParams
