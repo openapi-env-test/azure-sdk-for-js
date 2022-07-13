@@ -12,7 +12,7 @@ import {
   RecommendationsListOptionalParams,
   RecommendationsGenerateOptionalParams,
   RecommendationsGenerateResponse,
-  RecommendationsGetGenerateStatusOptionalParams,
+  RecommendationsGetGenerateRecommendationsStatusOptionalParams,
   RecommendationsGetOptionalParams,
   RecommendationsGetResponse
 } from "../models";
@@ -44,9 +44,9 @@ export interface Recommendations {
    *                    recommendation response header.
    * @param options The options parameters.
    */
-  getGenerateStatus(
+  getGenerateRecommendationsStatus(
     operationId: string,
-    options?: RecommendationsGetGenerateStatusOptionalParams
+    options?: RecommendationsGetGenerateRecommendationsStatusOptionalParams
   ): Promise<void>;
   /**
    * Obtains details of a cached recommendation.

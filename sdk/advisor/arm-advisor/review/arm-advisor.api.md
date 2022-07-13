@@ -16,11 +16,7 @@ export class AdvisorManagementClient extends coreClient.ServiceClient {
     // (undocumented)
     apiVersion: string;
     // (undocumented)
-    configurations: Configurations;
-    // (undocumented)
     operations: Operations;
-    // (undocumented)
-    recommendationMetadata: RecommendationMetadata;
     // (undocumented)
     recommendations: Recommendations;
     // (undocumented)
@@ -36,94 +32,8 @@ export interface AdvisorManagementClientOptionalParams extends coreClient.Servic
     endpoint?: string;
 }
 
-// @public (undocumented)
-export interface ArmErrorResponse {
-    error?: ARMErrorResponseBody;
-}
-
-// @public
-export interface ARMErrorResponseBody {
-    code?: string;
-    message?: string;
-}
-
 // @public
 export type Category = string;
-
-// @public
-export type ConfigData = Resource & {
-    exclude?: boolean;
-    lowCpuThreshold?: CpuThreshold;
-    digests?: DigestConfig[];
-};
-
-// @public
-export interface ConfigurationListResult {
-    nextLink?: string;
-    value?: ConfigData[];
-}
-
-// @public
-export type ConfigurationName = string;
-
-// @public
-export interface Configurations {
-    createInResourceGroup(configurationName: ConfigurationName, resourceGroup: string, configContract: ConfigData, options?: ConfigurationsCreateInResourceGroupOptionalParams): Promise<ConfigurationsCreateInResourceGroupResponse>;
-    createInSubscription(configurationName: ConfigurationName, configContract: ConfigData, options?: ConfigurationsCreateInSubscriptionOptionalParams): Promise<ConfigurationsCreateInSubscriptionResponse>;
-    listByResourceGroup(resourceGroup: string, options?: ConfigurationsListByResourceGroupOptionalParams): PagedAsyncIterableIterator<ConfigData>;
-    listBySubscription(options?: ConfigurationsListBySubscriptionOptionalParams): PagedAsyncIterableIterator<ConfigData>;
-}
-
-// @public
-export interface ConfigurationsCreateInResourceGroupOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type ConfigurationsCreateInResourceGroupResponse = ConfigData;
-
-// @public
-export interface ConfigurationsCreateInSubscriptionOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type ConfigurationsCreateInSubscriptionResponse = ConfigData;
-
-// @public
-export interface ConfigurationsListByResourceGroupOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type ConfigurationsListByResourceGroupResponse = ConfigurationListResult;
-
-// @public
-export interface ConfigurationsListBySubscriptionNextOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type ConfigurationsListBySubscriptionNextResponse = ConfigurationListResult;
-
-// @public
-export interface ConfigurationsListBySubscriptionOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type ConfigurationsListBySubscriptionResponse = ConfigurationListResult;
-
-// @public
-export type CpuThreshold = string;
-
-// @public
-export interface DigestConfig {
-    actionGroupResourceId?: string;
-    categories?: Category[];
-    frequency?: number;
-    language?: string;
-    name?: string;
-    state?: DigestConfigState;
-}
-
-// @public
-export type DigestConfigState = string;
 
 // @public
 export type Impact = string;
@@ -135,37 +45,9 @@ export enum KnownCategory {
     // (undocumented)
     HighAvailability = "HighAvailability",
     // (undocumented)
-    OperationalExcellence = "OperationalExcellence",
-    // (undocumented)
     Performance = "Performance",
     // (undocumented)
     Security = "Security"
-}
-
-// @public
-export enum KnownConfigurationName {
-    // (undocumented)
-    Default = "default"
-}
-
-// @public
-export enum KnownCpuThreshold {
-    // (undocumented)
-    Fifteen = "15",
-    // (undocumented)
-    Five = "5",
-    // (undocumented)
-    Ten = "10",
-    // (undocumented)
-    Twenty = "20"
-}
-
-// @public
-export enum KnownDigestConfigState {
-    // (undocumented)
-    Active = "Active",
-    // (undocumented)
-    Disabled = "Disabled"
 }
 
 // @public
@@ -186,35 +68,6 @@ export enum KnownRisk {
     None = "None",
     // (undocumented)
     Warning = "Warning"
-}
-
-// @public
-export enum KnownScenario {
-    // (undocumented)
-    Alerts = "Alerts"
-}
-
-// @public
-export interface MetadataEntity {
-    applicableScenarios?: Scenario[];
-    dependsOn?: string[];
-    displayName?: string;
-    id?: string;
-    name?: string;
-    supportedValues?: MetadataSupportedValueDetail[];
-    type?: string;
-}
-
-// @public
-export interface MetadataEntityListResult {
-    nextLink?: string;
-    value?: MetadataEntity[];
-}
-
-// @public
-export interface MetadataSupportedValueDetail {
-    displayName?: string;
-    id?: string;
 }
 
 // @public
@@ -257,37 +110,10 @@ export interface OperationsListOptionalParams extends coreClient.OperationOption
 export type OperationsListResponse = OperationEntityListResult;
 
 // @public
-export interface RecommendationMetadata {
-    get(name: string, options?: RecommendationMetadataGetOptionalParams): Promise<RecommendationMetadataGetResponse>;
-    list(options?: RecommendationMetadataListOptionalParams): PagedAsyncIterableIterator<MetadataEntity>;
-}
-
-// @public
-export interface RecommendationMetadataGetOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RecommendationMetadataGetResponse = MetadataEntity;
-
-// @public
-export interface RecommendationMetadataListNextOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RecommendationMetadataListNextResponse = MetadataEntityListResult;
-
-// @public
-export interface RecommendationMetadataListOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RecommendationMetadataListResponse = MetadataEntityListResult;
-
-// @public
 export interface Recommendations {
     generate(options?: RecommendationsGenerateOptionalParams): Promise<RecommendationsGenerateResponse>;
     get(resourceUri: string, recommendationId: string, options?: RecommendationsGetOptionalParams): Promise<RecommendationsGetResponse>;
-    getGenerateStatus(operationId: string, options?: RecommendationsGetGenerateStatusOptionalParams): Promise<void>;
+    getGenerateRecommendationsStatus(operationId: string, options?: RecommendationsGetGenerateRecommendationsStatusOptionalParams): Promise<void>;
     list(options?: RecommendationsListOptionalParams): PagedAsyncIterableIterator<ResourceRecommendationBase>;
 }
 
@@ -305,7 +131,7 @@ export interface RecommendationsGenerateOptionalParams extends coreClient.Operat
 export type RecommendationsGenerateResponse = RecommendationsGenerateHeaders;
 
 // @public
-export interface RecommendationsGetGenerateStatusOptionalParams extends coreClient.OperationOptions {
+export interface RecommendationsGetGenerateRecommendationsStatusOptionalParams extends coreClient.OperationOptions {
 }
 
 // @public
@@ -338,24 +164,18 @@ export type RecommendationsListResponse = ResourceRecommendationBaseListResult;
 // @public
 export interface Resource {
     readonly id?: string;
+    location?: string;
     readonly name?: string;
+    tags?: {
+        [propertyName: string]: string;
+    };
     readonly type?: string;
 }
 
 // @public
-export interface ResourceMetadata {
-    action?: {
-        [propertyName: string]: Record<string, unknown>;
-    };
-    plural?: string;
-    resourceId?: string;
-    singular?: string;
-    source?: string;
-}
-
-// @public
-export type ResourceRecommendationBase = Resource & {
+export interface ResourceRecommendationBase {
     category?: Category;
+    id?: string;
     impact?: Impact;
     impactedField?: string;
     impactedValue?: string;
@@ -363,28 +183,13 @@ export type ResourceRecommendationBase = Resource & {
     metadata?: {
         [propertyName: string]: Record<string, unknown>;
     };
+    name?: string;
     recommendationTypeId?: string;
     risk?: Risk;
     shortDescription?: ShortDescription;
     suppressionIds?: string[];
-    extendedProperties?: {
-        [propertyName: string]: string;
-    };
-    resourceMetadata?: ResourceMetadata;
-    description?: string;
-    label?: string;
-    learnMoreLink?: string;
-    potentialBenefits?: string;
-    actions?: {
-        [propertyName: string]: Record<string, unknown>;
-    }[];
-    remediation?: {
-        [propertyName: string]: Record<string, unknown>;
-    };
-    exposedMetadataProperties?: {
-        [propertyName: string]: Record<string, unknown>;
-    };
-};
+    type?: string;
+}
 
 // @public
 export interface ResourceRecommendationBaseListResult {
@@ -396,9 +201,6 @@ export interface ResourceRecommendationBaseListResult {
 export type Risk = string;
 
 // @public
-export type Scenario = string;
-
-// @public
 export interface ShortDescription {
     problem?: string;
     solution?: string;
@@ -408,21 +210,14 @@ export interface ShortDescription {
 export type SuppressionContract = Resource & {
     suppressionId?: string;
     ttl?: string;
-    readonly expirationTimeStamp?: Date;
 };
-
-// @public
-export interface SuppressionContractListResult {
-    nextLink?: string;
-    value?: SuppressionContract[];
-}
 
 // @public
 export interface Suppressions {
     create(resourceUri: string, recommendationId: string, name: string, suppressionContract: SuppressionContract, options?: SuppressionsCreateOptionalParams): Promise<SuppressionsCreateResponse>;
     delete(resourceUri: string, recommendationId: string, name: string, options?: SuppressionsDeleteOptionalParams): Promise<void>;
     get(resourceUri: string, recommendationId: string, name: string, options?: SuppressionsGetOptionalParams): Promise<SuppressionsGetResponse>;
-    list(options?: SuppressionsListOptionalParams): PagedAsyncIterableIterator<SuppressionContract>;
+    list(options?: SuppressionsListOptionalParams): Promise<SuppressionsListResponse>;
 }
 
 // @public
@@ -444,22 +239,11 @@ export interface SuppressionsGetOptionalParams extends coreClient.OperationOptio
 export type SuppressionsGetResponse = SuppressionContract;
 
 // @public
-export interface SuppressionsListNextOptionalParams extends coreClient.OperationOptions {
-    skipToken?: string;
-    top?: number;
-}
-
-// @public
-export type SuppressionsListNextResponse = SuppressionContractListResult;
-
-// @public
 export interface SuppressionsListOptionalParams extends coreClient.OperationOptions {
-    skipToken?: string;
-    top?: number;
 }
 
 // @public
-export type SuppressionsListResponse = SuppressionContractListResult;
+export type SuppressionsListResponse = SuppressionContract[];
 
 // (No @packageDocumentation comment for this package)
 

@@ -109,9 +109,6 @@ const listOperationSpec: coreClient.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.OperationEntityListResult
-    },
-    default: {
-      bodyMapper: Mappers.ArmErrorResponse
     }
   },
   queryParameters: [Parameters.apiVersion],
@@ -125,9 +122,6 @@ const listNextOperationSpec: coreClient.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.OperationEntityListResult
-    },
-    default: {
-      bodyMapper: Mappers.ArmErrorResponse
     }
   },
   queryParameters: [Parameters.apiVersion],

@@ -7,66 +7,16 @@
  */
 
 import {
-  OperationParameter,
   OperationURLParameter,
-  OperationQueryParameter
+  OperationQueryParameter,
+  OperationParameter
 } from "@azure/core-client";
-import {
-  ConfigData as ConfigDataMapper,
-  SuppressionContract as SuppressionContractMapper
-} from "../models/mappers";
-
-export const accept: OperationParameter = {
-  parameterPath: "accept",
-  mapper: {
-    defaultValue: "application/json",
-    isConstant: true,
-    serializedName: "Accept",
-    type: {
-      name: "String"
-    }
-  }
-};
+import { SuppressionContract as SuppressionContractMapper } from "../models/mappers";
 
 export const $host: OperationURLParameter = {
   parameterPath: "$host",
   mapper: {
     serializedName: "$host",
-    required: true,
-    type: {
-      name: "String"
-    }
-  },
-  skipEncoding: true
-};
-
-export const name: OperationURLParameter = {
-  parameterPath: "name",
-  mapper: {
-    serializedName: "name",
-    required: true,
-    type: {
-      name: "String"
-    }
-  }
-};
-
-export const apiVersion: OperationQueryParameter = {
-  parameterPath: "apiVersion",
-  mapper: {
-    defaultValue: "2020-01-01",
-    isConstant: true,
-    serializedName: "api-version",
-    type: {
-      name: "String"
-    }
-  }
-};
-
-export const nextLink: OperationURLParameter = {
-  parameterPath: "nextLink",
-  mapper: {
-    serializedName: "nextLink",
     required: true,
     type: {
       name: "String"
@@ -86,39 +36,12 @@ export const subscriptionId: OperationURLParameter = {
   }
 };
 
-export const contentType: OperationParameter = {
-  parameterPath: ["options", "contentType"],
+export const apiVersion: OperationQueryParameter = {
+  parameterPath: "apiVersion",
   mapper: {
-    defaultValue: "application/json",
+    defaultValue: "2022-06-01",
     isConstant: true,
-    serializedName: "Content-Type",
-    type: {
-      name: "String"
-    }
-  }
-};
-
-export const configContract: OperationParameter = {
-  parameterPath: "configContract",
-  mapper: ConfigDataMapper
-};
-
-export const configurationName: OperationURLParameter = {
-  parameterPath: "configurationName",
-  mapper: {
-    serializedName: "configurationName",
-    required: true,
-    type: {
-      name: "String"
-    }
-  }
-};
-
-export const resourceGroup: OperationURLParameter = {
-  parameterPath: "resourceGroup",
-  mapper: {
-    serializedName: "resourceGroup",
-    required: true,
+    serializedName: "api-version",
     type: {
       name: "String"
     }
@@ -132,6 +55,18 @@ export const operationId: OperationURLParameter = {
     required: true,
     type: {
       name: "Uuid"
+    }
+  }
+};
+
+export const accept: OperationParameter = {
+  parameterPath: "accept",
+  mapper: {
+    defaultValue: "application/json",
+    isConstant: true,
+    serializedName: "Accept",
+    type: {
+      name: "String"
     }
   }
 };
@@ -182,6 +117,41 @@ export const recommendationId: OperationURLParameter = {
   mapper: {
     serializedName: "recommendationId",
     required: true,
+    type: {
+      name: "String"
+    }
+  }
+};
+
+export const nextLink: OperationURLParameter = {
+  parameterPath: "nextLink",
+  mapper: {
+    serializedName: "nextLink",
+    required: true,
+    type: {
+      name: "String"
+    }
+  },
+  skipEncoding: true
+};
+
+export const name: OperationURLParameter = {
+  parameterPath: "name",
+  mapper: {
+    serializedName: "name",
+    required: true,
+    type: {
+      name: "String"
+    }
+  }
+};
+
+export const contentType: OperationParameter = {
+  parameterPath: ["options", "contentType"],
+  mapper: {
+    defaultValue: "application/json",
+    isConstant: true,
+    serializedName: "Content-Type",
     type: {
       name: "String"
     }

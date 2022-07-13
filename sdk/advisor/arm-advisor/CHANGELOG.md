@@ -1,15 +1,31 @@
 # Release History
+    
+## 4.0.0 (2022-07-13)
+    
+**Features**
 
-## 3.0.2 (Unreleased)
+  - Added operation Recommendations.getGenerateRecommendationsStatus
+  - Added Interface RecommendationsGetGenerateRecommendationsStatusOptionalParams
+  - Added Interface ResourceRecommendationBase
+  - Interface Resource has a new optional parameter location
+  - Interface Resource has a new optional parameter tags
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Removed operation group Configurations
+  - Removed operation group RecommendationMetadata
+  - Removed operation Recommendations.getGenerateStatus
+  - Interface SuppressionsListOptionalParams no longer has parameter skipToken
+  - Interface SuppressionsListOptionalParams no longer has parameter top
+  - Class AdvisorManagementClient no longer has parameter configurations
+  - Class AdvisorManagementClient no longer has parameter recommendationMetadata
+  - Type Alias SuppressionContract no longer has parameter expirationTimeStamp
+  - Removed Enum KnownConfigurationName
+  - Removed Enum KnownCpuThreshold
+  - Removed Enum KnownDigestConfigState
+  - Removed Enum KnownScenario
+  - Enum KnownCategory no longer has value OperationalExcellence
+    
 ## 3.0.1 (2022-03-22)
 
 **features**

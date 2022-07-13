@@ -18,7 +18,7 @@ import {
   RecommendationsListOptionalParams,
   RecommendationsGenerateOptionalParams,
   RecommendationsGenerateResponse,
-  RecommendationsGetGenerateStatusOptionalParams,
+  RecommendationsGetGenerateRecommendationsStatusOptionalParams,
   RecommendationsListResponse,
   RecommendationsGetOptionalParams,
   RecommendationsGetResponse,
@@ -100,13 +100,13 @@ export class RecommendationsImpl implements Recommendations {
    *                    recommendation response header.
    * @param options The options parameters.
    */
-  getGenerateStatus(
+  getGenerateRecommendationsStatus(
     operationId: string,
-    options?: RecommendationsGetGenerateStatusOptionalParams
+    options?: RecommendationsGetGenerateRecommendationsStatusOptionalParams
   ): Promise<void> {
     return this.client.sendOperationRequest(
       { operationId, options },
-      getGenerateStatusOperationSpec
+      getGenerateRecommendationsStatusOperationSpec
     );
   }
 
@@ -164,34 +164,23 @@ const generateOperationSpec: coreClient.OperationSpec = {
   responses: {
     202: {
       headersMapper: Mappers.RecommendationsGenerateHeaders
-    },
-    default: {
-      bodyMapper: Mappers.ArmErrorResponse
     }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [Parameters.$host, Parameters.subscriptionId],
-  headerParameters: [Parameters.accept],
   serializer
 };
-const getGenerateStatusOperationSpec: coreClient.OperationSpec = {
+const getGenerateRecommendationsStatusOperationSpec: coreClient.OperationSpec = {
   path:
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}",
   httpMethod: "GET",
-  responses: {
-    202: {},
-    204: {},
-    default: {
-      bodyMapper: Mappers.ArmErrorResponse
-    }
-  },
+  responses: { 202: {}, 204: {} },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.operationId
   ],
-  headerParameters: [Parameters.accept],
   serializer
 };
 const listOperationSpec: coreClient.OperationSpec = {
@@ -201,9 +190,6 @@ const listOperationSpec: coreClient.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.ResourceRecommendationBaseListResult
-    },
-    default: {
-      bodyMapper: Mappers.ArmErrorResponse
     }
   },
   queryParameters: [
@@ -223,9 +209,6 @@ const getOperationSpec: coreClient.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.ResourceRecommendationBase
-    },
-    default: {
-      bodyMapper: Mappers.ArmErrorResponse
     }
   },
   queryParameters: [Parameters.apiVersion],
@@ -243,9 +226,6 @@ const listNextOperationSpec: coreClient.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.ResourceRecommendationBaseListResult
-    },
-    default: {
-      bodyMapper: Mappers.ArmErrorResponse
     }
   },
   queryParameters: [
@@ -256,8 +236,8 @@ const listNextOperationSpec: coreClient.OperationSpec = {
   ],
   urlParameters: [
     Parameters.$host,
-    Parameters.nextLink,
-    Parameters.subscriptionId
+    Parameters.subscriptionId,
+    Parameters.nextLink
   ],
   headerParameters: [Parameters.accept],
   serializer
