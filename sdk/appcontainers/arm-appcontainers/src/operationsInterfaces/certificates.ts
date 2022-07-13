@@ -26,65 +26,65 @@ export interface Certificates {
   /**
    * Get the Certificates in a given managed environment.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param environmentName Name of the Managed Environment.
+   * @param managedEnvironmentName Name of the Managed Environment.
    * @param options The options parameters.
    */
   list(
     resourceGroupName: string,
-    environmentName: string,
+    managedEnvironmentName: string,
     options?: CertificatesListOptionalParams
   ): PagedAsyncIterableIterator<Certificate>;
   /**
    * Get the specified Certificate.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param environmentName Name of the Managed Environment.
-   * @param certificateName Name of the Certificate.
+   * @param managedEnvironmentName Name of the Managed Environment.
+   * @param name Name of the Certificate.
    * @param options The options parameters.
    */
   get(
     resourceGroupName: string,
-    environmentName: string,
-    certificateName: string,
+    managedEnvironmentName: string,
+    name: string,
     options?: CertificatesGetOptionalParams
   ): Promise<CertificatesGetResponse>;
   /**
    * Create or Update a Certificate.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param environmentName Name of the Managed Environment.
-   * @param certificateName Name of the Certificate.
+   * @param managedEnvironmentName Name of the Managed Environment.
+   * @param name Name of the Certificate.
    * @param options The options parameters.
    */
   createOrUpdate(
     resourceGroupName: string,
-    environmentName: string,
-    certificateName: string,
+    managedEnvironmentName: string,
+    name: string,
     options?: CertificatesCreateOrUpdateOptionalParams
   ): Promise<CertificatesCreateOrUpdateResponse>;
   /**
    * Deletes the specified Certificate.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param environmentName Name of the Managed Environment.
-   * @param certificateName Name of the Certificate.
+   * @param managedEnvironmentName Name of the Managed Environment.
+   * @param name Name of the Certificate.
    * @param options The options parameters.
    */
   delete(
     resourceGroupName: string,
-    environmentName: string,
-    certificateName: string,
+    managedEnvironmentName: string,
+    name: string,
     options?: CertificatesDeleteOptionalParams
   ): Promise<void>;
   /**
    * Patches a certificate. Currently only patching of tags is supported
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param environmentName Name of the Managed Environment.
-   * @param certificateName Name of the Certificate.
+   * @param managedEnvironmentName Name of the Managed Environment.
+   * @param name Name of the Certificate.
    * @param certificateEnvelope Properties of a certificate that need to be updated
    * @param options The options parameters.
    */
   update(
     resourceGroupName: string,
-    environmentName: string,
-    certificateName: string,
+    managedEnvironmentName: string,
+    name: string,
     certificateEnvelope: CertificatePatch,
     options?: CertificatesUpdateOptionalParams
   ): Promise<CertificatesUpdateResponse>;

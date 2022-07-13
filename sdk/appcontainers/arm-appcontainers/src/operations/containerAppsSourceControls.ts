@@ -133,17 +133,17 @@ export class ContainerAppsSourceControlsImpl
    * Get a SourceControl of a Container App.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param containerAppName Name of the Container App.
-   * @param sourceControlName Name of the Container App SourceControl.
+   * @param name Name of the Container App SourceControl.
    * @param options The options parameters.
    */
   get(
     resourceGroupName: string,
     containerAppName: string,
-    sourceControlName: string,
+    name: string,
     options?: ContainerAppsSourceControlsGetOptionalParams
   ): Promise<ContainerAppsSourceControlsGetResponse> {
     return this.client.sendOperationRequest(
-      { resourceGroupName, containerAppName, sourceControlName, options },
+      { resourceGroupName, containerAppName, name, options },
       getOperationSpec
     );
   }
@@ -152,14 +152,14 @@ export class ContainerAppsSourceControlsImpl
    * Create or update the SourceControl for a Container App.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param containerAppName Name of the Container App.
-   * @param sourceControlName Name of the Container App SourceControl.
+   * @param name Name of the Container App SourceControl.
    * @param sourceControlEnvelope Properties used to create a Container App SourceControl
    * @param options The options parameters.
    */
   async beginCreateOrUpdate(
     resourceGroupName: string,
     containerAppName: string,
-    sourceControlName: string,
+    name: string,
     sourceControlEnvelope: SourceControl,
     options?: ContainerAppsSourceControlsCreateOrUpdateOptionalParams
   ): Promise<
@@ -212,7 +212,7 @@ export class ContainerAppsSourceControlsImpl
       {
         resourceGroupName,
         containerAppName,
-        sourceControlName,
+        name,
         sourceControlEnvelope,
         options
       },
@@ -230,21 +230,21 @@ export class ContainerAppsSourceControlsImpl
    * Create or update the SourceControl for a Container App.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param containerAppName Name of the Container App.
-   * @param sourceControlName Name of the Container App SourceControl.
+   * @param name Name of the Container App SourceControl.
    * @param sourceControlEnvelope Properties used to create a Container App SourceControl
    * @param options The options parameters.
    */
   async beginCreateOrUpdateAndWait(
     resourceGroupName: string,
     containerAppName: string,
-    sourceControlName: string,
+    name: string,
     sourceControlEnvelope: SourceControl,
     options?: ContainerAppsSourceControlsCreateOrUpdateOptionalParams
   ): Promise<ContainerAppsSourceControlsCreateOrUpdateResponse> {
     const poller = await this.beginCreateOrUpdate(
       resourceGroupName,
       containerAppName,
-      sourceControlName,
+      name,
       sourceControlEnvelope,
       options
     );
@@ -255,13 +255,13 @@ export class ContainerAppsSourceControlsImpl
    * Delete a Container App SourceControl.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param containerAppName Name of the Container App.
-   * @param sourceControlName Name of the Container App SourceControl.
+   * @param name Name of the Container App SourceControl.
    * @param options The options parameters.
    */
   async beginDelete(
     resourceGroupName: string,
     containerAppName: string,
-    sourceControlName: string,
+    name: string,
     options?: ContainerAppsSourceControlsDeleteOptionalParams
   ): Promise<PollerLike<PollOperationState<void>, void>> {
     const directSendOperation = async (
@@ -305,7 +305,7 @@ export class ContainerAppsSourceControlsImpl
 
     const lro = new LroImpl(
       sendOperation,
-      { resourceGroupName, containerAppName, sourceControlName, options },
+      { resourceGroupName, containerAppName, name, options },
       deleteOperationSpec
     );
     const poller = new LroEngine(lro, {
@@ -320,19 +320,19 @@ export class ContainerAppsSourceControlsImpl
    * Delete a Container App SourceControl.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param containerAppName Name of the Container App.
-   * @param sourceControlName Name of the Container App SourceControl.
+   * @param name Name of the Container App SourceControl.
    * @param options The options parameters.
    */
   async beginDeleteAndWait(
     resourceGroupName: string,
     containerAppName: string,
-    sourceControlName: string,
+    name: string,
     options?: ContainerAppsSourceControlsDeleteOptionalParams
   ): Promise<void> {
     const poller = await this.beginDelete(
       resourceGroupName,
       containerAppName,
-      sourceControlName,
+      name,
       options
     );
     return poller.pollUntilDone();
@@ -384,7 +384,7 @@ const listByContainerAppOperationSpec: coreClient.OperationSpec = {
 };
 const getOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/sourcecontrols/{sourceControlName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/sourcecontrols/{name}",
   httpMethod: "GET",
   responses: {
     200: {
@@ -400,14 +400,14 @@ const getOperationSpec: coreClient.OperationSpec = {
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.containerAppName,
-    Parameters.sourceControlName
+    Parameters.name
   ],
   headerParameters: [Parameters.accept],
   serializer
 };
 const createOrUpdateOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/sourcecontrols/{sourceControlName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/sourcecontrols/{name}",
   httpMethod: "PUT",
   responses: {
     200: {
@@ -433,7 +433,7 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.containerAppName,
-    Parameters.sourceControlName
+    Parameters.name
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
   mediaType: "json",
@@ -441,7 +441,7 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
 };
 const deleteOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/sourcecontrols/{sourceControlName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/sourcecontrols/{name}",
   httpMethod: "DELETE",
   responses: {
     200: {},
@@ -458,7 +458,7 @@ const deleteOperationSpec: coreClient.OperationSpec = {
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.containerAppName,
-    Parameters.sourceControlName
+    Parameters.name
   ],
   headerParameters: [Parameters.accept],
   serializer

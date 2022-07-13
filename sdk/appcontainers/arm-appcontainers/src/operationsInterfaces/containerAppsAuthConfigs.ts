@@ -35,27 +35,27 @@ export interface ContainerAppsAuthConfigs {
    * Get a AuthConfig of a Container App.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param containerAppName Name of the Container App.
-   * @param authConfigName Name of the Container App AuthConfig.
+   * @param name Name of the Container App AuthConfig.
    * @param options The options parameters.
    */
   get(
     resourceGroupName: string,
     containerAppName: string,
-    authConfigName: string,
+    name: string,
     options?: ContainerAppsAuthConfigsGetOptionalParams
   ): Promise<ContainerAppsAuthConfigsGetResponse>;
   /**
    * Create or update the AuthConfig for a Container App.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param containerAppName Name of the Container App.
-   * @param authConfigName Name of the Container App AuthConfig.
+   * @param name Name of the Container App AuthConfig.
    * @param authConfigEnvelope Properties used to create a Container App AuthConfig
    * @param options The options parameters.
    */
   createOrUpdate(
     resourceGroupName: string,
     containerAppName: string,
-    authConfigName: string,
+    name: string,
     authConfigEnvelope: AuthConfig,
     options?: ContainerAppsAuthConfigsCreateOrUpdateOptionalParams
   ): Promise<ContainerAppsAuthConfigsCreateOrUpdateResponse>;
@@ -63,13 +63,13 @@ export interface ContainerAppsAuthConfigs {
    * Delete a Container App AuthConfig.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param containerAppName Name of the Container App.
-   * @param authConfigName Name of the Container App AuthConfig.
+   * @param name Name of the Container App AuthConfig.
    * @param options The options parameters.
    */
   delete(
     resourceGroupName: string,
     containerAppName: string,
-    authConfigName: string,
+    name: string,
     options?: ContainerAppsAuthConfigsDeleteOptionalParams
   ): Promise<void>;
 }

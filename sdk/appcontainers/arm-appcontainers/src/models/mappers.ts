@@ -1467,12 +1467,6 @@ export const TrafficWeight: coreClient.CompositeMapper = {
         type: {
           name: "Boolean"
         }
-      },
-      label: {
-        serializedName: "label",
-        type: {
-          name: "String"
-        }
       }
     }
   }
@@ -1526,12 +1520,6 @@ export const RegistryCredentials: coreClient.CompositeMapper = {
       },
       passwordSecretRef: {
         serializedName: "passwordSecretRef",
-        type: {
-          name: "String"
-        }
-      },
-      identity: {
-        serializedName: "identity",
         type: {
           name: "String"
         }
@@ -2149,6 +2137,22 @@ export const Volume: coreClient.CompositeMapper = {
   }
 };
 
+export const ContainerAppPatch: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "ContainerAppPatch",
+    modelProperties: {
+      tags: {
+        serializedName: "tags",
+        type: {
+          name: "Dictionary",
+          value: { type: { name: "String" } }
+        }
+      }
+    }
+  }
+};
+
 export const SecretsCollection: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -2334,28 +2338,6 @@ export const DaprMetadata: coreClient.CompositeMapper = {
         serializedName: "secretRef",
         type: {
           name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const DaprSecretsCollection: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "DaprSecretsCollection",
-    modelProperties: {
-      value: {
-        serializedName: "value",
-        required: true,
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "Secret"
-            }
-          }
         }
       }
     }
@@ -2573,6 +2555,22 @@ export const LogAnalyticsConfiguration: coreClient.CompositeMapper = {
   }
 };
 
+export const ManagedEnvironmentPatch: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "ManagedEnvironmentPatch",
+    modelProperties: {
+      tags: {
+        serializedName: "tags",
+        type: {
+          name: "Dictionary",
+          value: { type: { name: "String" } }
+        }
+      }
+    }
+  }
+};
+
 export const CertificateCollection: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -2689,54 +2687,6 @@ export const CertificatePatch: coreClient.CompositeMapper = {
         type: {
           name: "Dictionary",
           value: { type: { name: "String" } }
-        }
-      }
-    }
-  }
-};
-
-export const CheckNameAvailabilityRequest: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "CheckNameAvailabilityRequest",
-    modelProperties: {
-      name: {
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      type: {
-        serializedName: "type",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const CheckNameAvailabilityResponse: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "CheckNameAvailabilityResponse",
-    modelProperties: {
-      nameAvailable: {
-        serializedName: "nameAvailable",
-        type: {
-          name: "Boolean"
-        }
-      },
-      reason: {
-        serializedName: "reason",
-        type: {
-          name: "String"
-        }
-      },
-      message: {
-        serializedName: "message",
-        type: {
-          name: "String"
         }
       }
     }
@@ -2862,14 +2812,8 @@ export const GithubActionConfiguration: coreClient.CompositeMapper = {
           className: "AzureCredentials"
         }
       },
-      contextPath: {
-        serializedName: "contextPath",
-        type: {
-          name: "String"
-        }
-      },
-      image: {
-        serializedName: "image",
+      dockerfilePath: {
+        serializedName: "dockerfilePath",
         type: {
           name: "String"
         }
@@ -3469,12 +3413,6 @@ export const ManagedEnvironment: coreClient.CompositeMapper = {
           name: "String"
         }
       },
-      daprAIConnectionString: {
-        serializedName: "properties.daprAIConnectionString",
-        type: {
-          name: "String"
-        }
-      },
       vnetConfiguration: {
         serializedName: "properties.vnetConfiguration",
         type: {
@@ -3508,12 +3446,6 @@ export const ManagedEnvironment: coreClient.CompositeMapper = {
         type: {
           name: "Composite",
           className: "AppLogsConfiguration"
-        }
-      },
-      zoneRedundant: {
-        serializedName: "properties.zoneRedundant",
-        type: {
-          name: "Boolean"
         }
       }
     }

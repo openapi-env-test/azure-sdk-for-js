@@ -22,53 +22,53 @@ export interface ManagedEnvironmentsStorages {
   /**
    * Get all storages for a managedEnvironment.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param environmentName Name of the Environment.
+   * @param envName Name of the Environment.
    * @param options The options parameters.
    */
   list(
     resourceGroupName: string,
-    environmentName: string,
+    envName: string,
     options?: ManagedEnvironmentsStoragesListOptionalParams
   ): Promise<ManagedEnvironmentsStoragesListResponse>;
   /**
    * Get storage for a managedEnvironment.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param environmentName Name of the Environment.
-   * @param storageName Name of the storage.
+   * @param envName Name of the Environment.
+   * @param name Name of the storage.
    * @param options The options parameters.
    */
   get(
     resourceGroupName: string,
-    environmentName: string,
-    storageName: string,
+    envName: string,
+    name: string,
     options?: ManagedEnvironmentsStoragesGetOptionalParams
   ): Promise<ManagedEnvironmentsStoragesGetResponse>;
   /**
    * Create or update storage for a managedEnvironment.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param environmentName Name of the Environment.
-   * @param storageName Name of the storage.
+   * @param envName Name of the Environment.
+   * @param name Name of the storage.
    * @param storageEnvelope Configuration details of storage.
    * @param options The options parameters.
    */
   createOrUpdate(
     resourceGroupName: string,
-    environmentName: string,
-    storageName: string,
+    envName: string,
+    name: string,
     storageEnvelope: ManagedEnvironmentStorage,
     options?: ManagedEnvironmentsStoragesCreateOrUpdateOptionalParams
   ): Promise<ManagedEnvironmentsStoragesCreateOrUpdateResponse>;
   /**
    * Delete storage for a managedEnvironment.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param environmentName Name of the Environment.
-   * @param storageName Name of the storage.
+   * @param envName Name of the Environment.
+   * @param name Name of the storage.
    * @param options The options parameters.
    */
   delete(
     resourceGroupName: string,
-    environmentName: string,
-    storageName: string,
+    envName: string,
+    name: string,
     options?: ManagedEnvironmentsStoragesDeleteOptionalParams
   ): Promise<void>;
 }

@@ -519,7 +519,7 @@ export interface ManagedServiceIdentity {
   readonly tenantId?: string;
   /** Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed). */
   type: ManagedServiceIdentityType;
-  /** The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests. */
+  /** The set of  user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests. */
   userAssignedIdentities?: { [propertyName: string]: UserAssignedIdentity };
 }
 
@@ -543,7 +543,7 @@ export interface Configuration {
   secrets?: Secret[];
   /**
    * ActiveRevisionsMode controls how active revisions are handled for the Container app:
-   * <list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode. If no value if provided, this is the default.</item></list>
+   * <list><item>Multiple: multiple revisions can be active. If no value if provided, this is the default</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode</item></list>
    */
   activeRevisionsMode?: ActiveRevisionsMode;
   /** Ingress configurations. */
@@ -591,8 +591,6 @@ export interface TrafficWeight {
   weight?: number;
   /** Indicates that the traffic weight belongs to a latest stable revision */
   latestRevision?: boolean;
-  /** Associates a traffic label with a revision */
-  label?: string;
 }
 
 /** Custom Domain of a Container App */
@@ -613,8 +611,6 @@ export interface RegistryCredentials {
   username?: string;
   /** The name of the Secret that contains the registry login password */
   passwordSecretRef?: string;
-  /** A Managed Identity to use to authenticate with Azure Container Registry. For user-assigned identities, use the full user-assigned identity Resource ID. For system-assigned identities, use 'system' */
-  identity?: string;
 }
 
 /** Container App Dapr configuration. */
@@ -819,6 +815,12 @@ export interface Volume {
   storageName?: string;
 }
 
+/** Container App Patch. */
+export interface ContainerAppPatch {
+  /** Application-specific metadata in the form of key-value pairs. */
+  tags?: { [propertyName: string]: string };
+}
+
 /** Container App Secrets Collection ARM resource. */
 export interface SecretsCollection {
   /** Collection of resources. */
@@ -891,12 +893,6 @@ export interface DaprMetadata {
   secretRef?: string;
 }
 
-/** Dapr component Secrets Collection ARM resource. */
-export interface DaprSecretsCollection {
-  /** Collection of secrets used by a Dapr component */
-  value: Secret[];
-}
-
 /** Available operations of the service */
 export interface AvailableOperations {
   /** Collection of available operation details */
@@ -945,7 +941,7 @@ export interface ManagedEnvironmentsCollection {
 
 /** Configuration properties for apps environment to join a Virtual Network */
 export interface VnetConfiguration {
-  /** Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource, must provide ControlPlaneSubnetResourceId and AppSubnetResourceId if enabling this property */
+  /** Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource. They must provide runtimeSubnetId and infrastructureSubnetId if enabling this property */
   internal?: boolean;
   /** Resource ID of a subnet for infrastructure components. This subnet must be in the same VNET as the subnet defined in runtimeSubnetId. Must not overlap with any other provided IP ranges. */
   infrastructureSubnetId?: string;
@@ -973,6 +969,12 @@ export interface LogAnalyticsConfiguration {
   customerId?: string;
   /** Log analytics customer key */
   sharedKey?: string;
+}
+
+/** An environment for hosting container apps */
+export interface ManagedEnvironmentPatch {
+  /** Application-specific metadata in the form of key-value pairs. */
+  tags?: { [propertyName: string]: string };
 }
 
 /** Collection of Certificates. */
@@ -1040,24 +1042,6 @@ export interface CertificatePatch {
   tags?: { [propertyName: string]: string };
 }
 
-/** The check availability request body. */
-export interface CheckNameAvailabilityRequest {
-  /** The name of the resource for which availability needs to be checked. */
-  name?: string;
-  /** The resource type. */
-  type?: string;
-}
-
-/** The check availability result. */
-export interface CheckNameAvailabilityResponse {
-  /** Indicates if the resource name is available. */
-  nameAvailable?: boolean;
-  /** The reason why the given name is not available. */
-  reason?: CheckNameAvailabilityReason;
-  /** Detailed reason why the given name is available. */
-  message?: string;
-}
-
 /** Collection of Storage for Environments */
 export interface ManagedEnvironmentStoragesCollection {
   /** Collection of storage resources. */
@@ -1099,17 +1083,15 @@ export interface GithubActionConfiguration {
   registryInfo?: RegistryInfo;
   /** AzureCredentials configurations. */
   azureCredentials?: AzureCredentials;
-  /** Context path */
-  contextPath?: string;
-  /** Image name */
-  image?: string;
+  /** Docker file path */
+  dockerfilePath?: string;
   /** Code or Image */
   publishType?: string;
   /** Operation system */
   os?: string;
   /** Runtime stack */
   runtimeStack?: string;
-  /** Runtime version */
+  /** Runtime Version */
   runtimeVersion?: string;
 }
 
@@ -1136,7 +1118,7 @@ export interface AzureCredentials {
 }
 
 /** The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location */
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 /** The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location' */
 export type TrackedResource = Resource & {
@@ -1356,8 +1338,6 @@ export type ManagedEnvironment = TrackedResource & {
   readonly provisioningState?: EnvironmentProvisioningState;
   /** Azure Monitor instrumentation key used by Dapr to export Service to Service communication telemetry */
   daprAIInstrumentationKey?: string;
-  /** Application Insights connection string used by Dapr to export Service to Service communication telemetry */
-  daprAIConnectionString?: string;
   /** Vnet configuration for the environment */
   vnetConfiguration?: VnetConfiguration;
   /**
@@ -1381,8 +1361,6 @@ export type ManagedEnvironment = TrackedResource & {
    * supported
    */
   appLogsConfiguration?: AppLogsConfiguration;
-  /** Whether or not this Managed Environment is zone-redundant. */
-  zoneRedundant?: boolean;
 };
 
 /** Certificate used for Custom Domain bindings of Container Apps in a Managed Environment */
@@ -1661,22 +1639,6 @@ export enum KnownCertificateProvisioningState {
  */
 export type CertificateProvisioningState = string;
 
-/** Known values of {@link CheckNameAvailabilityReason} that the service accepts. */
-export enum KnownCheckNameAvailabilityReason {
-  Invalid = "Invalid",
-  AlreadyExists = "AlreadyExists"
-}
-
-/**
- * Defines values for CheckNameAvailabilityReason. \
- * {@link KnownCheckNameAvailabilityReason} can be used interchangeably with CheckNameAvailabilityReason,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **Invalid** \
- * **AlreadyExists**
- */
-export type CheckNameAvailabilityReason = string;
-
 /** Known values of {@link AccessMode} that the service accepts. */
 export enum KnownAccessMode {
   ReadOnly = "ReadOnly",
@@ -1803,12 +1765,10 @@ export interface ContainerAppsDeleteOptionalParams
 
 /** Optional parameters. */
 export interface ContainerAppsUpdateOptionalParams
-  extends coreClient.OperationOptions {
-  /** Delay to wait until next poll, in milliseconds. */
-  updateIntervalInMs?: number;
-  /** A serialized poller which can be used to resume an existing paused Long-Running-Operation. */
-  resumeFrom?: string;
-}
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the update operation. */
+export type ContainerAppsUpdateResponse = ContainerApp;
 
 /** Optional parameters. */
 export interface ContainerAppsListCustomHostNameAnalysisOptionalParams
@@ -1843,10 +1803,7 @@ export type ContainerAppsListByResourceGroupNextResponse = ContainerAppCollectio
 
 /** Optional parameters. */
 export interface ContainerAppsRevisionsListRevisionsOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. */
-  filter?: string;
-}
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listRevisions operation. */
 export type ContainerAppsRevisionsListRevisionsResponse = RevisionCollection;
@@ -1872,10 +1829,7 @@ export interface ContainerAppsRevisionsRestartRevisionOptionalParams
 
 /** Optional parameters. */
 export interface ContainerAppsRevisionsListRevisionsNextOptionalParams
-  extends coreClient.OperationOptions {
-  /** The filter to apply on the operation. */
-  filter?: string;
-}
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listRevisionsNext operation. */
 export type ContainerAppsRevisionsListRevisionsNextResponse = RevisionCollection;
@@ -1918,13 +1872,6 @@ export type DaprComponentsCreateOrUpdateResponse = DaprComponent;
 /** Optional parameters. */
 export interface DaprComponentsDeleteOptionalParams
   extends coreClient.OperationOptions {}
-
-/** Optional parameters. */
-export interface DaprComponentsListSecretsOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the listSecrets operation. */
-export type DaprComponentsListSecretsResponse = DaprSecretsCollection;
 
 /** Optional parameters. */
 export interface DaprComponentsListNextOptionalParams
@@ -1991,12 +1938,10 @@ export interface ManagedEnvironmentsDeleteOptionalParams
 
 /** Optional parameters. */
 export interface ManagedEnvironmentsUpdateOptionalParams
-  extends coreClient.OperationOptions {
-  /** Delay to wait until next poll, in milliseconds. */
-  updateIntervalInMs?: number;
-  /** A serialized poller which can be used to resume an existing paused Long-Running-Operation. */
-  resumeFrom?: string;
-}
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the update operation. */
+export type ManagedEnvironmentsUpdateResponse = ManagedEnvironment;
 
 /** Optional parameters. */
 export interface ManagedEnvironmentsListBySubscriptionNextOptionalParams
@@ -2053,13 +1998,6 @@ export interface CertificatesListNextOptionalParams
 
 /** Contains response data for the listNext operation. */
 export type CertificatesListNextResponse = CertificateCollection;
-
-/** Optional parameters. */
-export interface NamespacesCheckNameAvailabilityOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the checkNameAvailability operation. */
-export type NamespacesCheckNameAvailabilityResponse = CheckNameAvailabilityResponse;
 
 /** Optional parameters. */
 export interface ManagedEnvironmentsStoragesListOptionalParams

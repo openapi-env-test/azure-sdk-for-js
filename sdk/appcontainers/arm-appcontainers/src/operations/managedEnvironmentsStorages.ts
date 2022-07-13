@@ -38,16 +38,16 @@ export class ManagedEnvironmentsStoragesImpl
   /**
    * Get all storages for a managedEnvironment.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param environmentName Name of the Environment.
+   * @param envName Name of the Environment.
    * @param options The options parameters.
    */
   list(
     resourceGroupName: string,
-    environmentName: string,
+    envName: string,
     options?: ManagedEnvironmentsStoragesListOptionalParams
   ): Promise<ManagedEnvironmentsStoragesListResponse> {
     return this.client.sendOperationRequest(
-      { resourceGroupName, environmentName, options },
+      { resourceGroupName, envName, options },
       listOperationSpec
     );
   }
@@ -55,18 +55,18 @@ export class ManagedEnvironmentsStoragesImpl
   /**
    * Get storage for a managedEnvironment.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param environmentName Name of the Environment.
-   * @param storageName Name of the storage.
+   * @param envName Name of the Environment.
+   * @param name Name of the storage.
    * @param options The options parameters.
    */
   get(
     resourceGroupName: string,
-    environmentName: string,
-    storageName: string,
+    envName: string,
+    name: string,
     options?: ManagedEnvironmentsStoragesGetOptionalParams
   ): Promise<ManagedEnvironmentsStoragesGetResponse> {
     return this.client.sendOperationRequest(
-      { resourceGroupName, environmentName, storageName, options },
+      { resourceGroupName, envName, name, options },
       getOperationSpec
     );
   }
@@ -74,26 +74,20 @@ export class ManagedEnvironmentsStoragesImpl
   /**
    * Create or update storage for a managedEnvironment.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param environmentName Name of the Environment.
-   * @param storageName Name of the storage.
+   * @param envName Name of the Environment.
+   * @param name Name of the storage.
    * @param storageEnvelope Configuration details of storage.
    * @param options The options parameters.
    */
   createOrUpdate(
     resourceGroupName: string,
-    environmentName: string,
-    storageName: string,
+    envName: string,
+    name: string,
     storageEnvelope: ManagedEnvironmentStorage,
     options?: ManagedEnvironmentsStoragesCreateOrUpdateOptionalParams
   ): Promise<ManagedEnvironmentsStoragesCreateOrUpdateResponse> {
     return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        environmentName,
-        storageName,
-        storageEnvelope,
-        options
-      },
+      { resourceGroupName, envName, name, storageEnvelope, options },
       createOrUpdateOperationSpec
     );
   }
@@ -101,18 +95,18 @@ export class ManagedEnvironmentsStoragesImpl
   /**
    * Delete storage for a managedEnvironment.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param environmentName Name of the Environment.
-   * @param storageName Name of the storage.
+   * @param envName Name of the Environment.
+   * @param name Name of the storage.
    * @param options The options parameters.
    */
   delete(
     resourceGroupName: string,
-    environmentName: string,
-    storageName: string,
+    envName: string,
+    name: string,
     options?: ManagedEnvironmentsStoragesDeleteOptionalParams
   ): Promise<void> {
     return this.client.sendOperationRequest(
-      { resourceGroupName, environmentName, storageName, options },
+      { resourceGroupName, envName, name, options },
       deleteOperationSpec
     );
   }
@@ -122,7 +116,7 @@ const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
 const listOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/storages",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{envName}/storages",
   httpMethod: "GET",
   responses: {
     200: {
@@ -137,14 +131,14 @@ const listOperationSpec: coreClient.OperationSpec = {
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.environmentName
+    Parameters.envName
   ],
   headerParameters: [Parameters.accept],
   serializer
 };
 const getOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/storages/{storageName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{envName}/storages/{name}",
   httpMethod: "GET",
   responses: {
     200: {
@@ -159,15 +153,15 @@ const getOperationSpec: coreClient.OperationSpec = {
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.environmentName,
-    Parameters.storageName
+    Parameters.name,
+    Parameters.envName
   ],
   headerParameters: [Parameters.accept],
   serializer
 };
 const createOrUpdateOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/storages/{storageName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{envName}/storages/{name}",
   httpMethod: "PUT",
   responses: {
     200: {
@@ -183,8 +177,8 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.environmentName,
-    Parameters.storageName
+    Parameters.name,
+    Parameters.envName
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
   mediaType: "json",
@@ -192,7 +186,7 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
 };
 const deleteOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/storages/{storageName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{envName}/storages/{name}",
   httpMethod: "DELETE",
   responses: {
     200: {},
@@ -206,8 +200,8 @@ const deleteOperationSpec: coreClient.OperationSpec = {
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.environmentName,
-    Parameters.storageName
+    Parameters.name,
+    Parameters.envName
   ],
   headerParameters: [Parameters.accept],
   serializer

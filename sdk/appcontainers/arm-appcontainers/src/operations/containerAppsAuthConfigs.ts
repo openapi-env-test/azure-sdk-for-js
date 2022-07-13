@@ -130,17 +130,17 @@ export class ContainerAppsAuthConfigsImpl implements ContainerAppsAuthConfigs {
    * Get a AuthConfig of a Container App.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param containerAppName Name of the Container App.
-   * @param authConfigName Name of the Container App AuthConfig.
+   * @param name Name of the Container App AuthConfig.
    * @param options The options parameters.
    */
   get(
     resourceGroupName: string,
     containerAppName: string,
-    authConfigName: string,
+    name: string,
     options?: ContainerAppsAuthConfigsGetOptionalParams
   ): Promise<ContainerAppsAuthConfigsGetResponse> {
     return this.client.sendOperationRequest(
-      { resourceGroupName, containerAppName, authConfigName, options },
+      { resourceGroupName, containerAppName, name, options },
       getOperationSpec
     );
   }
@@ -149,14 +149,14 @@ export class ContainerAppsAuthConfigsImpl implements ContainerAppsAuthConfigs {
    * Create or update the AuthConfig for a Container App.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param containerAppName Name of the Container App.
-   * @param authConfigName Name of the Container App AuthConfig.
+   * @param name Name of the Container App AuthConfig.
    * @param authConfigEnvelope Properties used to create a Container App AuthConfig
    * @param options The options parameters.
    */
   createOrUpdate(
     resourceGroupName: string,
     containerAppName: string,
-    authConfigName: string,
+    name: string,
     authConfigEnvelope: AuthConfig,
     options?: ContainerAppsAuthConfigsCreateOrUpdateOptionalParams
   ): Promise<ContainerAppsAuthConfigsCreateOrUpdateResponse> {
@@ -164,7 +164,7 @@ export class ContainerAppsAuthConfigsImpl implements ContainerAppsAuthConfigs {
       {
         resourceGroupName,
         containerAppName,
-        authConfigName,
+        name,
         authConfigEnvelope,
         options
       },
@@ -176,17 +176,17 @@ export class ContainerAppsAuthConfigsImpl implements ContainerAppsAuthConfigs {
    * Delete a Container App AuthConfig.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param containerAppName Name of the Container App.
-   * @param authConfigName Name of the Container App AuthConfig.
+   * @param name Name of the Container App AuthConfig.
    * @param options The options parameters.
    */
   delete(
     resourceGroupName: string,
     containerAppName: string,
-    authConfigName: string,
+    name: string,
     options?: ContainerAppsAuthConfigsDeleteOptionalParams
   ): Promise<void> {
     return this.client.sendOperationRequest(
-      { resourceGroupName, containerAppName, authConfigName, options },
+      { resourceGroupName, containerAppName, name, options },
       deleteOperationSpec
     );
   }
@@ -237,7 +237,7 @@ const listByContainerAppOperationSpec: coreClient.OperationSpec = {
 };
 const getOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{authConfigName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{name}",
   httpMethod: "GET",
   responses: {
     200: {
@@ -253,14 +253,14 @@ const getOperationSpec: coreClient.OperationSpec = {
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.containerAppName,
-    Parameters.authConfigName
+    Parameters.name
   ],
   headerParameters: [Parameters.accept],
   serializer
 };
 const createOrUpdateOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{authConfigName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{name}",
   httpMethod: "PUT",
   responses: {
     200: {
@@ -277,7 +277,7 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.containerAppName,
-    Parameters.authConfigName
+    Parameters.name
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
   mediaType: "json",
@@ -285,7 +285,7 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
 };
 const deleteOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{authConfigName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{name}",
   httpMethod: "DELETE",
   responses: {
     200: {},
@@ -300,7 +300,7 @@ const deleteOperationSpec: coreClient.OperationSpec = {
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.containerAppName,
-    Parameters.authConfigName
+    Parameters.name
   ],
   headerParameters: [Parameters.accept],
   serializer

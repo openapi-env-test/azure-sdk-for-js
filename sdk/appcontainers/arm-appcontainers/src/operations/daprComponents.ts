@@ -22,8 +22,6 @@ import {
   DaprComponentsCreateOrUpdateOptionalParams,
   DaprComponentsCreateOrUpdateResponse,
   DaprComponentsDeleteOptionalParams,
-  DaprComponentsListSecretsOptionalParams,
-  DaprComponentsListSecretsResponse,
   DaprComponentsListNextResponse
 } from "../models";
 
@@ -124,17 +122,17 @@ export class DaprComponentsImpl implements DaprComponents {
    * Get a dapr component.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param environmentName Name of the Managed Environment.
-   * @param componentName Name of the Dapr Component.
+   * @param name Name of the Dapr Component.
    * @param options The options parameters.
    */
   get(
     resourceGroupName: string,
     environmentName: string,
-    componentName: string,
+    name: string,
     options?: DaprComponentsGetOptionalParams
   ): Promise<DaprComponentsGetResponse> {
     return this.client.sendOperationRequest(
-      { resourceGroupName, environmentName, componentName, options },
+      { resourceGroupName, environmentName, name, options },
       getOperationSpec
     );
   }
@@ -143,14 +141,14 @@ export class DaprComponentsImpl implements DaprComponents {
    * Creates or updates a Dapr Component in a Managed Environment.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param environmentName Name of the Managed Environment.
-   * @param componentName Name of the Dapr Component.
+   * @param name Name of the Dapr Component.
    * @param daprComponentEnvelope Configuration details of the Dapr Component.
    * @param options The options parameters.
    */
   createOrUpdate(
     resourceGroupName: string,
     environmentName: string,
-    componentName: string,
+    name: string,
     daprComponentEnvelope: DaprComponent,
     options?: DaprComponentsCreateOrUpdateOptionalParams
   ): Promise<DaprComponentsCreateOrUpdateResponse> {
@@ -158,7 +156,7 @@ export class DaprComponentsImpl implements DaprComponents {
       {
         resourceGroupName,
         environmentName,
-        componentName,
+        name,
         daprComponentEnvelope,
         options
       },
@@ -170,37 +168,18 @@ export class DaprComponentsImpl implements DaprComponents {
    * Delete a Dapr Component from a Managed Environment.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param environmentName Name of the Managed Environment.
-   * @param componentName Name of the Dapr Component.
+   * @param name Name of the Dapr Component.
    * @param options The options parameters.
    */
   delete(
     resourceGroupName: string,
     environmentName: string,
-    componentName: string,
+    name: string,
     options?: DaprComponentsDeleteOptionalParams
   ): Promise<void> {
     return this.client.sendOperationRequest(
-      { resourceGroupName, environmentName, componentName, options },
+      { resourceGroupName, environmentName, name, options },
       deleteOperationSpec
-    );
-  }
-
-  /**
-   * List secrets for a dapr component
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param environmentName Name of the Managed Environment.
-   * @param componentName Name of the Dapr Component.
-   * @param options The options parameters.
-   */
-  listSecrets(
-    resourceGroupName: string,
-    environmentName: string,
-    componentName: string,
-    options?: DaprComponentsListSecretsOptionalParams
-  ): Promise<DaprComponentsListSecretsResponse> {
-    return this.client.sendOperationRequest(
-      { resourceGroupName, environmentName, componentName, options },
-      listSecretsOperationSpec
     );
   }
 
@@ -250,7 +229,7 @@ const listOperationSpec: coreClient.OperationSpec = {
 };
 const getOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{name}",
   httpMethod: "GET",
   responses: {
     200: {
@@ -265,15 +244,15 @@ const getOperationSpec: coreClient.OperationSpec = {
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.environmentName,
-    Parameters.componentName
+    Parameters.name,
+    Parameters.environmentName
   ],
   headerParameters: [Parameters.accept],
   serializer
 };
 const createOrUpdateOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{name}",
   httpMethod: "PUT",
   responses: {
     200: {
@@ -289,8 +268,8 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.environmentName,
-    Parameters.componentName
+    Parameters.name,
+    Parameters.environmentName
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
   mediaType: "json",
@@ -298,7 +277,7 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
 };
 const deleteOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{name}",
   httpMethod: "DELETE",
   responses: {
     200: {},
@@ -312,31 +291,8 @@ const deleteOperationSpec: coreClient.OperationSpec = {
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.environmentName,
-    Parameters.componentName
-  ],
-  headerParameters: [Parameters.accept],
-  serializer
-};
-const listSecretsOperationSpec: coreClient.OperationSpec = {
-  path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}/listSecrets",
-  httpMethod: "POST",
-  responses: {
-    200: {
-      bodyMapper: Mappers.DaprSecretsCollection
-    },
-    default: {
-      bodyMapper: Mappers.DefaultErrorResponse
-    }
-  },
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.environmentName,
-    Parameters.componentName
+    Parameters.name,
+    Parameters.environmentName
   ],
   headerParameters: [Parameters.accept],
   serializer

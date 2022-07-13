@@ -36,24 +36,18 @@ export class ContainerAppsRevisionReplicasImpl
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param containerAppName Name of the Container App.
    * @param revisionName Name of the Container App Revision.
-   * @param replicaName Name of the Container App Revision Replica.
+   * @param name Name of the Container App Revision Replica.
    * @param options The options parameters.
    */
   getReplica(
     resourceGroupName: string,
     containerAppName: string,
     revisionName: string,
-    replicaName: string,
+    name: string,
     options?: ContainerAppsRevisionReplicasGetReplicaOptionalParams
   ): Promise<ContainerAppsRevisionReplicasGetReplicaResponse> {
     return this.client.sendOperationRequest(
-      {
-        resourceGroupName,
-        containerAppName,
-        revisionName,
-        replicaName,
-        options
-      },
+      { resourceGroupName, containerAppName, revisionName, name, options },
       getReplicaOperationSpec
     );
   }
@@ -82,7 +76,7 @@ const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
 const getReplicaOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/replicas/{replicaName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/replicas/{name}",
   httpMethod: "GET",
   responses: {
     200: {
@@ -98,8 +92,8 @@ const getReplicaOperationSpec: coreClient.OperationSpec = {
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.containerAppName,
-    Parameters.revisionName,
-    Parameters.replicaName
+    Parameters.name,
+    Parameters.revisionName
   ],
   headerParameters: [Parameters.accept],
   serializer

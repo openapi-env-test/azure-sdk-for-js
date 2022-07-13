@@ -14,9 +14,7 @@ import {
   DaprComponentsGetResponse,
   DaprComponentsCreateOrUpdateOptionalParams,
   DaprComponentsCreateOrUpdateResponse,
-  DaprComponentsDeleteOptionalParams,
-  DaprComponentsListSecretsOptionalParams,
-  DaprComponentsListSecretsResponse
+  DaprComponentsDeleteOptionalParams
 } from "../models";
 
 /// <reference lib="esnext.asynciterable" />
@@ -37,27 +35,27 @@ export interface DaprComponents {
    * Get a dapr component.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param environmentName Name of the Managed Environment.
-   * @param componentName Name of the Dapr Component.
+   * @param name Name of the Dapr Component.
    * @param options The options parameters.
    */
   get(
     resourceGroupName: string,
     environmentName: string,
-    componentName: string,
+    name: string,
     options?: DaprComponentsGetOptionalParams
   ): Promise<DaprComponentsGetResponse>;
   /**
    * Creates or updates a Dapr Component in a Managed Environment.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param environmentName Name of the Managed Environment.
-   * @param componentName Name of the Dapr Component.
+   * @param name Name of the Dapr Component.
    * @param daprComponentEnvelope Configuration details of the Dapr Component.
    * @param options The options parameters.
    */
   createOrUpdate(
     resourceGroupName: string,
     environmentName: string,
-    componentName: string,
+    name: string,
     daprComponentEnvelope: DaprComponent,
     options?: DaprComponentsCreateOrUpdateOptionalParams
   ): Promise<DaprComponentsCreateOrUpdateResponse>;
@@ -65,26 +63,13 @@ export interface DaprComponents {
    * Delete a Dapr Component from a Managed Environment.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param environmentName Name of the Managed Environment.
-   * @param componentName Name of the Dapr Component.
+   * @param name Name of the Dapr Component.
    * @param options The options parameters.
    */
   delete(
     resourceGroupName: string,
     environmentName: string,
-    componentName: string,
+    name: string,
     options?: DaprComponentsDeleteOptionalParams
   ): Promise<void>;
-  /**
-   * List secrets for a dapr component
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param environmentName Name of the Managed Environment.
-   * @param componentName Name of the Dapr Component.
-   * @param options The options parameters.
-   */
-  listSecrets(
-    resourceGroupName: string,
-    environmentName: string,
-    componentName: string,
-    options?: DaprComponentsListSecretsOptionalParams
-  ): Promise<DaprComponentsListSecretsResponse>;
 }

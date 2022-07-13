@@ -14,6 +14,5 @@ export * from "./daprComponents";
 export * from "./operations";
 export * from "./managedEnvironments";
 export * from "./certificates";
-export * from "./namespaces";
 export * from "./managedEnvironmentsStorages";
 export * from "./containerAppsSourceControls";
