@@ -1,5 +1,39 @@
 # Release History
+    
+## 8.0.0 (2022-07-15)
+    
+**Features**
 
+  - Added operation CustomDomains.beginDisableCustomHttps
+  - Added operation CustomDomains.beginDisableCustomHttpsAndWait
+  - Added operation CustomDomains.beginEnableCustomHttps
+  - Added operation CustomDomains.beginEnableCustomHttpsAndWait
+  - Added Type Alias DeviceMatchConditionValues
+  - Added Type Alias EndpointProvisioningState
+  - Added Type Alias OriginGroupProvisioningState
+  - Added Type Alias OriginProvisioningState
+  - Added Type Alias ProfileProvisioningState
+  - Added Type Alias RequestMethodMatchValues
+  - Added Type Alias RequestSchemeMatchValues
+  - Added Type Alias ResourceUsageUnit
+  - Interface CustomDomainsDisableCustomHttpsOptionalParams has a new optional parameter resumeFrom
+  - Interface CustomDomainsDisableCustomHttpsOptionalParams has a new optional parameter updateIntervalInMs
+  - Interface CustomDomainsEnableCustomHttpsOptionalParams has a new optional parameter resumeFrom
+  - Interface CustomDomainsEnableCustomHttpsOptionalParams has a new optional parameter updateIntervalInMs
+  - Added Enum KnownEndpointProvisioningState
+  - Added Enum KnownOriginGroupProvisioningState
+  - Added Enum KnownOriginProvisioningState
+  - Added Enum KnownProfileProvisioningState
+  - Added Enum KnownResourceUsageUnit
+
+**Breaking Changes**
+
+  - Removed operation CustomDomains.disableCustomHttps
+  - Removed operation CustomDomains.enableCustomHttps
+  - Removed Enum KnownIsDeviceMatchConditionParametersMatchValuesItem
+  - Removed Enum KnownRequestMethodMatchConditionParametersMatchValuesItem
+  - Removed Enum KnownRequestSchemeMatchConditionParametersMatchValuesItem
+    
 ## 7.0.1 (2022-04-21)
 
 **Features**

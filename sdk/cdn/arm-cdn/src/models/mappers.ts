@@ -5002,7 +5002,16 @@ export const RequestMethodMatchConditionParameters: coreClient.CompositeMapper =
           name: "Sequence",
           element: {
             type: {
-              name: "String"
+              name: "Enum",
+              allowedValues: [
+                "GET",
+                "HEAD",
+                "POST",
+                "PUT",
+                "DELETE",
+                "OPTIONS",
+                "TRACE"
+              ]
             }
           }
         }
@@ -5327,7 +5336,8 @@ export const RequestSchemeMatchConditionParameters: coreClient.CompositeMapper =
           name: "Sequence",
           element: {
             type: {
-              name: "String"
+              name: "Enum",
+              allowedValues: ["HTTP", "HTTPS"]
             }
           }
         }
@@ -5634,7 +5644,8 @@ export const IsDeviceMatchConditionParameters: coreClient.CompositeMapper = {
           name: "Sequence",
           element: {
             type: {
-              name: "String"
+              name: "Enum",
+              allowedValues: ["Mobile", "Desktop"]
             }
           }
         }
