@@ -945,7 +945,7 @@ export interface ManagedEnvironmentsCollection {
 
 /** Configuration properties for apps environment to join a Virtual Network */
 export interface VnetConfiguration {
-  /** Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource, must provide ControlPlaneSubnetResourceId and AppSubnetResourceId if enabling this property */
+  /** Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource. They must provide runtimeSubnetId and infrastructureSubnetId if enabling this property */
   internal?: boolean;
   /** Resource ID of a subnet for infrastructure components. This subnet must be in the same VNET as the subnet defined in runtimeSubnetId. Must not overlap with any other provided IP ranges. */
   infrastructureSubnetId?: string;
@@ -1136,7 +1136,7 @@ export interface AzureCredentials {
 }
 
 /** The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location */
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 /** The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location' */
 export type TrackedResource = Resource & {
@@ -1345,6 +1345,30 @@ export type ContainerApp = TrackedResource & {
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly outboundIPAddresses?: string[];
+};
+
+/** Container App Auth Token. */
+export type ContainerAppAuthToken = TrackedResource & {
+  /**
+   * Auth token value.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly token?: string;
+  /**
+   * Token expiration date.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly expires?: Date;
+  /**
+   * Log Stream endpoint with auth token.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly logStreamEndpoint?: string;
+  /**
+   * Container exec endpoint with auth token.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly execEndpoint?: string;
 };
 
 /** An environment for hosting container apps */
@@ -1826,6 +1850,13 @@ export interface ContainerAppsListSecretsOptionalParams
 
 /** Contains response data for the listSecrets operation. */
 export type ContainerAppsListSecretsResponse = SecretsCollection;
+
+/** Optional parameters. */
+export interface ContainerAppsGetAuthTokenOptionalParams
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the getAuthToken operation. */
+export type ContainerAppsGetAuthTokenResponse = ContainerAppAuthToken;
 
 /** Optional parameters. */
 export interface ContainerAppsListBySubscriptionNextOptionalParams
