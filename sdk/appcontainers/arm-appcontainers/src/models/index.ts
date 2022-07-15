@@ -519,7 +519,7 @@ export interface ManagedServiceIdentity {
   readonly tenantId?: string;
   /** Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed). */
   type: ManagedServiceIdentityType;
-  /** The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests. */
+  /** The set of  user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests. */
   userAssignedIdentities?: { [propertyName: string]: UserAssignedIdentity };
 }
 
@@ -945,7 +945,7 @@ export interface ManagedEnvironmentsCollection {
 
 /** Configuration properties for apps environment to join a Virtual Network */
 export interface VnetConfiguration {
-  /** Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource, must provide ControlPlaneSubnetResourceId and AppSubnetResourceId if enabling this property */
+  /** Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource. They must provide runtimeSubnetId and infrastructureSubnetId if enabling this property */
   internal?: boolean;
   /** Resource ID of a subnet for infrastructure components. This subnet must be in the same VNET as the subnet defined in runtimeSubnetId. Must not overlap with any other provided IP ranges. */
   infrastructureSubnetId?: string;
@@ -1136,7 +1136,7 @@ export interface AzureCredentials {
 }
 
 /** The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location */
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 /** The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location' */
 export type TrackedResource = Resource & {
