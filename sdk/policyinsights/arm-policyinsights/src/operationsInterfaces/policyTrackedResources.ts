@@ -43,7 +43,7 @@ export interface PolicyTrackedResources {
   ): PagedAsyncIterableIterator<PolicyTrackedResource>;
   /**
    * Queries policy tracked resources under the resource group.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param policyTrackedResourcesResource The name of the virtual resource under PolicyTrackedResources
    *                                       resource type; only "default" is allowed.
    * @param options The options parameters.
