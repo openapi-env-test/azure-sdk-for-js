@@ -394,6 +394,7 @@ export interface IotHubProperties {
     readonly provisioningState?: string;
     publicNetworkAccess?: PublicNetworkAccess;
     restrictOutboundNetworkAccess?: boolean;
+    rootCertificate?: RootCertificateProperties;
     routing?: RoutingProperties;
     readonly state?: string;
     storageEndpoints?: {
@@ -1116,6 +1117,12 @@ export interface ResourceProviderCommonGetSubscriptionQuotaOptionalParams extend
 
 // @public
 export type ResourceProviderCommonGetSubscriptionQuotaResponse = UserSubscriptionQuotaListResult;
+
+// @public
+export interface RootCertificateProperties {
+    enableRootCertificateV2?: boolean;
+    readonly lastUpdatedTimeUtc?: Date;
+}
 
 // @public
 export interface RouteCompilationError {

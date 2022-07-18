@@ -330,6 +330,13 @@ export const IotHubProperties: coreClient.CompositeMapper = {
         type: {
           name: "Boolean"
         }
+      },
+      rootCertificate: {
+        serializedName: "rootCertificate",
+        type: {
+          name: "Composite",
+          className: "RootCertificateProperties"
+        }
       }
     }
   }
@@ -1355,6 +1362,28 @@ export const IotHubLocationDescription: coreClient.CompositeMapper = {
         serializedName: "role",
         type: {
           name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const RootCertificateProperties: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "RootCertificateProperties",
+    modelProperties: {
+      enableRootCertificateV2: {
+        serializedName: "enableRootCertificateV2",
+        type: {
+          name: "Boolean"
+        }
+      },
+      lastUpdatedTimeUtc: {
+        serializedName: "lastUpdatedTimeUtc",
+        readOnly: true,
+        type: {
+          name: "DateTime"
         }
       }
     }
