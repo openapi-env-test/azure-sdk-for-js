@@ -37,6 +37,48 @@ export interface AutoscaleSettingResourceCollection {
   nextLink?: string;
 }
 
+/** The autoscale setting resource. */
+export interface AutoscaleSettingResource {
+  /**
+   * Azure resource Id
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly id?: string;
+  /**
+   * Azure resource name
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly name?: string;
+  /**
+   * Azure resource type
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly type?: string;
+  /** Resource location */
+  location: string;
+  /** Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters. */
+  tags?: { [propertyName: string]: string };
+  /**
+   * The system metadata related to the response.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly systemData?: SystemData;
+  /** the collection of automatic scaling profiles that specify different scaling parameters for different time periods. A maximum of 20 profiles can be specified. */
+  profiles: AutoscaleProfile[];
+  /** the collection of notifications. */
+  notifications?: AutoscaleNotification[];
+  /** the enabled flag. Specifies whether automatic scaling is enabled for the resource. The default value is 'false'. */
+  enabled?: boolean;
+  /** the predictive autoscale policy mode. */
+  predictiveAutoscalePolicy?: PredictiveAutoscalePolicy;
+  /** the name of the autoscale setting. */
+  namePropertiesName?: string;
+  /** the resource identifier of the resource that the autoscale setting should be added to. */
+  targetResourceUri?: string;
+  /** the location of the resource that the autoscale setting should be added to. */
+  targetResourceLocation?: string;
+}
+
 /** Autoscale profile. */
 export interface AutoscaleProfile {
   /** the name of the profile. */
@@ -177,35 +219,51 @@ export interface WebhookNotification {
   properties?: { [propertyName: string]: string };
 }
 
-/** An azure resource object */
-export interface Resource {
-  /**
-   * Azure resource Id
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly id?: string;
-  /**
-   * Azure resource name
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly name?: string;
-  /**
-   * Azure resource type
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly type?: string;
-  /** Resource location */
-  location: string;
-  /** Resource tags */
-  tags?: { [propertyName: string]: string };
+/** The parameters for enabling predictive autoscale. */
+export interface PredictiveAutoscalePolicy {
+  /** the predictive autoscale mode */
+  scaleMode: PredictiveAutoscalePolicyScaleMode;
+  /** the amount of time to specify by which instances are launched in advance. It must be between 1 minute and 60 minutes in ISO 8601 format. */
+  scaleLookAheadTime?: string;
+}
+
+/** Metadata pertaining to creation and last modification of the resource. */
+export interface SystemData {
+  /** The identity that created the resource. */
+  createdBy?: string;
+  /** The type of identity that created the resource. */
+  createdByType?: CreatedByType;
+  /** The timestamp of resource creation (UTC). */
+  createdAt?: Date;
+  /** The identity that last modified the resource. */
+  lastModifiedBy?: string;
+  /** The type of identity that last modified the resource. */
+  lastModifiedByType?: CreatedByType;
+  /** The timestamp of resource last modification (UTC) */
+  lastModifiedAt?: Date;
 }
 
 /** Describes the format of Error response. */
-export interface ErrorResponse {
-  /** Error code */
+export interface AutoscaleErrorResponse {
+  /** The error object. */
+  error?: AutoscaleErrorResponseError;
+  /**
+   * The system metadata related to the response.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly systemData?: SystemData;
+}
+
+/** The error object. */
+export interface AutoscaleErrorResponseError {
+  /** One of a server-defined set of error codes. */
   code?: string;
-  /** Error message indicating why the operation failed. */
+  /** A human-readable representation of the error. */
   message?: string;
+  /** The target of the particular error. */
+  target?: string;
+  /** A human-readable representation of the error's details. */
+  details?: string;
 }
 
 /** The autoscale setting object for patch operations. */
@@ -216,14 +274,38 @@ export interface AutoscaleSettingResourcePatch {
   profiles?: AutoscaleProfile[];
   /** the collection of notifications. */
   notifications?: AutoscaleNotification[];
-  /** the enabled flag. Specifies whether automatic scaling is enabled for the resource. The default value is 'true'. */
+  /** the enabled flag. Specifies whether automatic scaling is enabled for the resource. The default value is 'false'. */
   enabled?: boolean;
+  /** the predictive autoscale policy mode. */
+  predictiveAutoscalePolicy?: PredictiveAutoscalePolicy;
   /** the name of the autoscale setting. */
   name?: string;
   /** the resource identifier of the resource that the autoscale setting should be added to. */
   targetResourceUri?: string;
   /** the location of the resource that the autoscale setting should be added to. */
   targetResourceLocation?: string;
+}
+
+/** The response to a metrics query. */
+export interface PredictiveResponse {
+  /** The timespan for which the data was retrieved. Its value consists of two datetimes concatenated, separated by '/'.  This may be adjusted in the future and returned back from what was originally requested. */
+  timespan?: string;
+  /** The interval (window size) for which the metric data was returned in.  This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made. */
+  interval?: string;
+  /** The metrics being queried */
+  metricName?: string;
+  /** resource of the predictive metric. */
+  targetResourceId?: string;
+  /** the value of the collection. */
+  data?: PredictiveValue[];
+}
+
+/** Represents a predictive metric value in the given bucket. */
+export interface PredictiveValue {
+  /** the timestamp for the metric value in ISO 8601 format. */
+  timeStamp: Date;
+  /** Predictive value in this time bucket. */
+  value: number;
 }
 
 /** Result of the request to list Microsoft.Insights operations. It contains a list of operations and a URL link to get the next set of results. */
@@ -281,6 +363,14 @@ export interface Incident {
   readonly resolvedTime?: Date;
 }
 
+/** Describes the format of Error response. */
+export interface ErrorResponse {
+  /** Error code */
+  code?: string;
+  /** Error message indicating why the operation failed. */
+  message?: string;
+}
+
 /** The List incidents operation response. */
 export interface IncidentListResult {
   /** the incident collection. */
@@ -320,6 +410,29 @@ export interface RuleAction {
   odataType:
     | "Microsoft.Azure.Management.Insights.Models.RuleEmailAction"
     | "Microsoft.Azure.Management.Insights.Models.RuleWebhookAction";
+}
+
+/** An azure resource object */
+export interface Resource {
+  /**
+   * Azure resource Id
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly id?: string;
+  /**
+   * Azure resource name
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly name?: string;
+  /**
+   * Azure resource type
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly type?: string;
+  /** Resource location */
+  location: string;
+  /** Resource tags */
+  tags?: { [propertyName: string]: string };
 }
 
 /** The alert rule object for patch operations. */
@@ -653,16 +766,6 @@ export interface NotificationRequestBody {
   armRoleReceivers?: ArmRoleReceiver[];
   /** The list of event hub receivers that are part of this action group. */
   eventHubReceivers?: EventHubReceiver[];
-}
-
-/** The response when test notification succeeded */
-export interface TestNotificationResponse {
-  /** The notification id */
-  notificationId: string;
-  /** The correlation id */
-  correlationId: string;
-  /** The created time */
-  createdTime: string;
 }
 
 /** The details of the test notification results. */
@@ -1436,45 +1539,90 @@ export interface ScopedResourceListResult {
   readonly nextLink?: string;
 }
 
-/** An Activity Log alert condition that is met when all its member conditions are met. */
-export interface ActivityLogAlertAllOfCondition {
-  /** The list of activity log alert conditions. */
-  allOf: ActivityLogAlertLeafCondition[];
+/** An Activity Log Alert rule condition that is met when all its member conditions are met. */
+export interface AlertRuleAllOfCondition {
+  /** The list of Activity Log Alert rule conditions. */
+  allOf: AlertRuleAnyOfOrLeafCondition[];
 }
 
-/** An Activity Log alert condition that is met by comparing an activity log field and value. */
-export interface ActivityLogAlertLeafCondition {
-  /** The name of the field that this condition will examine. The possible values for this field are (case-insensitive): 'resourceId', 'category', 'caller', 'level', 'operationName', 'resourceGroup', 'resourceProvider', 'status', 'subStatus', 'resourceType', or anything beginning with 'properties.'. */
-  field: string;
-  /** The field value will be compared to this value (case-insensitive) to determine if the condition is met. */
-  equals: string;
+/**
+ * An Activity Log Alert rule condition that is met by comparing the field and value of an Activity Log event.
+ * This condition must contain 'field' and either 'equals' or 'containsAny'.
+ */
+export interface AlertRuleLeafCondition {
+  /**
+   * The name of the Activity Log event's field that this condition will examine.
+   * The possible values for this field are (case-insensitive): 'resourceId', 'category', 'caller', 'level', 'operationName', 'resourceGroup', 'resourceProvider', 'status', 'subStatus', 'resourceType', or anything beginning with 'properties'.
+   */
+  field?: string;
+  /** The value of the event's field will be compared to this value (case-insensitive) to determine if the condition is met. */
+  equals?: string;
+  /** The value of the event's field will be compared to the values in this array (case-insensitive) to determine if the condition is met. */
+  containsAny?: string[];
 }
 
-/** A list of activity log alert actions. */
-export interface ActivityLogAlertActionList {
-  /** The list of activity log alerts. */
-  actionGroups?: ActivityLogAlertActionGroup[];
+/** A list of Activity Log Alert rule actions. */
+export interface ActionList {
+  /** The list of the Action Groups. */
+  actionGroups?: ActionGroup[];
 }
 
 /** A pointer to an Azure Action Group. */
-export interface ActivityLogAlertActionGroup {
-  /** The resourceId of the action group. This cannot be null or empty. */
+export interface ActionGroup {
+  /** The resource ID of the Action Group. This cannot be null or empty. */
   actionGroupId: string;
   /** the dictionary of custom properties to include with the post operation. These data are appended to the webhook payload. */
   webhookProperties?: { [propertyName: string]: string };
 }
 
-/** An activity log alert object for the body of patch operations. */
-export interface ActivityLogAlertPatchBody {
-  /** Resource tags */
+/** An Azure resource object. */
+export interface AzureResourceAutoGenerated {
+  /**
+   * The resource Id.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly id?: string;
+  /**
+   * The name of the resource.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly name?: string;
+  /**
+   * The type of the resource.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly type?: string;
+  /** The location of the resource. Since Azure Activity Log Alerts is a global service, the location of the rules should always be 'global'. */
+  location?: string;
+  /** The tags of the resource. */
   tags?: { [propertyName: string]: string };
-  /** Indicates whether this activity log alert is enabled. If an activity log alert is not enabled, then none of its actions will be activated. */
+}
+
+/** The error response. */
+export interface ErrorResponseAutoGenerated {
+  /**
+   * The error code.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly code?: string;
+  /**
+   * The error message indicating why the operation failed.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly message?: string;
+}
+
+/** An Activity Log Alert rule object for the body of patch operations. */
+export interface AlertRulePatchObject {
+  /** The resource tags */
+  tags?: { [propertyName: string]: string };
+  /** Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated. */
   enabled?: boolean;
 }
 
-/** A list of activity log alerts. */
-export interface ActivityLogAlertList {
-  /** The list of activity log alerts. */
+/** A list of Activity Log Alert rules. */
+export interface AlertRuleList {
+  /** The list of Activity Log Alert rules. */
   value?: ActivityLogAlertResource[];
   /** Provides the link to retrieve the next set of elements. */
   nextLink?: string;
@@ -1525,7 +1673,7 @@ export interface DataCollectionEndpointResource {
   description?: string;
   /** The immutable ID of this data collection endpoint resource. This property is READ-ONLY. */
   immutableId?: string;
-  /** The endpoint used by agents to access their configuration. */
+  /** The endpoint used by clients to access their configuration. */
   configurationAccess?: DataCollectionEndpointConfigurationAccess;
   /** The endpoint used by clients to ingest logs. */
   logsIngestion?: DataCollectionEndpointLogsIngestion;
@@ -1544,7 +1692,7 @@ export interface DataCollectionEndpoint {
   description?: string;
   /** The immutable ID of this data collection endpoint resource. This property is READ-ONLY. */
   immutableId?: string;
-  /** The endpoint used by agents to access their configuration. */
+  /** The endpoint used by clients to access their configuration. */
   configurationAccess?: DataCollectionEndpointConfigurationAccess;
   /** The endpoint used by clients to ingest logs. */
   logsIngestion?: DataCollectionEndpointLogsIngestion;
@@ -1579,22 +1727,6 @@ export interface LogsIngestionEndpointSpec {
 export interface NetworkRuleSet {
   /** The configuration to set whether network access from public internet to the endpoints are allowed. */
   publicNetworkAccess?: KnownPublicNetworkAccessOptions;
-}
-
-/** Metadata pertaining to creation and last modification of the resource. */
-export interface SystemData {
-  /** The identity that created the resource. */
-  createdBy?: string;
-  /** The type of identity that created the resource. */
-  createdByType?: CreatedByType;
-  /** The timestamp of resource creation (UTC). */
-  createdAt?: Date;
-  /** The identity that last modified the resource. */
-  lastModifiedBy?: string;
-  /** The type of identity that last modified the resource. */
-  lastModifiedByType?: CreatedByType;
-  /** The timestamp of resource last modification (UTC) */
-  lastModifiedAt?: Date;
 }
 
 /** Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.). */
@@ -1684,6 +1816,11 @@ export interface DataCollectionRuleAssociationProxyOnlyResource {
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly provisioningState?: KnownDataCollectionRuleAssociationProvisioningState;
+  /**
+   * Metadata about the resource
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly metadata?: DataCollectionRuleAssociationMetadata;
 }
 
 /** Definition of association of a data collection rule with a monitored Azure resource. */
@@ -1699,6 +1836,20 @@ export interface DataCollectionRuleAssociation {
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly provisioningState?: KnownDataCollectionRuleAssociationProvisioningState;
+  /**
+   * Metadata about the resource
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly metadata?: DataCollectionRuleAssociationMetadata;
+}
+
+/** Metadata about the resource */
+export interface Metadata {
+  /**
+   * Azure offering managing this resource on-behalf-of customer.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly provisionedBy?: string;
 }
 
 /** A pageable list of resources. */
@@ -1749,6 +1900,15 @@ export interface DataCollectionRuleResource {
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly immutableId?: string;
+  /** The resource ID of the data collection endpoint that this rule can be used with. */
+  dataCollectionEndpointId?: string;
+  /**
+   * Metadata about the resource
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly metadata?: DataCollectionRuleMetadata;
+  /** Declaration of custom streams used in this rule. */
+  streamDeclarations?: { [propertyName: string]: StreamDeclaration };
   /**
    * The specification of data sources.
    * This property is optional and can be omitted if the rule is meant to be used via direct calls to the provisioned endpoint.
@@ -1774,6 +1934,15 @@ export interface DataCollectionRule {
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly immutableId?: string;
+  /** The resource ID of the data collection endpoint that this rule can be used with. */
+  dataCollectionEndpointId?: string;
+  /**
+   * Metadata about the resource
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly metadata?: DataCollectionRuleMetadata;
+  /** Declaration of custom streams used in this rule. */
+  streamDeclarations?: { [propertyName: string]: StreamDeclaration };
   /**
    * The specification of data sources.
    * This property is optional and can be omitted if the rule is meant to be used via direct calls to the provisioned endpoint.
@@ -1790,6 +1959,20 @@ export interface DataCollectionRule {
   readonly provisioningState?: KnownDataCollectionRuleProvisioningState;
 }
 
+/** Declaration of a custom stream. */
+export interface StreamDeclaration {
+  /** List of columns used by data in this stream. */
+  columns?: ColumnDefinition[];
+}
+
+/** Definition of custom data column. */
+export interface ColumnDefinition {
+  /** The name of the column. */
+  name?: string;
+  /** The type of the column data. */
+  type?: KnownColumnDefinitionType;
+}
+
 /** Specification of data sources that will be collected. */
 export interface DataSourcesSpec {
   /** The list of performance counter data source configurations. */
@@ -1800,6 +1983,10 @@ export interface DataSourcesSpec {
   syslog?: SyslogDataSource[];
   /** The list of Azure VM extension data source configurations. */
   extensions?: ExtensionDataSource[];
+  /** The list of Log files source configurations. */
+  logFiles?: LogFilesDataSource[];
+  /** The list of IIS logs source configurations. */
+  iisLogs?: IisLogsDataSource[];
 }
 
 /**
@@ -1890,6 +2077,51 @@ export interface ExtensionDataSource {
   name?: string;
 }
 
+/** Definition of which custom log files will be collected by this data collection rule */
+export interface LogFilesDataSource {
+  /**
+   * List of streams that this data source will be sent to.
+   * A stream indicates what schema will be used for this data source
+   */
+  streams: string[];
+  /** File Patterns where the log files are located */
+  filePatterns: string[];
+  /** The data format of the log files */
+  format: KnownLogFilesDataSourceFormat;
+  /** The log files specific settings. */
+  settings?: LogFilesDataSourceSettings;
+  /**
+   * A friendly name for the data source.
+   * This name should be unique across all data sources (regardless of type) within the data collection rule.
+   */
+  name?: string;
+}
+
+/** Settings for different log file formats */
+export interface LogFileSettings {
+  /** Text settings */
+  text?: LogFileSettingsText;
+}
+
+/** Settings for text log files */
+export interface LogFileTextSettings {
+  /** One of the supported timestamp formats */
+  recordStartTimestampFormat: KnownLogFileTextSettingsRecordStartTimestampFormat;
+}
+
+/** Enables IIS logs to be collected by this data collection rule. */
+export interface IisLogsDataSource {
+  /** IIS streams */
+  streams: string[];
+  /** Absolute paths file location */
+  logDirectories?: string[];
+  /**
+   * A friendly name for the data source.
+   * This name should be unique across all data sources (regardless of type) within the data collection rule.
+   */
+  name?: string;
+}
+
 /** Specification of destinations that can be used in data flows. */
 export interface DestinationsSpec {
   /** List of Log Analytics destinations. */
@@ -1929,6 +2161,10 @@ export interface DataFlow {
   streams?: KnownDataFlowStreams[];
   /** List of destinations for this data flow. */
   destinations?: string[];
+  /** The KQL query to transform stream data. */
+  transformKql?: string;
+  /** The output stream of the transform. Only required if the transform changes data to a different stream. */
+  outputStream?: string;
 }
 
 /** The claims for a rule management event data source. */
@@ -2035,108 +2271,14 @@ export interface Criteria {
   dimensions?: Dimension[];
 }
 
-/** The autoscale setting resource. */
-export type AutoscaleSettingResource = Resource & {
-  /** the collection of automatic scaling profiles that specify different scaling parameters for different time periods. A maximum of 20 profiles can be specified. */
-  profiles: AutoscaleProfile[];
-  /** the collection of notifications. */
-  notifications?: AutoscaleNotification[];
-  /** the enabled flag. Specifies whether automatic scaling is enabled for the resource. The default value is 'true'. */
-  enabled?: boolean;
-  /** the name of the autoscale setting. */
-  namePropertiesName?: string;
-  /** the resource identifier of the resource that the autoscale setting should be added to. */
-  targetResourceUri?: string;
-  /** the location of the resource that the autoscale setting should be added to. */
-  targetResourceLocation?: string;
-};
+/** Metadata pertaining to creation and last modification of the resource. */
+export type DataCollectionEndpointResourceSystemData = SystemData;
 
-/** The alert rule resource. */
-export type AlertRuleResource = Resource & {
-  /** the name of the alert rule. */
-  namePropertiesName: string;
-  /** the description of the alert rule that will be included in the alert email. */
-  description?: string;
-  /** the provisioning state. */
-  provisioningState?: string;
-  /** the flag that indicates whether the alert rule is enabled. */
-  isEnabled: boolean;
-  /** the condition that results in the alert rule being activated. */
-  condition: RuleConditionUnion;
-  /** action that is performed when the alert rule becomes active, and when an alert condition is resolved. */
-  action?: RuleActionUnion;
-  /** the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved. */
-  actions?: RuleActionUnion[];
-  /**
-   * Last time the rule was updated in ISO8601 format.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly lastUpdatedTime?: Date;
-};
+/** Metadata pertaining to creation and last modification of the resource. */
+export type DataCollectionRuleAssociationProxyOnlyResourceSystemData = SystemData;
 
-/** The log profile resource. */
-export type LogProfileResource = Resource & {
-  /** the resource id of the storage account to which you would like to send the Activity Log. */
-  storageAccountId?: string;
-  /** The service bus rule ID of the service bus namespace in which you would like to have Event Hubs created for streaming the Activity Log. The rule ID is of the format: '{service bus resource ID}/authorizationrules/{key name}'. */
-  serviceBusRuleId?: string;
-  /** List of regions for which Activity Log events should be stored or streamed. It is a comma separated list of valid ARM locations including the 'global' location. */
-  locations: string[];
-  /** the categories of the logs. These categories are created as is convenient to the user. Some values are: 'Write', 'Delete', and/or 'Action.' */
-  categories: string[];
-  /** the retention policy for the events in the log. */
-  retentionPolicy: RetentionPolicy;
-};
-
-/** The metric alert resource. */
-export type MetricAlertResource = Resource & {
-  /** the description of the metric alert that will be included in the alert email. */
-  description?: string;
-  /** Alert severity {0, 1, 2, 3, 4} */
-  severity: number;
-  /** the flag that indicates whether the metric alert is enabled. */
-  enabled: boolean;
-  /** the list of resource id's that this metric alert is scoped to. */
-  scopes: string[];
-  /** how often the metric alert is evaluated represented in ISO 8601 duration format. */
-  evaluationFrequency: string;
-  /** the period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold. */
-  windowSize: string;
-  /** the resource type of the target resource(s) on which the alert is created/updated. Mandatory if the scope contains a subscription, resource group, or more than one resource. */
-  targetResourceType?: string;
-  /** the region of the target resource(s) on which the alert is created/updated. Mandatory if the scope contains a subscription, resource group, or more than one resource. */
-  targetResourceRegion?: string;
-  /** defines the specific alert criteria information. */
-  criteria: MetricAlertCriteriaUnion;
-  /** the flag that indicates whether the alert should be auto resolved or not. The default is true. */
-  autoMitigate?: boolean;
-  /** the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved. */
-  actions?: MetricAlertAction[];
-  /**
-   * Last time the rule was updated in ISO8601 format.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly lastUpdatedTime?: Date;
-  /**
-   * the value indicating whether this alert rule is migrated.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly isMigrated?: boolean;
-};
-
-/** An activity log alert resource. */
-export type ActivityLogAlertResource = Resource & {
-  /** A list of resourceIds that will be used as prefixes. The alert will only apply to activityLogs with resourceIds that fall under one of these prefixes. This list must include at least one item. */
-  scopes?: string[];
-  /** Indicates whether this activity log alert is enabled. If an activity log alert is not enabled, then none of its actions will be activated. */
-  enabled?: boolean;
-  /** The condition that will cause this alert to activate. */
-  condition?: ActivityLogAlertAllOfCondition;
-  /** The actions that will activate when the condition is met. */
-  actions?: ActivityLogAlertActionList;
-  /** A description of this activity log alert. */
-  description?: string;
-};
+/** Metadata pertaining to creation and last modification of the resource. */
+export type DataCollectionRuleResourceSystemData = SystemData;
 
 /** The resource management error response. */
 export type ErrorResponseCommon = ErrorResponse & {
@@ -2234,6 +2376,79 @@ export type RuleWebhookAction = RuleAction & {
   serviceUri?: string;
   /** the dictionary of custom properties to include with the post operation. These data are appended to the webhook payload. */
   properties?: { [propertyName: string]: string };
+};
+
+/** The alert rule resource. */
+export type AlertRuleResource = Resource & {
+  /** the name of the alert rule. */
+  namePropertiesName: string;
+  /** the description of the alert rule that will be included in the alert email. */
+  description?: string;
+  /** the provisioning state. */
+  provisioningState?: string;
+  /** the flag that indicates whether the alert rule is enabled. */
+  isEnabled: boolean;
+  /** the condition that results in the alert rule being activated. */
+  condition: RuleConditionUnion;
+  /** action that is performed when the alert rule becomes active, and when an alert condition is resolved. */
+  action?: RuleActionUnion;
+  /** the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved. */
+  actions?: RuleActionUnion[];
+  /**
+   * Last time the rule was updated in ISO8601 format.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly lastUpdatedTime?: Date;
+};
+
+/** The log profile resource. */
+export type LogProfileResource = Resource & {
+  /** the resource id of the storage account to which you would like to send the Activity Log. */
+  storageAccountId?: string;
+  /** The service bus rule ID of the service bus namespace in which you would like to have Event Hubs created for streaming the Activity Log. The rule ID is of the format: '{service bus resource ID}/authorizationrules/{key name}'. */
+  serviceBusRuleId?: string;
+  /** List of regions for which Activity Log events should be stored or streamed. It is a comma separated list of valid ARM locations including the 'global' location. */
+  locations: string[];
+  /** the categories of the logs. These categories are created as is convenient to the user. Some values are: 'Write', 'Delete', and/or 'Action.' */
+  categories: string[];
+  /** the retention policy for the events in the log. */
+  retentionPolicy: RetentionPolicy;
+};
+
+/** The metric alert resource. */
+export type MetricAlertResource = Resource & {
+  /** the description of the metric alert that will be included in the alert email. */
+  description?: string;
+  /** Alert severity {0, 1, 2, 3, 4} */
+  severity: number;
+  /** the flag that indicates whether the metric alert is enabled. */
+  enabled: boolean;
+  /** the list of resource id's that this metric alert is scoped to. */
+  scopes: string[];
+  /** how often the metric alert is evaluated represented in ISO 8601 duration format. */
+  evaluationFrequency: string;
+  /** the period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold. */
+  windowSize: string;
+  /** the resource type of the target resource(s) on which the alert is created/updated. Mandatory if the scope contains a subscription, resource group, or more than one resource. */
+  targetResourceType?: string;
+  /** the region of the target resource(s) on which the alert is created/updated. Mandatory if the scope contains a subscription, resource group, or more than one resource. */
+  targetResourceRegion?: string;
+  /** defines the specific alert criteria information. */
+  criteria: MetricAlertCriteriaUnion;
+  /** the flag that indicates whether the alert should be auto resolved or not. The default is true. */
+  autoMitigate?: boolean;
+  /** the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved. */
+  actions?: MetricAlertAction[];
+  /**
+   * Last time the rule was updated in ISO8601 format.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly lastUpdatedTime?: Date;
+  /**
+   * the value indicating whether this alert rule is migrated.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly isMigrated?: boolean;
 };
 
 /** The diagnostic setting resource. */
@@ -2444,44 +2659,76 @@ export type AzureMonitorPrivateLinkScope = PrivateLinkScopesResource & {
   readonly privateEndpointConnections?: PrivateEndpointConnection[];
 };
 
-/** Resource properties. */
-export type DataCollectionEndpointResourceProperties = DataCollectionEndpoint & {};
+/**
+ * An Activity Log Alert rule condition that is met when all its member conditions are met.
+ * Each condition can be of one of the following types:
+ * __Important__: Each type has its unique subset of properties. Properties from different types CANNOT exist in one condition.
+ *    * __Leaf Condition -__ must contain 'field' and either 'equals' or 'containsAny'.
+ *   _Please note, 'anyOf' should __not__ be set in a Leaf Condition._
+ *   * __AnyOf Condition -__ must contain __only__ 'anyOf' (which is an array of Leaf Conditions).
+ *   _Please note, 'field', 'equals' and 'containsAny' should __not__ be set in an AnyOf Condition._
+ *
+ */
+export type AlertRuleAnyOfOrLeafCondition = AlertRuleLeafCondition & {
+  /** An Activity Log Alert rule condition that is met when at least one of its member leaf conditions are met. */
+  anyOf?: AlertRuleLeafCondition[];
+};
 
-/** The endpoint used by agents to access their configuration. */
-export type DataCollectionEndpointConfigurationAccess = ConfigurationAccessEndpointSpec & {};
+/** An Activity Log Alert rule resource. */
+export type ActivityLogAlertResource = AzureResourceAutoGenerated & {
+  /** A list of resource IDs that will be used as prefixes. The alert will only apply to Activity Log events with resource IDs that fall under one of these prefixes. This list must include at least one item. */
+  scopes?: string[];
+  /** The condition that will cause this alert to activate. */
+  condition?: AlertRuleAllOfCondition;
+  /** The actions that will activate when the condition is met. */
+  actions?: ActionList;
+  /** Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated. */
+  enabled?: boolean;
+  /** A description of this Activity Log Alert rule. */
+  description?: string;
+};
+
+/** Resource properties. */
+export type DataCollectionEndpointResourceProperties = DataCollectionEndpoint;
+
+/** The endpoint used by clients to access their configuration. */
+export type DataCollectionEndpointConfigurationAccess = ConfigurationAccessEndpointSpec;
 
 /** The endpoint used by clients to ingest logs. */
-export type DataCollectionEndpointLogsIngestion = LogsIngestionEndpointSpec & {};
+export type DataCollectionEndpointLogsIngestion = LogsIngestionEndpointSpec;
 
 /** Network access control rules for the endpoints. */
-export type DataCollectionEndpointNetworkAcls = NetworkRuleSet & {};
-
-/** Metadata pertaining to creation and last modification of the resource. */
-export type DataCollectionEndpointResourceSystemData = SystemData & {};
-
-/** Metadata pertaining to creation and last modification of the resource. */
-export type DataCollectionRuleAssociationProxyOnlyResourceSystemData = SystemData & {};
-
-/** Metadata pertaining to creation and last modification of the resource. */
-export type DataCollectionRuleResourceSystemData = SystemData & {};
+export type DataCollectionEndpointNetworkAcls = NetworkRuleSet;
 
 /** Resource properties. */
-export type DataCollectionRuleAssociationProxyOnlyResourceProperties = DataCollectionRuleAssociation & {};
+export type DataCollectionRuleAssociationProxyOnlyResourceProperties = DataCollectionRuleAssociation;
+
+/** Metadata about the resource */
+export type DataCollectionRuleAssociationMetadata = Metadata;
+
+/** Metadata about the resource */
+export type DataCollectionRuleMetadata = Metadata;
 
 /** Resource properties. */
-export type DataCollectionRuleResourceProperties = DataCollectionRule & {};
+export type DataCollectionRuleResourceProperties = DataCollectionRule;
 
 /**
  * The specification of data sources.
  * This property is optional and can be omitted if the rule is meant to be used via direct calls to the provisioned endpoint.
  */
-export type DataCollectionRuleDataSources = DataSourcesSpec & {};
+export type DataCollectionRuleDataSources = DataSourcesSpec;
+
+/** The log files specific settings. */
+export type LogFilesDataSourceSettings = LogFileSettings;
+
+/** Text settings */
+export type LogFileSettingsText = LogFileTextSettings;
 
 /** The specification of destinations. */
-export type DataCollectionRuleDestinations = DestinationsSpec & {};
+export type DataCollectionRuleDestinations = DestinationsSpec;
 
 /** Azure Monitor Metrics destination. */
-export type DestinationsSpecAzureMonitorMetrics = AzureMonitorMetricsDestination & {};
+export type DestinationsSpecAzureMonitorMetrics = AzureMonitorMetricsDestination;
 
 /** Criterion to filter metrics. */
 export type MetricCriteria = MultiMetricCriteria & {
@@ -2507,6 +2754,24 @@ export type DynamicMetricCriteria = MultiMetricCriteria & {
   ignoreDataBefore?: Date;
 };
 
+/** Defines headers for ActionGroups_postTestNotifications operation. */
+export interface ActionGroupsPostTestNotificationsHeaders {
+  /** The location header that has the polling uri. */
+  location?: string;
+}
+
+/** Defines headers for ActionGroups_createNotificationsAtResourceGroupLevel operation. */
+export interface ActionGroupsCreateNotificationsAtResourceGroupLevelHeaders {
+  /** The location header that has the polling uri. */
+  location?: string;
+}
+
+/** Defines headers for ActionGroups_createNotificationsAtActionGroupResourceLevel operation. */
+export interface ActionGroupsCreateNotificationsAtActionGroupResourceLevelHeaders {
+  /** The location header that has the polling uri. */
+  location?: string;
+}
+
 /** Known values of {@link ScaleRuleMetricDimensionOperationType} that the service accepts. */
 export enum KnownScaleRuleMetricDimensionOperationType {
   Equals = "Equals",
@@ -2522,6 +2787,26 @@ export enum KnownScaleRuleMetricDimensionOperationType {
  * **NotEquals**
  */
 export type ScaleRuleMetricDimensionOperationType = string;
+
+/** Known values of {@link CreatedByType} that the service accepts. */
+export enum KnownCreatedByType {
+  User = "User",
+  Application = "Application",
+  ManagedIdentity = "ManagedIdentity",
+  Key = "Key"
+}
+
+/**
+ * Defines values for CreatedByType. \
+ * {@link KnownCreatedByType} can be used interchangeably with CreatedByType,
+ *  this enum contains the known values that the service supports.
+ * ### Known values supported by the service
+ * **User** \
+ * **Application** \
+ * **ManagedIdentity** \
+ * **Key**
+ */
+export type CreatedByType = string;
 
 /** Known values of {@link MetricClass} that the service accepts. */
 export enum KnownMetricClass {
@@ -2775,26 +3060,6 @@ export enum KnownKnownDataCollectionEndpointResourceKind {
  */
 export type KnownDataCollectionEndpointResourceKind = string;
 
-/** Known values of {@link CreatedByType} that the service accepts. */
-export enum KnownCreatedByType {
-  User = "User",
-  Application = "Application",
-  ManagedIdentity = "ManagedIdentity",
-  Key = "Key"
-}
-
-/**
- * Defines values for CreatedByType. \
- * {@link KnownCreatedByType} can be used interchangeably with CreatedByType,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **User** \
- * **Application** \
- * **ManagedIdentity** \
- * **Key**
- */
-export type CreatedByType = string;
-
 /** Known values of {@link KnownDataCollectionRuleAssociationProvisioningState} that the service accepts. */
 export enum KnownKnownDataCollectionRuleAssociationProvisioningState {
   Creating = "Creating",
@@ -2816,6 +3081,32 @@ export enum KnownKnownDataCollectionRuleAssociationProvisioningState {
  * **Failed**
  */
 export type KnownDataCollectionRuleAssociationProvisioningState = string;
+
+/** Known values of {@link KnownColumnDefinitionType} that the service accepts. */
+export enum KnownKnownColumnDefinitionType {
+  String = "string",
+  Int = "int",
+  Long = "long",
+  Real = "real",
+  Boolean = "boolean",
+  Datetime = "datetime",
+  Dynamic = "dynamic"
+}
+
+/**
+ * Defines values for KnownColumnDefinitionType. \
+ * {@link KnownKnownColumnDefinitionType} can be used interchangeably with KnownColumnDefinitionType,
+ *  this enum contains the known values that the service supports.
+ * ### Known values supported by the service
+ * **string** \
+ * **int** \
+ * **long** \
+ * **real** \
+ * **boolean** \
+ * **datetime** \
+ * **dynamic**
+ */
+export type KnownColumnDefinitionType = string;
 
 /** Known values of {@link KnownPerfCounterDataSourceStreams} that the service accepts. */
 export enum KnownKnownPerfCounterDataSourceStreams {
@@ -2968,6 +3259,50 @@ export enum KnownKnownExtensionDataSourceStreams {
  * **Microsoft-WindowsEvent**
  */
 export type KnownExtensionDataSourceStreams = string;
+
+/** Known values of {@link KnownLogFilesDataSourceFormat} that the service accepts. */
+export enum KnownKnownLogFilesDataSourceFormat {
+  Text = "text"
+}
+
+/**
+ * Defines values for KnownLogFilesDataSourceFormat. \
+ * {@link KnownKnownLogFilesDataSourceFormat} can be used interchangeably with KnownLogFilesDataSourceFormat,
+ *  this enum contains the known values that the service supports.
+ * ### Known values supported by the service
+ * **text**
+ */
+export type KnownLogFilesDataSourceFormat = string;
+
+/** Known values of {@link KnownLogFileTextSettingsRecordStartTimestampFormat} that the service accepts. */
+export enum KnownKnownLogFileTextSettingsRecordStartTimestampFormat {
+  ISO8601 = "ISO 8601",
+  YyyyMMDDHHMMSS = "YYYY-MM-DD HH:MM:SS",
+  MDYyyyHHMMSSAMPM = "M/D/YYYY HH:MM:SS AM/PM",
+  MonDDYyyyHHMMSS = "Mon DD, YYYY HH:MM:SS",
+  YyMMddHHMmSs = "yyMMdd HH:mm:ss",
+  DdMMyyHHMmSs = "ddMMyy HH:mm:ss",
+  MMMDHhMmSs = "MMM d hh:mm:ss",
+  DdMMMYyyyHHMmSsZzz = "dd/MMM/yyyy:HH:mm:ss zzz",
+  YyyyMMDdTHHMmSsK = "yyyy-MM-ddTHH:mm:ssK"
+}
+
+/**
+ * Defines values for KnownLogFileTextSettingsRecordStartTimestampFormat. \
+ * {@link KnownKnownLogFileTextSettingsRecordStartTimestampFormat} can be used interchangeably with KnownLogFileTextSettingsRecordStartTimestampFormat,
+ *  this enum contains the known values that the service supports.
+ * ### Known values supported by the service
+ * **ISO 8601** \
+ * **YYYY-MM-DD HH:MM:SS** \
+ * **M\/D\/YYYY HH:MM:SS AM\/PM** \
+ * **Mon DD, YYYY HH:MM:SS** \
+ * **yyMMdd HH:mm:ss** \
+ * **ddMMyy HH:mm:ss** \
+ * **MMM d hh:mm:ss** \
+ * **dd\/MMM\/yyyy:HH:mm:ss zzz** \
+ * **yyyy-MM-ddTHH:mm:ssK**
+ */
+export type KnownLogFileTextSettingsRecordStartTimestampFormat = string;
 
 /** Known values of {@link KnownDataFlowStreams} that the service accepts. */
 export enum KnownKnownDataFlowStreams {
@@ -3222,6 +3557,11 @@ export type RecurrenceFrequency =
   | "Week"
   | "Month"
   | "Year";
+/** Defines values for PredictiveAutoscalePolicyScaleMode. */
+export type PredictiveAutoscalePolicyScaleMode =
+  | "Disabled"
+  | "ForecastOnly"
+  | "Enabled";
 /** Defines values for CategoryType. */
 export type CategoryType = "Metrics" | "Logs";
 /** Defines values for ReceiverStatus. */
@@ -3309,6 +3649,13 @@ export interface AutoscaleSettingsListBySubscriptionNextOptionalParams
 
 /** Contains response data for the listBySubscriptionNext operation. */
 export type AutoscaleSettingsListBySubscriptionNextResponse = AutoscaleSettingResourceCollection;
+
+/** Optional parameters. */
+export interface PredictiveMetricGetOptionalParams
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the get operation. */
+export type PredictiveMetricGetResponse = PredictiveResponse;
 
 /** Optional parameters. */
 export interface OperationsListOptionalParams
@@ -3476,7 +3823,31 @@ export interface ActionGroupsPostTestNotificationsOptionalParams
 }
 
 /** Contains response data for the postTestNotifications operation. */
-export type ActionGroupsPostTestNotificationsResponse = TestNotificationResponse;
+export type ActionGroupsPostTestNotificationsResponse = ActionGroupsPostTestNotificationsHeaders;
+
+/** Optional parameters. */
+export interface ActionGroupsCreateNotificationsAtResourceGroupLevelOptionalParams
+  extends coreClient.OperationOptions {
+  /** Delay to wait until next poll, in milliseconds. */
+  updateIntervalInMs?: number;
+  /** A serialized poller which can be used to resume an existing paused Long-Running-Operation. */
+  resumeFrom?: string;
+}
+
+/** Contains response data for the createNotificationsAtResourceGroupLevel operation. */
+export type ActionGroupsCreateNotificationsAtResourceGroupLevelResponse = ActionGroupsCreateNotificationsAtResourceGroupLevelHeaders;
+
+/** Optional parameters. */
+export interface ActionGroupsCreateNotificationsAtActionGroupResourceLevelOptionalParams
+  extends coreClient.OperationOptions {
+  /** Delay to wait until next poll, in milliseconds. */
+  updateIntervalInMs?: number;
+  /** A serialized poller which can be used to resume an existing paused Long-Running-Operation. */
+  resumeFrom?: string;
+}
+
+/** Contains response data for the createNotificationsAtActionGroupResourceLevel operation. */
+export type ActionGroupsCreateNotificationsAtActionGroupResourceLevelResponse = ActionGroupsCreateNotificationsAtActionGroupResourceLevelHeaders;
 
 /** Optional parameters. */
 export interface ActionGroupsGetTestNotificationsOptionalParams
@@ -3484,6 +3855,20 @@ export interface ActionGroupsGetTestNotificationsOptionalParams
 
 /** Contains response data for the getTestNotifications operation. */
 export type ActionGroupsGetTestNotificationsResponse = TestNotificationDetailsResponse;
+
+/** Optional parameters. */
+export interface ActionGroupsGetTestNotificationsAtResourceGroupLevelOptionalParams
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the getTestNotificationsAtResourceGroupLevel operation. */
+export type ActionGroupsGetTestNotificationsAtResourceGroupLevelResponse = TestNotificationDetailsResponse;
+
+/** Optional parameters. */
+export interface ActionGroupsGetTestNotificationsAtActionGroupResourceLevelOptionalParams
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the getTestNotificationsAtActionGroupResourceLevel operation. */
+export type ActionGroupsGetTestNotificationsAtActionGroupResourceLevelResponse = TestNotificationDetailsResponse;
 
 /** Optional parameters. */
 export interface ActionGroupsListBySubscriptionIdOptionalParams
@@ -3936,14 +4321,28 @@ export interface ActivityLogAlertsListBySubscriptionIdOptionalParams
   extends coreClient.OperationOptions {}
 
 /** Contains response data for the listBySubscriptionId operation. */
-export type ActivityLogAlertsListBySubscriptionIdResponse = ActivityLogAlertList;
+export type ActivityLogAlertsListBySubscriptionIdResponse = AlertRuleList;
 
 /** Optional parameters. */
 export interface ActivityLogAlertsListByResourceGroupOptionalParams
   extends coreClient.OperationOptions {}
 
 /** Contains response data for the listByResourceGroup operation. */
-export type ActivityLogAlertsListByResourceGroupResponse = ActivityLogAlertList;
+export type ActivityLogAlertsListByResourceGroupResponse = AlertRuleList;
+
+/** Optional parameters. */
+export interface ActivityLogAlertsListBySubscriptionIdNextOptionalParams
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the listBySubscriptionIdNext operation. */
+export type ActivityLogAlertsListBySubscriptionIdNextResponse = AlertRuleList;
+
+/** Optional parameters. */
+export interface ActivityLogAlertsListByResourceGroupNextOptionalParams
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the listByResourceGroupNext operation. */
+export type ActivityLogAlertsListByResourceGroupNextResponse = AlertRuleList;
 
 /** Optional parameters. */
 export interface DataCollectionEndpointsListByResourceGroupOptionalParams
@@ -4019,6 +4418,13 @@ export interface DataCollectionRuleAssociationsListByRuleOptionalParams
 export type DataCollectionRuleAssociationsListByRuleResponse = DataCollectionRuleAssociationProxyOnlyResourceListResult;
 
 /** Optional parameters. */
+export interface DataCollectionRuleAssociationsListByDataCollectionEndpointOptionalParams
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the listByDataCollectionEndpoint operation. */
+export type DataCollectionRuleAssociationsListByDataCollectionEndpointResponse = DataCollectionRuleAssociationProxyOnlyResourceListResult;
+
+/** Optional parameters. */
 export interface DataCollectionRuleAssociationsGetOptionalParams
   extends coreClient.OperationOptions {}
 
@@ -4052,6 +4458,13 @@ export interface DataCollectionRuleAssociationsListByRuleNextOptionalParams
 
 /** Contains response data for the listByRuleNext operation. */
 export type DataCollectionRuleAssociationsListByRuleNextResponse = DataCollectionRuleAssociationProxyOnlyResourceListResult;
+
+/** Optional parameters. */
+export interface DataCollectionRuleAssociationsListByDataCollectionEndpointNextOptionalParams
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the listByDataCollectionEndpointNext operation. */
+export type DataCollectionRuleAssociationsListByDataCollectionEndpointNextResponse = DataCollectionRuleAssociationProxyOnlyResourceListResult;
 
 /** Optional parameters. */
 export interface DataCollectionRulesListByResourceGroupOptionalParams
