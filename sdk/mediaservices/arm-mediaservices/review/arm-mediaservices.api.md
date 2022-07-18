@@ -395,6 +395,13 @@ export type AudioOverlay = Overlay & {
 // @public
 export type AudioTrack = TrackBase & {
     odataType: "#Microsoft.Media.AudioTrack";
+    fileName?: string;
+    displayName?: string;
+    languageCode?: string;
+    hlsSettings?: HlsSettings;
+    dashSettings?: DashSettings;
+    mpeg4TrackId?: number;
+    readonly bitRate?: number;
 };
 
 // @public
@@ -432,6 +439,10 @@ export class AzureMediaServices extends coreClient.ServiceClient {
     locations: Locations;
     // (undocumented)
     mediaservices: Mediaservices;
+    // (undocumented)
+    mediaServicesOperationResults: MediaServicesOperationResults;
+    // (undocumented)
+    mediaServicesOperationStatuses: MediaServicesOperationStatuses;
     // (undocumented)
     operationResults: OperationResults;
     // (undocumented)
@@ -495,6 +506,11 @@ export interface CheckNameAvailabilityInput {
 }
 
 // @public
+export interface ClearKeyEncryptionConfiguration {
+    customKeysAcquisitionUrlTemplate?: string;
+}
+
+// @public
 export interface ClipTime {
     odataType: "#Microsoft.Media.AbsoluteClipTime" | "#Microsoft.Media.UtcClipTime";
 }
@@ -513,6 +529,7 @@ export type CodecUnion = Codec | AudioUnion | VideoUnion | CopyVideo | CopyAudio
 
 // @public
 export interface CommonEncryptionCbcs {
+    clearKeyEncryptionConfiguration?: ClearKeyEncryptionConfiguration;
     clearTracks?: TrackSelection[];
     contentKeys?: StreamingPolicyContentKeys;
     drm?: CbcsDrmConfiguration;
@@ -521,6 +538,7 @@ export interface CommonEncryptionCbcs {
 
 // @public
 export interface CommonEncryptionCenc {
+    clearKeyEncryptionConfiguration?: ClearKeyEncryptionConfiguration;
     clearTracks?: TrackSelection[];
     contentKeys?: StreamingPolicyContentKeys;
     drm?: CencDrmConfiguration;
@@ -701,6 +719,7 @@ export interface ContentKeyPolicyPlayReadyLicense {
     playRight?: ContentKeyPolicyPlayReadyPlayRight;
     relativeBeginDate?: string;
     relativeExpirationDate?: string;
+    securityLevel?: SecurityLevel;
 }
 
 // @public
@@ -824,6 +843,11 @@ export type CreatedByType = string;
 export interface CrossSiteAccessPolicies {
     clientAccessPolicy?: string;
     crossDomainPolicy?: string;
+}
+
+// @public
+export interface DashSettings {
+    roles?: string;
 }
 
 // @public
@@ -1715,6 +1739,14 @@ export enum KnownRotation {
 }
 
 // @public
+export enum KnownSecurityLevel {
+    SL150 = "SL150",
+    SL2000 = "SL2000",
+    SL3000 = "SL3000",
+    Unknown = "Unknown"
+}
+
+// @public
 export enum KnownStorageAccountType {
     Primary = "Primary",
     Secondary = "Secondary"
@@ -2113,14 +2145,16 @@ export interface LogSpecification {
 
 // @public
 export type MediaService = TrackedResource & {
-    identity?: MediaServiceIdentity;
     readonly systemData?: SystemData;
+    identity?: MediaServiceIdentity;
     readonly mediaServiceId?: string;
     storageAccounts?: StorageAccount[];
     storageAuthentication?: StorageAuthentication;
     encryption?: AccountEncryption;
     keyDelivery?: KeyDelivery;
     publicNetworkAccess?: PublicNetworkAccess;
+    readonly provisioningState?: ProvisioningState;
+    readonly privateEndpointConnections?: PrivateEndpointConnection[];
 };
 
 // @public
@@ -2140,23 +2174,44 @@ export interface MediaServiceIdentity {
 }
 
 // @public
+export interface MediaServiceOperationStatus {
+    endTime?: Date;
+    error?: ErrorDetail;
+    id?: string;
+    name: string;
+    startTime?: Date;
+    status: string;
+}
+
+// @public
 export interface Mediaservices {
-    createOrUpdate(resourceGroupName: string, accountName: string, parameters: MediaService, options?: MediaservicesCreateOrUpdateOptionalParams): Promise<MediaservicesCreateOrUpdateResponse>;
+    beginCreateOrUpdate(resourceGroupName: string, accountName: string, parameters: MediaService, options?: MediaservicesCreateOrUpdateOptionalParams): Promise<PollerLike<PollOperationState<MediaservicesCreateOrUpdateResponse>, MediaservicesCreateOrUpdateResponse>>;
+    beginCreateOrUpdateAndWait(resourceGroupName: string, accountName: string, parameters: MediaService, options?: MediaservicesCreateOrUpdateOptionalParams): Promise<MediaservicesCreateOrUpdateResponse>;
+    beginUpdate(resourceGroupName: string, accountName: string, parameters: MediaServiceUpdate, options?: MediaservicesUpdateOptionalParams): Promise<PollerLike<PollOperationState<MediaservicesUpdateResponse>, MediaservicesUpdateResponse>>;
+    beginUpdateAndWait(resourceGroupName: string, accountName: string, parameters: MediaServiceUpdate, options?: MediaservicesUpdateOptionalParams): Promise<MediaservicesUpdateResponse>;
     delete(resourceGroupName: string, accountName: string, options?: MediaservicesDeleteOptionalParams): Promise<void>;
     get(resourceGroupName: string, accountName: string, options?: MediaservicesGetOptionalParams): Promise<MediaservicesGetResponse>;
     list(resourceGroupName: string, options?: MediaservicesListOptionalParams): PagedAsyncIterableIterator<MediaService>;
     listBySubscription(options?: MediaservicesListBySubscriptionOptionalParams): PagedAsyncIterableIterator<MediaService>;
     listEdgePolicies(resourceGroupName: string, accountName: string, parameters: ListEdgePoliciesInput, options?: MediaservicesListEdgePoliciesOptionalParams): Promise<MediaservicesListEdgePoliciesResponse>;
     syncStorageKeys(resourceGroupName: string, accountName: string, parameters: SyncStorageKeysInput, options?: MediaservicesSyncStorageKeysOptionalParams): Promise<void>;
-    update(resourceGroupName: string, accountName: string, parameters: MediaServiceUpdate, options?: MediaservicesUpdateOptionalParams): Promise<MediaservicesUpdateResponse>;
+}
+
+// @public
+export interface MediaservicesCreateOrUpdateHeaders {
+    azureAsyncOperation?: string;
+    location?: string;
+    retryAfter?: number;
 }
 
 // @public
 export interface MediaservicesCreateOrUpdateOptionalParams extends coreClient.OperationOptions {
+    resumeFrom?: string;
+    updateIntervalInMs?: number;
 }
 
 // @public
-export type MediaservicesCreateOrUpdateResponse = MediaService;
+export type MediaservicesCreateOrUpdateResponse = MediaservicesCreateOrUpdateHeaders & MediaService;
 
 // @public
 export interface MediaservicesDeleteOptionalParams extends coreClient.OperationOptions {
@@ -2205,15 +2260,55 @@ export interface MediaservicesListOptionalParams extends coreClient.OperationOpt
 export type MediaservicesListResponse = MediaServiceCollection;
 
 // @public
+export interface MediaServicesOperationResults {
+    get(locationName: string, operationId: string, options?: MediaServicesOperationResultsGetOptionalParams): Promise<MediaServicesOperationResultsGetResponse>;
+}
+
+// @public
+export interface MediaServicesOperationResultsGetHeaders {
+    azureAsyncOperation?: string;
+    location?: string;
+    retryAfter?: number;
+}
+
+// @public
+export interface MediaServicesOperationResultsGetOptionalParams extends coreClient.OperationOptions {
+}
+
+// @public
+export type MediaServicesOperationResultsGetResponse = MediaService;
+
+// @public
+export interface MediaServicesOperationStatuses {
+    get(locationName: string, operationId: string, options?: MediaServicesOperationStatusesGetOptionalParams): Promise<MediaServicesOperationStatusesGetResponse>;
+}
+
+// @public
+export interface MediaServicesOperationStatusesGetOptionalParams extends coreClient.OperationOptions {
+}
+
+// @public
+export type MediaServicesOperationStatusesGetResponse = MediaServiceOperationStatus;
+
+// @public
 export interface MediaservicesSyncStorageKeysOptionalParams extends coreClient.OperationOptions {
 }
 
 // @public
-export interface MediaservicesUpdateOptionalParams extends coreClient.OperationOptions {
+export interface MediaservicesUpdateHeaders {
+    azureAsyncOperation?: string;
+    location?: string;
+    retryAfter?: number;
 }
 
 // @public
-export type MediaservicesUpdateResponse = MediaService;
+export interface MediaservicesUpdateOptionalParams extends coreClient.OperationOptions {
+    resumeFrom?: string;
+    updateIntervalInMs?: number;
+}
+
+// @public
+export type MediaservicesUpdateResponse = MediaservicesUpdateHeaders & MediaService;
 
 // @public
 export interface MediaServiceUpdate {
@@ -2221,6 +2316,8 @@ export interface MediaServiceUpdate {
     identity?: MediaServiceIdentity;
     keyDelivery?: KeyDelivery;
     readonly mediaServiceId?: string;
+    readonly privateEndpointConnections?: PrivateEndpointConnection[];
+    readonly provisioningState?: ProvisioningState;
     publicNetworkAccess?: PublicNetworkAccess;
     storageAccounts?: StorageAccount[];
     // (undocumented)
@@ -2378,7 +2475,7 @@ export type PngImage = Image_2 & {
 };
 
 // @public
-export type PngLayer = Layer & {};
+export type PngLayer = Layer;
 
 // @public
 export interface PresentationTimeRange {
@@ -2517,7 +2614,7 @@ export interface Properties {
 export type ProvisioningState = string;
 
 // @public
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 // @public
 export type PublicNetworkAccess = string;
@@ -2545,6 +2642,9 @@ export interface ResourceIdentity {
 
 // @public
 export type Rotation = string;
+
+// @public
+export type SecurityLevel = string;
 
 // @public
 export type SelectAudioTrackByAttribute = AudioTrackDescriptor & {

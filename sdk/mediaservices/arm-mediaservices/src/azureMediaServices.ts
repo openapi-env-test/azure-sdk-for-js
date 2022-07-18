@@ -16,6 +16,8 @@ import {
   PrivateLinkResourcesImpl,
   PrivateEndpointConnectionsImpl,
   LocationsImpl,
+  MediaServicesOperationStatusesImpl,
+  MediaServicesOperationResultsImpl,
   AssetsImpl,
   AssetFiltersImpl,
   TracksImpl,
@@ -37,6 +39,8 @@ import {
   PrivateLinkResources,
   PrivateEndpointConnections,
   Locations,
+  MediaServicesOperationStatuses,
+  MediaServicesOperationResults,
   Assets,
   AssetFilters,
   Tracks,
@@ -84,7 +88,7 @@ export class AzureMediaServices extends coreClient.ServiceClient {
       credential: credentials
     };
 
-    const packageDetails = `azsdk-js-arm-mediaservices/11.0.1`;
+    const packageDetails = `azsdk-js-arm-mediaservices/13.0.0`;
     const userAgentPrefix =
       options.userAgentOptions && options.userAgentOptions.userAgentPrefix
         ? `${options.userAgentOptions.userAgentPrefix} ${packageDetails}`
@@ -137,6 +141,12 @@ export class AzureMediaServices extends coreClient.ServiceClient {
     this.privateLinkResources = new PrivateLinkResourcesImpl(this);
     this.privateEndpointConnections = new PrivateEndpointConnectionsImpl(this);
     this.locations = new LocationsImpl(this);
+    this.mediaServicesOperationStatuses = new MediaServicesOperationStatusesImpl(
+      this
+    );
+    this.mediaServicesOperationResults = new MediaServicesOperationResultsImpl(
+      this
+    );
     this.assets = new AssetsImpl(this);
     this.assetFilters = new AssetFiltersImpl(this);
     this.tracks = new TracksImpl(this);
@@ -158,6 +168,8 @@ export class AzureMediaServices extends coreClient.ServiceClient {
   privateLinkResources: PrivateLinkResources;
   privateEndpointConnections: PrivateEndpointConnections;
   locations: Locations;
+  mediaServicesOperationStatuses: MediaServicesOperationStatuses;
+  mediaServicesOperationResults: MediaServicesOperationResults;
   assets: Assets;
   assetFilters: AssetFilters;
   tracks: Tracks;

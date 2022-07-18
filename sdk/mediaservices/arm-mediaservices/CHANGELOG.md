@@ -1,15 +1,69 @@
 # Release History
+    
+## 13.0.0 (2022-07-18)
+    
+**Features**
 
-## 11.0.1 (Unreleased)
+  - Added Interface ClearKeyEncryptionConfiguration
+  - Added Interface DashSettings
+  - Added Type Alias SecurityLevel
+  - Interface CommonEncryptionCbcs has a new optional parameter clearKeyEncryptionConfiguration
+  - Interface CommonEncryptionCenc has a new optional parameter clearKeyEncryptionConfiguration
+  - Interface ContentKeyPolicyPlayReadyLicense has a new optional parameter securityLevel
+  - Type Alias AudioTrack has a new parameter fileName
+  - Type Alias AudioTrack has a new parameter displayName
+  - Type Alias AudioTrack has a new parameter languageCode
+  - Type Alias AudioTrack has a new parameter hlsSettings
+  - Type Alias AudioTrack has a new parameter dashSettings
+  - Type Alias AudioTrack has a new parameter mpeg4TrackId
+  - Type Alias AudioTrack has a new parameter bitRate
+  - Added Enum KnownSecurityLevel
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
+  - Interface AzureMediaServicesOptionalParams no longer has parameter apiVersion
+  - Class AzureMediaServices no longer has parameter apiVersion
+    
+    
+## 12.0.0 (2022-06-24)
+    
+**Features**
 
-### Bugs Fixed
+  - Added operation group MediaServicesOperationResults
+  - Added operation group MediaServicesOperationStatuses
+  - Added operation Mediaservices.beginCreateOrUpdate
+  - Added operation Mediaservices.beginCreateOrUpdateAndWait
+  - Added operation Mediaservices.beginUpdate
+  - Added operation Mediaservices.beginUpdateAndWait
+  - Added Interface MediaServiceOperationStatus
+  - Added Interface MediaservicesCreateOrUpdateHeaders
+  - Added Interface MediaServicesOperationResultsGetHeaders
+  - Added Interface MediaServicesOperationResultsGetOptionalParams
+  - Added Interface MediaServicesOperationStatusesGetOptionalParams
+  - Added Interface MediaservicesUpdateHeaders
+  - Added Type Alias MediaServicesOperationResultsGetResponse
+  - Added Type Alias MediaServicesOperationStatusesGetResponse
+  - Interface AzureMediaServicesOptionalParams has a new optional parameter apiVersion
+  - Interface MediaservicesCreateOrUpdateOptionalParams has a new optional parameter resumeFrom
+  - Interface MediaservicesCreateOrUpdateOptionalParams has a new optional parameter updateIntervalInMs
+  - Interface MediaservicesUpdateOptionalParams has a new optional parameter resumeFrom
+  - Interface MediaservicesUpdateOptionalParams has a new optional parameter updateIntervalInMs
+  - Interface MediaServiceUpdate has a new optional parameter privateEndpointConnections
+  - Interface MediaServiceUpdate has a new optional parameter provisioningState
+  - Class AzureMediaServices has a new parameter apiVersion
+  - Class AzureMediaServices has a new parameter mediaServicesOperationResults
+  - Class AzureMediaServices has a new parameter mediaServicesOperationStatuses
+  - Add parameters of MediaservicesCreateOrUpdateHeaders to TypeAlias MediaservicesCreateOrUpdateResponse
+  - Add parameters of MediaservicesUpdateHeaders to TypeAlias MediaservicesUpdateResponse
+  - Type Alias MediaService has a new parameter provisioningState
+  - Type Alias MediaService has a new parameter privateEndpointConnections
 
-### Other Changes
+**Breaking Changes**
 
+  - Removed operation Mediaservices.createOrUpdate
+  - Removed operation Mediaservices.update
+    
+    
 ## 11.0.0 (2022-04-14)
     
 **Features**
