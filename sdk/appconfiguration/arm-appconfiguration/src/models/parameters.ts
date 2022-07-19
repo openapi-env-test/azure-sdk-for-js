@@ -15,9 +15,9 @@ import {
   ConfigurationStore as ConfigurationStoreMapper,
   ConfigurationStoreUpdateParameters as ConfigurationStoreUpdateParametersMapper,
   RegenerateKeyParameters as RegenerateKeyParametersMapper,
+  ListKeyValueParameters as ListKeyValueParametersMapper,
   CheckNameAvailabilityParameters as CheckNameAvailabilityParametersMapper,
-  PrivateEndpointConnection as PrivateEndpointConnectionMapper,
-  KeyValue as KeyValueMapper
+  PrivateEndpointConnection as PrivateEndpointConnectionMapper
 } from "../models/mappers";
 
 export const accept: OperationParameter = {
@@ -58,7 +58,7 @@ export const subscriptionId: OperationURLParameter = {
 export const apiVersion: OperationQueryParameter = {
   parameterPath: "apiVersion",
   mapper: {
-    defaultValue: "2021-10-01-preview",
+    defaultValue: "2011-01-01",
     isConstant: true,
     serializedName: "api-version",
     type: {
@@ -131,15 +131,9 @@ export const regenerateKeyParameters: OperationParameter = {
   mapper: RegenerateKeyParametersMapper
 };
 
-export const location: OperationURLParameter = {
-  parameterPath: "location",
-  mapper: {
-    serializedName: "location",
-    required: true,
-    type: {
-      name: "String"
-    }
-  }
+export const listKeyValueParameters: OperationParameter = {
+  parameterPath: "listKeyValueParameters",
+  mapper: ListKeyValueParametersMapper
 };
 
 export const nextLink: OperationURLParameter = {
@@ -184,20 +178,4 @@ export const groupName: OperationURLParameter = {
       name: "String"
     }
   }
-};
-
-export const keyValueName: OperationURLParameter = {
-  parameterPath: "keyValueName",
-  mapper: {
-    serializedName: "keyValueName",
-    required: true,
-    type: {
-      name: "String"
-    }
-  }
-};
-
-export const keyValueParameters: OperationParameter = {
-  parameterPath: ["options", "keyValueParameters"],
-  mapper: KeyValueMapper
 };
