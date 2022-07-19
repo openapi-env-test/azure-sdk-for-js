@@ -728,7 +728,7 @@ export interface PerNodeState {
 export type ProvisioningState = string;
 
 // @public
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 // @public (undocumented)
 export interface RawCertificateData {
