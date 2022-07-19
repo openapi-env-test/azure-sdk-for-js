@@ -143,6 +143,8 @@ export interface IotHubProperties {
   readonly locations?: IotHubLocationDescription[];
   /** This property when set to true, will enable data residency, thus, disabling disaster recovery. */
   enableDataResidency?: boolean;
+  /** This property store root certificate related informaiton */
+  rootCertificate?: RootCertificateProperties;
 }
 
 /** The properties of an IoT hub shared access policy. */
@@ -472,6 +474,17 @@ export interface IotHubLocationDescription {
   location?: string;
   /** The role of the region, can be either primary or secondary. The primary region is where the IoT hub is currently provisioned. The secondary region is the Azure disaster recovery (DR) paired region and also the region where the IoT hub can failover to. */
   role?: IotHubReplicaRoleType;
+}
+
+/** This property store root certificate related informaiton */
+export interface RootCertificateProperties {
+  /** This property when set to true, hub will use G2 cert; while it's set to false, hub uses Baltimore Cert. */
+  enableRootCertificateV2?: boolean;
+  /**
+   * the last update time to root certificate flag.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly lastUpdatedTimeUtc?: Date;
 }
 
 /** Information about the SKU of the IoT hub. */
