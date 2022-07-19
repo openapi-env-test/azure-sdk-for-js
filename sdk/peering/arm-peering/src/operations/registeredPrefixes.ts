@@ -20,6 +20,8 @@ import {
   RegisteredPrefixesGetResponse,
   RegisteredPrefixesCreateOrUpdateOptionalParams,
   RegisteredPrefixesCreateOrUpdateResponse,
+  RegisteredPrefixesValidateOptionalParams,
+  RegisteredPrefixesValidateResponse,
   RegisteredPrefixesDeleteOptionalParams,
   RegisteredPrefixesListByPeeringResponse,
   RegisteredPrefixesListByPeeringNextResponse
@@ -158,6 +160,26 @@ export class RegisteredPrefixesImpl implements RegisteredPrefixes {
   }
 
   /**
+   * Validates an existing registered prefix with the specified name under the given subscription,
+   * resource group and peering.
+   * @param resourceGroupName The name of the resource group.
+   * @param peeringName The name of the peering.
+   * @param registeredPrefixName The name of the registered prefix.
+   * @param options The options parameters.
+   */
+  validate(
+    resourceGroupName: string,
+    peeringName: string,
+    registeredPrefixName: string,
+    options?: RegisteredPrefixesValidateOptionalParams
+  ): Promise<RegisteredPrefixesValidateResponse> {
+    return this.client.sendOperationRequest(
+      { resourceGroupName, peeringName, registeredPrefixName, options },
+      validateOperationSpec
+    );
+  }
+
+  /**
    * Deletes an existing registered prefix with the specified name under the given subscription, resource
    * group and peering.
    * @param resourceGroupName The name of the resource group.
@@ -265,6 +287,29 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
   mediaType: "json",
+  serializer
+};
+const validateOperationSpec: coreClient.OperationSpec = {
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredPrefixes/{registeredPrefixName}",
+  httpMethod: "POST",
+  responses: {
+    200: {
+      bodyMapper: Mappers.PeeringRegisteredPrefix
+    },
+    default: {
+      bodyMapper: Mappers.ErrorResponse
+    }
+  },
+  queryParameters: [Parameters.apiVersion],
+  urlParameters: [
+    Parameters.$host,
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName,
+    Parameters.peeringName,
+    Parameters.registeredPrefixName
+  ],
+  headerParameters: [Parameters.accept],
   serializer
 };
 const deleteOperationSpec: coreClient.OperationSpec = {

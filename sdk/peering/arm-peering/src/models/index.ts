@@ -744,7 +744,7 @@ export type ConnectionMonitorTest = Resource & {
 };
 
 /** The peering service country. */
-export type PeeringServiceCountry = Resource & {};
+export type PeeringServiceCountry = Resource;
 
 /** The peering service location. */
 export type PeeringServiceLocation = Resource & {
@@ -854,6 +854,34 @@ export enum KnownLegacyPeeringsKind {
  */
 export type LegacyPeeringsKind = string;
 
+/** Known values of {@link DirectPeeringType} that the service accepts. */
+export enum KnownDirectPeeringType {
+  Edge = "Edge",
+  Transit = "Transit",
+  Cdn = "Cdn",
+  Internal = "Internal",
+  Ix = "Ix",
+  IxRs = "IxRs",
+  Voice = "Voice",
+  EdgeZoneForOperators = "EdgeZoneForOperators"
+}
+
+/**
+ * Defines values for DirectPeeringType. \
+ * {@link KnownDirectPeeringType} can be used interchangeably with DirectPeeringType,
+ *  this enum contains the known values that the service supports.
+ * ### Known values supported by the service
+ * **Edge** \
+ * **Transit** \
+ * **Cdn** \
+ * **Internal** \
+ * **Ix** \
+ * **IxRs** \
+ * **Voice** \
+ * **EdgeZoneForOperators**
+ */
+export type DirectPeeringType = string;
+
 /** Known values of {@link Tier} that the service accepts. */
 export enum KnownTier {
   Basic = "Basic",
@@ -945,7 +973,9 @@ export enum KnownConnectionState {
   ProvisioningFailed = "ProvisioningFailed",
   ProvisioningCompleted = "ProvisioningCompleted",
   Validating = "Validating",
-  Active = "Active"
+  Active = "Active",
+  TypeChangeRequested = "TypeChangeRequested",
+  TypeChangeInProgress = "TypeChangeInProgress"
 }
 
 /**
@@ -960,7 +990,9 @@ export enum KnownConnectionState {
  * **ProvisioningFailed** \
  * **ProvisioningCompleted** \
  * **Validating** \
- * **Active**
+ * **Active** \
+ * **TypeChangeRequested** \
+ * **TypeChangeInProgress**
  */
 export type ConnectionState = string;
 
@@ -1031,32 +1063,6 @@ export enum KnownSessionStateV6 {
  * **PendingRemove**
  */
 export type SessionStateV6 = string;
-
-/** Known values of {@link DirectPeeringType} that the service accepts. */
-export enum KnownDirectPeeringType {
-  Edge = "Edge",
-  Transit = "Transit",
-  Cdn = "Cdn",
-  Internal = "Internal",
-  Ix = "Ix",
-  IxRs = "IxRs",
-  Voice = "Voice"
-}
-
-/**
- * Defines values for DirectPeeringType. \
- * {@link KnownDirectPeeringType} can be used interchangeably with DirectPeeringType,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **Edge** \
- * **Transit** \
- * **Cdn** \
- * **Internal** \
- * **Ix** \
- * **IxRs** \
- * **Voice**
- */
-export type DirectPeeringType = string;
 
 /** Known values of {@link ProvisioningState} that the service accepts. */
 export enum KnownProvisioningState {
@@ -1198,7 +1204,8 @@ export enum KnownPeeringLocationsDirectPeeringType {
   Internal = "Internal",
   Ix = "Ix",
   IxRs = "IxRs",
-  Voice = "Voice"
+  Voice = "Voice",
+  EdgeZoneForOperators = "EdgeZoneForOperators"
 }
 
 /**
@@ -1212,7 +1219,8 @@ export enum KnownPeeringLocationsDirectPeeringType {
  * **Internal** \
  * **Ix** \
  * **IxRs** \
- * **Voice**
+ * **Voice** \
+ * **EdgeZoneForOperators**
  */
 export type PeeringLocationsDirectPeeringType = string;
 
@@ -1289,6 +1297,8 @@ export interface LegacyPeeringsListOptionalParams
   extends coreClient.OperationOptions {
   /** The ASN number associated with a legacy peering. */
   asn?: number;
+  /** The direct peering type. */
+  directPeeringType?: DirectPeeringType;
 }
 
 /** Contains response data for the list operation. */
@@ -1299,6 +1309,8 @@ export interface LegacyPeeringsListNextOptionalParams
   extends coreClient.OperationOptions {
   /** The ASN number associated with a legacy peering. */
   asn?: number;
+  /** The direct peering type. */
+  directPeeringType?: DirectPeeringType;
 }
 
 /** Contains response data for the listNext operation. */
@@ -1422,6 +1434,13 @@ export interface RegisteredPrefixesCreateOrUpdateOptionalParams
 
 /** Contains response data for the createOrUpdate operation. */
 export type RegisteredPrefixesCreateOrUpdateResponse = PeeringRegisteredPrefix;
+
+/** Optional parameters. */
+export interface RegisteredPrefixesValidateOptionalParams
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the validate operation. */
+export type RegisteredPrefixesValidateResponse = PeeringRegisteredPrefix;
 
 /** Optional parameters. */
 export interface RegisteredPrefixesDeleteOptionalParams

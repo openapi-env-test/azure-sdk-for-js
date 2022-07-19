@@ -1,15 +1,19 @@
 # Release History
+    
+## 2.1.0 (2022-07-19)
+    
+**Features**
 
-## 2.0.2 (Unreleased)
-
-### Features Added
-
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Added operation RegisteredPrefixes.validate
+  - Added Interface RegisteredPrefixesValidateOptionalParams
+  - Added Type Alias RegisteredPrefixesValidateResponse
+  - Interface LegacyPeeringsListNextOptionalParams has a new optional parameter directPeeringType
+  - Interface LegacyPeeringsListOptionalParams has a new optional parameter directPeeringType
+  - Enum KnownConnectionState has a new value TypeChangeInProgress
+  - Enum KnownConnectionState has a new value TypeChangeRequested
+  - Enum KnownDirectPeeringType has a new value EdgeZoneForOperators
+  - Enum KnownPeeringLocationsDirectPeeringType has a new value EdgeZoneForOperators
+    
 ## 2.0.1 (2022-04-27)
 
 **Features**

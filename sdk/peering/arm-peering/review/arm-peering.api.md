@@ -235,6 +235,10 @@ export enum KnownConnectionState {
     // (undocumented)
     ProvisioningStarted = "ProvisioningStarted",
     // (undocumented)
+    TypeChangeInProgress = "TypeChangeInProgress",
+    // (undocumented)
+    TypeChangeRequested = "TypeChangeRequested",
+    // (undocumented)
     Validating = "Validating"
 }
 
@@ -244,6 +248,8 @@ export enum KnownDirectPeeringType {
     Cdn = "Cdn",
     // (undocumented)
     Edge = "Edge",
+    // (undocumented)
+    EdgeZoneForOperators = "EdgeZoneForOperators",
     // (undocumented)
     Internal = "Internal",
     // (undocumented)
@@ -322,6 +328,8 @@ export enum KnownPeeringLocationsDirectPeeringType {
     Cdn = "Cdn",
     // (undocumented)
     Edge = "Edge",
+    // (undocumented)
+    EdgeZoneForOperators = "EdgeZoneForOperators",
     // (undocumented)
     Internal = "Internal",
     // (undocumented)
@@ -492,6 +500,7 @@ export type LegacyPeeringsKind = string;
 // @public
 export interface LegacyPeeringsListNextOptionalParams extends coreClient.OperationOptions {
     asn?: number;
+    directPeeringType?: DirectPeeringType;
 }
 
 // @public
@@ -500,6 +509,7 @@ export type LegacyPeeringsListNextResponse = PeeringListResult;
 // @public
 export interface LegacyPeeringsListOptionalParams extends coreClient.OperationOptions {
     asn?: number;
+    directPeeringType?: DirectPeeringType;
 }
 
 // @public
@@ -895,7 +905,7 @@ export interface PeeringServiceCountriesListOptionalParams extends coreClient.Op
 export type PeeringServiceCountriesListResponse = PeeringServiceCountryListResult;
 
 // @public
-export type PeeringServiceCountry = Resource & {};
+export type PeeringServiceCountry = Resource;
 
 // @public
 export interface PeeringServiceCountryListResult {
@@ -1247,6 +1257,7 @@ export interface RegisteredPrefixes {
     delete(resourceGroupName: string, peeringName: string, registeredPrefixName: string, options?: RegisteredPrefixesDeleteOptionalParams): Promise<void>;
     get(resourceGroupName: string, peeringName: string, registeredPrefixName: string, options?: RegisteredPrefixesGetOptionalParams): Promise<RegisteredPrefixesGetResponse>;
     listByPeering(resourceGroupName: string, peeringName: string, options?: RegisteredPrefixesListByPeeringOptionalParams): PagedAsyncIterableIterator<PeeringRegisteredPrefix>;
+    validate(resourceGroupName: string, peeringName: string, registeredPrefixName: string, options?: RegisteredPrefixesValidateOptionalParams): Promise<RegisteredPrefixesValidateResponse>;
 }
 
 // @public
@@ -1280,6 +1291,13 @@ export interface RegisteredPrefixesListByPeeringOptionalParams extends coreClien
 
 // @public
 export type RegisteredPrefixesListByPeeringResponse = PeeringRegisteredPrefixListResult;
+
+// @public
+export interface RegisteredPrefixesValidateOptionalParams extends coreClient.OperationOptions {
+}
+
+// @public
+export type RegisteredPrefixesValidateResponse = PeeringRegisteredPrefix;
 
 // @public
 export interface Resource {
