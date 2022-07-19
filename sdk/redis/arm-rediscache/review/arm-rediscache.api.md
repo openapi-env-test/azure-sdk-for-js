@@ -67,6 +67,7 @@ export interface ErrorResponse {
 export interface ExportRDBParameters {
     container: string;
     format?: string;
+    preferredDataArchiveAuthMethod?: string;
     prefix: string;
 }
 
@@ -114,6 +115,7 @@ export type FirewallRulesListResponse = RedisFirewallRuleListResult;
 export interface ImportRDBParameters {
     files: string[];
     format?: string;
+    preferredDataArchiveAuthMethod?: string;
 }
 
 // @public
@@ -484,7 +486,7 @@ export interface PrivateLinkServiceConnectionState {
 export type ProvisioningState = string;
 
 // @public
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 // @public
 export type PublicNetworkAccess = string;
@@ -541,15 +543,17 @@ export interface RedisCommonProperties {
 // @public
 export interface RedisCommonPropertiesRedisConfiguration {
     [property: string]: any;
+    aofBackupEnabled?: string;
     aofStorageConnectionString0?: string;
     aofStorageConnectionString1?: string;
+    authnotrequired?: string;
     readonly maxclients?: string;
     maxfragmentationmemoryReserved?: string;
     maxmemoryDelta?: string;
     maxmemoryPolicy?: string;
     maxmemoryReserved?: string;
     readonly preferredDataArchiveAuthMethod?: string;
-    readonly preferredDataPersistenceAuthMethod?: string;
+    preferredDataPersistenceAuthMethod?: string;
     rdbBackupEnabled?: string;
     rdbBackupFrequency?: string;
     rdbBackupMaxSnapshotCount?: string;
@@ -616,7 +620,7 @@ export type RedisFirewallRule = ProxyResource & {
 };
 
 // @public
-export type RedisFirewallRuleCreateParameters = RedisFirewallRule & {};
+export type RedisFirewallRuleCreateParameters = RedisFirewallRule;
 
 // @public
 export interface RedisFirewallRuleListResult {
