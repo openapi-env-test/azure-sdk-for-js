@@ -1127,12 +1127,12 @@ export interface WorkspacePatchInfo {
 /** Grant sql control to managed identity */
 export interface ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentity {
   /** Desired state */
-  desiredState?: ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState;
+  desiredState?: DesiredState;
   /**
    * Actual state
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
-  readonly actualState?: ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState;
+  readonly actualState?: ActualState;
 }
 
 /** The response to a list restorable dropped Sql pools request */
@@ -1606,7 +1606,7 @@ export interface Operation {
   display?: OperationDisplay;
   /** The intended executor of the operation. */
   origin?: string;
-  /** Any object */
+  /** Properties of the operation. */
   properties?: Record<string, unknown>;
 }
 
@@ -2303,7 +2303,7 @@ export interface DatabaseStatistics {
 }
 
 /** The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location */
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 /** The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location' */
 export type TrackedResource = Resource & {
@@ -3069,10 +3069,10 @@ export type RecommendedSensitivityLabelUpdate = ProxyResource & {
 };
 
 /** A Sql pool schema resource. */
-export type SqlPoolSchema = ProxyResource & {};
+export type SqlPoolSchema = ProxyResource;
 
 /** A Sql pool table resource. */
-export type SqlPoolTable = ProxyResource & {};
+export type SqlPoolTable = ProxyResource;
 
 /** A Sql pool column resource. */
 export type SqlPoolColumn = ProxyResource & {
@@ -4163,7 +4163,7 @@ export type KustoPool = TrackedResource & {
 };
 
 /** Azure Synapse nested resource, which belongs to a workspace. */
-export type SubResource = AzureEntityResource & {};
+export type SubResource = AzureEntityResource;
 
 /** Class representing a read write database. */
 export type ReadWriteDatabase = Database & {
@@ -4810,44 +4810,6 @@ export enum KnownWorkspacePublicNetworkAccess {
  * **Disabled**
  */
 export type WorkspacePublicNetworkAccess = string;
-
-/** Known values of {@link ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState} that the service accepts. */
-export enum KnownManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState {
-  Enabled = "Enabled",
-  Disabled = "Disabled"
-}
-
-/**
- * Defines values for ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState. \
- * {@link KnownManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState} can be used interchangeably with ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **Enabled** \
- * **Disabled**
- */
-export type ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState = string;
-
-/** Known values of {@link ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState} that the service accepts. */
-export enum KnownManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState {
-  Enabling = "Enabling",
-  Enabled = "Enabled",
-  Disabling = "Disabling",
-  Disabled = "Disabled",
-  Unknown = "Unknown"
-}
-
-/**
- * Defines values for ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState. \
- * {@link KnownManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState} can be used interchangeably with ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **Enabling** \
- * **Enabled** \
- * **Disabling** \
- * **Disabled** \
- * **Unknown**
- */
-export type ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState = string;
 
 /** Known values of {@link ConfigurationType} that the service accepts. */
 export enum KnownConfigurationType {
@@ -5681,6 +5643,15 @@ export type ResourceIdentityType =
   | "None"
   | "SystemAssigned"
   | "SystemAssigned,UserAssigned";
+/** Defines values for DesiredState. */
+export type DesiredState = "Enabled" | "Disabled";
+/** Defines values for ActualState. */
+export type ActualState =
+  | "Enabling"
+  | "Enabled"
+  | "Disabling"
+  | "Disabled"
+  | "Unknown";
 /** Defines values for Type. */
 export type Type =
   | "Microsoft.Synapse/workspaces/kustoPools/databases"
