@@ -272,6 +272,8 @@ export interface RoutingProperties {
 
 /** The properties related to the custom endpoints to which your IoT hub routes messages based on the routing rules. A maximum of 10 custom endpoints are allowed across all endpoint types for paid hubs and only 1 custom endpoint is allowed across all endpoint types for free hubs. */
 export interface RoutingEndpoints {
+  /** The list of Azure Digital Twins instance endpoints that IoT hub routes the messages to, based on the routing rules. */
+  azureDigitalTwinsInstances?: RoutingAzureDigitalTwinsEndpointProperties[];
   /** The list of Service Bus queue endpoints that IoT hub routes the messages to, based on the routing rules. */
   serviceBusQueues?: RoutingServiceBusQueueEndpointProperties[];
   /** The list of Service Bus topic endpoints that the IoT hub routes the messages to, based on the routing rules. */
@@ -280,6 +282,30 @@ export interface RoutingEndpoints {
   eventHubs?: RoutingEventHubProperties[];
   /** The list of storage container endpoints that IoT hub routes messages to, based on the routing rules. */
   storageContainers?: RoutingStorageContainerProperties[];
+}
+
+/** The properties related to an Azure Digital Twins endpoint. */
+export interface RoutingAzureDigitalTwinsEndpointProperties {
+  /** Id of the Azure Digital Twins endpoint */
+  id?: string;
+  /** The url of the Azure Digital Twins streaming endpoint. It must include the protocol https:// */
+  endpointUri?: string;
+  /** Method used to authenticate against the Azure Digital Twins endpoint */
+  authenticationType?: AuthenticationType;
+  /** Managed identity properties of routing Azure Digital Twins endpoint. */
+  identity?: ManagedIdentity;
+  /** The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types. */
+  name: string;
+  /** The subscription identifier of the Azure Digital Twins endpoint. */
+  subscriptionId?: string;
+  /** The name of the resource group of the Azure Digital Twins endpoint. */
+  resourceGroup?: string;
+}
+
+/** The properties of the Managed identity. */
+export interface ManagedIdentity {
+  /** The user assigned identity. */
+  userAssignedIdentity?: string;
 }
 
 /** The properties related to service bus queue endpoint types. */
@@ -302,12 +328,6 @@ export interface RoutingServiceBusQueueEndpointProperties {
   subscriptionId?: string;
   /** The name of the resource group of the service bus queue endpoint. */
   resourceGroup?: string;
-}
-
-/** The properties of the Managed identity. */
-export interface ManagedIdentity {
-  /** The user assigned identity. */
-  userAssignedIdentity?: string;
 }
 
 /** The properties related to service bus topic endpoint types. */
@@ -1183,6 +1203,22 @@ export interface CertificateBodyDescription {
   certificate?: string;
   /** True indicates that the certificate will be created in verified state and proof of possession will not be required. */
   isVerified?: boolean;
+}
+
+/** The encryption properties for the IoT hub. */
+export interface EncryptionPropertiesDescription {
+  /** The source of the key. */
+  keySource?: string;
+  /** The properties of the KeyVault key. */
+  keyVaultProperties?: KeyVaultKeyProperties[];
+}
+
+/** The properties of the KeyVault key. */
+export interface KeyVaultKeyProperties {
+  /** The identifier of the key. */
+  keyIdentifier?: string;
+  /** Managed identity properties of KeyVault Key. */
+  identity?: ManagedIdentity;
 }
 
 /** The description of the IoT hub. */

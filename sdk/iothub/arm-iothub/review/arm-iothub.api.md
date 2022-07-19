@@ -156,6 +156,12 @@ export type CreatedByType = string;
 export type DefaultAction = string;
 
 // @public
+export interface EncryptionPropertiesDescription {
+    keySource?: string;
+    keyVaultProperties?: KeyVaultKeyProperties[];
+}
+
+// @public
 export interface EndpointHealthData {
     endpointId?: string;
     healthStatus?: EndpointHealthStatus;
@@ -732,6 +738,12 @@ export type JobStatus = "unknown" | "enqueued" | "running" | "completed" | "fail
 export type JobType = string;
 
 // @public
+export interface KeyVaultKeyProperties {
+    identity?: ManagedIdentity;
+    keyIdentifier?: string;
+}
+
+// @public
 export enum KnownAuthenticationType {
     // (undocumented)
     IdentityBased = "identityBased",
@@ -1149,7 +1161,19 @@ export interface RouteProperties {
 }
 
 // @public
+export interface RoutingAzureDigitalTwinsEndpointProperties {
+    authenticationType?: AuthenticationType;
+    endpointUri?: string;
+    id?: string;
+    identity?: ManagedIdentity;
+    name: string;
+    resourceGroup?: string;
+    subscriptionId?: string;
+}
+
+// @public
 export interface RoutingEndpoints {
+    azureDigitalTwinsInstances?: RoutingAzureDigitalTwinsEndpointProperties[];
     eventHubs?: RoutingEventHubProperties[];
     serviceBusQueues?: RoutingServiceBusQueueEndpointProperties[];
     serviceBusTopics?: RoutingServiceBusTopicEndpointProperties[];

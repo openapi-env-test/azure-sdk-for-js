@@ -688,6 +688,18 @@ export const RoutingEndpoints: coreClient.CompositeMapper = {
     name: "Composite",
     className: "RoutingEndpoints",
     modelProperties: {
+      azureDigitalTwinsInstances: {
+        serializedName: "azureDigitalTwinsInstances",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "RoutingAzureDigitalTwinsEndpointProperties"
+            }
+          }
+        }
+      },
       serviceBusQueues: {
         serializedName: "serviceBusQueues",
         type: {
@@ -734,6 +746,77 @@ export const RoutingEndpoints: coreClient.CompositeMapper = {
               className: "RoutingStorageContainerProperties"
             }
           }
+        }
+      }
+    }
+  }
+};
+
+export const RoutingAzureDigitalTwinsEndpointProperties: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "RoutingAzureDigitalTwinsEndpointProperties",
+    modelProperties: {
+      id: {
+        serializedName: "id",
+        type: {
+          name: "String"
+        }
+      },
+      endpointUri: {
+        serializedName: "endpointUri",
+        type: {
+          name: "String"
+        }
+      },
+      authenticationType: {
+        serializedName: "authenticationType",
+        type: {
+          name: "String"
+        }
+      },
+      identity: {
+        serializedName: "identity",
+        type: {
+          name: "Composite",
+          className: "ManagedIdentity"
+        }
+      },
+      name: {
+        constraints: {
+          Pattern: new RegExp("^[A-Za-z0-9-._]{1,64}$")
+        },
+        serializedName: "name",
+        required: true,
+        type: {
+          name: "String"
+        }
+      },
+      subscriptionId: {
+        serializedName: "subscriptionId",
+        type: {
+          name: "String"
+        }
+      },
+      resourceGroup: {
+        serializedName: "resourceGroup",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const ManagedIdentity: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "ManagedIdentity",
+    modelProperties: {
+      userAssignedIdentity: {
+        serializedName: "userAssignedIdentity",
+        type: {
+          name: "String"
         }
       }
     }
@@ -800,21 +883,6 @@ export const RoutingServiceBusQueueEndpointProperties: coreClient.CompositeMappe
       },
       resourceGroup: {
         serializedName: "resourceGroup",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const ManagedIdentity: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "ManagedIdentity",
-    modelProperties: {
-      userAssignedIdentity: {
-        serializedName: "userAssignedIdentity",
         type: {
           name: "String"
         }
@@ -2998,6 +3066,55 @@ export const CertificateBodyDescription: coreClient.CompositeMapper = {
         serializedName: "isVerified",
         type: {
           name: "Boolean"
+        }
+      }
+    }
+  }
+};
+
+export const EncryptionPropertiesDescription: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "EncryptionPropertiesDescription",
+    modelProperties: {
+      keySource: {
+        serializedName: "keySource",
+        type: {
+          name: "String"
+        }
+      },
+      keyVaultProperties: {
+        serializedName: "keyVaultProperties",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "KeyVaultKeyProperties"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const KeyVaultKeyProperties: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "KeyVaultKeyProperties",
+    modelProperties: {
+      keyIdentifier: {
+        serializedName: "keyIdentifier",
+        type: {
+          name: "String"
+        }
+      },
+      identity: {
+        serializedName: "identity",
+        type: {
+          name: "Composite",
+          className: "ManagedIdentity"
         }
       }
     }

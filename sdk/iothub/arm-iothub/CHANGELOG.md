@@ -1,15 +1,20 @@
 # Release History
+    
+## 6.2.0-beta.1 (2022-07-19)
+    
+**Features**
 
-## 6.1.2 (Unreleased)
+  - Added Interface EncryptionPropertiesDescription
+  - Added Interface KeyVaultKeyProperties
+  - Added Interface RoutingAzureDigitalTwinsEndpointProperties
+  - Interface RoutingEndpoints has a new optional parameter azureDigitalTwinsInstances
+    
+## 6.1.2 (2022-06-14)
 
-### Features Added
+**Features**
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Bug fix
+    
 ## 6.1.1 (2022-04-14)
     
 **Features**
