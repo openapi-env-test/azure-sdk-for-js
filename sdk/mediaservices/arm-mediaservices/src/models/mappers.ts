@@ -829,6 +829,49 @@ export const AccessControl: coreClient.CompositeMapper = {
   }
 };
 
+export const PrivateEndpoint: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "PrivateEndpoint",
+    modelProperties: {
+      id: {
+        serializedName: "id",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const PrivateLinkServiceConnectionState: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "PrivateLinkServiceConnectionState",
+    modelProperties: {
+      status: {
+        serializedName: "status",
+        type: {
+          name: "String"
+        }
+      },
+      description: {
+        serializedName: "description",
+        type: {
+          name: "String"
+        }
+      },
+      actionsRequired: {
+        serializedName: "actionsRequired",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const MediaServiceIdentity: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -962,6 +1005,26 @@ export const MediaServiceUpdate: coreClient.CompositeMapper = {
         nullable: true,
         type: {
           name: "String"
+        }
+      },
+      provisioningState: {
+        serializedName: "properties.provisioningState",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      privateEndpointConnections: {
+        serializedName: "properties.privateEndpointConnections",
+        readOnly: true,
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "PrivateEndpointConnection"
+            }
+          }
         }
       }
     }
@@ -1117,49 +1180,6 @@ export const PrivateEndpointConnectionListResult: coreClient.CompositeMapper = {
   }
 };
 
-export const PrivateEndpoint: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "PrivateEndpoint",
-    modelProperties: {
-      id: {
-        serializedName: "id",
-        readOnly: true,
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const PrivateLinkServiceConnectionState: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "PrivateLinkServiceConnectionState",
-    modelProperties: {
-      status: {
-        serializedName: "status",
-        type: {
-          name: "String"
-        }
-      },
-      description: {
-        serializedName: "description",
-        type: {
-          name: "String"
-        }
-      },
-      actionsRequired: {
-        serializedName: "actionsRequired",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
 export const CheckNameAvailabilityInput: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -1203,6 +1223,54 @@ export const EntityNameAvailabilityCheckOutput: coreClient.CompositeMapper = {
         serializedName: "message",
         type: {
           name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const MediaServiceOperationStatus: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "MediaServiceOperationStatus",
+    modelProperties: {
+      name: {
+        serializedName: "name",
+        required: true,
+        type: {
+          name: "String"
+        }
+      },
+      id: {
+        serializedName: "id",
+        type: {
+          name: "String"
+        }
+      },
+      startTime: {
+        serializedName: "startTime",
+        type: {
+          name: "DateTime"
+        }
+      },
+      endTime: {
+        serializedName: "endTime",
+        type: {
+          name: "DateTime"
+        }
+      },
+      status: {
+        serializedName: "status",
+        required: true,
+        type: {
+          name: "String"
+        }
+      },
+      error: {
+        serializedName: "error",
+        type: {
+          name: "Composite",
+          className: "ErrorDetail"
         }
       }
     }
@@ -2232,6 +2300,13 @@ export const CommonEncryptionCenc: coreClient.CompositeMapper = {
           name: "Composite",
           className: "CencDrmConfiguration"
         }
+      },
+      clearKeyEncryptionConfiguration: {
+        serializedName: "clearKeyEncryptionConfiguration",
+        type: {
+          name: "Composite",
+          className: "ClearKeyEncryptionConfiguration"
+        }
       }
     }
   }
@@ -2296,6 +2371,21 @@ export const StreamingPolicyWidevineConfiguration: coreClient.CompositeMapper = 
   }
 };
 
+export const ClearKeyEncryptionConfiguration: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "ClearKeyEncryptionConfiguration",
+    modelProperties: {
+      customKeysAcquisitionUrlTemplate: {
+        serializedName: "customKeysAcquisitionUrlTemplate",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const CommonEncryptionCbcs: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -2332,6 +2422,13 @@ export const CommonEncryptionCbcs: coreClient.CompositeMapper = {
         type: {
           name: "Composite",
           className: "CbcsDrmConfiguration"
+        }
+      },
+      clearKeyEncryptionConfiguration: {
+        serializedName: "clearKeyEncryptionConfiguration",
+        type: {
+          name: "Composite",
+          className: "ClearKeyEncryptionConfiguration"
         }
       }
     }
@@ -3264,6 +3361,21 @@ export const HlsSettings: coreClient.CompositeMapper = {
   }
 };
 
+export const DashSettings: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "DashSettings",
+    modelProperties: {
+      roles: {
+        serializedName: "roles",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const ContentKeyPolicyPlayReadyExplicitAnalogTelevisionRestriction: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -3432,6 +3544,12 @@ export const ContentKeyPolicyPlayReadyLicense: coreClient.CompositeMapper = {
         required: true,
         type: {
           name: "Boolean"
+        }
+      },
+      securityLevel: {
+        serializedName: "securityLevel",
+        type: {
+          name: "String"
         }
       },
       beginDate: {
@@ -3938,6 +4056,37 @@ export const ProxyResource: coreClient.CompositeMapper = {
   }
 };
 
+export const PrivateEndpointConnection: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "PrivateEndpointConnection",
+    modelProperties: {
+      ...Resource.type.modelProperties,
+      privateEndpoint: {
+        serializedName: "properties.privateEndpoint",
+        type: {
+          name: "Composite",
+          className: "PrivateEndpoint"
+        }
+      },
+      privateLinkServiceConnectionState: {
+        serializedName: "properties.privateLinkServiceConnectionState",
+        type: {
+          name: "Composite",
+          className: "PrivateLinkServiceConnectionState"
+        }
+      },
+      provisioningState: {
+        serializedName: "properties.provisioningState",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const TrackedResource: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -4002,37 +4151,6 @@ export const PrivateLinkResource: coreClient.CompositeMapper = {
   }
 };
 
-export const PrivateEndpointConnection: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "PrivateEndpointConnection",
-    modelProperties: {
-      ...Resource.type.modelProperties,
-      privateEndpoint: {
-        serializedName: "properties.privateEndpoint",
-        type: {
-          name: "Composite",
-          className: "PrivateEndpoint"
-        }
-      },
-      privateLinkServiceConnectionState: {
-        serializedName: "properties.privateLinkServiceConnectionState",
-        type: {
-          name: "Composite",
-          className: "PrivateLinkServiceConnectionState"
-        }
-      },
-      provisioningState: {
-        serializedName: "properties.provisioningState",
-        readOnly: true,
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
 export const AudioTrack: coreClient.CompositeMapper = {
   serializedName: "#Microsoft.Media.AudioTrack",
   type: {
@@ -4041,7 +4159,53 @@ export const AudioTrack: coreClient.CompositeMapper = {
     uberParent: "TrackBase",
     polymorphicDiscriminator: TrackBase.type.polymorphicDiscriminator,
     modelProperties: {
-      ...TrackBase.type.modelProperties
+      ...TrackBase.type.modelProperties,
+      fileName: {
+        serializedName: "fileName",
+        type: {
+          name: "String"
+        }
+      },
+      displayName: {
+        serializedName: "displayName",
+        type: {
+          name: "String"
+        }
+      },
+      languageCode: {
+        serializedName: "languageCode",
+        type: {
+          name: "String"
+        }
+      },
+      hlsSettings: {
+        serializedName: "hlsSettings",
+        type: {
+          name: "Composite",
+          className: "HlsSettings"
+        }
+      },
+      dashSettings: {
+        serializedName: "dashSettings",
+        type: {
+          name: "Composite",
+          className: "DashSettings"
+        }
+      },
+      mpeg4TrackId: {
+        serializedName: "mpeg4TrackId",
+        nullable: true,
+        type: {
+          name: "Number"
+        }
+      },
+      bitRate: {
+        serializedName: "bitRate",
+        readOnly: true,
+        type: {
+          name: "Number"
+        }
+      }
     }
   }
 };
@@ -5770,18 +5934,18 @@ export const MediaService: coreClient.CompositeMapper = {
     className: "MediaService",
     modelProperties: {
       ...TrackedResource.type.modelProperties,
-      identity: {
-        serializedName: "identity",
-        type: {
-          name: "Composite",
-          className: "MediaServiceIdentity"
-        }
-      },
       systemData: {
         serializedName: "systemData",
         type: {
           name: "Composite",
           className: "SystemData"
+        }
+      },
+      identity: {
+        serializedName: "identity",
+        type: {
+          name: "Composite",
+          className: "MediaServiceIdentity"
         }
       },
       mediaServiceId: {
@@ -5829,6 +5993,26 @@ export const MediaService: coreClient.CompositeMapper = {
         nullable: true,
         type: {
           name: "String"
+        }
+      },
+      provisioningState: {
+        serializedName: "properties.provisioningState",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      privateEndpointConnections: {
+        serializedName: "properties.privateEndpointConnections",
+        readOnly: true,
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "PrivateEndpointConnection"
+            }
+          }
         }
       }
     }
@@ -6568,6 +6752,87 @@ export const PngImage: coreClient.CompositeMapper = {
               className: "PngLayer"
             }
           }
+        }
+      }
+    }
+  }
+};
+
+export const MediaservicesCreateOrUpdateHeaders: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "MediaservicesCreateOrUpdateHeaders",
+    modelProperties: {
+      retryAfter: {
+        serializedName: "retry-after",
+        type: {
+          name: "Number"
+        }
+      },
+      location: {
+        serializedName: "location",
+        type: {
+          name: "String"
+        }
+      },
+      azureAsyncOperation: {
+        serializedName: "azure-asyncoperation",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const MediaservicesUpdateHeaders: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "MediaservicesUpdateHeaders",
+    modelProperties: {
+      retryAfter: {
+        serializedName: "retry-after",
+        type: {
+          name: "Number"
+        }
+      },
+      location: {
+        serializedName: "location",
+        type: {
+          name: "String"
+        }
+      },
+      azureAsyncOperation: {
+        serializedName: "azure-asyncoperation",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const MediaServicesOperationResultsGetHeaders: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "MediaServicesOperationResultsGetHeaders",
+    modelProperties: {
+      retryAfter: {
+        serializedName: "retry-after",
+        type: {
+          name: "Number"
+        }
+      },
+      location: {
+        serializedName: "location",
+        type: {
+          name: "String"
+        }
+      },
+      azureAsyncOperation: {
+        serializedName: "azure-asyncoperation",
+        type: {
+          name: "String"
         }
       }
     }

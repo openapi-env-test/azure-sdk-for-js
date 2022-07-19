@@ -433,6 +433,25 @@ export interface AccessControl {
   ipAllowList?: string[];
 }
 
+/** The Private Endpoint resource. */
+export interface PrivateEndpoint {
+  /**
+   * The ARM identifier for Private Endpoint
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly id?: string;
+}
+
+/** A collection of information about the state of the connection between service consumer and provider. */
+export interface PrivateLinkServiceConnectionState {
+  /** Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. */
+  status?: PrivateEndpointServiceConnectionStatus;
+  /** The reason for approval/rejection of the connection. */
+  description?: string;
+  /** A message indicating if changes on the service provider require any updates on the consumer. */
+  actionsRequired?: string;
+}
+
 export interface MediaServiceIdentity {
   /** The identity type. */
   type: string;
@@ -485,6 +504,16 @@ export interface MediaServiceUpdate {
   keyDelivery?: KeyDelivery;
   /** Whether or not public network access is allowed for resources under the Media Services account. */
   publicNetworkAccess?: PublicNetworkAccess;
+  /**
+   * Provisioning state of the Media Services account.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly provisioningState?: ProvisioningState;
+  /**
+   * The Private Endpoint Connections created for the Media Service account.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly privateEndpointConnections?: PrivateEndpointConnection[];
 }
 
 /** The input to the sync storage keys request. */
@@ -534,25 +563,6 @@ export interface PrivateEndpointConnectionListResult {
   value?: PrivateEndpointConnection[];
 }
 
-/** The Private Endpoint resource. */
-export interface PrivateEndpoint {
-  /**
-   * The ARM identifier for Private Endpoint
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly id?: string;
-}
-
-/** A collection of information about the state of the connection between service consumer and provider. */
-export interface PrivateLinkServiceConnectionState {
-  /** Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. */
-  status?: PrivateEndpointServiceConnectionStatus;
-  /** The reason for approval/rejection of the connection. */
-  description?: string;
-  /** A message indicating if changes on the service provider require any updates on the consumer. */
-  actionsRequired?: string;
-}
-
 /** The input to the check name availability request. */
 export interface CheckNameAvailabilityInput {
   /** The account name. */
@@ -569,6 +579,22 @@ export interface EntityNameAvailabilityCheckOutput {
   reason?: string;
   /** Specifies the detailed reason if the name is not available. */
   message?: string;
+}
+
+/** Status of media service operation. */
+export interface MediaServiceOperationStatus {
+  /** Operation identifier. */
+  name: string;
+  /** Operation resource ID. */
+  id?: string;
+  /** Operation start time. */
+  startTime?: Date;
+  /** Operation end time. */
+  endTime?: Date;
+  /** Operation status. */
+  status: string;
+  /** The error detail. */
+  error?: ErrorDetail;
 }
 
 /** A collection of Asset items. */
@@ -979,6 +1005,8 @@ export interface CommonEncryptionCenc {
   contentKeys?: StreamingPolicyContentKeys;
   /** Configuration of DRMs for CommonEncryptionCenc encryption scheme */
   drm?: CencDrmConfiguration;
+  /** Optional configuration supporting ClearKey in CommonEncryptionCenc encryption scheme. */
+  clearKeyEncryptionConfiguration?: ClearKeyEncryptionConfiguration;
 }
 
 /** Class to specify DRM configurations of CommonEncryptionCenc scheme in Streaming Policy */
@@ -1003,6 +1031,12 @@ export interface StreamingPolicyWidevineConfiguration {
   customLicenseAcquisitionUrlTemplate?: string;
 }
 
+/** Class to specify ClearKey configuration of common encryption schemes in Streaming Policy */
+export interface ClearKeyEncryptionConfiguration {
+  /** Template for the URL of the custom service delivering content keys to end user players. Not required when using Azure Media Services for issuing licenses. The template supports replaceable tokens that the service will update at runtime with the value specific to the request.  The currently supported token value is {AlternativeMediaId}, which is replaced with the value of StreamingLocatorId.AlternativeMediaId. */
+  customKeysAcquisitionUrlTemplate?: string;
+}
+
 /** Class for CommonEncryptionCbcs encryption scheme */
 export interface CommonEncryptionCbcs {
   /** Representing supported protocols */
@@ -1013,6 +1047,8 @@ export interface CommonEncryptionCbcs {
   contentKeys?: StreamingPolicyContentKeys;
   /** Configuration of DRMs for current encryption scheme */
   drm?: CbcsDrmConfiguration;
+  /** Optional configuration supporting ClearKey in CommonEncryptionCbcs encryption scheme. */
+  clearKeyEncryptionConfiguration?: ClearKeyEncryptionConfiguration;
 }
 
 /** Class to specify DRM configurations of CommonEncryptionCbcs scheme in Streaming Policy */
@@ -1323,7 +1359,7 @@ export interface StreamingEntityScaleUnit {
   scaleUnit?: number;
 }
 
-/** The HLS setting for a text track. */
+/** The HLS setting for a track. */
 export interface HlsSettings {
   /** The default for the HLS setting. */
   default?: boolean;
@@ -1331,6 +1367,12 @@ export interface HlsSettings {
   forced?: boolean;
   /** The characteristics for the HLS setting. */
   characteristics?: string;
+}
+
+/** The DASH setting for a track. */
+export interface DashSettings {
+  /** The role for the DASH setting. */
+  roles?: string;
 }
 
 /** Configures the Explicit Analog Television Output Restriction control bits. For further details see the PlayReady Compliance Rules. */
@@ -1391,6 +1433,8 @@ export interface ContentKeyPolicyTokenClaim {
 export interface ContentKeyPolicyPlayReadyLicense {
   /** A flag indicating whether test devices can use the license. */
   allowTestDevices: boolean;
+  /** The security level. */
+  securityLevel?: SecurityLevel;
   /** The begin date of license */
   beginDate?: Date;
   /** The expiration date of license. */
@@ -1577,7 +1621,20 @@ export interface ClipTime {
 }
 
 /** The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location */
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
+
+/** The Private Endpoint Connection resource. */
+export type PrivateEndpointConnection = Resource & {
+  /** The resource of private end point. */
+  privateEndpoint?: PrivateEndpoint;
+  /** A collection of information about the state of the connection between service consumer and provider. */
+  privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
+  /**
+   * The provisioning state of the private endpoint connection resource.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly provisioningState?: PrivateEndpointConnectionProvisioningState;
+};
 
 /** The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location' */
 export type TrackedResource = Resource & {
@@ -1603,23 +1660,27 @@ export type PrivateLinkResource = Resource & {
   requiredZoneNames?: string[];
 };
 
-/** The Private Endpoint Connection resource. */
-export type PrivateEndpointConnection = Resource & {
-  /** The resource of private end point. */
-  privateEndpoint?: PrivateEndpoint;
-  /** A collection of information about the state of the connection between service consumer and provider. */
-  privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
-  /**
-   * The provisioning state of the private endpoint connection resource.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly provisioningState?: PrivateEndpointConnectionProvisioningState;
-};
-
 /** Represents an audio track in the asset. */
 export type AudioTrack = TrackBase & {
   /** Polymorphic discriminator, which specifies the different types this object can be */
   odataType: "#Microsoft.Media.AudioTrack";
+  /** The file name to the source file. This file is located in the storage container of the asset. */
+  fileName?: string;
+  /** The display name of the audio track on a video player. In HLS, this maps to the NAME attribute of EXT-X-MEDIA. */
+  displayName?: string;
+  /** The RFC5646 language code for the audio track. */
+  languageCode?: string;
+  /** The HLS specific setting for the audio track. */
+  hlsSettings?: HlsSettings;
+  /** The DASH specific setting for the audio track. */
+  dashSettings?: DashSettings;
+  /** The MPEG-4 audio track ID for the audio track. */
+  mpeg4TrackId?: number;
+  /**
+   * The stream bit rate for the audio track.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly bitRate?: number;
 };
 
 /** Represents a video track in the asset. */
@@ -1941,7 +2002,7 @@ export type JpgLayer = Layer & {
 };
 
 /** Describes the settings to produce a PNG image from the input video. */
-export type PngLayer = Layer & {};
+export type PngLayer = Layer;
 
 /** A TrackSelection to select audio tracks. */
 export type AudioTrackDescriptor = TrackDescriptor & {
@@ -2309,13 +2370,13 @@ export type LiveOutput = ProxyResource & {
 
 /** A Media Services account. */
 export type MediaService = TrackedResource & {
-  /** The Managed Identity for the Media Services account. */
-  identity?: MediaServiceIdentity;
   /**
    * The system metadata relating to this resource.
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly systemData?: SystemData;
+  /** The Managed Identity for the Media Services account. */
+  identity?: MediaServiceIdentity;
   /**
    * The Media Services account ID.
    * NOTE: This property will not be serialized. It can only be populated by the server.
@@ -2330,6 +2391,16 @@ export type MediaService = TrackedResource & {
   keyDelivery?: KeyDelivery;
   /** Whether or not public network access is allowed for resources under the Media Services account. */
   publicNetworkAccess?: PublicNetworkAccess;
+  /**
+   * Provisioning state of the Media Services account.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly provisioningState?: ProvisioningState;
+  /**
+   * The Private Endpoint Connections created for the Media Service account.
+   * NOTE: This property will not be serialized. It can only be populated by the server.
+   */
+  readonly privateEndpointConnections?: PrivateEndpointConnection[];
 };
 
 /** The live event. */
@@ -2625,6 +2696,36 @@ export type PngImage = Image & {
   layers?: PngLayer[];
 };
 
+/** Defines headers for Mediaservices_createOrUpdate operation. */
+export interface MediaservicesCreateOrUpdateHeaders {
+  /** The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation. */
+  retryAfter?: number;
+  /** The URI to poll for completion status. */
+  location?: string;
+  /** The URI to poll for completion status. */
+  azureAsyncOperation?: string;
+}
+
+/** Defines headers for Mediaservices_update operation. */
+export interface MediaservicesUpdateHeaders {
+  /** The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation. */
+  retryAfter?: number;
+  /** The URI to poll for completion status. */
+  location?: string;
+  /** The URI to poll for completion status. */
+  azureAsyncOperation?: string;
+}
+
+/** Defines headers for MediaServicesOperationResults_get operation. */
+export interface MediaServicesOperationResultsGetHeaders {
+  /** The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation. */
+  retryAfter?: number;
+  /** The URI to poll for completion status. */
+  location?: string;
+  /** The URI to poll for completion status. */
+  azureAsyncOperation?: string;
+}
+
 /** Defines headers for Tracks_createOrUpdate operation. */
 export interface TracksCreateOrUpdateHeaders {
   /** The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation. */
@@ -2890,6 +2991,27 @@ export enum KnownPublicNetworkAccess {
  */
 export type PublicNetworkAccess = string;
 
+/** Known values of {@link ProvisioningState} that the service accepts. */
+export enum KnownProvisioningState {
+  /** Provisioning state failed. */
+  Failed = "Failed",
+  /** Provisioning state in progress. */
+  InProgress = "InProgress",
+  /** Provisioning state succeeded. */
+  Succeeded = "Succeeded"
+}
+
+/**
+ * Defines values for ProvisioningState. \
+ * {@link KnownProvisioningState} can be used interchangeably with ProvisioningState,
+ *  this enum contains the known values that the service supports.
+ * ### Known values supported by the service
+ * **Failed**: Provisioning state failed. \
+ * **InProgress**: Provisioning state in progress. \
+ * **Succeeded**: Provisioning state succeeded.
+ */
+export type ProvisioningState = string;
+
 /** Known values of {@link PrivateEndpointServiceConnectionStatus} that the service accepts. */
 export enum KnownPrivateEndpointServiceConnectionStatus {
   Pending = "Pending",
@@ -2966,27 +3088,6 @@ export enum KnownAssetContainerPermission {
  * **ReadWriteDelete**: The SAS URL will allow read, write and delete access to the container.
  */
 export type AssetContainerPermission = string;
-
-/** Known values of {@link ProvisioningState} that the service accepts. */
-export enum KnownProvisioningState {
-  /** Provisioning state failed. */
-  Failed = "Failed",
-  /** Provisioning state in progress. */
-  InProgress = "InProgress",
-  /** Provisioning state succeeded. */
-  Succeeded = "Succeeded"
-}
-
-/**
- * Defines values for ProvisioningState. \
- * {@link KnownProvisioningState} can be used interchangeably with ProvisioningState,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **Failed**: Provisioning state failed. \
- * **InProgress**: Provisioning state in progress. \
- * **Succeeded**: Provisioning state succeeded.
- */
-export type ProvisioningState = string;
 
 /** Known values of {@link OnErrorType} that the service accepts. */
 export enum KnownOnErrorType {
@@ -3461,6 +3562,30 @@ export enum KnownContentKeyPolicyPlayReadyUnknownOutputPassingOption {
  * **AllowedWithVideoConstriction**: Passing the video portion of protected content to an Unknown Output is allowed but with constrained resolution.
  */
 export type ContentKeyPolicyPlayReadyUnknownOutputPassingOption = string;
+
+/** Known values of {@link SecurityLevel} that the service accepts. */
+export enum KnownSecurityLevel {
+  /** Represents a SecurityLevel that is unavailable in current API version. */
+  Unknown = "Unknown",
+  /** For clients under development or test. No protection against unauthorized use. */
+  SL150 = "SL150",
+  /** For hardened devices and applications consuming commercial content. Software or hardware protection. */
+  SL2000 = "SL2000",
+  /** For hardened devices only. Hardware protection. */
+  SL3000 = "SL3000"
+}
+
+/**
+ * Defines values for SecurityLevel. \
+ * {@link KnownSecurityLevel} can be used interchangeably with SecurityLevel,
+ *  this enum contains the known values that the service supports.
+ * ### Known values supported by the service
+ * **Unknown**: Represents a SecurityLevel that is unavailable in current API version. \
+ * **SL150**: For clients under development or test. No protection against unauthorized use. \
+ * **SL2000**: For hardened devices and applications consuming commercial content. Software or hardware protection. \
+ * **SL3000**: For hardened devices only. Hardware protection.
+ */
+export type SecurityLevel = string;
 
 /** Known values of {@link ContentKeyPolicyPlayReadyLicenseType} that the service accepts. */
 export enum KnownContentKeyPolicyPlayReadyLicenseType {
@@ -4143,10 +4268,16 @@ export type MediaservicesGetResponse = MediaService;
 
 /** Optional parameters. */
 export interface MediaservicesCreateOrUpdateOptionalParams
-  extends coreClient.OperationOptions {}
+  extends coreClient.OperationOptions {
+  /** Delay to wait until next poll, in milliseconds. */
+  updateIntervalInMs?: number;
+  /** A serialized poller which can be used to resume an existing paused Long-Running-Operation. */
+  resumeFrom?: string;
+}
 
 /** Contains response data for the createOrUpdate operation. */
-export type MediaservicesCreateOrUpdateResponse = MediaService;
+export type MediaservicesCreateOrUpdateResponse = MediaservicesCreateOrUpdateHeaders &
+  MediaService;
 
 /** Optional parameters. */
 export interface MediaservicesDeleteOptionalParams
@@ -4154,10 +4285,16 @@ export interface MediaservicesDeleteOptionalParams
 
 /** Optional parameters. */
 export interface MediaservicesUpdateOptionalParams
-  extends coreClient.OperationOptions {}
+  extends coreClient.OperationOptions {
+  /** Delay to wait until next poll, in milliseconds. */
+  updateIntervalInMs?: number;
+  /** A serialized poller which can be used to resume an existing paused Long-Running-Operation. */
+  resumeFrom?: string;
+}
 
 /** Contains response data for the update operation. */
-export type MediaservicesUpdateResponse = MediaService;
+export type MediaservicesUpdateResponse = MediaservicesUpdateHeaders &
+  MediaService;
 
 /** Optional parameters. */
 export interface MediaservicesSyncStorageKeysOptionalParams
@@ -4236,6 +4373,20 @@ export interface LocationsCheckNameAvailabilityOptionalParams
 
 /** Contains response data for the checkNameAvailability operation. */
 export type LocationsCheckNameAvailabilityResponse = EntityNameAvailabilityCheckOutput;
+
+/** Optional parameters. */
+export interface MediaServicesOperationStatusesGetOptionalParams
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the get operation. */
+export type MediaServicesOperationStatusesGetResponse = MediaServiceOperationStatus;
+
+/** Optional parameters. */
+export interface MediaServicesOperationResultsGetOptionalParams
+  extends coreClient.OperationOptions {}
+
+/** Contains response data for the get operation. */
+export type MediaServicesOperationResultsGetResponse = MediaService;
 
 /** Optional parameters. */
 export interface AssetsListOptionalParams extends coreClient.OperationOptions {

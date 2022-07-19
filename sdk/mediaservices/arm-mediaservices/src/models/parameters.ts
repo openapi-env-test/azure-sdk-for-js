@@ -95,7 +95,7 @@ export const accountName: OperationURLParameter = {
 export const apiVersion: OperationQueryParameter = {
   parameterPath: "apiVersion",
   mapper: {
-    defaultValue: "2021-11-01",
+    defaultValue: "2022-08-01",
     isConstant: true,
     serializedName: "api-version",
     type: {
@@ -147,7 +147,7 @@ export const nextLink: OperationURLParameter = {
 export const apiVersion1: OperationQueryParameter = {
   parameterPath: "apiVersion",
   mapper: {
-    defaultValue: "2021-06-01",
+    defaultValue: "2021-11-01",
     isConstant: true,
     serializedName: "api-version",
     type: {
@@ -201,6 +201,17 @@ export const locationName: OperationURLParameter = {
   parameterPath: "locationName",
   mapper: {
     serializedName: "locationName",
+    required: true,
+    type: {
+      name: "String"
+    }
+  }
+};
+
+export const operationId: OperationURLParameter = {
+  parameterPath: "operationId",
+  mapper: {
+    serializedName: "operationId",
     required: true,
     type: {
       name: "String"
@@ -278,17 +289,6 @@ export const trackName: OperationURLParameter = {
 export const parameters10: OperationParameter = {
   parameterPath: "parameters",
   mapper: AssetTrackMapper
-};
-
-export const operationId: OperationURLParameter = {
-  parameterPath: "operationId",
-  mapper: {
-    serializedName: "operationId",
-    required: true,
-    type: {
-      name: "String"
-    }
-  }
 };
 
 export const contentKeyPolicyName: OperationURLParameter = {
