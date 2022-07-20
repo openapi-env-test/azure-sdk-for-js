@@ -20,6 +20,15 @@ export interface CheckNameAvailabilityParameters {
 }
 
 // @public
+export interface CorsConfiguration {
+    allowCredentials?: boolean;
+    headers?: string[];
+    maxAge?: number;
+    methods?: string[];
+    origins?: string[];
+}
+
+// @public
 export type CreatedByType = string;
 
 // @public
@@ -27,6 +36,7 @@ export type DicomService = TaggedResource & ServiceManagedIdentity & {
     readonly systemData?: SystemData;
     readonly provisioningState?: ProvisioningState;
     authenticationConfiguration?: DicomServiceAuthenticationConfiguration;
+    corsConfiguration?: CorsConfiguration;
     readonly serviceUrl?: string;
     readonly privateEndpointConnections?: PrivateEndpointConnection[];
     publicNetworkAccess?: PublicNetworkAccess;
@@ -45,7 +55,7 @@ export interface DicomServiceCollection {
 }
 
 // @public
-export type DicomServicePatchResource = ResourceTags & ServiceManagedIdentity & {};
+export type DicomServicePatchResource = ResourceTags & ServiceManagedIdentity;
 
 // @public
 export interface DicomServices {
@@ -157,6 +167,7 @@ export type FhirService = TaggedResource & ServiceManagedIdentity & {
     publicNetworkAccess?: PublicNetworkAccess;
     readonly eventState?: ServiceEventState;
     resourceVersionPolicyConfiguration?: ResourceVersionPolicyConfiguration;
+    importConfiguration?: FhirServiceImportConfiguration;
 };
 
 // @public
@@ -198,10 +209,17 @@ export interface FhirServiceExportConfiguration {
 }
 
 // @public
+export interface FhirServiceImportConfiguration {
+    enabled?: boolean;
+    initialImportMode?: boolean;
+    integrationDataStore?: string;
+}
+
+// @public
 export type FhirServiceKind = string;
 
 // @public
-export type FhirServicePatchResource = ResourceTags & ServiceManagedIdentity & {};
+export type FhirServicePatchResource = ResourceTags & ServiceManagedIdentity;
 
 // @public
 export interface FhirServices {
@@ -350,7 +368,7 @@ export interface IotConnectorFhirDestinationGetOptionalParams extends coreClient
 export type IotConnectorFhirDestinationGetResponse = IotFhirDestination;
 
 // @public
-export type IotConnectorPatchResource = ResourceTags & ServiceManagedIdentity & {};
+export type IotConnectorPatchResource = ResourceTags & ServiceManagedIdentity;
 
 // @public
 export interface IotConnectors {
@@ -637,8 +655,13 @@ export interface MetricSpecification {
     dimensions?: MetricDimension[];
     displayDescription?: string;
     displayName?: string;
+    enableRegionalMdmAccount?: boolean;
     fillGapWithZero?: boolean;
+    isInternal?: boolean;
+    metricFilterPattern?: string;
     name?: string;
+    resourceIdDimensionNameOverride?: string;
+    sourceMdmAccount?: string;
     sourceMdmNamespace?: string;
     supportedAggregationTypes?: string[];
     supportedTimeGrainTypes?: string[];
@@ -906,6 +929,13 @@ export interface ServiceExportConfigurationInfo {
 }
 
 // @public
+export interface ServiceImportConfigurationInfo {
+    enabled?: boolean;
+    initialImportMode?: boolean;
+    integrationDataStore?: string;
+}
+
+// @public
 export interface ServiceManagedIdentity {
     identity?: ServiceManagedIdentityIdentity;
 }
@@ -1045,6 +1075,7 @@ export interface ServicesProperties {
     corsConfiguration?: ServiceCorsConfigurationInfo;
     cosmosDbConfiguration?: ServiceCosmosDbConfigurationInfo;
     exportConfiguration?: ServiceExportConfigurationInfo;
+    importConfiguration?: ServiceImportConfigurationInfo;
     privateEndpointConnections?: PrivateEndpointConnection[];
     readonly provisioningState?: ProvisioningState;
     publicNetworkAccess?: PublicNetworkAccess;
@@ -1091,7 +1122,7 @@ export interface SystemData {
 }
 
 // @public
-export type TaggedResource = ResourceTags & LocationBasedResource & {};
+export type TaggedResource = ResourceTags & LocationBasedResource;
 
 // @public
 export interface UserAssignedIdentity {
@@ -1112,7 +1143,7 @@ export interface WorkspaceList {
 }
 
 // @public
-export type WorkspacePatchResource = ResourceTags & {};
+export type WorkspacePatchResource = ResourceTags;
 
 // @public
 export interface WorkspacePrivateEndpointConnections {
