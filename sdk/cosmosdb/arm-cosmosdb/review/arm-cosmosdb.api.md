@@ -36,7 +36,6 @@ export interface ARMProxyResource {
 // @public
 export interface ARMResourceProperties {
     readonly id?: string;
-    identity?: ManagedServiceIdentity;
     location?: string;
     readonly name?: string;
     tags?: {
@@ -47,18 +46,6 @@ export interface ARMResourceProperties {
 
 // @public
 export type AuthenticationMethod = string;
-
-// @public
-export interface AuthenticationMethodLdapProperties {
-    searchBaseDistinguishedName?: string;
-    searchFilterTemplate?: string;
-    // (undocumented)
-    serverCertificates?: Certificate[];
-    serverHostname?: string;
-    serverPort?: number;
-    serviceUserDistinguishedName?: string;
-    serviceUserPassword?: string;
-}
 
 // @public (undocumented)
 export interface AutoscaleSettings {
@@ -76,13 +63,6 @@ export interface AutoscaleSettingsResource {
 export interface AutoUpgradePolicyResource {
     throughputPolicy?: ThroughputPolicyResource;
 }
-
-// @public
-export type AzureBlobDataTransferDataSourceSink = DataTransferDataSourceSink & {
-    component: "AzureBlobStorage";
-    containerName: string;
-    endpointUrl?: string;
-};
 
 // @public
 export interface BackupInformation {
@@ -110,16 +90,6 @@ export type BackupPolicyType = string;
 
 // @public (undocumented)
 export type BackupPolicyUnion = BackupPolicy | PeriodicModeBackupPolicy | ContinuousModeBackupPolicy;
-
-// @public
-export type BackupResource = ARMProxyResource & {
-    properties?: BackupResourceProperties;
-};
-
-// @public (undocumented)
-export interface BackupResourceProperties {
-    timestamp?: Date;
-}
 
 // @public
 export type BackupStorageRedundancy = string;
@@ -167,8 +137,6 @@ export interface CassandraClusters {
     beginUpdate(resourceGroupName: string, clusterName: string, body: ClusterResource, options?: CassandraClustersUpdateOptionalParams): Promise<PollerLike<PollOperationState<CassandraClustersUpdateResponse>, CassandraClustersUpdateResponse>>;
     beginUpdateAndWait(resourceGroupName: string, clusterName: string, body: ClusterResource, options?: CassandraClustersUpdateOptionalParams): Promise<CassandraClustersUpdateResponse>;
     get(resourceGroupName: string, clusterName: string, options?: CassandraClustersGetOptionalParams): Promise<CassandraClustersGetResponse>;
-    getBackup(resourceGroupName: string, clusterName: string, backupId: string, options?: CassandraClustersGetBackupOptionalParams): Promise<CassandraClustersGetBackupResponse>;
-    listBackups(resourceGroupName: string, clusterName: string, options?: CassandraClustersListBackupsOptionalParams): PagedAsyncIterableIterator<BackupResource>;
     listByResourceGroup(resourceGroupName: string, options?: CassandraClustersListByResourceGroupOptionalParams): PagedAsyncIterableIterator<ClusterResource>;
     listBySubscription(options?: CassandraClustersListBySubscriptionOptionalParams): PagedAsyncIterableIterator<ClusterResource>;
     status(resourceGroupName: string, clusterName: string, options?: CassandraClustersStatusOptionalParams): Promise<CassandraClustersStatusResponse>;
@@ -196,13 +164,6 @@ export interface CassandraClustersDeleteOptionalParams extends coreClient.Operat
 }
 
 // @public
-export interface CassandraClustersGetBackupOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type CassandraClustersGetBackupResponse = BackupResource;
-
-// @public
 export interface CassandraClustersGetOptionalParams extends coreClient.OperationOptions {
 }
 
@@ -217,13 +178,6 @@ export interface CassandraClustersInvokeCommandOptionalParams extends coreClient
 
 // @public
 export type CassandraClustersInvokeCommandResponse = CommandOutput;
-
-// @public
-export interface CassandraClustersListBackupsOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type CassandraClustersListBackupsResponse = ListBackups;
 
 // @public
 export interface CassandraClustersListByResourceGroupOptionalParams extends coreClient.OperationOptions {
@@ -318,10 +272,10 @@ export type CassandraKeyspaceCreateUpdateParameters = ARMResourceProperties & {
 };
 
 // @public (undocumented)
-export type CassandraKeyspaceGetPropertiesOptions = OptionsResource & {};
+export type CassandraKeyspaceGetPropertiesOptions = OptionsResource;
 
 // @public (undocumented)
-export type CassandraKeyspaceGetPropertiesResource = CassandraKeyspaceResource & ExtendedResourceProperties & {};
+export type CassandraKeyspaceGetPropertiesResource = CassandraKeyspaceResource & ExtendedResourceProperties;
 
 // @public
 export type CassandraKeyspaceGetResults = ARMResourceProperties & {
@@ -350,14 +304,10 @@ export interface CassandraResources {
     beginCreateUpdateCassandraKeyspaceAndWait(resourceGroupName: string, accountName: string, keyspaceName: string, createUpdateCassandraKeyspaceParameters: CassandraKeyspaceCreateUpdateParameters, options?: CassandraResourcesCreateUpdateCassandraKeyspaceOptionalParams): Promise<CassandraResourcesCreateUpdateCassandraKeyspaceResponse>;
     beginCreateUpdateCassandraTable(resourceGroupName: string, accountName: string, keyspaceName: string, tableName: string, createUpdateCassandraTableParameters: CassandraTableCreateUpdateParameters, options?: CassandraResourcesCreateUpdateCassandraTableOptionalParams): Promise<PollerLike<PollOperationState<CassandraResourcesCreateUpdateCassandraTableResponse>, CassandraResourcesCreateUpdateCassandraTableResponse>>;
     beginCreateUpdateCassandraTableAndWait(resourceGroupName: string, accountName: string, keyspaceName: string, tableName: string, createUpdateCassandraTableParameters: CassandraTableCreateUpdateParameters, options?: CassandraResourcesCreateUpdateCassandraTableOptionalParams): Promise<CassandraResourcesCreateUpdateCassandraTableResponse>;
-    beginCreateUpdateCassandraView(resourceGroupName: string, accountName: string, keyspaceName: string, viewName: string, createUpdateCassandraViewParameters: CassandraViewCreateUpdateParameters, options?: CassandraResourcesCreateUpdateCassandraViewOptionalParams): Promise<PollerLike<PollOperationState<CassandraResourcesCreateUpdateCassandraViewResponse>, CassandraResourcesCreateUpdateCassandraViewResponse>>;
-    beginCreateUpdateCassandraViewAndWait(resourceGroupName: string, accountName: string, keyspaceName: string, viewName: string, createUpdateCassandraViewParameters: CassandraViewCreateUpdateParameters, options?: CassandraResourcesCreateUpdateCassandraViewOptionalParams): Promise<CassandraResourcesCreateUpdateCassandraViewResponse>;
     beginDeleteCassandraKeyspace(resourceGroupName: string, accountName: string, keyspaceName: string, options?: CassandraResourcesDeleteCassandraKeyspaceOptionalParams): Promise<PollerLike<PollOperationState<void>, void>>;
     beginDeleteCassandraKeyspaceAndWait(resourceGroupName: string, accountName: string, keyspaceName: string, options?: CassandraResourcesDeleteCassandraKeyspaceOptionalParams): Promise<void>;
     beginDeleteCassandraTable(resourceGroupName: string, accountName: string, keyspaceName: string, tableName: string, options?: CassandraResourcesDeleteCassandraTableOptionalParams): Promise<PollerLike<PollOperationState<void>, void>>;
     beginDeleteCassandraTableAndWait(resourceGroupName: string, accountName: string, keyspaceName: string, tableName: string, options?: CassandraResourcesDeleteCassandraTableOptionalParams): Promise<void>;
-    beginDeleteCassandraView(resourceGroupName: string, accountName: string, keyspaceName: string, viewName: string, options?: CassandraResourcesDeleteCassandraViewOptionalParams): Promise<PollerLike<PollOperationState<void>, void>>;
-    beginDeleteCassandraViewAndWait(resourceGroupName: string, accountName: string, keyspaceName: string, viewName: string, options?: CassandraResourcesDeleteCassandraViewOptionalParams): Promise<void>;
     beginMigrateCassandraKeyspaceToAutoscale(resourceGroupName: string, accountName: string, keyspaceName: string, options?: CassandraResourcesMigrateCassandraKeyspaceToAutoscaleOptionalParams): Promise<PollerLike<PollOperationState<CassandraResourcesMigrateCassandraKeyspaceToAutoscaleResponse>, CassandraResourcesMigrateCassandraKeyspaceToAutoscaleResponse>>;
     beginMigrateCassandraKeyspaceToAutoscaleAndWait(resourceGroupName: string, accountName: string, keyspaceName: string, options?: CassandraResourcesMigrateCassandraKeyspaceToAutoscaleOptionalParams): Promise<CassandraResourcesMigrateCassandraKeyspaceToAutoscaleResponse>;
     beginMigrateCassandraKeyspaceToManualThroughput(resourceGroupName: string, accountName: string, keyspaceName: string, options?: CassandraResourcesMigrateCassandraKeyspaceToManualThroughputOptionalParams): Promise<PollerLike<PollOperationState<CassandraResourcesMigrateCassandraKeyspaceToManualThroughputResponse>, CassandraResourcesMigrateCassandraKeyspaceToManualThroughputResponse>>;
@@ -366,25 +316,16 @@ export interface CassandraResources {
     beginMigrateCassandraTableToAutoscaleAndWait(resourceGroupName: string, accountName: string, keyspaceName: string, tableName: string, options?: CassandraResourcesMigrateCassandraTableToAutoscaleOptionalParams): Promise<CassandraResourcesMigrateCassandraTableToAutoscaleResponse>;
     beginMigrateCassandraTableToManualThroughput(resourceGroupName: string, accountName: string, keyspaceName: string, tableName: string, options?: CassandraResourcesMigrateCassandraTableToManualThroughputOptionalParams): Promise<PollerLike<PollOperationState<CassandraResourcesMigrateCassandraTableToManualThroughputResponse>, CassandraResourcesMigrateCassandraTableToManualThroughputResponse>>;
     beginMigrateCassandraTableToManualThroughputAndWait(resourceGroupName: string, accountName: string, keyspaceName: string, tableName: string, options?: CassandraResourcesMigrateCassandraTableToManualThroughputOptionalParams): Promise<CassandraResourcesMigrateCassandraTableToManualThroughputResponse>;
-    beginMigrateCassandraViewToAutoscale(resourceGroupName: string, accountName: string, keyspaceName: string, viewName: string, options?: CassandraResourcesMigrateCassandraViewToAutoscaleOptionalParams): Promise<PollerLike<PollOperationState<CassandraResourcesMigrateCassandraViewToAutoscaleResponse>, CassandraResourcesMigrateCassandraViewToAutoscaleResponse>>;
-    beginMigrateCassandraViewToAutoscaleAndWait(resourceGroupName: string, accountName: string, keyspaceName: string, viewName: string, options?: CassandraResourcesMigrateCassandraViewToAutoscaleOptionalParams): Promise<CassandraResourcesMigrateCassandraViewToAutoscaleResponse>;
-    beginMigrateCassandraViewToManualThroughput(resourceGroupName: string, accountName: string, keyspaceName: string, viewName: string, options?: CassandraResourcesMigrateCassandraViewToManualThroughputOptionalParams): Promise<PollerLike<PollOperationState<CassandraResourcesMigrateCassandraViewToManualThroughputResponse>, CassandraResourcesMigrateCassandraViewToManualThroughputResponse>>;
-    beginMigrateCassandraViewToManualThroughputAndWait(resourceGroupName: string, accountName: string, keyspaceName: string, viewName: string, options?: CassandraResourcesMigrateCassandraViewToManualThroughputOptionalParams): Promise<CassandraResourcesMigrateCassandraViewToManualThroughputResponse>;
     beginUpdateCassandraKeyspaceThroughput(resourceGroupName: string, accountName: string, keyspaceName: string, updateThroughputParameters: ThroughputSettingsUpdateParameters, options?: CassandraResourcesUpdateCassandraKeyspaceThroughputOptionalParams): Promise<PollerLike<PollOperationState<CassandraResourcesUpdateCassandraKeyspaceThroughputResponse>, CassandraResourcesUpdateCassandraKeyspaceThroughputResponse>>;
     beginUpdateCassandraKeyspaceThroughputAndWait(resourceGroupName: string, accountName: string, keyspaceName: string, updateThroughputParameters: ThroughputSettingsUpdateParameters, options?: CassandraResourcesUpdateCassandraKeyspaceThroughputOptionalParams): Promise<CassandraResourcesUpdateCassandraKeyspaceThroughputResponse>;
     beginUpdateCassandraTableThroughput(resourceGroupName: string, accountName: string, keyspaceName: string, tableName: string, updateThroughputParameters: ThroughputSettingsUpdateParameters, options?: CassandraResourcesUpdateCassandraTableThroughputOptionalParams): Promise<PollerLike<PollOperationState<CassandraResourcesUpdateCassandraTableThroughputResponse>, CassandraResourcesUpdateCassandraTableThroughputResponse>>;
     beginUpdateCassandraTableThroughputAndWait(resourceGroupName: string, accountName: string, keyspaceName: string, tableName: string, updateThroughputParameters: ThroughputSettingsUpdateParameters, options?: CassandraResourcesUpdateCassandraTableThroughputOptionalParams): Promise<CassandraResourcesUpdateCassandraTableThroughputResponse>;
-    beginUpdateCassandraViewThroughput(resourceGroupName: string, accountName: string, keyspaceName: string, viewName: string, updateThroughputParameters: ThroughputSettingsUpdateParameters, options?: CassandraResourcesUpdateCassandraViewThroughputOptionalParams): Promise<PollerLike<PollOperationState<CassandraResourcesUpdateCassandraViewThroughputResponse>, CassandraResourcesUpdateCassandraViewThroughputResponse>>;
-    beginUpdateCassandraViewThroughputAndWait(resourceGroupName: string, accountName: string, keyspaceName: string, viewName: string, updateThroughputParameters: ThroughputSettingsUpdateParameters, options?: CassandraResourcesUpdateCassandraViewThroughputOptionalParams): Promise<CassandraResourcesUpdateCassandraViewThroughputResponse>;
     getCassandraKeyspace(resourceGroupName: string, accountName: string, keyspaceName: string, options?: CassandraResourcesGetCassandraKeyspaceOptionalParams): Promise<CassandraResourcesGetCassandraKeyspaceResponse>;
     getCassandraKeyspaceThroughput(resourceGroupName: string, accountName: string, keyspaceName: string, options?: CassandraResourcesGetCassandraKeyspaceThroughputOptionalParams): Promise<CassandraResourcesGetCassandraKeyspaceThroughputResponse>;
     getCassandraTable(resourceGroupName: string, accountName: string, keyspaceName: string, tableName: string, options?: CassandraResourcesGetCassandraTableOptionalParams): Promise<CassandraResourcesGetCassandraTableResponse>;
     getCassandraTableThroughput(resourceGroupName: string, accountName: string, keyspaceName: string, tableName: string, options?: CassandraResourcesGetCassandraTableThroughputOptionalParams): Promise<CassandraResourcesGetCassandraTableThroughputResponse>;
-    getCassandraView(resourceGroupName: string, accountName: string, keyspaceName: string, viewName: string, options?: CassandraResourcesGetCassandraViewOptionalParams): Promise<CassandraResourcesGetCassandraViewResponse>;
-    getCassandraViewThroughput(resourceGroupName: string, accountName: string, keyspaceName: string, viewName: string, options?: CassandraResourcesGetCassandraViewThroughputOptionalParams): Promise<CassandraResourcesGetCassandraViewThroughputResponse>;
     listCassandraKeyspaces(resourceGroupName: string, accountName: string, options?: CassandraResourcesListCassandraKeyspacesOptionalParams): PagedAsyncIterableIterator<CassandraKeyspaceGetResults>;
     listCassandraTables(resourceGroupName: string, accountName: string, keyspaceName: string, options?: CassandraResourcesListCassandraTablesOptionalParams): PagedAsyncIterableIterator<CassandraTableGetResults>;
-    listCassandraViews(resourceGroupName: string, accountName: string, keyspaceName: string, options?: CassandraResourcesListCassandraViewsOptionalParams): PagedAsyncIterableIterator<CassandraViewGetResults>;
 }
 
 // @public
@@ -406,15 +347,6 @@ export interface CassandraResourcesCreateUpdateCassandraTableOptionalParams exte
 export type CassandraResourcesCreateUpdateCassandraTableResponse = CassandraTableGetResults;
 
 // @public
-export interface CassandraResourcesCreateUpdateCassandraViewOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type CassandraResourcesCreateUpdateCassandraViewResponse = CassandraViewGetResults;
-
-// @public
 export interface CassandraResourcesDeleteCassandraKeyspaceOptionalParams extends coreClient.OperationOptions {
     resumeFrom?: string;
     updateIntervalInMs?: number;
@@ -422,12 +354,6 @@ export interface CassandraResourcesDeleteCassandraKeyspaceOptionalParams extends
 
 // @public
 export interface CassandraResourcesDeleteCassandraTableOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export interface CassandraResourcesDeleteCassandraViewOptionalParams extends coreClient.OperationOptions {
     resumeFrom?: string;
     updateIntervalInMs?: number;
 }
@@ -461,20 +387,6 @@ export interface CassandraResourcesGetCassandraTableThroughputOptionalParams ext
 export type CassandraResourcesGetCassandraTableThroughputResponse = ThroughputSettingsGetResults;
 
 // @public
-export interface CassandraResourcesGetCassandraViewOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type CassandraResourcesGetCassandraViewResponse = CassandraViewGetResults;
-
-// @public
-export interface CassandraResourcesGetCassandraViewThroughputOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type CassandraResourcesGetCassandraViewThroughputResponse = ThroughputSettingsGetResults;
-
-// @public
 export interface CassandraResourcesListCassandraKeyspacesOptionalParams extends coreClient.OperationOptions {
 }
 
@@ -487,13 +399,6 @@ export interface CassandraResourcesListCassandraTablesOptionalParams extends cor
 
 // @public
 export type CassandraResourcesListCassandraTablesResponse = CassandraTableListResult;
-
-// @public
-export interface CassandraResourcesListCassandraViewsOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type CassandraResourcesListCassandraViewsResponse = CassandraViewListResult;
 
 // @public
 export interface CassandraResourcesMigrateCassandraKeyspaceToAutoscaleOptionalParams extends coreClient.OperationOptions {
@@ -532,24 +437,6 @@ export interface CassandraResourcesMigrateCassandraTableToManualThroughputOption
 export type CassandraResourcesMigrateCassandraTableToManualThroughputResponse = ThroughputSettingsGetResults;
 
 // @public
-export interface CassandraResourcesMigrateCassandraViewToAutoscaleOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type CassandraResourcesMigrateCassandraViewToAutoscaleResponse = ThroughputSettingsGetResults;
-
-// @public
-export interface CassandraResourcesMigrateCassandraViewToManualThroughputOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type CassandraResourcesMigrateCassandraViewToManualThroughputResponse = ThroughputSettingsGetResults;
-
-// @public
 export interface CassandraResourcesUpdateCassandraKeyspaceThroughputOptionalParams extends coreClient.OperationOptions {
     resumeFrom?: string;
     updateIntervalInMs?: number;
@@ -568,15 +455,6 @@ export interface CassandraResourcesUpdateCassandraTableThroughputOptionalParams 
 export type CassandraResourcesUpdateCassandraTableThroughputResponse = ThroughputSettingsGetResults;
 
 // @public
-export interface CassandraResourcesUpdateCassandraViewThroughputOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type CassandraResourcesUpdateCassandraViewThroughputResponse = ThroughputSettingsGetResults;
-
-// @public
 export interface CassandraSchema {
     clusterKeys?: ClusterKey[];
     columns?: Column[];
@@ -590,10 +468,10 @@ export type CassandraTableCreateUpdateParameters = ARMResourceProperties & {
 };
 
 // @public (undocumented)
-export type CassandraTableGetPropertiesOptions = OptionsResource & {};
+export type CassandraTableGetPropertiesOptions = OptionsResource;
 
 // @public (undocumented)
-export type CassandraTableGetPropertiesResource = CassandraTableResource & ExtendedResourceProperties & {};
+export type CassandraTableGetPropertiesResource = CassandraTableResource & ExtendedResourceProperties;
 
 // @public
 export type CassandraTableGetResults = ARMResourceProperties & {
@@ -614,64 +492,9 @@ export interface CassandraTableResource {
     schema?: CassandraSchema;
 }
 
-// @public
-export type CassandraViewCreateUpdateParameters = ARMResourceProperties & {
-    resource: CassandraViewResource;
-    options?: CreateUpdateOptions;
-};
-
-// @public (undocumented)
-export type CassandraViewGetPropertiesOptions = OptionsResource & {};
-
-// @public (undocumented)
-export type CassandraViewGetPropertiesResource = CassandraViewResource & ExtendedResourceProperties & {};
-
-// @public
-export type CassandraViewGetResults = ARMResourceProperties & {
-    resource?: CassandraViewGetPropertiesResource;
-    options?: CassandraViewGetPropertiesOptions;
-};
-
-// @public
-export interface CassandraViewListResult {
-    readonly value?: CassandraViewGetResults[];
-}
-
-// @public
-export interface CassandraViewResource {
-    id: string;
-    viewDefinition: string;
-}
-
 // @public (undocumented)
 export interface Certificate {
     pem?: string;
-}
-
-// @public
-export interface ClientEncryptionKeyCreateUpdateParameters {
-    resource: ClientEncryptionKeyResource;
-}
-
-// @public (undocumented)
-export type ClientEncryptionKeyGetPropertiesResource = ClientEncryptionKeyResource & ExtendedResourceProperties & {};
-
-// @public
-export type ClientEncryptionKeyGetResults = ARMProxyResource & {
-    resource?: ClientEncryptionKeyGetPropertiesResource;
-};
-
-// @public
-export interface ClientEncryptionKeyResource {
-    encryptionAlgorithm?: string;
-    id?: string;
-    keyWrapMetadata?: KeyWrapMetadata;
-    wrappedDataEncryptionKey?: Uint8Array;
-}
-
-// @public
-export interface ClientEncryptionKeysListResult {
-    readonly value?: ClientEncryptionKeyGetResults[];
 }
 
 // @public
@@ -908,13 +731,6 @@ export interface CorsPolicy {
     maxAgeInSeconds?: number;
 }
 
-// @public
-export type CosmosCassandraDataTransferDataSourceSink = DataTransferDataSourceSink & {
-    component: "CosmosDBCassandra";
-    keyspaceName: string;
-    tableName: string;
-};
-
 // @public (undocumented)
 export class CosmosDBManagementClient extends coreClient.ServiceClient {
     // (undocumented)
@@ -943,10 +759,6 @@ export class CosmosDBManagementClient extends coreClient.ServiceClient {
     // (undocumented)
     databaseAccounts: DatabaseAccounts;
     // (undocumented)
-    dataTransferJobs: DataTransferJobs;
-    // (undocumented)
-    graphResources: GraphResources;
-    // (undocumented)
     gremlinResources: GremlinResources;
     // (undocumented)
     locations: Locations;
@@ -973,12 +785,6 @@ export class CosmosDBManagementClient extends coreClient.ServiceClient {
     // (undocumented)
     restorableDatabaseAccounts: RestorableDatabaseAccounts;
     // (undocumented)
-    restorableGremlinDatabases: RestorableGremlinDatabases;
-    // (undocumented)
-    restorableGremlinGraphs: RestorableGremlinGraphs;
-    // (undocumented)
-    restorableGremlinResources: RestorableGremlinResources;
-    // (undocumented)
     restorableMongodbCollections: RestorableMongodbCollections;
     // (undocumented)
     restorableMongodbDatabases: RestorableMongodbDatabases;
@@ -990,10 +796,6 @@ export class CosmosDBManagementClient extends coreClient.ServiceClient {
     restorableSqlDatabases: RestorableSqlDatabases;
     // (undocumented)
     restorableSqlResources: RestorableSqlResources;
-    // (undocumented)
-    restorableTableResources: RestorableTableResources;
-    // (undocumented)
-    restorableTables: RestorableTables;
     // (undocumented)
     service: Service;
     // (undocumented)
@@ -1012,19 +814,7 @@ export interface CosmosDBManagementClientOptionalParams extends coreClient.Servi
 }
 
 // @public
-export type CosmosSqlDataTransferDataSourceSink = DataTransferDataSourceSink & {
-    component: "CosmosDBSql";
-    databaseName: string;
-    containerName: string;
-};
-
-// @public
 export type CreatedByType = string;
-
-// @public
-export type CreateJobRequest = ARMProxyResource & {
-    properties: DataTransferJobProperties;
-};
 
 // @public
 export type CreateMode = string;
@@ -1051,6 +841,7 @@ export interface DatabaseAccountConnectionString {
 // @public
 export type DatabaseAccountCreateUpdateParameters = ARMResourceProperties & {
     kind?: DatabaseAccountKind;
+    identity?: ManagedServiceIdentity;
     consistencyPolicy?: ConsistencyPolicy;
     locations: Location_2[];
     databaseAccountOfferType: "Standard";
@@ -1075,16 +866,15 @@ export type DatabaseAccountCreateUpdateParameters = ARMResourceProperties & {
     cors?: CorsPolicy[];
     networkAclBypass?: NetworkAclBypass;
     networkAclBypassResourceIds?: string[];
-    diagnosticLogSettings?: DiagnosticLogSettings;
     disableLocalAuth?: boolean;
     restoreParameters?: RestoreParameters;
     capacity?: Capacity;
-    enableMaterializedViews?: boolean;
 };
 
 // @public
 export type DatabaseAccountGetResults = ARMResourceProperties & {
     kind?: DatabaseAccountKind;
+    identity?: ManagedServiceIdentity;
     readonly systemData?: SystemData;
     readonly provisioningState?: string;
     readonly documentEndpoint?: string;
@@ -1118,10 +908,8 @@ export type DatabaseAccountGetResults = ARMResourceProperties & {
     cors?: CorsPolicy[];
     networkAclBypass?: NetworkAclBypass;
     networkAclBypassResourceIds?: string[];
-    diagnosticLogSettings?: DiagnosticLogSettings;
     disableLocalAuth?: boolean;
     capacity?: Capacity;
-    enableMaterializedViews?: boolean;
 };
 
 // @public
@@ -1334,14 +1122,12 @@ export interface DatabaseAccountUpdateParameters {
     consistencyPolicy?: ConsistencyPolicy;
     cors?: CorsPolicy[];
     defaultIdentity?: string;
-    diagnosticLogSettings?: DiagnosticLogSettings;
     disableKeyBasedMetadataWriteAccess?: boolean;
     disableLocalAuth?: boolean;
     enableAnalyticalStorage?: boolean;
     enableAutomaticFailover?: boolean;
     enableCassandraConnector?: boolean;
     enableFreeTier?: boolean;
-    enableMaterializedViews?: boolean;
     enableMultipleWriteLocations?: boolean;
     identity?: ManagedServiceIdentity;
     ipRules?: IpAddressOrRange[];
@@ -1393,7 +1179,6 @@ export type DataCenterResource = ARMProxyResource & {
 
 // @public
 export interface DataCenterResourceProperties {
-    authenticationMethodLdapProperties?: AuthenticationMethodLdapProperties;
     availabilityZone?: boolean;
     backupStorageCustomerKeyUri?: string;
     base64EncodedCassandraYamlFragment?: string;
@@ -1409,83 +1194,7 @@ export interface DataCenterResourceProperties {
 }
 
 // @public
-export type DataTransferComponent = string;
-
-// @public
-export interface DataTransferDataSourceSink {
-    component: "CosmosDBCassandra" | "CosmosDBSql" | "AzureBlobStorage";
-}
-
-// @public (undocumented)
-export type DataTransferDataSourceSinkUnion = DataTransferDataSourceSink | CosmosCassandraDataTransferDataSourceSink | CosmosSqlDataTransferDataSourceSink | AzureBlobDataTransferDataSourceSink;
-
-// @public
-export interface DataTransferJobFeedResults {
-    readonly nextLink?: string;
-    readonly value?: DataTransferJobGetResults[];
-}
-
-// @public
-export type DataTransferJobGetResults = ARMProxyResource & {
-    readonly jobName?: string;
-    source?: DataTransferDataSourceSinkUnion;
-    destination?: DataTransferDataSourceSinkUnion;
-    readonly status?: string;
-    readonly percentageComplete?: number;
-    readonly lastUpdatedUtcTime?: Date;
-    workerCount?: number;
-    readonly error?: ErrorResponse;
-};
-
-// @public
-export interface DataTransferJobProperties {
-    destination: DataTransferDataSourceSinkUnion;
-    readonly error?: ErrorResponse;
-    readonly jobName?: string;
-    readonly lastUpdatedUtcTime?: Date;
-    readonly percentageComplete?: number;
-    source: DataTransferDataSourceSinkUnion;
-    readonly status?: string;
-    workerCount?: number;
-}
-
-// @public
-export interface DataTransferJobs {
-    create(resourceGroupName: string, accountName: string, jobName: string, jobCreateParameters: CreateJobRequest, options?: DataTransferJobsCreateOptionalParams): Promise<DataTransferJobsCreateResponse>;
-    get(resourceGroupName: string, accountName: string, jobName: string, options?: DataTransferJobsGetOptionalParams): Promise<DataTransferJobsGetResponse>;
-    listByDatabaseAccount(resourceGroupName: string, accountName: string, options?: DataTransferJobsListByDatabaseAccountOptionalParams): PagedAsyncIterableIterator<DataTransferJobGetResults>;
-}
-
-// @public
-export interface DataTransferJobsCreateOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type DataTransferJobsCreateResponse = DataTransferJobGetResults;
-
-// @public
-export interface DataTransferJobsGetOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type DataTransferJobsGetResponse = DataTransferJobGetResults;
-
-// @public
-export interface DataTransferJobsListByDatabaseAccountNextOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type DataTransferJobsListByDatabaseAccountNextResponse = DataTransferJobFeedResults;
-
-// @public
-export interface DataTransferJobsListByDatabaseAccountOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type DataTransferJobsListByDatabaseAccountResponse = DataTransferJobFeedResults;
-
-// @public
-export type DataTransferRegionalServiceResource = RegionalServiceResource & {};
+export type DataTransferRegionalServiceResource = RegionalServiceResource;
 
 // @public
 export interface DataTransferServiceResource {
@@ -1503,14 +1212,6 @@ export type DataType = string;
 
 // @public
 export type DefaultConsistencyLevel = "Eventual" | "Session" | "BoundedStaleness" | "Strong" | "ConsistentPrefix";
-
-// @public
-export interface DiagnosticLogSettings {
-    enableFullTextQuery?: EnableFullTextQuery;
-}
-
-// @public
-export type EnableFullTextQuery = "None" | "True" | "False";
 
 // @public
 export interface ErrorResponse {
@@ -1560,83 +1261,16 @@ export type GraphAPIComputeServiceResourceProperties = ServiceResourceProperties
 };
 
 // @public
-export interface GraphResource {
-    id: string;
-}
-
-// @public
-export type GraphResourceCreateUpdateParameters = ARMResourceProperties & {
-    resource: GraphResource;
-    options?: CreateUpdateOptions;
-};
-
-// @public (undocumented)
-export type GraphResourceGetPropertiesOptions = OptionsResource & {};
-
-// @public (undocumented)
-export type GraphResourceGetPropertiesResource = GraphResource & {};
-
-// @public
-export type GraphResourceGetResults = ARMResourceProperties & {
-    resource?: GraphResourceGetPropertiesResource;
-    options?: GraphResourceGetPropertiesOptions;
-};
-
-// @public
-export interface GraphResources {
-    beginCreateUpdateGraph(resourceGroupName: string, accountName: string, graphName: string, createUpdateGraphParameters: GraphResourceCreateUpdateParameters, options?: GraphResourcesCreateUpdateGraphOptionalParams): Promise<PollerLike<PollOperationState<GraphResourcesCreateUpdateGraphResponse>, GraphResourcesCreateUpdateGraphResponse>>;
-    beginCreateUpdateGraphAndWait(resourceGroupName: string, accountName: string, graphName: string, createUpdateGraphParameters: GraphResourceCreateUpdateParameters, options?: GraphResourcesCreateUpdateGraphOptionalParams): Promise<GraphResourcesCreateUpdateGraphResponse>;
-    beginDeleteGraphResource(resourceGroupName: string, accountName: string, graphName: string, options?: GraphResourcesDeleteGraphResourceOptionalParams): Promise<PollerLike<PollOperationState<void>, void>>;
-    beginDeleteGraphResourceAndWait(resourceGroupName: string, accountName: string, graphName: string, options?: GraphResourcesDeleteGraphResourceOptionalParams): Promise<void>;
-    getGraph(resourceGroupName: string, accountName: string, graphName: string, options?: GraphResourcesGetGraphOptionalParams): Promise<GraphResourcesGetGraphResponse>;
-    listGraphs(resourceGroupName: string, accountName: string, options?: GraphResourcesListGraphsOptionalParams): PagedAsyncIterableIterator<GraphResourceGetResults>;
-}
-
-// @public
-export interface GraphResourcesCreateUpdateGraphOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type GraphResourcesCreateUpdateGraphResponse = GraphResourceGetResults;
-
-// @public
-export interface GraphResourcesDeleteGraphResourceOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export interface GraphResourcesGetGraphOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type GraphResourcesGetGraphResponse = GraphResourceGetResults;
-
-// @public
-export interface GraphResourcesListGraphsOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type GraphResourcesListGraphsResponse = GraphResourcesListResult;
-
-// @public
-export interface GraphResourcesListResult {
-    readonly value?: GraphResourceGetResults[];
-}
-
-// @public
 export type GremlinDatabaseCreateUpdateParameters = ARMResourceProperties & {
     resource: GremlinDatabaseResource;
     options?: CreateUpdateOptions;
 };
 
 // @public (undocumented)
-export type GremlinDatabaseGetPropertiesOptions = OptionsResource & {};
+export type GremlinDatabaseGetPropertiesOptions = OptionsResource;
 
 // @public (undocumented)
-export type GremlinDatabaseGetPropertiesResource = GremlinDatabaseResource & ExtendedResourceProperties & {};
+export type GremlinDatabaseGetPropertiesResource = GremlinDatabaseResource & ExtendedResourceProperties;
 
 // @public
 export type GremlinDatabaseGetResults = ARMResourceProperties & {
@@ -1655,22 +1289,16 @@ export interface GremlinDatabaseResource {
 }
 
 // @public
-export interface GremlinDatabaseRestoreResource {
-    databaseName?: string;
-    graphNames?: string[];
-}
-
-// @public
 export type GremlinGraphCreateUpdateParameters = ARMResourceProperties & {
     resource: GremlinGraphResource;
     options?: CreateUpdateOptions;
 };
 
 // @public (undocumented)
-export type GremlinGraphGetPropertiesOptions = OptionsResource & {};
+export type GremlinGraphGetPropertiesOptions = OptionsResource;
 
 // @public (undocumented)
-export type GremlinGraphGetPropertiesResource = GremlinGraphResource & ExtendedResourceProperties & {};
+export type GremlinGraphGetPropertiesResource = GremlinGraphResource & ExtendedResourceProperties;
 
 // @public
 export type GremlinGraphGetResults = ARMResourceProperties & {
@@ -1685,6 +1313,7 @@ export interface GremlinGraphListResult {
 
 // @public
 export interface GremlinGraphResource {
+    analyticalStorageTtl?: number;
     conflictResolutionPolicy?: ConflictResolutionPolicy;
     defaultTtl?: number;
     id: string;
@@ -1711,8 +1340,6 @@ export interface GremlinResources {
     beginMigrateGremlinGraphToAutoscaleAndWait(resourceGroupName: string, accountName: string, databaseName: string, graphName: string, options?: GremlinResourcesMigrateGremlinGraphToAutoscaleOptionalParams): Promise<GremlinResourcesMigrateGremlinGraphToAutoscaleResponse>;
     beginMigrateGremlinGraphToManualThroughput(resourceGroupName: string, accountName: string, databaseName: string, graphName: string, options?: GremlinResourcesMigrateGremlinGraphToManualThroughputOptionalParams): Promise<PollerLike<PollOperationState<GremlinResourcesMigrateGremlinGraphToManualThroughputResponse>, GremlinResourcesMigrateGremlinGraphToManualThroughputResponse>>;
     beginMigrateGremlinGraphToManualThroughputAndWait(resourceGroupName: string, accountName: string, databaseName: string, graphName: string, options?: GremlinResourcesMigrateGremlinGraphToManualThroughputOptionalParams): Promise<GremlinResourcesMigrateGremlinGraphToManualThroughputResponse>;
-    beginRetrieveContinuousBackupInformation(resourceGroupName: string, accountName: string, databaseName: string, graphName: string, location: ContinuousBackupRestoreLocation, options?: GremlinResourcesRetrieveContinuousBackupInformationOptionalParams): Promise<PollerLike<PollOperationState<GremlinResourcesRetrieveContinuousBackupInformationResponse>, GremlinResourcesRetrieveContinuousBackupInformationResponse>>;
-    beginRetrieveContinuousBackupInformationAndWait(resourceGroupName: string, accountName: string, databaseName: string, graphName: string, location: ContinuousBackupRestoreLocation, options?: GremlinResourcesRetrieveContinuousBackupInformationOptionalParams): Promise<GremlinResourcesRetrieveContinuousBackupInformationResponse>;
     beginUpdateGremlinDatabaseThroughput(resourceGroupName: string, accountName: string, databaseName: string, updateThroughputParameters: ThroughputSettingsUpdateParameters, options?: GremlinResourcesUpdateGremlinDatabaseThroughputOptionalParams): Promise<PollerLike<PollOperationState<GremlinResourcesUpdateGremlinDatabaseThroughputResponse>, GremlinResourcesUpdateGremlinDatabaseThroughputResponse>>;
     beginUpdateGremlinDatabaseThroughputAndWait(resourceGroupName: string, accountName: string, databaseName: string, updateThroughputParameters: ThroughputSettingsUpdateParameters, options?: GremlinResourcesUpdateGremlinDatabaseThroughputOptionalParams): Promise<GremlinResourcesUpdateGremlinDatabaseThroughputResponse>;
     beginUpdateGremlinGraphThroughput(resourceGroupName: string, accountName: string, databaseName: string, graphName: string, updateThroughputParameters: ThroughputSettingsUpdateParameters, options?: GremlinResourcesUpdateGremlinGraphThroughputOptionalParams): Promise<PollerLike<PollOperationState<GremlinResourcesUpdateGremlinGraphThroughputResponse>, GremlinResourcesUpdateGremlinGraphThroughputResponse>>;
@@ -1834,15 +1461,6 @@ export interface GremlinResourcesMigrateGremlinGraphToManualThroughputOptionalPa
 export type GremlinResourcesMigrateGremlinGraphToManualThroughputResponse = ThroughputSettingsGetResults;
 
 // @public
-export interface GremlinResourcesRetrieveContinuousBackupInformationOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type GremlinResourcesRetrieveContinuousBackupInformationResponse = BackupInformation;
-
-// @public
 export interface GremlinResourcesUpdateGremlinDatabaseThroughputOptionalParams extends coreClient.OperationOptions {
     resumeFrom?: string;
     updateIntervalInMs?: number;
@@ -1898,13 +1516,6 @@ export interface IpAddressOrRange {
 export type KeyKind = string;
 
 // @public
-export interface KeyWrapMetadata {
-    name?: string;
-    type?: string;
-    value?: string;
-}
-
-// @public
 export enum KnownAnalyticalStorageSchemaType {
     // (undocumented)
     FullFidelity = "FullFidelity",
@@ -1932,8 +1543,6 @@ export enum KnownApiType {
 export enum KnownAuthenticationMethod {
     // (undocumented)
     Cassandra = "Cassandra",
-    // (undocumented)
-    Ldap = "Ldap",
     // (undocumented)
     None = "None"
 }
@@ -2034,16 +1643,6 @@ export enum KnownDatabaseAccountKind {
     MongoDB = "MongoDB",
     // (undocumented)
     Parse = "Parse"
-}
-
-// @public
-export enum KnownDataTransferComponent {
-    // (undocumented)
-    AzureBlobStorage = "AzureBlobStorage",
-    // (undocumented)
-    CosmosDBCassandra = "CosmosDBCassandra",
-    // (undocumented)
-    CosmosDBSql = "CosmosDBSql"
 }
 
 // @public
@@ -2203,6 +1802,8 @@ export enum KnownServerVersion {
     // (undocumented)
     Four0 = "4.0",
     // (undocumented)
+    Four2 = "4.2",
+    // (undocumented)
     Three2 = "3.2",
     // (undocumented)
     Three6 = "3.6"
@@ -2299,11 +1900,6 @@ export enum KnownUnitType {
 }
 
 // @public
-export interface ListBackups {
-    readonly value?: BackupResource[];
-}
-
-// @public
 export interface ListClusters {
     value?: ClusterResource[];
 }
@@ -2338,7 +1934,6 @@ export interface LocationListResult {
 export interface LocationProperties {
     readonly backupStorageRedundancies?: BackupStorageRedundancy[];
     readonly isResidencyRestricted?: boolean;
-    readonly status?: string;
     readonly supportsAvailabilityZone?: boolean;
 }
 
@@ -2410,7 +2005,7 @@ export interface ManagedServiceIdentity {
 }
 
 // @public
-export type MaterializedViewsBuilderRegionalServiceResource = RegionalServiceResource & {};
+export type MaterializedViewsBuilderRegionalServiceResource = RegionalServiceResource;
 
 // @public
 export interface MaterializedViewsBuilderServiceResource {
@@ -2481,10 +2076,10 @@ export type MongoDBCollectionCreateUpdateParameters = ARMResourceProperties & {
 };
 
 // @public (undocumented)
-export type MongoDBCollectionGetPropertiesOptions = OptionsResource & {};
+export type MongoDBCollectionGetPropertiesOptions = OptionsResource;
 
 // @public (undocumented)
-export type MongoDBCollectionGetPropertiesResource = MongoDBCollectionResource & ExtendedResourceProperties & {};
+export type MongoDBCollectionGetPropertiesResource = MongoDBCollectionResource & ExtendedResourceProperties;
 
 // @public
 export type MongoDBCollectionGetResults = ARMResourceProperties & {
@@ -2514,10 +2109,10 @@ export type MongoDBDatabaseCreateUpdateParameters = ARMResourceProperties & {
 };
 
 // @public (undocumented)
-export type MongoDBDatabaseGetPropertiesOptions = OptionsResource & {};
+export type MongoDBDatabaseGetPropertiesOptions = OptionsResource;
 
 // @public (undocumented)
-export type MongoDBDatabaseGetPropertiesResource = MongoDBDatabaseResource & ExtendedResourceProperties & {};
+export type MongoDBDatabaseGetPropertiesResource = MongoDBDatabaseResource & ExtendedResourceProperties;
 
 // @public
 export type MongoDBDatabaseGetResults = ARMResourceProperties & {
@@ -2862,7 +2457,7 @@ export interface NotebookWorkspaceConnectionInfoResult {
 }
 
 // @public
-export type NotebookWorkspaceCreateUpdateParameters = ARMProxyResource & {};
+export type NotebookWorkspaceCreateUpdateParameters = ARMProxyResource;
 
 // @public
 export interface NotebookWorkspaceListResult {
@@ -3225,7 +2820,7 @@ export interface PrivilegeResource {
 }
 
 // @public
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 // @public
 export type PublicNetworkAccess = string;
@@ -3299,96 +2894,6 @@ export interface RestorableDatabaseAccountsListResult {
 }
 
 // @public
-export interface RestorableGremlinDatabaseGetResult {
-    readonly id?: string;
-    readonly name?: string;
-    resource?: RestorableGremlinDatabasePropertiesResource;
-    readonly type?: string;
-}
-
-// @public
-export interface RestorableGremlinDatabasePropertiesResource {
-    readonly eventTimestamp?: string;
-    readonly operationType?: OperationType;
-    readonly ownerId?: string;
-    readonly ownerResourceId?: string;
-    readonly rid?: string;
-}
-
-// @public
-export interface RestorableGremlinDatabases {
-    list(location: string, instanceId: string, options?: RestorableGremlinDatabasesListOptionalParams): PagedAsyncIterableIterator<RestorableGremlinDatabaseGetResult>;
-}
-
-// @public
-export interface RestorableGremlinDatabasesListOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type RestorableGremlinDatabasesListResponse = RestorableGremlinDatabasesListResult;
-
-// @public
-export interface RestorableGremlinDatabasesListResult {
-    readonly value?: RestorableGremlinDatabaseGetResult[];
-}
-
-// @public
-export interface RestorableGremlinGraphGetResult {
-    readonly id?: string;
-    readonly name?: string;
-    resource?: RestorableGremlinGraphPropertiesResource;
-    readonly type?: string;
-}
-
-// @public
-export interface RestorableGremlinGraphPropertiesResource {
-    readonly eventTimestamp?: string;
-    readonly operationType?: OperationType;
-    readonly ownerId?: string;
-    readonly ownerResourceId?: string;
-    readonly rid?: string;
-}
-
-// @public
-export interface RestorableGremlinGraphs {
-    list(location: string, instanceId: string, options?: RestorableGremlinGraphsListOptionalParams): PagedAsyncIterableIterator<RestorableGremlinGraphGetResult>;
-}
-
-// @public
-export interface RestorableGremlinGraphsListOptionalParams extends coreClient.OperationOptions {
-    endTime?: string;
-    restorableGremlinDatabaseRid?: string;
-    startTime?: string;
-}
-
-// @public
-export type RestorableGremlinGraphsListResponse = RestorableGremlinGraphsListResult;
-
-// @public
-export interface RestorableGremlinGraphsListResult {
-    readonly value?: RestorableGremlinGraphGetResult[];
-}
-
-// @public
-export interface RestorableGremlinResources {
-    list(location: string, instanceId: string, options?: RestorableGremlinResourcesListOptionalParams): PagedAsyncIterableIterator<GremlinDatabaseRestoreResource>;
-}
-
-// @public
-export interface RestorableGremlinResourcesListOptionalParams extends coreClient.OperationOptions {
-    restoreLocation?: string;
-    restoreTimestampInUtc?: string;
-}
-
-// @public
-export type RestorableGremlinResourcesListResponse = RestorableGremlinResourcesListResult;
-
-// @public
-export interface RestorableGremlinResourcesListResult {
-    readonly value?: GremlinDatabaseRestoreResource[];
-}
-
-// @public
 export interface RestorableLocationResource {
     readonly creationTime?: Date;
     readonly deletionTime?: Date;
@@ -3420,9 +2925,7 @@ export interface RestorableMongodbCollections {
 
 // @public
 export interface RestorableMongodbCollectionsListOptionalParams extends coreClient.OperationOptions {
-    endTime?: string;
     restorableMongodbDatabaseRid?: string;
-    startTime?: string;
 }
 
 // @public
@@ -3469,7 +2972,16 @@ export interface RestorableMongodbDatabasesListResult {
 
 // @public
 export interface RestorableMongodbResources {
-    list(location: string, instanceId: string, options?: RestorableMongodbResourcesListOptionalParams): PagedAsyncIterableIterator<DatabaseRestoreResource>;
+    list(location: string, instanceId: string, options?: RestorableMongodbResourcesListOptionalParams): PagedAsyncIterableIterator<RestorableMongodbResourcesGetResult>;
+}
+
+// @public
+export interface RestorableMongodbResourcesGetResult {
+    collectionNames?: string[];
+    databaseName?: string;
+    readonly id?: string;
+    readonly name?: string;
+    readonly type?: string;
 }
 
 // @public
@@ -3483,7 +2995,7 @@ export type RestorableMongodbResourcesListResponse = RestorableMongodbResourcesL
 
 // @public
 export interface RestorableMongodbResourcesListResult {
-    readonly value?: DatabaseRestoreResource[];
+    readonly value?: RestorableMongodbResourcesGetResult[];
 }
 
 // @public
@@ -3573,7 +3085,16 @@ export interface RestorableSqlDatabasesListResult {
 
 // @public
 export interface RestorableSqlResources {
-    list(location: string, instanceId: string, options?: RestorableSqlResourcesListOptionalParams): PagedAsyncIterableIterator<DatabaseRestoreResource>;
+    list(location: string, instanceId: string, options?: RestorableSqlResourcesListOptionalParams): PagedAsyncIterableIterator<RestorableSqlResourcesGetResult>;
+}
+
+// @public
+export interface RestorableSqlResourcesGetResult {
+    collectionNames?: string[];
+    databaseName?: string;
+    readonly id?: string;
+    readonly name?: string;
+    readonly type?: string;
 }
 
 // @public
@@ -3587,62 +3108,7 @@ export type RestorableSqlResourcesListResponse = RestorableSqlResourcesListResul
 
 // @public
 export interface RestorableSqlResourcesListResult {
-    readonly value?: DatabaseRestoreResource[];
-}
-
-// @public
-export interface RestorableTableGetResult {
-    readonly id?: string;
-    readonly name?: string;
-    resource?: RestorableTablePropertiesResource;
-    readonly type?: string;
-}
-
-// @public
-export interface RestorableTablePropertiesResource {
-    readonly eventTimestamp?: string;
-    readonly operationType?: OperationType;
-    readonly ownerId?: string;
-    readonly ownerResourceId?: string;
-    readonly rid?: string;
-}
-
-// @public
-export interface RestorableTableResources {
-    list(location: string, instanceId: string, options?: RestorableTableResourcesListOptionalParams): PagedAsyncIterableIterator<string>;
-}
-
-// @public
-export interface RestorableTableResourcesListOptionalParams extends coreClient.OperationOptions {
-    restoreLocation?: string;
-    restoreTimestampInUtc?: string;
-}
-
-// @public
-export type RestorableTableResourcesListResponse = RestorableTableResourcesListResult;
-
-// @public
-export interface RestorableTableResourcesListResult {
-    readonly value?: string[];
-}
-
-// @public
-export interface RestorableTables {
-    list(location: string, instanceId: string, options?: RestorableTablesListOptionalParams): PagedAsyncIterableIterator<RestorableTableGetResult>;
-}
-
-// @public
-export interface RestorableTablesListOptionalParams extends coreClient.OperationOptions {
-    endTime?: string;
-    startTime?: string;
-}
-
-// @public
-export type RestorableTablesListResponse = RestorableTablesListResult;
-
-// @public
-export interface RestorableTablesListResult {
-    readonly value?: RestorableTableGetResult[];
+    readonly value?: RestorableSqlResourcesGetResult[];
 }
 
 // @public
@@ -3651,11 +3117,9 @@ export type RestoreMode = string;
 // @public
 export interface RestoreParameters {
     databasesToRestore?: DatabaseRestoreResource[];
-    gremlinDatabasesToRestore?: GremlinDatabaseRestoreResource[];
     restoreMode?: RestoreMode;
     restoreSource?: string;
     restoreTimestampInUtc?: Date;
-    tablesToRestore?: string[];
 }
 
 // @public
@@ -3769,10 +3233,10 @@ export type SqlContainerCreateUpdateParameters = ARMResourceProperties & {
 };
 
 // @public (undocumented)
-export type SqlContainerGetPropertiesOptions = OptionsResource & {};
+export type SqlContainerGetPropertiesOptions = OptionsResource;
 
 // @public (undocumented)
-export type SqlContainerGetPropertiesResource = SqlContainerResource & ExtendedResourceProperties & {};
+export type SqlContainerGetPropertiesResource = SqlContainerResource & ExtendedResourceProperties;
 
 // @public
 export type SqlContainerGetResults = ARMResourceProperties & {
@@ -3803,7 +3267,7 @@ export type SqlDatabaseCreateUpdateParameters = ARMResourceProperties & {
 };
 
 // @public (undocumented)
-export type SqlDatabaseGetPropertiesOptions = OptionsResource & {};
+export type SqlDatabaseGetPropertiesOptions = OptionsResource;
 
 // @public (undocumented)
 export type SqlDatabaseGetPropertiesResource = SqlDatabaseResource & ExtendedResourceProperties & {
@@ -3846,8 +3310,6 @@ export type SqlDedicatedGatewayServiceResourceProperties = ServiceResourceProper
 
 // @public
 export interface SqlResources {
-    beginCreateUpdateClientEncryptionKey(resourceGroupName: string, accountName: string, databaseName: string, clientEncryptionKeyName: string, createUpdateClientEncryptionKeyParameters: ClientEncryptionKeyCreateUpdateParameters, options?: SqlResourcesCreateUpdateClientEncryptionKeyOptionalParams): Promise<PollerLike<PollOperationState<SqlResourcesCreateUpdateClientEncryptionKeyResponse>, SqlResourcesCreateUpdateClientEncryptionKeyResponse>>;
-    beginCreateUpdateClientEncryptionKeyAndWait(resourceGroupName: string, accountName: string, databaseName: string, clientEncryptionKeyName: string, createUpdateClientEncryptionKeyParameters: ClientEncryptionKeyCreateUpdateParameters, options?: SqlResourcesCreateUpdateClientEncryptionKeyOptionalParams): Promise<SqlResourcesCreateUpdateClientEncryptionKeyResponse>;
     beginCreateUpdateSqlContainer(resourceGroupName: string, accountName: string, databaseName: string, containerName: string, createUpdateSqlContainerParameters: SqlContainerCreateUpdateParameters, options?: SqlResourcesCreateUpdateSqlContainerOptionalParams): Promise<PollerLike<PollOperationState<SqlResourcesCreateUpdateSqlContainerResponse>, SqlResourcesCreateUpdateSqlContainerResponse>>;
     beginCreateUpdateSqlContainerAndWait(resourceGroupName: string, accountName: string, databaseName: string, containerName: string, createUpdateSqlContainerParameters: SqlContainerCreateUpdateParameters, options?: SqlResourcesCreateUpdateSqlContainerOptionalParams): Promise<SqlResourcesCreateUpdateSqlContainerResponse>;
     beginCreateUpdateSqlDatabase(resourceGroupName: string, accountName: string, databaseName: string, createUpdateSqlDatabaseParameters: SqlDatabaseCreateUpdateParameters, options?: SqlResourcesCreateUpdateSqlDatabaseOptionalParams): Promise<PollerLike<PollOperationState<SqlResourcesCreateUpdateSqlDatabaseResponse>, SqlResourcesCreateUpdateSqlDatabaseResponse>>;
@@ -3890,7 +3352,6 @@ export interface SqlResources {
     beginUpdateSqlContainerThroughputAndWait(resourceGroupName: string, accountName: string, databaseName: string, containerName: string, updateThroughputParameters: ThroughputSettingsUpdateParameters, options?: SqlResourcesUpdateSqlContainerThroughputOptionalParams): Promise<SqlResourcesUpdateSqlContainerThroughputResponse>;
     beginUpdateSqlDatabaseThroughput(resourceGroupName: string, accountName: string, databaseName: string, updateThroughputParameters: ThroughputSettingsUpdateParameters, options?: SqlResourcesUpdateSqlDatabaseThroughputOptionalParams): Promise<PollerLike<PollOperationState<SqlResourcesUpdateSqlDatabaseThroughputResponse>, SqlResourcesUpdateSqlDatabaseThroughputResponse>>;
     beginUpdateSqlDatabaseThroughputAndWait(resourceGroupName: string, accountName: string, databaseName: string, updateThroughputParameters: ThroughputSettingsUpdateParameters, options?: SqlResourcesUpdateSqlDatabaseThroughputOptionalParams): Promise<SqlResourcesUpdateSqlDatabaseThroughputResponse>;
-    getClientEncryptionKey(resourceGroupName: string, accountName: string, databaseName: string, clientEncryptionKeyName: string, options?: SqlResourcesGetClientEncryptionKeyOptionalParams): Promise<SqlResourcesGetClientEncryptionKeyResponse>;
     getSqlContainer(resourceGroupName: string, accountName: string, databaseName: string, containerName: string, options?: SqlResourcesGetSqlContainerOptionalParams): Promise<SqlResourcesGetSqlContainerResponse>;
     getSqlContainerThroughput(resourceGroupName: string, accountName: string, databaseName: string, containerName: string, options?: SqlResourcesGetSqlContainerThroughputOptionalParams): Promise<SqlResourcesGetSqlContainerThroughputResponse>;
     getSqlDatabase(resourceGroupName: string, accountName: string, databaseName: string, options?: SqlResourcesGetSqlDatabaseOptionalParams): Promise<SqlResourcesGetSqlDatabaseResponse>;
@@ -3900,7 +3361,6 @@ export interface SqlResources {
     getSqlStoredProcedure(resourceGroupName: string, accountName: string, databaseName: string, containerName: string, storedProcedureName: string, options?: SqlResourcesGetSqlStoredProcedureOptionalParams): Promise<SqlResourcesGetSqlStoredProcedureResponse>;
     getSqlTrigger(resourceGroupName: string, accountName: string, databaseName: string, containerName: string, triggerName: string, options?: SqlResourcesGetSqlTriggerOptionalParams): Promise<SqlResourcesGetSqlTriggerResponse>;
     getSqlUserDefinedFunction(resourceGroupName: string, accountName: string, databaseName: string, containerName: string, userDefinedFunctionName: string, options?: SqlResourcesGetSqlUserDefinedFunctionOptionalParams): Promise<SqlResourcesGetSqlUserDefinedFunctionResponse>;
-    listClientEncryptionKeys(resourceGroupName: string, accountName: string, databaseName: string, options?: SqlResourcesListClientEncryptionKeysOptionalParams): PagedAsyncIterableIterator<ClientEncryptionKeyGetResults>;
     listSqlContainers(resourceGroupName: string, accountName: string, databaseName: string, options?: SqlResourcesListSqlContainersOptionalParams): PagedAsyncIterableIterator<SqlContainerGetResults>;
     listSqlDatabases(resourceGroupName: string, accountName: string, options?: SqlResourcesListSqlDatabasesOptionalParams): PagedAsyncIterableIterator<SqlDatabaseGetResults>;
     listSqlRoleAssignments(resourceGroupName: string, accountName: string, options?: SqlResourcesListSqlRoleAssignmentsOptionalParams): PagedAsyncIterableIterator<SqlRoleAssignmentGetResults>;
@@ -3909,15 +3369,6 @@ export interface SqlResources {
     listSqlTriggers(resourceGroupName: string, accountName: string, databaseName: string, containerName: string, options?: SqlResourcesListSqlTriggersOptionalParams): PagedAsyncIterableIterator<SqlTriggerGetResults>;
     listSqlUserDefinedFunctions(resourceGroupName: string, accountName: string, databaseName: string, containerName: string, options?: SqlResourcesListSqlUserDefinedFunctionsOptionalParams): PagedAsyncIterableIterator<SqlUserDefinedFunctionGetResults>;
 }
-
-// @public
-export interface SqlResourcesCreateUpdateClientEncryptionKeyOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type SqlResourcesCreateUpdateClientEncryptionKeyResponse = ClientEncryptionKeyGetResults;
 
 // @public
 export interface SqlResourcesCreateUpdateSqlContainerOptionalParams extends coreClient.OperationOptions {
@@ -4025,13 +3476,6 @@ export interface SqlResourcesDeleteSqlUserDefinedFunctionOptionalParams extends 
 }
 
 // @public
-export interface SqlResourcesGetClientEncryptionKeyOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type SqlResourcesGetClientEncryptionKeyResponse = ClientEncryptionKeyGetResults;
-
-// @public
 export interface SqlResourcesGetSqlContainerOptionalParams extends coreClient.OperationOptions {
 }
 
@@ -4093,13 +3537,6 @@ export interface SqlResourcesGetSqlUserDefinedFunctionOptionalParams extends cor
 
 // @public
 export type SqlResourcesGetSqlUserDefinedFunctionResponse = SqlUserDefinedFunctionGetResults;
-
-// @public
-export interface SqlResourcesListClientEncryptionKeysOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type SqlResourcesListClientEncryptionKeysResponse = ClientEncryptionKeysListResult;
 
 // @public
 export interface SqlResourcesListSqlContainersOptionalParams extends coreClient.OperationOptions {
@@ -4260,7 +3697,7 @@ export type SqlStoredProcedureCreateUpdateParameters = ARMResourceProperties & {
 };
 
 // @public (undocumented)
-export type SqlStoredProcedureGetPropertiesResource = SqlStoredProcedureResource & ExtendedResourceProperties & {};
+export type SqlStoredProcedureGetPropertiesResource = SqlStoredProcedureResource & ExtendedResourceProperties;
 
 // @public
 export type SqlStoredProcedureGetResults = ARMResourceProperties & {
@@ -4285,7 +3722,7 @@ export type SqlTriggerCreateUpdateParameters = ARMResourceProperties & {
 };
 
 // @public (undocumented)
-export type SqlTriggerGetPropertiesResource = SqlTriggerResource & ExtendedResourceProperties & {};
+export type SqlTriggerGetPropertiesResource = SqlTriggerResource & ExtendedResourceProperties;
 
 // @public
 export type SqlTriggerGetResults = ARMResourceProperties & {
@@ -4312,7 +3749,7 @@ export type SqlUserDefinedFunctionCreateUpdateParameters = ARMResourceProperties
 };
 
 // @public (undocumented)
-export type SqlUserDefinedFunctionGetPropertiesResource = SqlUserDefinedFunctionResource & ExtendedResourceProperties & {};
+export type SqlUserDefinedFunctionGetPropertiesResource = SqlUserDefinedFunctionResource & ExtendedResourceProperties;
 
 // @public
 export type SqlUserDefinedFunctionGetResults = ARMResourceProperties & {
@@ -4347,10 +3784,10 @@ export type TableCreateUpdateParameters = ARMResourceProperties & {
 };
 
 // @public (undocumented)
-export type TableGetPropertiesOptions = OptionsResource & {};
+export type TableGetPropertiesOptions = OptionsResource;
 
 // @public (undocumented)
-export type TableGetPropertiesResource = TableResource & ExtendedResourceProperties & {};
+export type TableGetPropertiesResource = TableResource & ExtendedResourceProperties;
 
 // @public
 export type TableGetResults = ARMResourceProperties & {
@@ -4378,8 +3815,6 @@ export interface TableResources {
     beginMigrateTableToAutoscaleAndWait(resourceGroupName: string, accountName: string, tableName: string, options?: TableResourcesMigrateTableToAutoscaleOptionalParams): Promise<TableResourcesMigrateTableToAutoscaleResponse>;
     beginMigrateTableToManualThroughput(resourceGroupName: string, accountName: string, tableName: string, options?: TableResourcesMigrateTableToManualThroughputOptionalParams): Promise<PollerLike<PollOperationState<TableResourcesMigrateTableToManualThroughputResponse>, TableResourcesMigrateTableToManualThroughputResponse>>;
     beginMigrateTableToManualThroughputAndWait(resourceGroupName: string, accountName: string, tableName: string, options?: TableResourcesMigrateTableToManualThroughputOptionalParams): Promise<TableResourcesMigrateTableToManualThroughputResponse>;
-    beginRetrieveContinuousBackupInformation(resourceGroupName: string, accountName: string, tableName: string, location: ContinuousBackupRestoreLocation, options?: TableResourcesRetrieveContinuousBackupInformationOptionalParams): Promise<PollerLike<PollOperationState<TableResourcesRetrieveContinuousBackupInformationResponse>, TableResourcesRetrieveContinuousBackupInformationResponse>>;
-    beginRetrieveContinuousBackupInformationAndWait(resourceGroupName: string, accountName: string, tableName: string, location: ContinuousBackupRestoreLocation, options?: TableResourcesRetrieveContinuousBackupInformationOptionalParams): Promise<TableResourcesRetrieveContinuousBackupInformationResponse>;
     beginUpdateTableThroughput(resourceGroupName: string, accountName: string, tableName: string, updateThroughputParameters: ThroughputSettingsUpdateParameters, options?: TableResourcesUpdateTableThroughputOptionalParams): Promise<PollerLike<PollOperationState<TableResourcesUpdateTableThroughputResponse>, TableResourcesUpdateTableThroughputResponse>>;
     beginUpdateTableThroughputAndWait(resourceGroupName: string, accountName: string, tableName: string, updateThroughputParameters: ThroughputSettingsUpdateParameters, options?: TableResourcesUpdateTableThroughputOptionalParams): Promise<TableResourcesUpdateTableThroughputResponse>;
     getTable(resourceGroupName: string, accountName: string, tableName: string, options?: TableResourcesGetTableOptionalParams): Promise<TableResourcesGetTableResponse>;
@@ -4442,15 +3877,6 @@ export interface TableResourcesMigrateTableToManualThroughputOptionalParams exte
 export type TableResourcesMigrateTableToManualThroughputResponse = ThroughputSettingsGetResults;
 
 // @public
-export interface TableResourcesRetrieveContinuousBackupInformationOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type TableResourcesRetrieveContinuousBackupInformationResponse = BackupInformation;
-
-// @public
 export interface TableResourcesUpdateTableThroughputOptionalParams extends coreClient.OperationOptions {
     resumeFrom?: string;
     updateIntervalInMs?: number;
@@ -4466,7 +3892,7 @@ export interface ThroughputPolicyResource {
 }
 
 // @public (undocumented)
-export type ThroughputSettingsGetPropertiesResource = ThroughputSettingsResource & ExtendedResourceProperties & {};
+export type ThroughputSettingsGetPropertiesResource = ThroughputSettingsResource & ExtendedResourceProperties;
 
 // @public
 export type ThroughputSettingsGetResults = ARMResourceProperties & {
