@@ -1773,6 +1773,12 @@ export const ContainerGroup: coreClient.CompositeMapper = {
           name: "String"
         }
       },
+      priority: {
+        serializedName: "properties.priority",
+        type: {
+          name: "String"
+        }
+      },
       volumes: {
         serializedName: "properties.volumes",
         type: {

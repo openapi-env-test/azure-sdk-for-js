@@ -34,7 +34,7 @@ export interface ContainerGroups {
   /**
    * Get a list of container groups in the specified subscription. This operation returns properties of
    * each container group including containers, image registry credentials, restart policy, IP address
-   * type, OS type, state, and volumes.
+   * type, OS type, state, volumes and priority.
    * @param options The options parameters.
    */
   list(
@@ -43,7 +43,7 @@ export interface ContainerGroups {
   /**
    * Get a list of container groups in a specified subscription and resource group. This operation
    * returns properties of each container group including containers, image registry credentials, restart
-   * policy, IP address type, OS type, state, and volumes.
+   * policy, IP address type, OS type, state, volumes and priority.
    * @param resourceGroupName The name of the resource group.
    * @param options The options parameters.
    */
@@ -54,7 +54,7 @@ export interface ContainerGroups {
   /**
    * Gets the properties of the specified container group in the specified subscription and resource
    * group. The operation returns the properties of each container group including containers, image
-   * registry credentials, restart policy, IP address type, OS type, state, and volumes.
+   * registry credentials, restart policy, IP address type, OS type, state, volumes and priority.
    * @param resourceGroupName The name of the resource group.
    * @param containerGroupName The name of the container group.
    * @param options The options parameters.
