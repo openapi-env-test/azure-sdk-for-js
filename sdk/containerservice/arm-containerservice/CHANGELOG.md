@@ -1,15 +1,25 @@
 # Release History
+    
+## 17.0.0 (2022-07-20)
+    
+**Features**
 
-## 16.1.1 (Unreleased)
+  - Added Interface AzureKeyVaultKms
+  - Added Interface ManagedClusterSecurityProfileDefender
+  - Added Interface ManagedClusterSecurityProfileDefenderSecurityMonitoring
+  - Added Type Alias KeyVaultNetworkAccessTypes
+  - Interface ManagedClusterAgentPoolProfileProperties has a new optional parameter hostGroupID
+  - Interface ManagedClusterSecurityProfile has a new optional parameter azureKeyVaultKms
+  - Interface ManagedClusterSecurityProfile has a new optional parameter defender
+  - Type Alias AgentPool has a new parameter hostGroupID
+  - Added Enum KnownKeyVaultNetworkAccessTypes
+  - Enum KnownNetworkPlugin has a new value None
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Interface ManagedClusterSecurityProfile no longer has parameter azureDefender
+    
+    
 ## 16.1.0 (2022-05-23)
     
 **Features**

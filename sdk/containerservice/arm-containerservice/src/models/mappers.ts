@@ -624,6 +624,12 @@ export const ManagedClusterAgentPoolProfileProperties: coreClient.CompositeMappe
           name: "Composite",
           className: "CreationData"
         }
+      },
+      hostGroupID: {
+        serializedName: "hostGroupID",
+        type: {
+          name: "String"
+        }
       }
     }
   }
@@ -2034,21 +2040,65 @@ export const ManagedClusterSecurityProfile: coreClient.CompositeMapper = {
     name: "Composite",
     className: "ManagedClusterSecurityProfile",
     modelProperties: {
-      azureDefender: {
-        serializedName: "azureDefender",
+      defender: {
+        serializedName: "defender",
         type: {
           name: "Composite",
-          className: "ManagedClusterSecurityProfileAzureDefender"
+          className: "ManagedClusterSecurityProfileDefender"
+        }
+      },
+      azureKeyVaultKms: {
+        serializedName: "azureKeyVaultKms",
+        type: {
+          name: "Composite",
+          className: "AzureKeyVaultKms"
         }
       }
     }
   }
 };
 
-export const ManagedClusterSecurityProfileAzureDefender: coreClient.CompositeMapper = {
+export const ManagedClusterSecurityProfileDefender: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
-    className: "ManagedClusterSecurityProfileAzureDefender",
+    className: "ManagedClusterSecurityProfileDefender",
+    modelProperties: {
+      logAnalyticsWorkspaceResourceId: {
+        serializedName: "logAnalyticsWorkspaceResourceId",
+        type: {
+          name: "String"
+        }
+      },
+      securityMonitoring: {
+        serializedName: "securityMonitoring",
+        type: {
+          name: "Composite",
+          className: "ManagedClusterSecurityProfileDefenderSecurityMonitoring"
+        }
+      }
+    }
+  }
+};
+
+export const ManagedClusterSecurityProfileDefenderSecurityMonitoring: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "ManagedClusterSecurityProfileDefenderSecurityMonitoring",
+    modelProperties: {
+      enabled: {
+        serializedName: "enabled",
+        type: {
+          name: "Boolean"
+        }
+      }
+    }
+  }
+};
+
+export const AzureKeyVaultKms: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AzureKeyVaultKms",
     modelProperties: {
       enabled: {
         serializedName: "enabled",
@@ -2056,8 +2106,21 @@ export const ManagedClusterSecurityProfileAzureDefender: coreClient.CompositeMap
           name: "Boolean"
         }
       },
-      logAnalyticsWorkspaceResourceId: {
-        serializedName: "logAnalyticsWorkspaceResourceId",
+      keyId: {
+        serializedName: "keyId",
+        type: {
+          name: "String"
+        }
+      },
+      keyVaultNetworkAccess: {
+        defaultValue: "Public",
+        serializedName: "keyVaultNetworkAccess",
+        type: {
+          name: "String"
+        }
+      },
+      keyVaultResourceId: {
+        serializedName: "keyVaultResourceId",
         type: {
           name: "String"
         }
@@ -3520,6 +3583,12 @@ export const AgentPool: coreClient.CompositeMapper = {
         type: {
           name: "Composite",
           className: "CreationData"
+        }
+      },
+      hostGroupID: {
+        serializedName: "properties.hostGroupID",
+        type: {
+          name: "String"
         }
       }
     }

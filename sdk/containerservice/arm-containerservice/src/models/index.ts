@@ -255,6 +255,8 @@ export interface ManagedClusterAgentPoolProfileProperties {
   gpuInstanceProfile?: GPUInstanceProfile;
   /** CreationData to be used to specify the source Snapshot ID if the node pool will be created/upgraded using a snapshot. */
   creationData?: CreationData;
+  /** This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}. For more information see [Azure dedicated hosts](https://docs.microsoft.com/azure/virtual-machines/dedicated-hosts). */
+  hostGroupID?: string;
 }
 
 /** Settings for upgrading an agentpool */
@@ -707,16 +709,36 @@ export interface ManagedClusterHttpProxyConfig {
 
 /** Security profile for the container service cluster. */
 export interface ManagedClusterSecurityProfile {
-  /** Azure Defender settings for the security profile. */
-  azureDefender?: ManagedClusterSecurityProfileAzureDefender;
+  /** Microsoft Defender settings for the security profile. */
+  defender?: ManagedClusterSecurityProfileDefender;
+  /** Azure Key Vault [key management service](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) settings for the security profile. */
+  azureKeyVaultKms?: AzureKeyVaultKms;
 }
 
-/** Azure Defender settings for the security profile. */
-export interface ManagedClusterSecurityProfileAzureDefender {
-  /** Whether to enable Azure Defender */
-  enabled?: boolean;
-  /** Resource ID of the Log Analytics workspace to be associated with Azure Defender.  When Azure Defender is enabled, this field is required and must be a valid workspace resource ID. When Azure Defender is disabled, leave the field empty. */
+/** Microsoft Defender settings for the security profile. */
+export interface ManagedClusterSecurityProfileDefender {
+  /** Resource ID of the Log Analytics workspace to be associated with Microsoft Defender. When Microsoft Defender is enabled, this field is required and must be a valid workspace resource ID. When Microsoft Defender is disabled, leave the field empty. */
   logAnalyticsWorkspaceResourceId?: string;
+  /** Microsoft Defender threat detection for Cloud settings for the security profile. */
+  securityMonitoring?: ManagedClusterSecurityProfileDefenderSecurityMonitoring;
+}
+
+/** Microsoft Defender settings for the security profile threat detection. */
+export interface ManagedClusterSecurityProfileDefenderSecurityMonitoring {
+  /** Whether to enable Defender threat detection */
+  enabled?: boolean;
+}
+
+/** Azure Key Vault key management service settings for the security profile. */
+export interface AzureKeyVaultKms {
+  /** Whether to enable Azure Key Vault key management service. The default is false. */
+  enabled?: boolean;
+  /** Identifier of Azure Key Vault key. See [key identifier format](https://docs.microsoft.com/en-us/azure/key-vault/general/about-keys-secrets-certificates#vault-name-and-object-name) for more details. When Azure Key Vault key management service is enabled, this field is required and must be a valid key identifier. When Azure Key Vault key management service is disabled, leave the field empty. */
+  keyId?: string;
+  /** Network access of key vault. The possible values are `Public` and `Private`. `Public` means the key vault allows public access from all networks. `Private` means the key vault disables public access and enables private link. The default value is `Public`. */
+  keyVaultNetworkAccess?: KeyVaultNetworkAccessTypes;
+  /** Resource ID of key vault. When keyVaultNetworkAccess is `Private`, this field is required and must be a valid resource ID. When keyVaultNetworkAccess is `Public`, leave the field empty. */
+  keyVaultResourceId?: string;
 }
 
 /** Storage profile for the container service cluster. */
@@ -1179,7 +1201,7 @@ export type ManagedClusterAgentPoolProfile = ManagedClusterAgentPoolProfilePrope
 };
 
 /** Information of user assigned identity used by this add-on. */
-export type ManagedClusterAddonProfileIdentity = UserAssignedIdentity & {};
+export type ManagedClusterAddonProfileIdentity = UserAssignedIdentity;
 
 /** The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location' */
 export type TrackedResource = Resource & {
@@ -1293,6 +1315,8 @@ export type AgentPool = SubResource & {
   gpuInstanceProfile?: GPUInstanceProfile;
   /** CreationData to be used to specify the source Snapshot ID if the node pool will be created/upgraded using a snapshot. */
   creationData?: CreationData;
+  /** This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}. For more information see [Azure dedicated hosts](https://docs.microsoft.com/azure/virtual-machines/dedicated-hosts). */
+  hostGroupID?: string;
 };
 
 /** Managed cluster. */
@@ -1747,7 +1771,9 @@ export enum KnownNetworkPlugin {
   /** Use the Azure CNI network plugin. See [Azure CNI (advanced) networking](https://docs.microsoft.com/azure/aks/concepts-network#azure-cni-advanced-networking) for more information. */
   Azure = "azure",
   /** Use the Kubenet network plugin. See [Kubenet (basic) networking](https://docs.microsoft.com/azure/aks/concepts-network#kubenet-basic-networking) for more information. */
-  Kubenet = "kubenet"
+  Kubenet = "kubenet",
+  /** No CNI plugin is pre-installed. See [BYO CNI](https://docs.microsoft.com/en-us/azure/aks/use-byo-cni) for more information. */
+  None = "none"
 }
 
 /**
@@ -1756,7 +1782,8 @@ export enum KnownNetworkPlugin {
  *  this enum contains the known values that the service supports.
  * ### Known values supported by the service
  * **azure**: Use the Azure CNI network plugin. See [Azure CNI (advanced) networking](https:\/\/docs.microsoft.com\/azure\/aks\/concepts-network#azure-cni-advanced-networking) for more information. \
- * **kubenet**: Use the Kubenet network plugin. See [Kubenet (basic) networking](https:\/\/docs.microsoft.com\/azure\/aks\/concepts-network#kubenet-basic-networking) for more information.
+ * **kubenet**: Use the Kubenet network plugin. See [Kubenet (basic) networking](https:\/\/docs.microsoft.com\/azure\/aks\/concepts-network#kubenet-basic-networking) for more information. \
+ * **none**: No CNI plugin is pre-installed. See [BYO CNI](https:\/\/docs.microsoft.com\/en-us\/azure\/aks\/use-byo-cni) for more information.
  */
 export type NetworkPlugin = string;
 
@@ -1904,6 +1931,22 @@ export enum KnownExpander {
  * **random**: Used when you don't have a particular need for the node groups to scale differently.
  */
 export type Expander = string;
+
+/** Known values of {@link KeyVaultNetworkAccessTypes} that the service accepts. */
+export enum KnownKeyVaultNetworkAccessTypes {
+  Public = "Public",
+  Private = "Private"
+}
+
+/**
+ * Defines values for KeyVaultNetworkAccessTypes. \
+ * {@link KnownKeyVaultNetworkAccessTypes} can be used interchangeably with KeyVaultNetworkAccessTypes,
+ *  this enum contains the known values that the service supports.
+ * ### Known values supported by the service
+ * **Public** \
+ * **Private**
+ */
+export type KeyVaultNetworkAccessTypes = string;
 
 /** Known values of {@link PublicNetworkAccess} that the service accepts. */
 export enum KnownPublicNetworkAccess {

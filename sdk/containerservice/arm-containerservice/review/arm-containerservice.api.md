@@ -56,6 +56,7 @@ export type AgentPool = SubResource & {
     enableFips?: boolean;
     gpuInstanceProfile?: GPUInstanceProfile;
     creationData?: CreationData;
+    hostGroupID?: string;
 };
 
 // @public
@@ -180,6 +181,14 @@ export interface AgentPoolUpgradeProfilePropertiesUpgradesItem {
 // @public
 export interface AgentPoolUpgradeSettings {
     maxSurge?: string;
+}
+
+// @public
+export interface AzureKeyVaultKms {
+    enabled?: boolean;
+    keyId?: string;
+    keyVaultNetworkAccess?: KeyVaultNetworkAccessTypes;
+    keyVaultResourceId?: string;
 }
 
 // @public
@@ -354,6 +363,9 @@ export type GPUInstanceProfile = string;
 
 // @public
 export type IpFamily = string;
+
+// @public
+export type KeyVaultNetworkAccessTypes = string;
 
 // @public
 export enum KnownAgentPoolMode {
@@ -800,6 +812,14 @@ export enum KnownIpFamily {
 }
 
 // @public
+export enum KnownKeyVaultNetworkAccessTypes {
+    // (undocumented)
+    Private = "Private",
+    // (undocumented)
+    Public = "Public"
+}
+
+// @public
 export enum KnownKubeletDiskType {
     OS = "OS",
     Temporary = "Temporary"
@@ -850,7 +870,8 @@ export enum KnownNetworkMode {
 // @public
 export enum KnownNetworkPlugin {
     Azure = "azure",
-    Kubenet = "kubenet"
+    Kubenet = "kubenet",
+    None = "none"
 }
 
 // @public
@@ -1117,7 +1138,7 @@ export interface ManagedClusterAddonProfile {
 }
 
 // @public
-export type ManagedClusterAddonProfileIdentity = UserAssignedIdentity & {};
+export type ManagedClusterAddonProfileIdentity = UserAssignedIdentity;
 
 // @public
 export type ManagedClusterAgentPoolProfile = ManagedClusterAgentPoolProfileProperties & {
@@ -1136,6 +1157,7 @@ export interface ManagedClusterAgentPoolProfileProperties {
     enableNodePublicIP?: boolean;
     enableUltraSSD?: boolean;
     gpuInstanceProfile?: GPUInstanceProfile;
+    hostGroupID?: string;
     kubeletConfig?: KubeletConfig;
     kubeletDiskType?: KubeletDiskType;
     linuxOSConfig?: LinuxOSConfig;
@@ -1382,13 +1404,19 @@ export interface ManagedClustersDeleteOptionalParams extends coreClient.Operatio
 
 // @public
 export interface ManagedClusterSecurityProfile {
-    azureDefender?: ManagedClusterSecurityProfileAzureDefender;
+    azureKeyVaultKms?: AzureKeyVaultKms;
+    defender?: ManagedClusterSecurityProfileDefender;
 }
 
 // @public
-export interface ManagedClusterSecurityProfileAzureDefender {
-    enabled?: boolean;
+export interface ManagedClusterSecurityProfileDefender {
     logAnalyticsWorkspaceResourceId?: string;
+    securityMonitoring?: ManagedClusterSecurityProfileDefenderSecurityMonitoring;
+}
+
+// @public
+export interface ManagedClusterSecurityProfileDefenderSecurityMonitoring {
+    enabled?: boolean;
 }
 
 // @public
