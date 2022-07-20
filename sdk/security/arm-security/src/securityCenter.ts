@@ -7,6 +7,7 @@
  */
 
 import * as coreClient from "@azure/core-client";
+import * as coreRestPipeline from "@azure/core-rest-pipeline";
 import * as coreAuth from "@azure/core-auth";
 import {
   MdeOnboardingsImpl,
@@ -57,7 +58,19 @@ import {
   SettingsImpl,
   IngestionSettingsImpl,
   SoftwareInventoriesImpl,
-  SecurityConnectorsImpl
+  VmScannersImpl,
+  SecurityConnectorsImpl,
+  GovernanceRuleOperationsImpl,
+  GovernanceRulesImpl,
+  SecurityConnectorGovernanceRuleImpl,
+  SecurityConnectorGovernanceRulesImpl,
+  SubscriptionGovernanceRulesExecuteStatusImpl,
+  SecurityConnectorGovernanceRulesExecuteStatusImpl,
+  GovernanceAssignmentsImpl,
+  ApplicationsImpl,
+  ApplicationOperationsImpl,
+  SecurityConnectorApplicationsImpl,
+  SecurityConnectorApplicationImpl
 } from "./operations";
 import {
   MdeOnboardings,
@@ -108,7 +121,19 @@ import {
   Settings,
   IngestionSettings,
   SoftwareInventories,
-  SecurityConnectors
+  VmScanners,
+  SecurityConnectors,
+  GovernanceRuleOperations,
+  GovernanceRules,
+  SecurityConnectorGovernanceRule,
+  SecurityConnectorGovernanceRules,
+  SubscriptionGovernanceRulesExecuteStatus,
+  SecurityConnectorGovernanceRulesExecuteStatus,
+  GovernanceAssignments,
+  Applications,
+  ApplicationOperations,
+  SecurityConnectorApplications,
+  SecurityConnectorApplication
 } from "./operationsInterfaces";
 import { SecurityCenterOptionalParams } from "./models";
 
@@ -143,7 +168,7 @@ export class SecurityCenter extends coreClient.ServiceClient {
       credential: credentials
     };
 
-    const packageDetails = `azsdk-js-arm-security/5.0.1`;
+    const packageDetails = `azsdk-js-arm-security/6.0.0-beta.1`;
     const userAgentPrefix =
       options.userAgentOptions && options.userAgentOptions.userAgentPrefix
         ? `${options.userAgentOptions.userAgentPrefix} ${packageDetails}`
@@ -162,6 +187,29 @@ export class SecurityCenter extends coreClient.ServiceClient {
         options.endpoint ?? options.baseUri ?? "https://management.azure.com"
     };
     super(optionsWithDefaults);
+
+    if (options?.pipeline && options.pipeline.getOrderedPolicies().length > 0) {
+      const pipelinePolicies: coreRestPipeline.PipelinePolicy[] = options.pipeline.getOrderedPolicies();
+      const bearerTokenAuthenticationPolicyFound = pipelinePolicies.some(
+        (pipelinePolicy) =>
+          pipelinePolicy.name ===
+          coreRestPipeline.bearerTokenAuthenticationPolicyName
+      );
+      if (!bearerTokenAuthenticationPolicyFound) {
+        this.pipeline.removePolicy({
+          name: coreRestPipeline.bearerTokenAuthenticationPolicyName
+        });
+        this.pipeline.addPolicy(
+          coreRestPipeline.bearerTokenAuthenticationPolicy({
+            scopes: `${optionsWithDefaults.baseUri}/.default`,
+            challengeCallbacks: {
+              authorizeRequestOnChallenge:
+                coreClient.authorizeRequestOnClaimChallenge
+            }
+          })
+        );
+      }
+    }
     // Parameter assignments
     this.subscriptionId = subscriptionId;
 
@@ -249,7 +297,31 @@ export class SecurityCenter extends coreClient.ServiceClient {
     this.settings = new SettingsImpl(this);
     this.ingestionSettings = new IngestionSettingsImpl(this);
     this.softwareInventories = new SoftwareInventoriesImpl(this);
+    this.vmScanners = new VmScannersImpl(this);
     this.securityConnectors = new SecurityConnectorsImpl(this);
+    this.governanceRuleOperations = new GovernanceRuleOperationsImpl(this);
+    this.governanceRules = new GovernanceRulesImpl(this);
+    this.securityConnectorGovernanceRule = new SecurityConnectorGovernanceRuleImpl(
+      this
+    );
+    this.securityConnectorGovernanceRules = new SecurityConnectorGovernanceRulesImpl(
+      this
+    );
+    this.subscriptionGovernanceRulesExecuteStatus = new SubscriptionGovernanceRulesExecuteStatusImpl(
+      this
+    );
+    this.securityConnectorGovernanceRulesExecuteStatus = new SecurityConnectorGovernanceRulesExecuteStatusImpl(
+      this
+    );
+    this.governanceAssignments = new GovernanceAssignmentsImpl(this);
+    this.applications = new ApplicationsImpl(this);
+    this.applicationOperations = new ApplicationOperationsImpl(this);
+    this.securityConnectorApplications = new SecurityConnectorApplicationsImpl(
+      this
+    );
+    this.securityConnectorApplication = new SecurityConnectorApplicationImpl(
+      this
+    );
   }
 
   mdeOnboardings: MdeOnboardings;
@@ -300,5 +372,17 @@ export class SecurityCenter extends coreClient.ServiceClient {
   settings: Settings;
   ingestionSettings: IngestionSettings;
   softwareInventories: SoftwareInventories;
+  vmScanners: VmScanners;
   securityConnectors: SecurityConnectors;
+  governanceRuleOperations: GovernanceRuleOperations;
+  governanceRules: GovernanceRules;
+  securityConnectorGovernanceRule: SecurityConnectorGovernanceRule;
+  securityConnectorGovernanceRules: SecurityConnectorGovernanceRules;
+  subscriptionGovernanceRulesExecuteStatus: SubscriptionGovernanceRulesExecuteStatus;
+  securityConnectorGovernanceRulesExecuteStatus: SecurityConnectorGovernanceRulesExecuteStatus;
+  governanceAssignments: GovernanceAssignments;
+  applications: Applications;
+  applicationOperations: ApplicationOperations;
+  securityConnectorApplications: SecurityConnectorApplications;
+  securityConnectorApplication: SecurityConnectorApplication;
 }
