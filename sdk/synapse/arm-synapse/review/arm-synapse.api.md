@@ -11,6 +11,9 @@ import { PollerLike } from '@azure/core-lro';
 import { PollOperationState } from '@azure/core-lro';
 
 // @public
+export type ActualState = "Enabling" | "Enabled" | "Disabling" | "Disabled" | "Unknown";
+
+// @public
 export type AttachedDatabaseConfiguration = ProxyResource & {
     location?: string;
     readonly systemData?: SystemData;
@@ -168,6 +171,7 @@ export type BigDataPoolResourceInfo = TrackedResource & {
     nodeSize?: NodeSize;
     nodeSizeFamily?: NodeSizeFamily;
     readonly lastSucceededTimestamp?: Date;
+    isAutotuneEnabled?: boolean;
 };
 
 // @public
@@ -576,6 +580,9 @@ export interface DedicatedSQLminimalTlsSettingsPatchInfo {
 
 // @public
 export type DefaultPrincipalsModificationKind = string;
+
+// @public
+export type DesiredState = "Enabled" | "Disabled";
 
 // @public
 export interface DynamicExecutorAllocation {
@@ -1847,28 +1854,6 @@ export enum KnownLanguageExtensionName {
 }
 
 // @public
-export enum KnownManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState {
-    // (undocumented)
-    Disabled = "Disabled",
-    // (undocumented)
-    Disabling = "Disabling",
-    // (undocumented)
-    Enabled = "Enabled",
-    // (undocumented)
-    Enabling = "Enabling",
-    // (undocumented)
-    Unknown = "Unknown"
-}
-
-// @public
-export enum KnownManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState {
-    // (undocumented)
-    Disabled = "Disabled",
-    // (undocumented)
-    Enabled = "Enabled"
-}
-
-// @public
 export enum KnownManagedIntegrationRuntimeNodeStatus {
     // (undocumented)
     Available = "Available",
@@ -2781,15 +2766,9 @@ export type ManagedIdentitySqlControlSettingsModel = ProxyResource & {
 
 // @public
 export interface ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentity {
-    readonly actualState?: ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState;
-    desiredState?: ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState;
+    readonly actualState?: ActualState;
+    desiredState?: DesiredState;
 }
-
-// @public
-export type ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState = string;
-
-// @public
-export type ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState = string;
 
 // @public
 export type ManagedIntegrationRuntime = IntegrationRuntime & {
@@ -3278,7 +3257,7 @@ export interface PrivateLinkServiceConnectionState {
 export type ProvisioningState = string;
 
 // @public
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 // @public
 export interface PurviewConfiguration {
@@ -4160,7 +4139,7 @@ export interface SqlPools {
 }
 
 // @public
-export type SqlPoolSchema = ProxyResource & {};
+export type SqlPoolSchema = ProxyResource;
 
 // @public
 export interface SqlPoolSchemaListResult {
@@ -4391,7 +4370,7 @@ export interface SqlPoolsUpdateOptionalParams extends coreClient.OperationOption
 export type SqlPoolsUpdateResponse = SqlPool;
 
 // @public
-export type SqlPoolTable = ProxyResource & {};
+export type SqlPoolTable = ProxyResource;
 
 // @public
 export interface SqlPoolTableColumns {
@@ -4852,7 +4831,7 @@ export type StateValue = string;
 export type StorageAccountType = string;
 
 // @public
-export type SubResource = AzureEntityResource & {};
+export type SubResource = AzureEntityResource;
 
 // @public (undocumented)
 export class SynapseManagementClient extends coreClient.ServiceClient {
