@@ -330,7 +330,7 @@ export class RemediationsImpl implements Remediations {
 
   /**
    * Gets all deployments for a remediation at resource group scope.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param remediationName The name of the remediation.
    * @param options The options parameters.
    */
@@ -401,7 +401,7 @@ export class RemediationsImpl implements Remediations {
 
   /**
    * Gets all remediations for the subscription.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param options The options parameters.
    */
   public listForResourceGroup(
@@ -770,7 +770,7 @@ export class RemediationsImpl implements Remediations {
 
   /**
    * Gets all deployments for a remediation at resource group scope.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param remediationName The name of the remediation.
    * @param options The options parameters.
    */
@@ -787,7 +787,7 @@ export class RemediationsImpl implements Remediations {
 
   /**
    * Cancels a remediation at resource group scope.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param remediationName The name of the remediation.
    * @param options The options parameters.
    */
@@ -804,7 +804,7 @@ export class RemediationsImpl implements Remediations {
 
   /**
    * Gets all remediations for the subscription.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param options The options parameters.
    */
   private _listForResourceGroup(
@@ -819,7 +819,7 @@ export class RemediationsImpl implements Remediations {
 
   /**
    * Creates or updates a remediation at resource group scope.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param remediationName The name of the remediation.
    * @param parameters The remediation parameters.
    * @param options The options parameters.
@@ -838,7 +838,7 @@ export class RemediationsImpl implements Remediations {
 
   /**
    * Gets an existing remediation at resource group scope.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param remediationName The name of the remediation.
    * @param options The options parameters.
    */
@@ -855,7 +855,7 @@ export class RemediationsImpl implements Remediations {
 
   /**
    * Deletes an existing remediation at resource group scope.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param remediationName The name of the remediation.
    * @param options The options parameters.
    */
@@ -1044,7 +1044,7 @@ export class RemediationsImpl implements Remediations {
 
   /**
    * ListDeploymentsAtResourceGroupNext
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param remediationName The name of the remediation.
    * @param nextLink The nextLink from the previous successful call to the ListDeploymentsAtResourceGroup
    *                 method.
@@ -1064,7 +1064,7 @@ export class RemediationsImpl implements Remediations {
 
   /**
    * ListForResourceGroupNext
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param nextLink The nextLink from the previous successful call to the ListForResourceGroup method.
    * @param options The options parameters.
    */

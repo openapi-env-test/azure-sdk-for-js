@@ -161,17 +161,14 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param options The options parameters.
    */
   public listQueryResultsForSubscription(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     options?: PolicyStatesListQueryResultsForSubscriptionOptionalParams
   ): PagedAsyncIterableIterator<PolicyState> {
     const iter = this.listQueryResultsForSubscriptionPagingAll(
       policyStatesResource,
-      subscriptionId,
       options
     );
     return {
@@ -184,7 +181,6 @@ export class PolicyStatesImpl implements PolicyStates {
       byPage: () => {
         return this.listQueryResultsForSubscriptionPagingPage(
           policyStatesResource,
-          subscriptionId,
           options
         );
       }
@@ -193,12 +189,10 @@ export class PolicyStatesImpl implements PolicyStates {
 
   private async *listQueryResultsForSubscriptionPagingPage(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     options?: PolicyStatesListQueryResultsForSubscriptionOptionalParams
   ): AsyncIterableIterator<PolicyState[]> {
     let result = await this._listQueryResultsForSubscription(
       policyStatesResource,
-      subscriptionId,
       options
     );
     yield result.value || [];
@@ -206,7 +200,6 @@ export class PolicyStatesImpl implements PolicyStates {
     while (continuationToken) {
       result = await this._listQueryResultsForSubscriptionNext(
         policyStatesResource,
-        subscriptionId,
         continuationToken,
         options
       );
@@ -217,12 +210,10 @@ export class PolicyStatesImpl implements PolicyStates {
 
   private async *listQueryResultsForSubscriptionPagingAll(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     options?: PolicyStatesListQueryResultsForSubscriptionOptionalParams
   ): AsyncIterableIterator<PolicyState> {
     for await (const page of this.listQueryResultsForSubscriptionPagingPage(
       policyStatesResource,
-      subscriptionId,
       options
     )) {
       yield* page;
@@ -234,19 +225,16 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param options The options parameters.
    */
   public listQueryResultsForResourceGroup(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     resourceGroupName: string,
     options?: PolicyStatesListQueryResultsForResourceGroupOptionalParams
   ): PagedAsyncIterableIterator<PolicyState> {
     const iter = this.listQueryResultsForResourceGroupPagingAll(
       policyStatesResource,
-      subscriptionId,
       resourceGroupName,
       options
     );
@@ -260,7 +248,6 @@ export class PolicyStatesImpl implements PolicyStates {
       byPage: () => {
         return this.listQueryResultsForResourceGroupPagingPage(
           policyStatesResource,
-          subscriptionId,
           resourceGroupName,
           options
         );
@@ -270,13 +257,11 @@ export class PolicyStatesImpl implements PolicyStates {
 
   private async *listQueryResultsForResourceGroupPagingPage(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     resourceGroupName: string,
     options?: PolicyStatesListQueryResultsForResourceGroupOptionalParams
   ): AsyncIterableIterator<PolicyState[]> {
     let result = await this._listQueryResultsForResourceGroup(
       policyStatesResource,
-      subscriptionId,
       resourceGroupName,
       options
     );
@@ -285,7 +270,6 @@ export class PolicyStatesImpl implements PolicyStates {
     while (continuationToken) {
       result = await this._listQueryResultsForResourceGroupNext(
         policyStatesResource,
-        subscriptionId,
         resourceGroupName,
         continuationToken,
         options
@@ -297,13 +281,11 @@ export class PolicyStatesImpl implements PolicyStates {
 
   private async *listQueryResultsForResourceGroupPagingAll(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     resourceGroupName: string,
     options?: PolicyStatesListQueryResultsForResourceGroupOptionalParams
   ): AsyncIterableIterator<PolicyState> {
     for await (const page of this.listQueryResultsForResourceGroupPagingPage(
       policyStatesResource,
-      subscriptionId,
       resourceGroupName,
       options
     )) {
@@ -389,19 +371,16 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policySetDefinitionName Policy set definition name.
    * @param options The options parameters.
    */
   public listQueryResultsForPolicySetDefinition(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policySetDefinitionName: string,
     options?: PolicyStatesListQueryResultsForPolicySetDefinitionOptionalParams
   ): PagedAsyncIterableIterator<PolicyState> {
     const iter = this.listQueryResultsForPolicySetDefinitionPagingAll(
       policyStatesResource,
-      subscriptionId,
       policySetDefinitionName,
       options
     );
@@ -415,7 +394,6 @@ export class PolicyStatesImpl implements PolicyStates {
       byPage: () => {
         return this.listQueryResultsForPolicySetDefinitionPagingPage(
           policyStatesResource,
-          subscriptionId,
           policySetDefinitionName,
           options
         );
@@ -425,13 +403,11 @@ export class PolicyStatesImpl implements PolicyStates {
 
   private async *listQueryResultsForPolicySetDefinitionPagingPage(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policySetDefinitionName: string,
     options?: PolicyStatesListQueryResultsForPolicySetDefinitionOptionalParams
   ): AsyncIterableIterator<PolicyState[]> {
     let result = await this._listQueryResultsForPolicySetDefinition(
       policyStatesResource,
-      subscriptionId,
       policySetDefinitionName,
       options
     );
@@ -440,7 +416,6 @@ export class PolicyStatesImpl implements PolicyStates {
     while (continuationToken) {
       result = await this._listQueryResultsForPolicySetDefinitionNext(
         policyStatesResource,
-        subscriptionId,
         policySetDefinitionName,
         continuationToken,
         options
@@ -452,13 +427,11 @@ export class PolicyStatesImpl implements PolicyStates {
 
   private async *listQueryResultsForPolicySetDefinitionPagingAll(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policySetDefinitionName: string,
     options?: PolicyStatesListQueryResultsForPolicySetDefinitionOptionalParams
   ): AsyncIterableIterator<PolicyState> {
     for await (const page of this.listQueryResultsForPolicySetDefinitionPagingPage(
       policyStatesResource,
-      subscriptionId,
       policySetDefinitionName,
       options
     )) {
@@ -471,19 +444,16 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policyDefinitionName Policy definition name.
    * @param options The options parameters.
    */
   public listQueryResultsForPolicyDefinition(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policyDefinitionName: string,
     options?: PolicyStatesListQueryResultsForPolicyDefinitionOptionalParams
   ): PagedAsyncIterableIterator<PolicyState> {
     const iter = this.listQueryResultsForPolicyDefinitionPagingAll(
       policyStatesResource,
-      subscriptionId,
       policyDefinitionName,
       options
     );
@@ -497,7 +467,6 @@ export class PolicyStatesImpl implements PolicyStates {
       byPage: () => {
         return this.listQueryResultsForPolicyDefinitionPagingPage(
           policyStatesResource,
-          subscriptionId,
           policyDefinitionName,
           options
         );
@@ -507,13 +476,11 @@ export class PolicyStatesImpl implements PolicyStates {
 
   private async *listQueryResultsForPolicyDefinitionPagingPage(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policyDefinitionName: string,
     options?: PolicyStatesListQueryResultsForPolicyDefinitionOptionalParams
   ): AsyncIterableIterator<PolicyState[]> {
     let result = await this._listQueryResultsForPolicyDefinition(
       policyStatesResource,
-      subscriptionId,
       policyDefinitionName,
       options
     );
@@ -522,7 +489,6 @@ export class PolicyStatesImpl implements PolicyStates {
     while (continuationToken) {
       result = await this._listQueryResultsForPolicyDefinitionNext(
         policyStatesResource,
-        subscriptionId,
         policyDefinitionName,
         continuationToken,
         options
@@ -534,13 +500,11 @@ export class PolicyStatesImpl implements PolicyStates {
 
   private async *listQueryResultsForPolicyDefinitionPagingAll(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policyDefinitionName: string,
     options?: PolicyStatesListQueryResultsForPolicyDefinitionOptionalParams
   ): AsyncIterableIterator<PolicyState> {
     for await (const page of this.listQueryResultsForPolicyDefinitionPagingPage(
       policyStatesResource,
-      subscriptionId,
       policyDefinitionName,
       options
     )) {
@@ -553,19 +517,16 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policyAssignmentName Policy assignment name.
    * @param options The options parameters.
    */
   public listQueryResultsForSubscriptionLevelPolicyAssignment(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policyAssignmentName: string,
     options?: PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentOptionalParams
   ): PagedAsyncIterableIterator<PolicyState> {
     const iter = this.listQueryResultsForSubscriptionLevelPolicyAssignmentPagingAll(
       policyStatesResource,
-      subscriptionId,
       policyAssignmentName,
       options
     );
@@ -579,7 +540,6 @@ export class PolicyStatesImpl implements PolicyStates {
       byPage: () => {
         return this.listQueryResultsForSubscriptionLevelPolicyAssignmentPagingPage(
           policyStatesResource,
-          subscriptionId,
           policyAssignmentName,
           options
         );
@@ -589,13 +549,11 @@ export class PolicyStatesImpl implements PolicyStates {
 
   private async *listQueryResultsForSubscriptionLevelPolicyAssignmentPagingPage(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policyAssignmentName: string,
     options?: PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentOptionalParams
   ): AsyncIterableIterator<PolicyState[]> {
     let result = await this._listQueryResultsForSubscriptionLevelPolicyAssignment(
       policyStatesResource,
-      subscriptionId,
       policyAssignmentName,
       options
     );
@@ -604,7 +562,6 @@ export class PolicyStatesImpl implements PolicyStates {
     while (continuationToken) {
       result = await this._listQueryResultsForSubscriptionLevelPolicyAssignmentNext(
         policyStatesResource,
-        subscriptionId,
         policyAssignmentName,
         continuationToken,
         options
@@ -616,13 +573,11 @@ export class PolicyStatesImpl implements PolicyStates {
 
   private async *listQueryResultsForSubscriptionLevelPolicyAssignmentPagingAll(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policyAssignmentName: string,
     options?: PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentOptionalParams
   ): AsyncIterableIterator<PolicyState> {
     for await (const page of this.listQueryResultsForSubscriptionLevelPolicyAssignmentPagingPage(
       policyStatesResource,
-      subscriptionId,
       policyAssignmentName,
       options
     )) {
@@ -635,21 +590,18 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param policyAssignmentName Policy assignment name.
    * @param options The options parameters.
    */
   public listQueryResultsForResourceGroupLevelPolicyAssignment(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     resourceGroupName: string,
     policyAssignmentName: string,
     options?: PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentOptionalParams
   ): PagedAsyncIterableIterator<PolicyState> {
     const iter = this.listQueryResultsForResourceGroupLevelPolicyAssignmentPagingAll(
       policyStatesResource,
-      subscriptionId,
       resourceGroupName,
       policyAssignmentName,
       options
@@ -664,7 +616,6 @@ export class PolicyStatesImpl implements PolicyStates {
       byPage: () => {
         return this.listQueryResultsForResourceGroupLevelPolicyAssignmentPagingPage(
           policyStatesResource,
-          subscriptionId,
           resourceGroupName,
           policyAssignmentName,
           options
@@ -675,14 +626,12 @@ export class PolicyStatesImpl implements PolicyStates {
 
   private async *listQueryResultsForResourceGroupLevelPolicyAssignmentPagingPage(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     resourceGroupName: string,
     policyAssignmentName: string,
     options?: PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentOptionalParams
   ): AsyncIterableIterator<PolicyState[]> {
     let result = await this._listQueryResultsForResourceGroupLevelPolicyAssignment(
       policyStatesResource,
-      subscriptionId,
       resourceGroupName,
       policyAssignmentName,
       options
@@ -692,7 +641,6 @@ export class PolicyStatesImpl implements PolicyStates {
     while (continuationToken) {
       result = await this._listQueryResultsForResourceGroupLevelPolicyAssignmentNext(
         policyStatesResource,
-        subscriptionId,
         resourceGroupName,
         policyAssignmentName,
         continuationToken,
@@ -705,14 +653,12 @@ export class PolicyStatesImpl implements PolicyStates {
 
   private async *listQueryResultsForResourceGroupLevelPolicyAssignmentPagingAll(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     resourceGroupName: string,
     policyAssignmentName: string,
     options?: PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentOptionalParams
   ): AsyncIterableIterator<PolicyState> {
     for await (const page of this.listQueryResultsForResourceGroupLevelPolicyAssignmentPagingPage(
       policyStatesResource,
-      subscriptionId,
       resourceGroupName,
       policyAssignmentName,
       options
@@ -764,16 +710,14 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param options The options parameters.
    */
   private _listQueryResultsForSubscription(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     options?: PolicyStatesListQueryResultsForSubscriptionOptionalParams
   ): Promise<PolicyStatesListQueryResultsForSubscriptionResponse> {
     return this.client.sendOperationRequest(
-      { policyStatesResource, subscriptionId, options },
+      { policyStatesResource, options },
       listQueryResultsForSubscriptionOperationSpec
     );
   }
@@ -783,16 +727,14 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for
    *                                    summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
    *                                    only allowed value.
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param options The options parameters.
    */
   summarizeForSubscription(
     policyStatesSummaryResource: PolicyStatesSummaryResourceType,
-    subscriptionId: string,
     options?: PolicyStatesSummarizeForSubscriptionOptionalParams
   ): Promise<PolicyStatesSummarizeForSubscriptionResponse> {
     return this.client.sendOperationRequest(
-      { policyStatesSummaryResource, subscriptionId, options },
+      { policyStatesSummaryResource, options },
       summarizeForSubscriptionOperationSpec
     );
   }
@@ -802,18 +744,16 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param options The options parameters.
    */
   private _listQueryResultsForResourceGroup(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     resourceGroupName: string,
     options?: PolicyStatesListQueryResultsForResourceGroupOptionalParams
   ): Promise<PolicyStatesListQueryResultsForResourceGroupResponse> {
     return this.client.sendOperationRequest(
-      { policyStatesResource, subscriptionId, resourceGroupName, options },
+      { policyStatesResource, resourceGroupName, options },
       listQueryResultsForResourceGroupOperationSpec
     );
   }
@@ -823,23 +763,16 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for
    *                                    summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
    *                                    only allowed value.
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param options The options parameters.
    */
   summarizeForResourceGroup(
     policyStatesSummaryResource: PolicyStatesSummaryResourceType,
-    subscriptionId: string,
     resourceGroupName: string,
     options?: PolicyStatesSummarizeForResourceGroupOptionalParams
   ): Promise<PolicyStatesSummarizeForResourceGroupResponse> {
     return this.client.sendOperationRequest(
-      {
-        policyStatesSummaryResource,
-        subscriptionId,
-        resourceGroupName,
-        options
-      },
+      { policyStatesSummaryResource, resourceGroupName, options },
       summarizeForResourceGroupOperationSpec
     );
   }
@@ -884,11 +817,9 @@ export class PolicyStatesImpl implements PolicyStates {
 
   /**
    * Triggers a policy evaluation scan for all the resources under the subscription
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param options The options parameters.
    */
   async beginTriggerSubscriptionEvaluation(
-    subscriptionId: string,
     options?: PolicyStatesTriggerSubscriptionEvaluationOptionalParams
   ): Promise<PollerLike<PollOperationState<void>, void>> {
     const directSendOperation = async (
@@ -932,7 +863,7 @@ export class PolicyStatesImpl implements PolicyStates {
 
     const lro = new LroImpl(
       sendOperation,
-      { subscriptionId, options },
+      { options },
       triggerSubscriptionEvaluationOperationSpec
     );
     const poller = new LroEngine(lro, {
@@ -946,28 +877,21 @@ export class PolicyStatesImpl implements PolicyStates {
 
   /**
    * Triggers a policy evaluation scan for all the resources under the subscription
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param options The options parameters.
    */
   async beginTriggerSubscriptionEvaluationAndWait(
-    subscriptionId: string,
     options?: PolicyStatesTriggerSubscriptionEvaluationOptionalParams
   ): Promise<void> {
-    const poller = await this.beginTriggerSubscriptionEvaluation(
-      subscriptionId,
-      options
-    );
+    const poller = await this.beginTriggerSubscriptionEvaluation(options);
     return poller.pollUntilDone();
   }
 
   /**
    * Triggers a policy evaluation scan for all the resources under the resource group.
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param options The options parameters.
    */
   async beginTriggerResourceGroupEvaluation(
-    subscriptionId: string,
     resourceGroupName: string,
     options?: PolicyStatesTriggerResourceGroupEvaluationOptionalParams
   ): Promise<PollerLike<PollOperationState<void>, void>> {
@@ -1012,7 +936,7 @@ export class PolicyStatesImpl implements PolicyStates {
 
     const lro = new LroImpl(
       sendOperation,
-      { subscriptionId, resourceGroupName, options },
+      { resourceGroupName, options },
       triggerResourceGroupEvaluationOperationSpec
     );
     const poller = new LroEngine(lro, {
@@ -1026,17 +950,14 @@ export class PolicyStatesImpl implements PolicyStates {
 
   /**
    * Triggers a policy evaluation scan for all the resources under the resource group.
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param options The options parameters.
    */
   async beginTriggerResourceGroupEvaluationAndWait(
-    subscriptionId: string,
     resourceGroupName: string,
     options?: PolicyStatesTriggerResourceGroupEvaluationOptionalParams
   ): Promise<void> {
     const poller = await this.beginTriggerResourceGroupEvaluation(
-      subscriptionId,
       resourceGroupName,
       options
     );
@@ -1048,23 +969,16 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policySetDefinitionName Policy set definition name.
    * @param options The options parameters.
    */
   private _listQueryResultsForPolicySetDefinition(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policySetDefinitionName: string,
     options?: PolicyStatesListQueryResultsForPolicySetDefinitionOptionalParams
   ): Promise<PolicyStatesListQueryResultsForPolicySetDefinitionResponse> {
     return this.client.sendOperationRequest(
-      {
-        policyStatesResource,
-        subscriptionId,
-        policySetDefinitionName,
-        options
-      },
+      { policyStatesResource, policySetDefinitionName, options },
       listQueryResultsForPolicySetDefinitionOperationSpec
     );
   }
@@ -1074,23 +988,16 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for
    *                                    summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
    *                                    only allowed value.
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policySetDefinitionName Policy set definition name.
    * @param options The options parameters.
    */
   summarizeForPolicySetDefinition(
     policyStatesSummaryResource: PolicyStatesSummaryResourceType,
-    subscriptionId: string,
     policySetDefinitionName: string,
     options?: PolicyStatesSummarizeForPolicySetDefinitionOptionalParams
   ): Promise<PolicyStatesSummarizeForPolicySetDefinitionResponse> {
     return this.client.sendOperationRequest(
-      {
-        policyStatesSummaryResource,
-        subscriptionId,
-        policySetDefinitionName,
-        options
-      },
+      { policyStatesSummaryResource, policySetDefinitionName, options },
       summarizeForPolicySetDefinitionOperationSpec
     );
   }
@@ -1100,18 +1007,16 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policyDefinitionName Policy definition name.
    * @param options The options parameters.
    */
   private _listQueryResultsForPolicyDefinition(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policyDefinitionName: string,
     options?: PolicyStatesListQueryResultsForPolicyDefinitionOptionalParams
   ): Promise<PolicyStatesListQueryResultsForPolicyDefinitionResponse> {
     return this.client.sendOperationRequest(
-      { policyStatesResource, subscriptionId, policyDefinitionName, options },
+      { policyStatesResource, policyDefinitionName, options },
       listQueryResultsForPolicyDefinitionOperationSpec
     );
   }
@@ -1121,23 +1026,16 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for
    *                                    summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
    *                                    only allowed value.
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policyDefinitionName Policy definition name.
    * @param options The options parameters.
    */
   summarizeForPolicyDefinition(
     policyStatesSummaryResource: PolicyStatesSummaryResourceType,
-    subscriptionId: string,
     policyDefinitionName: string,
     options?: PolicyStatesSummarizeForPolicyDefinitionOptionalParams
   ): Promise<PolicyStatesSummarizeForPolicyDefinitionResponse> {
     return this.client.sendOperationRequest(
-      {
-        policyStatesSummaryResource,
-        subscriptionId,
-        policyDefinitionName,
-        options
-      },
+      { policyStatesSummaryResource, policyDefinitionName, options },
       summarizeForPolicyDefinitionOperationSpec
     );
   }
@@ -1147,20 +1045,18 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policyAssignmentName Policy assignment name.
    * @param options The options parameters.
    */
   private _listQueryResultsForSubscriptionLevelPolicyAssignment(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policyAssignmentName: string,
     options?: PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentOptionalParams
   ): Promise<
     PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentResponse
   > {
     return this.client.sendOperationRequest(
-      { policyStatesResource, subscriptionId, policyAssignmentName, options },
+      { policyStatesResource, policyAssignmentName, options },
       listQueryResultsForSubscriptionLevelPolicyAssignmentOperationSpec
     );
   }
@@ -1170,25 +1066,18 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for
    *                                    summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
    *                                    only allowed value.
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policyAssignmentName Policy assignment name.
    * @param options The options parameters.
    */
   summarizeForSubscriptionLevelPolicyAssignment(
     policyStatesSummaryResource: PolicyStatesSummaryResourceType,
-    subscriptionId: string,
     policyAssignmentName: string,
     options?: PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentOptionalParams
   ): Promise<
     PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentResponse
   > {
     return this.client.sendOperationRequest(
-      {
-        policyStatesSummaryResource,
-        subscriptionId,
-        policyAssignmentName,
-        options
-      },
+      { policyStatesSummaryResource, policyAssignmentName, options },
       summarizeForSubscriptionLevelPolicyAssignmentOperationSpec
     );
   }
@@ -1198,14 +1087,12 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param policyAssignmentName Policy assignment name.
    * @param options The options parameters.
    */
   private _listQueryResultsForResourceGroupLevelPolicyAssignment(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     resourceGroupName: string,
     policyAssignmentName: string,
     options?: PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentOptionalParams
@@ -1215,7 +1102,6 @@ export class PolicyStatesImpl implements PolicyStates {
     return this.client.sendOperationRequest(
       {
         policyStatesResource,
-        subscriptionId,
         resourceGroupName,
         policyAssignmentName,
         options
@@ -1229,14 +1115,12 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for
    *                                    summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
    *                                    only allowed value.
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param policyAssignmentName Policy assignment name.
    * @param options The options parameters.
    */
   summarizeForResourceGroupLevelPolicyAssignment(
     policyStatesSummaryResource: PolicyStatesSummaryResourceType,
-    subscriptionId: string,
     resourceGroupName: string,
     policyAssignmentName: string,
     options?: PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentOptionalParams
@@ -1246,7 +1130,6 @@ export class PolicyStatesImpl implements PolicyStates {
     return this.client.sendOperationRequest(
       {
         policyStatesSummaryResource,
-        subscriptionId,
         resourceGroupName,
         policyAssignmentName,
         options
@@ -1282,19 +1165,17 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param nextLink The nextLink from the previous successful call to the
    *                 ListQueryResultsForSubscription method.
    * @param options The options parameters.
    */
   private _listQueryResultsForSubscriptionNext(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     nextLink: string,
     options?: PolicyStatesListQueryResultsForSubscriptionNextOptionalParams
   ): Promise<PolicyStatesListQueryResultsForSubscriptionNextResponse> {
     return this.client.sendOperationRequest(
-      { policyStatesResource, subscriptionId, nextLink, options },
+      { policyStatesResource, nextLink, options },
       listQueryResultsForSubscriptionNextOperationSpec
     );
   }
@@ -1304,27 +1185,19 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param nextLink The nextLink from the previous successful call to the
    *                 ListQueryResultsForResourceGroup method.
    * @param options The options parameters.
    */
   private _listQueryResultsForResourceGroupNext(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     resourceGroupName: string,
     nextLink: string,
     options?: PolicyStatesListQueryResultsForResourceGroupNextOptionalParams
   ): Promise<PolicyStatesListQueryResultsForResourceGroupNextResponse> {
     return this.client.sendOperationRequest(
-      {
-        policyStatesResource,
-        subscriptionId,
-        resourceGroupName,
-        nextLink,
-        options
-      },
+      { policyStatesResource, resourceGroupName, nextLink, options },
       listQueryResultsForResourceGroupNextOperationSpec
     );
   }
@@ -1356,7 +1229,6 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policySetDefinitionName Policy set definition name.
    * @param nextLink The nextLink from the previous successful call to the
    *                 ListQueryResultsForPolicySetDefinition method.
@@ -1364,19 +1236,12 @@ export class PolicyStatesImpl implements PolicyStates {
    */
   private _listQueryResultsForPolicySetDefinitionNext(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policySetDefinitionName: string,
     nextLink: string,
     options?: PolicyStatesListQueryResultsForPolicySetDefinitionNextOptionalParams
   ): Promise<PolicyStatesListQueryResultsForPolicySetDefinitionNextResponse> {
     return this.client.sendOperationRequest(
-      {
-        policyStatesResource,
-        subscriptionId,
-        policySetDefinitionName,
-        nextLink,
-        options
-      },
+      { policyStatesResource, policySetDefinitionName, nextLink, options },
       listQueryResultsForPolicySetDefinitionNextOperationSpec
     );
   }
@@ -1386,7 +1251,6 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policyDefinitionName Policy definition name.
    * @param nextLink The nextLink from the previous successful call to the
    *                 ListQueryResultsForPolicyDefinition method.
@@ -1394,19 +1258,12 @@ export class PolicyStatesImpl implements PolicyStates {
    */
   private _listQueryResultsForPolicyDefinitionNext(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policyDefinitionName: string,
     nextLink: string,
     options?: PolicyStatesListQueryResultsForPolicyDefinitionNextOptionalParams
   ): Promise<PolicyStatesListQueryResultsForPolicyDefinitionNextResponse> {
     return this.client.sendOperationRequest(
-      {
-        policyStatesResource,
-        subscriptionId,
-        policyDefinitionName,
-        nextLink,
-        options
-      },
+      { policyStatesResource, policyDefinitionName, nextLink, options },
       listQueryResultsForPolicyDefinitionNextOperationSpec
     );
   }
@@ -1416,7 +1273,6 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policyAssignmentName Policy assignment name.
    * @param nextLink The nextLink from the previous successful call to the
    *                 ListQueryResultsForSubscriptionLevelPolicyAssignment method.
@@ -1424,7 +1280,6 @@ export class PolicyStatesImpl implements PolicyStates {
    */
   private _listQueryResultsForSubscriptionLevelPolicyAssignmentNext(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policyAssignmentName: string,
     nextLink: string,
     options?: PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentNextOptionalParams
@@ -1432,13 +1287,7 @@ export class PolicyStatesImpl implements PolicyStates {
     PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentNextResponse
   > {
     return this.client.sendOperationRequest(
-      {
-        policyStatesResource,
-        subscriptionId,
-        policyAssignmentName,
-        nextLink,
-        options
-      },
+      { policyStatesResource, policyAssignmentName, nextLink, options },
       listQueryResultsForSubscriptionLevelPolicyAssignmentNextOperationSpec
     );
   }
@@ -1448,8 +1297,7 @@ export class PolicyStatesImpl implements PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param policyAssignmentName Policy assignment name.
    * @param nextLink The nextLink from the previous successful call to the
    *                 ListQueryResultsForResourceGroupLevelPolicyAssignment method.
@@ -1457,7 +1305,6 @@ export class PolicyStatesImpl implements PolicyStates {
    */
   private _listQueryResultsForResourceGroupLevelPolicyAssignmentNext(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     resourceGroupName: string,
     policyAssignmentName: string,
     nextLink: string,
@@ -1468,7 +1315,6 @@ export class PolicyStatesImpl implements PolicyStates {
     return this.client.sendOperationRequest(
       {
         policyStatesResource,
-        subscriptionId,
         resourceGroupName,
         policyAssignmentName,
         nextLink,
@@ -1566,7 +1412,7 @@ const listQueryResultsForSubscriptionOperationSpec: coreClient.OperationSpec = {
   ],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId1,
+    Parameters.subscriptionId,
     Parameters.policyStatesResource
   ],
   headerParameters: [Parameters.accept],
@@ -1593,7 +1439,7 @@ const summarizeForSubscriptionOperationSpec: coreClient.OperationSpec = {
   ],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId1,
+    Parameters.subscriptionId,
     Parameters.policyStatesSummaryResource
   ],
   headerParameters: [Parameters.accept],
@@ -1624,8 +1470,8 @@ const listQueryResultsForResourceGroupOperationSpec: coreClient.OperationSpec = 
   ],
   urlParameters: [
     Parameters.$host,
+    Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.subscriptionId1,
     Parameters.policyStatesResource
   ],
   headerParameters: [Parameters.accept],
@@ -1652,8 +1498,8 @@ const summarizeForResourceGroupOperationSpec: coreClient.OperationSpec = {
   ],
   urlParameters: [
     Parameters.$host,
+    Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.subscriptionId1,
     Parameters.policyStatesSummaryResource
   ],
   headerParameters: [Parameters.accept],
@@ -1732,7 +1578,7 @@ const triggerSubscriptionEvaluationOperationSpec: coreClient.OperationSpec = {
     }
   },
   queryParameters: [Parameters.apiVersion2],
-  urlParameters: [Parameters.$host, Parameters.subscriptionId1],
+  urlParameters: [Parameters.$host, Parameters.subscriptionId],
   headerParameters: [Parameters.accept],
   serializer
 };
@@ -1752,8 +1598,8 @@ const triggerResourceGroupEvaluationOperationSpec: coreClient.OperationSpec = {
   queryParameters: [Parameters.apiVersion2],
   urlParameters: [
     Parameters.$host,
-    Parameters.resourceGroupName,
-    Parameters.subscriptionId1
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName
   ],
   headerParameters: [Parameters.accept],
   serializer
@@ -1783,7 +1629,7 @@ const listQueryResultsForPolicySetDefinitionOperationSpec: coreClient.OperationS
   ],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId1,
+    Parameters.subscriptionId,
     Parameters.authorizationNamespace,
     Parameters.policySetDefinitionName,
     Parameters.policyStatesResource
@@ -1812,7 +1658,7 @@ const summarizeForPolicySetDefinitionOperationSpec: coreClient.OperationSpec = {
   ],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId1,
+    Parameters.subscriptionId,
     Parameters.authorizationNamespace,
     Parameters.policySetDefinitionName,
     Parameters.policyStatesSummaryResource
@@ -1845,7 +1691,7 @@ const listQueryResultsForPolicyDefinitionOperationSpec: coreClient.OperationSpec
   ],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId1,
+    Parameters.subscriptionId,
     Parameters.authorizationNamespace,
     Parameters.policyDefinitionName,
     Parameters.policyStatesResource
@@ -1874,7 +1720,7 @@ const summarizeForPolicyDefinitionOperationSpec: coreClient.OperationSpec = {
   ],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId1,
+    Parameters.subscriptionId,
     Parameters.authorizationNamespace,
     Parameters.policyDefinitionName,
     Parameters.policyStatesSummaryResource
@@ -1907,7 +1753,7 @@ const listQueryResultsForSubscriptionLevelPolicyAssignmentOperationSpec: coreCli
   ],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId1,
+    Parameters.subscriptionId,
     Parameters.authorizationNamespace,
     Parameters.policyAssignmentName,
     Parameters.policyStatesResource
@@ -1936,7 +1782,7 @@ const summarizeForSubscriptionLevelPolicyAssignmentOperationSpec: coreClient.Ope
   ],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId1,
+    Parameters.subscriptionId,
     Parameters.authorizationNamespace,
     Parameters.policyAssignmentName,
     Parameters.policyStatesSummaryResource
@@ -1969,8 +1815,8 @@ const listQueryResultsForResourceGroupLevelPolicyAssignmentOperationSpec: coreCl
   ],
   urlParameters: [
     Parameters.$host,
+    Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.subscriptionId1,
     Parameters.authorizationNamespace,
     Parameters.policyAssignmentName,
     Parameters.policyStatesResource
@@ -1999,8 +1845,8 @@ const summarizeForResourceGroupLevelPolicyAssignmentOperationSpec: coreClient.Op
   ],
   urlParameters: [
     Parameters.$host,
+    Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.subscriptionId1,
     Parameters.authorizationNamespace,
     Parameters.policyAssignmentName,
     Parameters.policyStatesSummaryResource
@@ -2064,8 +1910,8 @@ const listQueryResultsForSubscriptionNextOperationSpec: coreClient.OperationSpec
   ],
   urlParameters: [
     Parameters.$host,
+    Parameters.subscriptionId,
     Parameters.nextLink,
-    Parameters.subscriptionId1,
     Parameters.policyStatesResource
   ],
   headerParameters: [Parameters.accept],
@@ -2095,9 +1941,9 @@ const listQueryResultsForResourceGroupNextOperationSpec: coreClient.OperationSpe
   ],
   urlParameters: [
     Parameters.$host,
+    Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.nextLink,
-    Parameters.subscriptionId1,
     Parameters.policyStatesResource
   ],
   headerParameters: [Parameters.accept],
@@ -2159,8 +2005,8 @@ const listQueryResultsForPolicySetDefinitionNextOperationSpec: coreClient.Operat
   ],
   urlParameters: [
     Parameters.$host,
+    Parameters.subscriptionId,
     Parameters.nextLink,
-    Parameters.subscriptionId1,
     Parameters.authorizationNamespace,
     Parameters.policySetDefinitionName,
     Parameters.policyStatesResource
@@ -2192,8 +2038,8 @@ const listQueryResultsForPolicyDefinitionNextOperationSpec: coreClient.Operation
   ],
   urlParameters: [
     Parameters.$host,
+    Parameters.subscriptionId,
     Parameters.nextLink,
-    Parameters.subscriptionId1,
     Parameters.authorizationNamespace,
     Parameters.policyDefinitionName,
     Parameters.policyStatesResource
@@ -2225,8 +2071,8 @@ const listQueryResultsForSubscriptionLevelPolicyAssignmentNextOperationSpec: cor
   ],
   urlParameters: [
     Parameters.$host,
+    Parameters.subscriptionId,
     Parameters.nextLink,
-    Parameters.subscriptionId1,
     Parameters.authorizationNamespace,
     Parameters.policyAssignmentName,
     Parameters.policyStatesResource
@@ -2258,9 +2104,9 @@ const listQueryResultsForResourceGroupLevelPolicyAssignmentNextOperationSpec: co
   ],
   urlParameters: [
     Parameters.$host,
+    Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.nextLink,
-    Parameters.subscriptionId1,
     Parameters.authorizationNamespace,
     Parameters.policyAssignmentName,
     Parameters.policyStatesResource

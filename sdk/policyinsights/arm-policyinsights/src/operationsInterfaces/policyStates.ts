@@ -61,12 +61,10 @@ export interface PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param options The options parameters.
    */
   listQueryResultsForSubscription(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     options?: PolicyStatesListQueryResultsForSubscriptionOptionalParams
   ): PagedAsyncIterableIterator<PolicyState>;
   /**
@@ -74,13 +72,11 @@ export interface PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param options The options parameters.
    */
   listQueryResultsForResourceGroup(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     resourceGroupName: string,
     options?: PolicyStatesListQueryResultsForResourceGroupOptionalParams
   ): PagedAsyncIterableIterator<PolicyState>;
@@ -102,13 +98,11 @@ export interface PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policySetDefinitionName Policy set definition name.
    * @param options The options parameters.
    */
   listQueryResultsForPolicySetDefinition(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policySetDefinitionName: string,
     options?: PolicyStatesListQueryResultsForPolicySetDefinitionOptionalParams
   ): PagedAsyncIterableIterator<PolicyState>;
@@ -117,13 +111,11 @@ export interface PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policyDefinitionName Policy definition name.
    * @param options The options parameters.
    */
   listQueryResultsForPolicyDefinition(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policyDefinitionName: string,
     options?: PolicyStatesListQueryResultsForPolicyDefinitionOptionalParams
   ): PagedAsyncIterableIterator<PolicyState>;
@@ -132,13 +124,11 @@ export interface PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policyAssignmentName Policy assignment name.
    * @param options The options parameters.
    */
   listQueryResultsForSubscriptionLevelPolicyAssignment(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     policyAssignmentName: string,
     options?: PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentOptionalParams
   ): PagedAsyncIterableIterator<PolicyState>;
@@ -147,14 +137,12 @@ export interface PolicyStates {
    * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time
    *                             range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy
    *                             state(s).
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param policyAssignmentName Policy assignment name.
    * @param options The options parameters.
    */
   listQueryResultsForResourceGroupLevelPolicyAssignment(
     policyStatesResource: PolicyStatesResource,
-    subscriptionId: string,
     resourceGroupName: string,
     policyAssignmentName: string,
     options?: PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentOptionalParams
@@ -177,12 +165,10 @@ export interface PolicyStates {
    * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for
    *                                    summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
    *                                    only allowed value.
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param options The options parameters.
    */
   summarizeForSubscription(
     policyStatesSummaryResource: PolicyStatesSummaryResourceType,
-    subscriptionId: string,
     options?: PolicyStatesSummarizeForSubscriptionOptionalParams
   ): Promise<PolicyStatesSummarizeForSubscriptionResponse>;
   /**
@@ -190,13 +176,11 @@ export interface PolicyStates {
    * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for
    *                                    summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
    *                                    only allowed value.
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param options The options parameters.
    */
   summarizeForResourceGroup(
     policyStatesSummaryResource: PolicyStatesSummaryResourceType,
-    subscriptionId: string,
     resourceGroupName: string,
     options?: PolicyStatesSummarizeForResourceGroupOptionalParams
   ): Promise<PolicyStatesSummarizeForResourceGroupResponse>;
@@ -215,41 +199,33 @@ export interface PolicyStates {
   ): Promise<PolicyStatesSummarizeForResourceResponse>;
   /**
    * Triggers a policy evaluation scan for all the resources under the subscription
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param options The options parameters.
    */
   beginTriggerSubscriptionEvaluation(
-    subscriptionId: string,
     options?: PolicyStatesTriggerSubscriptionEvaluationOptionalParams
   ): Promise<PollerLike<PollOperationState<void>, void>>;
   /**
    * Triggers a policy evaluation scan for all the resources under the subscription
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param options The options parameters.
    */
   beginTriggerSubscriptionEvaluationAndWait(
-    subscriptionId: string,
     options?: PolicyStatesTriggerSubscriptionEvaluationOptionalParams
   ): Promise<void>;
   /**
    * Triggers a policy evaluation scan for all the resources under the resource group.
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param options The options parameters.
    */
   beginTriggerResourceGroupEvaluation(
-    subscriptionId: string,
     resourceGroupName: string,
     options?: PolicyStatesTriggerResourceGroupEvaluationOptionalParams
   ): Promise<PollerLike<PollOperationState<void>, void>>;
   /**
    * Triggers a policy evaluation scan for all the resources under the resource group.
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param options The options parameters.
    */
   beginTriggerResourceGroupEvaluationAndWait(
-    subscriptionId: string,
     resourceGroupName: string,
     options?: PolicyStatesTriggerResourceGroupEvaluationOptionalParams
   ): Promise<void>;
@@ -258,13 +234,11 @@ export interface PolicyStates {
    * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for
    *                                    summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
    *                                    only allowed value.
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policySetDefinitionName Policy set definition name.
    * @param options The options parameters.
    */
   summarizeForPolicySetDefinition(
     policyStatesSummaryResource: PolicyStatesSummaryResourceType,
-    subscriptionId: string,
     policySetDefinitionName: string,
     options?: PolicyStatesSummarizeForPolicySetDefinitionOptionalParams
   ): Promise<PolicyStatesSummarizeForPolicySetDefinitionResponse>;
@@ -273,13 +247,11 @@ export interface PolicyStates {
    * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for
    *                                    summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
    *                                    only allowed value.
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policyDefinitionName Policy definition name.
    * @param options The options parameters.
    */
   summarizeForPolicyDefinition(
     policyStatesSummaryResource: PolicyStatesSummaryResourceType,
-    subscriptionId: string,
     policyDefinitionName: string,
     options?: PolicyStatesSummarizeForPolicyDefinitionOptionalParams
   ): Promise<PolicyStatesSummarizeForPolicyDefinitionResponse>;
@@ -288,13 +260,11 @@ export interface PolicyStates {
    * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for
    *                                    summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
    *                                    only allowed value.
-   * @param subscriptionId Microsoft Azure subscription ID.
    * @param policyAssignmentName Policy assignment name.
    * @param options The options parameters.
    */
   summarizeForSubscriptionLevelPolicyAssignment(
     policyStatesSummaryResource: PolicyStatesSummaryResourceType,
-    subscriptionId: string,
     policyAssignmentName: string,
     options?: PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentOptionalParams
   ): Promise<PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentResponse>;
@@ -303,14 +273,12 @@ export interface PolicyStates {
    * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for
    *                                    summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
    *                                    only allowed value.
-   * @param subscriptionId Microsoft Azure subscription ID.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param policyAssignmentName Policy assignment name.
    * @param options The options parameters.
    */
   summarizeForResourceGroupLevelPolicyAssignment(
     policyStatesSummaryResource: PolicyStatesSummaryResourceType,
-    subscriptionId: string,
     resourceGroupName: string,
     policyAssignmentName: string,
     options?: PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentOptionalParams

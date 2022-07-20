@@ -1,16 +1,6 @@
 # Release History
-
-## 6.0.0-beta.2 (Unreleased)
-
-### Features Added
-
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
-## 6.0.0-beta.1 (2022-03-31)
+    
+## 6.0.0-beta.2 (2022-07-20)
     
 **Features**
 
@@ -35,6 +25,16 @@
   - Operation PolicyEvents.listQueryResultsForResourceGroupLevelPolicyAssignment has a new signature
   - Operation PolicyEvents.listQueryResultsForSubscription has a new signature
   - Operation PolicyEvents.listQueryResultsForSubscriptionLevelPolicyAssignment has a new signature
+  - Operation PolicyStates.beginTriggerResourceGroupEvaluation has a new signature
+  - Operation PolicyStates.beginTriggerResourceGroupEvaluationAndWait has a new signature
+  - Operation PolicyStates.beginTriggerSubscriptionEvaluation has a new signature
+  - Operation PolicyStates.beginTriggerSubscriptionEvaluationAndWait has a new signature
+  - Operation PolicyStates.listQueryResultsForPolicyDefinition has a new signature
+  - Operation PolicyStates.listQueryResultsForPolicySetDefinition has a new signature
+  - Operation PolicyStates.listQueryResultsForResourceGroup has a new signature
+  - Operation PolicyStates.listQueryResultsForResourceGroupLevelPolicyAssignment has a new signature
+  - Operation PolicyStates.listQueryResultsForSubscription has a new signature
+  - Operation PolicyStates.listQueryResultsForSubscriptionLevelPolicyAssignment has a new signature
   - Operation PolicyStates.summarizeForManagementGroup has a new signature
   - Operation PolicyStates.summarizeForPolicyDefinition has a new signature
   - Operation PolicyStates.summarizeForPolicySetDefinition has a new signature

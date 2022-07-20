@@ -93,7 +93,7 @@ export interface Remediations {
   ): PagedAsyncIterableIterator<Remediation>;
   /**
    * Gets all deployments for a remediation at resource group scope.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param remediationName The name of the remediation.
    * @param options The options parameters.
    */
@@ -104,7 +104,7 @@ export interface Remediations {
   ): PagedAsyncIterableIterator<RemediationDeployment>;
   /**
    * Gets all remediations for the subscription.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param options The options parameters.
    */
   listForResourceGroup(
@@ -217,7 +217,7 @@ export interface Remediations {
   ): Promise<RemediationsDeleteAtSubscriptionResponse>;
   /**
    * Cancels a remediation at resource group scope.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param remediationName The name of the remediation.
    * @param options The options parameters.
    */
@@ -228,7 +228,7 @@ export interface Remediations {
   ): Promise<RemediationsCancelAtResourceGroupResponse>;
   /**
    * Creates or updates a remediation at resource group scope.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param remediationName The name of the remediation.
    * @param parameters The remediation parameters.
    * @param options The options parameters.
@@ -241,7 +241,7 @@ export interface Remediations {
   ): Promise<RemediationsCreateOrUpdateAtResourceGroupResponse>;
   /**
    * Gets an existing remediation at resource group scope.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param remediationName The name of the remediation.
    * @param options The options parameters.
    */
@@ -252,7 +252,7 @@ export interface Remediations {
   ): Promise<RemediationsGetAtResourceGroupResponse>;
   /**
    * Deletes an existing remediation at resource group scope.
-   * @param resourceGroupName Resource group name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param remediationName The name of the remediation.
    * @param options The options parameters.
    */
