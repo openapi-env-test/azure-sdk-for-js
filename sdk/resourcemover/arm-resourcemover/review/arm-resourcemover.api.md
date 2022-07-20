@@ -255,10 +255,10 @@ export interface LBFrontendIPConfigurationResourceSettings {
 }
 
 // @public
-export type LoadBalancerBackendAddressPoolReference = ProxyResourceReference & {};
+export type LoadBalancerBackendAddressPoolReference = ProxyResourceReference;
 
 // @public
-export type LoadBalancerNatRuleReference = ProxyResourceReference & {};
+export type LoadBalancerNatRuleReference = ProxyResourceReference;
 
 // @public
 export type LoadBalancerResourceSettings = ResourceSettings & {
@@ -301,7 +301,7 @@ export interface MoveCollectionProperties {
 }
 
 // @public
-export type MoveCollectionPropertiesErrors = MoveResourceError & {};
+export type MoveCollectionPropertiesErrors = MoveResourceError;
 
 // @public
 export interface MoveCollectionResultList {
@@ -541,10 +541,10 @@ export interface MoveResourceProperties {
 }
 
 // @public
-export type MoveResourcePropertiesErrors = MoveResourceError & {};
+export type MoveResourcePropertiesErrors = MoveResourceError;
 
 // @public
-export type MoveResourcePropertiesMoveStatus = MoveResourceStatus & {};
+export type MoveResourcePropertiesMoveStatus = MoveResourceStatus;
 
 // @public
 export interface MoveResources {
@@ -640,7 +640,7 @@ export interface NicIpConfigurationResourceSettings {
 }
 
 // @public
-export type NsgReference = AzureResourceReference & {};
+export type NsgReference = AzureResourceReference;
 
 // @public
 export interface NsgSecurityRule {
@@ -738,7 +738,7 @@ export type PublicIPAddressResourceSettings = ResourceSettings & {
 };
 
 // @public
-export type PublicIpReference = AzureResourceReference & {};
+export type PublicIpReference = AzureResourceReference;
 
 // @public
 export interface RequiredForResourcesCollection {
@@ -822,7 +822,7 @@ export type SqlServerResourceSettings = ResourceSettings & {
 };
 
 // @public
-export type SubnetReference = ProxyResourceReference & {};
+export type SubnetReference = ProxyResourceReference;
 
 // @public
 export interface SubnetResourceSettings {
