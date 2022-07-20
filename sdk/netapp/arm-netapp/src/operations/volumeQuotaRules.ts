@@ -7,7 +7,7 @@
  */
 
 import { PagedAsyncIterableIterator } from "@azure/core-paging";
-import { Backups } from "../operationsInterfaces";
+import { VolumeQuotaRules } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
@@ -15,29 +15,26 @@ import { NetAppManagementClient } from "../netAppManagementClient";
 import { PollerLike, PollOperationState, LroEngine } from "@azure/core-lro";
 import { LroImpl } from "../lroImpl";
 import {
-  Backup,
-  BackupsListOptionalParams,
-  BackupsGetStatusOptionalParams,
-  BackupsGetStatusResponse,
-  BackupsGetVolumeRestoreStatusOptionalParams,
-  BackupsGetVolumeRestoreStatusResponse,
-  BackupsListResponse,
-  BackupsGetOptionalParams,
-  BackupsGetResponse,
-  BackupsCreateOptionalParams,
-  BackupsCreateResponse,
-  BackupsUpdateOptionalParams,
-  BackupsUpdateResponse,
-  BackupsDeleteOptionalParams
+  VolumeQuotaRule,
+  VolumeQuotaRulesListByVolumeOptionalParams,
+  VolumeQuotaRulesListByVolumeResponse,
+  VolumeQuotaRulesGetOptionalParams,
+  VolumeQuotaRulesGetResponse,
+  VolumeQuotaRulesCreateOptionalParams,
+  VolumeQuotaRulesCreateResponse,
+  VolumeQuotaRulePatch,
+  VolumeQuotaRulesUpdateOptionalParams,
+  VolumeQuotaRulesUpdateResponse,
+  VolumeQuotaRulesDeleteOptionalParams
 } from "../models";
 
 /// <reference lib="esnext.asynciterable" />
-/** Class containing Backups operations. */
-export class BackupsImpl implements Backups {
+/** Class containing VolumeQuotaRules operations. */
+export class VolumeQuotaRulesImpl implements VolumeQuotaRules {
   private readonly client: NetAppManagementClient;
 
   /**
-   * Initialize a new instance of the class Backups class.
+   * Initialize a new instance of the class VolumeQuotaRules class.
    * @param client Reference to the service client
    */
   constructor(client: NetAppManagementClient) {
@@ -45,21 +42,21 @@ export class BackupsImpl implements Backups {
   }
 
   /**
-   * List all backups for a volume
+   * List all quota rules associated with the volume
    * @param resourceGroupName The name of the resource group.
    * @param accountName The name of the NetApp account
    * @param poolName The name of the capacity pool
    * @param volumeName The name of the volume
    * @param options The options parameters.
    */
-  public list(
+  public listByVolume(
     resourceGroupName: string,
     accountName: string,
     poolName: string,
     volumeName: string,
-    options?: BackupsListOptionalParams
-  ): PagedAsyncIterableIterator<Backup> {
-    const iter = this.listPagingAll(
+    options?: VolumeQuotaRulesListByVolumeOptionalParams
+  ): PagedAsyncIterableIterator<VolumeQuotaRule> {
+    const iter = this.listByVolumePagingAll(
       resourceGroupName,
       accountName,
       poolName,
@@ -74,7 +71,7 @@ export class BackupsImpl implements Backups {
         return this;
       },
       byPage: () => {
-        return this.listPagingPage(
+        return this.listByVolumePagingPage(
           resourceGroupName,
           accountName,
           poolName,
@@ -85,14 +82,14 @@ export class BackupsImpl implements Backups {
     };
   }
 
-  private async *listPagingPage(
+  private async *listByVolumePagingPage(
     resourceGroupName: string,
     accountName: string,
     poolName: string,
     volumeName: string,
-    options?: BackupsListOptionalParams
-  ): AsyncIterableIterator<Backup[]> {
-    let result = await this._list(
+    options?: VolumeQuotaRulesListByVolumeOptionalParams
+  ): AsyncIterableIterator<VolumeQuotaRule[]> {
+    let result = await this._listByVolume(
       resourceGroupName,
       accountName,
       poolName,
@@ -102,14 +99,14 @@ export class BackupsImpl implements Backups {
     yield result.value || [];
   }
 
-  private async *listPagingAll(
+  private async *listByVolumePagingAll(
     resourceGroupName: string,
     accountName: string,
     poolName: string,
     volumeName: string,
-    options?: BackupsListOptionalParams
-  ): AsyncIterableIterator<Backup> {
-    for await (const page of this.listPagingPage(
+    options?: VolumeQuotaRulesListByVolumeOptionalParams
+  ): AsyncIterableIterator<VolumeQuotaRule> {
+    for await (const page of this.listByVolumePagingPage(
       resourceGroupName,
       accountName,
       poolName,
@@ -121,75 +118,33 @@ export class BackupsImpl implements Backups {
   }
 
   /**
-   * Get the status of the backup for a volume
+   * List all quota rules associated with the volume
    * @param resourceGroupName The name of the resource group.
    * @param accountName The name of the NetApp account
    * @param poolName The name of the capacity pool
    * @param volumeName The name of the volume
    * @param options The options parameters.
    */
-  getStatus(
+  private _listByVolume(
     resourceGroupName: string,
     accountName: string,
     poolName: string,
     volumeName: string,
-    options?: BackupsGetStatusOptionalParams
-  ): Promise<BackupsGetStatusResponse> {
+    options?: VolumeQuotaRulesListByVolumeOptionalParams
+  ): Promise<VolumeQuotaRulesListByVolumeResponse> {
     return this.client.sendOperationRequest(
       { resourceGroupName, accountName, poolName, volumeName, options },
-      getStatusOperationSpec
+      listByVolumeOperationSpec
     );
   }
 
   /**
-   * Get the status of the restore for a volume
+   * Get details of the specified quota rule
    * @param resourceGroupName The name of the resource group.
    * @param accountName The name of the NetApp account
    * @param poolName The name of the capacity pool
    * @param volumeName The name of the volume
-   * @param options The options parameters.
-   */
-  getVolumeRestoreStatus(
-    resourceGroupName: string,
-    accountName: string,
-    poolName: string,
-    volumeName: string,
-    options?: BackupsGetVolumeRestoreStatusOptionalParams
-  ): Promise<BackupsGetVolumeRestoreStatusResponse> {
-    return this.client.sendOperationRequest(
-      { resourceGroupName, accountName, poolName, volumeName, options },
-      getVolumeRestoreStatusOperationSpec
-    );
-  }
-
-  /**
-   * List all backups for a volume
-   * @param resourceGroupName The name of the resource group.
-   * @param accountName The name of the NetApp account
-   * @param poolName The name of the capacity pool
-   * @param volumeName The name of the volume
-   * @param options The options parameters.
-   */
-  private _list(
-    resourceGroupName: string,
-    accountName: string,
-    poolName: string,
-    volumeName: string,
-    options?: BackupsListOptionalParams
-  ): Promise<BackupsListResponse> {
-    return this.client.sendOperationRequest(
-      { resourceGroupName, accountName, poolName, volumeName, options },
-      listOperationSpec
-    );
-  }
-
-  /**
-   * Gets the specified backup of the volume
-   * @param resourceGroupName The name of the resource group.
-   * @param accountName The name of the NetApp account
-   * @param poolName The name of the capacity pool
-   * @param volumeName The name of the volume
-   * @param backupName The name of the backup
+   * @param volumeQuotaRuleName The name of volume quota rule
    * @param options The options parameters.
    */
   get(
@@ -197,16 +152,16 @@ export class BackupsImpl implements Backups {
     accountName: string,
     poolName: string,
     volumeName: string,
-    backupName: string,
-    options?: BackupsGetOptionalParams
-  ): Promise<BackupsGetResponse> {
+    volumeQuotaRuleName: string,
+    options?: VolumeQuotaRulesGetOptionalParams
+  ): Promise<VolumeQuotaRulesGetResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
         accountName,
         poolName,
         volumeName,
-        backupName,
+        volumeQuotaRuleName,
         options
       },
       getOperationSpec
@@ -214,13 +169,13 @@ export class BackupsImpl implements Backups {
   }
 
   /**
-   * Create a backup for the volume
+   * Create the specified quota rule within the given volume
    * @param resourceGroupName The name of the resource group.
    * @param accountName The name of the NetApp account
    * @param poolName The name of the capacity pool
    * @param volumeName The name of the volume
-   * @param backupName The name of the backup
-   * @param body Backup object supplied in the body of the operation.
+   * @param volumeQuotaRuleName The name of volume quota rule
+   * @param body Quota rule object supplied in the body of the operation.
    * @param options The options parameters.
    */
   async beginCreate(
@@ -228,16 +183,19 @@ export class BackupsImpl implements Backups {
     accountName: string,
     poolName: string,
     volumeName: string,
-    backupName: string,
-    body: Backup,
-    options?: BackupsCreateOptionalParams
+    volumeQuotaRuleName: string,
+    body: VolumeQuotaRule,
+    options?: VolumeQuotaRulesCreateOptionalParams
   ): Promise<
-    PollerLike<PollOperationState<BackupsCreateResponse>, BackupsCreateResponse>
+    PollerLike<
+      PollOperationState<VolumeQuotaRulesCreateResponse>,
+      VolumeQuotaRulesCreateResponse
+    >
   > {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
-    ): Promise<BackupsCreateResponse> => {
+    ): Promise<VolumeQuotaRulesCreateResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
     const sendOperation = async (
@@ -280,7 +238,7 @@ export class BackupsImpl implements Backups {
         accountName,
         poolName,
         volumeName,
-        backupName,
+        volumeQuotaRuleName,
         body,
         options
       },
@@ -296,13 +254,13 @@ export class BackupsImpl implements Backups {
   }
 
   /**
-   * Create a backup for the volume
+   * Create the specified quota rule within the given volume
    * @param resourceGroupName The name of the resource group.
    * @param accountName The name of the NetApp account
    * @param poolName The name of the capacity pool
    * @param volumeName The name of the volume
-   * @param backupName The name of the backup
-   * @param body Backup object supplied in the body of the operation.
+   * @param volumeQuotaRuleName The name of volume quota rule
+   * @param body Quota rule object supplied in the body of the operation.
    * @param options The options parameters.
    */
   async beginCreateAndWait(
@@ -310,16 +268,16 @@ export class BackupsImpl implements Backups {
     accountName: string,
     poolName: string,
     volumeName: string,
-    backupName: string,
-    body: Backup,
-    options?: BackupsCreateOptionalParams
-  ): Promise<BackupsCreateResponse> {
+    volumeQuotaRuleName: string,
+    body: VolumeQuotaRule,
+    options?: VolumeQuotaRulesCreateOptionalParams
+  ): Promise<VolumeQuotaRulesCreateResponse> {
     const poller = await this.beginCreate(
       resourceGroupName,
       accountName,
       poolName,
       volumeName,
-      backupName,
+      volumeQuotaRuleName,
       body,
       options
     );
@@ -327,12 +285,13 @@ export class BackupsImpl implements Backups {
   }
 
   /**
-   * Patch a backup for the volume
+   * Patch a quota rule
    * @param resourceGroupName The name of the resource group.
    * @param accountName The name of the NetApp account
    * @param poolName The name of the capacity pool
    * @param volumeName The name of the volume
-   * @param backupName The name of the backup
+   * @param volumeQuotaRuleName The name of volume quota rule
+   * @param body Quota rule object supplied in the body of the operation.
    * @param options The options parameters.
    */
   async beginUpdate(
@@ -340,15 +299,19 @@ export class BackupsImpl implements Backups {
     accountName: string,
     poolName: string,
     volumeName: string,
-    backupName: string,
-    options?: BackupsUpdateOptionalParams
+    volumeQuotaRuleName: string,
+    body: VolumeQuotaRulePatch,
+    options?: VolumeQuotaRulesUpdateOptionalParams
   ): Promise<
-    PollerLike<PollOperationState<BackupsUpdateResponse>, BackupsUpdateResponse>
+    PollerLike<
+      PollOperationState<VolumeQuotaRulesUpdateResponse>,
+      VolumeQuotaRulesUpdateResponse
+    >
   > {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
-    ): Promise<BackupsUpdateResponse> => {
+    ): Promise<VolumeQuotaRulesUpdateResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
     const sendOperation = async (
@@ -391,7 +354,8 @@ export class BackupsImpl implements Backups {
         accountName,
         poolName,
         volumeName,
-        backupName,
+        volumeQuotaRuleName,
+        body,
         options
       },
       updateOperationSpec
@@ -406,12 +370,13 @@ export class BackupsImpl implements Backups {
   }
 
   /**
-   * Patch a backup for the volume
+   * Patch a quota rule
    * @param resourceGroupName The name of the resource group.
    * @param accountName The name of the NetApp account
    * @param poolName The name of the capacity pool
    * @param volumeName The name of the volume
-   * @param backupName The name of the backup
+   * @param volumeQuotaRuleName The name of volume quota rule
+   * @param body Quota rule object supplied in the body of the operation.
    * @param options The options parameters.
    */
   async beginUpdateAndWait(
@@ -419,27 +384,29 @@ export class BackupsImpl implements Backups {
     accountName: string,
     poolName: string,
     volumeName: string,
-    backupName: string,
-    options?: BackupsUpdateOptionalParams
-  ): Promise<BackupsUpdateResponse> {
+    volumeQuotaRuleName: string,
+    body: VolumeQuotaRulePatch,
+    options?: VolumeQuotaRulesUpdateOptionalParams
+  ): Promise<VolumeQuotaRulesUpdateResponse> {
     const poller = await this.beginUpdate(
       resourceGroupName,
       accountName,
       poolName,
       volumeName,
-      backupName,
+      volumeQuotaRuleName,
+      body,
       options
     );
     return poller.pollUntilDone();
   }
 
   /**
-   * Delete a backup of the volume
+   * Delete quota rule
    * @param resourceGroupName The name of the resource group.
    * @param accountName The name of the NetApp account
    * @param poolName The name of the capacity pool
    * @param volumeName The name of the volume
-   * @param backupName The name of the backup
+   * @param volumeQuotaRuleName The name of volume quota rule
    * @param options The options parameters.
    */
   async beginDelete(
@@ -447,8 +414,8 @@ export class BackupsImpl implements Backups {
     accountName: string,
     poolName: string,
     volumeName: string,
-    backupName: string,
-    options?: BackupsDeleteOptionalParams
+    volumeQuotaRuleName: string,
+    options?: VolumeQuotaRulesDeleteOptionalParams
   ): Promise<PollerLike<PollOperationState<void>, void>> {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
@@ -496,7 +463,7 @@ export class BackupsImpl implements Backups {
         accountName,
         poolName,
         volumeName,
-        backupName,
+        volumeQuotaRuleName,
         options
       },
       deleteOperationSpec
@@ -511,12 +478,12 @@ export class BackupsImpl implements Backups {
   }
 
   /**
-   * Delete a backup of the volume
+   * Delete quota rule
    * @param resourceGroupName The name of the resource group.
    * @param accountName The name of the NetApp account
    * @param poolName The name of the capacity pool
    * @param volumeName The name of the volume
-   * @param backupName The name of the backup
+   * @param volumeQuotaRuleName The name of volume quota rule
    * @param options The options parameters.
    */
   async beginDeleteAndWait(
@@ -524,15 +491,15 @@ export class BackupsImpl implements Backups {
     accountName: string,
     poolName: string,
     volumeName: string,
-    backupName: string,
-    options?: BackupsDeleteOptionalParams
+    volumeQuotaRuleName: string,
+    options?: VolumeQuotaRulesDeleteOptionalParams
   ): Promise<void> {
     const poller = await this.beginDelete(
       resourceGroupName,
       accountName,
       poolName,
       volumeName,
-      backupName,
+      volumeQuotaRuleName,
       options
     );
     return poller.pollUntilDone();
@@ -541,57 +508,13 @@ export class BackupsImpl implements Backups {
 // Operation Specifications
 const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getStatusOperationSpec: coreClient.OperationSpec = {
+const listByVolumeOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/backupStatus",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/volumeQuotaRules",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.BackupStatus
-    },
-    default: {}
-  },
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.accountName,
-    Parameters.poolName,
-    Parameters.volumeName
-  ],
-  headerParameters: [Parameters.accept],
-  serializer
-};
-const getVolumeRestoreStatusOperationSpec: coreClient.OperationSpec = {
-  path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/restoreStatus",
-  httpMethod: "GET",
-  responses: {
-    200: {
-      bodyMapper: Mappers.RestoreStatus
-    },
-    default: {}
-  },
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.accountName,
-    Parameters.poolName,
-    Parameters.volumeName
-  ],
-  headerParameters: [Parameters.accept],
-  serializer
-};
-const listOperationSpec: coreClient.OperationSpec = {
-  path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/backups",
-  httpMethod: "GET",
-  responses: {
-    200: {
-      bodyMapper: Mappers.BackupsList
+      bodyMapper: Mappers.VolumeQuotaRulesList
     },
     default: {}
   },
@@ -609,11 +532,11 @@ const listOperationSpec: coreClient.OperationSpec = {
 };
 const getOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/backups/{backupName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/volumeQuotaRules/{volumeQuotaRuleName}",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.Backup
+      bodyMapper: Mappers.VolumeQuotaRule
     },
     default: {}
   },
@@ -625,31 +548,31 @@ const getOperationSpec: coreClient.OperationSpec = {
     Parameters.accountName,
     Parameters.poolName,
     Parameters.volumeName,
-    Parameters.backupName
+    Parameters.volumeQuotaRuleName
   ],
   headerParameters: [Parameters.accept],
   serializer
 };
 const createOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/backups/{backupName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/volumeQuotaRules/{volumeQuotaRuleName}",
   httpMethod: "PUT",
   responses: {
     200: {
-      bodyMapper: Mappers.Backup
+      bodyMapper: Mappers.VolumeQuotaRule
     },
     201: {
-      bodyMapper: Mappers.Backup
+      bodyMapper: Mappers.VolumeQuotaRule
     },
     202: {
-      bodyMapper: Mappers.Backup
+      bodyMapper: Mappers.VolumeQuotaRule
     },
     204: {
-      bodyMapper: Mappers.Backup
+      bodyMapper: Mappers.VolumeQuotaRule
     },
     default: {}
   },
-  requestBody: Parameters.body19,
+  requestBody: Parameters.body23,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
@@ -658,7 +581,7 @@ const createOperationSpec: coreClient.OperationSpec = {
     Parameters.accountName,
     Parameters.poolName,
     Parameters.volumeName,
-    Parameters.backupName
+    Parameters.volumeQuotaRuleName
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
   mediaType: "json",
@@ -666,24 +589,24 @@ const createOperationSpec: coreClient.OperationSpec = {
 };
 const updateOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/backups/{backupName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/volumeQuotaRules/{volumeQuotaRuleName}",
   httpMethod: "PATCH",
   responses: {
     200: {
-      bodyMapper: Mappers.Backup
+      bodyMapper: Mappers.VolumeQuotaRule
     },
     201: {
-      bodyMapper: Mappers.Backup
+      bodyMapper: Mappers.VolumeQuotaRule
     },
     202: {
-      bodyMapper: Mappers.Backup
+      bodyMapper: Mappers.VolumeQuotaRule
     },
     204: {
-      bodyMapper: Mappers.Backup
+      bodyMapper: Mappers.VolumeQuotaRule
     },
     default: {}
   },
-  requestBody: Parameters.body20,
+  requestBody: Parameters.body24,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
@@ -692,7 +615,7 @@ const updateOperationSpec: coreClient.OperationSpec = {
     Parameters.accountName,
     Parameters.poolName,
     Parameters.volumeName,
-    Parameters.backupName
+    Parameters.volumeQuotaRuleName
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
   mediaType: "json",
@@ -700,7 +623,7 @@ const updateOperationSpec: coreClient.OperationSpec = {
 };
 const deleteOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/backups/{backupName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/volumeQuotaRules/{volumeQuotaRuleName}",
   httpMethod: "DELETE",
   responses: { 200: {}, 201: {}, 202: {}, 204: {}, default: {} },
   queryParameters: [Parameters.apiVersion],
@@ -711,7 +634,7 @@ const deleteOperationSpec: coreClient.OperationSpec = {
     Parameters.accountName,
     Parameters.poolName,
     Parameters.volumeName,
-    Parameters.backupName
+    Parameters.volumeQuotaRuleName
   ],
   serializer
 };
