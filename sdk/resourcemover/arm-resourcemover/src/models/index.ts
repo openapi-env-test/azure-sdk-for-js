@@ -590,7 +590,7 @@ export interface OperationsDiscovery {
    * Default value is "user,system".
    */
   origin?: string;
-  /** Any object */
+  /** ClientDiscovery properties. */
   properties?: Record<string, unknown>;
 }
 
@@ -789,10 +789,10 @@ export interface LBBackendAddressPoolResourceSettings {
 }
 
 /** Defines the move collection errors. */
-export type MoveCollectionPropertiesErrors = MoveResourceError & {};
+export type MoveCollectionPropertiesErrors = MoveResourceError;
 
 /** Defines the move resource errors. */
-export type MoveResourcePropertiesErrors = MoveResourceError & {};
+export type MoveResourcePropertiesErrors = MoveResourceError;
 
 /** Gets or sets the virtual machine resource settings. */
 export type VirtualMachineResourceSettings = ResourceSettings & {
@@ -948,10 +948,10 @@ export type DiskEncryptionSetResourceSettings = ResourceSettings & {
 };
 
 /** Defines the move resource status. */
-export type MoveResourcePropertiesMoveStatus = MoveResourceStatus & {};
+export type MoveResourcePropertiesMoveStatus = MoveResourceStatus;
 
 /** Defines reference to NSG. */
-export type NsgReference = AzureResourceReference & {};
+export type NsgReference = AzureResourceReference;
 
 /** Defines reference to a proxy resource. */
 export type ProxyResourceReference = AzureResourceReference & {
@@ -960,16 +960,16 @@ export type ProxyResourceReference = AzureResourceReference & {
 };
 
 /** Defines reference to a public IP. */
-export type PublicIpReference = AzureResourceReference & {};
+export type PublicIpReference = AzureResourceReference;
 
 /** Defines reference to subnet. */
-export type SubnetReference = ProxyResourceReference & {};
+export type SubnetReference = ProxyResourceReference;
 
 /** Defines reference to load balancer backend address pools. */
-export type LoadBalancerBackendAddressPoolReference = ProxyResourceReference & {};
+export type LoadBalancerBackendAddressPoolReference = ProxyResourceReference;
 
 /** Defines reference to load balancer NAT rules. */
-export type LoadBalancerNatRuleReference = ProxyResourceReference & {};
+export type LoadBalancerNatRuleReference = ProxyResourceReference;
 
 /** Known values of {@link ResourceIdentityType} that the service accepts. */
 export enum KnownResourceIdentityType {
