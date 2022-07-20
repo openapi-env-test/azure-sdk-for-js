@@ -156,6 +156,12 @@ export type CreatedByType = string;
 export type DefaultAction = string;
 
 // @public
+export interface EncryptionPropertiesDescription {
+    keySource?: string;
+    keyVaultProperties?: KeyVaultKeyProperties[];
+}
+
+// @public
 export interface EndpointHealthData {
     endpointId?: string;
     healthStatus?: EndpointHealthStatus;
@@ -373,11 +379,13 @@ export interface IotHubProperties {
     authorizationPolicies?: SharedAccessSignatureAuthorizationRule[];
     cloudToDevice?: CloudToDeviceProperties;
     comments?: string;
+    deviceStreams?: IotHubPropertiesDeviceStreams;
     disableDeviceSAS?: boolean;
     disableLocalAuth?: boolean;
     disableModuleSAS?: boolean;
     enableDataResidency?: boolean;
     enableFileUploadNotifications?: boolean;
+    encryption?: EncryptionPropertiesDescription;
     eventHubEndpoints?: {
         [propertyName: string]: EventHubProperties;
     };
@@ -394,11 +402,17 @@ export interface IotHubProperties {
     readonly provisioningState?: string;
     publicNetworkAccess?: PublicNetworkAccess;
     restrictOutboundNetworkAccess?: boolean;
+    rootCertificate?: RootCertificateProperties;
     routing?: RoutingProperties;
     readonly state?: string;
     storageEndpoints?: {
         [propertyName: string]: StorageEndpointProperties;
     };
+}
+
+// @public
+export interface IotHubPropertiesDeviceStreams {
+    streamingEndpoints?: string[];
 }
 
 // @public
@@ -732,6 +746,12 @@ export type JobStatus = "unknown" | "enqueued" | "running" | "completed" | "fail
 export type JobType = string;
 
 // @public
+export interface KeyVaultKeyProperties {
+    identity?: ManagedIdentity;
+    keyIdentifier?: string;
+}
+
+// @public
 export enum KnownAuthenticationType {
     // (undocumented)
     IdentityBased = "identityBased",
@@ -876,7 +896,11 @@ export enum KnownRoutingSource {
     // (undocumented)
     DeviceMessages = "DeviceMessages",
     // (undocumented)
+    DigitalTwinChangeEvents = "DigitalTwinChangeEvents",
+    // (undocumented)
     Invalid = "Invalid",
+    // (undocumented)
+    MqttBrokerMessages = "MqttBrokerMessages",
     // (undocumented)
     TwinChangeEvents = "TwinChangeEvents"
 }
@@ -1118,6 +1142,12 @@ export interface ResourceProviderCommonGetSubscriptionQuotaOptionalParams extend
 export type ResourceProviderCommonGetSubscriptionQuotaResponse = UserSubscriptionQuotaListResult;
 
 // @public
+export interface RootCertificateProperties {
+    enableRootCertificateV2?: boolean;
+    readonly lastUpdatedTimeUtc?: Date;
+}
+
+// @public
 export interface RouteCompilationError {
     location?: RouteErrorRange;
     message?: string;
@@ -1149,7 +1179,25 @@ export interface RouteProperties {
 }
 
 // @public
+export interface RoutingCosmosDBSqlApiProperties {
+    authenticationType?: AuthenticationType;
+    collectionName: string;
+    databaseName: string;
+    endpointUri: string;
+    id?: string;
+    identity?: ManagedIdentity;
+    name: string;
+    partitionKeyName?: string;
+    partitionKeyTemplate?: string;
+    primaryKey?: string;
+    resourceGroup?: string;
+    secondaryKey?: string;
+    subscriptionId?: string;
+}
+
+// @public
 export interface RoutingEndpoints {
+    cosmosDBSqlCollections?: RoutingCosmosDBSqlApiProperties[];
     eventHubs?: RoutingEventHubProperties[];
     serviceBusQueues?: RoutingServiceBusQueueEndpointProperties[];
     serviceBusTopics?: RoutingServiceBusTopicEndpointProperties[];

@@ -1,15 +1,27 @@
 # Release History
+    
+## 6.2.0-beta.1 (2022-07-20)
+    
+**Features**
 
-## 6.1.2 (Unreleased)
+  - Added Interface EncryptionPropertiesDescription
+  - Added Interface IotHubPropertiesDeviceStreams
+  - Added Interface KeyVaultKeyProperties
+  - Added Interface RootCertificateProperties
+  - Added Interface RoutingCosmosDBSqlApiProperties
+  - Interface IotHubProperties has a new optional parameter deviceStreams
+  - Interface IotHubProperties has a new optional parameter encryption
+  - Interface IotHubProperties has a new optional parameter rootCertificate
+  - Interface RoutingEndpoints has a new optional parameter cosmosDBSqlCollections
+  - Enum KnownRoutingSource has a new value DigitalTwinChangeEvents
+  - Enum KnownRoutingSource has a new value MqttBrokerMessages
+    
+## 6.1.2 (2022-06-14)
 
-### Features Added
+**Features**
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Bug fix
+    
 ## 6.1.1 (2022-04-14)
     
 **Features**
