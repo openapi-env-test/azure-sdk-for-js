@@ -183,7 +183,7 @@ export interface QueryExperience {
 }
 
 /** The resource model definition for a ARM proxy resource. It will have everything other than required location and tags */
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 /** The resource model definition for a ARM tracked top level resource */
 export type TrackedResource = Resource & {

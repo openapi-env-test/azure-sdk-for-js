@@ -361,7 +361,7 @@ export interface ProfilesUpdateOptionalParams extends coreClient.OperationOption
 export type ProfilesUpdateResponse = Profile;
 
 // @public
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 // @public
 export interface QueryExperience {
