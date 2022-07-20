@@ -15,6 +15,7 @@ import {
   CheckNameAvailabilityInput as CheckNameAvailabilityInputMapper,
   UpdateSupportTicket as UpdateSupportTicketMapper,
   SupportTicketDetails as SupportTicketDetailsMapper,
+  SupportTicketResourceIdLookupRequest as SupportTicketResourceIdLookupRequestMapper,
   CommunicationDetails as CommunicationDetailsMapper
 } from "../models/mappers";
 
@@ -155,6 +156,11 @@ export const nextLink: OperationURLParameter = {
     }
   },
   skipEncoding: true
+};
+
+export const supportTicketResourceIdLookupRequest: OperationParameter = {
+  parameterPath: "supportTicketResourceIdLookupRequest",
+  mapper: SupportTicketResourceIdLookupRequestMapper
 };
 
 export const communicationName: OperationURLParameter = {

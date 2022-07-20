@@ -177,6 +177,7 @@ export class MicrosoftSupport extends coreClient.ServiceClient {
     services: Services;
     // (undocumented)
     subscriptionId: string;
+    supportTicketResourceIdLookUp(supportTicketResourceIdLookupRequest: SupportTicketResourceIdLookupRequest, options?: SupportTicketResourceIdLookUpOptionalParams): Promise<SupportTicketResourceIdLookUpOperationResponse>;
     // (undocumented)
     supportTickets: SupportTickets;
 }
@@ -360,6 +361,23 @@ export interface SupportTicketDetails {
     technicalTicketDetails?: TechnicalTicketDetails;
     title?: string;
     readonly type?: string;
+}
+
+// @public
+export type SupportTicketResourceIdLookUpOperationResponse = SupportTicketResourceIdLookUpResponse;
+
+// @public
+export interface SupportTicketResourceIdLookUpOptionalParams extends coreClient.OperationOptions {
+}
+
+// @public
+export interface SupportTicketResourceIdLookupRequest {
+    supportTicketId?: string;
+}
+
+// @public
+export interface SupportTicketResourceIdLookUpResponse {
+    resourceId?: string;
 }
 
 // @public

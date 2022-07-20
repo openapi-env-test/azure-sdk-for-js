@@ -1,14 +1,19 @@
 # Release History
+    
+## 2.1.0 (2022-07-20)
+    
+**Features**
 
-## 2.0.2 (Unreleased)
+  - Added Interface SupportTicketResourceIdLookUpOptionalParams
+  - Added Interface SupportTicketResourceIdLookupRequest
+  - Added Interface SupportTicketResourceIdLookUpResponse
+  - Added Type Alias SupportTicketResourceIdLookUpOperationResponse
+    
+## 2.0.2 (2022-07-05)
 
-### Features Added
+**Features**
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
+  - Bug fix
 
 ## 2.0.1 (2022-05-05)
 

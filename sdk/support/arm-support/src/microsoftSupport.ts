@@ -8,6 +8,11 @@
 
 import * as coreClient from "@azure/core-client";
 import * as coreRestPipeline from "@azure/core-rest-pipeline";
+import {
+  PipelineRequest,
+  PipelineResponse,
+  SendRequest
+} from "@azure/core-rest-pipeline";
 import * as coreAuth from "@azure/core-auth";
 import {
   OperationsImpl,
@@ -23,7 +28,14 @@ import {
   SupportTickets,
   Communications
 } from "./operationsInterfaces";
-import { MicrosoftSupportOptionalParams } from "./models";
+import * as Parameters from "./models/parameters";
+import * as Mappers from "./models/mappers";
+import {
+  MicrosoftSupportOptionalParams,
+  SupportTicketResourceIdLookupRequest,
+  SupportTicketResourceIdLookUpOptionalParams,
+  SupportTicketResourceIdLookUpOperationResponse
+} from "./models";
 
 export class MicrosoftSupport extends coreClient.ServiceClient {
   $host: string;
@@ -57,7 +69,7 @@ export class MicrosoftSupport extends coreClient.ServiceClient {
       credential: credentials
     };
 
-    const packageDetails = `azsdk-js-arm-support/2.0.2`;
+    const packageDetails = `azsdk-js-arm-support/2.1.0`;
     const userAgentPrefix =
       options.userAgentOptions && options.userAgentOptions.userAgentPrefix
         ? `${options.userAgentOptions.userAgentPrefix} ${packageDetails}`
@@ -110,6 +122,50 @@ export class MicrosoftSupport extends coreClient.ServiceClient {
     this.problemClassifications = new ProblemClassificationsImpl(this);
     this.supportTickets = new SupportTicketsImpl(this);
     this.communications = new CommunicationsImpl(this);
+    this.addCustomApiVersionPolicy(options.apiVersion);
+  }
+
+  /** A function that adds a policy that sets the api-version (or equivalent) to reflect the library version. */
+  private addCustomApiVersionPolicy(apiVersion?: string) {
+    if (!apiVersion) {
+      return;
+    }
+    const apiVersionPolicy = {
+      name: "CustomApiVersionPolicy",
+      async sendRequest(
+        request: PipelineRequest,
+        next: SendRequest
+      ): Promise<PipelineResponse> {
+        const param = request.url.split("?");
+        if (param.length > 1) {
+          const newParams = param[1].split("&").map((item) => {
+            if (item.indexOf("api-version") > -1) {
+              return item.replace(/(?<==).*$/, apiVersion);
+            } else {
+              return item;
+            }
+          });
+          request.url = param[0] + "?" + newParams.join("&");
+        }
+        return next(request);
+      }
+    };
+    this.pipeline.addPolicy(apiVersionPolicy);
+  }
+
+  /**
+   * This operation fetches ARM resource id of support ticket
+   * @param supportTicketResourceIdLookupRequest Support ticket resource id request body
+   * @param options The options parameters.
+   */
+  supportTicketResourceIdLookUp(
+    supportTicketResourceIdLookupRequest: SupportTicketResourceIdLookupRequest,
+    options?: SupportTicketResourceIdLookUpOptionalParams
+  ): Promise<SupportTicketResourceIdLookUpOperationResponse> {
+    return this.sendOperationRequest(
+      { supportTicketResourceIdLookupRequest, options },
+      supportTicketResourceIdLookUpOperationSpec
+    );
   }
 
   operations: Operations;
@@ -118,3 +174,24 @@ export class MicrosoftSupport extends coreClient.ServiceClient {
   supportTickets: SupportTickets;
   communications: Communications;
 }
+// Operation Specifications
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
+
+const supportTicketResourceIdLookUpOperationSpec: coreClient.OperationSpec = {
+  path: "/providers/Microsoft.Support/supportTickets/resourceIdLookUp",
+  httpMethod: "POST",
+  responses: {
+    200: {
+      bodyMapper: Mappers.SupportTicketResourceIdLookUpResponse
+    },
+    default: {
+      bodyMapper: Mappers.ExceptionResponse
+    }
+  },
+  requestBody: Parameters.supportTicketResourceIdLookupRequest,
+  queryParameters: [Parameters.apiVersion],
+  urlParameters: [Parameters.$host],
+  headerParameters: [Parameters.accept, Parameters.contentType],
+  mediaType: "json",
+  serializer
+};

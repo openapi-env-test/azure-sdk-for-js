@@ -831,6 +831,36 @@ export const UpdateContactProfile: coreClient.CompositeMapper = {
   }
 };
 
+export const SupportTicketResourceIdLookupRequest: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "SupportTicketResourceIdLookupRequest",
+    modelProperties: {
+      supportTicketId: {
+        serializedName: "supportTicketId",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const SupportTicketResourceIdLookUpResponse: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "SupportTicketResourceIdLookUpResponse",
+    modelProperties: {
+      resourceId: {
+        serializedName: "resourceId",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const CommunicationsListResult: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
