@@ -125,6 +125,18 @@ export const ApiOperationPropertiesServiceSpecification: coreClient.CompositeMap
             }
           }
         }
+      },
+      logSpecifications: {
+        serializedName: "logSpecifications",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "LogSpecification"
+            }
+          }
+        }
       }
     }
   }
@@ -225,6 +237,27 @@ export const MetricDimension: coreClient.CompositeMapper = {
         serializedName: "toBeExportedForShoebox",
         type: {
           name: "Boolean"
+        }
+      }
+    }
+  }
+};
+
+export const LogSpecification: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "LogSpecification",
+    modelProperties: {
+      name: {
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      displayName: {
+        serializedName: "displayName",
+        type: {
+          name: "String"
         }
       }
     }
@@ -839,6 +872,13 @@ export const Cache: coreClient.CompositeMapper = {
           className: "CacheUpgradeStatus"
         }
       },
+      upgradeSettings: {
+        serializedName: "properties.upgradeSettings",
+        type: {
+          name: "Composite",
+          className: "CacheUpgradeSettings"
+        }
+      },
       networkSettings: {
         serializedName: "properties.networkSettings",
         type: {
@@ -874,6 +914,32 @@ export const Cache: coreClient.CompositeMapper = {
           element: {
             type: {
               name: "String"
+            }
+          }
+        }
+      },
+      primingJobs: {
+        serializedName: "properties.primingJobs",
+        readOnly: true,
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "PrimingJob"
+            }
+          }
+        }
+      },
+      spaceAllocation: {
+        serializedName: "properties.spaceAllocation",
+        readOnly: true,
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "StorageTargetSpaceAllocation"
             }
           }
         }
@@ -1092,6 +1158,27 @@ export const CacheUpgradeStatus: coreClient.CompositeMapper = {
         readOnly: true,
         type: {
           name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const CacheUpgradeSettings: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "CacheUpgradeSettings",
+    modelProperties: {
+      upgradeScheduleEnabled: {
+        serializedName: "upgradeScheduleEnabled",
+        type: {
+          name: "Boolean"
+        }
+      },
+      scheduledTime: {
+        serializedName: "scheduledTime",
+        type: {
+          name: "DateTime"
         }
       }
     }
@@ -1534,6 +1621,102 @@ export const CacheUsernameDownloadSettingsCredentials: coreClient.CompositeMappe
   }
 };
 
+export const PrimingJob: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "PrimingJob",
+    modelProperties: {
+      primingJobName: {
+        constraints: {
+          Pattern: new RegExp("^[-0-9a-zA-Z_]{1,80}$")
+        },
+        serializedName: "primingJobName",
+        required: true,
+        type: {
+          name: "String"
+        }
+      },
+      primingManifestUrl: {
+        serializedName: "primingManifestUrl",
+        required: true,
+        type: {
+          name: "String"
+        }
+      },
+      primingJobId: {
+        constraints: {
+          Pattern: new RegExp("^[-0-9a-zA-Z_]{1,80}$")
+        },
+        serializedName: "primingJobId",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      primingJobState: {
+        serializedName: "primingJobState",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      primingJobStatus: {
+        serializedName: "primingJobStatus",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      primingJobDetails: {
+        serializedName: "primingJobDetails",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      primingJobPercentComplete: {
+        constraints: {
+          InclusiveMaximum: 100,
+          InclusiveMinimum: 0
+        },
+        serializedName: "primingJobPercentComplete",
+        readOnly: true,
+        type: {
+          name: "Number"
+        }
+      }
+    }
+  }
+};
+
+export const StorageTargetSpaceAllocation: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "StorageTargetSpaceAllocation",
+    modelProperties: {
+      name: {
+        constraints: {
+          Pattern: new RegExp("^[-0-9a-zA-Z_]{1,80}$")
+        },
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      allocationPercentage: {
+        constraints: {
+          InclusiveMaximum: 100,
+          InclusiveMinimum: 1
+        },
+        serializedName: "allocationPercentage",
+        type: {
+          name: "Number"
+        }
+      }
+    }
+  }
+};
+
 export const CacheSku: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -1733,6 +1916,589 @@ export const StorageTargetResource: coreClient.CompositeMapper = {
   }
 };
 
+export const PrimingJobIdParameter: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "PrimingJobIdParameter",
+    modelProperties: {
+      primingJobId: {
+        constraints: {
+          Pattern: new RegExp("^[-0-9a-zA-Z_]{1,80}$")
+        },
+        serializedName: "primingJobId",
+        required: true,
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const AmlFilesystemsListResult: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AmlFilesystemsListResult",
+    modelProperties: {
+      nextLink: {
+        serializedName: "nextLink",
+        type: {
+          name: "String"
+        }
+      },
+      value: {
+        serializedName: "value",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "AmlFilesystem"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const AmlFilesystem: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AmlFilesystem",
+    modelProperties: {
+      tags: {
+        serializedName: "tags",
+        type: {
+          name: "Dictionary",
+          value: { type: { name: "String" } }
+        }
+      },
+      id: {
+        serializedName: "id",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      location: {
+        serializedName: "location",
+        type: {
+          name: "String"
+        }
+      },
+      name: {
+        constraints: {
+          Pattern: new RegExp("^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$"),
+          MaxLength: 80,
+          MinLength: 2
+        },
+        serializedName: "name",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      type: {
+        serializedName: "type",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      identity: {
+        serializedName: "identity",
+        type: {
+          name: "Composite",
+          className: "AmlFilesystemIdentity"
+        }
+      },
+      systemData: {
+        serializedName: "systemData",
+        type: {
+          name: "Composite",
+          className: "SystemData"
+        }
+      },
+      sku: {
+        serializedName: "sku",
+        type: {
+          name: "Composite",
+          className: "SkuName"
+        }
+      },
+      storageCapacityTiB: {
+        serializedName: "properties.storageCapacityTiB",
+        type: {
+          name: "Number"
+        }
+      },
+      health: {
+        serializedName: "properties.health",
+        type: {
+          name: "Composite",
+          className: "AmlFilesystemHealth"
+        }
+      },
+      zones: {
+        serializedName: "properties.zones",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      },
+      provisioningState: {
+        serializedName: "properties.provisioningState",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      filesystemSubnet: {
+        serializedName: "properties.filesystemSubnet",
+        type: {
+          name: "String"
+        }
+      },
+      mgsAddress: {
+        serializedName: "properties.mgsAddress",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      mountCommand: {
+        serializedName: "properties.mountCommand",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      lustreVersion: {
+        serializedName: "properties.lustreVersion",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      throughputProvisionedMBps: {
+        serializedName: "properties.throughputProvisionedMBps",
+        readOnly: true,
+        type: {
+          name: "Number"
+        }
+      },
+      encryptionSettings: {
+        serializedName: "properties.encryptionSettings",
+        type: {
+          name: "Composite",
+          className: "AmlFilesystemEncryptionSettings"
+        }
+      },
+      maintenanceWindow: {
+        serializedName: "properties.maintenanceWindow",
+        type: {
+          name: "Composite",
+          className: "AmlFilesystemPropertiesMaintenanceWindow"
+        }
+      },
+      hsm: {
+        serializedName: "properties.hsm",
+        type: {
+          name: "Composite",
+          className: "AmlFilesystemPropertiesHsm"
+        }
+      }
+    }
+  }
+};
+
+export const AmlFilesystemIdentity: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AmlFilesystemIdentity",
+    modelProperties: {
+      principalId: {
+        serializedName: "principalId",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      tenantId: {
+        serializedName: "tenantId",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      type: {
+        serializedName: "type",
+        type: {
+          name: "Enum",
+          allowedValues: ["UserAssigned", "None"]
+        }
+      },
+      userAssignedIdentities: {
+        serializedName: "userAssignedIdentities",
+        type: {
+          name: "Dictionary",
+          value: {
+            type: {
+              name: "Composite",
+              className: "UserAssignedIdentitiesValueAutoGenerated"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const UserAssignedIdentitiesValueAutoGenerated: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "UserAssignedIdentitiesValueAutoGenerated",
+    modelProperties: {
+      principalId: {
+        serializedName: "principalId",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      clientId: {
+        serializedName: "clientId",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const AmlFilesystemHealth: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AmlFilesystemHealth",
+    modelProperties: {
+      state: {
+        serializedName: "state",
+        type: {
+          name: "String"
+        }
+      },
+      statusCode: {
+        serializedName: "statusCode",
+        type: {
+          name: "String"
+        }
+      },
+      statusDescription: {
+        serializedName: "statusDescription",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const AmlFilesystemEncryptionSettings: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AmlFilesystemEncryptionSettings",
+    modelProperties: {
+      keyEncryptionKey: {
+        serializedName: "keyEncryptionKey",
+        type: {
+          name: "Composite",
+          className: "KeyVaultKeyReference"
+        }
+      }
+    }
+  }
+};
+
+export const AmlFilesystemPropertiesMaintenanceWindow: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AmlFilesystemPropertiesMaintenanceWindow",
+    modelProperties: {
+      dayOfWeek: {
+        serializedName: "dayOfWeek",
+        type: {
+          name: "Enum",
+          allowedValues: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ]
+        }
+      },
+      timeOfDay: {
+        constraints: {
+          Pattern: new RegExp("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$")
+        },
+        serializedName: "timeOfDay",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const AmlFilesystemPropertiesHsm: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AmlFilesystemPropertiesHsm",
+    modelProperties: {
+      settings: {
+        serializedName: "settings",
+        type: {
+          name: "Composite",
+          className: "AmlFilesystemHsmSettings"
+        }
+      },
+      archiveStatus: {
+        serializedName: "archiveStatus",
+        readOnly: true,
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "AmlFilesystemArchive"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const AmlFilesystemHsmSettings: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AmlFilesystemHsmSettings",
+    modelProperties: {
+      container: {
+        serializedName: "container",
+        required: true,
+        type: {
+          name: "String"
+        }
+      },
+      loggingContainer: {
+        serializedName: "loggingContainer",
+        required: true,
+        type: {
+          name: "String"
+        }
+      },
+      importPrefix: {
+        defaultValue: "/",
+        serializedName: "importPrefix",
+        type: {
+          name: "String"
+        }
+      },
+      exportPrefix: {
+        serializedName: "exportPrefix",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const AmlFilesystemArchive: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AmlFilesystemArchive",
+    modelProperties: {
+      filesystemPath: {
+        serializedName: "filesystemPath",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      status: {
+        serializedName: "status",
+        type: {
+          name: "Composite",
+          className: "AmlFilesystemArchiveStatus"
+        }
+      }
+    }
+  }
+};
+
+export const AmlFilesystemArchiveStatus: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AmlFilesystemArchiveStatus",
+    modelProperties: {
+      state: {
+        serializedName: "state",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      lastCompletionTime: {
+        serializedName: "lastCompletionTime",
+        readOnly: true,
+        type: {
+          name: "DateTime"
+        }
+      },
+      lastStartedTime: {
+        serializedName: "lastStartedTime",
+        readOnly: true,
+        type: {
+          name: "DateTime"
+        }
+      },
+      percentComplete: {
+        serializedName: "percentComplete",
+        readOnly: true,
+        type: {
+          name: "Number"
+        }
+      },
+      errorCode: {
+        serializedName: "errorCode",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      },
+      errorMessage: {
+        serializedName: "errorMessage",
+        readOnly: true,
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const SkuName: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "SkuName",
+    modelProperties: {
+      name: {
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const AmlFilesystemArchiveInfo: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AmlFilesystemArchiveInfo",
+    modelProperties: {
+      filesystemPath: {
+        defaultValue: "/",
+        serializedName: "filesystemPath",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const AmlFilesystemSubnetInfo: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AmlFilesystemSubnetInfo",
+    modelProperties: {
+      filesystemSubnet: {
+        serializedName: "filesystemSubnet",
+        type: {
+          name: "String"
+        }
+      },
+      storageCapacityTiB: {
+        serializedName: "storageCapacityTiB",
+        type: {
+          name: "Number"
+        }
+      },
+      sku: {
+        serializedName: "sku",
+        type: {
+          name: "Composite",
+          className: "SkuName"
+        }
+      },
+      location: {
+        serializedName: "location",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const AmlFilesystemCheckSubnetError: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AmlFilesystemCheckSubnetError",
+    modelProperties: {
+      filesystemSubnet: {
+        serializedName: "filesystemSubnet",
+        type: {
+          name: "Composite",
+          className: "AmlFilesystemCheckSubnetErrorFilesystemSubnet"
+        }
+      }
+    }
+  }
+};
+
+export const AmlFilesystemCheckSubnetErrorFilesystemSubnet: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AmlFilesystemCheckSubnetErrorFilesystemSubnet",
+    modelProperties: {
+      status: {
+        serializedName: "status",
+        type: {
+          name: "String"
+        }
+      },
+      message: {
+        serializedName: "message",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const StorageTarget: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -1796,6 +2562,122 @@ export const StorageTarget: coreClient.CompositeMapper = {
         type: {
           name: "Composite",
           className: "BlobNfsTarget"
+        }
+      },
+      allocationPercentage: {
+        constraints: {
+          InclusiveMaximum: 100,
+          InclusiveMinimum: 1
+        },
+        serializedName: "properties.allocationPercentage",
+        readOnly: true,
+        type: {
+          name: "Number"
+        }
+      }
+    }
+  }
+};
+
+export const CachesStartPrimingJobHeaders: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "CachesStartPrimingJobHeaders",
+    modelProperties: {
+      location: {
+        serializedName: "location",
+        type: {
+          name: "String"
+        }
+      },
+      azureAsyncOperation: {
+        serializedName: "azure-asyncoperation",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const CachesStopPrimingJobHeaders: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "CachesStopPrimingJobHeaders",
+    modelProperties: {
+      location: {
+        serializedName: "location",
+        type: {
+          name: "String"
+        }
+      },
+      azureAsyncOperation: {
+        serializedName: "azure-asyncoperation",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const CachesPausePrimingJobHeaders: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "CachesPausePrimingJobHeaders",
+    modelProperties: {
+      location: {
+        serializedName: "location",
+        type: {
+          name: "String"
+        }
+      },
+      azureAsyncOperation: {
+        serializedName: "azure-asyncoperation",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const CachesResumePrimingJobHeaders: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "CachesResumePrimingJobHeaders",
+    modelProperties: {
+      location: {
+        serializedName: "location",
+        type: {
+          name: "String"
+        }
+      },
+      azureAsyncOperation: {
+        serializedName: "azure-asyncoperation",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const CachesSpaceAllocationHeaders: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "CachesSpaceAllocationHeaders",
+    modelProperties: {
+      location: {
+        serializedName: "location",
+        type: {
+          name: "String"
+        }
+      },
+      azureAsyncOperation: {
+        serializedName: "azure-asyncoperation",
+        type: {
+          name: "String"
         }
       }
     }

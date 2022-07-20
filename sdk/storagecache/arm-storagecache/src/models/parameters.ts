@@ -13,7 +13,12 @@ import {
 } from "@azure/core-client";
 import {
   Cache as CacheMapper,
-  StorageTarget as StorageTargetMapper
+  PrimingJob as PrimingJobMapper,
+  PrimingJobIdParameter as PrimingJobIdParameterMapper,
+  StorageTarget as StorageTargetMapper,
+  AmlFilesystem as AmlFilesystemMapper,
+  AmlFilesystemArchiveInfo as AmlFilesystemArchiveInfoMapper,
+  AmlFilesystemSubnetInfo as AmlFilesystemSubnetInfoMapper
 } from "../models/mappers";
 
 export const accept: OperationParameter = {
@@ -43,7 +48,7 @@ export const $host: OperationURLParameter = {
 export const apiVersion: OperationQueryParameter = {
   parameterPath: "apiVersion",
   mapper: {
-    defaultValue: "2022-01-01",
+    defaultValue: "2022-11-01-preview",
     isConstant: true,
     serializedName: "api-version",
     type: {
@@ -139,6 +144,32 @@ export const cache: OperationParameter = {
   mapper: CacheMapper
 };
 
+export const primingjob: OperationParameter = {
+  parameterPath: ["options", "primingjob"],
+  mapper: PrimingJobMapper
+};
+
+export const primingJobId: OperationParameter = {
+  parameterPath: ["options", "primingJobId"],
+  mapper: PrimingJobIdParameterMapper
+};
+
+export const spaceAllocation: OperationParameter = {
+  parameterPath: ["options", "spaceAllocation"],
+  mapper: {
+    serializedName: "spaceAllocation",
+    type: {
+      name: "Sequence",
+      element: {
+        type: {
+          name: "Composite",
+          className: "StorageTargetSpaceAllocation"
+        }
+      }
+    }
+  }
+};
+
 export const storageTargetName: OperationURLParameter = {
   parameterPath: "storageTargetName",
   mapper: {
@@ -166,4 +197,62 @@ export const force: OperationQueryParameter = {
 export const storagetarget: OperationParameter = {
   parameterPath: ["options", "storagetarget"],
   mapper: StorageTargetMapper
+};
+
+export const apiVersion1: OperationQueryParameter = {
+  parameterPath: "apiVersion",
+  mapper: {
+    defaultValue: "2021-11-01-preview",
+    isConstant: true,
+    serializedName: "api-version",
+    type: {
+      name: "String"
+    }
+  }
+};
+
+export const resourceGroupName1: OperationURLParameter = {
+  parameterPath: "resourceGroupName",
+  mapper: {
+    constraints: {
+      MaxLength: 90,
+      MinLength: 1
+    },
+    serializedName: "resourceGroupName",
+    required: true,
+    type: {
+      name: "String"
+    }
+  }
+};
+
+export const amlFilesystemName: OperationURLParameter = {
+  parameterPath: "amlFilesystemName",
+  mapper: {
+    constraints: {
+      Pattern: new RegExp("^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$"),
+      MaxLength: 80,
+      MinLength: 2
+    },
+    serializedName: "amlFilesystemName",
+    required: true,
+    type: {
+      name: "String"
+    }
+  }
+};
+
+export const amlFilesystem: OperationParameter = {
+  parameterPath: ["options", "amlFilesystem"],
+  mapper: AmlFilesystemMapper
+};
+
+export const archiveInfo: OperationParameter = {
+  parameterPath: ["options", "archiveInfo"],
+  mapper: AmlFilesystemArchiveInfoMapper
+};
+
+export const amlFilesystemSubnetInfo: OperationParameter = {
+  parameterPath: ["options", "amlFilesystemSubnetInfo"],
+  mapper: AmlFilesystemSubnetInfoMapper
 };
