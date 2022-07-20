@@ -1,15 +1,18 @@
 # Release History
+    
+## 3.2.0 (2022-07-20)
+    
+**Features**
 
-## 3.0.2 (Unreleased)
+  - Added Type Alias AgreementTerms
+    
+    
+## 3.1.0 (2022-07-08)
+    
+**Features**
 
-### Features Added
-
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Added Interface AgreementTerms
+    
 ## 3.0.1 (2022-04-25)
 
 **Features**
