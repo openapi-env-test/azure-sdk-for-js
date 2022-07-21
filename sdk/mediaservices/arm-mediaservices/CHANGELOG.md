@@ -1,15 +1,72 @@
 # Release History
+    
+## 12.1.0 (2022-07-21)
+    
+**Features**
 
-## 11.0.1 (Unreleased)
+  - Added operation LiveEvents.asyncOperation
+  - Added operation LiveEvents.operationLocation
+  - Added operation LiveOutputs.asyncOperation
+  - Added operation LiveOutputs.operationLocation
+  - Added operation StreamingEndpoints.asyncOperation
+  - Added operation StreamingEndpoints.operationLocation
+  - Added Interface AsyncOperationErrorDetail
+  - Added Interface AsyncOperationResult
+  - Added Interface LiveEventsAsyncOperationOptionalParams
+  - Added Interface LiveEventsOperationLocationOptionalParams
+  - Added Interface LiveOutputsAsyncOperationOptionalParams
+  - Added Interface LiveOutputsOperationLocationOptionalParams
+  - Added Interface StreamingEndpointsAsyncOperationOptionalParams
+  - Added Interface StreamingEndpointsOperationLocationOptionalParams
+  - Added Type Alias AsyncOperationStatus
+  - Added Type Alias LiveEventsAsyncOperationResponse
+  - Added Type Alias LiveEventsOperationLocationResponse
+  - Added Type Alias LiveOutputsAsyncOperationResponse
+  - Added Type Alias LiveOutputsOperationLocationResponse
+  - Added Type Alias StreamingEndpointsAsyncOperationResponse
+  - Added Type Alias StreamingEndpointsOperationLocationResponse
+  - Added Enum KnownAsyncOperationStatus
+    
+    
+## 12.0.0 (2022-06-24)
+    
+**Features**
 
-### Features Added
+  - Added operation group MediaServicesOperationResults
+  - Added operation group MediaServicesOperationStatuses
+  - Added operation Mediaservices.beginCreateOrUpdate
+  - Added operation Mediaservices.beginCreateOrUpdateAndWait
+  - Added operation Mediaservices.beginUpdate
+  - Added operation Mediaservices.beginUpdateAndWait
+  - Added Interface MediaServiceOperationStatus
+  - Added Interface MediaservicesCreateOrUpdateHeaders
+  - Added Interface MediaServicesOperationResultsGetHeaders
+  - Added Interface MediaServicesOperationResultsGetOptionalParams
+  - Added Interface MediaServicesOperationStatusesGetOptionalParams
+  - Added Interface MediaservicesUpdateHeaders
+  - Added Type Alias MediaServicesOperationResultsGetResponse
+  - Added Type Alias MediaServicesOperationStatusesGetResponse
+  - Interface AzureMediaServicesOptionalParams has a new optional parameter apiVersion
+  - Interface MediaservicesCreateOrUpdateOptionalParams has a new optional parameter resumeFrom
+  - Interface MediaservicesCreateOrUpdateOptionalParams has a new optional parameter updateIntervalInMs
+  - Interface MediaservicesUpdateOptionalParams has a new optional parameter resumeFrom
+  - Interface MediaservicesUpdateOptionalParams has a new optional parameter updateIntervalInMs
+  - Interface MediaServiceUpdate has a new optional parameter privateEndpointConnections
+  - Interface MediaServiceUpdate has a new optional parameter provisioningState
+  - Class AzureMediaServices has a new parameter apiVersion
+  - Class AzureMediaServices has a new parameter mediaServicesOperationResults
+  - Class AzureMediaServices has a new parameter mediaServicesOperationStatuses
+  - Add parameters of MediaservicesCreateOrUpdateHeaders to TypeAlias MediaservicesCreateOrUpdateResponse
+  - Add parameters of MediaservicesUpdateHeaders to TypeAlias MediaservicesUpdateResponse
+  - Type Alias MediaService has a new parameter provisioningState
+  - Type Alias MediaService has a new parameter privateEndpointConnections
 
-### Breaking Changes
+**Breaking Changes**
 
-### Bugs Fixed
-
-### Other Changes
-
+  - Removed operation Mediaservices.createOrUpdate
+  - Removed operation Mediaservices.update
+    
+    
 ## 11.0.0 (2022-04-14)
     
 **Features**
