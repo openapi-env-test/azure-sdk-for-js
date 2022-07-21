@@ -685,7 +685,7 @@ export interface PlanData {
 export type ProvisioningState = string;
 
 // @public
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 // @public
 export interface Resource {

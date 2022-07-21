@@ -503,7 +503,7 @@ export type TrackedResource = Resource & {
 };
 
 /** The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location */
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 /** Dynatrace Monitor Resource */
 export type MonitorResource = TrackedResource & {
