@@ -6,4 +6,7 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-export * from "./hybridRunbookWorkerGroupOperations";
+/// <reference lib="esnext.asynciterable" />
+export * from "./models";
+export { AutomationClient } from "./automationClient";
+export * from "./operationsInterfaces";
