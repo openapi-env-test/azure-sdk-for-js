@@ -174,7 +174,7 @@ const listByConfigurationStoreOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.PrivateLinkResourceListResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.ErrorModel
     }
   },
   queryParameters: [Parameters.apiVersion],
@@ -196,7 +196,7 @@ const getOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.PrivateLinkResource
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.ErrorModel
     }
   },
   queryParameters: [Parameters.apiVersion],
@@ -218,7 +218,7 @@ const listByConfigurationStoreNextOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.PrivateLinkResourceListResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse
+      bodyMapper: Mappers.ErrorModel
     }
   },
   queryParameters: [Parameters.apiVersion],
