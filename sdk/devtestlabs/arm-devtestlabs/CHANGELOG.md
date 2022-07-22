@@ -1,15 +1,709 @@
 # Release History
+    
+## 5.0.0 (2022-07-22)
+    
+**Features**
 
-## 4.0.2 (Unreleased)
+  - Added operation group BastionHosts
+  - Added operation group LabSecrets
+  - Added operation group SharedGalleries
+  - Added operation group SharedImages
+  - Added operation GalleryImages.get
+  - Added operation Labs.ensureCurrentUserProfile
+  - Added operation PolicySets.list
+  - Added operation ServiceRunners.beginCreateOrUpdate
+  - Added operation ServiceRunners.beginCreateOrUpdateAndWait
+  - Added operation ServiceRunners.beginDelete
+  - Added operation ServiceRunners.beginDeleteAndWait
+  - Added operation ServiceRunners.list
+  - Added operation VirtualMachines.clearArtifactResults
+  - Added Interface BastionHostList
+  - Added Interface BastionHostsCreateOrUpdateOptionalParams
+  - Added Interface BastionHostsDeleteOptionalParams
+  - Added Interface BastionHostsGetOptionalParams
+  - Added Interface BastionHostsListNextOptionalParams
+  - Added Interface BastionHostsListOptionalParams
+  - Added Interface BastionHostsUpdateOptionalParams
+  - Added Interface CheckNameAvailabilityRequest
+  - Added Interface CheckNameAvailabilityResponse
+  - Added Interface CustomImagePropertiesFromPlanFragment
+  - Added Interface EncryptionProperties
+  - Added Interface ErrorAdditionalInfo
+  - Added Interface ErrorDetail
+  - Added Interface ErrorResponse
+  - Added Interface GalleryImagesGetOptionalParams
+  - Added Interface Identity
+  - Added Interface ImageVersionProperties
+  - Added Interface KeyVaultProperties
+  - Added Interface LabCostList
+  - Added Interface LabSecretList
+  - Added Interface LabSecretsCreateOrUpdateOptionalParams
+  - Added Interface LabSecretsDeleteOptionalParams
+  - Added Interface LabSecretsGetOptionalParams
+  - Added Interface LabSecretsListNextOptionalParams
+  - Added Interface LabSecretsListOptionalParams
+  - Added Interface LabSecretsUpdateOptionalParams
+  - Added Interface LabsEnsureCurrentUserProfileOptionalParams
+  - Added Interface LocationData
+  - Added Interface Operation
+  - Added Interface OperationDisplay
+  - Added Interface OperationListResult
+  - Added Interface OperationStatusResult
+  - Added Interface Plan
+  - Added Interface PolicySetList
+  - Added Interface PolicySetsListNextOptionalParams
+  - Added Interface PolicySetsListOptionalParams
+  - Added Interface ResourceModelWithAllowedPropertySet
+  - Added Interface ServiceRunnersListNextOptionalParams
+  - Added Interface ServiceRunnersListOptionalParams
+  - Added Interface SharedGalleriesCreateOrUpdateOptionalParams
+  - Added Interface SharedGalleriesDeleteOptionalParams
+  - Added Interface SharedGalleriesGetOptionalParams
+  - Added Interface SharedGalleriesListNextOptionalParams
+  - Added Interface SharedGalleriesListOptionalParams
+  - Added Interface SharedGalleriesUpdateOptionalParams
+  - Added Interface SharedGalleryList
+  - Added Interface SharedImageList
+  - Added Interface SharedImagesCreateOrUpdateOptionalParams
+  - Added Interface SharedImagesDeleteOptionalParams
+  - Added Interface SharedImagesGetOptionalParams
+  - Added Interface SharedImagesListNextOptionalParams
+  - Added Interface SharedImagesListOptionalParams
+  - Added Interface SharedImagesUpdateOptionalParams
+  - Added Interface Sku
+  - Added Interface SystemData
+  - Added Interface VirtualMachinesClearArtifactResultsOptionalParams
+  - Added Interface WeekDetailsFragment
+  - Added Type Alias ActionType
+  - Added Type Alias AzureEntityResource
+  - Added Type Alias BastionHost
+  - Added Type Alias BastionHostFragment
+  - Added Type Alias BastionHostsCreateOrUpdateResponse
+  - Added Type Alias BastionHostsGetResponse
+  - Added Type Alias BastionHostsListNextResponse
+  - Added Type Alias BastionHostsListResponse
+  - Added Type Alias BastionHostsUpdateResponse
+  - Added Type Alias CheckNameAvailabilityReason
+  - Added Type Alias Cost
+  - Added Type Alias CreatedByType
+  - Added Type Alias EnableState
+  - Added Type Alias EncryptionStatus
+  - Added Type Alias EncryptionType
+  - Added Type Alias GalleryImagesGetResponse
+  - Added Type Alias ImageType
+  - Added Type Alias LabSecret
+  - Added Type Alias LabSecretFragment
+  - Added Type Alias LabSecretsCreateOrUpdateResponse
+  - Added Type Alias LabSecretsGetResponse
+  - Added Type Alias LabSecretsListNextResponse
+  - Added Type Alias LabSecretsListResponse
+  - Added Type Alias LabSecretsUpdateResponse
+  - Added Type Alias Origin
+  - Added Type Alias OsType
+  - Added Type Alias PolicySet
+  - Added Type Alias PolicySetsListNextResponse
+  - Added Type Alias PolicySetsListResponse
+  - Added Type Alias ProxyResource
+  - Added Type Alias ResourceModelWithAllowedPropertySetIdentity
+  - Added Type Alias ResourceModelWithAllowedPropertySetPlan
+  - Added Type Alias ResourceModelWithAllowedPropertySetSku
+  - Added Type Alias ServiceRunnersListNextResponse
+  - Added Type Alias ServiceRunnersListResponse
+  - Added Type Alias SharedGalleriesCreateOrUpdateResponse
+  - Added Type Alias SharedGalleriesGetResponse
+  - Added Type Alias SharedGalleriesListNextResponse
+  - Added Type Alias SharedGalleriesListResponse
+  - Added Type Alias SharedGalleriesUpdateResponse
+  - Added Type Alias SharedGallery
+  - Added Type Alias SharedGalleryFragment
+  - Added Type Alias SharedImage
+  - Added Type Alias SharedImageFragment
+  - Added Type Alias SharedImagesCreateOrUpdateResponse
+  - Added Type Alias SharedImagesGetResponse
+  - Added Type Alias SharedImagesListNextResponse
+  - Added Type Alias SharedImagesListResponse
+  - Added Type Alias SharedImagesUpdateResponse
+  - Added Type Alias SkuTier
+  - Added Type Alias StorageTypes
+  - Interface CostThresholdProperties has a new optional parameter thresholdValue
+  - Interface DataDiskProperties has a new optional parameter diskName
+  - Interface DataDiskProperties has a new optional parameter diskSizeGiB
+  - Interface DataDiskProperties has a new optional parameter diskType
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter artifactsApplied
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter canApplyArtifacts
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter computeId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter createdByUser
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter createdByUserId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter createdDatePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesCreatedDate
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter createdDatePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesCreatedDate
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter createdDatePropertiesCreatedDate
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter dataDiskIds
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter dataDisks
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter deploymentStatus
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter dnsName
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter emailRecipientPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsEmailRecipient
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter emailRecipientPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsEmailRecipient
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter fqdn
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter galleryImageVersionId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter idPropertiesApplicableScheduleId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter idPropertiesApplicableSchedulePropertiesLabVmsShutdownId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter idPropertiesApplicableSchedulePropertiesLabVmsStartupId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter inboundNatRules
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter instanceCount
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter lastKnownPowerState
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter locationPropertiesApplicableScheduleLocation
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter locationPropertiesApplicableSchedulePropertiesLabVmsShutdownLocation
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter locationPropertiesApplicableSchedulePropertiesLabVmsStartupLocation
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter minutePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesHourlyRecurrenceMinute
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter minutePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesHourlyRecurrenceMinute
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter namePropertiesApplicableScheduleName
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter namePropertiesApplicableSchedulePropertiesLabVmsShutdownName
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter namePropertiesApplicableSchedulePropertiesLabVmsStartupName
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter networkInterfaceId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter notificationLocalePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsNotificationLocale
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter notificationLocalePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsNotificationLocale
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter offer
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter osDiskId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter osDiskSizeGb
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter osTypePropertiesComputeVmOsType
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter osTypePropertiesGalleryImageReferenceOsType
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter osTypePropertiesOsType
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter privateIpAddress
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter provisioningStatePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesProvisioningState
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter provisioningStatePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesProvisioningState
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter provisioningStatePropertiesProvisioningState
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter publicIpAddress
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter publicIpAddressId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter publisher
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter rdpAuthority
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter sharedImageId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter sharedImageVersion
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter sku
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter sshAuthority
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter statuses
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter statusPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsStatus
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter statusPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesStatus
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter statusPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsStatus
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter statusPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesStatus
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter subnetId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter systemDataPropertiesApplicableSchedulePropertiesLabVmsShutdownSystemData
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter systemDataPropertiesApplicableSchedulePropertiesLabVmsStartupSystemData
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter systemDataPropertiesApplicableScheduleSystemData
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter tagsPropertiesApplicableSchedulePropertiesLabVmsShutdownTags
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter tagsPropertiesApplicableSchedulePropertiesLabVmsStartupTags
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter tagsPropertiesApplicableScheduleTags
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter targetResourceIdPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesTargetResourceId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter targetResourceIdPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesTargetResourceId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter taskTypePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesTaskType
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter taskTypePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesTaskType
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter timeInMinutesPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsTimeInMinutes
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter timeInMinutesPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsTimeInMinutes
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter timePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesDailyRecurrenceTime
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter timePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesWeeklyRecurrenceTime
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter timePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesDailyRecurrenceTime
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter timePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesWeeklyRecurrenceTime
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter timeZoneIdPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesTimeZoneId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter timeZoneIdPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesTimeZoneId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter totalArtifacts
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter typePropertiesApplicableSchedulePropertiesLabVmsShutdownType
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter typePropertiesApplicableSchedulePropertiesLabVmsStartupType
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter typePropertiesApplicableScheduleType
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter uniqueIdentifierPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesUniqueIdentifier
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter uniqueIdentifierPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesUniqueIdentifier
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter uniqueIdentifierPropertiesUniqueIdentifier
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter version
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter virtualMachineCreationSource
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter virtualNetworkId
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter vmSize
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter webhookUrlPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsWebhookUrl
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter webhookUrlPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsWebhookUrl
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter weekdaysPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesWeeklyRecurrenceWeekdays
+  - Interface LabVirtualMachineCreationParameter has a new optional parameter weekdaysPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesWeeklyRecurrenceWeekdays
+  - Interface OperationResult has a new optional parameter code
+  - Interface OperationResult has a new optional parameter message
+  - Interface ScheduleCreationParameter has a new optional parameter createdDate
+  - Interface ScheduleCreationParameter has a new optional parameter emailRecipient
+  - Interface ScheduleCreationParameter has a new optional parameter minute
+  - Interface ScheduleCreationParameter has a new optional parameter notificationLocale
+  - Interface ScheduleCreationParameter has a new optional parameter provisioningState
+  - Interface ScheduleCreationParameter has a new optional parameter statusPropertiesNotificationSettingsStatus
+  - Interface ScheduleCreationParameter has a new optional parameter statusPropertiesStatus
+  - Interface ScheduleCreationParameter has a new optional parameter timeInMinutes
+  - Interface ScheduleCreationParameter has a new optional parameter timePropertiesDailyRecurrenceTime
+  - Interface ScheduleCreationParameter has a new optional parameter timePropertiesWeeklyRecurrenceTime
+  - Interface ScheduleCreationParameter has a new optional parameter uniqueIdentifier
+  - Interface ScheduleCreationParameter has a new optional parameter webhookUrl
+  - Interface ScheduleCreationParameter has a new optional parameter weekdays
+  - Interface ServiceRunnersCreateOrUpdateOptionalParams has a new optional parameter resumeFrom
+  - Interface ServiceRunnersCreateOrUpdateOptionalParams has a new optional parameter updateIntervalInMs
+  - Interface ServiceRunnersDeleteOptionalParams has a new optional parameter resumeFrom
+  - Interface ServiceRunnersDeleteOptionalParams has a new optional parameter updateIntervalInMs
+  - Interface SubnetOverride has a new optional parameter allowedPorts
+  - Interface UsersCreateOrUpdateOptionalParams has a new optional parameter user
+  - Class DevTestLabsClient has a new parameter bastionHosts
+  - Class DevTestLabsClient has a new parameter labSecrets
+  - Class DevTestLabsClient has a new parameter sharedGalleries
+  - Class DevTestLabsClient has a new parameter sharedImages
+  - Type Alias ApplicableSchedule has a new parameter systemData
+  - Type Alias ApplicableSchedule has a new parameter idPropertiesLabVmsStartupId
+  - Type Alias ApplicableSchedule has a new parameter namePropertiesLabVmsStartupName
+  - Type Alias ApplicableSchedule has a new parameter typePropertiesLabVmsStartupType
+  - Type Alias ApplicableSchedule has a new parameter locationPropertiesLabVmsStartupLocation
+  - Type Alias ApplicableSchedule has a new parameter systemDataPropertiesLabVmsStartupSystemData
+  - Type Alias ApplicableSchedule has a new parameter statusPropertiesLabVmsStartupPropertiesStatus
+  - Type Alias ApplicableSchedule has a new parameter taskTypePropertiesLabVmsStartupPropertiesTaskType
+  - Type Alias ApplicableSchedule has a new parameter timeZoneIdPropertiesLabVmsStartupPropertiesTimeZoneId
+  - Type Alias ApplicableSchedule has a new parameter createdDatePropertiesLabVmsStartupPropertiesCreatedDate
+  - Type Alias ApplicableSchedule has a new parameter targetResourceIdPropertiesLabVmsStartupPropertiesTargetResourceId
+  - Type Alias ApplicableSchedule has a new parameter provisioningStatePropertiesLabVmsStartupPropertiesProvisioningState
+  - Type Alias ApplicableSchedule has a new parameter uniqueIdentifierPropertiesLabVmsStartupPropertiesUniqueIdentifier
+  - Type Alias ApplicableSchedule has a new parameter statusPropertiesLabVmsStartupPropertiesNotificationSettingsStatus
+  - Type Alias ApplicableSchedule has a new parameter timeInMinutesPropertiesLabVmsStartupPropertiesNotificationSettingsTimeInMinutes
+  - Type Alias ApplicableSchedule has a new parameter webhookUrlPropertiesLabVmsStartupPropertiesNotificationSettingsWebhookUrl
+  - Type Alias ApplicableSchedule has a new parameter emailRecipientPropertiesLabVmsStartupPropertiesNotificationSettingsEmailRecipient
+  - Type Alias ApplicableSchedule has a new parameter notificationLocalePropertiesLabVmsStartupPropertiesNotificationSettingsNotificationLocale
+  - Type Alias ApplicableSchedule has a new parameter minutePropertiesLabVmsStartupPropertiesHourlyRecurrenceMinute
+  - Type Alias ApplicableSchedule has a new parameter timePropertiesLabVmsStartupPropertiesDailyRecurrenceTime
+  - Type Alias ApplicableSchedule has a new parameter weekdaysPropertiesLabVmsStartupPropertiesWeeklyRecurrenceWeekdays
+  - Type Alias ApplicableSchedule has a new parameter timePropertiesLabVmsStartupPropertiesWeeklyRecurrenceTime
+  - Type Alias ApplicableSchedule has a new parameter idPropertiesLabVmsShutdownId
+  - Type Alias ApplicableSchedule has a new parameter namePropertiesLabVmsShutdownName
+  - Type Alias ApplicableSchedule has a new parameter typePropertiesLabVmsShutdownType
+  - Type Alias ApplicableSchedule has a new parameter locationPropertiesLabVmsShutdownLocation
+  - Type Alias ApplicableSchedule has a new parameter systemDataPropertiesLabVmsShutdownSystemData
+  - Type Alias ApplicableSchedule has a new parameter statusPropertiesLabVmsShutdownPropertiesStatus
+  - Type Alias ApplicableSchedule has a new parameter taskTypePropertiesLabVmsShutdownPropertiesTaskType
+  - Type Alias ApplicableSchedule has a new parameter timeZoneIdPropertiesLabVmsShutdownPropertiesTimeZoneId
+  - Type Alias ApplicableSchedule has a new parameter createdDatePropertiesLabVmsShutdownPropertiesCreatedDate
+  - Type Alias ApplicableSchedule has a new parameter targetResourceIdPropertiesLabVmsShutdownPropertiesTargetResourceId
+  - Type Alias ApplicableSchedule has a new parameter provisioningStatePropertiesLabVmsShutdownPropertiesProvisioningState
+  - Type Alias ApplicableSchedule has a new parameter uniqueIdentifierPropertiesLabVmsShutdownPropertiesUniqueIdentifier
+  - Type Alias ApplicableSchedule has a new parameter statusPropertiesLabVmsShutdownPropertiesNotificationSettingsStatus
+  - Type Alias ApplicableSchedule has a new parameter timeInMinutesPropertiesLabVmsShutdownPropertiesNotificationSettingsTimeInMinutes
+  - Type Alias ApplicableSchedule has a new parameter webhookUrlPropertiesLabVmsShutdownPropertiesNotificationSettingsWebhookUrl
+  - Type Alias ApplicableSchedule has a new parameter emailRecipientPropertiesLabVmsShutdownPropertiesNotificationSettingsEmailRecipient
+  - Type Alias ApplicableSchedule has a new parameter notificationLocalePropertiesLabVmsShutdownPropertiesNotificationSettingsNotificationLocale
+  - Type Alias ApplicableSchedule has a new parameter minutePropertiesLabVmsShutdownPropertiesHourlyRecurrenceMinute
+  - Type Alias ApplicableSchedule has a new parameter timePropertiesLabVmsShutdownPropertiesDailyRecurrenceTime
+  - Type Alias ApplicableSchedule has a new parameter weekdaysPropertiesLabVmsShutdownPropertiesWeeklyRecurrenceWeekdays
+  - Type Alias ApplicableSchedule has a new parameter timePropertiesLabVmsShutdownPropertiesWeeklyRecurrenceTime
+  - Type Alias ArmTemplate has a new parameter systemData
+  - Type Alias Artifact has a new parameter systemData
+  - Type Alias ArtifactSource has a new parameter systemData
+  - Type Alias CustomImage has a new parameter systemData
+  - Type Alias CustomImage has a new parameter idPropertiesCustomImagePlanId
+  - Type Alias CustomImage has a new parameter publisher
+  - Type Alias CustomImage has a new parameter offer
+  - Type Alias CustomImage has a new parameter imageName
+  - Type Alias CustomImage has a new parameter sysPrep
+  - Type Alias CustomImage has a new parameter osType
+  - Type Alias CustomImage has a new parameter sourceVmId
+  - Type Alias CustomImage has a new parameter linuxOsState
+  - Type Alias CustomImage has a new parameter windowsOsState
+  - Type Alias Disk has a new parameter systemData
+  - Type Alias DtlEnvironment has a new parameter systemData
+  - Type Alias DtlEnvironment has a new parameter armTemplateId
+  - Type Alias DtlEnvironment has a new parameter parameters
+  - Type Alias Formula has a new parameter systemData
+  - Type Alias Formula has a new parameter osTypePropertiesOsType
+  - Type Alias Formula has a new parameter provisioningStatePropertiesProvisioningState
+  - Type Alias Formula has a new parameter uniqueIdentifierPropertiesUniqueIdentifier
+  - Type Alias Formula has a new parameter labVmId
+  - Type Alias Formula has a new parameter namePropertiesFormulaContentName
+  - Type Alias Formula has a new parameter locationPropertiesFormulaContentLocation
+  - Type Alias Formula has a new parameter notes
+  - Type Alias Formula has a new parameter ownerObjectId
+  - Type Alias Formula has a new parameter ownerUserPrincipalName
+  - Type Alias Formula has a new parameter createdByUserId
+  - Type Alias Formula has a new parameter createdByUser
+  - Type Alias Formula has a new parameter createdDatePropertiesFormulaContentPropertiesCreatedDate
+  - Type Alias Formula has a new parameter computeId
+  - Type Alias Formula has a new parameter customImageId
+  - Type Alias Formula has a new parameter galleryImageVersionId
+  - Type Alias Formula has a new parameter sharedImageId
+  - Type Alias Formula has a new parameter sharedImageVersion
+  - Type Alias Formula has a new parameter osTypePropertiesFormulaContentPropertiesOsType
+  - Type Alias Formula has a new parameter size
+  - Type Alias Formula has a new parameter userName
+  - Type Alias Formula has a new parameter password
+  - Type Alias Formula has a new parameter sshKey
+  - Type Alias Formula has a new parameter isAuthenticationWithSshKey
+  - Type Alias Formula has a new parameter fqdn
+  - Type Alias Formula has a new parameter labSubnetName
+  - Type Alias Formula has a new parameter labVirtualNetworkId
+  - Type Alias Formula has a new parameter disallowPublicIpAddress
+  - Type Alias Formula has a new parameter artifacts
+  - Type Alias Formula has a new parameter planId
+  - Type Alias Formula has a new parameter osDiskSizeGb
+  - Type Alias Formula has a new parameter expirationDate
+  - Type Alias Formula has a new parameter allowClaim
+  - Type Alias Formula has a new parameter storageType
+  - Type Alias Formula has a new parameter virtualMachineCreationSource
+  - Type Alias Formula has a new parameter environmentId
+  - Type Alias Formula has a new parameter dataDiskParameters
+  - Type Alias Formula has a new parameter scheduleParameters
+  - Type Alias Formula has a new parameter lastKnownPowerState
+  - Type Alias Formula has a new parameter canApplyArtifacts
+  - Type Alias Formula has a new parameter provisioningStatePropertiesFormulaContentPropertiesProvisioningState
+  - Type Alias Formula has a new parameter uniqueIdentifierPropertiesFormulaContentPropertiesUniqueIdentifier
+  - Type Alias Formula has a new parameter idPropertiesFormulaContentPropertiesApplicableScheduleId
+  - Type Alias Formula has a new parameter namePropertiesFormulaContentPropertiesApplicableScheduleName
+  - Type Alias Formula has a new parameter typePropertiesFormulaContentPropertiesApplicableScheduleType
+  - Type Alias Formula has a new parameter locationPropertiesFormulaContentPropertiesApplicableScheduleLocation
+  - Type Alias Formula has a new parameter systemDataPropertiesFormulaContentPropertiesApplicableScheduleSystemData
+  - Type Alias Formula has a new parameter idPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupId
+  - Type Alias Formula has a new parameter namePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupName
+  - Type Alias Formula has a new parameter typePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupType
+  - Type Alias Formula has a new parameter locationPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupLocation
+  - Type Alias Formula has a new parameter systemDataPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupSystemData
+  - Type Alias Formula has a new parameter statusPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesStatus
+  - Type Alias Formula has a new parameter taskTypePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesTaskType
+  - Type Alias Formula has a new parameter timeZoneIdPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesTimeZoneId
+  - Type Alias Formula has a new parameter createdDatePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesCreatedDate
+  - Type Alias Formula has a new parameter targetResourceIdPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesTargetResourceId
+  - Type Alias Formula has a new parameter provisioningStatePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesProvisioningState
+  - Type Alias Formula has a new parameter uniqueIdentifierPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesUniqueIdentifier
+  - Type Alias Formula has a new parameter statusPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsStatus
+  - Type Alias Formula has a new parameter timeInMinutesPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsTimeInMinutes
+  - Type Alias Formula has a new parameter webhookUrlPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsWebhookUrl
+  - Type Alias Formula has a new parameter emailRecipientPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsEmailRecipient
+  - Type Alias Formula has a new parameter notificationLocalePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsNotificationLocale
+  - Type Alias Formula has a new parameter minutePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesHourlyRecurrenceMinute
+  - Type Alias Formula has a new parameter timePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesDailyRecurrenceTime
+  - Type Alias Formula has a new parameter weekdaysPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesWeeklyRecurrenceWeekdays
+  - Type Alias Formula has a new parameter timePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesWeeklyRecurrenceTime
+  - Type Alias Formula has a new parameter idPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownId
+  - Type Alias Formula has a new parameter namePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownName
+  - Type Alias Formula has a new parameter typePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownType
+  - Type Alias Formula has a new parameter locationPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownLocation
+  - Type Alias Formula has a new parameter systemDataPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownSystemData
+  - Type Alias Formula has a new parameter statusPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesStatus
+  - Type Alias Formula has a new parameter taskTypePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesTaskType
+  - Type Alias Formula has a new parameter timeZoneIdPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesTimeZoneId
+  - Type Alias Formula has a new parameter createdDatePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesCreatedDate
+  - Type Alias Formula has a new parameter targetResourceIdPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesTargetResourceId
+  - Type Alias Formula has a new parameter provisioningStatePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesProvisioningState
+  - Type Alias Formula has a new parameter uniqueIdentifierPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesUniqueIdentifier
+  - Type Alias Formula has a new parameter statusPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsStatus
+  - Type Alias Formula has a new parameter timeInMinutesPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsTimeInMinutes
+  - Type Alias Formula has a new parameter webhookUrlPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsWebhookUrl
+  - Type Alias Formula has a new parameter emailRecipientPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsEmailRecipient
+  - Type Alias Formula has a new parameter notificationLocalePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsNotificationLocale
+  - Type Alias Formula has a new parameter minutePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesHourlyRecurrenceMinute
+  - Type Alias Formula has a new parameter timePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesDailyRecurrenceTime
+  - Type Alias Formula has a new parameter weekdaysPropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesWeeklyRecurrenceWeekdays
+  - Type Alias Formula has a new parameter timePropertiesFormulaContentPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesWeeklyRecurrenceTime
+  - Type Alias Formula has a new parameter virtualNetworkId
+  - Type Alias Formula has a new parameter subnetId
+  - Type Alias Formula has a new parameter publicIpAddressId
+  - Type Alias Formula has a new parameter publicIpAddress
+  - Type Alias Formula has a new parameter privateIpAddress
+  - Type Alias Formula has a new parameter dnsName
+  - Type Alias Formula has a new parameter rdpAuthority
+  - Type Alias Formula has a new parameter sshAuthority
+  - Type Alias Formula has a new parameter inboundNatRules
+  - Type Alias Formula has a new parameter statuses
+  - Type Alias Formula has a new parameter osTypePropertiesFormulaContentPropertiesComputeVmOsType
+  - Type Alias Formula has a new parameter vmSize
+  - Type Alias Formula has a new parameter networkInterfaceId
+  - Type Alias Formula has a new parameter osDiskId
+  - Type Alias Formula has a new parameter dataDiskIds
+  - Type Alias Formula has a new parameter dataDisks
+  - Type Alias Formula has a new parameter offer
+  - Type Alias Formula has a new parameter publisher
+  - Type Alias Formula has a new parameter sku
+  - Type Alias Formula has a new parameter osTypePropertiesFormulaContentPropertiesGalleryImageReferenceOsType
+  - Type Alias Formula has a new parameter version
+  - Type Alias Formula has a new parameter deploymentStatus
+  - Type Alias Formula has a new parameter artifactsApplied
+  - Type Alias Formula has a new parameter totalArtifacts
+  - Type Alias Formula has a new parameter instanceCount
+  - Type Alias GalleryImage has a new parameter systemData
+  - Type Alias GalleryImage has a new parameter offer
+  - Type Alias GalleryImage has a new parameter publisher
+  - Type Alias GalleryImage has a new parameter sku
+  - Type Alias GalleryImage has a new parameter osType
+  - Type Alias GalleryImage has a new parameter version
+  - Type Alias Lab has a new parameter systemData
+  - Type Alias Lab has a new parameter typeIdentityType
+  - Type Alias Lab has a new parameter principalId
+  - Type Alias Lab has a new parameter tenantId
+  - Type Alias Lab has a new parameter clientSecretUrl
+  - Type Alias Lab has a new parameter browserConnect
+  - Type Alias Lab has a new parameter disableAutoUpgradeCseMinorVersion
+  - Type Alias Lab has a new parameter isolateLabResources
+  - Type Alias Lab has a new parameter defaultSecretName
+  - Type Alias Lab has a new parameter provisioningStatePropertiesProvisioningState
+  - Type Alias Lab has a new parameter uniqueIdentifierPropertiesUniqueIdentifier
+  - Type Alias Lab has a new parameter diskEncryptionSetId
+  - Type Alias Lab has a new parameter typePropertiesEncryptionType
+  - Type Alias Lab has a new parameter enabledPropertiesSupportEnabled
+  - Type Alias Lab has a new parameter markdownPropertiesSupportMarkdown
+  - Type Alias Lab has a new parameter title
+  - Type Alias Lab has a new parameter markdownPropertiesAnnouncementMarkdown
+  - Type Alias Lab has a new parameter enabledPropertiesAnnouncementEnabled
+  - Type Alias Lab has a new parameter expirationDate
+  - Type Alias Lab has a new parameter expired
+  - Type Alias Lab has a new parameter provisioningStatePropertiesAnnouncementProvisioningState
+  - Type Alias Lab has a new parameter uniqueIdentifierPropertiesAnnouncementUniqueIdentifier
+  - Type Alias LabCost has a new parameter systemData
+  - Type Alias LabCost has a new parameter estimatedLabCost
+  - Type Alias LabCost has a new parameter status
+  - Type Alias LabCost has a new parameter target
+  - Type Alias LabCost has a new parameter costThresholds
+  - Type Alias LabCost has a new parameter cycleStartDateTime
+  - Type Alias LabCost has a new parameter cycleEndDateTime
+  - Type Alias LabCost has a new parameter cycleType
+  - Type Alias LabVirtualMachine has a new parameter systemData
+  - Type Alias LabVirtualMachine has a new parameter createdDatePropertiesCreatedDate
+  - Type Alias LabVirtualMachine has a new parameter galleryImageVersionId
+  - Type Alias LabVirtualMachine has a new parameter sharedImageId
+  - Type Alias LabVirtualMachine has a new parameter sharedImageVersion
+  - Type Alias LabVirtualMachine has a new parameter osTypePropertiesOsType
+  - Type Alias LabVirtualMachine has a new parameter osDiskSizeGb
+  - Type Alias LabVirtualMachine has a new parameter canApplyArtifacts
+  - Type Alias LabVirtualMachine has a new parameter provisioningStatePropertiesProvisioningState
+  - Type Alias LabVirtualMachine has a new parameter uniqueIdentifierPropertiesUniqueIdentifier
+  - Type Alias LabVirtualMachine has a new parameter idPropertiesApplicableScheduleId
+  - Type Alias LabVirtualMachine has a new parameter namePropertiesApplicableScheduleName
+  - Type Alias LabVirtualMachine has a new parameter typePropertiesApplicableScheduleType
+  - Type Alias LabVirtualMachine has a new parameter locationPropertiesApplicableScheduleLocation
+  - Type Alias LabVirtualMachine has a new parameter systemDataPropertiesApplicableScheduleSystemData
+  - Type Alias LabVirtualMachine has a new parameter idPropertiesApplicableSchedulePropertiesLabVmsStartupId
+  - Type Alias LabVirtualMachine has a new parameter namePropertiesApplicableSchedulePropertiesLabVmsStartupName
+  - Type Alias LabVirtualMachine has a new parameter typePropertiesApplicableSchedulePropertiesLabVmsStartupType
+  - Type Alias LabVirtualMachine has a new parameter locationPropertiesApplicableSchedulePropertiesLabVmsStartupLocation
+  - Type Alias LabVirtualMachine has a new parameter systemDataPropertiesApplicableSchedulePropertiesLabVmsStartupSystemData
+  - Type Alias LabVirtualMachine has a new parameter statusPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesStatus
+  - Type Alias LabVirtualMachine has a new parameter taskTypePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesTaskType
+  - Type Alias LabVirtualMachine has a new parameter timeZoneIdPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesTimeZoneId
+  - Type Alias LabVirtualMachine has a new parameter createdDatePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesCreatedDate
+  - Type Alias LabVirtualMachine has a new parameter targetResourceIdPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesTargetResourceId
+  - Type Alias LabVirtualMachine has a new parameter provisioningStatePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesProvisioningState
+  - Type Alias LabVirtualMachine has a new parameter uniqueIdentifierPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesUniqueIdentifier
+  - Type Alias LabVirtualMachine has a new parameter statusPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsStatus
+  - Type Alias LabVirtualMachine has a new parameter timeInMinutesPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsTimeInMinutes
+  - Type Alias LabVirtualMachine has a new parameter webhookUrlPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsWebhookUrl
+  - Type Alias LabVirtualMachine has a new parameter emailRecipientPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsEmailRecipient
+  - Type Alias LabVirtualMachine has a new parameter notificationLocalePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsNotificationLocale
+  - Type Alias LabVirtualMachine has a new parameter minutePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesHourlyRecurrenceMinute
+  - Type Alias LabVirtualMachine has a new parameter timePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesDailyRecurrenceTime
+  - Type Alias LabVirtualMachine has a new parameter weekdaysPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesWeeklyRecurrenceWeekdays
+  - Type Alias LabVirtualMachine has a new parameter timePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesWeeklyRecurrenceTime
+  - Type Alias LabVirtualMachine has a new parameter idPropertiesApplicableSchedulePropertiesLabVmsShutdownId
+  - Type Alias LabVirtualMachine has a new parameter namePropertiesApplicableSchedulePropertiesLabVmsShutdownName
+  - Type Alias LabVirtualMachine has a new parameter typePropertiesApplicableSchedulePropertiesLabVmsShutdownType
+  - Type Alias LabVirtualMachine has a new parameter locationPropertiesApplicableSchedulePropertiesLabVmsShutdownLocation
+  - Type Alias LabVirtualMachine has a new parameter systemDataPropertiesApplicableSchedulePropertiesLabVmsShutdownSystemData
+  - Type Alias LabVirtualMachine has a new parameter statusPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesStatus
+  - Type Alias LabVirtualMachine has a new parameter taskTypePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesTaskType
+  - Type Alias LabVirtualMachine has a new parameter timeZoneIdPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesTimeZoneId
+  - Type Alias LabVirtualMachine has a new parameter createdDatePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesCreatedDate
+  - Type Alias LabVirtualMachine has a new parameter targetResourceIdPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesTargetResourceId
+  - Type Alias LabVirtualMachine has a new parameter provisioningStatePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesProvisioningState
+  - Type Alias LabVirtualMachine has a new parameter uniqueIdentifierPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesUniqueIdentifier
+  - Type Alias LabVirtualMachine has a new parameter statusPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsStatus
+  - Type Alias LabVirtualMachine has a new parameter timeInMinutesPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsTimeInMinutes
+  - Type Alias LabVirtualMachine has a new parameter webhookUrlPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsWebhookUrl
+  - Type Alias LabVirtualMachine has a new parameter emailRecipientPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsEmailRecipient
+  - Type Alias LabVirtualMachine has a new parameter notificationLocalePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsNotificationLocale
+  - Type Alias LabVirtualMachine has a new parameter minutePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesHourlyRecurrenceMinute
+  - Type Alias LabVirtualMachine has a new parameter timePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesDailyRecurrenceTime
+  - Type Alias LabVirtualMachine has a new parameter weekdaysPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesWeeklyRecurrenceWeekdays
+  - Type Alias LabVirtualMachine has a new parameter timePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesWeeklyRecurrenceTime
+  - Type Alias LabVirtualMachine has a new parameter virtualNetworkId
+  - Type Alias LabVirtualMachine has a new parameter subnetId
+  - Type Alias LabVirtualMachine has a new parameter publicIpAddressId
+  - Type Alias LabVirtualMachine has a new parameter publicIpAddress
+  - Type Alias LabVirtualMachine has a new parameter privateIpAddress
+  - Type Alias LabVirtualMachine has a new parameter dnsName
+  - Type Alias LabVirtualMachine has a new parameter rdpAuthority
+  - Type Alias LabVirtualMachine has a new parameter sshAuthority
+  - Type Alias LabVirtualMachine has a new parameter inboundNatRules
+  - Type Alias LabVirtualMachine has a new parameter statuses
+  - Type Alias LabVirtualMachine has a new parameter osTypePropertiesComputeVmOsType
+  - Type Alias LabVirtualMachine has a new parameter vmSize
+  - Type Alias LabVirtualMachine has a new parameter networkInterfaceId
+  - Type Alias LabVirtualMachine has a new parameter osDiskId
+  - Type Alias LabVirtualMachine has a new parameter dataDiskIds
+  - Type Alias LabVirtualMachine has a new parameter dataDisks
+  - Type Alias LabVirtualMachine has a new parameter offer
+  - Type Alias LabVirtualMachine has a new parameter publisher
+  - Type Alias LabVirtualMachine has a new parameter sku
+  - Type Alias LabVirtualMachine has a new parameter osTypePropertiesGalleryImageReferenceOsType
+  - Type Alias LabVirtualMachine has a new parameter version
+  - Type Alias LabVirtualMachine has a new parameter deploymentStatus
+  - Type Alias LabVirtualMachine has a new parameter artifactsApplied
+  - Type Alias LabVirtualMachine has a new parameter totalArtifacts
+  - Type Alias NotificationChannel has a new parameter systemData
+  - Type Alias Policy has a new parameter systemData
+  - Type Alias Schedule has a new parameter systemData
+  - Type Alias Schedule has a new parameter statusPropertiesStatus
+  - Type Alias Schedule has a new parameter statusPropertiesNotificationSettingsStatus
+  - Type Alias Schedule has a new parameter timeInMinutes
+  - Type Alias Schedule has a new parameter webhookUrl
+  - Type Alias Schedule has a new parameter emailRecipient
+  - Type Alias Schedule has a new parameter notificationLocale
+  - Type Alias Schedule has a new parameter minute
+  - Type Alias Schedule has a new parameter timePropertiesDailyRecurrenceTime
+  - Type Alias Schedule has a new parameter weekdays
+  - Type Alias Schedule has a new parameter timePropertiesWeeklyRecurrenceTime
+  - Type Alias Secret has a new parameter systemData
+  - Type Alias ServiceFabric has a new parameter systemData
+  - Type Alias ServiceFabric has a new parameter provisioningStatePropertiesProvisioningState
+  - Type Alias ServiceFabric has a new parameter uniqueIdentifierPropertiesUniqueIdentifier
+  - Type Alias ServiceFabric has a new parameter idPropertiesApplicableScheduleId
+  - Type Alias ServiceFabric has a new parameter namePropertiesApplicableScheduleName
+  - Type Alias ServiceFabric has a new parameter typePropertiesApplicableScheduleType
+  - Type Alias ServiceFabric has a new parameter locationPropertiesApplicableScheduleLocation
+  - Type Alias ServiceFabric has a new parameter systemDataPropertiesApplicableScheduleSystemData
+  - Type Alias ServiceFabric has a new parameter idPropertiesApplicableSchedulePropertiesLabVmsStartupId
+  - Type Alias ServiceFabric has a new parameter namePropertiesApplicableSchedulePropertiesLabVmsStartupName
+  - Type Alias ServiceFabric has a new parameter typePropertiesApplicableSchedulePropertiesLabVmsStartupType
+  - Type Alias ServiceFabric has a new parameter locationPropertiesApplicableSchedulePropertiesLabVmsStartupLocation
+  - Type Alias ServiceFabric has a new parameter systemDataPropertiesApplicableSchedulePropertiesLabVmsStartupSystemData
+  - Type Alias ServiceFabric has a new parameter statusPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesStatus
+  - Type Alias ServiceFabric has a new parameter taskTypePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesTaskType
+  - Type Alias ServiceFabric has a new parameter timeZoneIdPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesTimeZoneId
+  - Type Alias ServiceFabric has a new parameter createdDatePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesCreatedDate
+  - Type Alias ServiceFabric has a new parameter targetResourceIdPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesTargetResourceId
+  - Type Alias ServiceFabric has a new parameter provisioningStatePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesProvisioningState
+  - Type Alias ServiceFabric has a new parameter uniqueIdentifierPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesUniqueIdentifier
+  - Type Alias ServiceFabric has a new parameter statusPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsStatus
+  - Type Alias ServiceFabric has a new parameter timeInMinutesPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsTimeInMinutes
+  - Type Alias ServiceFabric has a new parameter webhookUrlPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsWebhookUrl
+  - Type Alias ServiceFabric has a new parameter emailRecipientPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsEmailRecipient
+  - Type Alias ServiceFabric has a new parameter notificationLocalePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesNotificationSettingsNotificationLocale
+  - Type Alias ServiceFabric has a new parameter minutePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesHourlyRecurrenceMinute
+  - Type Alias ServiceFabric has a new parameter timePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesDailyRecurrenceTime
+  - Type Alias ServiceFabric has a new parameter weekdaysPropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesWeeklyRecurrenceWeekdays
+  - Type Alias ServiceFabric has a new parameter timePropertiesApplicableSchedulePropertiesLabVmsStartupPropertiesWeeklyRecurrenceTime
+  - Type Alias ServiceFabric has a new parameter idPropertiesApplicableSchedulePropertiesLabVmsShutdownId
+  - Type Alias ServiceFabric has a new parameter namePropertiesApplicableSchedulePropertiesLabVmsShutdownName
+  - Type Alias ServiceFabric has a new parameter typePropertiesApplicableSchedulePropertiesLabVmsShutdownType
+  - Type Alias ServiceFabric has a new parameter locationPropertiesApplicableSchedulePropertiesLabVmsShutdownLocation
+  - Type Alias ServiceFabric has a new parameter systemDataPropertiesApplicableSchedulePropertiesLabVmsShutdownSystemData
+  - Type Alias ServiceFabric has a new parameter statusPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesStatus
+  - Type Alias ServiceFabric has a new parameter taskTypePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesTaskType
+  - Type Alias ServiceFabric has a new parameter timeZoneIdPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesTimeZoneId
+  - Type Alias ServiceFabric has a new parameter createdDatePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesCreatedDate
+  - Type Alias ServiceFabric has a new parameter targetResourceIdPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesTargetResourceId
+  - Type Alias ServiceFabric has a new parameter provisioningStatePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesProvisioningState
+  - Type Alias ServiceFabric has a new parameter uniqueIdentifierPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesUniqueIdentifier
+  - Type Alias ServiceFabric has a new parameter statusPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsStatus
+  - Type Alias ServiceFabric has a new parameter timeInMinutesPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsTimeInMinutes
+  - Type Alias ServiceFabric has a new parameter webhookUrlPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsWebhookUrl
+  - Type Alias ServiceFabric has a new parameter emailRecipientPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsEmailRecipient
+  - Type Alias ServiceFabric has a new parameter notificationLocalePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesNotificationSettingsNotificationLocale
+  - Type Alias ServiceFabric has a new parameter minutePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesHourlyRecurrenceMinute
+  - Type Alias ServiceFabric has a new parameter timePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesDailyRecurrenceTime
+  - Type Alias ServiceFabric has a new parameter weekdaysPropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesWeeklyRecurrenceWeekdays
+  - Type Alias ServiceFabric has a new parameter timePropertiesApplicableSchedulePropertiesLabVmsShutdownPropertiesWeeklyRecurrenceTime
+  - Type Alias ServiceRunner has a new parameter systemData
+  - Type Alias ServiceRunner has a new parameter typeIdentityType
+  - Type Alias ServiceRunner has a new parameter principalId
+  - Type Alias ServiceRunner has a new parameter tenantId
+  - Type Alias ServiceRunner has a new parameter clientSecretUrl
+  - Type Alias ServiceRunner has a new parameter identityUsageType
+  - Type Alias ServiceRunner has a new parameter provisioningState
+  - Type Alias ServiceRunner has a new parameter uniqueIdentifier
+  - Type Alias User has a new parameter systemData
+  - Type Alias User has a new parameter keyVaultUri
+  - Type Alias User has a new parameter keyVaultId
+  - Type Alias User has a new parameter principalName
+  - Type Alias User has a new parameter principalId
+  - Type Alias User has a new parameter tenantId
+  - Type Alias User has a new parameter objectId
+  - Type Alias User has a new parameter appId
+  - Type Alias VirtualNetwork has a new parameter systemData
+  - Added Enum KnownActionType
+  - Added Enum KnownCheckNameAvailabilityReason
+  - Added Enum KnownCreatedByType
+  - Added Enum KnownEnableState
+  - Added Enum KnownEncryptionStatus
+  - Added Enum KnownEncryptionType
+  - Added Enum KnownImageType
+  - Added Enum KnownOrigin
+  - Added Enum KnownOsType
+  - Added Enum KnownStorageTypes
+  - Enum KnownHttpStatusCode has a new value AlreadyReported
+  - Enum KnownHttpStatusCode has a new value EarlyHints
+  - Enum KnownHttpStatusCode has a new value FailedDependency
+  - Enum KnownHttpStatusCode has a new value IMUsed
+  - Enum KnownHttpStatusCode has a new value InsufficientStorage
+  - Enum KnownHttpStatusCode has a new value Locked
+  - Enum KnownHttpStatusCode has a new value LoopDetected
+  - Enum KnownHttpStatusCode has a new value MisdirectedRequest
+  - Enum KnownHttpStatusCode has a new value MultiStatus
+  - Enum KnownHttpStatusCode has a new value NetworkAuthenticationRequired
+  - Enum KnownHttpStatusCode has a new value NotExtended
+  - Enum KnownHttpStatusCode has a new value PermanentRedirect
+  - Enum KnownHttpStatusCode has a new value PreconditionRequired
+  - Enum KnownHttpStatusCode has a new value Processing
+  - Enum KnownHttpStatusCode has a new value RequestHeaderFieldsTooLarge
+  - Enum KnownHttpStatusCode has a new value TooManyRequests
+  - Enum KnownHttpStatusCode has a new value UnavailableForLegalReasons
+  - Enum KnownHttpStatusCode has a new value UnprocessableEntity
+  - Enum KnownHttpStatusCode has a new value VariantAlsoNegotiates
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Removed operation ServiceRunners.createOrUpdate
+  - Removed operation ServiceRunners.delete
+  - Operation Users.beginCreateOrUpdate has a new signature
+  - Operation Users.beginCreateOrUpdateAndWait has a new signature
+  - Interface CostThresholdProperties no longer has parameter percentageThreshold
+  - Interface DataDiskProperties no longer has parameter attachNewDataDiskOptions
+  - Interface LabVirtualMachineCreationParameter no longer has parameter bulkCreationParameters
+  - Interface LabVirtualMachineCreationParameter no longer has parameter createdDate
+  - Interface LabVirtualMachineCreationParameter no longer has parameter galleryImageReference
+  - Interface LabVirtualMachineCreationParameter no longer has parameter networkInterface
+  - Interface OperationResult no longer has parameter error
+  - Interface ScheduleCreationParameter no longer has parameter dailyRecurrence
+  - Interface ScheduleCreationParameter no longer has parameter hourlyRecurrence
+  - Interface ScheduleCreationParameter no longer has parameter notificationSettings
+  - Interface ScheduleCreationParameter no longer has parameter status
+  - Interface ScheduleCreationParameter no longer has parameter weeklyRecurrence
+  - Interface SubnetOverride no longer has parameter sharedPublicIpAddressConfiguration
+  - Type Alias ApplicableSchedule no longer has parameter labVmsShutdown
+  - Type Alias ApplicableSchedule no longer has parameter labVmsStartup
+  - Type Alias CustomImage no longer has parameter vm
+  - Type Alias CustomImage no longer has parameter vhd
+  - Type Alias CustomImage no longer has parameter customImagePlan
+  - Type Alias DtlEnvironment no longer has parameter deploymentProperties
+  - Type Alias Formula no longer has parameter osType
+  - Type Alias Formula no longer has parameter formulaContent
+  - Type Alias Formula no longer has parameter vm
+  - Type Alias Formula no longer has parameter provisioningState
+  - Type Alias Formula no longer has parameter uniqueIdentifier
+  - Type Alias GalleryImage no longer has parameter imageReference
+  - Type Alias Lab no longer has parameter announcement
+  - Type Alias Lab no longer has parameter support
+  - Type Alias Lab no longer has parameter provisioningState
+  - Type Alias Lab no longer has parameter uniqueIdentifier
+  - Type Alias LabCost no longer has parameter targetCost
+  - Type Alias LabCost no longer has parameter labCostSummary
+  - Type Alias LabVirtualMachine no longer has parameter createdDate
+  - Type Alias LabVirtualMachine no longer has parameter osType
+  - Type Alias LabVirtualMachine no longer has parameter artifactDeploymentStatus
+  - Type Alias LabVirtualMachine no longer has parameter galleryImageReference
+  - Type Alias LabVirtualMachine no longer has parameter computeVm
+  - Type Alias LabVirtualMachine no longer has parameter networkInterface
+  - Type Alias LabVirtualMachine no longer has parameter applicableSchedule
+  - Type Alias LabVirtualMachine no longer has parameter provisioningState
+  - Type Alias LabVirtualMachine no longer has parameter uniqueIdentifier
+  - Type Alias Schedule no longer has parameter status
+  - Type Alias Schedule no longer has parameter weeklyRecurrence
+  - Type Alias Schedule no longer has parameter dailyRecurrence
+  - Type Alias Schedule no longer has parameter hourlyRecurrence
+  - Type Alias Schedule no longer has parameter notificationSettings
+  - Type Alias ServiceFabric no longer has parameter applicableSchedule
+  - Type Alias ServiceFabric no longer has parameter provisioningState
+  - Type Alias ServiceFabric no longer has parameter uniqueIdentifier
+  - Type Alias ServiceRunner no longer has parameter identity
+  - Type Alias User no longer has parameter identity
+  - Type Alias User no longer has parameter secretStore
+    
 ## 4.0.1 (2022-04-18)
 
 **features**
