@@ -1339,7 +1339,7 @@ export interface OperationsListOptionalParams extends coreClient.OperationOption
 export type OperationsListResponse = AvailableOperations;
 
 // @public
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 // @public
 export interface QueueScaleRule {
