@@ -12,7 +12,7 @@ rest-level-client: true
 add-credentials: true
 credential-scopes: https://purview.azure.net/.default
 require:
-  - https://github.com/Azure/azure-rest-api-specs/blob/9e30496a8803beb5a84909997e5cd7ea0f242fd8/specification/purview/data-plane/readme.md
+  - https://github.com/Azure/azure-rest-api-specs/blob/9e30496a8803beb5a84909997e5cd7ea0f242fd8/specification/purview/data-plane/administration/readme.md
 use-extension:
   '@autorest/typescript': 6.0.0-beta.20
 tag: false
