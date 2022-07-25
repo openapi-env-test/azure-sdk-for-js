@@ -18,8 +18,6 @@ import {
   ConfigurationStore,
   ConfigurationStoresListNextOptionalParams,
   ConfigurationStoresListOptionalParams,
-  ConfigurationStoresListByResourceGroupNextOptionalParams,
-  ConfigurationStoresListByResourceGroupOptionalParams,
   ApiKey,
   ConfigurationStoresListKeysNextOptionalParams,
   ConfigurationStoresListKeysOptionalParams,
@@ -27,7 +25,6 @@ import {
   ConfigurationStoresListDeletedNextOptionalParams,
   ConfigurationStoresListDeletedOptionalParams,
   ConfigurationStoresListResponse,
-  ConfigurationStoresListByResourceGroupResponse,
   ConfigurationStoresGetOptionalParams,
   ConfigurationStoresGetResponse,
   ConfigurationStoresCreateOptionalParams,
@@ -45,7 +42,6 @@ import {
   ConfigurationStoresGetDeletedResponse,
   ConfigurationStoresPurgeDeletedOptionalParams,
   ConfigurationStoresListNextResponse,
-  ConfigurationStoresListByResourceGroupNextResponse,
   ConfigurationStoresListKeysNextResponse,
   ConfigurationStoresListDeletedNextResponse
 } from "../models";
@@ -101,59 +97,6 @@ export class ConfigurationStoresImpl implements ConfigurationStores {
     options?: ConfigurationStoresListOptionalParams
   ): AsyncIterableIterator<ConfigurationStore> {
     for await (const page of this.listPagingPage(options)) {
-      yield* page;
-    }
-  }
-
-  /**
-   * Lists the configuration stores for a given resource group.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
-   * @param options The options parameters.
-   */
-  public listByResourceGroup(
-    resourceGroupName: string,
-    options?: ConfigurationStoresListByResourceGroupOptionalParams
-  ): PagedAsyncIterableIterator<ConfigurationStore> {
-    const iter = this.listByResourceGroupPagingAll(resourceGroupName, options);
-    return {
-      next() {
-        return iter.next();
-      },
-      [Symbol.asyncIterator]() {
-        return this;
-      },
-      byPage: () => {
-        return this.listByResourceGroupPagingPage(resourceGroupName, options);
-      }
-    };
-  }
-
-  private async *listByResourceGroupPagingPage(
-    resourceGroupName: string,
-    options?: ConfigurationStoresListByResourceGroupOptionalParams
-  ): AsyncIterableIterator<ConfigurationStore[]> {
-    let result = await this._listByResourceGroup(resourceGroupName, options);
-    yield result.value || [];
-    let continuationToken = result.nextLink;
-    while (continuationToken) {
-      result = await this._listByResourceGroupNext(
-        resourceGroupName,
-        continuationToken,
-        options
-      );
-      continuationToken = result.nextLink;
-      yield result.value || [];
-    }
-  }
-
-  private async *listByResourceGroupPagingAll(
-    resourceGroupName: string,
-    options?: ConfigurationStoresListByResourceGroupOptionalParams
-  ): AsyncIterableIterator<ConfigurationStore> {
-    for await (const page of this.listByResourceGroupPagingPage(
-      resourceGroupName,
-      options
-    )) {
       yield* page;
     }
   }
@@ -279,21 +222,6 @@ export class ConfigurationStoresImpl implements ConfigurationStores {
     options?: ConfigurationStoresListOptionalParams
   ): Promise<ConfigurationStoresListResponse> {
     return this.client.sendOperationRequest({ options }, listOperationSpec);
-  }
-
-  /**
-   * Lists the configuration stores for a given resource group.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
-   * @param options The options parameters.
-   */
-  private _listByResourceGroup(
-    resourceGroupName: string,
-    options?: ConfigurationStoresListByResourceGroupOptionalParams
-  ): Promise<ConfigurationStoresListByResourceGroupResponse> {
-    return this.client.sendOperationRequest(
-      { resourceGroupName, options },
-      listByResourceGroupOperationSpec
-    );
   }
 
   /**
@@ -753,23 +681,6 @@ export class ConfigurationStoresImpl implements ConfigurationStores {
   }
 
   /**
-   * ListByResourceGroupNext
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
-   * @param nextLink The nextLink from the previous successful call to the ListByResourceGroup method.
-   * @param options The options parameters.
-   */
-  private _listByResourceGroupNext(
-    resourceGroupName: string,
-    nextLink: string,
-    options?: ConfigurationStoresListByResourceGroupNextOptionalParams
-  ): Promise<ConfigurationStoresListByResourceGroupNextResponse> {
-    return this.client.sendOperationRequest(
-      { resourceGroupName, nextLink, options },
-      listByResourceGroupNextOperationSpec
-    );
-  }
-
-  /**
    * ListKeysNext
    * @param resourceGroupName The name of the resource group to which the container registry belongs.
    * @param configStoreName The name of the configuration store.
@@ -820,27 +731,6 @@ const listOperationSpec: coreClient.OperationSpec = {
   },
   queryParameters: [Parameters.apiVersion, Parameters.skipToken],
   urlParameters: [Parameters.$host, Parameters.subscriptionId],
-  headerParameters: [Parameters.accept],
-  serializer
-};
-const listByResourceGroupOperationSpec: coreClient.OperationSpec = {
-  path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores",
-  httpMethod: "GET",
-  responses: {
-    200: {
-      bodyMapper: Mappers.ConfigurationStoreListResult
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  queryParameters: [Parameters.apiVersion, Parameters.skipToken],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName
-  ],
   headerParameters: [Parameters.accept],
   serializer
 };
@@ -1078,27 +968,6 @@ const listNextOperationSpec: coreClient.OperationSpec = {
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
-    Parameters.nextLink
-  ],
-  headerParameters: [Parameters.accept],
-  serializer
-};
-const listByResourceGroupNextOperationSpec: coreClient.OperationSpec = {
-  path: "{nextLink}",
-  httpMethod: "GET",
-  responses: {
-    200: {
-      bodyMapper: Mappers.ConfigurationStoreListResult
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  queryParameters: [Parameters.apiVersion, Parameters.skipToken],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
     Parameters.nextLink
   ],
   headerParameters: [Parameters.accept],
