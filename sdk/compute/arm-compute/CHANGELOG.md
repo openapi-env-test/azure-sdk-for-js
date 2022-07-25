@@ -1,15 +1,254 @@
 # Release History
+    
+## 19.2.0 (2022-07-25)
+    
+**Features**
 
-## 18.0.1 (Unreleased)
+  - Added Type Alias AvailabilitySet
+  - Added Type Alias AvailabilitySetUpdate
+  - Added Type Alias CapacityReservation
+  - Added Type Alias CapacityReservationGroup
+  - Added Type Alias CapacityReservationGroupUpdate
+  - Added Type Alias CapacityReservationInstanceViewWithName
+  - Added Type Alias CapacityReservationUpdate
+  - Added Type Alias CommunityGallery
+  - Added Type Alias CommunityGalleryImage
+  - Added Type Alias CommunityGalleryImageVersion
+  - Added Type Alias DataDiskImageEncryption
+  - Added Type Alias DedicatedHost
+  - Added Type Alias DedicatedHostGroup
+  - Added Type Alias DedicatedHostGroupUpdate
+  - Added Type Alias DedicatedHostInstanceViewWithName
+  - Added Type Alias DedicatedHostUpdate
+  - Added Type Alias Disk
+  - Added Type Alias DiskAccess
+  - Added Type Alias DiskEncryptionSet
+  - Added Type Alias DiskEncryptionSetParameters
+  - Added Type Alias DiskRestorePoint
+  - Added Type Alias Gallery
+  - Added Type Alias GalleryApplication
+  - Added Type Alias GalleryApplicationUpdate
+  - Added Type Alias GalleryApplicationVersion
+  - Added Type Alias GalleryApplicationVersionPublishingProfile
+  - Added Type Alias GalleryApplicationVersionUpdate
+  - Added Type Alias GalleryDataDiskImage
+  - Added Type Alias GalleryImage
+  - Added Type Alias GalleryImageUpdate
+  - Added Type Alias GalleryImageVersion
+  - Added Type Alias GalleryImageVersionPublishingProfile
+  - Added Type Alias GalleryImageVersionUpdate
+  - Added Type Alias GalleryOSDiskImage
+  - Added Type Alias GalleryUpdate
+  - Added Type Alias Image_2
+  - Added Type Alias ImageDataDisk
+  - Added Type Alias ImageOSDisk
+  - Added Type Alias ImageReference
+  - Added Type Alias ImageUpdate
+  - Added Type Alias ManagedDiskParameters
+  - Added Type Alias NetworkInterfaceReference
+  - Added Type Alias OSDiskImageEncryption
+  - Added Type Alias PirSharedGalleryResource
+  - Added Type Alias ProximityPlacementGroup
+  - Added Type Alias ProximityPlacementGroupUpdate
+  - Added Type Alias RequestRateByIntervalInput
+  - Added Type Alias RestorePoint
+  - Added Type Alias RestorePointCollection
+  - Added Type Alias RestorePointCollectionUpdate
+  - Added Type Alias RollingUpgradeStatusInfo
+  - Added Type Alias RunCommandDocument
+  - Added Type Alias SharedGallery
+  - Added Type Alias SharedGalleryDataDiskImage
+  - Added Type Alias SharedGalleryImage
+  - Added Type Alias SharedGalleryImageVersion
+  - Added Type Alias SharedGalleryOSDiskImage
+  - Added Type Alias Snapshot
+  - Added Type Alias SshPublicKeyResource
+  - Added Type Alias SshPublicKeyUpdateResource
+  - Added Type Alias SubResourceWithColocationStatus
+  - Added Type Alias ThrottledRequestsInput
+  - Added Type Alias VirtualMachine
+  - Added Type Alias VirtualMachineCaptureResult
+  - Added Type Alias VirtualMachineExtension
+  - Added Type Alias VirtualMachineExtensionImage
+  - Added Type Alias VirtualMachineExtensionUpdate
+  - Added Type Alias VirtualMachineImage
+  - Added Type Alias VirtualMachineImageResource
+  - Added Type Alias VirtualMachineRunCommand
+  - Added Type Alias VirtualMachineRunCommandUpdate
+  - Added Type Alias VirtualMachineScaleSet
+  - Added Type Alias VirtualMachineScaleSetExtension
+  - Added Type Alias VirtualMachineScaleSetExtensionUpdate
+  - Added Type Alias VirtualMachineScaleSetIPConfiguration
+  - Added Type Alias VirtualMachineScaleSetNetworkConfiguration
+  - Added Type Alias VirtualMachineScaleSetReimageParameters
+  - Added Type Alias VirtualMachineScaleSetUpdate
+  - Added Type Alias VirtualMachineScaleSetUpdateIPConfiguration
+  - Added Type Alias VirtualMachineScaleSetUpdateNetworkConfiguration
+  - Added Type Alias VirtualMachineScaleSetVM
+  - Added Type Alias VirtualMachineScaleSetVMExtension
+  - Added Type Alias VirtualMachineScaleSetVMExtensionUpdate
+  - Added Type Alias VirtualMachineScaleSetVMReimageParameters
+  - Added Type Alias VirtualMachineUpdate
+    
+    
+## 19.1.0 (2022-06-27)
+    
+**Features**
 
-### Features Added
+  - Added Interface AvailabilitySet
+  - Added Interface AvailabilitySetUpdate
+  - Added Interface CapacityReservation
+  - Added Interface CapacityReservationGroup
+  - Added Interface CapacityReservationGroupUpdate
+  - Added Interface CapacityReservationInstanceViewWithName
+  - Added Interface CapacityReservationUpdate
+  - Added Interface CommunityGallery
+  - Added Interface CommunityGalleryImage
+  - Added Interface CommunityGalleryImageVersion
+  - Added Interface DataDiskImageEncryption
+  - Added Interface DedicatedHost
+  - Added Interface DedicatedHostGroup
+  - Added Interface DedicatedHostGroupUpdate
+  - Added Interface DedicatedHostInstanceViewWithName
+  - Added Interface DedicatedHostUpdate
+  - Added Interface Disk
+  - Added Interface DiskAccess
+  - Added Interface DiskEncryptionSet
+  - Added Interface DiskEncryptionSetParameters
+  - Added Interface DiskRestorePoint
+  - Added Interface Gallery
+  - Added Interface GalleryApplication
+  - Added Interface GalleryApplicationUpdate
+  - Added Interface GalleryApplicationVersion
+  - Added Interface GalleryApplicationVersionPublishingProfile
+  - Added Interface GalleryApplicationVersionUpdate
+  - Added Interface GalleryDataDiskImage
+  - Added Interface GalleryImage
+  - Added Interface GalleryImageUpdate
+  - Added Interface GalleryImageVersion
+  - Added Interface GalleryImageVersionPublishingProfile
+  - Added Interface GalleryImageVersionUpdate
+  - Added Interface GalleryOSDiskImage
+  - Added Interface GalleryUpdate
+  - Added Interface Image_2
+  - Added Interface ImageDataDisk
+  - Added Interface ImageOSDisk
+  - Added Interface ImageReference
+  - Added Interface ImageUpdate
+  - Added Interface ManagedDiskParameters
+  - Added Interface NetworkInterfaceReference
+  - Added Interface OSDiskImageEncryption
+  - Added Interface PirSharedGalleryResource
+  - Added Interface ProximityPlacementGroup
+  - Added Interface ProximityPlacementGroupUpdate
+  - Added Interface RequestRateByIntervalInput
+  - Added Interface RestorePoint
+  - Added Interface RestorePointCollection
+  - Added Interface RestorePointCollectionUpdate
+  - Added Interface RollingUpgradeStatusInfo
+  - Added Interface RunCommandDocument
+  - Added Interface SharedGallery
+  - Added Interface SharedGalleryDataDiskImage
+  - Added Interface SharedGalleryImage
+  - Added Interface SharedGalleryImageVersion
+  - Added Interface SharedGalleryOSDiskImage
+  - Added Interface Snapshot
+  - Added Interface SshPublicKeyResource
+  - Added Interface SshPublicKeyUpdateResource
+  - Added Interface SubResourceWithColocationStatus
+  - Added Interface SystemData
+  - Added Interface ThrottledRequestsInput
+  - Added Interface VirtualMachine
+  - Added Interface VirtualMachineCaptureResult
+  - Added Interface VirtualMachineExtension
+  - Added Interface VirtualMachineExtensionImage
+  - Added Interface VirtualMachineExtensionUpdate
+  - Added Interface VirtualMachineImage
+  - Added Interface VirtualMachineImageResource
+  - Added Interface VirtualMachineRunCommand
+  - Added Interface VirtualMachineRunCommandUpdate
+  - Added Interface VirtualMachineScaleSet
+  - Added Interface VirtualMachineScaleSetExtension
+  - Added Interface VirtualMachineScaleSetExtensionUpdate
+  - Added Interface VirtualMachineScaleSetIPConfiguration
+  - Added Interface VirtualMachineScaleSetNetworkConfiguration
+  - Added Interface VirtualMachineScaleSetReimageParameters
+  - Added Interface VirtualMachineScaleSetUpdate
+  - Added Interface VirtualMachineScaleSetUpdateIPConfiguration
+  - Added Interface VirtualMachineScaleSetUpdateNetworkConfiguration
+  - Added Interface VirtualMachineScaleSetVM
+  - Added Interface VirtualMachineScaleSetVMExtension
+  - Added Interface VirtualMachineScaleSetVMExtensionUpdate
+  - Added Interface VirtualMachineScaleSetVMReimageParameters
+  - Added Interface VirtualMachineUpdate
+  - Added Type Alias CloudServiceSlotType
+  - Interface CloudService has a new optional parameter systemData
+  - Interface CloudServiceNetworkProfile has a new optional parameter slotType
+  - Added Enum KnownCloudServiceSlotType
+    
+    
+## 19.0.0 (2022-06-06)
+    
+**Features**
 
-### Breaking Changes
+  - Added operation CommunityGalleryImages.list
+  - Added operation CommunityGalleryImageVersions.list
+  - Added operation VirtualMachineImages.listByEdgeZone
+  - Added Interface CommunityGalleryImageList
+  - Added Interface CommunityGalleryImagesListNextOptionalParams
+  - Added Interface CommunityGalleryImagesListOptionalParams
+  - Added Interface CommunityGalleryImageVersionList
+  - Added Interface CommunityGalleryImageVersionsListNextOptionalParams
+  - Added Interface CommunityGalleryImageVersionsListOptionalParams
+  - Added Interface CopyCompletionError
+  - Added Interface SharedGalleryDiskImage
+  - Added Interface SharedGalleryImageVersionStorageProfile
+  - Added Interface UserArtifactSettings
+  - Added Interface VirtualMachineImagesListByEdgeZoneOptionalParams
+  - Added Interface VmImagesInEdgeZoneListResult
+  - Added Type Alias CommunityGalleryImagesListNextResponse
+  - Added Type Alias CommunityGalleryImagesListResponse
+  - Added Type Alias CommunityGalleryImageVersionsListNextResponse
+  - Added Type Alias CommunityGalleryImageVersionsListResponse
+  - Added Type Alias CopyCompletionErrorReason
+  - Added Type Alias GalleryProvisioningState
+  - Added Type Alias SharedGalleryDataDiskImage
+  - Added Type Alias SharedGalleryHostCaching
+  - Added Type Alias SharedGalleryOSDiskImage
+  - Added Type Alias VirtualMachineImagesListByEdgeZoneResponse
+  - Interface DiskEncryptionSetUpdate has a new optional parameter federatedClientId
+  - Interface EncryptionSetIdentity has a new optional parameter userAssignedIdentities
+  - Interface ImageDiskReference has a new optional parameter communityGalleryImageId
+  - Interface ImageDiskReference has a new optional parameter sharedGalleryImageId
+  - Type Alias CommunityGalleryImage has a new parameter architecture
+  - Type Alias CommunityGalleryImage has a new parameter privacyStatementUri
+  - Type Alias CommunityGalleryImage has a new parameter eula
+  - Type Alias CommunityGalleryImageVersion has a new parameter excludeFromLatest
+  - Type Alias CommunityGalleryImageVersion has a new parameter storageProfile
+  - Type Alias DiskEncryptionSet has a new parameter federatedClientId
+  - Type Alias DiskRestorePoint has a new parameter securityProfile
+  - Type Alias GalleryApplicationVersionPublishingProfile has a new parameter settings
+  - Type Alias SharedGalleryImage has a new parameter architecture
+  - Type Alias SharedGalleryImageVersion has a new parameter excludeFromLatest
+  - Type Alias SharedGalleryImageVersion has a new parameter storageProfile
+  - Type Alias Snapshot has a new parameter copyCompletionError
+  - Added Enum KnownCopyCompletionErrorReason
+  - Added Enum KnownGalleryProvisioningState
+  - Added Enum KnownSharedGalleryHostCaching
+  - Enum KnownDiskEncryptionSetIdentityType has a new value SystemAssignedUserAssigned
+  - Enum KnownDiskEncryptionSetIdentityType has a new value UserAssigned
+  - Enum KnownDiskStorageAccountTypes has a new value PremiumV2LRS
+  - Enum KnownGallerySharingPermissionTypes has a new value Community
 
-### Bugs Fixed
+**Breaking Changes**
 
-### Other Changes
-
+  - Removed Enum KnownGalleryApplicationVersionPropertiesProvisioningState
+  - Removed Enum KnownGalleryImagePropertiesProvisioningState
+  - Removed Enum KnownGalleryImageVersionPropertiesProvisioningState
+  - Removed Enum KnownGalleryPropertiesProvisioningState
+  - Enum KnownSharingProfileGroupTypes no longer has value Community
+    
+    
 ## 18.0.0 (2022-05-23)
     
 **Features**
