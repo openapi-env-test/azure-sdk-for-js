@@ -636,19 +636,19 @@ export interface CustomDomain {
 }
 
 // @public
-export type CustomHostnameAnalysisResult = ProxyResource & {
-    readonly hostName?: string;
-    readonly isHostnameAlreadyVerified?: boolean;
-    readonly customDomainVerificationTest?: DnsVerificationTestResult;
-    readonly customDomainVerificationFailureInfo?: DefaultErrorResponse;
-    readonly hasConflictOnManagedEnvironment?: boolean;
-    readonly conflictingContainerAppResourceId?: string;
-    cNameRecords?: string[];
-    txtRecords?: string[];
-    aRecords?: string[];
+export interface CustomHostnameAnalysisResult {
     alternateCNameRecords?: string[];
     alternateTxtRecords?: string[];
-};
+    aRecords?: string[];
+    cNameRecords?: string[];
+    readonly conflictingContainerAppResourceId?: string;
+    readonly customDomainVerificationFailureInfo?: DefaultErrorResponse;
+    readonly customDomainVerificationTest?: DnsVerificationTestResult;
+    readonly hasConflictOnManagedEnvironment?: boolean;
+    readonly hostName?: string;
+    readonly isHostnameAlreadyVerified?: boolean;
+    txtRecords?: string[];
+}
 
 // @public
 export interface CustomOpenIdConnectProvider {
@@ -1339,7 +1339,7 @@ export interface OperationsListOptionalParams extends coreClient.OperationOption
 export type OperationsListResponse = AvailableOperations;
 
 // @public
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 // @public
 export interface QueueScaleRule {
