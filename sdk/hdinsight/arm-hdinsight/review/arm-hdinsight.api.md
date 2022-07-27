@@ -1301,7 +1301,7 @@ export interface PrivateLinkServiceConnectionState {
 export type PrivateLinkServiceConnectionStatus = string;
 
 // @public
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 // @public
 export interface QuotaCapability {
