@@ -31,6 +31,8 @@ export interface ServicesProperties {
   publicNetworkAccess?: PublicNetworkAccess;
   /** The azure container registry settings used for convert data operation of the service instance. */
   acrConfiguration?: ServiceAcrConfigurationInfo;
+  /** The settings for the import operation of the service instance. */
+  importConfiguration?: ServiceImportConfigurationInfo;
 }
 
 /** An access policy entry. */
@@ -96,7 +98,7 @@ export interface PrivateLinkServiceConnectionState {
   actionsRequired?: string;
 }
 
-/** Common fields that are returned in the response for all Azure Resource Manager resources */
+/** Common  fields that are returned in the response for all Azure Resource Manager resources */
 export interface Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
@@ -131,6 +133,16 @@ export interface ServiceOciArtifactEntry {
   imageName?: string;
   /** The artifact digest. */
   digest?: string;
+}
+
+/** Import operation configuration information */
+export interface ServiceImportConfigurationInfo {
+  /** The name of the default integration storage account. */
+  integrationDataStore?: string;
+  /** If the FHIR service is in InitialImportMode. */
+  initialImportMode?: boolean;
+  /** If the import operation is enabled. */
+  enabled?: boolean;
 }
 
 /** Metadata pertaining to creation and last modification of the resource. */
@@ -350,6 +362,20 @@ export interface DicomServiceAuthenticationConfiguration {
   readonly audiences?: string[];
 }
 
+/** The settings for the CORS configuration of the service instance. */
+export interface CorsConfiguration {
+  /** The origins to be allowed via CORS. */
+  origins?: string[];
+  /** The headers to be allowed via CORS. */
+  headers?: string[];
+  /** The methods to be allowed via CORS. */
+  methods?: string[];
+  /** The max age to be allowed via CORS. */
+  maxAge?: number;
+  /** If credentials are allowed via CORS. */
+  allowCredentials?: boolean;
+}
+
 /** Managed service identity (system assigned and/or user assigned identities) */
 export interface ServiceManagedIdentity {
   /** Setting indicating whether the service has a managed identity associated with it. */
@@ -489,6 +515,16 @@ export interface ResourceVersionPolicyConfiguration {
   resourceTypeOverrides?: { [propertyName: string]: FhirResourceVersionPolicy };
 }
 
+/** Import operation configuration information */
+export interface FhirServiceImportConfiguration {
+  /** The name of the default integration storage account. */
+  integrationDataStore?: string;
+  /** If the FHIR service is in InitialImportMode. */
+  initialImportMode?: boolean;
+  /** If the import operation is enabled. */
+  enabled?: boolean;
+}
+
 /** Available operations of the service */
 export interface ListOperations {
   /**
@@ -599,10 +635,20 @@ export interface MetricSpecification {
   supportedTimeGrainTypes?: string[];
   /** Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published. */
   fillGapWithZero?: boolean;
+  /** Pattern for the filter of the metric. */
+  metricFilterPattern?: string;
   /** Dimensions of the metric */
   dimensions?: MetricDimension[];
-  /** Name of the MDM namespace. Optional. */
+  /** Whether the metric is internal. */
+  isInternal?: boolean;
+  /** The source MDM account. */
+  sourceMdmAccount?: string;
+  /** The source MDM namespace. */
   sourceMdmNamespace?: string;
+  /** Whether regional MDM account enabled. */
+  enableRegionalMdmAccount?: boolean;
+  /** The resource Id dimension name override. */
+  resourceIdDimensionNameOverride?: string;
 }
 
 /** Specifications of the Dimension of metrics */
@@ -693,22 +739,19 @@ export type ServicesDescription = ServicesResource & {
 };
 
 /** The common properties of tracked resources in the service. */
-export type TaggedResource = ResourceTags & LocationBasedResource & {};
+export type TaggedResource = ResourceTags & LocationBasedResource;
 
 /** Workspace patch properties */
-export type WorkspacePatchResource = ResourceTags & {};
+export type WorkspacePatchResource = ResourceTags;
 
 /** Dicom Service patch properties */
-export type DicomServicePatchResource = ResourceTags &
-  ServiceManagedIdentity & {};
+export type DicomServicePatchResource = ResourceTags & ServiceManagedIdentity;
 
 /** Iot Connector patch properties */
-export type IotConnectorPatchResource = ResourceTags &
-  ServiceManagedIdentity & {};
+export type IotConnectorPatchResource = ResourceTags & ServiceManagedIdentity;
 
 /** FhirService patch properties */
-export type FhirServicePatchResource = ResourceTags &
-  ServiceManagedIdentity & {};
+export type FhirServicePatchResource = ResourceTags & ServiceManagedIdentity;
 
 /** The common properties for any location based resource, tracked or proxy. */
 export type LocationBasedResource = ResourceCore & {
@@ -731,6 +774,8 @@ export type DicomService = TaggedResource &
     readonly provisioningState?: ProvisioningState;
     /** Dicom Service authentication configuration. */
     authenticationConfiguration?: DicomServiceAuthenticationConfiguration;
+    /** Dicom Service Cors configuration. */
+    corsConfiguration?: CorsConfiguration;
     /**
      * The url of the Dicom Services.
      * NOTE: This property will not be serialized. It can only be populated by the server.
@@ -803,6 +848,8 @@ export type FhirService = TaggedResource &
     readonly eventState?: ServiceEventState;
     /** Determines tracking of history for resources. */
     resourceVersionPolicyConfiguration?: ResourceVersionPolicyConfiguration;
+    /** Fhir Service import configuration. */
+    importConfiguration?: FhirServiceImportConfiguration;
   };
 
 /** IoT Connector destination properties for an Azure FHIR service. */
