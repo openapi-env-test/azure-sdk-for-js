@@ -1,15 +1,37 @@
 # Release History
+    
+## 4.0.0 (2022-07-27)
+    
+**Features**
 
-## 3.0.2 (Unreleased)
+  - Added Interface AvailabilityStatusPropertiesRecentlyResolved
+  - Added Type Alias ImpactedResourceStatus
+  - Added Type Alias ReasonTypeValues
+  - Interface AvailabilityStatusProperties has a new optional parameter recentlyResolved
+  - Interface AvailabilityStatusProperties has a new optional parameter title
+  - Added Enum KnownAvailabilityStateValues
+  - Added Enum KnownReasonChronicityTypes
+  - Added Enum KnownReasonTypeValues
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
+  - Removed operation group ChildAvailabilityStatuses
+  - Removed operation group ChildResources
+  - Removed operation group EmergingIssues
+  - Interface AvailabilityStatusProperties no longer has parameter recentlyResolvedState
+  - Class MicrosoftResourceHealth no longer has parameter childAvailabilityStatuses
+  - Class MicrosoftResourceHealth no longer has parameter childResources
+  - Class MicrosoftResourceHealth no longer has parameter emergingIssues
+  - Removed Enum KnownSeverityValues
+  - Removed Enum KnownStageValues
+    
+    
+## 3.1.0 (2022-07-14)
+    
+**Features**
 
-### Bugs Fixed
-
-### Other Changes
-
+  - Added Interface EmergingIssuesGetResult
+    
 ## 3.0.1 (2022-04-29)
 
 **Features**
