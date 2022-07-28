@@ -235,7 +235,7 @@ export interface Operation {
   display?: OperationDisplay;
   /** The intended executor of the operation. */
   origin?: string;
-  /** Any object */
+  /** Properties of the operation. */
   properties?: Record<string, unknown>;
   /** The flag that indicates whether the operation applies to data plane. */
   isDataAction?: boolean;
