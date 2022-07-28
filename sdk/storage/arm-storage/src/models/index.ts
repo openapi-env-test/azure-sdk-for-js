@@ -618,7 +618,7 @@ export interface PrivateLinkServiceConnectionState {
   actionRequired?: string;
 }
 
-/** Common fields that are returned in the response for all Azure Resource Manager resources */
+/** Common  fields that are returned in the response for all Azure Resource Manager resources */
 export interface Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
@@ -1289,7 +1289,7 @@ export interface CorsRules {
 
 /** Specifies a CORS rule for the Blob service. */
 export interface CorsRule {
-  /** Required if CorsRule element is present. A list of origin domains that will be allowed via CORS, or "*" to allow all domains */
+  /** Required if CorsRule element is  present. A list of origin domains that will be allowed via CORS, or "*" to allow all domains */
   allowedOrigins: string[];
   /** Required if CorsRule element is present. A list of HTTP methods that are allowed to be executed by the origin. */
   allowedMethods: CorsRuleAllowedMethodsItem[];
@@ -1708,7 +1708,7 @@ export type TrackedResource = Resource & {
 };
 
 /** The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location */
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 /** The Get Storage Account ManagementPolicies operation response. */
 export type ManagementPolicy = Resource & {
