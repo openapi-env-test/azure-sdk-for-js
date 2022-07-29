@@ -1,15 +1,1054 @@
 # Release History
+    
+## 10.8.0 (2022-07-29)
+    
+**Features**
 
-## 10.5.1 (Unreleased)
+  - Added Interface BigDataPoolParametrizationReference
+  - Added Interface NotebookParameter
+  - Added Interface SynapseNotebookReference
+  - Added Interface SynapseSparkJobReference
+  - Added Type Alias AmazonMWSLinkedService
+  - Added Type Alias AmazonMWSObjectDataset
+  - Added Type Alias AmazonMWSSource
+  - Added Type Alias AmazonRdsForOracleLinkedService
+  - Added Type Alias AmazonRdsForOracleSource
+  - Added Type Alias AmazonRdsForOracleTableDataset
+  - Added Type Alias AmazonRdsForSqlServerLinkedService
+  - Added Type Alias AmazonRdsForSqlServerSource
+  - Added Type Alias AmazonRdsForSqlServerTableDataset
+  - Added Type Alias AmazonRedshiftLinkedService
+  - Added Type Alias AmazonRedshiftSource
+  - Added Type Alias AmazonRedshiftTableDataset
+  - Added Type Alias AmazonS3CompatibleLinkedService
+  - Added Type Alias AmazonS3CompatibleLocation
+  - Added Type Alias AmazonS3CompatibleReadSettings
+  - Added Type Alias AmazonS3Dataset
+  - Added Type Alias AmazonS3LinkedService
+  - Added Type Alias AmazonS3Location
+  - Added Type Alias AmazonS3ReadSettings
+  - Added Type Alias AppendVariableActivity
+  - Added Type Alias AppFiguresLinkedService
+  - Added Type Alias AsanaLinkedService
+  - Added Type Alias AvroDataset
+  - Added Type Alias AvroFormat
+  - Added Type Alias AvroSink
+  - Added Type Alias AvroSource
+  - Added Type Alias AvroWriteSettings
+  - Added Type Alias AzPowerShellSetup
+  - Added Type Alias AzureBatchLinkedService
+  - Added Type Alias AzureBlobDataset
+  - Added Type Alias AzureBlobFSDataset
+  - Added Type Alias AzureBlobFSLinkedService
+  - Added Type Alias AzureBlobFSLocation
+  - Added Type Alias AzureBlobFSReadSettings
+  - Added Type Alias AzureBlobFSSink
+  - Added Type Alias AzureBlobFSSource
+  - Added Type Alias AzureBlobFSWriteSettings
+  - Added Type Alias AzureBlobStorageLinkedService
+  - Added Type Alias AzureBlobStorageLocation
+  - Added Type Alias AzureBlobStorageReadSettings
+  - Added Type Alias AzureBlobStorageWriteSettings
+  - Added Type Alias AzureDatabricksDeltaLakeDataset
+  - Added Type Alias AzureDatabricksDeltaLakeExportCommand
+  - Added Type Alias AzureDatabricksDeltaLakeImportCommand
+  - Added Type Alias AzureDatabricksDeltaLakeLinkedService
+  - Added Type Alias AzureDatabricksDeltaLakeSink
+  - Added Type Alias AzureDatabricksDeltaLakeSource
+  - Added Type Alias AzureDatabricksLinkedService
+  - Added Type Alias AzureDataExplorerCommandActivity
+  - Added Type Alias AzureDataExplorerLinkedService
+  - Added Type Alias AzureDataExplorerSink
+  - Added Type Alias AzureDataExplorerSource
+  - Added Type Alias AzureDataExplorerTableDataset
+  - Added Type Alias AzureDataLakeAnalyticsLinkedService
+  - Added Type Alias AzureDataLakeStoreDataset
+  - Added Type Alias AzureDataLakeStoreLinkedService
+  - Added Type Alias AzureDataLakeStoreLocation
+  - Added Type Alias AzureDataLakeStoreReadSettings
+  - Added Type Alias AzureDataLakeStoreSink
+  - Added Type Alias AzureDataLakeStoreSource
+  - Added Type Alias AzureDataLakeStoreWriteSettings
+  - Added Type Alias AzureFileStorageLinkedService
+  - Added Type Alias AzureFileStorageLocation
+  - Added Type Alias AzureFileStorageReadSettings
+  - Added Type Alias AzureFileStorageWriteSettings
+  - Added Type Alias AzureFunctionActivity
+  - Added Type Alias AzureFunctionLinkedService
+  - Added Type Alias AzureKeyVaultLinkedService
+  - Added Type Alias AzureKeyVaultSecretReference
+  - Added Type Alias AzureMariaDBLinkedService
+  - Added Type Alias AzureMariaDBSource
+  - Added Type Alias AzureMariaDBTableDataset
+  - Added Type Alias AzureMLBatchExecutionActivity
+  - Added Type Alias AzureMLExecutePipelineActivity
+  - Added Type Alias AzureMLLinkedService
+  - Added Type Alias AzureMLServiceLinkedService
+  - Added Type Alias AzureMLUpdateResourceActivity
+  - Added Type Alias AzureMySqlLinkedService
+  - Added Type Alias AzureMySqlSink
+  - Added Type Alias AzureMySqlSource
+  - Added Type Alias AzureMySqlTableDataset
+  - Added Type Alias AzurePostgreSqlLinkedService
+  - Added Type Alias AzurePostgreSqlSink
+  - Added Type Alias AzurePostgreSqlSource
+  - Added Type Alias AzurePostgreSqlTableDataset
+  - Added Type Alias AzureQueueSink
+  - Added Type Alias AzureSearchIndexDataset
+  - Added Type Alias AzureSearchIndexSink
+  - Added Type Alias AzureSearchLinkedService
+  - Added Type Alias AzureSqlDatabaseLinkedService
+  - Added Type Alias AzureSqlDWLinkedService
+  - Added Type Alias AzureSqlDWTableDataset
+  - Added Type Alias AzureSqlMILinkedService
+  - Added Type Alias AzureSqlMITableDataset
+  - Added Type Alias AzureSqlSink
+  - Added Type Alias AzureSqlSource
+  - Added Type Alias AzureSqlTableDataset
+  - Added Type Alias AzureStorageLinkedService
+  - Added Type Alias AzureSynapseArtifactsLinkedService
+  - Added Type Alias AzureTableDataset
+  - Added Type Alias AzureTableSink
+  - Added Type Alias AzureTableSource
+  - Added Type Alias AzureTableStorageLinkedService
+  - Added Type Alias BigDataPoolReferenceType
+  - Added Type Alias BinaryDataset
+  - Added Type Alias BinaryReadSettings
+  - Added Type Alias BinarySink
+  - Added Type Alias BinarySource
+  - Added Type Alias BlobEventsTrigger
+  - Added Type Alias BlobSink
+  - Added Type Alias BlobSource
+  - Added Type Alias BlobTrigger
+  - Added Type Alias CassandraLinkedService
+  - Added Type Alias CassandraSource
+  - Added Type Alias CassandraTableDataset
+  - Added Type Alias ChainingTrigger
+  - Added Type Alias CmdkeySetup
+  - Added Type Alias CommonDataServiceForAppsEntityDataset
+  - Added Type Alias CommonDataServiceForAppsLinkedService
+  - Added Type Alias CommonDataServiceForAppsSink
+  - Added Type Alias CommonDataServiceForAppsSource
+  - Added Type Alias ComponentSetup
+  - Added Type Alias ConcurLinkedService
+  - Added Type Alias ConcurObjectDataset
+  - Added Type Alias ConcurSource
+  - Added Type Alias ControlActivity
+  - Added Type Alias CopyActivity
+  - Added Type Alias CosmosDbLinkedService
+  - Added Type Alias CosmosDbMongoDbApiCollectionDataset
+  - Added Type Alias CosmosDbMongoDbApiLinkedService
+  - Added Type Alias CosmosDbMongoDbApiSink
+  - Added Type Alias CosmosDbMongoDbApiSource
+  - Added Type Alias CosmosDbSqlApiCollectionDataset
+  - Added Type Alias CosmosDbSqlApiSink
+  - Added Type Alias CosmosDbSqlApiSource
+  - Added Type Alias CouchbaseLinkedService
+  - Added Type Alias CouchbaseSource
+  - Added Type Alias CouchbaseTableDataset
+  - Added Type Alias CredentialResource
+  - Added Type Alias CustomActivity
+  - Added Type Alias CustomDataset
+  - Added Type Alias CustomDataSourceLinkedService
+  - Added Type Alias CustomEventsTrigger
+  - Added Type Alias DatabricksNotebookActivity
+  - Added Type Alias DatabricksSparkJarActivity
+  - Added Type Alias DatabricksSparkPythonActivity
+  - Added Type Alias DataFlowDebugResource
+  - Added Type Alias DataFlowResource
+  - Added Type Alias DataFlowSink
+  - Added Type Alias DataFlowSource
+  - Added Type Alias DataLakeAnalyticsUsqlActivity
+  - Added Type Alias DatasetDebugResource
+  - Added Type Alias DatasetResource
+  - Added Type Alias DataworldLinkedService
+  - Added Type Alias Db2LinkedService
+  - Added Type Alias Db2Source
+  - Added Type Alias Db2TableDataset
+  - Added Type Alias DeleteActivity
+  - Added Type Alias DelimitedTextDataset
+  - Added Type Alias DelimitedTextReadSettings
+  - Added Type Alias DelimitedTextSink
+  - Added Type Alias DelimitedTextSource
+  - Added Type Alias DelimitedTextWriteSettings
+  - Added Type Alias DocumentDbCollectionDataset
+  - Added Type Alias DocumentDbCollectionSink
+  - Added Type Alias DocumentDbCollectionSource
+  - Added Type Alias DrillLinkedService
+  - Added Type Alias DrillSource
+  - Added Type Alias DrillTableDataset
+  - Added Type Alias DynamicsAXLinkedService
+  - Added Type Alias DynamicsAXResourceDataset
+  - Added Type Alias DynamicsAXSource
+  - Added Type Alias DynamicsCrmEntityDataset
+  - Added Type Alias DynamicsCrmLinkedService
+  - Added Type Alias DynamicsCrmSink
+  - Added Type Alias DynamicsCrmSource
+  - Added Type Alias DynamicsEntityDataset
+  - Added Type Alias DynamicsLinkedService
+  - Added Type Alias DynamicsSink
+  - Added Type Alias DynamicsSource
+  - Added Type Alias EloquaLinkedService
+  - Added Type Alias EloquaObjectDataset
+  - Added Type Alias EloquaSource
+  - Added Type Alias EnvironmentVariableSetup
+  - Added Type Alias ExcelDataset
+  - Added Type Alias ExcelSource
+  - Added Type Alias ExecuteDataFlowActivity
+  - Added Type Alias ExecutePipelineActivity
+  - Added Type Alias ExecutePowerQueryActivityTypeProperties
+  - Added Type Alias ExecuteSsisPackageActivity
+  - Added Type Alias ExecuteWranglingDataflowActivity
+  - Added Type Alias ExecutionActivity
+  - Added Type Alias Factory
+  - Added Type Alias FactoryGitHubConfiguration
+  - Added Type Alias FactoryVstsConfiguration
+  - Added Type Alias FailActivity
+  - Added Type Alias FileServerLinkedService
+  - Added Type Alias FileServerLocation
+  - Added Type Alias FileServerReadSettings
+  - Added Type Alias FileServerWriteSettings
+  - Added Type Alias FileShareDataset
+  - Added Type Alias FileSystemSink
+  - Added Type Alias FileSystemSource
+  - Added Type Alias FilterActivity
+  - Added Type Alias Flowlet
+  - Added Type Alias ForEachActivity
+  - Added Type Alias FtpReadSettings
+  - Added Type Alias FtpServerLinkedService
+  - Added Type Alias FtpServerLocation
+  - Added Type Alias GetMetadataActivity
+  - Added Type Alias GlobalParameterResource
+  - Added Type Alias GoogleAdWordsLinkedService
+  - Added Type Alias GoogleAdWordsObjectDataset
+  - Added Type Alias GoogleAdWordsSource
+  - Added Type Alias GoogleBigQueryLinkedService
+  - Added Type Alias GoogleBigQueryObjectDataset
+  - Added Type Alias GoogleBigQuerySource
+  - Added Type Alias GoogleCloudStorageLinkedService
+  - Added Type Alias GoogleCloudStorageLocation
+  - Added Type Alias GoogleCloudStorageReadSettings
+  - Added Type Alias GreenplumLinkedService
+  - Added Type Alias GreenplumSource
+  - Added Type Alias GreenplumTableDataset
+  - Added Type Alias HBaseLinkedService
+  - Added Type Alias HBaseObjectDataset
+  - Added Type Alias HBaseSource
+  - Added Type Alias HdfsLinkedService
+  - Added Type Alias HdfsLocation
+  - Added Type Alias HdfsReadSettings
+  - Added Type Alias HdfsSource
+  - Added Type Alias HDInsightHiveActivity
+  - Added Type Alias HDInsightLinkedService
+  - Added Type Alias HDInsightMapReduceActivity
+  - Added Type Alias HDInsightOnDemandLinkedService
+  - Added Type Alias HDInsightPigActivity
+  - Added Type Alias HDInsightSparkActivity
+  - Added Type Alias HDInsightStreamingActivity
+  - Added Type Alias HiveLinkedService
+  - Added Type Alias HiveObjectDataset
+  - Added Type Alias HiveSource
+  - Added Type Alias HttpDataset
+  - Added Type Alias HttpLinkedService
+  - Added Type Alias HttpReadSettings
+  - Added Type Alias HttpServerLocation
+  - Added Type Alias HttpSource
+  - Added Type Alias HubspotLinkedService
+  - Added Type Alias HubspotObjectDataset
+  - Added Type Alias HubspotSource
+  - Added Type Alias IfConditionActivity
+  - Added Type Alias ImpalaLinkedService
+  - Added Type Alias ImpalaObjectDataset
+  - Added Type Alias ImpalaSource
+  - Added Type Alias InformixLinkedService
+  - Added Type Alias InformixSink
+  - Added Type Alias InformixSource
+  - Added Type Alias InformixTableDataset
+  - Added Type Alias IntegrationRuntimeDebugResource
+  - Added Type Alias IntegrationRuntimeResource
+  - Added Type Alias JiraLinkedService
+  - Added Type Alias JiraObjectDataset
+  - Added Type Alias JiraSource
+  - Added Type Alias JsonDataset
+  - Added Type Alias JsonFormat
+  - Added Type Alias JsonReadSettings
+  - Added Type Alias JsonSink
+  - Added Type Alias JsonSource
+  - Added Type Alias JsonWriteSettings
+  - Added Type Alias LinkedIntegrationRuntimeKeyAuthorization
+  - Added Type Alias LinkedIntegrationRuntimeRbacAuthorization
+  - Added Type Alias LinkedServiceDebugResource
+  - Added Type Alias LinkedServiceResource
+  - Added Type Alias LookupActivity
+  - Added Type Alias MagentoLinkedService
+  - Added Type Alias MagentoObjectDataset
+  - Added Type Alias MagentoSource
+  - Added Type Alias ManagedIdentityCredential
+  - Added Type Alias ManagedIntegrationRuntime
+  - Added Type Alias ManagedIntegrationRuntimeStatus
+  - Added Type Alias ManagedPrivateEndpointResource
+  - Added Type Alias ManagedVirtualNetworkResource
+  - Added Type Alias MappingDataFlow
+  - Added Type Alias MariaDBLinkedService
+  - Added Type Alias MariaDBSource
+  - Added Type Alias MariaDBTableDataset
+  - Added Type Alias MarketoLinkedService
+  - Added Type Alias MarketoObjectDataset
+  - Added Type Alias MarketoSource
+  - Added Type Alias MicrosoftAccessLinkedService
+  - Added Type Alias MicrosoftAccessSink
+  - Added Type Alias MicrosoftAccessSource
+  - Added Type Alias MicrosoftAccessTableDataset
+  - Added Type Alias MongoDbAtlasCollectionDataset
+  - Added Type Alias MongoDbAtlasLinkedService
+  - Added Type Alias MongoDbAtlasSink
+  - Added Type Alias MongoDbAtlasSource
+  - Added Type Alias MongoDbCollectionDataset
+  - Added Type Alias MongoDbLinkedService
+  - Added Type Alias MongoDbSource
+  - Added Type Alias MongoDbV2CollectionDataset
+  - Added Type Alias MongoDbV2LinkedService
+  - Added Type Alias MongoDbV2Sink
+  - Added Type Alias MongoDbV2Source
+  - Added Type Alias MultiplePipelineTrigger
+  - Added Type Alias MySqlLinkedService
+  - Added Type Alias MySqlSource
+  - Added Type Alias MySqlTableDataset
+  - Added Type Alias NetezzaLinkedService
+  - Added Type Alias NetezzaSource
+  - Added Type Alias NetezzaTableDataset
+  - Added Type Alias NotebookParameterType
+  - Added Type Alias NotebookReferenceType
+  - Added Type Alias ODataLinkedService
+  - Added Type Alias ODataResourceDataset
+  - Added Type Alias ODataSource
+  - Added Type Alias OdbcLinkedService
+  - Added Type Alias OdbcSink
+  - Added Type Alias OdbcSource
+  - Added Type Alias OdbcTableDataset
+  - Added Type Alias Office365Dataset
+  - Added Type Alias Office365LinkedService
+  - Added Type Alias Office365Source
+  - Added Type Alias OracleCloudStorageLinkedService
+  - Added Type Alias OracleCloudStorageLocation
+  - Added Type Alias OracleCloudStorageReadSettings
+  - Added Type Alias OracleLinkedService
+  - Added Type Alias OracleServiceCloudLinkedService
+  - Added Type Alias OracleServiceCloudObjectDataset
+  - Added Type Alias OracleServiceCloudSource
+  - Added Type Alias OracleSink
+  - Added Type Alias OracleSource
+  - Added Type Alias OracleTableDataset
+  - Added Type Alias OrcDataset
+  - Added Type Alias OrcFormat
+  - Added Type Alias OrcSink
+  - Added Type Alias OrcSource
+  - Added Type Alias OrcWriteSettings
+  - Added Type Alias ParquetDataset
+  - Added Type Alias ParquetFormat
+  - Added Type Alias ParquetSink
+  - Added Type Alias ParquetSource
+  - Added Type Alias ParquetWriteSettings
+  - Added Type Alias PaypalLinkedService
+  - Added Type Alias PaypalObjectDataset
+  - Added Type Alias PaypalSource
+  - Added Type Alias PhoenixLinkedService
+  - Added Type Alias PhoenixObjectDataset
+  - Added Type Alias PhoenixSource
+  - Added Type Alias PipelineResource
+  - Added Type Alias PostgreSqlLinkedService
+  - Added Type Alias PostgreSqlSource
+  - Added Type Alias PostgreSqlTableDataset
+  - Added Type Alias PowerQuerySink
+  - Added Type Alias PowerQuerySource
+  - Added Type Alias PrestoLinkedService
+  - Added Type Alias PrestoObjectDataset
+  - Added Type Alias PrestoSource
+  - Added Type Alias PrivateEndpointConnectionResource
+  - Added Type Alias PrivateLinkConnectionApprovalRequestResource
+  - Added Type Alias PrivateLinkResource
+  - Added Type Alias QuickbaseLinkedService
+  - Added Type Alias QuickBooksLinkedService
+  - Added Type Alias QuickBooksObjectDataset
+  - Added Type Alias QuickBooksSource
+  - Added Type Alias RelationalSource
+  - Added Type Alias RelationalTableDataset
+  - Added Type Alias RerunTumblingWindowTrigger
+  - Added Type Alias ResponsysLinkedService
+  - Added Type Alias ResponsysObjectDataset
+  - Added Type Alias ResponsysSource
+  - Added Type Alias RestResourceDataset
+  - Added Type Alias RestServiceLinkedService
+  - Added Type Alias RestSink
+  - Added Type Alias RestSource
+  - Added Type Alias SalesforceLinkedService
+  - Added Type Alias SalesforceMarketingCloudLinkedService
+  - Added Type Alias SalesforceMarketingCloudObjectDataset
+  - Added Type Alias SalesforceMarketingCloudSource
+  - Added Type Alias SalesforceObjectDataset
+  - Added Type Alias SalesforceServiceCloudLinkedService
+  - Added Type Alias SalesforceServiceCloudObjectDataset
+  - Added Type Alias SalesforceServiceCloudSink
+  - Added Type Alias SalesforceServiceCloudSource
+  - Added Type Alias SalesforceSink
+  - Added Type Alias SalesforceSource
+  - Added Type Alias SapBwCubeDataset
+  - Added Type Alias SapBWLinkedService
+  - Added Type Alias SapBwSource
+  - Added Type Alias SapCloudForCustomerLinkedService
+  - Added Type Alias SapCloudForCustomerResourceDataset
+  - Added Type Alias SapCloudForCustomerSink
+  - Added Type Alias SapCloudForCustomerSource
+  - Added Type Alias SapEccLinkedService
+  - Added Type Alias SapEccResourceDataset
+  - Added Type Alias SapEccSource
+  - Added Type Alias SapHanaLinkedService
+  - Added Type Alias SapHanaSource
+  - Added Type Alias SapHanaTableDataset
+  - Added Type Alias SapOdpLinkedService
+  - Added Type Alias SapOdpResourceDataset
+  - Added Type Alias SapOdpSource
+  - Added Type Alias SapOpenHubLinkedService
+  - Added Type Alias SapOpenHubSource
+  - Added Type Alias SapOpenHubTableDataset
+  - Added Type Alias SapTableLinkedService
+  - Added Type Alias SapTableResourceDataset
+  - Added Type Alias SapTableSource
+  - Added Type Alias ScheduleTrigger
+  - Added Type Alias ScriptActivity
+  - Added Type Alias SecureString
+  - Added Type Alias SelfDependencyTumblingWindowTriggerReference
+  - Added Type Alias SelfHostedIntegrationRuntime
+  - Added Type Alias SelfHostedIntegrationRuntimeStatus
+  - Added Type Alias ServiceNowLinkedService
+  - Added Type Alias ServiceNowObjectDataset
+  - Added Type Alias ServiceNowSource
+  - Added Type Alias ServicePrincipalCredential
+  - Added Type Alias SetVariableActivity
+  - Added Type Alias SftpLocation
+  - Added Type Alias SftpReadSettings
+  - Added Type Alias SftpServerLinkedService
+  - Added Type Alias SftpWriteSettings
+  - Added Type Alias SharePointOnlineListLinkedService
+  - Added Type Alias SharePointOnlineListResourceDataset
+  - Added Type Alias SharePointOnlineListSource
+  - Added Type Alias ShopifyLinkedService
+  - Added Type Alias ShopifyObjectDataset
+  - Added Type Alias ShopifySource
+  - Added Type Alias SmartsheetLinkedService
+  - Added Type Alias SnowflakeDataset
+  - Added Type Alias SnowflakeExportCopyCommand
+  - Added Type Alias SnowflakeImportCopyCommand
+  - Added Type Alias SnowflakeLinkedService
+  - Added Type Alias SnowflakeSink
+  - Added Type Alias SnowflakeSource
+  - Added Type Alias SparkJobReferenceType
+  - Added Type Alias SparkLinkedService
+  - Added Type Alias SparkObjectDataset
+  - Added Type Alias SparkSource
+  - Added Type Alias SqlDWSink
+  - Added Type Alias SqlDWSource
+  - Added Type Alias SqlMISink
+  - Added Type Alias SqlMISource
+  - Added Type Alias SqlServerLinkedService
+  - Added Type Alias SqlServerSink
+  - Added Type Alias SqlServerSource
+  - Added Type Alias SqlServerStoredProcedureActivity
+  - Added Type Alias SqlServerTableDataset
+  - Added Type Alias SqlSink
+  - Added Type Alias SqlSource
+  - Added Type Alias SquareLinkedService
+  - Added Type Alias SquareObjectDataset
+  - Added Type Alias SquareSource
+  - Added Type Alias SsisEnvironment
+  - Added Type Alias SsisFolder
+  - Added Type Alias SsisPackage
+  - Added Type Alias SsisProject
+  - Added Type Alias SwitchActivity
+  - Added Type Alias SybaseLinkedService
+  - Added Type Alias SybaseSource
+  - Added Type Alias SybaseTableDataset
+  - Added Type Alias SynapseNotebookActivity
+  - Added Type Alias SynapseSparkJobDefinitionActivity
+  - Added Type Alias TabularSource
+  - Added Type Alias TabularTranslator
+  - Added Type Alias TarGZipReadSettings
+  - Added Type Alias TarReadSettings
+  - Added Type Alias TeamDeskLinkedService
+  - Added Type Alias TeradataLinkedService
+  - Added Type Alias TeradataSource
+  - Added Type Alias TeradataTableDataset
+  - Added Type Alias TextFormat
+  - Added Type Alias TriggerDependencyReference
+  - Added Type Alias TriggerResource
+  - Added Type Alias TumblingWindowTrigger
+  - Added Type Alias TumblingWindowTriggerDependencyReference
+  - Added Type Alias TwilioLinkedService
+  - Added Type Alias UntilActivity
+  - Added Type Alias ValidationActivity
+  - Added Type Alias VerticaLinkedService
+  - Added Type Alias VerticaSource
+  - Added Type Alias VerticaTableDataset
+  - Added Type Alias WaitActivity
+  - Added Type Alias WebActivity
+  - Added Type Alias WebAnonymousAuthentication
+  - Added Type Alias WebBasicAuthentication
+  - Added Type Alias WebClientCertificateAuthentication
+  - Added Type Alias WebHookActivity
+  - Added Type Alias WebLinkedService
+  - Added Type Alias WebSource
+  - Added Type Alias WebTableDataset
+  - Added Type Alias WranglingDataFlow
+  - Added Type Alias XeroLinkedService
+  - Added Type Alias XeroObjectDataset
+  - Added Type Alias XeroSource
+  - Added Type Alias XmlDataset
+  - Added Type Alias XmlReadSettings
+  - Added Type Alias XmlSource
+  - Added Type Alias ZendeskLinkedService
+  - Added Type Alias ZipDeflateReadSettings
+  - Added Type Alias ZohoLinkedService
+  - Added Type Alias ZohoObjectDataset
+  - Added Type Alias ZohoSource
+  - Added Enum KnownBigDataPoolReferenceType
+  - Added Enum KnownNotebookParameterType
+  - Added Enum KnownNotebookReferenceType
+  - Added Enum KnownSparkJobReferenceType
+    
+    
+## 10.7.0 (2022-06-22)
+    
+**Features**
 
-### Features Added
+  - Added Interface AmazonMWSLinkedService
+  - Added Interface AmazonMWSObjectDataset
+  - Added Interface AmazonMWSSource
+  - Added Interface AmazonRdsForOracleLinkedService
+  - Added Interface AmazonRdsForOracleSource
+  - Added Interface AmazonRdsForOracleTableDataset
+  - Added Interface AmazonRdsForSqlServerLinkedService
+  - Added Interface AmazonRdsForSqlServerSource
+  - Added Interface AmazonRdsForSqlServerTableDataset
+  - Added Interface AmazonRedshiftLinkedService
+  - Added Interface AmazonRedshiftSource
+  - Added Interface AmazonRedshiftTableDataset
+  - Added Interface AmazonS3CompatibleLinkedService
+  - Added Interface AmazonS3CompatibleLocation
+  - Added Interface AmazonS3CompatibleReadSettings
+  - Added Interface AmazonS3Dataset
+  - Added Interface AmazonS3LinkedService
+  - Added Interface AmazonS3Location
+  - Added Interface AmazonS3ReadSettings
+  - Added Interface AppendVariableActivity
+  - Added Interface AppFiguresLinkedService
+  - Added Interface AsanaLinkedService
+  - Added Interface AvroDataset
+  - Added Interface AvroFormat
+  - Added Interface AvroSink
+  - Added Interface AvroSource
+  - Added Interface AvroWriteSettings
+  - Added Interface AzPowerShellSetup
+  - Added Interface AzureBatchLinkedService
+  - Added Interface AzureBlobDataset
+  - Added Interface AzureBlobFSDataset
+  - Added Interface AzureBlobFSLinkedService
+  - Added Interface AzureBlobFSLocation
+  - Added Interface AzureBlobFSReadSettings
+  - Added Interface AzureBlobFSSink
+  - Added Interface AzureBlobFSSource
+  - Added Interface AzureBlobFSWriteSettings
+  - Added Interface AzureBlobStorageLinkedService
+  - Added Interface AzureBlobStorageLocation
+  - Added Interface AzureBlobStorageReadSettings
+  - Added Interface AzureBlobStorageWriteSettings
+  - Added Interface AzureDatabricksDeltaLakeDataset
+  - Added Interface AzureDatabricksDeltaLakeExportCommand
+  - Added Interface AzureDatabricksDeltaLakeImportCommand
+  - Added Interface AzureDatabricksDeltaLakeLinkedService
+  - Added Interface AzureDatabricksDeltaLakeSink
+  - Added Interface AzureDatabricksDeltaLakeSource
+  - Added Interface AzureDatabricksLinkedService
+  - Added Interface AzureDataExplorerCommandActivity
+  - Added Interface AzureDataExplorerLinkedService
+  - Added Interface AzureDataExplorerSink
+  - Added Interface AzureDataExplorerSource
+  - Added Interface AzureDataExplorerTableDataset
+  - Added Interface AzureDataLakeAnalyticsLinkedService
+  - Added Interface AzureDataLakeStoreDataset
+  - Added Interface AzureDataLakeStoreLinkedService
+  - Added Interface AzureDataLakeStoreLocation
+  - Added Interface AzureDataLakeStoreReadSettings
+  - Added Interface AzureDataLakeStoreSink
+  - Added Interface AzureDataLakeStoreSource
+  - Added Interface AzureDataLakeStoreWriteSettings
+  - Added Interface AzureFileStorageLinkedService
+  - Added Interface AzureFileStorageLocation
+  - Added Interface AzureFileStorageReadSettings
+  - Added Interface AzureFileStorageWriteSettings
+  - Added Interface AzureFunctionActivity
+  - Added Interface AzureFunctionLinkedService
+  - Added Interface AzureKeyVaultLinkedService
+  - Added Interface AzureKeyVaultSecretReference
+  - Added Interface AzureMariaDBLinkedService
+  - Added Interface AzureMariaDBSource
+  - Added Interface AzureMariaDBTableDataset
+  - Added Interface AzureMLBatchExecutionActivity
+  - Added Interface AzureMLExecutePipelineActivity
+  - Added Interface AzureMLLinkedService
+  - Added Interface AzureMLServiceLinkedService
+  - Added Interface AzureMLUpdateResourceActivity
+  - Added Interface AzureMySqlLinkedService
+  - Added Interface AzureMySqlSink
+  - Added Interface AzureMySqlSource
+  - Added Interface AzureMySqlTableDataset
+  - Added Interface AzurePostgreSqlLinkedService
+  - Added Interface AzurePostgreSqlSink
+  - Added Interface AzurePostgreSqlSource
+  - Added Interface AzurePostgreSqlTableDataset
+  - Added Interface AzureQueueSink
+  - Added Interface AzureSearchIndexDataset
+  - Added Interface AzureSearchIndexSink
+  - Added Interface AzureSearchLinkedService
+  - Added Interface AzureSqlDatabaseLinkedService
+  - Added Interface AzureSqlDWLinkedService
+  - Added Interface AzureSqlDWTableDataset
+  - Added Interface AzureSqlMILinkedService
+  - Added Interface AzureSqlMITableDataset
+  - Added Interface AzureSqlSink
+  - Added Interface AzureSqlSource
+  - Added Interface AzureSqlTableDataset
+  - Added Interface AzureStorageLinkedService
+  - Added Interface AzureTableDataset
+  - Added Interface AzureTableSink
+  - Added Interface AzureTableSource
+  - Added Interface AzureTableStorageLinkedService
+  - Added Interface BinaryDataset
+  - Added Interface BinaryReadSettings
+  - Added Interface BinarySink
+  - Added Interface BinarySource
+  - Added Interface BlobEventsTrigger
+  - Added Interface BlobSink
+  - Added Interface BlobSource
+  - Added Interface BlobTrigger
+  - Added Interface CassandraLinkedService
+  - Added Interface CassandraSource
+  - Added Interface CassandraTableDataset
+  - Added Interface ChainingTrigger
+  - Added Interface CmdkeySetup
+  - Added Interface CommonDataServiceForAppsEntityDataset
+  - Added Interface CommonDataServiceForAppsLinkedService
+  - Added Interface CommonDataServiceForAppsSink
+  - Added Interface CommonDataServiceForAppsSource
+  - Added Interface ComponentSetup
+  - Added Interface ConcurLinkedService
+  - Added Interface ConcurObjectDataset
+  - Added Interface ConcurSource
+  - Added Interface ControlActivity
+  - Added Interface CopyActivity
+  - Added Interface CosmosDbLinkedService
+  - Added Interface CosmosDbMongoDbApiCollectionDataset
+  - Added Interface CosmosDbMongoDbApiLinkedService
+  - Added Interface CosmosDbMongoDbApiSink
+  - Added Interface CosmosDbMongoDbApiSource
+  - Added Interface CosmosDbSqlApiCollectionDataset
+  - Added Interface CosmosDbSqlApiSink
+  - Added Interface CosmosDbSqlApiSource
+  - Added Interface CouchbaseLinkedService
+  - Added Interface CouchbaseSource
+  - Added Interface CouchbaseTableDataset
+  - Added Interface CredentialResource
+  - Added Interface CustomActivity
+  - Added Interface CustomDataset
+  - Added Interface CustomDataSourceLinkedService
+  - Added Interface CustomEventsTrigger
+  - Added Interface DatabricksNotebookActivity
+  - Added Interface DatabricksSparkJarActivity
+  - Added Interface DatabricksSparkPythonActivity
+  - Added Interface DataFlowDebugResource
+  - Added Interface DataFlowResource
+  - Added Interface DataFlowSink
+  - Added Interface DataFlowSource
+  - Added Interface DataLakeAnalyticsUsqlActivity
+  - Added Interface DatasetDebugResource
+  - Added Interface DatasetResource
+  - Added Interface DataworldLinkedService
+  - Added Interface Db2LinkedService
+  - Added Interface Db2Source
+  - Added Interface Db2TableDataset
+  - Added Interface DeleteActivity
+  - Added Interface DelimitedTextDataset
+  - Added Interface DelimitedTextReadSettings
+  - Added Interface DelimitedTextSink
+  - Added Interface DelimitedTextSource
+  - Added Interface DelimitedTextWriteSettings
+  - Added Interface DocumentDbCollectionDataset
+  - Added Interface DocumentDbCollectionSink
+  - Added Interface DocumentDbCollectionSource
+  - Added Interface DrillLinkedService
+  - Added Interface DrillSource
+  - Added Interface DrillTableDataset
+  - Added Interface DynamicsAXLinkedService
+  - Added Interface DynamicsAXResourceDataset
+  - Added Interface DynamicsAXSource
+  - Added Interface DynamicsCrmEntityDataset
+  - Added Interface DynamicsCrmLinkedService
+  - Added Interface DynamicsCrmSink
+  - Added Interface DynamicsCrmSource
+  - Added Interface DynamicsEntityDataset
+  - Added Interface DynamicsLinkedService
+  - Added Interface DynamicsSink
+  - Added Interface DynamicsSource
+  - Added Interface EloquaLinkedService
+  - Added Interface EloquaObjectDataset
+  - Added Interface EloquaSource
+  - Added Interface EnvironmentVariableSetup
+  - Added Interface ExcelDataset
+  - Added Interface ExcelSource
+  - Added Interface ExecuteDataFlowActivity
+  - Added Interface ExecutePipelineActivity
+  - Added Interface ExecutePowerQueryActivityTypeProperties
+  - Added Interface ExecuteSsisPackageActivity
+  - Added Interface ExecuteWranglingDataflowActivity
+  - Added Interface ExecutionActivity
+  - Added Interface Factory
+  - Added Interface FactoryGitHubConfiguration
+  - Added Interface FactoryVstsConfiguration
+  - Added Interface FailActivity
+  - Added Interface FileServerLinkedService
+  - Added Interface FileServerLocation
+  - Added Interface FileServerReadSettings
+  - Added Interface FileServerWriteSettings
+  - Added Interface FileShareDataset
+  - Added Interface FileSystemSink
+  - Added Interface FileSystemSource
+  - Added Interface FilterActivity
+  - Added Interface Flowlet
+  - Added Interface ForEachActivity
+  - Added Interface FtpReadSettings
+  - Added Interface FtpServerLinkedService
+  - Added Interface FtpServerLocation
+  - Added Interface GetMetadataActivity
+  - Added Interface GlobalParameterResource
+  - Added Interface GoogleAdWordsLinkedService
+  - Added Interface GoogleAdWordsObjectDataset
+  - Added Interface GoogleAdWordsSource
+  - Added Interface GoogleBigQueryLinkedService
+  - Added Interface GoogleBigQueryObjectDataset
+  - Added Interface GoogleBigQuerySource
+  - Added Interface GoogleCloudStorageLinkedService
+  - Added Interface GoogleCloudStorageLocation
+  - Added Interface GoogleCloudStorageReadSettings
+  - Added Interface GreenplumLinkedService
+  - Added Interface GreenplumSource
+  - Added Interface GreenplumTableDataset
+  - Added Interface HBaseLinkedService
+  - Added Interface HBaseObjectDataset
+  - Added Interface HBaseSource
+  - Added Interface HdfsLinkedService
+  - Added Interface HdfsLocation
+  - Added Interface HdfsReadSettings
+  - Added Interface HdfsSource
+  - Added Interface HDInsightHiveActivity
+  - Added Interface HDInsightLinkedService
+  - Added Interface HDInsightMapReduceActivity
+  - Added Interface HDInsightOnDemandLinkedService
+  - Added Interface HDInsightPigActivity
+  - Added Interface HDInsightSparkActivity
+  - Added Interface HDInsightStreamingActivity
+  - Added Interface HiveLinkedService
+  - Added Interface HiveObjectDataset
+  - Added Interface HiveSource
+  - Added Interface HttpDataset
+  - Added Interface HttpLinkedService
+  - Added Interface HttpReadSettings
+  - Added Interface HttpServerLocation
+  - Added Interface HttpSource
+  - Added Interface HubspotLinkedService
+  - Added Interface HubspotObjectDataset
+  - Added Interface HubspotSource
+  - Added Interface IfConditionActivity
+  - Added Interface ImpalaLinkedService
+  - Added Interface ImpalaObjectDataset
+  - Added Interface ImpalaSource
+  - Added Interface InformixLinkedService
+  - Added Interface InformixSink
+  - Added Interface InformixSource
+  - Added Interface InformixTableDataset
+  - Added Interface IntegrationRuntimeDebugResource
+  - Added Interface IntegrationRuntimeResource
+  - Added Interface JiraLinkedService
+  - Added Interface JiraObjectDataset
+  - Added Interface JiraSource
+  - Added Interface JsonDataset
+  - Added Interface JsonFormat
+  - Added Interface JsonReadSettings
+  - Added Interface JsonSink
+  - Added Interface JsonSource
+  - Added Interface JsonWriteSettings
+  - Added Interface LinkedIntegrationRuntimeKeyAuthorization
+  - Added Interface LinkedIntegrationRuntimeRbacAuthorization
+  - Added Interface LinkedServiceDebugResource
+  - Added Interface LinkedServiceResource
+  - Added Interface LookupActivity
+  - Added Interface MagentoLinkedService
+  - Added Interface MagentoObjectDataset
+  - Added Interface MagentoSource
+  - Added Interface ManagedIdentityCredential
+  - Added Interface ManagedIntegrationRuntime
+  - Added Interface ManagedIntegrationRuntimeStatus
+  - Added Interface ManagedPrivateEndpointResource
+  - Added Interface ManagedVirtualNetworkResource
+  - Added Interface MappingDataFlow
+  - Added Interface MariaDBLinkedService
+  - Added Interface MariaDBSource
+  - Added Interface MariaDBTableDataset
+  - Added Interface MarketoLinkedService
+  - Added Interface MarketoObjectDataset
+  - Added Interface MarketoSource
+  - Added Interface MicrosoftAccessLinkedService
+  - Added Interface MicrosoftAccessSink
+  - Added Interface MicrosoftAccessSource
+  - Added Interface MicrosoftAccessTableDataset
+  - Added Interface MongoDbAtlasCollectionDataset
+  - Added Interface MongoDbAtlasLinkedService
+  - Added Interface MongoDbAtlasSink
+  - Added Interface MongoDbAtlasSource
+  - Added Interface MongoDbCollectionDataset
+  - Added Interface MongoDbLinkedService
+  - Added Interface MongoDbSource
+  - Added Interface MongoDbV2CollectionDataset
+  - Added Interface MongoDbV2LinkedService
+  - Added Interface MongoDbV2Sink
+  - Added Interface MongoDbV2Source
+  - Added Interface MultiplePipelineTrigger
+  - Added Interface MySqlLinkedService
+  - Added Interface MySqlSource
+  - Added Interface MySqlTableDataset
+  - Added Interface NetezzaLinkedService
+  - Added Interface NetezzaSource
+  - Added Interface NetezzaTableDataset
+  - Added Interface ODataLinkedService
+  - Added Interface ODataResourceDataset
+  - Added Interface ODataSource
+  - Added Interface OdbcLinkedService
+  - Added Interface OdbcSink
+  - Added Interface OdbcSource
+  - Added Interface OdbcTableDataset
+  - Added Interface Office365Dataset
+  - Added Interface Office365LinkedService
+  - Added Interface Office365Source
+  - Added Interface OracleCloudStorageLinkedService
+  - Added Interface OracleCloudStorageLocation
+  - Added Interface OracleCloudStorageReadSettings
+  - Added Interface OracleLinkedService
+  - Added Interface OracleServiceCloudLinkedService
+  - Added Interface OracleServiceCloudObjectDataset
+  - Added Interface OracleServiceCloudSource
+  - Added Interface OracleSink
+  - Added Interface OracleSource
+  - Added Interface OracleTableDataset
+  - Added Interface OrcDataset
+  - Added Interface OrcFormat
+  - Added Interface OrcSink
+  - Added Interface OrcSource
+  - Added Interface OrcWriteSettings
+  - Added Interface ParquetDataset
+  - Added Interface ParquetFormat
+  - Added Interface ParquetSink
+  - Added Interface ParquetSource
+  - Added Interface ParquetWriteSettings
+  - Added Interface PaypalLinkedService
+  - Added Interface PaypalObjectDataset
+  - Added Interface PaypalSource
+  - Added Interface PhoenixLinkedService
+  - Added Interface PhoenixObjectDataset
+  - Added Interface PhoenixSource
+  - Added Interface PipelineResource
+  - Added Interface PostgreSqlLinkedService
+  - Added Interface PostgreSqlSource
+  - Added Interface PostgreSqlTableDataset
+  - Added Interface PowerQuerySink
+  - Added Interface PowerQuerySource
+  - Added Interface PrestoLinkedService
+  - Added Interface PrestoObjectDataset
+  - Added Interface PrestoSource
+  - Added Interface PrivateEndpointConnectionResource
+  - Added Interface PrivateLinkConnectionApprovalRequestResource
+  - Added Interface PrivateLinkResource
+  - Added Interface QuickbaseLinkedService
+  - Added Interface QuickBooksLinkedService
+  - Added Interface QuickBooksObjectDataset
+  - Added Interface QuickBooksSource
+  - Added Interface RelationalSource
+  - Added Interface RelationalTableDataset
+  - Added Interface RerunTumblingWindowTrigger
+  - Added Interface ResponsysLinkedService
+  - Added Interface ResponsysObjectDataset
+  - Added Interface ResponsysSource
+  - Added Interface RestResourceDataset
+  - Added Interface RestServiceLinkedService
+  - Added Interface RestSink
+  - Added Interface RestSource
+  - Added Interface SalesforceLinkedService
+  - Added Interface SalesforceMarketingCloudLinkedService
+  - Added Interface SalesforceMarketingCloudObjectDataset
+  - Added Interface SalesforceMarketingCloudSource
+  - Added Interface SalesforceObjectDataset
+  - Added Interface SalesforceServiceCloudLinkedService
+  - Added Interface SalesforceServiceCloudObjectDataset
+  - Added Interface SalesforceServiceCloudSink
+  - Added Interface SalesforceServiceCloudSource
+  - Added Interface SalesforceSink
+  - Added Interface SalesforceSource
+  - Added Interface SapBwCubeDataset
+  - Added Interface SapBWLinkedService
+  - Added Interface SapBwSource
+  - Added Interface SapCloudForCustomerLinkedService
+  - Added Interface SapCloudForCustomerResourceDataset
+  - Added Interface SapCloudForCustomerSink
+  - Added Interface SapCloudForCustomerSource
+  - Added Interface SapEccLinkedService
+  - Added Interface SapEccResourceDataset
+  - Added Interface SapEccSource
+  - Added Interface SapHanaLinkedService
+  - Added Interface SapHanaSource
+  - Added Interface SapHanaTableDataset
+  - Added Interface SapOdpLinkedService
+  - Added Interface SapOdpResourceDataset
+  - Added Interface SapOdpSource
+  - Added Interface SapOpenHubLinkedService
+  - Added Interface SapOpenHubSource
+  - Added Interface SapOpenHubTableDataset
+  - Added Interface SapTableLinkedService
+  - Added Interface SapTableResourceDataset
+  - Added Interface SapTableSource
+  - Added Interface ScheduleTrigger
+  - Added Interface ScriptActivity
+  - Added Interface SecureString
+  - Added Interface SelfDependencyTumblingWindowTriggerReference
+  - Added Interface SelfHostedIntegrationRuntime
+  - Added Interface SelfHostedIntegrationRuntimeStatus
+  - Added Interface ServiceNowLinkedService
+  - Added Interface ServiceNowObjectDataset
+  - Added Interface ServiceNowSource
+  - Added Interface ServicePrincipalCredential
+  - Added Interface SetVariableActivity
+  - Added Interface SftpLocation
+  - Added Interface SftpReadSettings
+  - Added Interface SftpServerLinkedService
+  - Added Interface SftpWriteSettings
+  - Added Interface SharePointOnlineListLinkedService
+  - Added Interface SharePointOnlineListResourceDataset
+  - Added Interface SharePointOnlineListSource
+  - Added Interface ShopifyLinkedService
+  - Added Interface ShopifyObjectDataset
+  - Added Interface ShopifySource
+  - Added Interface SmartsheetLinkedService
+  - Added Interface SnowflakeDataset
+  - Added Interface SnowflakeExportCopyCommand
+  - Added Interface SnowflakeImportCopyCommand
+  - Added Interface SnowflakeLinkedService
+  - Added Interface SnowflakeSink
+  - Added Interface SnowflakeSource
+  - Added Interface SparkLinkedService
+  - Added Interface SparkObjectDataset
+  - Added Interface SparkSource
+  - Added Interface SqlDWSink
+  - Added Interface SqlDWSource
+  - Added Interface SqlMISink
+  - Added Interface SqlMISource
+  - Added Interface SqlServerLinkedService
+  - Added Interface SqlServerSink
+  - Added Interface SqlServerSource
+  - Added Interface SqlServerStoredProcedureActivity
+  - Added Interface SqlServerTableDataset
+  - Added Interface SqlSink
+  - Added Interface SqlSource
+  - Added Interface SquareLinkedService
+  - Added Interface SquareObjectDataset
+  - Added Interface SquareSource
+  - Added Interface SsisEnvironment
+  - Added Interface SsisFolder
+  - Added Interface SsisPackage
+  - Added Interface SsisProject
+  - Added Interface SwitchActivity
+  - Added Interface SybaseLinkedService
+  - Added Interface SybaseSource
+  - Added Interface SybaseTableDataset
+  - Added Interface TabularSource
+  - Added Interface TabularTranslator
+  - Added Interface TarGZipReadSettings
+  - Added Interface TarReadSettings
+  - Added Interface TeamDeskLinkedService
+  - Added Interface TeradataLinkedService
+  - Added Interface TeradataSource
+  - Added Interface TeradataTableDataset
+  - Added Interface TextFormat
+  - Added Interface TriggerDependencyReference
+  - Added Interface TriggerResource
+  - Added Interface TumblingWindowTrigger
+  - Added Interface TumblingWindowTriggerDependencyReference
+  - Added Interface TwilioLinkedService
+  - Added Interface UntilActivity
+  - Added Interface ValidationActivity
+  - Added Interface VerticaLinkedService
+  - Added Interface VerticaSource
+  - Added Interface VerticaTableDataset
+  - Added Interface WaitActivity
+  - Added Interface WebActivity
+  - Added Interface WebAnonymousAuthentication
+  - Added Interface WebBasicAuthentication
+  - Added Interface WebClientCertificateAuthentication
+  - Added Interface WebHookActivity
+  - Added Interface WebLinkedService
+  - Added Interface WebSource
+  - Added Interface WebTableDataset
+  - Added Interface WranglingDataFlow
+  - Added Interface XeroLinkedService
+  - Added Interface XeroObjectDataset
+  - Added Interface XeroSource
+  - Added Interface XmlDataset
+  - Added Interface XmlReadSettings
+  - Added Interface XmlSource
+  - Added Interface ZendeskLinkedService
+  - Added Interface ZipDeflateReadSettings
+  - Added Interface ZohoLinkedService
+  - Added Interface ZohoObjectDataset
+  - Added Interface ZohoSource
+  - Added Type Alias Type
+  - Added Enum KnownType
+    
+    
+## 10.6.0 (2022-06-07)
+    
+**Features**
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Added operation group GlobalParameters
+  - Added Interface GlobalParameterListResponse
+  - Added Interface GlobalParametersCreateOrUpdateOptionalParams
+  - Added Interface GlobalParametersDeleteOptionalParams
+  - Added Interface GlobalParametersGetOptionalParams
+  - Added Interface GlobalParametersListByFactoryNextOptionalParams
+  - Added Interface GlobalParametersListByFactoryOptionalParams
+  - Added Interface PurviewConfiguration
+  - Added Type Alias GlobalParameterResource
+  - Added Type Alias GlobalParametersCreateOrUpdateResponse
+  - Added Type Alias GlobalParametersGetResponse
+  - Added Type Alias GlobalParametersListByFactoryNextResponse
+  - Added Type Alias GlobalParametersListByFactoryResponse
+  - Interface ExecuteDataFlowActivityTypeProperties has a new optional parameter sourceStagingConcurrency
+  - Class DataFactoryManagementClient has a new parameter globalParameters
+  - Type Alias ExecuteDataFlowActivity has a new parameter sourceStagingConcurrency
+  - Type Alias ExecuteWranglingDataflowActivity has a new parameter sourceStagingConcurrency
+  - Type Alias Factory has a new parameter purviewConfiguration
+  - Type Alias RestServiceLinkedService has a new parameter clientId
+  - Type Alias RestServiceLinkedService has a new parameter clientSecret
+  - Type Alias RestServiceLinkedService has a new parameter tokenEndpoint
+  - Type Alias RestServiceLinkedService has a new parameter resource
+  - Type Alias RestServiceLinkedService has a new parameter scope
+  - Enum KnownRestServiceAuthenticationType has a new value OAuth2ClientCredential
+    
+    
 ## 10.5.0 (2022-05-09)
     
 **Features**
