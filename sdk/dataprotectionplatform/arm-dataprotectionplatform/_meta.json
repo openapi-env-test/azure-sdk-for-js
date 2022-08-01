@@ -1,0 +1,8 @@
+{
+  "commit": "6a69a25b1691591e7d038955c9c26e639a747d19",
+  "readme": "specification/dataprotection/resource-manager/readme.md",
+  "autorest_command": "",
+  "repository_url": "https://github.com/test-repo-billy/azure-rest-api-specs.git",
+  "release_tool": "@azure-tools/js-sdk-release-tools@2.4.1",
+  "use": "@autorest/typescript@6.0.0-alpha.20.20220608.1"
+}
