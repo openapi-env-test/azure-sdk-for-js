@@ -178,7 +178,7 @@ export class WorkbooksImpl implements Workbooks {
   /**
    * Get the revisions for the workbook defined by its resourceName.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param resourceName The name of the resource.
+   * @param resourceName The name of the Application Insights component resource.
    * @param options The options parameters.
    */
   public listRevisionsList(
@@ -281,7 +281,7 @@ export class WorkbooksImpl implements Workbooks {
   /**
    * Get a single workbook by its resourceName.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param resourceName The name of the resource.
+   * @param resourceName The name of the Application Insights component resource.
    * @param options The options parameters.
    */
   get(
@@ -298,7 +298,7 @@ export class WorkbooksImpl implements Workbooks {
   /**
    * Delete a workbook.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param resourceName The name of the resource.
+   * @param resourceName The name of the Application Insights component resource.
    * @param options The options parameters.
    */
   delete(
@@ -315,7 +315,7 @@ export class WorkbooksImpl implements Workbooks {
   /**
    * Create a new workbook.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param resourceName The name of the resource.
+   * @param resourceName The name of the Application Insights component resource.
    * @param workbookProperties Properties that need to be specified to create a new workbook.
    * @param options The options parameters.
    */
@@ -334,7 +334,7 @@ export class WorkbooksImpl implements Workbooks {
   /**
    * Updates a workbook that has already been added.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param resourceName The name of the resource.
+   * @param resourceName The name of the Application Insights component resource.
    * @param options The options parameters.
    */
   update(
@@ -351,7 +351,7 @@ export class WorkbooksImpl implements Workbooks {
   /**
    * Get the revisions for the workbook defined by its resourceName.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param resourceName The name of the resource.
+   * @param resourceName The name of the Application Insights component resource.
    * @param options The options parameters.
    */
   private _revisionsList(
@@ -368,7 +368,7 @@ export class WorkbooksImpl implements Workbooks {
   /**
    * Get a single workbook revision defined by its revisionId.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param resourceName The name of the resource.
+   * @param resourceName The name of the Application Insights component resource.
    * @param revisionId The id of the workbook's revision.
    * @param options The options parameters.
    */
@@ -423,7 +423,7 @@ export class WorkbooksImpl implements Workbooks {
   /**
    * RevisionsListNext
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param resourceName The name of the resource.
+   * @param resourceName The name of the Application Insights component resource.
    * @param nextLink The nextLink from the previous successful call to the RevisionsList method.
    * @param options The options parameters.
    */
@@ -455,10 +455,10 @@ const listBySubscriptionOperationSpec: coreClient.OperationSpec = {
     }
   },
   queryParameters: [
-    Parameters.canFetchContent,
-    Parameters.tags,
     Parameters.category,
-    Parameters.apiVersion3
+    Parameters.tags,
+    Parameters.canFetchContent,
+    Parameters.apiVersion
   ],
   urlParameters: [Parameters.$host, Parameters.subscriptionId],
   headerParameters: [Parameters.accept],
@@ -477,16 +477,16 @@ const listByResourceGroupOperationSpec: coreClient.OperationSpec = {
     }
   },
   queryParameters: [
-    Parameters.canFetchContent,
-    Parameters.tags,
     Parameters.category,
-    Parameters.sourceId,
-    Parameters.apiVersion3
+    Parameters.tags,
+    Parameters.canFetchContent,
+    Parameters.apiVersion,
+    Parameters.sourceId
   ],
   urlParameters: [
     Parameters.$host,
-    Parameters.resourceGroupName,
-    Parameters.subscriptionId
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName
   ],
   headerParameters: [Parameters.accept],
   serializer
@@ -503,11 +503,11 @@ const getOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.WorkbookError
     }
   },
-  queryParameters: [Parameters.canFetchContent, Parameters.apiVersion3],
+  queryParameters: [Parameters.canFetchContent, Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
-    Parameters.resourceGroupName,
     Parameters.subscriptionId,
+    Parameters.resourceGroupName,
     Parameters.resourceName
   ],
   headerParameters: [Parameters.accept],
@@ -524,11 +524,11 @@ const deleteOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.WorkbookError
     }
   },
-  queryParameters: [Parameters.apiVersion3],
+  queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
-    Parameters.resourceGroupName,
     Parameters.subscriptionId,
+    Parameters.resourceGroupName,
     Parameters.resourceName
   ],
   headerParameters: [Parameters.accept],
@@ -549,12 +549,12 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.WorkbookError
     }
   },
-  requestBody: Parameters.workbookProperties1,
-  queryParameters: [Parameters.sourceId, Parameters.apiVersion3],
+  requestBody: Parameters.workbookProperties,
+  queryParameters: [Parameters.apiVersion, Parameters.sourceId],
   urlParameters: [
     Parameters.$host,
-    Parameters.resourceGroupName,
     Parameters.subscriptionId,
+    Parameters.resourceGroupName,
     Parameters.resourceName
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
@@ -574,11 +574,11 @@ const updateOperationSpec: coreClient.OperationSpec = {
     }
   },
   requestBody: Parameters.workbookUpdateParameters,
-  queryParameters: [Parameters.sourceId, Parameters.apiVersion3],
+  queryParameters: [Parameters.apiVersion, Parameters.sourceId],
   urlParameters: [
     Parameters.$host,
-    Parameters.resourceGroupName,
     Parameters.subscriptionId,
+    Parameters.resourceGroupName,
     Parameters.resourceName
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
@@ -597,11 +597,11 @@ const revisionsListOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.WorkbookError
     }
   },
-  queryParameters: [Parameters.apiVersion3],
+  queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
-    Parameters.resourceGroupName,
     Parameters.subscriptionId,
+    Parameters.resourceGroupName,
     Parameters.resourceName
   ],
   headerParameters: [Parameters.accept],
@@ -619,11 +619,11 @@ const revisionGetOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.WorkbookError
     }
   },
-  queryParameters: [Parameters.apiVersion3],
+  queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
-    Parameters.resourceGroupName,
     Parameters.subscriptionId,
+    Parameters.resourceGroupName,
     Parameters.resourceName,
     Parameters.revisionId
   ],
@@ -642,10 +642,10 @@ const listBySubscriptionNextOperationSpec: coreClient.OperationSpec = {
     }
   },
   queryParameters: [
-    Parameters.canFetchContent,
-    Parameters.tags,
     Parameters.category,
-    Parameters.apiVersion3
+    Parameters.tags,
+    Parameters.canFetchContent,
+    Parameters.apiVersion
   ],
   urlParameters: [
     Parameters.$host,
@@ -667,16 +667,16 @@ const listByResourceGroupNextOperationSpec: coreClient.OperationSpec = {
     }
   },
   queryParameters: [
-    Parameters.canFetchContent,
-    Parameters.tags,
     Parameters.category,
-    Parameters.sourceId,
-    Parameters.apiVersion3
+    Parameters.tags,
+    Parameters.canFetchContent,
+    Parameters.apiVersion,
+    Parameters.sourceId
   ],
   urlParameters: [
     Parameters.$host,
-    Parameters.resourceGroupName,
     Parameters.subscriptionId,
+    Parameters.resourceGroupName,
     Parameters.nextLink
   ],
   headerParameters: [Parameters.accept],
@@ -693,11 +693,11 @@ const revisionsListNextOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.WorkbookError
     }
   },
-  queryParameters: [Parameters.apiVersion3],
+  queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
-    Parameters.resourceGroupName,
     Parameters.subscriptionId,
+    Parameters.resourceGroupName,
     Parameters.resourceName,
     Parameters.nextLink
   ],
