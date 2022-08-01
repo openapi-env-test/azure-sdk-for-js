@@ -6,7 +6,7 @@ Composite Swagger for Application Insights Management Client
 
 [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/applicationinsights/arm-appinsights) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-appinsights) |
-[API reference documentation](https://docs.microsoft.com/javascript/api/@azure/arm-appinsights?view=azure-node-preview) |
+[API reference documentation](https://docs.microsoft.com/javascript/api/@azure/arm-appinsights) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started

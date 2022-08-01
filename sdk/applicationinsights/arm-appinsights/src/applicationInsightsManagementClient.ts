@@ -8,54 +8,20 @@
 
 import * as coreClient from "@azure/core-client";
 import * as coreRestPipeline from "@azure/core-rest-pipeline";
+import {
+  PipelineRequest,
+  PipelineResponse,
+  SendRequest
+} from "@azure/core-rest-pipeline";
 import * as coreAuth from "@azure/core-auth";
-import {
-  AnnotationsImpl,
-  APIKeysImpl,
-  ExportConfigurationsImpl,
-  ComponentCurrentBillingFeaturesImpl,
-  ComponentQuotaStatusImpl,
-  ComponentFeatureCapabilitiesImpl,
-  ComponentAvailableFeaturesImpl,
-  ProactiveDetectionConfigurationsImpl,
-  WorkItemConfigurationsImpl,
-  FavoritesImpl,
-  WebTestLocationsImpl,
-  WebTestsImpl,
-  AnalyticsItemsImpl,
-  WorkbookTemplatesImpl,
-  MyWorkbooksImpl,
-  WorkbooksImpl,
-  ComponentsImpl,
-  ComponentLinkedStorageAccountsOperationsImpl,
-  LiveTokenImpl
-} from "./operations";
-import {
-  Annotations,
-  APIKeys,
-  ExportConfigurations,
-  ComponentCurrentBillingFeatures,
-  ComponentQuotaStatus,
-  ComponentFeatureCapabilities,
-  ComponentAvailableFeatures,
-  ProactiveDetectionConfigurations,
-  WorkItemConfigurations,
-  Favorites,
-  WebTestLocations,
-  WebTests,
-  AnalyticsItems,
-  WorkbookTemplates,
-  MyWorkbooks,
-  Workbooks,
-  Components,
-  ComponentLinkedStorageAccountsOperations,
-  LiveToken
-} from "./operationsInterfaces";
+import { WorkbooksImpl } from "./operations";
+import { Workbooks } from "./operationsInterfaces";
 import { ApplicationInsightsManagementClientOptionalParams } from "./models";
 
 export class ApplicationInsightsManagementClient extends coreClient.ServiceClient {
   $host: string;
   subscriptionId: string;
+  apiVersion: string;
 
   /**
    * Initializes a new instance of the ApplicationInsightsManagementClient class.
@@ -84,7 +50,7 @@ export class ApplicationInsightsManagementClient extends coreClient.ServiceClien
       credential: credentials
     };
 
-    const packageDetails = `azsdk-js-arm-appinsights/5.0.0-beta.5`;
+    const packageDetails = `azsdk-js-arm-appinsights/5.0.0`;
     const userAgentPrefix =
       options.userAgentOptions && options.userAgentOptions.userAgentPrefix
         ? `${options.userAgentOptions.userAgentPrefix} ${packageDetails}`
@@ -131,52 +97,38 @@ export class ApplicationInsightsManagementClient extends coreClient.ServiceClien
 
     // Assigning values to Constant parameters
     this.$host = options.$host || "https://management.azure.com";
-    this.annotations = new AnnotationsImpl(this);
-    this.aPIKeys = new APIKeysImpl(this);
-    this.exportConfigurations = new ExportConfigurationsImpl(this);
-    this.componentCurrentBillingFeatures = new ComponentCurrentBillingFeaturesImpl(
-      this
-    );
-    this.componentQuotaStatus = new ComponentQuotaStatusImpl(this);
-    this.componentFeatureCapabilities = new ComponentFeatureCapabilitiesImpl(
-      this
-    );
-    this.componentAvailableFeatures = new ComponentAvailableFeaturesImpl(this);
-    this.proactiveDetectionConfigurations = new ProactiveDetectionConfigurationsImpl(
-      this
-    );
-    this.workItemConfigurations = new WorkItemConfigurationsImpl(this);
-    this.favorites = new FavoritesImpl(this);
-    this.webTestLocations = new WebTestLocationsImpl(this);
-    this.webTests = new WebTestsImpl(this);
-    this.analyticsItems = new AnalyticsItemsImpl(this);
-    this.workbookTemplates = new WorkbookTemplatesImpl(this);
-    this.myWorkbooks = new MyWorkbooksImpl(this);
+    this.apiVersion = options.apiVersion || "2022-02-01";
     this.workbooks = new WorkbooksImpl(this);
-    this.components = new ComponentsImpl(this);
-    this.componentLinkedStorageAccountsOperations = new ComponentLinkedStorageAccountsOperationsImpl(
-      this
-    );
-    this.liveToken = new LiveTokenImpl(this);
+    this.addCustomApiVersionPolicy(options.apiVersion);
   }
 
-  annotations: Annotations;
-  aPIKeys: APIKeys;
-  exportConfigurations: ExportConfigurations;
-  componentCurrentBillingFeatures: ComponentCurrentBillingFeatures;
-  componentQuotaStatus: ComponentQuotaStatus;
-  componentFeatureCapabilities: ComponentFeatureCapabilities;
-  componentAvailableFeatures: ComponentAvailableFeatures;
-  proactiveDetectionConfigurations: ProactiveDetectionConfigurations;
-  workItemConfigurations: WorkItemConfigurations;
-  favorites: Favorites;
-  webTestLocations: WebTestLocations;
-  webTests: WebTests;
-  analyticsItems: AnalyticsItems;
-  workbookTemplates: WorkbookTemplates;
-  myWorkbooks: MyWorkbooks;
+  /** A function that adds a policy that sets the api-version (or equivalent) to reflect the library version. */
+  private addCustomApiVersionPolicy(apiVersion?: string) {
+    if (!apiVersion) {
+      return;
+    }
+    const apiVersionPolicy = {
+      name: "CustomApiVersionPolicy",
+      async sendRequest(
+        request: PipelineRequest,
+        next: SendRequest
+      ): Promise<PipelineResponse> {
+        const param = request.url.split("?");
+        if (param.length > 1) {
+          const newParams = param[1].split("&").map((item) => {
+            if (item.indexOf("api-version") > -1) {
+              return item.replace(/(?<==).*$/, apiVersion);
+            } else {
+              return item;
+            }
+          });
+          request.url = param[0] + "?" + newParams.join("&");
+        }
+        return next(request);
+      }
+    };
+    this.pipeline.addPolicy(apiVersionPolicy);
+  }
+
   workbooks: Workbooks;
-  components: Components;
-  componentLinkedStorageAccountsOperations: ComponentLinkedStorageAccountsOperations;
-  liveToken: LiveToken;
 }
