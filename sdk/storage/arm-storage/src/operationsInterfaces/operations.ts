@@ -13,7 +13,7 @@ import { Operation, OperationsListOptionalParams } from "../models";
 /** Interface representing a Operations. */
 export interface Operations {
   /**
-   * Lists all of the available Storage Rest API operations.
+   *  Lists all of the available Storage Rest API operations.
    * @param options The options parameters.
    */
   list(

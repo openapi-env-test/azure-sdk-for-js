@@ -19,7 +19,7 @@ import {
 /** Interface representing a QueueServices. */
 export interface QueueServices {
   /**
-   * List all queue services for the storage account
+   *  List all queue services for the storage account
    * @param resourceGroupName The name of the resource group within the user's subscription. The name is
    *                          case insensitive.
    * @param accountName The name of the storage account within the specified resource group. Storage
