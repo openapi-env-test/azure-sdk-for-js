@@ -1,15 +1,602 @@
 # Release History
+    
+## 29.1.0 (2022-08-08)
+    
+**Features**
 
-## 28.0.1 (Unreleased)
+  - Added Type Alias ActiveConnectivityConfiguration
+  - Added Type Alias ActiveDefaultSecurityAdminRule
+  - Added Type Alias ActiveSecurityAdminRule
+  - Added Type Alias AdminRule
+  - Added Type Alias AdminRuleCollection
+  - Added Type Alias ApplicationGateway
+  - Added Type Alias ApplicationGatewayAuthenticationCertificate
+  - Added Type Alias ApplicationGatewayAvailableSslOptions
+  - Added Type Alias ApplicationGatewayBackendAddressPool
+  - Added Type Alias ApplicationGatewayBackendHttpSettings
+  - Added Type Alias ApplicationGatewayBackendSettings
+  - Added Type Alias ApplicationGatewayFirewallRuleSet
+  - Added Type Alias ApplicationGatewayFrontendIPConfiguration
+  - Added Type Alias ApplicationGatewayFrontendPort
+  - Added Type Alias ApplicationGatewayHttpListener
+  - Added Type Alias ApplicationGatewayIPConfiguration
+  - Added Type Alias ApplicationGatewayListener
+  - Added Type Alias ApplicationGatewayLoadDistributionPolicy
+  - Added Type Alias ApplicationGatewayLoadDistributionTarget
+  - Added Type Alias ApplicationGatewayPathRule
+  - Added Type Alias ApplicationGatewayPrivateEndpointConnection
+  - Added Type Alias ApplicationGatewayPrivateLinkConfiguration
+  - Added Type Alias ApplicationGatewayPrivateLinkIpConfiguration
+  - Added Type Alias ApplicationGatewayPrivateLinkResource
+  - Added Type Alias ApplicationGatewayProbe
+  - Added Type Alias ApplicationGatewayRedirectConfiguration
+  - Added Type Alias ApplicationGatewayRequestRoutingRule
+  - Added Type Alias ApplicationGatewayRewriteRuleSet
+  - Added Type Alias ApplicationGatewayRoutingRule
+  - Added Type Alias ApplicationGatewaySslCertificate
+  - Added Type Alias ApplicationGatewaySslPredefinedPolicy
+  - Added Type Alias ApplicationGatewaySslProfile
+  - Added Type Alias ApplicationGatewayTrustedClientCertificate
+  - Added Type Alias ApplicationGatewayTrustedRootCertificate
+  - Added Type Alias ApplicationGatewayUrlPathMap
+  - Added Type Alias ApplicationRule
+  - Added Type Alias ApplicationSecurityGroup
+  - Added Type Alias AzureFirewall
+  - Added Type Alias AzureFirewallApplicationRuleCollection
+  - Added Type Alias AzureFirewallFqdnTag
+  - Added Type Alias AzureFirewallIPConfiguration
+  - Added Type Alias AzureFirewallNatRuleCollection
+  - Added Type Alias AzureFirewallNetworkRuleCollection
+  - Added Type Alias BackendAddressPool
+  - Added Type Alias BaseAdminRule
+  - Added Type Alias BastionHost
+  - Added Type Alias BastionHostIPConfiguration
+  - Added Type Alias BgpConnection
+  - Added Type Alias BgpServiceCommunity
+  - Added Type Alias ConnectionMonitorResultProperties
+  - Added Type Alias ConnectionSharedKey
+  - Added Type Alias ConnectivityConfiguration
+  - Added Type Alias Container
+  - Added Type Alias ContainerNetworkInterface
+  - Added Type Alias ContainerNetworkInterfaceConfiguration
+  - Added Type Alias CustomIpPrefix
+  - Added Type Alias DdosCustomPolicy
+  - Added Type Alias DefaultAdminRule
+  - Added Type Alias Delegation
+  - Added Type Alias DscpConfiguration
+  - Added Type Alias EffectiveDefaultSecurityAdminRule
+  - Added Type Alias EffectiveSecurityAdminRule
+  - Added Type Alias EndpointServiceResult
+  - Added Type Alias ExpressRouteCircuit
+  - Added Type Alias ExpressRouteCircuitAuthorization
+  - Added Type Alias ExpressRouteCircuitConnection
+  - Added Type Alias ExpressRouteCircuitPeering
+  - Added Type Alias ExpressRouteConnection
+  - Added Type Alias ExpressRouteCrossConnection
+  - Added Type Alias ExpressRouteCrossConnectionPeering
+  - Added Type Alias ExpressRouteGateway
+  - Added Type Alias ExpressRouteLink
+  - Added Type Alias ExpressRoutePort
+  - Added Type Alias ExpressRoutePortAuthorization
+  - Added Type Alias ExpressRoutePortsLocation
+  - Added Type Alias ExpressRouteProviderPort
+  - Added Type Alias ExpressRouteServiceProvider
+  - Added Type Alias FirewallPolicy
+  - Added Type Alias FirewallPolicyFilterRuleCollection
+  - Added Type Alias FirewallPolicyNatRuleCollection
+  - Added Type Alias FirewallPolicyRuleCollectionGroup
+  - Added Type Alias FlowLog
+  - Added Type Alias FrontendIPConfiguration
+  - Added Type Alias HubIpConfiguration
+  - Added Type Alias HubRouteTable
+  - Added Type Alias HubVirtualNetworkConnection
+  - Added Type Alias InboundNatPool
+  - Added Type Alias InboundNatRule
+  - Added Type Alias InboundSecurityRule
+  - Added Type Alias IpAllocation
+  - Added Type Alias IPConfiguration
+  - Added Type Alias IPConfigurationProfile
+  - Added Type Alias IpGroup
+  - Added Type Alias LoadBalancer
+  - Added Type Alias LoadBalancingRule
+  - Added Type Alias LocalNetworkGateway
+  - Added Type Alias NatGateway
+  - Added Type Alias NatRule
+  - Added Type Alias NetworkGroup
+  - Added Type Alias NetworkIntentPolicy
+  - Added Type Alias NetworkInterface
+  - Added Type Alias NetworkInterfaceIPConfiguration
+  - Added Type Alias NetworkInterfaceTapConfiguration
+  - Added Type Alias NetworkManager
+  - Added Type Alias NetworkManagerConnection
+  - Added Type Alias NetworkProfile
+  - Added Type Alias NetworkRule
+  - Added Type Alias NetworkSecurityGroup
+  - Added Type Alias NetworkVirtualAppliance
+  - Added Type Alias NetworkVirtualApplianceSku
+  - Added Type Alias NetworkWatcher
+  - Added Type Alias OutboundRule
+  - Added Type Alias P2SConnectionConfiguration
+  - Added Type Alias P2SVpnGateway
+  - Added Type Alias PacketCaptureResultProperties
+  - Added Type Alias PatchRouteFilter
+  - Added Type Alias PatchRouteFilterRule
+  - Added Type Alias PeerExpressRouteCircuitConnection
+  - Added Type Alias PrivateDnsZoneGroup
+  - Added Type Alias PrivateEndpoint
+  - Added Type Alias PrivateEndpointConnection
+  - Added Type Alias PrivateLinkService
+  - Added Type Alias PrivateLinkServiceConnection
+  - Added Type Alias PrivateLinkServiceIpConfiguration
+  - Added Type Alias PrivateLinkServicePropertiesAutoApproval
+  - Added Type Alias PrivateLinkServicePropertiesVisibility
+  - Added Type Alias Probe
+  - Added Type Alias PublicIPAddress
+  - Added Type Alias PublicIPPrefix
+  - Added Type Alias ResourceNavigationLink
+  - Added Type Alias Route
+  - Added Type Alias RouteFilter
+  - Added Type Alias RouteFilterRule
+  - Added Type Alias RouteTable
+  - Added Type Alias RoutingIntent
+  - Added Type Alias ScopeConnection
+  - Added Type Alias SecurityAdminConfiguration
+  - Added Type Alias SecurityPartnerProvider
+  - Added Type Alias SecurityRule
+  - Added Type Alias ServiceAssociationLink
+  - Added Type Alias ServiceEndpointPolicy
+  - Added Type Alias ServiceEndpointPolicyDefinition
+  - Added Type Alias StaticMember
+  - Added Type Alias Subnet
+  - Added Type Alias VirtualApplianceSite
+  - Added Type Alias VirtualHub
+  - Added Type Alias VirtualHubRouteTableV2
+  - Added Type Alias VirtualNetwork
+  - Added Type Alias VirtualNetworkGateway
+  - Added Type Alias VirtualNetworkGatewayConnection
+  - Added Type Alias VirtualNetworkGatewayConnectionListEntity
+  - Added Type Alias VirtualNetworkGatewayIPConfiguration
+  - Added Type Alias VirtualNetworkGatewayNatRule
+  - Added Type Alias VirtualNetworkPeering
+  - Added Type Alias VirtualNetworkTap
+  - Added Type Alias VirtualRouter
+  - Added Type Alias VirtualRouterPeering
+  - Added Type Alias VirtualWAN
+  - Added Type Alias Vm
+  - Added Type Alias VpnClientRevokedCertificate
+  - Added Type Alias VpnClientRootCertificate
+  - Added Type Alias VpnConnection
+  - Added Type Alias VpnGateway
+  - Added Type Alias VpnGatewayNatRule
+  - Added Type Alias VpnServerConfiguration
+  - Added Type Alias VpnServerConfigurationPolicyGroup
+  - Added Type Alias VpnSite
+  - Added Type Alias VpnSiteLink
+  - Added Type Alias VpnSiteLinkConnection
+  - Added Type Alias WebApplicationFirewallPolicy
+    
+    
+## 29.0.0 (2022-08-02)
+    
+**Features**
 
-### Features Added
+  - Added operation group AdminRuleCollections
+  - Added operation group AdminRules
+  - Added operation group ConnectivityConfigurations
+  - Added operation group ExpressRouteProviderPortsLocation
+  - Added operation group ManagementGroupNetworkManagerConnections
+  - Added operation group NetworkGroups
+  - Added operation group NetworkManagerCommits
+  - Added operation group NetworkManagerDeploymentStatusOperations
+  - Added operation group NetworkManagers
+  - Added operation group ScopeConnections
+  - Added operation group SecurityAdminConfigurations
+  - Added operation group StaticMembers
+  - Added operation group SubscriptionNetworkManagerConnections
+  - Added operation AzureFirewalls.beginListLearnedPrefixes
+  - Added operation AzureFirewalls.beginListLearnedPrefixesAndWait
+  - Added Interface ActiveBaseSecurityAdminRule
+  - Added Interface ActiveConfigurationParameter
+  - Added Interface ActiveConnectivityConfiguration
+  - Added Interface ActiveConnectivityConfigurationsListResult
+  - Added Interface ActiveDefaultSecurityAdminRule
+  - Added Interface ActiveSecurityAdminRule
+  - Added Interface ActiveSecurityAdminRulesListResult
+  - Added Interface AddressPrefixItem
+  - Added Interface AdminRule
+  - Added Interface AdminRuleCollection
+  - Added Interface AdminRuleCollectionListResult
+  - Added Interface AdminRuleCollectionsCreateOrUpdateOptionalParams
+  - Added Interface AdminRuleCollectionsDeleteHeaders
+  - Added Interface AdminRuleCollectionsDeleteOptionalParams
+  - Added Interface AdminRuleCollectionsGetOptionalParams
+  - Added Interface AdminRuleCollectionsListNextOptionalParams
+  - Added Interface AdminRuleCollectionsListOptionalParams
+  - Added Interface AdminRuleListResult
+  - Added Interface AdminRulesCreateOrUpdateOptionalParams
+  - Added Interface AdminRulesDeleteHeaders
+  - Added Interface AdminRulesDeleteOptionalParams
+  - Added Interface AdminRulesGetOptionalParams
+  - Added Interface AdminRulesListNextOptionalParams
+  - Added Interface AdminRulesListOptionalParams
+  - Added Interface ApplicationGateway
+  - Added Interface ApplicationGatewayAuthenticationCertificate
+  - Added Interface ApplicationGatewayAvailableSslOptions
+  - Added Interface ApplicationGatewayBackendAddressPool
+  - Added Interface ApplicationGatewayBackendHttpSettings
+  - Added Interface ApplicationGatewayBackendSettings
+  - Added Interface ApplicationGatewayFirewallRuleSet
+  - Added Interface ApplicationGatewayFrontendIPConfiguration
+  - Added Interface ApplicationGatewayFrontendPort
+  - Added Interface ApplicationGatewayHttpListener
+  - Added Interface ApplicationGatewayIPConfiguration
+  - Added Interface ApplicationGatewayListener
+  - Added Interface ApplicationGatewayLoadDistributionPolicy
+  - Added Interface ApplicationGatewayLoadDistributionTarget
+  - Added Interface ApplicationGatewayPathRule
+  - Added Interface ApplicationGatewayPrivateEndpointConnection
+  - Added Interface ApplicationGatewayPrivateLinkConfiguration
+  - Added Interface ApplicationGatewayPrivateLinkIpConfiguration
+  - Added Interface ApplicationGatewayPrivateLinkResource
+  - Added Interface ApplicationGatewayProbe
+  - Added Interface ApplicationGatewayRedirectConfiguration
+  - Added Interface ApplicationGatewayRequestRoutingRule
+  - Added Interface ApplicationGatewayRewriteRuleSet
+  - Added Interface ApplicationGatewayRoutingRule
+  - Added Interface ApplicationGatewaySslCertificate
+  - Added Interface ApplicationGatewaySslPredefinedPolicy
+  - Added Interface ApplicationGatewaySslProfile
+  - Added Interface ApplicationGatewayTrustedClientCertificate
+  - Added Interface ApplicationGatewayTrustedRootCertificate
+  - Added Interface ApplicationGatewayUrlPathMap
+  - Added Interface ApplicationRule
+  - Added Interface ApplicationSecurityGroup
+  - Added Interface AzureFirewall
+  - Added Interface AzureFirewallApplicationRuleCollection
+  - Added Interface AzureFirewallFqdnTag
+  - Added Interface AzureFirewallIPConfiguration
+  - Added Interface AzureFirewallNatRuleCollection
+  - Added Interface AzureFirewallNetworkRuleCollection
+  - Added Interface AzureFirewallsListLearnedPrefixesOptionalParams
+  - Added Interface BackendAddressPool
+  - Added Interface BaseAdminRule
+  - Added Interface BastionHost
+  - Added Interface BastionHostIPConfiguration
+  - Added Interface BgpConnection
+  - Added Interface BgpServiceCommunity
+  - Added Interface ChildResource
+  - Added Interface ConfigurationGroup
+  - Added Interface ConnectionMonitorResultProperties
+  - Added Interface ConnectionSharedKey
+  - Added Interface ConnectivityConfiguration
+  - Added Interface ConnectivityConfigurationListResult
+  - Added Interface ConnectivityConfigurationsCreateOrUpdateOptionalParams
+  - Added Interface ConnectivityConfigurationsDeleteHeaders
+  - Added Interface ConnectivityConfigurationsDeleteOptionalParams
+  - Added Interface ConnectivityConfigurationsGetOptionalParams
+  - Added Interface ConnectivityConfigurationsListNextOptionalParams
+  - Added Interface ConnectivityConfigurationsListOptionalParams
+  - Added Interface ConnectivityGroupItem
+  - Added Interface Container
+  - Added Interface ContainerNetworkInterface
+  - Added Interface ContainerNetworkInterfaceConfiguration
+  - Added Interface CrossTenantScopes
+  - Added Interface CustomIpPrefix
+  - Added Interface DdosCustomPolicy
+  - Added Interface DefaultAdminRule
+  - Added Interface Delegation
+  - Added Interface DscpConfiguration
+  - Added Interface EffectiveBaseSecurityAdminRule
+  - Added Interface EffectiveConnectivityConfiguration
+  - Added Interface EffectiveDefaultSecurityAdminRule
+  - Added Interface EffectiveSecurityAdminRule
+  - Added Interface EndpointServiceResult
+  - Added Interface ExplicitProxy
+  - Added Interface ExpressRouteCircuit
+  - Added Interface ExpressRouteCircuitAuthorization
+  - Added Interface ExpressRouteCircuitConnection
+  - Added Interface ExpressRouteCircuitPeering
+  - Added Interface ExpressRouteConnection
+  - Added Interface ExpressRouteCrossConnection
+  - Added Interface ExpressRouteCrossConnectionPeering
+  - Added Interface ExpressRouteGateway
+  - Added Interface ExpressRouteLink
+  - Added Interface ExpressRoutePort
+  - Added Interface ExpressRoutePortAuthorization
+  - Added Interface ExpressRoutePortsLocation
+  - Added Interface ExpressRouteProviderPort
+  - Added Interface ExpressRouteProviderPortListResult
+  - Added Interface ExpressRouteProviderPortOptionalParams
+  - Added Interface ExpressRouteProviderPortsLocationListOptionalParams
+  - Added Interface ExpressRouteServiceProvider
+  - Added Interface FirewallPolicy
+  - Added Interface FirewallPolicyFilterRuleCollection
+  - Added Interface FirewallPolicyNatRuleCollection
+  - Added Interface FirewallPolicyRuleCollectionGroup
+  - Added Interface FlowLog
+  - Added Interface FrontendIPConfiguration
+  - Added Interface Hub
+  - Added Interface HubIpConfiguration
+  - Added Interface HubRouteTable
+  - Added Interface HubVirtualNetworkConnection
+  - Added Interface InboundNatPool
+  - Added Interface InboundNatRule
+  - Added Interface InboundSecurityRule
+  - Added Interface IpAllocation
+  - Added Interface IPConfiguration
+  - Added Interface IPConfigurationProfile
+  - Added Interface IpGroup
+  - Added Interface IPPrefixesList
+  - Added Interface ListActiveConnectivityConfigurationsOptionalParams
+  - Added Interface ListActiveSecurityAdminRulesOptionalParams
+  - Added Interface ListNetworkManagerEffectiveConnectivityConfigurationsOptionalParams
+  - Added Interface ListNetworkManagerEffectiveSecurityAdminRulesOptionalParams
+  - Added Interface LoadBalancer
+  - Added Interface LoadBalancingRule
+  - Added Interface LocalNetworkGateway
+  - Added Interface ManagementGroupNetworkManagerConnectionsCreateOrUpdateOptionalParams
+  - Added Interface ManagementGroupNetworkManagerConnectionsDeleteOptionalParams
+  - Added Interface ManagementGroupNetworkManagerConnectionsGetOptionalParams
+  - Added Interface ManagementGroupNetworkManagerConnectionsListNextOptionalParams
+  - Added Interface ManagementGroupNetworkManagerConnectionsListOptionalParams
+  - Added Interface NatGateway
+  - Added Interface NatRule
+  - Added Interface NetworkGroup
+  - Added Interface NetworkGroupListResult
+  - Added Interface NetworkGroupsCreateOrUpdateHeaders
+  - Added Interface NetworkGroupsCreateOrUpdateOptionalParams
+  - Added Interface NetworkGroupsDeleteHeaders
+  - Added Interface NetworkGroupsDeleteOptionalParams
+  - Added Interface NetworkGroupsGetOptionalParams
+  - Added Interface NetworkGroupsListNextOptionalParams
+  - Added Interface NetworkGroupsListOptionalParams
+  - Added Interface NetworkIntentPolicy
+  - Added Interface NetworkInterface
+  - Added Interface NetworkInterfaceIPConfiguration
+  - Added Interface NetworkInterfaceTapConfiguration
+  - Added Interface NetworkManager
+  - Added Interface NetworkManagerCommit
+  - Added Interface NetworkManagerCommitsPostHeaders
+  - Added Interface NetworkManagerCommitsPostOptionalParams
+  - Added Interface NetworkManagerConnection
+  - Added Interface NetworkManagerConnectionListResult
+  - Added Interface NetworkManagerDeploymentStatus
+  - Added Interface NetworkManagerDeploymentStatusListOptionalParams
+  - Added Interface NetworkManagerDeploymentStatusListResult
+  - Added Interface NetworkManagerDeploymentStatusParameter
+  - Added Interface NetworkManagerEffectiveConnectivityConfigurationListResult
+  - Added Interface NetworkManagerEffectiveSecurityAdminRulesListResult
+  - Added Interface NetworkManagerListResult
+  - Added Interface NetworkManagerPropertiesNetworkManagerScopes
+  - Added Interface NetworkManagersCreateOrUpdateOptionalParams
+  - Added Interface NetworkManagersDeleteHeaders
+  - Added Interface NetworkManagersDeleteOptionalParams
+  - Added Interface NetworkManagerSecurityGroupItem
+  - Added Interface NetworkManagersGetOptionalParams
+  - Added Interface NetworkManagersListBySubscriptionNextOptionalParams
+  - Added Interface NetworkManagersListBySubscriptionOptionalParams
+  - Added Interface NetworkManagersListNextOptionalParams
+  - Added Interface NetworkManagersListOptionalParams
+  - Added Interface NetworkManagersPatchOptionalParams
+  - Added Interface NetworkProfile
+  - Added Interface NetworkRule
+  - Added Interface NetworkSecurityGroup
+  - Added Interface NetworkVirtualAppliance
+  - Added Interface NetworkVirtualApplianceSku
+  - Added Interface NetworkWatcher
+  - Added Interface OutboundRule
+  - Added Interface P2SConnectionConfiguration
+  - Added Interface P2SVpnGateway
+  - Added Interface PacketCaptureMachineScope
+  - Added Interface PacketCaptureResultProperties
+  - Added Interface PatchObject
+  - Added Interface PatchRouteFilter
+  - Added Interface PatchRouteFilterRule
+  - Added Interface PeerExpressRouteCircuitConnection
+  - Added Interface PrivateDnsZoneGroup
+  - Added Interface PrivateEndpoint
+  - Added Interface PrivateEndpointConnection
+  - Added Interface PrivateLinkService
+  - Added Interface PrivateLinkServiceConnection
+  - Added Interface PrivateLinkServiceIpConfiguration
+  - Added Interface PrivateLinkServicePropertiesAutoApproval
+  - Added Interface PrivateLinkServicePropertiesVisibility
+  - Added Interface Probe
+  - Added Interface PublicIPAddress
+  - Added Interface PublicIPPrefix
+  - Added Interface QueryRequestOptions
+  - Added Interface ResourceNavigationLink
+  - Added Interface Route
+  - Added Interface RouteFilter
+  - Added Interface RouteFilterRule
+  - Added Interface RouteTable
+  - Added Interface RoutingIntent
+  - Added Interface ScopeConnection
+  - Added Interface ScopeConnectionListResult
+  - Added Interface ScopeConnectionsCreateOrUpdateOptionalParams
+  - Added Interface ScopeConnectionsDeleteOptionalParams
+  - Added Interface ScopeConnectionsGetOptionalParams
+  - Added Interface ScopeConnectionsListNextOptionalParams
+  - Added Interface ScopeConnectionsListOptionalParams
+  - Added Interface SecurityAdminConfiguration
+  - Added Interface SecurityAdminConfigurationListResult
+  - Added Interface SecurityAdminConfigurationsCreateOrUpdateOptionalParams
+  - Added Interface SecurityAdminConfigurationsDeleteHeaders
+  - Added Interface SecurityAdminConfigurationsDeleteOptionalParams
+  - Added Interface SecurityAdminConfigurationsGetOptionalParams
+  - Added Interface SecurityAdminConfigurationsListNextOptionalParams
+  - Added Interface SecurityAdminConfigurationsListOptionalParams
+  - Added Interface SecurityPartnerProvider
+  - Added Interface SecurityRule
+  - Added Interface ServiceAssociationLink
+  - Added Interface ServiceEndpointPolicy
+  - Added Interface ServiceEndpointPolicyDefinition
+  - Added Interface StaticMember
+  - Added Interface StaticMemberListResult
+  - Added Interface StaticMembersCreateOrUpdateOptionalParams
+  - Added Interface StaticMembersDeleteOptionalParams
+  - Added Interface StaticMembersGetOptionalParams
+  - Added Interface StaticMembersListNextOptionalParams
+  - Added Interface StaticMembersListOptionalParams
+  - Added Interface Subnet
+  - Added Interface SubscriptionNetworkManagerConnectionsCreateOrUpdateOptionalParams
+  - Added Interface SubscriptionNetworkManagerConnectionsDeleteOptionalParams
+  - Added Interface SubscriptionNetworkManagerConnectionsGetOptionalParams
+  - Added Interface SubscriptionNetworkManagerConnectionsListNextOptionalParams
+  - Added Interface SubscriptionNetworkManagerConnectionsListOptionalParams
+  - Added Interface SystemData
+  - Added Interface VirtualApplianceSite
+  - Added Interface VirtualHub
+  - Added Interface VirtualHubRouteTableV2
+  - Added Interface VirtualNetwork
+  - Added Interface VirtualNetworkGateway
+  - Added Interface VirtualNetworkGatewayConnection
+  - Added Interface VirtualNetworkGatewayConnectionListEntity
+  - Added Interface VirtualNetworkGatewayIPConfiguration
+  - Added Interface VirtualNetworkGatewayNatRule
+  - Added Interface VirtualNetworkPeering
+  - Added Interface VirtualNetworkTap
+  - Added Interface VirtualRouter
+  - Added Interface VirtualRouterAutoScaleConfiguration
+  - Added Interface VirtualRouterPeering
+  - Added Interface VirtualWAN
+  - Added Interface Vm
+  - Added Interface VpnClientRevokedCertificate
+  - Added Interface VpnClientRootCertificate
+  - Added Interface VpnConnection
+  - Added Interface VpnGateway
+  - Added Interface VpnGatewayNatRule
+  - Added Interface VpnServerConfiguration
+  - Added Interface VpnServerConfigurationPolicyGroup
+  - Added Interface VpnSite
+  - Added Interface VpnSiteLink
+  - Added Interface VpnSiteLinkConnection
+  - Added Interface WebApplicationFirewallPolicy
+  - Added Type Alias ActiveBaseSecurityAdminRuleUnion
+  - Added Type Alias AddressPrefixType
+  - Added Type Alias AdminRuleCollectionsCreateOrUpdateResponse
+  - Added Type Alias AdminRuleCollectionsGetResponse
+  - Added Type Alias AdminRuleCollectionsListNextResponse
+  - Added Type Alias AdminRuleCollectionsListResponse
+  - Added Type Alias AdminRuleKind
+  - Added Type Alias AdminRulesCreateOrUpdateResponse
+  - Added Type Alias AdminRulesGetResponse
+  - Added Type Alias AdminRulesListNextResponse
+  - Added Type Alias AdminRulesListResponse
+  - Added Type Alias AutoLearnPrivateRangesMode
+  - Added Type Alias AzureFirewallsListLearnedPrefixesResponse
+  - Added Type Alias BaseAdminRuleUnion
+  - Added Type Alias ConfigurationType
+  - Added Type Alias ConnectivityConfigurationsCreateOrUpdateResponse
+  - Added Type Alias ConnectivityConfigurationsGetResponse
+  - Added Type Alias ConnectivityConfigurationsListNextResponse
+  - Added Type Alias ConnectivityConfigurationsListResponse
+  - Added Type Alias ConnectivityTopology
+  - Added Type Alias CreatedByType
+  - Added Type Alias DeleteExistingPeering
+  - Added Type Alias DeploymentStatus
+  - Added Type Alias EffectiveAdminRuleKind
+  - Added Type Alias EffectiveBaseSecurityAdminRuleUnion
+  - Added Type Alias ExpressRouteProviderPortResponse
+  - Added Type Alias ExpressRouteProviderPortsLocationListResponse
+  - Added Type Alias GroupConnectivity
+  - Added Type Alias IsGlobal
+  - Added Type Alias ListActiveConnectivityConfigurationsResponse
+  - Added Type Alias ListActiveSecurityAdminRulesResponse
+  - Added Type Alias ListNetworkManagerEffectiveConnectivityConfigurationsResponse
+  - Added Type Alias ListNetworkManagerEffectiveSecurityAdminRulesResponse
+  - Added Type Alias ManagementGroupNetworkManagerConnectionsCreateOrUpdateResponse
+  - Added Type Alias ManagementGroupNetworkManagerConnectionsGetResponse
+  - Added Type Alias ManagementGroupNetworkManagerConnectionsListNextResponse
+  - Added Type Alias ManagementGroupNetworkManagerConnectionsListResponse
+  - Added Type Alias NetworkGroupsCreateOrUpdateResponse
+  - Added Type Alias NetworkGroupsGetResponse
+  - Added Type Alias NetworkGroupsListNextResponse
+  - Added Type Alias NetworkGroupsListResponse
+  - Added Type Alias NetworkIntentPolicyBasedService
+  - Added Type Alias NetworkManagerCommitsPostResponse
+  - Added Type Alias NetworkManagerDeploymentStatusListResponse
+  - Added Type Alias NetworkManagersCreateOrUpdateResponse
+  - Added Type Alias NetworkManagersGetResponse
+  - Added Type Alias NetworkManagersListBySubscriptionNextResponse
+  - Added Type Alias NetworkManagersListBySubscriptionResponse
+  - Added Type Alias NetworkManagersListNextResponse
+  - Added Type Alias NetworkManagersListResponse
+  - Added Type Alias NetworkManagersPatchResponse
+  - Added Type Alias PacketCaptureTargetType
+  - Added Type Alias ScopeConnectionsCreateOrUpdateResponse
+  - Added Type Alias ScopeConnectionsGetResponse
+  - Added Type Alias ScopeConnectionsListNextResponse
+  - Added Type Alias ScopeConnectionsListResponse
+  - Added Type Alias ScopeConnectionState
+  - Added Type Alias SecurityAdminConfigurationsCreateOrUpdateResponse
+  - Added Type Alias SecurityAdminConfigurationsGetResponse
+  - Added Type Alias SecurityAdminConfigurationsListNextResponse
+  - Added Type Alias SecurityAdminConfigurationsListResponse
+  - Added Type Alias SecurityConfigurationRuleAccess
+  - Added Type Alias SecurityConfigurationRuleDirection
+  - Added Type Alias SecurityConfigurationRuleProtocol
+  - Added Type Alias StaticMembersCreateOrUpdateResponse
+  - Added Type Alias StaticMembersGetResponse
+  - Added Type Alias StaticMembersListNextResponse
+  - Added Type Alias StaticMembersListResponse
+  - Added Type Alias SubscriptionNetworkManagerConnectionsCreateOrUpdateResponse
+  - Added Type Alias SubscriptionNetworkManagerConnectionsGetResponse
+  - Added Type Alias SubscriptionNetworkManagerConnectionsListNextResponse
+  - Added Type Alias SubscriptionNetworkManagerConnectionsListResponse
+  - Added Type Alias UseHubGateway
+  - Interface FirewallPolicySnat has a new optional parameter autoLearnPrivateRanges
+  - Interface PacketCapture has a new optional parameter scope
+  - Interface PacketCapture has a new optional parameter targetType
+  - Interface PacketCaptureParameters has a new optional parameter scope
+  - Interface PacketCaptureParameters has a new optional parameter targetType
+  - Interface PacketCaptureResult has a new optional parameter scope
+  - Interface PacketCaptureResult has a new optional parameter targetType
+  - Class NetworkManagementClient has a new parameter adminRuleCollections
+  - Class NetworkManagementClient has a new parameter adminRules
+  - Class NetworkManagementClient has a new parameter connectivityConfigurations
+  - Class NetworkManagementClient has a new parameter expressRouteProviderPortsLocation
+  - Class NetworkManagementClient has a new parameter managementGroupNetworkManagerConnections
+  - Class NetworkManagementClient has a new parameter networkGroups
+  - Class NetworkManagementClient has a new parameter networkManagerCommits
+  - Class NetworkManagementClient has a new parameter networkManagerDeploymentStatusOperations
+  - Class NetworkManagementClient has a new parameter networkManagers
+  - Class NetworkManagementClient has a new parameter scopeConnections
+  - Class NetworkManagementClient has a new parameter securityAdminConfigurations
+  - Class NetworkManagementClient has a new parameter staticMembers
+  - Class NetworkManagementClient has a new parameter subscriptionNetworkManagerConnections
+  - Added Enum KnownAddressPrefixType
+  - Added Enum KnownAdminRuleKind
+  - Added Enum KnownAutoLearnPrivateRangesMode
+  - Added Enum KnownConfigurationType
+  - Added Enum KnownConnectivityTopology
+  - Added Enum KnownCreatedByType
+  - Added Enum KnownDeleteExistingPeering
+  - Added Enum KnownDeploymentStatus
+  - Added Enum KnownEffectiveAdminRuleKind
+  - Added Enum KnownGroupConnectivity
+  - Added Enum KnownIsGlobal
+  - Added Enum KnownNetworkIntentPolicyBasedService
+  - Added Enum KnownScopeConnectionState
+  - Added Enum KnownSecurityConfigurationRuleAccess
+  - Added Enum KnownSecurityConfigurationRuleDirection
+  - Added Enum KnownSecurityConfigurationRuleProtocol
+  - Added Enum KnownUseHubGateway
+  - Enum KnownApplicationGatewaySslPolicyName has a new value AppGwSslPolicy20220101
+  - Enum KnownApplicationGatewaySslPolicyName has a new value AppGwSslPolicy20220101S
+  - Enum KnownApplicationGatewaySslPolicyType has a new value CustomV2
+  - Enum KnownApplicationGatewaySslProtocol has a new value TLSv13
+  - Enum KnownCommissionedState has a new value CommissionedNoInternetAdvertise
+  - Enum KnownEndpointType has a new value AzureArcVM
+  - Enum KnownEndpointType has a new value AzureVmss
+  - Enum KnownWebApplicationFirewallOperator has a new value Any
 
-### Breaking Changes
+**Breaking Changes**
 
-### Bugs Fixed
-
-### Other Changes
-
+  - Interface NetworkManagementClientOptionalParams no longer has parameter apiVersion
+  - Class NetworkManagementClient no longer has parameter apiVersion
+    
+    
 ## 28.0.0 (2022-05-18)
     
 **Features**
