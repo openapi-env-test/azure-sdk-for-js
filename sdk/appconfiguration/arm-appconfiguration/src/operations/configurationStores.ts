@@ -808,7 +808,7 @@ const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
 const listOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/configurationStores",
+    "/subscriptions/{subscriptionId}/providersss/Microsoft.AppConfiguration/configurationStores",
   httpMethod: "GET",
   responses: {
     200: {
