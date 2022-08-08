@@ -1170,6 +1170,9 @@ const updateOperationSpec: coreClient.OperationSpec = {
     },
     204: {
       bodyMapper: Mappers.ProvisioningServiceDescription
+    },
+    default: {
+      bodyMapper: Mappers.ErrorDetails
     }
   },
   requestBody: Parameters.provisioningServiceTags,

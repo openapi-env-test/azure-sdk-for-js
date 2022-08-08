@@ -49,6 +49,12 @@ export const Operation: coreClient.CompositeMapper = {
           name: "String"
         }
       },
+      isDataAction: {
+        serializedName: "isDataAction",
+        type: {
+          name: "Boolean"
+        }
+      },
       display: {
         serializedName: "display",
         type: {
@@ -94,6 +100,22 @@ export const ErrorDetails: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
     className: "ErrorDetails",
+    modelProperties: {
+      error: {
+        serializedName: "error",
+        type: {
+          name: "Composite",
+          className: "ErrorDetailsError"
+        }
+      }
+    }
+  }
+};
+
+export const ErrorDetailsError: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "ErrorDetailsError",
     modelProperties: {
       code: {
         serializedName: "code",
@@ -382,6 +404,12 @@ export const IotDpsPropertiesDescription: coreClient.CompositeMapper = {
         serializedName: "enableDataResidency",
         type: {
           name: "Boolean"
+        }
+      },
+      portalOperationsHostName: {
+        serializedName: "portalOperationsHostName",
+        type: {
+          name: "String"
         }
       }
     }
@@ -1167,6 +1195,13 @@ export const ProvisioningServiceDescription: coreClient.CompositeMapper = {
         serializedName: "etag",
         type: {
           name: "String"
+        }
+      },
+      tags: {
+        serializedName: "tags",
+        type: {
+          name: "Dictionary",
+          value: { type: { name: "any" } }
         }
       },
       properties: {

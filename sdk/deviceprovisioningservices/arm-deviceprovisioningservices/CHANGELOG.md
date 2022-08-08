@@ -1,5 +1,22 @@
 # Release History
+    
+## 6.0.0 (2022-08-08)
+    
+**Features**
 
+  - Added Interface ErrorDetailsError
+  - Interface ErrorDetails has a new optional parameter error
+  - Interface IotDpsPropertiesDescription has a new optional parameter portalOperationsHostName
+  - Interface Operation has a new optional parameter isDataAction
+  - Type Alias ProvisioningServiceDescription has a new parameter tags
+
+**Breaking Changes**
+
+  - Interface ErrorDetails no longer has parameter code
+  - Interface ErrorDetails no longer has parameter details
+  - Interface ErrorDetails no longer has parameter httpStatusCode
+  - Interface ErrorDetails no longer has parameter message
+    
 ## 5.0.1 (2022-04-27)
     
 **Features**

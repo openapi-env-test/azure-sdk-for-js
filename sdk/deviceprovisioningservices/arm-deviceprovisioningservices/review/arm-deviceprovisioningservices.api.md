@@ -135,8 +135,13 @@ export interface DpsCertificateVerifyCertificateOptionalParams extends coreClien
 // @public
 export type DpsCertificateVerifyCertificateResponse = CertificateResponse;
 
-// @public
+// @public (undocumented)
 export interface ErrorDetails {
+    error?: ErrorDetailsError;
+}
+
+// @public
+export interface ErrorDetailsError {
     readonly code?: string;
     readonly details?: string;
     readonly httpStatusCode?: string;
@@ -198,6 +203,7 @@ export interface IotDpsPropertiesDescription {
     readonly idScope?: string;
     iotHubs?: IotHubDefinitionDescription[];
     ipFilterRules?: IpFilterRule[];
+    portalOperationsHostName?: string;
     privateEndpointConnections?: PrivateEndpointConnection[];
     provisioningState?: string;
     publicNetworkAccess?: PublicNetworkAccess;
@@ -557,6 +563,7 @@ export type NameUnavailabilityReason = string;
 // @public
 export interface Operation {
     display?: OperationDisplay;
+    isDataAction?: boolean;
     readonly name?: string;
 }
 
@@ -635,6 +642,7 @@ export type PrivateLinkServiceConnectionStatus = string;
 // @public
 export type ProvisioningServiceDescription = Resource & {
     etag?: string;
+    tags?: Record<string, unknown>;
     properties: IotDpsPropertiesDescription;
     sku: IotDpsSkuInfo;
     readonly systemData?: SystemData;

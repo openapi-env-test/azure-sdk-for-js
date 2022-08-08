@@ -29,6 +29,8 @@ export interface Operation {
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly name?: string;
+  /** Indicates whether the operation is a data action */
+  isDataAction?: boolean;
   /** The object that represents the operation. */
   display?: OperationDisplay;
 }
@@ -52,8 +54,13 @@ export interface OperationDisplay {
   readonly operation?: string;
 }
 
-/** Error details. */
 export interface ErrorDetails {
+  /** Error details. */
+  error?: ErrorDetailsError;
+}
+
+/** Error details. */
+export interface ErrorDetailsError {
   /**
    * The error code.
    * NOTE: This property will not be serialized. It can only be populated by the server.
@@ -194,6 +201,8 @@ export interface IotDpsPropertiesDescription {
    * Indicates if the DPS instance has Data Residency enabled, removing the cross geo-pair disaster recovery.
    */
   enableDataResidency?: boolean;
+  /** URL for CORS enabled service endpoint. */
+  portalOperationsHostName?: string;
 }
 
 /** The IP filter rules for a provisioning Service. */
@@ -510,6 +519,8 @@ export interface CertificateBodyDescription {
 export type ProvisioningServiceDescription = Resource & {
   /** The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention. */
   etag?: string;
+  /** The DPS tags */
+  tags?: Record<string, unknown>;
   /** Service specific properties for a provisioning service */
   properties: IotDpsPropertiesDescription;
   /** Sku info for a provisioning Service. */
