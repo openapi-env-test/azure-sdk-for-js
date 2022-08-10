@@ -11,15 +11,15 @@ export default function createClient(
   options: ClientOptions = {}
 ): DeviceUpdateClient {
   const baseUrl = options.baseUrl ?? `https://${endpoint}`;
-  options.apiVersion = options.apiVersion ?? "2022-07-01-preview";
+  options.apiVersion = options.apiVersion ?? "2022-07-03";
   options = {
     ...options,
     credentials: {
-      scopes: ["https://api.adu.microsoft.com/.default"],
-    },
+      scopes: ["https://api.adu.microsoft.com/.default"]
+    }
   };
 
-  const userAgentInfo = `azsdk-js-iot-device-update-rest/1.0.0-beta.2`;
+  const userAgentInfo = `azsdk-js-iot-device-update-rest/1.0.0-beta.1`;
   const userAgentPrefix =
     options.userAgentOptions && options.userAgentOptions.userAgentPrefix
       ? `${options.userAgentOptions.userAgentPrefix} ${userAgentInfo}`
@@ -27,8 +27,8 @@ export default function createClient(
   options = {
     ...options,
     userAgentOptions: {
-      userAgentPrefix,
-    },
+      userAgentPrefix
+    }
   };
 
   const client = getClient(baseUrl, credentials, options) as DeviceUpdateClient;

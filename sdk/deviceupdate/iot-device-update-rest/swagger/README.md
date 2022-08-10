@@ -1,4 +1,4 @@
-# Azure IOT Device Update TypeScript Protocol Layer
+# JavaScript
 
 > see https://aka.ms/autorest
 
@@ -11,10 +11,8 @@ license-header: MICROSOFT_MIT_NO_VERSION
 output-folder: ../
 source-code-folder-path: ./src
 require:
-  - https://github.com/Azure/azure-rest-api-specs/blob/9e30496a8803beb5a84909997e5cd7ea0f242fd8/specification/deviceupdate/data-plane/readme.md
+  - /spec-repo/specification/deviceupdate/data-plane/readme.md
 rest-level-client: true
-add-credentials: true
-credential-scopes: https://api.adu.microsoft.com/.default
 use-extension:
-  '@autorest/typescript': 6.0.0-beta.20
-```
+  '@autorest/typescript': 6.0.0-rc.1
+```  
