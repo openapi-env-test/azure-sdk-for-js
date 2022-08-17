@@ -142,8 +142,8 @@ export class ServersImpl implements Servers {
    * Gets details about the specified Analysis Services server.
    * @param resourceGroupName The name of the Azure Resource group of which a given Analysis Services
    *                          server is part. This name must be at least 1 character in length, and no more than 90.
-   * @param serverName The name of the Analysis Services server. It must be a minimum of 3 characters,
-   *                   and a maximum of 63.
+   * @param serverName The name of the Analysis Services server. It must be a of 3 characters, and a
+   *                   maximum of 63.
    * @param options The options parameters.
    */
   getDetails(
@@ -219,10 +219,12 @@ export class ServersImpl implements Servers {
       { resourceGroupName, serverName, serverParameters, options },
       createOperationSpec
     );
-    return new LroEngine(lro, {
+    const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs
     });
+    await poller.poll();
+    return poller;
   }
 
   /**
@@ -307,10 +309,12 @@ export class ServersImpl implements Servers {
       { resourceGroupName, serverName, options },
       deleteOperationSpec
     );
-    return new LroEngine(lro, {
+    const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs
     });
+    await poller.poll();
+    return poller;
   }
 
   /**
@@ -395,10 +399,12 @@ export class ServersImpl implements Servers {
       { resourceGroupName, serverName, serverUpdateParameters, options },
       updateOperationSpec
     );
-    return new LroEngine(lro, {
+    const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs
     });
+    await poller.poll();
+    return poller;
   }
 
   /**
@@ -482,10 +488,12 @@ export class ServersImpl implements Servers {
       { resourceGroupName, serverName, options },
       suspendOperationSpec
     );
-    return new LroEngine(lro, {
+    const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs
     });
+    await poller.poll();
+    return poller;
   }
 
   /**
@@ -566,10 +574,12 @@ export class ServersImpl implements Servers {
       { resourceGroupName, serverName, options },
       resumeOperationSpec
     );
-    return new LroEngine(lro, {
+    const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs
     });
+    await poller.poll();
+    return poller;
   }
 
   /**

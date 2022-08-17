@@ -61,8 +61,8 @@ export interface Servers {
    * Gets details about the specified Analysis Services server.
    * @param resourceGroupName The name of the Azure Resource group of which a given Analysis Services
    *                          server is part. This name must be at least 1 character in length, and no more than 90.
-   * @param serverName The name of the Analysis Services server. It must be a minimum of 3 characters,
-   *                   and a maximum of 63.
+   * @param serverName The name of the Analysis Services server. It must be a of 3 characters, and a
+   *                   maximum of 63.
    * @param options The options parameters.
    */
   getDetails(
