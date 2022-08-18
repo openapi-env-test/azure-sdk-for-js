@@ -11,6 +11,7 @@ import * as coreRestPipeline from "@azure/core-rest-pipeline";
 import * as coreAuth from "@azure/core-auth";
 import {
   AutoscaleSettingsImpl,
+  PredictiveMetricImpl,
   OperationsImpl,
   AlertRuleIncidentsImpl,
   AlertRulesImpl,
@@ -41,6 +42,7 @@ import {
 } from "./operations";
 import {
   AutoscaleSettings,
+  PredictiveMetric,
   Operations,
   AlertRuleIncidents,
   AlertRules,
@@ -102,7 +104,7 @@ export class MonitorClient extends coreClient.ServiceClient {
       credential: credentials
     };
 
-    const packageDetails = `azsdk-js-arm-monitor/7.0.1`;
+    const packageDetails = `azsdk-js-arm-monitor/8.0.0-beta.3`;
     const userAgentPrefix =
       options.userAgentOptions && options.userAgentOptions.userAgentPrefix
         ? `${options.userAgentOptions.userAgentPrefix} ${packageDetails}`
@@ -150,6 +152,7 @@ export class MonitorClient extends coreClient.ServiceClient {
     // Assigning values to Constant parameters
     this.$host = options.$host || "https://management.azure.com";
     this.autoscaleSettings = new AutoscaleSettingsImpl(this);
+    this.predictiveMetric = new PredictiveMetricImpl(this);
     this.operations = new OperationsImpl(this);
     this.alertRuleIncidents = new AlertRuleIncidentsImpl(this);
     this.alertRules = new AlertRulesImpl(this);
@@ -184,6 +187,7 @@ export class MonitorClient extends coreClient.ServiceClient {
   }
 
   autoscaleSettings: AutoscaleSettings;
+  predictiveMetric: PredictiveMetric;
   operations: Operations;
   alertRuleIncidents: AlertRuleIncidents;
   alertRules: AlertRules;
