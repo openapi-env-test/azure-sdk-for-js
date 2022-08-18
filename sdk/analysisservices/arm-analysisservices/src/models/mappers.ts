@@ -446,28 +446,6 @@ export const AnalysisServicesServerUpdateParameters: coreClient.CompositeMapper 
   }
 };
 
-export const AnalysisServicesServers: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "AnalysisServicesServers",
-    modelProperties: {
-      value: {
-        serializedName: "value",
-        required: true,
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "AnalysisServicesServer"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
 export const SkuEnumerationForNewResourceResult: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -923,6 +901,28 @@ export const LogSpecifications: coreClient.CompositeMapper = {
         readOnly: true,
         type: {
           name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const AnalysisServicesServers: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "AnalysisServicesServers",
+    modelProperties: {
+      value: {
+        serializedName: "value",
+        required: true,
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "AnalysisServicesServer"
+            }
+          }
         }
       }
     }

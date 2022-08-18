@@ -139,7 +139,7 @@ export interface GatewayListStatusError {
 
 // @public
 export interface GatewayListStatusLive {
-    status?: "undefined";
+    status?: 0;
 }
 
 // @public
@@ -354,8 +354,6 @@ export interface Servers {
     checkNameAvailability(location: string, serverParameters: CheckServerNameAvailabilityParameters, options?: ServersCheckNameAvailabilityOptionalParams): Promise<ServersCheckNameAvailabilityResponse>;
     dissociateGateway(resourceGroupName: string, serverName: string, options?: ServersDissociateGatewayOptionalParams): Promise<void>;
     getDetails(resourceGroupName: string, serverName: string, options?: ServersGetDetailsOptionalParams): Promise<ServersGetDetailsResponse>;
-    list(options?: ServersListOptionalParams): PagedAsyncIterableIterator<AnalysisServicesServer>;
-    listByResourceGroup(resourceGroupName: string, options?: ServersListByResourceGroupOptionalParams): PagedAsyncIterableIterator<AnalysisServicesServer>;
     listGatewayStatus(resourceGroupName: string, serverName: string, options?: ServersListGatewayStatusOptionalParams): Promise<ServersListGatewayStatusResponse>;
     listOperationResults(location: string, operationId: string, options?: ServersListOperationResultsOptionalParams): Promise<void>;
     listOperationStatuses(location: string, operationId: string, options?: ServersListOperationStatusesOptionalParams): Promise<ServersListOperationStatusesResponse>;
@@ -397,13 +395,6 @@ export interface ServersGetDetailsOptionalParams extends coreClient.OperationOpt
 export type ServersGetDetailsResponse = AnalysisServicesServer;
 
 // @public
-export interface ServersListByResourceGroupOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type ServersListByResourceGroupResponse = AnalysisServicesServers;
-
-// @public
 export interface ServersListGatewayStatusOptionalParams extends coreClient.OperationOptions {
 }
 
@@ -420,13 +411,6 @@ export interface ServersListOperationStatusesOptionalParams extends coreClient.O
 
 // @public
 export type ServersListOperationStatusesResponse = OperationStatus;
-
-// @public
-export interface ServersListOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type ServersListResponse = AnalysisServicesServers;
 
 // @public
 export interface ServersListSkusForExistingOptionalParams extends coreClient.OperationOptions {

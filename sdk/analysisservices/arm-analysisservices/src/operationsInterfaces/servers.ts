@@ -6,14 +6,11 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { PagedAsyncIterableIterator } from "@azure/core-paging";
 import { PollerLike, PollOperationState } from "@azure/core-lro";
 import {
-  AnalysisServicesServer,
-  ServersListByResourceGroupOptionalParams,
-  ServersListOptionalParams,
   ServersGetDetailsOptionalParams,
   ServersGetDetailsResponse,
+  AnalysisServicesServer,
   ServersCreateOptionalParams,
   ServersCreateResponse,
   ServersDeleteOptionalParams,
@@ -37,26 +34,8 @@ import {
   ServersListOperationStatusesResponse
 } from "../models";
 
-/// <reference lib="esnext.asynciterable" />
 /** Interface representing a Servers. */
 export interface Servers {
-  /**
-   * Gets all the Analysis Services servers for the given resource group.
-   * @param resourceGroupName The name of the Azure Resource group of which a given Analysis Services
-   *                          server is part. This name must be at least 1 character in length, and no more than 90.
-   * @param options The options parameters.
-   */
-  listByResourceGroup(
-    resourceGroupName: string,
-    options?: ServersListByResourceGroupOptionalParams
-  ): PagedAsyncIterableIterator<AnalysisServicesServer>;
-  /**
-   * Lists all the Analysis Services servers for the given subscription.
-   * @param options The options parameters.
-   */
-  list(
-    options?: ServersListOptionalParams
-  ): PagedAsyncIterableIterator<AnalysisServicesServer>;
   /**
    * Gets details about the specified Analysis Services server.
    * @param resourceGroupName The name of the Azure Resource group of which a given Analysis Services

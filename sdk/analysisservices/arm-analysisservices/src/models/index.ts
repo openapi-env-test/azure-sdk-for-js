@@ -187,12 +187,6 @@ export interface AnalysisServicesServerUpdateParameters {
   serverMonitorMode?: ServerMonitorMode;
 }
 
-/** An array of Analysis Services resources. */
-export interface AnalysisServicesServers {
-  /** An array of Analysis Services resources. */
-  value: AnalysisServicesServer[];
-}
-
 /** An object that represents enumerating SKUs for new resources. */
 export interface SkuEnumerationForNewResourceResult {
   /** The collection of available SKUs for new resources. */
@@ -216,7 +210,7 @@ export interface SkuDetailsForExistingResource {
 /** Status of gateway is live. */
 export interface GatewayListStatusLive {
   /** Live message of list gateway. Status: 0 - Live */
-  status?: "undefined";
+  status?: 0;
 }
 
 /** Status of gateway is error. */
@@ -400,6 +394,12 @@ export interface LogSpecifications {
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly blobDuration?: string;
+}
+
+/** An array of Analysis Services resources. */
+export interface AnalysisServicesServers {
+  /** An array of Analysis Services resources. */
+  value: AnalysisServicesServer[];
 }
 
 /** Properties of Analysis Services resource. */
@@ -611,20 +611,6 @@ export interface ServersResumeOptionalParams
   /** A serialized poller which can be used to resume an existing paused Long-Running-Operation. */
   resumeFrom?: string;
 }
-
-/** Optional parameters. */
-export interface ServersListByResourceGroupOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the listByResourceGroup operation. */
-export type ServersListByResourceGroupResponse = AnalysisServicesServers;
-
-/** Optional parameters. */
-export interface ServersListOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the list operation. */
-export type ServersListResponse = AnalysisServicesServers;
 
 /** Optional parameters. */
 export interface ServersListSkusForNewOptionalParams

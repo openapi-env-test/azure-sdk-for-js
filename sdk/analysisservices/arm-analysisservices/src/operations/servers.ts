@@ -6,7 +6,6 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { PagedAsyncIterableIterator } from "@azure/core-paging";
 import { Servers } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
 import * as Mappers from "../models/mappers";
@@ -15,11 +14,9 @@ import { AzureAnalysisServices } from "../azureAnalysisServices";
 import { PollerLike, PollOperationState, LroEngine } from "@azure/core-lro";
 import { LroImpl } from "../lroImpl";
 import {
-  AnalysisServicesServer,
-  ServersListByResourceGroupOptionalParams,
-  ServersListOptionalParams,
   ServersGetDetailsOptionalParams,
   ServersGetDetailsResponse,
+  AnalysisServicesServer,
   ServersCreateOptionalParams,
   ServersCreateResponse,
   ServersDeleteOptionalParams,
@@ -28,8 +25,6 @@ import {
   ServersUpdateResponse,
   ServersSuspendOptionalParams,
   ServersResumeOptionalParams,
-  ServersListByResourceGroupResponse,
-  ServersListResponse,
   ServersListSkusForNewOptionalParams,
   ServersListSkusForNewResponse,
   ServersListSkusForExistingOptionalParams,
@@ -45,7 +40,6 @@ import {
   ServersListOperationStatusesResponse
 } from "../models";
 
-/// <reference lib="esnext.asynciterable" />
 /** Class containing Servers operations. */
 export class ServersImpl implements Servers {
   private readonly client: AzureAnalysisServices;
@@ -56,86 +50,6 @@ export class ServersImpl implements Servers {
    */
   constructor(client: AzureAnalysisServices) {
     this.client = client;
-  }
-
-  /**
-   * Gets all the Analysis Services servers for the given resource group.
-   * @param resourceGroupName The name of the Azure Resource group of which a given Analysis Services
-   *                          server is part. This name must be at least 1 character in length, and no more than 90.
-   * @param options The options parameters.
-   */
-  public listByResourceGroup(
-    resourceGroupName: string,
-    options?: ServersListByResourceGroupOptionalParams
-  ): PagedAsyncIterableIterator<AnalysisServicesServer> {
-    const iter = this.listByResourceGroupPagingAll(resourceGroupName, options);
-    return {
-      next() {
-        return iter.next();
-      },
-      [Symbol.asyncIterator]() {
-        return this;
-      },
-      byPage: () => {
-        return this.listByResourceGroupPagingPage(resourceGroupName, options);
-      }
-    };
-  }
-
-  private async *listByResourceGroupPagingPage(
-    resourceGroupName: string,
-    options?: ServersListByResourceGroupOptionalParams
-  ): AsyncIterableIterator<AnalysisServicesServer[]> {
-    let result = await this._listByResourceGroup(resourceGroupName, options);
-    yield result.value || [];
-  }
-
-  private async *listByResourceGroupPagingAll(
-    resourceGroupName: string,
-    options?: ServersListByResourceGroupOptionalParams
-  ): AsyncIterableIterator<AnalysisServicesServer> {
-    for await (const page of this.listByResourceGroupPagingPage(
-      resourceGroupName,
-      options
-    )) {
-      yield* page;
-    }
-  }
-
-  /**
-   * Lists all the Analysis Services servers for the given subscription.
-   * @param options The options parameters.
-   */
-  public list(
-    options?: ServersListOptionalParams
-  ): PagedAsyncIterableIterator<AnalysisServicesServer> {
-    const iter = this.listPagingAll(options);
-    return {
-      next() {
-        return iter.next();
-      },
-      [Symbol.asyncIterator]() {
-        return this;
-      },
-      byPage: () => {
-        return this.listPagingPage(options);
-      }
-    };
-  }
-
-  private async *listPagingPage(
-    options?: ServersListOptionalParams
-  ): AsyncIterableIterator<AnalysisServicesServer[]> {
-    let result = await this._list(options);
-    yield result.value || [];
-  }
-
-  private async *listPagingAll(
-    options?: ServersListOptionalParams
-  ): AsyncIterableIterator<AnalysisServicesServer> {
-    for await (const page of this.listPagingPage(options)) {
-      yield* page;
-    }
   }
 
   /**
@@ -219,10 +133,12 @@ export class ServersImpl implements Servers {
       { resourceGroupName, serverName, serverParameters, options },
       createOperationSpec
     );
-    return new LroEngine(lro, {
+    const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs
     });
+    await poller.poll();
+    return poller;
   }
 
   /**
@@ -307,10 +223,12 @@ export class ServersImpl implements Servers {
       { resourceGroupName, serverName, options },
       deleteOperationSpec
     );
-    return new LroEngine(lro, {
+    const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs
     });
+    await poller.poll();
+    return poller;
   }
 
   /**
@@ -395,10 +313,12 @@ export class ServersImpl implements Servers {
       { resourceGroupName, serverName, serverUpdateParameters, options },
       updateOperationSpec
     );
-    return new LroEngine(lro, {
+    const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs
     });
+    await poller.poll();
+    return poller;
   }
 
   /**
@@ -482,10 +402,12 @@ export class ServersImpl implements Servers {
       { resourceGroupName, serverName, options },
       suspendOperationSpec
     );
-    return new LroEngine(lro, {
+    const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs
     });
+    await poller.poll();
+    return poller;
   }
 
   /**
@@ -566,10 +488,12 @@ export class ServersImpl implements Servers {
       { resourceGroupName, serverName, options },
       resumeOperationSpec
     );
-    return new LroEngine(lro, {
+    const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs
     });
+    await poller.poll();
+    return poller;
   }
 
   /**
@@ -591,32 +515,6 @@ export class ServersImpl implements Servers {
       options
     );
     return poller.pollUntilDone();
-  }
-
-  /**
-   * Gets all the Analysis Services servers for the given resource group.
-   * @param resourceGroupName The name of the Azure Resource group of which a given Analysis Services
-   *                          server is part. This name must be at least 1 character in length, and no more than 90.
-   * @param options The options parameters.
-   */
-  private _listByResourceGroup(
-    resourceGroupName: string,
-    options?: ServersListByResourceGroupOptionalParams
-  ): Promise<ServersListByResourceGroupResponse> {
-    return this.client.sendOperationRequest(
-      { resourceGroupName, options },
-      listByResourceGroupOperationSpec
-    );
-  }
-
-  /**
-   * Lists all the Analysis Services servers for the given subscription.
-   * @param options The options parameters.
-   */
-  private _list(
-    options?: ServersListOptionalParams
-  ): Promise<ServersListResponse> {
-    return this.client.sendOperationRequest({ options }, listOperationSpec);
   }
 
   /**
@@ -896,44 +794,6 @@ const resumeOperationSpec: coreClient.OperationSpec = {
     Parameters.serverName,
     Parameters.subscriptionId
   ],
-  headerParameters: [Parameters.accept],
-  serializer
-};
-const listByResourceGroupOperationSpec: coreClient.OperationSpec = {
-  path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers",
-  httpMethod: "GET",
-  responses: {
-    200: {
-      bodyMapper: Mappers.AnalysisServicesServers
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.resourceGroupName,
-    Parameters.subscriptionId
-  ],
-  headerParameters: [Parameters.accept],
-  serializer
-};
-const listOperationSpec: coreClient.OperationSpec = {
-  path:
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers",
-  httpMethod: "GET",
-  responses: {
-    200: {
-      bodyMapper: Mappers.AnalysisServicesServers
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [Parameters.$host, Parameters.subscriptionId],
   headerParameters: [Parameters.accept],
   serializer
 };
