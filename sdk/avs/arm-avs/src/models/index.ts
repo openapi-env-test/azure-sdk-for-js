@@ -950,10 +950,10 @@ export type PrivateCloudProperties = PrivateCloudUpdateProperties & {
 };
 
 /** The properties of a management cluster */
-export type ManagementCluster = CommonClusterProperties & {};
+export type ManagementCluster = CommonClusterProperties;
 
 /** The properties of a cluster */
-export type ClusterProperties = CommonClusterProperties & {};
+export type ClusterProperties = CommonClusterProperties;
 
 /** The resource model definition for a ARM tracked top level resource */
 export type TrackedResource = Resource & {
@@ -1062,7 +1062,7 @@ export type GlobalReachConnection = Resource & {
 };
 
 /** The resource model definition for a ARM proxy resource */
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 /** A cloud link resource */
 export type CloudLink = Resource & {

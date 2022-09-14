@@ -307,7 +307,7 @@ export interface ClusterList {
 }
 
 // @public
-export type ClusterProperties = CommonClusterProperties & {};
+export type ClusterProperties = CommonClusterProperties;
 
 // @public
 export type ClusterProvisioningState = string;
@@ -1219,7 +1219,7 @@ export interface LogSpecification {
 }
 
 // @public
-export type ManagementCluster = CommonClusterProperties & {};
+export type ManagementCluster = CommonClusterProperties;
 
 // @public
 export interface MetricDimension {
@@ -1581,7 +1581,7 @@ export interface PrivateCloudUpdateProperties {
 }
 
 // @public
-export type ProxyResource = Resource & {};
+export type ProxyResource = Resource;
 
 // @public
 export type PSCredentialExecutionParameter = ScriptExecutionParameter & {
