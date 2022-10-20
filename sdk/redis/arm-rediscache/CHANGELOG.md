@@ -1,15 +1,67 @@
 # Release History
+    
+## 8.0.0 (2022-10-20)
+    
+**Features**
 
-## 6.1.1 (Unreleased)
+  - Added Type Alias OperationStatus
+  - Added Type Alias PrivateEndpointConnection
+  - Added Type Alias PrivateLinkResource
+  - Added Type Alias ProxyResource
+  - Added Type Alias RedisCreateProperties
+  - Added Type Alias RedisFirewallRule
+  - Added Type Alias RedisFirewallRuleCreateParameters
+  - Added Type Alias RedisLinkedServerProperties
+  - Added Type Alias RedisLinkedServerWithProperties
+  - Added Type Alias RedisPatchSchedule
+  - Added Type Alias RedisProperties
+  - Added Type Alias RedisResource
+  - Added Type Alias RedisUpdateProperties
+  - Added Type Alias TrackedResource
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
+  - Operation PatchSchedules.createOrUpdate has a new signature
+    
+    
+## 7.0.0 (2022-09-05)
+    
+**Features**
 
-### Bugs Fixed
+  - Added operation LinkedServer.beginDelete
+  - Added operation LinkedServer.beginDeleteAndWait
+  - Added operation Redis.beginUpdate
+  - Added operation Redis.beginUpdateAndWait
+  - Added Interface OperationStatus
+  - Added Interface PrivateEndpointConnection
+  - Added Interface PrivateLinkResource
+  - Added Interface ProxyResource
+  - Added Interface RedisCreateProperties
+  - Added Interface RedisFirewallRule
+  - Added Interface RedisFirewallRuleCreateParameters
+  - Added Interface RedisLinkedServerProperties
+  - Added Interface RedisLinkedServerWithProperties
+  - Added Interface RedisPatchSchedule
+  - Added Interface RedisProperties
+  - Added Interface RedisResource
+  - Added Interface RedisUpdateProperties
+  - Added Interface TrackedResource
+  - Interface ExportRDBParameters has a new optional parameter preferredDataArchiveAuthMethod
+  - Interface ImportRDBParameters has a new optional parameter preferredDataArchiveAuthMethod
+  - Interface LinkedServerDeleteOptionalParams has a new optional parameter resumeFrom
+  - Interface LinkedServerDeleteOptionalParams has a new optional parameter updateIntervalInMs
+  - Interface RedisCommonPropertiesRedisConfiguration has a new optional parameter aofBackupEnabled
+  - Interface RedisCommonPropertiesRedisConfiguration has a new optional parameter authnotrequired
+  - Interface RedisUpdateOptionalParams has a new optional parameter resumeFrom
+  - Interface RedisUpdateOptionalParams has a new optional parameter updateIntervalInMs
 
-### Other Changes
+**Breaking Changes**
 
+  - Removed operation LinkedServer.delete
+  - Removed operation Redis.update
+  - Operation PatchSchedules.createOrUpdate has a new signature
+    
+    
 ## 6.1.0 (2022-03-07)
     
 **Features**
