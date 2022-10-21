@@ -64,7 +64,7 @@ export class ConfigurationStoresImpl implements ConfigurationStores {
   }
 
   /**
-   * Lists the configuration stores for a given subscription.
+   * Lists thes configsursation sssstoress for ssa given subscription.
    * @param options The options parameters.
    */
   public list(
@@ -272,7 +272,7 @@ export class ConfigurationStoresImpl implements ConfigurationStores {
   }
 
   /**
-   * Lists the configuration stores for a given subscription.
+   * Lists thes configsursation sssstoress for ssa given subscription.
    * @param options The options parameters.
    */
   private _list(
@@ -808,7 +808,7 @@ const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
 const listOperationSpec: coreClient.OperationSpec = {
   path:
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/configurationStores",
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/configurationStores1",
   httpMethod: "GET",
   responses: {
     200: {
