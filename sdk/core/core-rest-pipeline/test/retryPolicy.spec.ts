@@ -1,10 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import { AzureLogger } from "@azure/logger";
-import { AbortController } from "@azure/abort-controller";
-import { assert } from "chai";
-import * as sinon from "sinon";
+import sinon from "sinon";
 import {
   PipelineResponse,
   RestError,
@@ -12,8 +9,11 @@ import {
   createHttpHeaders,
   createPipelineRequest,
   retryPolicy,
-} from "../src";
-import { DEFAULT_RETRY_POLICY_COUNT } from "../src/constants";
+} from "../src/index.js";
+import { AbortController } from "@azure/abort-controller";
+import { DEFAULT_RETRY_POLICY_COUNT } from "../src/constants.js";
+import { assert } from "chai";
+import { makeTestLogger } from "./util.js";
 
 describe("retryPolicy", function () {
   afterEach(function () {
@@ -216,30 +216,6 @@ describe("retryPolicy", function () {
     assert.strictEqual(next.callCount, 1);
     assert.isTrue(catchCalled);
   });
-
-  function makeTestLogger(): { logger: AzureLogger; params: { info: string[]; error: string[] } } {
-    const logParams: {
-      info: string[];
-      error: string[];
-    } = {
-      info: [],
-      error: [],
-    };
-
-    const logger: AzureLogger = {
-      info(...params) {
-        logParams.info.push(params.join(" "));
-      },
-      error(...params) {
-        logParams.error.push(params.join(" "));
-      },
-    } as AzureLogger;
-
-    return {
-      logger,
-      params: logParams,
-    };
-  }
 
   it("It should log consistent messages", async () => {
     const request = createPipelineRequest({

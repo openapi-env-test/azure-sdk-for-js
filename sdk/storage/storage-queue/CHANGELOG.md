@@ -1,14 +1,20 @@
 # Release History
 
-## 12.9.1 (Unreleased)
+## 12.11.0 (2022-10-14)
 
-### Features Added
+### Features 
 
-### Breaking Changes
+- Added support for service version 2021-10-04.
 
 ### Bugs Fixed
 
-### Other Changes
+- Refined URL parsing method to let it be able to correctly parse URLs with account name in path.
+
+## 12.10.0 (2022-07-08)
+
+### Features Added
+
+- Added support for service version 2021-08-06.
 
 ## 12.9.0 (2022-05-12)
 

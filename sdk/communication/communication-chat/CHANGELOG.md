@@ -1,14 +1,18 @@
 # Release History
 
-## 1.2.1 (Unreleased)
+## 1.3.0 (2022-10-13)
 
 ### Features Added
 
-### Breaking Changes
+- Updated to @azure/communication-signaling@1.0.0-beta.15. Improves real-time notification of messages when the network is offline, interrupted or unstable. For message(s) sent during this time, the customer will receive the notification that the message has been delivered if the network is functioning normally within 15 minutes.
 
-### Bugs Fixed
+- Updated to `@azure/core-tracing` 1.0.
 
-### Other Changes
+## 1.2.1 (2022-07-12)
+
+### Features Added
+
+- Updated to @azure/communication-signaling@1.0.0-beta.14.
 
 ## 1.2.0 (2022-04-05)
 

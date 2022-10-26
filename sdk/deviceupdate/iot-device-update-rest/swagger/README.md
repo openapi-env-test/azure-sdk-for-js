@@ -1,21 +1,52 @@
-# JavaScript
+# Azure IOT Device Update TypeScript Protocol Layer
 
 > see https://aka.ms/autorest
 
 ## Configuration
 
 ```yaml
-package-name: '@azure-rest/iot-device-update'
-generate-metadata: true
+package-name: "@azure-rest/iot-device-update"
+title: DeviceUpdate
+description: Iot Device Update Client
+generate-metadata: false
 license-header: MICROSOFT_MIT_NO_VERSION
 output-folder: ../
 source-code-folder-path: ./src
-require:
-  - https://github.com/Azure/azure-rest-api-specs/blob/9e30496a8803beb5a84909997e5cd7ea0f242fd8/specification/deviceupdate/data-plane/readme.md
+input-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d7c9be23749467be1aea18f02ba2f4948a39db6a/specification/deviceupdate/data-plane/Microsoft.DeviceUpdate/stable/2022-10-01/deviceupdate.json
+package-version: 1.0.1
 rest-level-client: true
 add-credentials: true
 credential-scopes: https://api.adu.microsoft.com/.default
 use-extension:
-  '@autorest/typescript': 6.0.0-beta.20
+  "@autorest/typescript": "6.0.0-rc.1"
+```
 
-```  
+### Fix 304s
+``` yaml
+directive:
+- from: swagger-document
+  where: $["paths"]["/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}"]
+  transform: >
+    $.get.responses["304"] = {
+      "description": "The condition specified using HTTP conditional header(s) is not met."
+    };
+- from: swagger-document
+  where: $["paths"]["/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files/{fileId}"]
+  transform: >
+    $.get.responses["304"] = {
+      "description": "The condition specified using HTTP conditional header(s) is not met."
+    };
+- from: swagger-document
+  where: $["paths"]["/deviceUpdate/{instanceId}/updates/operations/{operationId}"]
+  transform: >
+    $.get.responses["304"] = {
+      "description": "The condition specified using HTTP conditional header(s) is not met."
+    };
+- from: swagger-document
+  where: $["paths"]["/deviceUpdate/{instanceId}/management/operations/{operationId}"]
+  transform: >
+    $.get.responses["304"] = {
+      "description": "The condition specified using HTTP conditional header(s) is not met."
+    };
+```
+

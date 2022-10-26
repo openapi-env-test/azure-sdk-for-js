@@ -10,13 +10,12 @@
  * https://aka.ms/azsdk/formrecognizer/taxusw2fieldschema
  *
  * @summary extract data from a United States W2 tax document
+ * @azsdk-skip-javascript
  */
 
-import {
-  AzureKeyCredential,
-  DocumentAnalysisClient,
-  PrebuiltModels,
-} from "@azure/ai-form-recognizer";
+import { AzureKeyCredential, DocumentAnalysisClient } from "@azure/ai-form-recognizer";
+
+import { PrebuiltTaxUsW2Model } from "./prebuilt/prebuilt-tax.us.w2";
 
 import fs from "fs";
 import path from "path";
@@ -28,18 +27,18 @@ async function main() {
   const endpoint = process.env.FORM_RECOGNIZER_ENDPOINT || "<endpoint>";
   const credential = new AzureKeyCredential(process.env.FORM_RECOGNIZER_API_KEY || "<api key>");
 
-  const file = fs.readFileSync(path.join(".", "assets", "w2", "gold_simple_w2.png"));
+  const file = fs.readFileSync(path.join(".", "assets", "w2", "w2-single.png"));
 
   const client = new DocumentAnalysisClient(endpoint, credential);
 
-  const poller = await client.beginAnalyzeDocument(PrebuiltModels.TaxUsW2, file);
+  const poller = await client.beginAnalyzeDocument(PrebuiltTaxUsW2Model, file);
 
   const {
-    documents: [result],
+    documents: [document],
   } = await poller.pollUntilDone();
 
-  if (result) {
-    const { employee, employer, controlNumber, taxYear, additionalInfo } = result.fields;
+  if (document) {
+    const { employee, employer, controlNumber, taxYear, additionalInfo } = document.fields;
 
     if (employee) {
       const { name, address, socialSecurityNumber } = employee.properties;

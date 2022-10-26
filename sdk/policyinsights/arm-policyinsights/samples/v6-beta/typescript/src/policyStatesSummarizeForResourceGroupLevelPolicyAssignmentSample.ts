@@ -20,7 +20,6 @@ import { DefaultAzureCredential } from "@azure/identity";
 async function summarizeAtPolicyAssignmentScope() {
   const subscriptionId = "00000000-0000-0000-0000-000000000000";
   const policyStatesSummaryResource = "latest";
-  const subscriptionId = "fffedd8f-ffff-fffd-fffd-fffed2f84852";
   const resourceGroupName = "myResourceGroup";
   const policyAssignmentName = "b7a1ca2596524e3ab19597f2";
   const credential = new DefaultAzureCredential();

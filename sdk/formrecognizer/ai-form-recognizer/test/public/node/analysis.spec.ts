@@ -11,9 +11,8 @@ import {
   AnalyzedDocument,
   DocumentAnalysisClient,
   DocumentModelAdministrationClient,
-  IdentityDocument,
-  ModelInfo,
-  PrebuiltModels,
+  DocumentTable,
+  DocumentModelDetails,
 } from "../../../src";
 import { DocumentSelectionMarkField } from "../../../src/models/fields";
 import {
@@ -24,6 +23,9 @@ import {
 } from "../../utils/recordedClients";
 import { DocumentModelBuildMode } from "../../../src/options/BuildModelOptions";
 import { createValidator } from "../../utils/fieldValidator";
+
+import { PrebuiltModels } from "../../utils/prebuilts";
+import { PrebuiltIdDocumentDocument } from "../../../samples-dev/prebuilt/prebuilt-idDocument";
 
 const endpoint = (): string => assertEnvironmentVariable("FORM_RECOGNIZER_ENDPOINT");
 
@@ -39,7 +41,7 @@ function assertDefined(value: unknown, message?: string): asserts value {
   return assert.ok(value, message);
 }
 
-matrix([[/* true, */ false]] as const, async (useAad) => {
+matrix([[true, false]] as const, async (useAad) => {
   describe(`[${useAad ? "AAD" : "API Key"}] analysis (Node)`, () => {
     const ASSET_PATH = path.resolve(path.join(process.cwd(), "assets"));
     let client: DocumentAnalysisClient;
@@ -66,7 +68,11 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         const filePath = path.join(ASSET_PATH, "forms", "Invoice_1.pdf");
         const stream = fs.createReadStream(filePath);
 
-        const poller = await client.beginExtractLayout(stream, testPollingOptions);
+        const poller = await client.beginAnalyzeDocument(
+          PrebuiltModels.Layout,
+          stream,
+          testPollingOptions
+        );
         const { pages, tables } = await poller.pollUntilDone();
 
         assert.ok(pages && pages.length > 0, `Expected non-empty pages but got ${pages}`);
@@ -82,8 +88,17 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         const filePath = path.join(ASSET_PATH, "receipt", "contoso-receipt.png");
         const stream = fs.createReadStream(filePath);
 
-        const poller = await client.beginExtractLayout(stream, testPollingOptions);
-        const { pages } = await poller.pollUntilDone();
+        const poller = await client.beginAnalyzeDocument(
+          "prebuilt-layout",
+          stream,
+          testPollingOptions
+        );
+        const { pages, paragraphs } = await poller.pollUntilDone();
+
+        assert.ok(
+          paragraphs && paragraphs.length > 0,
+          `Expected non-empty paragraphs but got ${paragraphs}.`
+        );
 
         assert.ok(pages && pages.length > 0, `Expect no-empty pages but got ${pages}`);
       });
@@ -92,13 +107,17 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         const filePath = path.join(ASSET_PATH, "forms", "Form_1.jpg");
         const stream = fs.createReadStream(filePath);
 
-        const poller = await client.beginExtractLayout(stream, testPollingOptions);
+        const poller = await client.beginAnalyzeDocument(
+          PrebuiltModels.Layout,
+          stream,
+          testPollingOptions
+        );
         const { pages, tables } = await poller.pollUntilDone();
 
         assert.isNotEmpty(pages);
 
         assert.isNotEmpty(tables);
-        const [table] = tables;
+        const [table] = tables as DocumentTable[];
         assert.ok(table.boundingRegions?.[0].polygon);
         assert.equal(table.boundingRegions?.[0].pageNumber, 1);
       });
@@ -107,13 +126,17 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         const filePath = path.join(ASSET_PATH, "forms", "Invoice_1.tiff");
         const stream = fs.createReadStream(filePath);
 
-        const poller = await client.beginExtractLayout(stream, testPollingOptions);
+        const poller = await client.beginAnalyzeDocument(
+          PrebuiltModels.Layout,
+          stream,
+          testPollingOptions
+        );
         const { pages, tables } = await poller.pollUntilDone();
 
         assert.isNotEmpty(pages);
 
         assert.isNotEmpty(tables);
-        const [table] = tables;
+        const [table] = tables as DocumentTable[];
         assert.ok(table.boundingRegions?.[0].polygon);
         assert.equal(table.boundingRegions?.[0].pageNumber, 1);
       });
@@ -122,13 +145,17 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         const filePath = path.join(ASSET_PATH, "forms", "Invoice_1.pdf");
         const stream = fs.createReadStream(filePath);
 
-        const poller = await client.beginExtractLayout(stream, testPollingOptions);
+        const poller = await client.beginAnalyzeDocument(
+          PrebuiltModels.Layout,
+          stream,
+          testPollingOptions
+        );
         const { pages, tables } = await poller.pollUntilDone();
 
         assert.isNotEmpty(pages);
 
         assert.isNotEmpty(tables);
-        const [table] = tables;
+        const [table] = tables as DocumentTable[];
         assert.ok(table.boundingRegions?.[0].polygon);
         assert.equal(table.boundingRegions?.[0].pageNumber, 1);
       });
@@ -136,13 +163,17 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
       it("url", async () => {
         const url = makeTestUrl("/Invoice_1.pdf");
 
-        const poller = await client.beginExtractLayout(url, testPollingOptions);
+        const poller = await client.beginAnalyzeDocument(
+          PrebuiltModels.Layout,
+          url,
+          testPollingOptions
+        );
         const { pages, tables } = await poller.pollUntilDone();
 
         assert.isNotEmpty(pages);
 
         assert.isNotEmpty(tables);
-        const [table] = tables;
+        const [table] = tables as DocumentTable[];
         assert.ok(table.boundingRegions?.[0].polygon);
         assert.equal(table.boundingRegions?.[0].pageNumber, 1);
       });
@@ -151,7 +182,11 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         const filePath = path.join(ASSET_PATH, "forms", "selection_mark_form.pdf");
         const stream = fs.createReadStream(filePath);
 
-        const poller = await client.beginExtractLayout(stream, testPollingOptions);
+        const poller = await client.beginAnalyzeDocument(
+          PrebuiltModels.Layout,
+          stream,
+          testPollingOptions
+        );
 
         const { pages } = await poller.pollUntilDone();
 
@@ -163,15 +198,15 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           assert.ok(table.boundingRegions?.[0].boundingBox);
           assert.equal(table.boundingRegions?.[0].pageNumber, 1);*/
 
-        assert.equal(pages[0].pageNumber, 1);
-        assert.isNotEmpty(pages[0].selectionMarks);
+        assert.equal(pages?.[0].pageNumber, 1);
+        assert.isNotEmpty(pages?.[0].selectionMarks);
       });
 
       it("specifying locale", async () => {
         const url = makeTestUrl("/Invoice_1.pdf");
 
         // Just make sure that this doesn't throw
-        const poller = await client.beginExtractLayout(url, {
+        const poller = await client.beginAnalyzeDocument(PrebuiltModels.Layout, url, {
           locale: "en-US",
           ...testPollingOptions,
         });
@@ -183,7 +218,7 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         const url = makeTestUrl("/Invoice_1.pdf");
 
         try {
-          const poller = await client.beginExtractLayout(url, {
+          const poller = await client.beginAnalyzeDocument(PrebuiltModels.Layout, url, {
             locale: "thisIsNotAValidLanguage",
             ...testPollingOptions,
           });
@@ -200,7 +235,7 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         const url = makeTestUrl("/Invoice_1.pdf");
 
         // Just make sure that this doesn't throw
-        const poller = await client.beginExtractLayout(url, {
+        const poller = await client.beginAnalyzeDocument(PrebuiltModels.Layout, url, {
           pages: "1",
           ...testPollingOptions,
         });
@@ -212,7 +247,7 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         const url = makeTestUrl("/Invoice_1.pdf");
 
         try {
-          const poller = await client.beginExtractLayout(url, {
+          const poller = await client.beginAnalyzeDocument(PrebuiltModels.Layout, url, {
             // No page 2 in document
             pages: "2",
             ...testPollingOptions,
@@ -234,8 +269,20 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         invoiceDate: "2017-06-18T00:00:00.000Z",
         dueDate: "2017-06-24T00:00:00.000Z",
         vendorName: "Contoso",
-        vendorAddress: "1 Redmond way Suite\n6000 Redmond, WA\n99243",
-        customerAddress: "1020 Enterprise Way\nSunnayvale, CA 87659",
+        vendorAddress: {
+          houseNumber: "1",
+          road: "Redmond way",
+          city: "Redmond",
+          state: "WA",
+          postalCode: "99243",
+          streetAddress: "1 Redmond way Suite\n6000",
+          unit: "Suite\n6000",
+        },
+        customerAddress: {
+          houseNumber: "1020",
+          road: "Enterprise Way\nSunnayvale, CA 87659",
+          streetAddress: "1020 Enterprise Way\nSunnayvale, CA 87659",
+        },
         customerAddressRecipient: "Microsoft",
         invoiceTotal: {
           amount: 56651.49,
@@ -252,14 +299,14 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           },
         ],
       });
-      let _model: ModelInfo;
+      let _model: DocumentModelDetails;
       let modelName: string;
 
       // We only want to create the model once, but because of the recorder's
       // precedence, we have to create it in a test, so one test will end up
       // recording the entire creation and the other tests will still be able
       // to use it.
-      async function requireModel(): Promise<ModelInfo> {
+      async function requireModel(): Promise<DocumentModelDetails> {
         if (!_model) {
           const trainingClient = new DocumentModelAdministrationClient(
             endpoint(),
@@ -270,7 +317,7 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
             "customFormModelName",
             `customFormModelName${getRandomNumber()}`
           );
-          const poller = await trainingClient.beginBuildModel(
+          const poller = await trainingClient.beginBuildDocumentModel(
             modelName,
             assertEnvironmentVariable("FORM_RECOGNIZER_SELECTION_MARK_STORAGE_CONTAINER_SAS_URL"),
             DocumentModelBuildMode.Template,
@@ -291,19 +338,16 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         const stream = fs.createReadStream(filePath);
 
         const poller = await client.beginAnalyzeDocument(modelId, stream, testPollingOptions);
-        const {
-          pages: [page],
-          documents: [result],
-        } = await poller.pollUntilDone();
+        const { pages, documents } = await poller.pollUntilDone();
 
-        assert.ok(result);
-        assert.equal(result.docType, `${modelName}:${modelName}`);
+        assert.ok(documents);
+        assert.equal(documents?.[0].docType, `${modelName}:${modelName}`);
 
-        const amexMark = result.fields["AMEX_SELECTION_MARK"] as DocumentSelectionMarkField;
+        const amexMark = documents?.[0].fields["AMEX_SELECTION_MARK"] as DocumentSelectionMarkField;
         assert.equal(amexMark.kind, "selectionMark");
         assert.equal(amexMark.value, "selected");
 
-        assert.ok(page);
+        assert.ok(pages?.[0]);
 
         /* There should be a table in the response, but it isn't recognized (maybe because it's too small or sparse)
           assert.isNotEmpty(tables);
@@ -311,8 +355,8 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           assert.ok(table.boundingRegions?.[0].boundingBox);
           assert.equal(table.boundingRegions?.[0].pageNumber, 1);*/
 
-        assert.equal(page.pageNumber, 1);
-        assert.isNotEmpty(page.selectionMarks);
+        assert.equal(pages?.[0].pageNumber, 1);
+        assert.isNotEmpty(pages?.[0].selectionMarks);
       });
 
       it("png file stream", async () => {
@@ -325,16 +369,13 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           testPollingOptions
         );
 
-        const {
-          documents,
-          documents: [receipt],
-        } = await poller.pollUntilDone();
+        const { documents } = await poller.pollUntilDone();
 
         assert.isNotEmpty(documents);
 
-        assert.equal(receipt.docType, "invoice");
+        assert.equal(documents?.[0].docType, "invoice");
 
-        validator(receipt as AnalyzedDocument);
+        validator(documents?.[0] as AnalyzedDocument);
       });
     });
 
@@ -343,11 +384,19 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         const validator = createValidator({
           merchantName: "Contoso",
           merchantPhoneNumber: "+19876543210",
-          merchantAddress: "123 Main Street\nRedmond, WA 98052",
+          merchantAddress: {
+            houseNumber: "123",
+            road: "Main Street",
+            city: "Redmond",
+            state: "WA",
+            postalCode: "98052",
+            streetAddress: "123 Main Street",
+          },
           total: 2516.28,
           transactionDate: "2019-06-10T00:00:00.000Z",
           transactionTime: "13:59:00",
           subtotal: 2297.97,
+          totalTax: 218.31,
           items: [
             {
               totalPrice: 1998,
@@ -361,6 +410,7 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
             },
           ],
         });
+
         const filePath = path.join(ASSET_PATH, "receipt", "contoso-receipt.png");
         const stream = fs.createReadStream(filePath);
 
@@ -369,29 +419,32 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           stream,
           testPollingOptions
         );
-        const {
-          documents,
-          documents: [receiptNaive],
-        } = await poller.pollUntilDone();
+        const { documents } = await poller.pollUntilDone();
         assert.isNotEmpty(documents);
 
-        assert.equal(receiptNaive.docType, "receipt.retailMeal");
+        assert.equal(documents?.[0].docType, "receipt.retailMeal");
 
-        validator(receiptNaive as AnalyzedDocument);
+        validator(documents?.[0] as AnalyzedDocument);
       });
 
       it("jpeg file stream", async () => {
         const validator = createValidator({
-          // locale: "en-US",
           merchantName: "Contoso",
           merchantPhoneNumber: "+19876543210",
-          merchantAddress: "123 Main Street\nRedmond, WA 98052",
+          merchantAddress: {
+            houseNumber: "123",
+            road: "Main Street",
+            city: "Redmond",
+            state: "WA",
+            postalCode: "98052",
+            streetAddress: "123 Main Street",
+          },
           total: 14.5,
           transactionDate: "2019-06-10T00:00:00.000Z",
           transactionTime: "13:59:00",
           subtotal: 11.7,
-          // TODO: model regression
-          // tip: 1.63,
+          totalTax: 1.17,
+          tip: 1.63,
           items: [
             {
               totalPrice: 2.2,
@@ -400,7 +453,7 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
             },
             {
               totalPrice: 9.5,
-              description: "BACON & EGGS\nSunny-side-up",
+              description: "BACON & EGGS",
               quantity: 1,
             },
           ],
@@ -413,29 +466,32 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           stream,
           testPollingOptions
         );
-        const {
-          documents,
-          documents: [receipt],
-        } = await poller.pollUntilDone();
+        const { documents } = await poller.pollUntilDone();
 
         assert.isNotEmpty(documents);
-        assert.equal(receipt.docType, "receipt.retailMeal");
+        assert.equal(documents?.[0].docType, "receipt.retailMeal");
 
-        validator(receipt as AnalyzedDocument);
+        validator(documents?.[0] as AnalyzedDocument);
       });
 
       it("url", async () => {
         const validator = createValidator({
-          locale: undefined, // "en-US",
           merchantName: "Contoso",
           merchantPhoneNumber: "+19876543210",
-          merchantAddress: "123 Main Street\nRedmond, WA 98052",
+          merchantAddress: {
+            houseNumber: "123",
+            road: "Main Street",
+            city: "Redmond",
+            state: "WA",
+            postalCode: "98052",
+            streetAddress: "123 Main Street",
+          },
           total: 14.5,
           transactionDate: "2019-06-10T00:00:00.000Z",
           transactionTime: "13:59:00",
           subtotal: 11.7,
-          // TODO: model regression
-          // tip: 1.63,
+          totalTax: 1.17,
+          tip: 1.63,
           items: [
             {
               totalPrice: 2.2,
@@ -444,7 +500,7 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
             },
             {
               totalPrice: 9.5,
-              description: "BACON & EGGS\nSunny-side-up",
+              description: "BACON & EGGS",
               quantity: 1,
             },
           ],
@@ -456,17 +512,15 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           url,
           testPollingOptions
         );
-        const {
-          documents,
-          documents: [receipt],
-        } = await poller.pollUntilDone();
+        const { documents } = await poller.pollUntilDone();
 
         assert.isNotEmpty(documents);
-        assert.equal(receipt.docType, "receipt.retailMeal");
-        validator(receipt as AnalyzedDocument);
+        assert.equal(documents?.[0].docType, "receipt.retailMeal");
+        validator(documents?.[0] as AnalyzedDocument);
       });
 
-      it("multi-page receipt with blank page", async () => {
+      // TODO: Service regression - throws InternalServerError (message - "An unexpected error occurred.")
+      it.skip("multi-page receipt with blank page", async () => {
         const validator = createValidator({
           // TODO: model regression
           // locale: "en-US",
@@ -475,7 +529,8 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           merchantAddress: "567 Main St.\nRedmond, WA",
           total: 430,
           subtotal: 300,
-          tip: 100,
+          // TODO: model regression
+          // tip: 100,
           items: [
             {
               totalPrice: 10.99,
@@ -515,14 +570,11 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           stream,
           testPollingOptions
         );
-        const {
-          documents,
-          documents: [receipt],
-        } = await poller.pollUntilDone();
+        const { documents } = await poller.pollUntilDone();
 
         assert.isNotEmpty(documents);
-        assert.equal(receipt.docType, "receipt.retailMeal");
-        validator(receipt as AnalyzedDocument);
+        assert.equal(documents?.[0].docType, "receipt.retailMeal");
+        validator(documents?.[0] as AnalyzedDocument);
       });
 
       it("specifying locale", async () => {
@@ -566,13 +618,23 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         companyNames: ["Contoso"],
         jobTitles: ["Senior Researcher"],
         departments: ["Cloud & Al Department"],
-        addresses: ["2 Kingdom Street\nPaddington, London, W2 6BD"],
+        addresses: [
+          {
+            houseNumber: "2",
+            road: "Kingdom Street",
+            city: "London",
+            postalCode: "W2 6BD",
+            streetAddress: "2 Kingdom Street",
+            suburb: "Paddington",
+          },
+        ],
         workPhones: ["+10209875432"],
         mobilePhones: ["+10791112345"],
         faxes: ["+10207892345"],
         emails: ["avery.smith@contoso.com"],
         websites: ["https://www.contoso.com/"],
       });
+
       it("jpg file stream", async () => {
         const filePath = path.join(ASSET_PATH, "businessCard", "business-card-english.jpg");
         const stream = fs.createReadStream(filePath);
@@ -582,21 +644,18 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           stream,
           testPollingOptions
         );
-        const {
-          documents,
-          documents: [businessCard],
-        } = await poller.pollUntilDone();
+        const { documents } = await poller.pollUntilDone();
 
         assert.isNotEmpty(documents);
 
-        const contactNames = businessCard.fields.contactNames;
+        const contactNames = documents?.[0].fields.contactNames;
 
         assertDefined(contactNames);
 
         assert.isNotEmpty(documents);
-        assert.equal(businessCard.docType, "businessCard");
+        assert.equal(documents?.[0].docType, "businessCard");
 
-        validator(businessCard as AnalyzedDocument);
+        validator(documents?.[0] as AnalyzedDocument);
       });
 
       it("url", async () => {
@@ -607,13 +666,11 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           url,
           testPollingOptions
         );
-        const {
-          documents,
-          documents: [businessCard],
-        } = await poller.pollUntilDone();
+        const { documents } = await poller.pollUntilDone();
+        const businessCard = documents?.[0];
 
         assert.isNotEmpty(documents);
-        assert.equal(businessCard.docType, "businessCard");
+        assert.equal(businessCard?.docType, "businessCard");
 
         validator(businessCard as AnalyzedDocument);
       });
@@ -627,10 +684,8 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           ...testPollingOptions,
         });
 
-        const {
-          documents: _,
-          documents: [businessCard],
-        } = await poller.pollUntilDone();
+        const { documents } = await poller.pollUntilDone();
+        const businessCard = documents?.[0];
         const validatorOverride = createValidator({
           contactNames: [
             {
@@ -641,7 +696,16 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           companyNames: ["Contoso"],
           jobTitles: ["Senior Researcher"],
           departments: ["Cloud & Al Department"],
-          addresses: ["2 Kingdom Street\nPaddington, London, W2 6BD"],
+          addresses: [
+            {
+              houseNumber: "2",
+              road: "Kingdom Street",
+              city: "London",
+              postalCode: "W2 6BD",
+              streetAddress: "2 Kingdom Street",
+              suburb: "Paddington",
+            },
+          ],
           workPhones: ["+912098765432"],
           mobilePhones: ["+917911123456"],
           faxes: ["+912067892345"],
@@ -676,8 +740,20 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         invoiceDate: "2017-06-18T00:00:00.000Z",
         dueDate: "2017-06-24T00:00:00.000Z",
         vendorName: "Contoso",
-        vendorAddress: "1 Redmond way Suite\n6000 Redmond, WA\n99243",
-        customerAddress: "1020 Enterprise Way\nSunnayvale, CA 87659",
+        vendorAddress: {
+          houseNumber: "1",
+          road: "Redmond way",
+          city: "Redmond",
+          state: "WA",
+          postalCode: "99243",
+          streetAddress: "1 Redmond way Suite\n6000",
+          unit: "Suite\n6000",
+        },
+        customerAddress: {
+          houseNumber: "1020",
+          road: "Enterprise Way\nSunnayvale, CA 87659",
+          streetAddress: "1020 Enterprise Way\nSunnayvale, CA 87659",
+        },
         customerAddressRecipient: "Microsoft",
         invoiceTotal: {
           amount: 56651.49,
@@ -704,12 +780,8 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           stream,
           testPollingOptions
         );
-        const {
-          documents,
-          documents: [invoice],
-          pages,
-          tables,
-        } = await poller.pollUntilDone();
+        const { documents, pages, tables } = await poller.pollUntilDone();
+        const invoice = documents?.[0];
 
         assert.isNotEmpty(documents);
         assert.isNotEmpty(pages);
@@ -729,12 +801,8 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           url,
           testPollingOptions
         );
-        const {
-          documents,
-          documents: [invoice],
-          pages,
-          tables,
-        } = await poller.pollUntilDone();
+        const { documents, pages, tables } = await poller.pollUntilDone();
+        const invoice = documents?.[0];
 
         assert.isNotEmpty(documents);
         assert.isNotEmpty(pages);
@@ -769,11 +837,22 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         countryRegion: "USA",
         region: "West Virginia",
         documentNumber: "034568",
+        documentDiscriminator: "12645646464554646456464544",
         firstName: "CHRIS",
         lastName: "SMITH",
-        address: "Main Street , Charleston,\nWV 456789",
+        address: {
+          road: "Main Street",
+          city: "Charleston",
+          state: "WV",
+          postalCode: "456789",
+          streetAddress: "Main Street",
+        },
         dateOfBirth: "1988-03-23T00:00:00.000Z",
         dateOfExpiration: "2026-03-23T00:00:00.000Z",
+        dateOfIssue: "2019-03-23T00:00:00.000Z",
+        eyeColor: "BLU",
+        height: "5'11\"",
+        weight: "185LB",
         sex: "M",
         endorsements: "NONE",
         restrictions: "NONE",
@@ -790,14 +869,12 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           testPollingOptions
         );
 
-        const {
-          documents,
-          documents: [receipt],
-        } = await poller.pollUntilDone();
+        const { documents } = await poller.pollUntilDone();
+        const receipt = documents?.[0];
 
         assert.isNotEmpty(documents);
 
-        assert.equal(receipt.docType, "idDocument.driverLicense");
+        assert.equal(receipt?.docType, "idDocument.driverLicense");
 
         validator(receipt as AnalyzedDocument);
       });
@@ -809,14 +886,25 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           countryRegion: "USA",
           region: "Washington",
           documentNumber: "WDLABCD456DG",
+          documentDiscriminator: "DDWDLABCD456DG 1234567XX1101",
           firstName: "LIAM R.",
           lastName: "TALBOT",
-          address: "123 STREET ADDRESS\nYOUR CITY WA 99999-1234",
+          address: {
+            road: "123 STREET ADDRESS",
+            city: "YOUR CITY",
+            state: "WA",
+            postalCode: "99999-1234",
+            streetAddress: "123 STREET ADDRESS",
+          },
           dateOfBirth: "1958-01-06T00:00:00.000Z",
           dateOfExpiration: "2020-08-12T00:00:00.000Z",
+          dateOfIssue: "2015-01-06T00:00:00.000Z",
+          eyeColor: "BLU",
+          height: "5'-08\"",
+          weight: "165 lb",
           sex: "M",
           endorsements: "L",
-          restrictions: "E",
+          restrictions: "B",
         });
 
         const poller = await client.beginAnalyzeDocument(
@@ -824,18 +912,15 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           url,
           testPollingOptions
         );
-        const {
-          documents,
-          documents: [idDocumentNaive],
-          pages,
-        } = await poller.pollUntilDone();
+        const { documents, pages } = await poller.pollUntilDone();
+        const idDocumentNaive = documents?.[0];
 
         assert.isNotEmpty(documents);
 
-        assert.equal(idDocumentNaive.docType, "idDocument.driverLicense");
+        assert.equal(idDocumentNaive?.docType, "idDocument.driverLicense");
 
         const idDocument = idDocumentNaive as Extract<
-          IdentityDocument,
+          PrebuiltIdDocumentDocument,
           { docType: "idDocument.driverLicense" }
         >;
 
@@ -870,27 +955,28 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         taxYear: "2018",
         w2Copy: "Copy 2 -- To Be Filed with Employee's State, City, or Local Income Tax Return,",
         employee: {
-          socialSecurityNumber: "986-62-1002",
-          name: "BONNIE F HERNANDEZ",
+          socialSecurityNumber: "123-45-6789",
+          name: "ANGEL BROWN",
           address: {
-            houseNumber: "96541",
-            road: "molly hollow street",
-            city: "kathrynmouth",
-            state: "ne",
-            postalCode: "98631-5293",
-            streetAddress: "96541 molly hollow street",
+            houseNumber: "4567",
+            road: "MAIN STREET",
+            city: "BUFFALO",
+            state: "WA",
+            postalCode: "12345",
+            streetAddress: "4567 MAIN STREET",
           },
         },
         controlNumber: "000086242",
         employer: {
-          idNumber: "48-1069918",
-          name: "BLUE BEACON USA, LP",
+          idNumber: "98-7654321",
+          name: "CONTOSO LTD",
           address: {
-            poBox: "po box 856",
-            city: "salina",
-            state: "ks",
-            postalCode: "67402-0856",
-            streetAddress: "po box 856",
+            houseNumber: "123",
+            road: "MICROSOFT WAY",
+            city: "REDMOND",
+            state: "WA",
+            postalCode: "98765",
+            streetAddress: "123 MICROSOFT WAY",
           },
         },
         wagesTipsAndOtherCompensation: 37160.56,
@@ -921,23 +1007,24 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
             amount: 123.3,
           },
         ],
-        isRetirementPlan: "true",
+        isStatutoryEmployee: "true",
+        isThirdPartySickPay: "true",
         other: "DISINS 170.85",
         stateTaxInfos: [
           {
             state: "PA",
-            employerStateIdNumber: "18574095",
+            employerStateIdNumber: "87654321",
           },
           {
             state: "WA",
-            employerStateIdNumber: "18743231",
+            employerStateIdNumber: "112345678",
           },
         ],
         localTaxInfos: [
           {
             localWagesTipsEtc: 37160.56,
             localIncomeTax: 51,
-            localityName: "Cmberland Vly/ Mddl",
+            localityName: "Cmberland Vly/Mddl",
           },
           {
             localWagesTipsEtc: 37160.56,
@@ -948,7 +1035,7 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
       });
 
       it("png file stream", async function (this: Mocha.Context) {
-        const filePath = path.join(ASSET_PATH, "w2", "gold_simple_w2.png");
+        const filePath = path.join(ASSET_PATH, "w2", "w2-single.png");
         const stream = fs.createReadStream(filePath);
 
         const poller = await client.beginAnalyzeDocument(
@@ -957,14 +1044,12 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           testPollingOptions
         );
 
-        const {
-          documents,
-          documents: [w2Naive],
-        } = await poller.pollUntilDone();
+        const { documents } = await poller.pollUntilDone();
+        const w2Naive = documents?.[0];
 
         assert.isNotEmpty(documents);
 
-        assert.equal(w2Naive.docType, "tax.us.w2");
+        assert.equal(w2Naive?.docType, "tax.us.w2");
 
         validator(w2Naive as AnalyzedDocument);
       });
@@ -972,10 +1057,11 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
 
     describe("healthInsuranceCard - US", function () {
       const validator = createValidator({
-        insurer: "PREMERA",
+        insurer: "PREMERA| BLUE CROSS",
         member: {
           name: "ANGEL BROWN",
           employer: "Microsoft",
+          idNumberSuffix: "01",
         },
         dependents: [
           {
@@ -983,6 +1069,7 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           },
         ],
         idNumber: {
+          prefix: "ABC",
           number: "123456789",
         },
         groupNumber: "1000000",
@@ -1000,9 +1087,6 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
             amount: "$1,000",
           },
         ],
-        plan: {
-          name: "PPO",
-        },
       });
 
       it("png file stream", async function (this: Mocha.Context) {
@@ -1015,10 +1099,8 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           testPollingOptions
         );
 
-        const {
-          documents,
-          documents: [healthInsuranceCard],
-        } = await poller.pollUntilDone();
+        const { documents } = await poller.pollUntilDone();
+        const healthInsuranceCard = documents?.[0];
 
         assert.isNotEmpty(documents);
 
@@ -1026,7 +1108,7 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
       });
     });
 
-    describe("vaccinationCard", function () {
+    describe.skip("vaccinationCard", function () {
       const validator = createValidator({
         cardHolderInfo: {
           firstName: "Angel",
@@ -1034,13 +1116,9 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
         vaccines: [
           {
             manufacturer: "Pfizer",
-            // TODO: date format incorrect
-            // dateAdministered: "2021-11-10T05:00:00.000Z",
           },
           {
             manufacturer: "Pfizer",
-            // TODO: date format incorrect
-            // dateAdministered: "2021-12-04T05:00:00.000Z",
           },
         ],
       });
@@ -1055,10 +1133,8 @@ matrix([[/* true, */ false]] as const, async (useAad) => {
           testPollingOptions
         );
 
-        const {
-          documents,
-          documents: [vaccinationCard],
-        } = await poller.pollUntilDone();
+        const { documents } = await poller.pollUntilDone();
+        const vaccinationCard = documents?.[0];
 
         assert.isNotEmpty(documents);
 

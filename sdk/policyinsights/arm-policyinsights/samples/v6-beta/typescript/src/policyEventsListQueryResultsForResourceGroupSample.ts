@@ -23,7 +23,6 @@ import { DefaultAzureCredential } from "@azure/identity";
 async function queryAtResourceGroupScope() {
   const subscriptionId = "00000000-0000-0000-0000-000000000000";
   const policyEventsResource = "default";
-  const subscriptionId = "fffedd8f-ffff-fffd-fffd-fffed2f84852";
   const resourceGroupName = "myResourceGroup";
   const credential = new DefaultAzureCredential();
   const client = new PolicyInsightsClient(credential, subscriptionId);
@@ -49,11 +48,10 @@ queryAtResourceGroupScope().catch(console.error);
 async function queryAtResourceGroupScopeWithNextLink() {
   const subscriptionId = "00000000-0000-0000-0000-000000000000";
   const policyEventsResource = "default";
-  const subscriptionId = "fffedd8f-ffff-fffd-fffd-fffed2f84852";
   const resourceGroupName = "myResourceGroup";
   const skipToken = "WpmWfBSvPhkAK6QD";
   const options: PolicyEventsListQueryResultsForResourceGroupOptionalParams = {
-    skipToken
+    queryOptions: { skipToken: skipToken }
   };
   const credential = new DefaultAzureCredential();
   const client = new PolicyInsightsClient(credential, subscriptionId);

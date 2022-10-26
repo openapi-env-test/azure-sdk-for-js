@@ -147,7 +147,48 @@ describe("RuleManager tests", () => {
       assert.deepStrictEqual(correlationFilter.applicationProperties, applicationProperties);
     });
 
-    it("list rules by page", async () => {
+    it("list rules", async () => {
+      const ruleManager = serviceBusClient.createRuleManager(topic, subscription);
+
+      const sqlRuleName = "sqlRule";
+      const correlationRuleName = "correlationRule";
+
+      const rules = await getRules(ruleManager);
+      assert.equal(rules.length, 1); // default rule
+      const firstRule = rules[0];
+      assert.equal(firstRule.name, defaultRuleName);
+
+      await ruleManager.createRule(sqlRuleName, {
+        sqlExpression: "price > 10",
+      });
+
+      const applicationProperties = {
+        key1: "value1",
+      };
+      const correlationRuleFilter: CorrelationRuleFilter = {
+        correlationId: "correlationId",
+        subject: "label",
+        messageId: "messageId",
+        applicationProperties,
+        replyTo: "replyTo",
+        replyToSessionId: "replyToSessionId",
+        sessionId: "sessionId",
+        to: "to",
+      };
+      const action: SqlRuleAction = {
+        sqlExpression: "Set CorrelationId = 'newValue'",
+      };
+      await ruleManager.createRule(correlationRuleName, correlationRuleFilter, action);
+
+      const iterator = ruleManager.listRules();
+      const result: RuleProperties[] = [];
+      for await (const rule of iterator) {
+        result.push(rule);
+      }
+      assert.equal(result.length, 3, "Expecting three rules");
+    });
+
+    it("list rules by page specifying page size", async () => {
       const ruleManager = serviceBusClient.createRuleManager(topic, subscription);
 
       const sqlRuleName = "sqlRule";
@@ -191,7 +232,45 @@ describe("RuleManager tests", () => {
       assert.equal(result.value.length, 1, "Expecting one rule in third page");
       assert.equal(result.value[0].name, sqlRuleName);
       result = await iterator.next();
-      assert.equal(result.value.length, 0, "Not expecting any result in last page");
+      assert.equal(result.value, undefined, "Not expecting any more pages");
+    });
+
+    it("list rules by page without specifying page size", async () => {
+      const ruleManager = serviceBusClient.createRuleManager(topic, subscription);
+
+      const sqlRuleName = "sqlRule";
+      const correlationRuleName = "correlationRule";
+
+      const rules = await getRules(ruleManager);
+      assert.equal(rules.length, 1); // default rule
+      const firstRule = rules[0];
+      assert.equal(firstRule.name, defaultRuleName);
+
+      await ruleManager.createRule(sqlRuleName, {
+        sqlExpression: "price > 10",
+      });
+
+      const applicationProperties = {
+        key1: "value1",
+      };
+      const correlationRuleFilter: CorrelationRuleFilter = {
+        correlationId: "correlationId",
+        subject: "label",
+        messageId: "messageId",
+        applicationProperties,
+        replyTo: "replyTo",
+        replyToSessionId: "replyToSessionId",
+        sessionId: "sessionId",
+        to: "to",
+      };
+      const action: SqlRuleAction = {
+        sqlExpression: "Set CorrelationId = 'newValue'",
+      };
+      await ruleManager.createRule(correlationRuleName, correlationRuleFilter, action);
+
+      const iterator = ruleManager.listRules().byPage();
+      let result = await iterator.next();
+      assert.equal(result.value.length, 3, "Expecting three rules in first page");
       result = await iterator.next();
       assert.equal(result.value, undefined, "Not expecting any more pages");
     });
@@ -380,6 +459,35 @@ describe("RuleManager tests", () => {
         assert.ok(m.applicationProperties, "expecting valid applicationProperties on message")
       );
       received.every((m) => assert.equal(m.applicationProperties!["priority"], "high"));
+    });
+
+    it("created sql filter works using overload without action argument", async () => {
+      const ruleManager = serviceBusClient.createRuleManager(topic, subscription);
+
+      const rules = await getRules(ruleManager);
+      const filteredRules = rules.filter((r) => r.name === defaultRuleName);
+      assert.ok(filteredRules.length >= 1, "expecting at least one rule");
+      assert.ok(filteredRules[0], "expecting valid default rule");
+
+      await ruleManager.deleteRule(defaultRuleName);
+      const ruleName = "SqlRuleWithAction";
+      await ruleManager.createRule(
+        ruleName,
+        { sqlExpression: "Color = 'blue'" },
+        { abortSignal: undefined }
+      );
+
+      await sendMessages(sender);
+      const expectedOrders = orders.filter((o) => o.color === "blue");
+      const received = await receiveAndValidate(
+        serviceBusClient,
+        topic,
+        subscription,
+        expectedOrders
+      );
+      received.every((m) =>
+        assert.ok(m.applicationProperties, "expecting valid applicationProperties on message")
+      );
     });
   });
 });

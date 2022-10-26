@@ -18,7 +18,7 @@ import { DefaultAzureCredential } from "@azure/identity";
  * This sample demonstrates how to Gets all attestations for the resource group.
  *
  * @summary Gets all attestations for the resource group.
- * x-ms-original-file: specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2021-01-01/examples/Attestations_ListResourceGroupScope.json
+ * x-ms-original-file: specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2022-09-01/examples/Attestations_ListResourceGroupScope.json
  */
 async function listAttestationsAtResourceGroupScope() {
   const subscriptionId = "35ee058e-5fa0-414c-8145-3ebb8d09b6e2";
@@ -40,7 +40,7 @@ listAttestationsAtResourceGroupScope().catch(console.error);
  * This sample demonstrates how to Gets all attestations for the resource group.
  *
  * @summary Gets all attestations for the resource group.
- * x-ms-original-file: specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2021-01-01/examples/Attestations_ListResourceGroupScope_WithQuery.json
+ * x-ms-original-file: specification/policyinsights/resource-manager/Microsoft.PolicyInsights/stable/2022-09-01/examples/Attestations_ListResourceGroupScope_WithQuery.json
  */
 async function listAttestationsAtResourceGroupScopeWithQueryParameters() {
   const subscriptionId = "35ee058e-5fa0-414c-8145-3ebb8d09b6e2";
@@ -49,8 +49,10 @@ async function listAttestationsAtResourceGroupScopeWithQueryParameters() {
   const filter =
     "PolicyAssignmentId eq '/subscriptions/35ee058e-5fa0-414c-8145-3ebb8d09b6e2/providers/microsoft.authorization/policyassignments/b101830944f246d8a14088c5' AND PolicyDefinitionReferenceId eq '0b158b46-ff42-4799-8e39-08a5c23b4551'";
   const options: AttestationsListForResourceGroupOptionalParams = {
-    top,
-    filter
+    queryOptions: {
+      top: top,
+      filter: filter
+    }
   };
   const credential = new DefaultAzureCredential();
   const client = new PolicyInsightsClient(credential, subscriptionId);

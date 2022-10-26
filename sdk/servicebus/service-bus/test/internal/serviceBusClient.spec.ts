@@ -69,33 +69,35 @@ describe("ServiceBusClient live tests", () => {
         ? sbClientWithRelaxedEndPoint.createReceiver(entities.queue)
         : sbClientWithRelaxedEndPoint.createReceiver(entities.topic!, entities.subscription!);
 
-      // Send and receive messages
-      const testMessages = entities.usesSessions
-        ? TestMessage.getSessionSample()
-        : TestMessage.getSample();
-      await sender.sendMessages(testMessages);
-      await testPeekMsgsLength(receiver, 1);
+      try {
+        // Send and receive messages
+        const testMessages = entities.usesSessions
+          ? TestMessage.getSessionSample()
+          : TestMessage.getSample();
+        await sender.sendMessages(testMessages);
+        await testPeekMsgsLength(receiver, 1);
 
-      const msgs = await receiver.receiveMessages(1);
+        const msgs = await receiver.receiveMessages(1);
 
-      should.equal(Array.isArray(msgs), true, "`ReceivedMessages` is not an array");
-      should.equal(msgs.length, 1, "Unexpected number of messages");
-      should.equal(msgs[0].body, testMessages.body, "MessageBody is different than expected");
-      should.equal(
-        msgs[0].messageId,
-        testMessages.messageId,
-        "MessageId is different than expected"
-      );
-      should.equal(msgs[0].deliveryCount, 0, "DeliveryCount is different than expected");
-      await receiver.completeMessage(msgs[0]);
+        should.equal(Array.isArray(msgs), true, "`ReceivedMessages` is not an array");
+        should.equal(msgs.length, 1, "Unexpected number of messages");
+        should.equal(msgs[0].body, testMessages.body, "MessageBody is different than expected");
+        should.equal(
+          msgs[0].messageId,
+          testMessages.messageId,
+          "MessageId is different than expected"
+        );
+        should.equal(msgs[0].deliveryCount, 0, "DeliveryCount is different than expected");
+        await receiver.completeMessage(msgs[0]);
 
-      await testPeekMsgsLength(receiver, 0);
-
-      // Clean up
-      await sbClient.test.after();
-      await sender.close();
-      await receiver.close();
-      await sbClientWithRelaxedEndPoint.close();
+        await testPeekMsgsLength(receiver, 0);
+      } finally {
+        // Clean up
+        await sbClient.test.after();
+        await sender.close();
+        await receiver.close();
+        await sbClientWithRelaxedEndPoint.close();
+      }
     });
 
     it.skip(
@@ -220,7 +222,7 @@ describe("ServiceBusClient live tests", () => {
     });
 
     it("throws error when receiving streaming data from a non existing namespace", async function (): Promise<void> {
-      const receiver = sbClient.createReceiver("some-queue");
+      const receiver = sbClient.createReceiver("some-queue", { identifier: "receiverId" });
       reduceRetries(receiver);
 
       try {
@@ -233,12 +235,14 @@ describe("ServiceBusClient live tests", () => {
               errorSource: args.errorSource,
               entityPath: args.entityPath,
               fullyQualifiedNamespace: args.fullyQualifiedNamespace,
+              identifier: args.identifier,
             };
 
             actual.should.deep.equal({
               errorSource: "receive",
               entityPath: receiver.entityPath,
               fullyQualifiedNamespace: sbClient.fullyQualifiedNamespace,
+              identifier: "receiverId",
             } as Omit<ProcessErrorArgs, "error">);
 
             testError(args.error);
@@ -324,7 +328,7 @@ describe("ServiceBusClient live tests", () => {
     });
 
     it("throws error when receiving streaming data from a non existing queue", async function (): Promise<void> {
-      const receiver = sbClient.createReceiver("some-name");
+      const receiver = sbClient.createReceiver("some-name", { identifier: "receiverId" });
       reduceRetries(receiver);
 
       receiver.subscribe({
@@ -336,12 +340,14 @@ describe("ServiceBusClient live tests", () => {
             errorSource: args.errorSource,
             entityPath: args.entityPath,
             fullyQualifiedNamespace: args.fullyQualifiedNamespace,
+            identifier: args.identifier,
           };
 
           actual.should.deep.equal({
             errorSource: "receive",
             entityPath: receiver.entityPath,
             fullyQualifiedNamespace: sbClient.fullyQualifiedNamespace,
+            identifier: "receiverId",
           } as Omit<ProcessErrorArgs, "error">);
 
           testError(args.error, "some-name");
@@ -357,10 +363,9 @@ describe("ServiceBusClient live tests", () => {
     });
 
     it("throws error when receiving streaming data from a non existing topic", async function (): Promise<void> {
-      const receiver = sbClient.createReceiver(
-        "some-topic-name",
-        "some-subscription-name"
-      ) as ServiceBusReceiverImpl;
+      const receiver = sbClient.createReceiver("some-topic-name", "some-subscription-name", {
+        identifier: "receiverId",
+      }) as ServiceBusReceiverImpl;
       reduceRetries(receiver);
 
       receiver.subscribe({
@@ -372,12 +377,14 @@ describe("ServiceBusClient live tests", () => {
             errorSource: args.errorSource,
             entityPath: args.entityPath,
             fullyQualifiedNamespace: args.fullyQualifiedNamespace,
+            identifier: args.identifier,
           };
 
           expected.should.deep.equal({
             errorSource: "receive",
             entityPath: receiver.entityPath,
             fullyQualifiedNamespace: sbClient.fullyQualifiedNamespace,
+            identifier: "receiverId",
           } as Omit<ProcessErrorArgs, "error">);
 
           testError(args.error, "some-topic-name/Subscriptions/some-subscription-name");
@@ -402,10 +409,9 @@ describe("ServiceBusClient live tests", () => {
       if (!entityNames.topic) {
         throw new Error("Expecting valid topic name");
       }
-      const receiver = sbClient.createReceiver(
-        entityNames.topic,
-        "some-subscription-name"
-      ) as ServiceBusReceiverImpl;
+      const receiver = sbClient.createReceiver(entityNames.topic, "some-subscription-name", {
+        identifier: "receiverId",
+      }) as ServiceBusReceiverImpl;
       reduceRetries(receiver);
 
       receiver.subscribe({
@@ -417,12 +423,14 @@ describe("ServiceBusClient live tests", () => {
             errorSource: args.errorSource,
             entityPath: args.entityPath,
             fullyQualifiedNamespace: args.fullyQualifiedNamespace,
+            identifier: args.identifier,
           };
 
           expected.should.deep.equal({
             errorSource: "receive",
             entityPath: receiver.entityPath,
             fullyQualifiedNamespace: sbClient.fullyQualifiedNamespace,
+            identifier: "receiverId",
           } as Omit<ProcessErrorArgs, "error">);
 
           testError(args.error);

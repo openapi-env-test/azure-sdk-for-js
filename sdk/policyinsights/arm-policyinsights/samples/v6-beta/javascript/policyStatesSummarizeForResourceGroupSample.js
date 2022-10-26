@@ -20,7 +20,6 @@ const { DefaultAzureCredential } = require("@azure/identity");
 async function summarizeAtResourceGroupScope() {
   const subscriptionId = "00000000-0000-0000-0000-000000000000";
   const policyStatesSummaryResource = "latest";
-  const subscriptionId = "fffedd8f-ffff-fffd-fffd-fffed2f84852";
   const resourceGroupName = "myResourceGroup";
   const credential = new DefaultAzureCredential();
   const client = new PolicyInsightsClient(credential, subscriptionId);

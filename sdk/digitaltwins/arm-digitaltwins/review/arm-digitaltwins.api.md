@@ -78,7 +78,7 @@ export interface ConnectionProperties {
 }
 
 // @public
-export type ConnectionPropertiesPrivateLinkServiceConnectionState = ConnectionState & {};
+export type ConnectionPropertiesPrivateLinkServiceConnectionState = ConnectionState;
 
 // @public
 export type ConnectionPropertiesProvisioningState = string;
@@ -91,8 +91,7 @@ export interface ConnectionState {
 }
 
 // @public
-type ConnectionType_2 = string;
-export { ConnectionType_2 as ConnectionType }
+export type ConnectionType = string;
 
 // @public
 export type CreatedByType = string;
@@ -438,6 +437,8 @@ export enum KnownEndpointProvisioningState {
     // (undocumented)
     Suspending = "Suspending",
     // (undocumented)
+    Updating = "Updating",
+    // (undocumented)
     Warning = "Warning"
 }
 
@@ -527,6 +528,8 @@ export enum KnownTimeSeriesDatabaseConnectionState {
     Succeeded = "Succeeded",
     // (undocumented)
     Suspending = "Suspending",
+    // (undocumented)
+    Updating = "Updating",
     // (undocumented)
     Warning = "Warning"
 }
