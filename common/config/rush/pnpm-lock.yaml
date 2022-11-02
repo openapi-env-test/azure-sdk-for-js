@@ -4132,7 +4132,7 @@ packages:
     dependencies:
       semver: 7.3.7
       shelljs: 0.8.5
-      typescript: 4.9.0-dev.20221025
+      typescript: 5.0.0-dev.20221102
     dev: false
 
   /downlevel-dts/0.8.0:
@@ -9209,8 +9209,8 @@ packages:
     hasBin: true
     dev: false
 
-  /typescript/4.9.0-dev.20221025:
-    resolution: {integrity: sha512-3TZlt+3jGBjPRVFcNX6BmlajqwNExRm4rhG4llSH5WSMX/eQ54PSueTJ5UhLn9+6/byL31/WRmJJ/7W0j+gCtQ==}
+  /typescript/5.0.0-dev.20221102:
+    resolution: {integrity: sha512-/zsVWPD4QVasQaOQAhaV7TkveFM6Wx4ql9LxnM7NNFb56FpD4tlIjUT/EZLA2tiz472D6zGQf6uuzhjS9mQ4EQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: false
@@ -11828,7 +11828,7 @@ packages:
     dev: false
 
   file:projects/arm-databricks.tgz:
-    resolution: {integrity: sha512-eRXnpEY9ELlW2/wUNEQU1fN9sWnKhn3c9nOqeieaLLglXjwsbP8LDBZx5P4jhuPwoM1gw7gzcOPrgPTXn5oLxQ==, tarball: file:projects/arm-databricks.tgz}
+    resolution: {integrity: sha512-xtMvocnLSR5K3S2SHMd9rYcBzhkWTCcbmi0sbv3dTiBblkqQxrk+MieFL7mDacuvG1drv/aFlFHx2x9R3hr+Sw==, tarball: file:projects/arm-databricks.tgz}
     name: '@rush-temp/arm-databricks'
     version: 0.0.0
     dependencies:
@@ -11840,6 +11840,8 @@ packages:
       '@rollup/plugin-json': 4.1.0_rollup@2.79.0
       '@rollup/plugin-multi-entry': 4.1.0_rollup@2.79.0
       '@rollup/plugin-node-resolve': 13.3.0_rollup@2.79.0
+      '@types/chai': 4.3.1
+      chai: 4.3.6
       cross-env: 7.0.3
       mkdirp: 1.0.4
       mocha: 7.2.0
@@ -11847,11 +11849,10 @@ packages:
       rollup: 2.79.0
       rollup-plugin-sourcemaps: 0.6.3_rollup@2.79.0
       tslib: 2.4.0
-      typescript: 4.2.4
+      typescript: 4.6.4
       uglify-js: 3.16.3
     transitivePeerDependencies:
       - '@types/node'
-      - encoding
       - supports-color
     dev: false
 

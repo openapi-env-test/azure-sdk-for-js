@@ -12,3 +12,5 @@ export * from "./privateLinkResources";
 export * from "./privateEndpointConnections";
 export * from "./outboundNetworkDependenciesEndpoints";
 export * from "./vNetPeering";
+export * from "./accessConnectorss";
+export * from "./accessConnectors";
