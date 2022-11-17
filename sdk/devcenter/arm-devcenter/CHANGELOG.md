@@ -1,15 +1,46 @@
 # Release History
+    
+## 1.0.0-beta.3 (2022-11-17)
+    
+**Features**
 
-## 1.0.0-beta.3 (Unreleased)
+  - Added operation group CheckNameAvailability
+  - Added operation NetworkConnections.beginRunHealthChecks
+  - Added operation NetworkConnections.beginRunHealthChecksAndWait
+  - Added Interface CheckNameAvailabilityExecuteOptionalParams
+  - Added Interface CheckNameAvailabilityRequest
+  - Added Interface CheckNameAvailabilityResponse
+  - Added Interface ErrorAdditionalInfo
+  - Added Interface ErrorDetail
+  - Added Interface ErrorResponse
+  - Added Interface OperationStatusResult
+  - Added Type Alias CatalogSyncState
+  - Added Type Alias CheckNameAvailabilityExecuteResponse
+  - Added Type Alias CheckNameAvailabilityReason
+  - Added Type Alias HibernateSupport
+  - Added Type Alias ProvisioningState
+  - Added Type Alias SchedulesUpdateResponse
+  - Interface Catalog has a new optional parameter syncState
+  - Interface CatalogProperties has a new optional parameter syncState
+  - Interface DevBoxDefinition has a new optional parameter hibernateSupport
+  - Interface DevBoxDefinitionUpdate has a new optional parameter hibernateSupport
+  - Interface DevBoxDefinitionUpdateProperties has a new optional parameter hibernateSupport
+  - Interface DevCenter has a new optional parameter devCenterUri
+  - Interface NetworkConnectionsRunHealthChecksOptionalParams has a new optional parameter resumeFrom
+  - Interface NetworkConnectionsRunHealthChecksOptionalParams has a new optional parameter updateIntervalInMs
+  - Interface Project has a new optional parameter devCenterUri
+  - Interface ProjectProperties has a new optional parameter devCenterUri
+  - Class DevCenterClient has a new parameter checkNameAvailability
+  - Added Enum KnownCatalogSyncState
+  - Added Enum KnownCheckNameAvailabilityReason
+  - Added Enum KnownHibernateSupport
+  - Added Enum KnownProvisioningState
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Removed operation NetworkConnections.runHealthChecks
+    
+    
 ## 1.0.0-beta.2 (2022-10-11)
     
 **Features**
