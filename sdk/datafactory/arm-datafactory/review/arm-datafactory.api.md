@@ -1499,9 +1499,57 @@ interface Credential_2 {
     [property: string]: any;
     annotations?: any[];
     description?: string;
-    type: "ServicePrincipal" | "ManagedIdentity";
+    type: "ManagedIdentity" | "ServicePrincipal";
 }
 export { Credential_2 as Credential }
+
+// @public
+export interface CredentialListResponse {
+    nextLink?: string;
+    value: ManagedIdentityCredentialResource[];
+}
+
+// @public
+export interface CredentialOperations {
+    createOrUpdate(resourceGroupName: string, factoryName: string, credentialName: string, credential: ManagedIdentityCredentialResource, options?: CredentialOperationsCreateOrUpdateOptionalParams): Promise<CredentialOperationsCreateOrUpdateResponse>;
+    delete(resourceGroupName: string, factoryName: string, credentialName: string, options?: CredentialOperationsDeleteOptionalParams): Promise<void>;
+    get(resourceGroupName: string, factoryName: string, credentialName: string, options?: CredentialOperationsGetOptionalParams): Promise<CredentialOperationsGetResponse>;
+    listByFactory(resourceGroupName: string, factoryName: string, options?: CredentialOperationsListByFactoryOptionalParams): PagedAsyncIterableIterator<ManagedIdentityCredentialResource>;
+}
+
+// @public
+export interface CredentialOperationsCreateOrUpdateOptionalParams extends coreClient.OperationOptions {
+    ifMatch?: string;
+}
+
+// @public
+export type CredentialOperationsCreateOrUpdateResponse = ManagedIdentityCredentialResource;
+
+// @public
+export interface CredentialOperationsDeleteOptionalParams extends coreClient.OperationOptions {
+}
+
+// @public
+export interface CredentialOperationsGetOptionalParams extends coreClient.OperationOptions {
+    ifNoneMatch?: string;
+}
+
+// @public
+export type CredentialOperationsGetResponse = ManagedIdentityCredentialResource;
+
+// @public
+export interface CredentialOperationsListByFactoryNextOptionalParams extends coreClient.OperationOptions {
+}
+
+// @public
+export type CredentialOperationsListByFactoryNextResponse = CredentialListResponse;
+
+// @public
+export interface CredentialOperationsListByFactoryOptionalParams extends coreClient.OperationOptions {
+}
+
+// @public
+export type CredentialOperationsListByFactoryResponse = CredentialListResponse;
 
 // @public
 export interface CredentialReference {
@@ -1519,7 +1567,7 @@ export interface CredentialResource extends SubResource {
 }
 
 // @public (undocumented)
-export type CredentialUnion = Credential_2 | ServicePrincipalCredential | ManagedIdentityCredential;
+export type CredentialUnion = Credential_2 | ManagedIdentityCredential | ServicePrincipalCredential;
 
 // @public
 export interface CustomActivity extends ExecutionActivity {
@@ -1611,6 +1659,8 @@ export class DataFactoryManagementClient extends coreClient.ServiceClient {
     activityRuns: ActivityRuns;
     // (undocumented)
     apiVersion: string;
+    // (undocumented)
+    credentialOperations: CredentialOperations;
     // (undocumented)
     dataFlowDebugSession: DataFlowDebugSession;
     // (undocumented)
@@ -4994,6 +5044,11 @@ export interface ManagedIdentityCredential extends Credential_2 {
 }
 
 // @public
+export interface ManagedIdentityCredentialResource extends SubResource {
+    properties: ManagedIdentityCredential;
+}
+
+// @public
 export interface ManagedIntegrationRuntime extends IntegrationRuntime {
     computeProperties?: IntegrationRuntimeComputeProperties;
     customerVirtualNetwork?: IntegrationRuntimeCustomerVirtualNetwork;
@@ -6821,6 +6876,7 @@ export interface ScriptAction {
 // @public
 export interface ScriptActivity extends ExecutionActivity {
     logSettings?: ScriptActivityTypePropertiesLogSettings;
+    scriptBlockExecutionTimeout?: any;
     scripts?: ScriptActivityScriptBlock[];
     type: "Script";
 }
@@ -7136,7 +7192,7 @@ export interface SnowflakeSink extends CopySink {
 
 // @public
 export interface SnowflakeSource extends CopySource {
-    exportSettings?: SnowflakeExportCopyCommand;
+    exportSettings: SnowflakeExportCopyCommand;
     query?: any;
     type: "SnowflakeSource";
 }
