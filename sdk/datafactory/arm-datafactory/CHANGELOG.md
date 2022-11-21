@@ -1,15 +1,35 @@
 # Release History
+    
+## 11.0.0 (2022-11-21)
+    
+**Features**
 
-## 10.9.1 (Unreleased)
+  - Added operation group CredentialOperations
+  - Added Interface CredentialListResponse
+  - Added Interface CredentialOperationsCreateOrUpdateOptionalParams
+  - Added Interface CredentialOperationsDeleteOptionalParams
+  - Added Interface CredentialOperationsGetOptionalParams
+  - Added Interface CredentialOperationsListByFactoryNextOptionalParams
+  - Added Interface CredentialOperationsListByFactoryOptionalParams
+  - Added Interface ManagedIdentityCredentialResource
+  - Added Type Alias CredentialOperationsCreateOrUpdateResponse
+  - Added Type Alias CredentialOperationsGetResponse
+  - Added Type Alias CredentialOperationsListByFactoryNextResponse
+  - Added Type Alias CredentialOperationsListByFactoryResponse
+  - Class DataFactoryManagementClient has a new parameter credentialOperations
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
+  - Parameter exportSettings of interface SnowflakeSource is now required
+    
+    
+## 10.10.0 (2022-11-04)
+    
+**Features**
 
-### Bugs Fixed
-
-### Other Changes
-
+  - Interface ScriptActivity has a new optional parameter scriptBlockExecutionTimeout
+    
+    
 ## 10.9.0 (2022-10-17)
     
 **Features**
