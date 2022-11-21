@@ -1,15 +1,40 @@
 # Release History
+    
+## 6.0.0 (2022-11-21)
+    
+**Features**
 
-## 5.0.2 (Unreleased)
+  - Added operation TagsOperations.beginCreateOrUpdateAtScope
+  - Added operation TagsOperations.beginCreateOrUpdateAtScopeAndWait
+  - Added operation TagsOperations.beginDeleteAtScope
+  - Added operation TagsOperations.beginDeleteAtScopeAndWait
+  - Added operation TagsOperations.beginUpdateAtScope
+  - Added operation TagsOperations.beginUpdateAtScopeAndWait
+  - Added Interface TagsCreateOrUpdateAtScopeHeaders
+  - Added Interface TagsDeleteAtScopeHeaders
+  - Added Interface TagsUpdateAtScopeHeaders
+  - Interface TagsCreateOrUpdateAtScopeOptionalParams has a new optional parameter resumeFrom
+  - Interface TagsCreateOrUpdateAtScopeOptionalParams has a new optional parameter updateIntervalInMs
+  - Interface TagsDeleteAtScopeOptionalParams has a new optional parameter resumeFrom
+  - Interface TagsDeleteAtScopeOptionalParams has a new optional parameter updateIntervalInMs
+  - Interface TagsUpdateAtScopeOptionalParams has a new optional parameter resumeFrom
+  - Interface TagsUpdateAtScopeOptionalParams has a new optional parameter updateIntervalInMs
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
+  - Removed operation TagsOperations.createOrUpdateAtScope
+  - Removed operation TagsOperations.deleteAtScope
+  - Removed operation TagsOperations.updateAtScope
+    
+    
+## 5.1.0 (2022-11-10)
+    
+**Features**
 
-### Bugs Fixed
-
-### Other Changes
-
+  - Added Interface DeploymentWhatIfProperties
+  - Added Interface GenericResource
+  - Added Interface GenericResourceExpanded
+    
 ## 5.0.1 (2022-04-18)
 
 **features**
