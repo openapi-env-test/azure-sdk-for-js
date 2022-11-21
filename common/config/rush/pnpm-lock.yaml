@@ -1868,6 +1868,7 @@ packages:
   /@opentelemetry/api-metrics/0.33.0:
     resolution: {integrity: sha512-78evfPRRRnJA6uZ3xuBuS3VZlXTO/LRs+Ff1iv3O/7DgibCtq9k27T6Zlj8yRdJDFmcjcbQrvC0/CpDpWHaZYA==}
     engines: {node: '>=14'}
+    deprecated: Please use @opentelemetry/api >= 1.3.0
     dependencies:
       '@opentelemetry/api': 1.2.0
     dev: false
@@ -4132,7 +4133,7 @@ packages:
     dependencies:
       semver: 7.3.7
       shelljs: 0.8.5
-      typescript: 4.9.0-dev.20221025
+      typescript: 5.0.0-dev.20221121
     dev: false
 
   /downlevel-dts/0.8.0:
@@ -9209,8 +9210,8 @@ packages:
     hasBin: true
     dev: false
 
-  /typescript/4.9.0-dev.20221025:
-    resolution: {integrity: sha512-3TZlt+3jGBjPRVFcNX6BmlajqwNExRm4rhG4llSH5WSMX/eQ54PSueTJ5UhLn9+6/byL31/WRmJJ/7W0j+gCtQ==}
+  /typescript/5.0.0-dev.20221121:
+    resolution: {integrity: sha512-p7Nubpa0zmn90Uyacwy26poAIoMmYhEvFxXWs9Kb4INjfQQhQ1svVoXL1R2nQjD9a8W/H9F8BhETzS09ztLMog==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: false
@@ -14669,7 +14670,7 @@ packages:
     dev: false
 
   file:projects/arm-resourcehealth.tgz:
-    resolution: {integrity: sha512-Wgl98neDnGlahm6+x5H/b22PmI9RmUy4DJzmR97JTM/oO8EWyAHiM4eVG9fvZnQR1QggVkAXCqzl8hFKHSLoVw==, tarball: file:projects/arm-resourcehealth.tgz}
+    resolution: {integrity: sha512-ddBhWohE55q+g80psG+FUMPaqJbGIbZmZUe63K8R6kiM4wASQDxFmFdmNHmMXybvlvfg/6bGHTsfipGVabcy5w==, tarball: file:projects/arm-resourcehealth.tgz}
     name: '@rush-temp/arm-resourcehealth'
     version: 0.0.0
     dependencies:
@@ -14688,7 +14689,7 @@ packages:
       rollup: 2.79.0
       rollup-plugin-sourcemaps: 0.6.3_rollup@2.79.0
       tslib: 2.4.0
-      typescript: 4.2.4
+      typescript: 4.6.4
       uglify-js: 3.16.3
     transitivePeerDependencies:
       - '@types/node'
