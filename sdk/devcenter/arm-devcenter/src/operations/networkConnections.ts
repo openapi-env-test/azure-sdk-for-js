@@ -99,7 +99,7 @@ export class NetworkConnectionsImpl implements NetworkConnections {
 
   /**
    * Lists network connections in a resource group
-   * @param resourceGroupName Name of the resource group within the Azure subscription.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param options The options parameters.
    */
   public listByResourceGroup(
@@ -152,7 +152,7 @@ export class NetworkConnectionsImpl implements NetworkConnections {
 
   /**
    * Lists health check status details
-   * @param resourceGroupName Name of the resource group within the Azure subscription.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param networkConnectionName Name of the Network Connection that can be applied to a Pool.
    * @param options The options parameters.
    */
@@ -236,7 +236,7 @@ export class NetworkConnectionsImpl implements NetworkConnections {
 
   /**
    * Lists network connections in a resource group
-   * @param resourceGroupName Name of the resource group within the Azure subscription.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param options The options parameters.
    */
   private _listByResourceGroup(
@@ -251,7 +251,7 @@ export class NetworkConnectionsImpl implements NetworkConnections {
 
   /**
    * Gets a network connection resource
-   * @param resourceGroupName Name of the resource group within the Azure subscription.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param networkConnectionName Name of the Network Connection that can be applied to a Pool.
    * @param options The options parameters.
    */
@@ -268,7 +268,7 @@ export class NetworkConnectionsImpl implements NetworkConnections {
 
   /**
    * Creates or updates a Network Connections resource
-   * @param resourceGroupName Name of the resource group within the Azure subscription.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param networkConnectionName Name of the Network Connection that can be applied to a Pool.
    * @param body Represents network connection
    * @param options The options parameters.
@@ -339,7 +339,7 @@ export class NetworkConnectionsImpl implements NetworkConnections {
 
   /**
    * Creates or updates a Network Connections resource
-   * @param resourceGroupName Name of the resource group within the Azure subscription.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param networkConnectionName Name of the Network Connection that can be applied to a Pool.
    * @param body Represents network connection
    * @param options The options parameters.
@@ -361,7 +361,7 @@ export class NetworkConnectionsImpl implements NetworkConnections {
 
   /**
    * Partially updates a Network Connection
-   * @param resourceGroupName Name of the resource group within the Azure subscription.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param networkConnectionName Name of the Network Connection that can be applied to a Pool.
    * @param body Represents network connection
    * @param options The options parameters.
@@ -432,7 +432,7 @@ export class NetworkConnectionsImpl implements NetworkConnections {
 
   /**
    * Partially updates a Network Connection
-   * @param resourceGroupName Name of the resource group within the Azure subscription.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param networkConnectionName Name of the Network Connection that can be applied to a Pool.
    * @param body Represents network connection
    * @param options The options parameters.
@@ -454,7 +454,7 @@ export class NetworkConnectionsImpl implements NetworkConnections {
 
   /**
    * Deletes a Network Connections resource
-   * @param resourceGroupName Name of the resource group within the Azure subscription.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param networkConnectionName Name of the Network Connection that can be applied to a Pool.
    * @param options The options parameters.
    */
@@ -518,7 +518,7 @@ export class NetworkConnectionsImpl implements NetworkConnections {
 
   /**
    * Deletes a Network Connections resource
-   * @param resourceGroupName Name of the resource group within the Azure subscription.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param networkConnectionName Name of the Network Connection that can be applied to a Pool.
    * @param options The options parameters.
    */
@@ -537,7 +537,7 @@ export class NetworkConnectionsImpl implements NetworkConnections {
 
   /**
    * Lists health check status details
-   * @param resourceGroupName Name of the resource group within the Azure subscription.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param networkConnectionName Name of the Network Connection that can be applied to a Pool.
    * @param options The options parameters.
    */
@@ -554,7 +554,7 @@ export class NetworkConnectionsImpl implements NetworkConnections {
 
   /**
    * Gets health check status details.
-   * @param resourceGroupName Name of the resource group within the Azure subscription.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param networkConnectionName Name of the Network Connection that can be applied to a Pool.
    * @param options The options parameters.
    */
@@ -572,19 +572,86 @@ export class NetworkConnectionsImpl implements NetworkConnections {
   /**
    * Triggers a new health check run. The execution and health check result can be tracked via the
    * network Connection health check details
-   * @param resourceGroupName Name of the resource group within the Azure subscription.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param networkConnectionName Name of the Network Connection that can be applied to a Pool.
    * @param options The options parameters.
    */
-  runHealthChecks(
+  async beginRunHealthChecks(
+    resourceGroupName: string,
+    networkConnectionName: string,
+    options?: NetworkConnectionsRunHealthChecksOptionalParams
+  ): Promise<PollerLike<PollOperationState<void>, void>> {
+    const directSendOperation = async (
+      args: coreClient.OperationArguments,
+      spec: coreClient.OperationSpec
+    ): Promise<void> => {
+      return this.client.sendOperationRequest(args, spec);
+    };
+    const sendOperation = async (
+      args: coreClient.OperationArguments,
+      spec: coreClient.OperationSpec
+    ) => {
+      let currentRawResponse:
+        | coreClient.FullOperationResponse
+        | undefined = undefined;
+      const providedCallback = args.options?.onResponse;
+      const callback: coreClient.RawResponseCallback = (
+        rawResponse: coreClient.FullOperationResponse,
+        flatResponse: unknown
+      ) => {
+        currentRawResponse = rawResponse;
+        providedCallback?.(rawResponse, flatResponse);
+      };
+      const updatedArgs = {
+        ...args,
+        options: {
+          ...args.options,
+          onResponse: callback
+        }
+      };
+      const flatResponse = await directSendOperation(updatedArgs, spec);
+      return {
+        flatResponse,
+        rawResponse: {
+          statusCode: currentRawResponse!.status,
+          body: currentRawResponse!.parsedBody,
+          headers: currentRawResponse!.headers.toJSON()
+        }
+      };
+    };
+
+    const lro = new LroImpl(
+      sendOperation,
+      { resourceGroupName, networkConnectionName, options },
+      runHealthChecksOperationSpec
+    );
+    const poller = new LroEngine(lro, {
+      resumeFrom: options?.resumeFrom,
+      intervalInMs: options?.updateIntervalInMs,
+      lroResourceLocationConfig: "azure-async-operation"
+    });
+    await poller.poll();
+    return poller;
+  }
+
+  /**
+   * Triggers a new health check run. The execution and health check result can be tracked via the
+   * network Connection health check details
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param networkConnectionName Name of the Network Connection that can be applied to a Pool.
+   * @param options The options parameters.
+   */
+  async beginRunHealthChecksAndWait(
     resourceGroupName: string,
     networkConnectionName: string,
     options?: NetworkConnectionsRunHealthChecksOptionalParams
   ): Promise<void> {
-    return this.client.sendOperationRequest(
-      { resourceGroupName, networkConnectionName, options },
-      runHealthChecksOperationSpec
+    const poller = await this.beginRunHealthChecks(
+      resourceGroupName,
+      networkConnectionName,
+      options
     );
+    return poller.pollUntilDone();
   }
 
   /**
@@ -604,7 +671,7 @@ export class NetworkConnectionsImpl implements NetworkConnections {
 
   /**
    * ListByResourceGroupNext
-   * @param resourceGroupName Name of the resource group within the Azure subscription.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param nextLink The nextLink from the previous successful call to the ListByResourceGroup method.
    * @param options The options parameters.
    */
@@ -621,7 +688,7 @@ export class NetworkConnectionsImpl implements NetworkConnections {
 
   /**
    * ListHealthDetailsNext
-   * @param resourceGroupName Name of the resource group within the Azure subscription.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param networkConnectionName Name of the Network Connection that can be applied to a Pool.
    * @param nextLink The nextLink from the previous successful call to the ListHealthDetails method.
    * @param options The options parameters.
@@ -840,6 +907,9 @@ const runHealthChecksOperationSpec: coreClient.OperationSpec = {
   httpMethod: "POST",
   responses: {
     200: {},
+    201: {},
+    202: {},
+    204: {},
     default: {
       bodyMapper: Mappers.CloudError
     }
