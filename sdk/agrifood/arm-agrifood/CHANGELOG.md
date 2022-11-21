@@ -1,15 +1,29 @@
 # Release History
+    
+## 1.0.0-beta.5 (2022-11-21)
+    
+**Features**
 
-## 1.0.0-beta.4 (Unreleased)
+  - Added operation Extensions.createOrUpdate
+  - Added Interface ApiProperties
+  - Added Interface ExtensionInstallationRequest
+  - Added Interface ExtensionsCreateOrUpdateOptionalParams
+  - Added Type Alias ExtensionsCreateOrUpdateResponse
+  - Interface Extension has a new optional parameter additionalApiProperties
+  - Interface PrivateEndpointConnection has a new optional parameter groupIds
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
+  - Removed operation Extensions.create
+  - Removed operation Extensions.update
+    
+    
+## 1.0.0-beta.4 (2022-11-14)
+    
+**Features**
 
-### Bugs Fixed
-
-### Other Changes
-
+  - Bugs Fixed
+    
 ## 1.0.0-beta.3 (2022-10-08)
 
 **Bugs Fixed**
