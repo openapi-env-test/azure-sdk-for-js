@@ -1,16 +1,64 @@
 # Release History
+    
+## 17.2.0-beta.2 (2022-11-23)
+    
+**Features**
 
-## 18.0.0-beta.3 (Unreleased)
+  - Added operation AgentPools.beginAbortLatestOperation
+  - Added operation AgentPools.beginAbortLatestOperationAndWait
+  - Added operation ManagedClusters.beginAbortLatestOperation
+  - Added operation ManagedClusters.beginAbortLatestOperationAndWait
+  - Added Interface AbsoluteMonthlySchedule
+  - Added Interface AgentPoolsAbortLatestOperationHeaders
+  - Added Interface AgentPoolsDeleteHeaders
+  - Added Interface DailySchedule
+  - Added Interface DateSpan
+  - Added Interface MaintenanceWindow
+  - Added Interface ManagedClustersAbortLatestOperationHeaders
+  - Added Interface ManagedClustersDeleteHeaders
+  - Added Interface ManagedClustersGetCommandResultHeaders
+  - Added Interface ManagedClustersResetAADProfileHeaders
+  - Added Interface ManagedClustersResetServicePrincipalProfileHeaders
+  - Added Interface ManagedClustersRotateClusterCertificatesHeaders
+  - Added Interface ManagedClustersRotateServiceAccountSigningKeysHeaders
+  - Added Interface ManagedClustersRunCommandHeaders
+  - Added Interface ManagedClustersStartHeaders
+  - Added Interface ManagedClustersStopHeaders
+  - Added Interface RelativeMonthlySchedule
+  - Added Interface Schedule
+  - Added Interface WeeklySchedule
+  - Added Type Alias AgentPoolsAbortLatestOperationResponse
+  - Added Type Alias AgentPoolsDeleteResponse
+  - Added Type Alias ManagedClustersAbortLatestOperationResponse
+  - Added Type Alias ManagedClustersDeleteResponse
+  - Added Type Alias ManagedClustersRotateClusterCertificatesResponse
+  - Added Type Alias ManagedClustersRotateServiceAccountSigningKeysResponse
+  - Added Type Alias ManagedClustersStartResponse
+  - Added Type Alias ManagedClustersStopResponse
+  - Added Type Alias NodeOSUpgradeChannel
+  - Added Type Alias Type
+  - Interface AgentPoolsAbortLatestOperationOptionalParams has a new optional parameter resumeFrom
+  - Interface AgentPoolsAbortLatestOperationOptionalParams has a new optional parameter updateIntervalInMs
+  - Interface MaintenanceConfiguration has a new optional parameter maintenanceWindow
+  - Interface ManagedClusterAutoUpgradeProfile has a new optional parameter nodeOSUpgradeChannel
+  - Interface ManagedClustersAbortLatestOperationOptionalParams has a new optional parameter resumeFrom
+  - Interface ManagedClustersAbortLatestOperationOptionalParams has a new optional parameter updateIntervalInMs
+  - Added Enum KnownNodeOSUpgradeChannel
+  - Added Enum KnownType
+  - Enum KnownManagedClusterPodIdentityProvisioningState has a new value Canceled
+  - Enum KnownManagedClusterPodIdentityProvisioningState has a new value Succeeded
+  - Enum KnownPrivateEndpointConnectionProvisioningState has a new value Canceled
+  - Enum KnownTrustedAccessRoleBindingProvisioningState has a new value Canceled
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
-## 18.0.0-beta.2 (2022-09-29)
+  - Removed operation AgentPools.abortLatestOperation
+  - Removed operation ManagedClusters.abortLatestOperation
+  - Interface ContainerServiceClientOptionalParams no longer has parameter apiVersion
+  - Class ContainerServiceClient no longer has parameter apiVersion
+    
+    
+## 17.2.0-beta.1 (2022-11-07)
     
 **Features**
 
@@ -39,6 +87,7 @@
   - Added Interface FleetListResult
   - Added Interface FleetMember
   - Added Interface FleetMembersCreateOrUpdateOptionalParams
+  - Added Interface FleetMembersDeleteHeaders
   - Added Interface FleetMembersDeleteOptionalParams
   - Added Interface FleetMembersGetOptionalParams
   - Added Interface FleetMembersListByFleetNextOptionalParams
@@ -46,6 +95,7 @@
   - Added Interface FleetMembersListResult
   - Added Interface FleetPatch
   - Added Interface FleetsCreateOrUpdateOptionalParams
+  - Added Interface FleetsDeleteHeaders
   - Added Interface FleetsDeleteOptionalParams
   - Added Interface FleetsGetOptionalParams
   - Added Interface FleetsListByResourceGroupNextOptionalParams
@@ -83,6 +133,7 @@
   - Added Interface ManagedClusterWorkloadAutoScalerProfileKeda
   - Added Interface ManagedClusterWorkloadAutoScalerProfileVerticalPodAutoscaler
   - Added Interface NetworkProfileForSnapshot
+  - Added Interface PortRange
   - Added Interface TrustedAccessRole
   - Added Interface TrustedAccessRoleBinding
   - Added Interface TrustedAccessRoleBindingListResult
@@ -97,6 +148,7 @@
   - Added Interface TrustedAccessRolesListOptionalParams
   - Added Type Alias BackendPoolType
   - Added Type Alias ControlledValues
+  - Added Type Alias EbpfDataplane
   - Added Type Alias FleetMemberProvisioningState
   - Added Type Alias FleetMembersCreateOrUpdateResponse
   - Added Type Alias FleetMembersGetResponse
@@ -122,6 +174,7 @@
   - Added Type Alias ManagedClusterSnapshotsUpdateTagsResponse
   - Added Type Alias Mode
   - Added Type Alias NetworkPluginMode
+  - Added Type Alias Protocol
   - Added Type Alias TrustedAccessRoleBindingProvisioningState
   - Added Type Alias TrustedAccessRoleBindingsCreateOrUpdateResponse
   - Added Type Alias TrustedAccessRoleBindingsGetResponse
@@ -136,6 +189,7 @@
   - Interface AgentPool has a new optional parameter networkProfile
   - Interface AgentPool has a new optional parameter windowsProfile
   - Interface AgentPoolsDeleteOptionalParams has a new optional parameter ignorePodDisruptionBudget
+  - Interface ContainerServiceNetworkProfile has a new optional parameter ebpfDataplane
   - Interface ContainerServiceNetworkProfile has a new optional parameter kubeProxyConfig
   - Interface ContainerServiceNetworkProfile has a new optional parameter networkPluginMode
   - Interface ManagedCluster has a new optional parameter azureMonitorProfile
@@ -155,6 +209,7 @@
   - Interface ManagedClusterHttpProxyConfig has a new optional parameter effectiveNoProxy
   - Interface ManagedClusterLoadBalancerProfile has a new optional parameter backendPoolType
   - Interface ManagedClustersDeleteOptionalParams has a new optional parameter ignorePodDisruptionBudget
+  - Interface ManagedClusterSecurityProfile has a new optional parameter customCATrustCertificates
   - Interface ManagedClusterSecurityProfile has a new optional parameter imageCleaner
   - Interface ManagedClusterSecurityProfile has a new optional parameter nodeRestriction
   - Interface ManagedClusterSecurityProfile has a new optional parameter workloadIdentity
@@ -167,22 +222,19 @@
   - Class ContainerServiceClient has a new parameter trustedAccessRoles
   - Added Enum KnownBackendPoolType
   - Added Enum KnownControlledValues
+  - Added Enum KnownEbpfDataplane
   - Added Enum KnownFleetMemberProvisioningState
   - Added Enum KnownFleetProvisioningState
   - Added Enum KnownIpvsScheduler
   - Added Enum KnownLevel
   - Added Enum KnownMode
   - Added Enum KnownNetworkPluginMode
+  - Added Enum KnownProtocol
   - Added Enum KnownTrustedAccessRoleBindingProvisioningState
   - Added Enum KnownUpdateMode
   - Enum KnownOssku has a new value Mariner
   - Enum KnownPublicNetworkAccess has a new value SecuredByPerimeter
   - Enum KnownSnapshotType has a new value ManagedCluster
-
-**Breaking Changes**
-
-  - Interface ContainerServiceClientOptionalParams no longer has parameter apiVersion
-  - Class ContainerServiceClient no longer has parameter apiVersion
     
     
 ## 17.1.0 (2022-08-25)
