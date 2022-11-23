@@ -1868,6 +1868,7 @@ packages:
   /@opentelemetry/api-metrics/0.33.0:
     resolution: {integrity: sha512-78evfPRRRnJA6uZ3xuBuS3VZlXTO/LRs+Ff1iv3O/7DgibCtq9k27T6Zlj8yRdJDFmcjcbQrvC0/CpDpWHaZYA==}
     engines: {node: '>=14'}
+    deprecated: Please use @opentelemetry/api >= 1.3.0
     dependencies:
       '@opentelemetry/api': 1.2.0
     dev: false
@@ -4132,7 +4133,7 @@ packages:
     dependencies:
       semver: 7.3.7
       shelljs: 0.8.5
-      typescript: 4.9.0-dev.20221025
+      typescript: 5.0.0-dev.20221123
     dev: false
 
   /downlevel-dts/0.8.0:
@@ -9209,8 +9210,8 @@ packages:
     hasBin: true
     dev: false
 
-  /typescript/4.9.0-dev.20221025:
-    resolution: {integrity: sha512-3TZlt+3jGBjPRVFcNX6BmlajqwNExRm4rhG4llSH5WSMX/eQ54PSueTJ5UhLn9+6/byL31/WRmJJ/7W0j+gCtQ==}
+  /typescript/5.0.0-dev.20221123:
+    resolution: {integrity: sha512-DckWW291XJ5FxCCqBohnQpiR31wNsib9JAOHKRC/+RswvHLeMoU43ocSEkEsCq+chu07nYp9RuJB3VPUiiPulA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: false
@@ -16415,7 +16416,7 @@ packages:
     dev: false
 
   file:projects/confidential-ledger.tgz:
-    resolution: {integrity: sha512-uaZbNCpDVM8zmXzCYBZx8e+ymDPt+hXZeuM9/5mG4RJ9+i28uWOSpzoERQjH8hiNbccQEabSKyXOgsQ4LKKPsQ==, tarball: file:projects/confidential-ledger.tgz}
+    resolution: {integrity: sha512-KDhzZqo405xJSH4TupFOYDO/tH94xNMhrQB9olU10CGTx/TcZ73e6YVWLAbBlZPE4aadiy58HHiLsbGVwAbwDg==, tarball: file:projects/confidential-ledger.tgz}
     name: '@rush-temp/confidential-ledger'
     version: 0.0.0
     dependencies:
@@ -16445,18 +16446,18 @@ packages:
       karma-mocha-reporter: 2.2.5_karma@6.4.0
       karma-source-map-support: 1.4.0
       karma-sourcemap-loader: 0.3.8
+      mkdirp: 1.0.4
       mocha: 7.2.0
-      mocha-junit-reporter: 2.0.2_mocha@7.2.0
-      nyc: 15.1.0
-      prettier: 2.7.1
+      mocha-junit-reporter: 1.23.3_mocha@7.2.0
+      nyc: 14.1.1
+      prettier: 2.2.1
       rimraf: 3.0.2
       source-map-support: 0.5.21
       tslib: 2.4.0
-      typescript: 4.6.4
+      typescript: 4.8.3
     transitivePeerDependencies:
       - bufferutil
       - debug
-      - encoding
       - supports-color
       - utf-8-validate
     dev: false
