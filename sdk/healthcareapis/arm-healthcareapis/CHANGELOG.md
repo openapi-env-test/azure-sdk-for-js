@@ -1,15 +1,44 @@
 # Release History
+    
+## 2.3.0 (2022-12-01)
+    
+**Features**
 
-## 2.1.2 (Unreleased)
+  - Added Interface CorsConfiguration
+  - Added Interface FhirServiceImportConfiguration
+  - Added Interface ServiceImportConfigurationInfo
+  - Interface DicomService has a new optional parameter corsConfiguration
+  - Interface FhirService has a new optional parameter importConfiguration
+  - Interface MetricSpecification has a new optional parameter enableRegionalMdmAccount
+  - Interface MetricSpecification has a new optional parameter isInternal
+  - Interface MetricSpecification has a new optional parameter metricFilterPattern
+  - Interface MetricSpecification has a new optional parameter resourceIdDimensionNameOverride
+  - Interface MetricSpecification has a new optional parameter sourceMdmAccount
+  - Interface ServicesProperties has a new optional parameter importConfiguration
+    
+    
+## 2.2.0 (2022-11-25)
+    
+**Features**
 
-### Features Added
-
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Added Interface DicomService
+  - Added Interface DicomServicePatchResource
+  - Added Interface FhirService
+  - Added Interface FhirServicePatchResource
+  - Added Interface IotConnector
+  - Added Interface IotConnectorPatchResource
+  - Added Interface IotFhirDestination
+  - Added Interface IotFhirDestinationProperties
+  - Added Interface LocationBasedResource
+  - Added Interface PrivateEndpointConnection
+  - Added Interface PrivateEndpointConnectionDescription
+  - Added Interface PrivateLinkResource
+  - Added Interface PrivateLinkResourceDescription
+  - Added Interface ServicesDescription
+  - Added Interface TaggedResource
+  - Added Interface Workspace
+  - Added Interface WorkspacePatchResource
+    
 ## 2.1.1 (2022-04-26)
 
 **Features**
