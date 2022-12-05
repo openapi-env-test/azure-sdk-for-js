@@ -19,28 +19,24 @@ import {
   FarmBeatsExtensionsImpl,
   FarmBeatsModelsImpl,
   LocationsImpl,
-  OperationsImpl,
-  PrivateEndpointConnectionsImpl,
-  PrivateLinkResourcesImpl
+  OperationsImpl
 } from "./operations";
 import {
   Extensions,
   FarmBeatsExtensions,
   FarmBeatsModels,
   Locations,
-  Operations,
-  PrivateEndpointConnections,
-  PrivateLinkResources
+  Operations
 } from "./operationsInterfaces";
-import { AgriFoodMgmtClientOptionalParams } from "./models";
+import { AzureAgriFoodRPServiceOptionalParams } from "./models";
 
-export class AgriFoodMgmtClient extends coreClient.ServiceClient {
+export class AzureAgriFoodRPService extends coreClient.ServiceClient {
   $host: string;
   subscriptionId: string;
   apiVersion: string;
 
   /**
-   * Initializes a new instance of the AgriFoodMgmtClient class.
+   * Initializes a new instance of the AzureAgriFoodRPService class.
    * @param credentials Subscription credentials which uniquely identify client subscription.
    * @param subscriptionId The ID of the target subscription.
    * @param options The parameter options
@@ -48,7 +44,7 @@ export class AgriFoodMgmtClient extends coreClient.ServiceClient {
   constructor(
     credentials: coreAuth.TokenCredential,
     subscriptionId: string,
-    options?: AgriFoodMgmtClientOptionalParams
+    options?: AzureAgriFoodRPServiceOptionalParams
   ) {
     if (credentials === undefined) {
       throw new Error("'credentials' cannot be null");
@@ -61,12 +57,12 @@ export class AgriFoodMgmtClient extends coreClient.ServiceClient {
     if (!options) {
       options = {};
     }
-    const defaults: AgriFoodMgmtClientOptionalParams = {
+    const defaults: AzureAgriFoodRPServiceOptionalParams = {
       requestContentType: "application/json; charset=utf-8",
       credential: credentials
     };
 
-    const packageDetails = `azsdk-js-arm-agrifood/1.0.0-beta.4`;
+    const packageDetails = `azsdk-js-arm-agrifood/1.0.0-beta.5`;
     const userAgentPrefix =
       options.userAgentOptions && options.userAgentOptions.userAgentPrefix
         ? `${options.userAgentOptions.userAgentPrefix} ${packageDetails}`
@@ -120,14 +116,12 @@ export class AgriFoodMgmtClient extends coreClient.ServiceClient {
 
     // Assigning values to Constant parameters
     this.$host = options.$host || "https://management.azure.com";
-    this.apiVersion = options.apiVersion || "2021-09-01-preview";
+    this.apiVersion = options.apiVersion || "2020-05-12-preview";
     this.extensions = new ExtensionsImpl(this);
     this.farmBeatsExtensions = new FarmBeatsExtensionsImpl(this);
     this.farmBeatsModels = new FarmBeatsModelsImpl(this);
     this.locations = new LocationsImpl(this);
     this.operations = new OperationsImpl(this);
-    this.privateEndpointConnections = new PrivateEndpointConnectionsImpl(this);
-    this.privateLinkResources = new PrivateLinkResourcesImpl(this);
     this.addCustomApiVersionPolicy(options.apiVersion);
   }
 
@@ -164,6 +158,4 @@ export class AgriFoodMgmtClient extends coreClient.ServiceClient {
   farmBeatsModels: FarmBeatsModels;
   locations: Locations;
   operations: Operations;
-  privateEndpointConnections: PrivateEndpointConnections;
-  privateLinkResources: PrivateLinkResources;
 }
