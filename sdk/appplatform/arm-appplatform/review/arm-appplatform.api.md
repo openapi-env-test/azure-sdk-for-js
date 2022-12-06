@@ -1021,7 +1021,6 @@ export interface CloudErrorBody {
 // @public
 export interface ClusterResourceProperties {
     readonly fqdn?: string;
-    marketplaceResource?: MarketplaceResource;
     networkProfile?: NetworkProfile;
     readonly powerState?: PowerState;
     readonly provisioningState?: ProvisioningState;
@@ -2304,13 +2303,6 @@ export interface ManagedIdentityProperties {
 
 // @public
 export type ManagedIdentityType = string;
-
-// @public
-export interface MarketplaceResource {
-    plan?: string;
-    product?: string;
-    publisher?: string;
-}
 
 // @public
 export interface MetricDimension {
