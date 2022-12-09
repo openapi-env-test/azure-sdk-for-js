@@ -41,12 +41,17 @@ export class ReplicationProtectionIntentsImpl
 
   /**
    * Gets the list of ASR replication protection intent objects in the vault.
+   * @param resourceName The name of the recovery services vault.
+   * @param resourceGroupName The name of the resource group where the recovery services vault is
+   *                          present.
    * @param options The options parameters.
    */
   public list(
+    resourceName: string,
+    resourceGroupName: string,
     options?: ReplicationProtectionIntentsListOptionalParams
   ): PagedAsyncIterableIterator<ReplicationProtectionIntent> {
-    const iter = this.listPagingAll(options);
+    const iter = this.listPagingAll(resourceName, resourceGroupName, options);
     return {
       next() {
         return iter.next();
@@ -55,85 +60,121 @@ export class ReplicationProtectionIntentsImpl
         return this;
       },
       byPage: () => {
-        return this.listPagingPage(options);
+        return this.listPagingPage(resourceName, resourceGroupName, options);
       }
     };
   }
 
   private async *listPagingPage(
+    resourceName: string,
+    resourceGroupName: string,
     options?: ReplicationProtectionIntentsListOptionalParams
   ): AsyncIterableIterator<ReplicationProtectionIntent[]> {
-    let result = await this._list(options);
+    let result = await this._list(resourceName, resourceGroupName, options);
     yield result.value || [];
     let continuationToken = result.nextLink;
     while (continuationToken) {
-      result = await this._listNext(continuationToken, options);
+      result = await this._listNext(
+        resourceName,
+        resourceGroupName,
+        continuationToken,
+        options
+      );
       continuationToken = result.nextLink;
       yield result.value || [];
     }
   }
 
   private async *listPagingAll(
+    resourceName: string,
+    resourceGroupName: string,
     options?: ReplicationProtectionIntentsListOptionalParams
   ): AsyncIterableIterator<ReplicationProtectionIntent> {
-    for await (const page of this.listPagingPage(options)) {
+    for await (const page of this.listPagingPage(
+      resourceName,
+      resourceGroupName,
+      options
+    )) {
       yield* page;
     }
   }
 
   /**
    * Gets the list of ASR replication protection intent objects in the vault.
+   * @param resourceName The name of the recovery services vault.
+   * @param resourceGroupName The name of the resource group where the recovery services vault is
+   *                          present.
    * @param options The options parameters.
    */
   private _list(
+    resourceName: string,
+    resourceGroupName: string,
     options?: ReplicationProtectionIntentsListOptionalParams
   ): Promise<ReplicationProtectionIntentsListResponse> {
-    return this.client.sendOperationRequest({ options }, listOperationSpec);
+    return this.client.sendOperationRequest(
+      { resourceName, resourceGroupName, options },
+      listOperationSpec
+    );
   }
 
   /**
    * Gets the details of an ASR replication protection intent.
+   * @param resourceName The name of the recovery services vault.
+   * @param resourceGroupName The name of the resource group where the recovery services vault is
+   *                          present.
    * @param intentObjectName Replication protection intent name.
    * @param options The options parameters.
    */
   get(
+    resourceName: string,
+    resourceGroupName: string,
     intentObjectName: string,
     options?: ReplicationProtectionIntentsGetOptionalParams
   ): Promise<ReplicationProtectionIntentsGetResponse> {
     return this.client.sendOperationRequest(
-      { intentObjectName, options },
+      { resourceName, resourceGroupName, intentObjectName, options },
       getOperationSpec
     );
   }
 
   /**
    * The operation to create an ASR replication protection intent item.
+   * @param resourceName The name of the recovery services vault.
+   * @param resourceGroupName The name of the resource group where the recovery services vault is
+   *                          present.
    * @param intentObjectName A name for the replication protection item.
    * @param input Create Protection Intent Input.
    * @param options The options parameters.
    */
   create(
+    resourceName: string,
+    resourceGroupName: string,
     intentObjectName: string,
     input: CreateProtectionIntentInput,
     options?: ReplicationProtectionIntentsCreateOptionalParams
   ): Promise<ReplicationProtectionIntentsCreateResponse> {
     return this.client.sendOperationRequest(
-      { intentObjectName, input, options },
+      { resourceName, resourceGroupName, intentObjectName, input, options },
       createOperationSpec
     );
   }
 
   /**
    * ListNext
+   * @param resourceName The name of the recovery services vault.
+   * @param resourceGroupName The name of the resource group where the recovery services vault is
+   *                          present.
    * @param nextLink The nextLink from the previous successful call to the List method.
    * @param options The options parameters.
    */
   private _listNext(
+    resourceName: string,
+    resourceGroupName: string,
     nextLink: string,
     options?: ReplicationProtectionIntentsListNextOptionalParams
   ): Promise<ReplicationProtectionIntentsListNextResponse> {
     return this.client.sendOperationRequest(
-      { nextLink, options },
+      { resourceName, resourceGroupName, nextLink, options },
       listNextOperationSpec
     );
   }

@@ -35,18 +35,25 @@ export class TargetComputeSizesImpl implements TargetComputeSizes {
 
   /**
    * Lists the available target compute sizes for a replication protected item.
+   * @param resourceName The name of the recovery services vault.
+   * @param resourceGroupName The name of the resource group where the recovery services vault is
+   *                          present.
    * @param fabricName Fabric name.
    * @param protectionContainerName protection container name.
    * @param replicatedProtectedItemName Replication protected item name.
    * @param options The options parameters.
    */
   public listByReplicationProtectedItems(
+    resourceName: string,
+    resourceGroupName: string,
     fabricName: string,
     protectionContainerName: string,
     replicatedProtectedItemName: string,
     options?: TargetComputeSizesListByReplicationProtectedItemsOptionalParams
   ): PagedAsyncIterableIterator<TargetComputeSize> {
     const iter = this.listByReplicationProtectedItemsPagingAll(
+      resourceName,
+      resourceGroupName,
       fabricName,
       protectionContainerName,
       replicatedProtectedItemName,
@@ -61,6 +68,8 @@ export class TargetComputeSizesImpl implements TargetComputeSizes {
       },
       byPage: () => {
         return this.listByReplicationProtectedItemsPagingPage(
+          resourceName,
+          resourceGroupName,
           fabricName,
           protectionContainerName,
           replicatedProtectedItemName,
@@ -71,12 +80,16 @@ export class TargetComputeSizesImpl implements TargetComputeSizes {
   }
 
   private async *listByReplicationProtectedItemsPagingPage(
+    resourceName: string,
+    resourceGroupName: string,
     fabricName: string,
     protectionContainerName: string,
     replicatedProtectedItemName: string,
     options?: TargetComputeSizesListByReplicationProtectedItemsOptionalParams
   ): AsyncIterableIterator<TargetComputeSize[]> {
     let result = await this._listByReplicationProtectedItems(
+      resourceName,
+      resourceGroupName,
       fabricName,
       protectionContainerName,
       replicatedProtectedItemName,
@@ -86,6 +99,8 @@ export class TargetComputeSizesImpl implements TargetComputeSizes {
     let continuationToken = result.nextLink;
     while (continuationToken) {
       result = await this._listByReplicationProtectedItemsNext(
+        resourceName,
+        resourceGroupName,
         fabricName,
         protectionContainerName,
         replicatedProtectedItemName,
@@ -98,12 +113,16 @@ export class TargetComputeSizesImpl implements TargetComputeSizes {
   }
 
   private async *listByReplicationProtectedItemsPagingAll(
+    resourceName: string,
+    resourceGroupName: string,
     fabricName: string,
     protectionContainerName: string,
     replicatedProtectedItemName: string,
     options?: TargetComputeSizesListByReplicationProtectedItemsOptionalParams
   ): AsyncIterableIterator<TargetComputeSize> {
     for await (const page of this.listByReplicationProtectedItemsPagingPage(
+      resourceName,
+      resourceGroupName,
       fabricName,
       protectionContainerName,
       replicatedProtectedItemName,
@@ -115,12 +134,17 @@ export class TargetComputeSizesImpl implements TargetComputeSizes {
 
   /**
    * Lists the available target compute sizes for a replication protected item.
+   * @param resourceName The name of the recovery services vault.
+   * @param resourceGroupName The name of the resource group where the recovery services vault is
+   *                          present.
    * @param fabricName Fabric name.
    * @param protectionContainerName protection container name.
    * @param replicatedProtectedItemName Replication protected item name.
    * @param options The options parameters.
    */
   private _listByReplicationProtectedItems(
+    resourceName: string,
+    resourceGroupName: string,
     fabricName: string,
     protectionContainerName: string,
     replicatedProtectedItemName: string,
@@ -128,6 +152,8 @@ export class TargetComputeSizesImpl implements TargetComputeSizes {
   ): Promise<TargetComputeSizesListByReplicationProtectedItemsResponse> {
     return this.client.sendOperationRequest(
       {
+        resourceName,
+        resourceGroupName,
         fabricName,
         protectionContainerName,
         replicatedProtectedItemName,
@@ -139,6 +165,9 @@ export class TargetComputeSizesImpl implements TargetComputeSizes {
 
   /**
    * ListByReplicationProtectedItemsNext
+   * @param resourceName The name of the recovery services vault.
+   * @param resourceGroupName The name of the resource group where the recovery services vault is
+   *                          present.
    * @param fabricName Fabric name.
    * @param protectionContainerName protection container name.
    * @param replicatedProtectedItemName Replication protected item name.
@@ -147,6 +176,8 @@ export class TargetComputeSizesImpl implements TargetComputeSizes {
    * @param options The options parameters.
    */
   private _listByReplicationProtectedItemsNext(
+    resourceName: string,
+    resourceGroupName: string,
     fabricName: string,
     protectionContainerName: string,
     replicatedProtectedItemName: string,
@@ -155,6 +186,8 @@ export class TargetComputeSizesImpl implements TargetComputeSizes {
   ): Promise<TargetComputeSizesListByReplicationProtectedItemsNextResponse> {
     return this.client.sendOperationRequest(
       {
+        resourceName,
+        resourceGroupName,
         fabricName,
         protectionContainerName,
         replicatedProtectedItemName,
