@@ -253,7 +253,7 @@ export class GitHubOwnerOperationsImpl implements GitHubOwnerOperations {
   }
 
   /**
-   * Patch a monitored GitHub repository.
+   * Update a monitored GitHub repository.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param gitHubConnectorName Name of the GitHub Connector.
    * @param gitHubOwnerName Name of the GitHub Owner.
@@ -323,7 +323,7 @@ export class GitHubOwnerOperationsImpl implements GitHubOwnerOperations {
   }
 
   /**
-   * Patch a monitored GitHub repository.
+   * Update a monitored GitHub repository.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param gitHubConnectorName Name of the GitHub Connector.
    * @param gitHubOwnerName Name of the GitHub Owner.

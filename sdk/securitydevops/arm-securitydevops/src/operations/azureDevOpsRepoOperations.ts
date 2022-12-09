@@ -393,7 +393,7 @@ export class AzureDevOpsRepoOperationsImpl
   }
 
   /**
-   * Update monitored AzureDevOps Project details.
+   * Update monitored AzureDevOps Repo details.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param azureDevOpsConnectorName Name of the AzureDevOps Connector.
    * @param azureDevOpsOrgName Name of the AzureDevOps Org.
@@ -474,7 +474,7 @@ export class AzureDevOpsRepoOperationsImpl
   }
 
   /**
-   * Update monitored AzureDevOps Project details.
+   * Update monitored AzureDevOps Repo details.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param azureDevOpsConnectorName Name of the AzureDevOps Connector.
    * @param azureDevOpsOrgName Name of the AzureDevOps Org.
