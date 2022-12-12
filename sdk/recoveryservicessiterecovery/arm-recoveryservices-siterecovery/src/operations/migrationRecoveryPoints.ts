@@ -37,18 +37,25 @@ export class MigrationRecoveryPointsImpl implements MigrationRecoveryPoints {
 
   /**
    * Gets the recovery points for a migration item.
+   * @param resourceName The name of the recovery services vault.
+   * @param resourceGroupName The name of the resource group where the recovery services vault is
+   *                          present.
    * @param fabricName Fabric unique name.
    * @param protectionContainerName Protection container name.
    * @param migrationItemName Migration item name.
    * @param options The options parameters.
    */
   public listByReplicationMigrationItems(
+    resourceName: string,
+    resourceGroupName: string,
     fabricName: string,
     protectionContainerName: string,
     migrationItemName: string,
     options?: MigrationRecoveryPointsListByReplicationMigrationItemsOptionalParams
   ): PagedAsyncIterableIterator<MigrationRecoveryPoint> {
     const iter = this.listByReplicationMigrationItemsPagingAll(
+      resourceName,
+      resourceGroupName,
       fabricName,
       protectionContainerName,
       migrationItemName,
@@ -63,6 +70,8 @@ export class MigrationRecoveryPointsImpl implements MigrationRecoveryPoints {
       },
       byPage: () => {
         return this.listByReplicationMigrationItemsPagingPage(
+          resourceName,
+          resourceGroupName,
           fabricName,
           protectionContainerName,
           migrationItemName,
@@ -73,12 +82,16 @@ export class MigrationRecoveryPointsImpl implements MigrationRecoveryPoints {
   }
 
   private async *listByReplicationMigrationItemsPagingPage(
+    resourceName: string,
+    resourceGroupName: string,
     fabricName: string,
     protectionContainerName: string,
     migrationItemName: string,
     options?: MigrationRecoveryPointsListByReplicationMigrationItemsOptionalParams
   ): AsyncIterableIterator<MigrationRecoveryPoint[]> {
     let result = await this._listByReplicationMigrationItems(
+      resourceName,
+      resourceGroupName,
       fabricName,
       protectionContainerName,
       migrationItemName,
@@ -88,6 +101,8 @@ export class MigrationRecoveryPointsImpl implements MigrationRecoveryPoints {
     let continuationToken = result.nextLink;
     while (continuationToken) {
       result = await this._listByReplicationMigrationItemsNext(
+        resourceName,
+        resourceGroupName,
         fabricName,
         protectionContainerName,
         migrationItemName,
@@ -100,12 +115,16 @@ export class MigrationRecoveryPointsImpl implements MigrationRecoveryPoints {
   }
 
   private async *listByReplicationMigrationItemsPagingAll(
+    resourceName: string,
+    resourceGroupName: string,
     fabricName: string,
     protectionContainerName: string,
     migrationItemName: string,
     options?: MigrationRecoveryPointsListByReplicationMigrationItemsOptionalParams
   ): AsyncIterableIterator<MigrationRecoveryPoint> {
     for await (const page of this.listByReplicationMigrationItemsPagingPage(
+      resourceName,
+      resourceGroupName,
       fabricName,
       protectionContainerName,
       migrationItemName,
@@ -117,25 +136,40 @@ export class MigrationRecoveryPointsImpl implements MigrationRecoveryPoints {
 
   /**
    * Gets the recovery points for a migration item.
+   * @param resourceName The name of the recovery services vault.
+   * @param resourceGroupName The name of the resource group where the recovery services vault is
+   *                          present.
    * @param fabricName Fabric unique name.
    * @param protectionContainerName Protection container name.
    * @param migrationItemName Migration item name.
    * @param options The options parameters.
    */
   private _listByReplicationMigrationItems(
+    resourceName: string,
+    resourceGroupName: string,
     fabricName: string,
     protectionContainerName: string,
     migrationItemName: string,
     options?: MigrationRecoveryPointsListByReplicationMigrationItemsOptionalParams
   ): Promise<MigrationRecoveryPointsListByReplicationMigrationItemsResponse> {
     return this.client.sendOperationRequest(
-      { fabricName, protectionContainerName, migrationItemName, options },
+      {
+        resourceName,
+        resourceGroupName,
+        fabricName,
+        protectionContainerName,
+        migrationItemName,
+        options
+      },
       listByReplicationMigrationItemsOperationSpec
     );
   }
 
   /**
    * Gets a recovery point for a migration item.
+   * @param resourceName The name of the recovery services vault.
+   * @param resourceGroupName The name of the resource group where the recovery services vault is
+   *                          present.
    * @param fabricName Fabric unique name.
    * @param protectionContainerName Protection container name.
    * @param migrationItemName Migration item name.
@@ -143,6 +177,8 @@ export class MigrationRecoveryPointsImpl implements MigrationRecoveryPoints {
    * @param options The options parameters.
    */
   get(
+    resourceName: string,
+    resourceGroupName: string,
     fabricName: string,
     protectionContainerName: string,
     migrationItemName: string,
@@ -151,6 +187,8 @@ export class MigrationRecoveryPointsImpl implements MigrationRecoveryPoints {
   ): Promise<MigrationRecoveryPointsGetResponse> {
     return this.client.sendOperationRequest(
       {
+        resourceName,
+        resourceGroupName,
         fabricName,
         protectionContainerName,
         migrationItemName,
@@ -163,6 +201,9 @@ export class MigrationRecoveryPointsImpl implements MigrationRecoveryPoints {
 
   /**
    * ListByReplicationMigrationItemsNext
+   * @param resourceName The name of the recovery services vault.
+   * @param resourceGroupName The name of the resource group where the recovery services vault is
+   *                          present.
    * @param fabricName Fabric unique name.
    * @param protectionContainerName Protection container name.
    * @param migrationItemName Migration item name.
@@ -171,6 +212,8 @@ export class MigrationRecoveryPointsImpl implements MigrationRecoveryPoints {
    * @param options The options parameters.
    */
   private _listByReplicationMigrationItemsNext(
+    resourceName: string,
+    resourceGroupName: string,
     fabricName: string,
     protectionContainerName: string,
     migrationItemName: string,
@@ -181,6 +224,8 @@ export class MigrationRecoveryPointsImpl implements MigrationRecoveryPoints {
   > {
     return this.client.sendOperationRequest(
       {
+        resourceName,
+        resourceGroupName,
         fabricName,
         protectionContainerName,
         migrationItemName,

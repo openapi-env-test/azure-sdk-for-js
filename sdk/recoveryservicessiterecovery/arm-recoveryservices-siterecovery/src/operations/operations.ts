@@ -35,12 +35,15 @@ export class OperationsImpl implements Operations {
 
   /**
    * Operation to return the list of available operations.
+   * @param resourceGroupName The name of the resource group where the recovery services vault is
+   *                          present.
    * @param options The options parameters.
    */
   public list(
+    resourceGroupName: string,
     options?: OperationsListOptionalParams
   ): PagedAsyncIterableIterator<OperationsDiscovery> {
-    const iter = this.listPagingAll(options);
+    const iter = this.listPagingAll(resourceGroupName, options);
     return {
       next() {
         return iter.next();
@@ -49,53 +52,68 @@ export class OperationsImpl implements Operations {
         return this;
       },
       byPage: () => {
-        return this.listPagingPage(options);
+        return this.listPagingPage(resourceGroupName, options);
       }
     };
   }
 
   private async *listPagingPage(
+    resourceGroupName: string,
     options?: OperationsListOptionalParams
   ): AsyncIterableIterator<OperationsDiscovery[]> {
-    let result = await this._list(options);
+    let result = await this._list(resourceGroupName, options);
     yield result.value || [];
     let continuationToken = result.nextLink;
     while (continuationToken) {
-      result = await this._listNext(continuationToken, options);
+      result = await this._listNext(
+        resourceGroupName,
+        continuationToken,
+        options
+      );
       continuationToken = result.nextLink;
       yield result.value || [];
     }
   }
 
   private async *listPagingAll(
+    resourceGroupName: string,
     options?: OperationsListOptionalParams
   ): AsyncIterableIterator<OperationsDiscovery> {
-    for await (const page of this.listPagingPage(options)) {
+    for await (const page of this.listPagingPage(resourceGroupName, options)) {
       yield* page;
     }
   }
 
   /**
    * Operation to return the list of available operations.
+   * @param resourceGroupName The name of the resource group where the recovery services vault is
+   *                          present.
    * @param options The options parameters.
    */
   private _list(
+    resourceGroupName: string,
     options?: OperationsListOptionalParams
   ): Promise<OperationsListResponse> {
-    return this.client.sendOperationRequest({ options }, listOperationSpec);
+    return this.client.sendOperationRequest(
+      { resourceGroupName, options },
+      listOperationSpec
+    );
   }
 
   /**
    * ListNext
+   * @param resourceGroupName The name of the resource group where the recovery services vault is
+   *                          present.
    * @param nextLink The nextLink from the previous successful call to the List method.
    * @param options The options parameters.
    */
   private _listNext(
+    resourceGroupName: string,
     nextLink: string,
     options?: OperationsListNextOptionalParams
   ): Promise<OperationsListNextResponse> {
     return this.client.sendOperationRequest(
-      { nextLink, options },
+      { resourceGroupName, nextLink, options },
       listNextOperationSpec
     );
   }
