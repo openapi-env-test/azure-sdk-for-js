@@ -45,7 +45,7 @@ export class ScopeMapsImpl implements ScopeMaps {
 
   /**
    * Lists all the scope maps for the specified container registry.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param options The options parameters.
    */
@@ -104,7 +104,7 @@ export class ScopeMapsImpl implements ScopeMaps {
 
   /**
    * Lists all the scope maps for the specified container registry.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param options The options parameters.
    */
@@ -121,7 +121,7 @@ export class ScopeMapsImpl implements ScopeMaps {
 
   /**
    * Gets the properties of the specified scope map.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param scopeMapName The name of the scope map.
    * @param options The options parameters.
@@ -140,7 +140,7 @@ export class ScopeMapsImpl implements ScopeMaps {
 
   /**
    * Creates a scope map for a container registry with the specified parameters.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param scopeMapName The name of the scope map.
    * @param scopeMapCreateParameters The parameters for creating a scope map.
@@ -210,7 +210,8 @@ export class ScopeMapsImpl implements ScopeMaps {
     );
     const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs
+      intervalInMs: options?.updateIntervalInMs,
+      lroResourceLocationConfig: "azure-async-operation"
     });
     await poller.poll();
     return poller;
@@ -218,7 +219,7 @@ export class ScopeMapsImpl implements ScopeMaps {
 
   /**
    * Creates a scope map for a container registry with the specified parameters.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param scopeMapName The name of the scope map.
    * @param scopeMapCreateParameters The parameters for creating a scope map.
@@ -243,7 +244,7 @@ export class ScopeMapsImpl implements ScopeMaps {
 
   /**
    * Deletes a scope map from a container registry.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param scopeMapName The name of the scope map.
    * @param options The options parameters.
@@ -300,7 +301,8 @@ export class ScopeMapsImpl implements ScopeMaps {
     );
     const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs
+      intervalInMs: options?.updateIntervalInMs,
+      lroResourceLocationConfig: "location"
     });
     await poller.poll();
     return poller;
@@ -308,7 +310,7 @@ export class ScopeMapsImpl implements ScopeMaps {
 
   /**
    * Deletes a scope map from a container registry.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param scopeMapName The name of the scope map.
    * @param options The options parameters.
@@ -330,7 +332,7 @@ export class ScopeMapsImpl implements ScopeMaps {
 
   /**
    * Updates a scope map with the specified parameters.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param scopeMapName The name of the scope map.
    * @param scopeMapUpdateParameters The parameters for updating a scope map.
@@ -400,7 +402,8 @@ export class ScopeMapsImpl implements ScopeMaps {
     );
     const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs
+      intervalInMs: options?.updateIntervalInMs,
+      lroResourceLocationConfig: "azure-async-operation"
     });
     await poller.poll();
     return poller;
@@ -408,7 +411,7 @@ export class ScopeMapsImpl implements ScopeMaps {
 
   /**
    * Updates a scope map with the specified parameters.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param scopeMapName The name of the scope map.
    * @param scopeMapUpdateParameters The parameters for updating a scope map.
@@ -433,7 +436,7 @@ export class ScopeMapsImpl implements ScopeMaps {
 
   /**
    * ListNext
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param nextLink The nextLink from the previous successful call to the List method.
    * @param options The options parameters.
@@ -528,7 +531,7 @@ const createOperationSpec: coreClient.OperationSpec = {
     Parameters.registryName,
     Parameters.scopeMapName
   ],
-  headerParameters: [Parameters.accept, Parameters.contentType],
+  headerParameters: [Parameters.contentType, Parameters.accept],
   mediaType: "json",
   serializer
 };
@@ -586,7 +589,7 @@ const updateOperationSpec: coreClient.OperationSpec = {
     Parameters.registryName,
     Parameters.scopeMapName
   ],
-  headerParameters: [Parameters.accept, Parameters.contentType],
+  headerParameters: [Parameters.contentType, Parameters.accept],
   mediaType: "json",
   serializer
 };

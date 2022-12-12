@@ -43,7 +43,7 @@ export class PrivateEndpointConnectionsImpl
 
   /**
    * List all private endpoint connections in a container registry.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param options The options parameters.
    */
@@ -102,7 +102,7 @@ export class PrivateEndpointConnectionsImpl
 
   /**
    * List all private endpoint connections in a container registry.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param options The options parameters.
    */
@@ -119,7 +119,7 @@ export class PrivateEndpointConnectionsImpl
 
   /**
    * Get the specified private endpoint connection associated with the container registry.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param privateEndpointConnectionName The name of the private endpoint connection.
    * @param options The options parameters.
@@ -143,7 +143,7 @@ export class PrivateEndpointConnectionsImpl
 
   /**
    * Update the state of specified private endpoint connection associated with the container registry.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param privateEndpointConnectionName The name of the private endpoint connection.
    * @param privateEndpointConnection The parameters for creating a private endpoint connection.
@@ -213,7 +213,8 @@ export class PrivateEndpointConnectionsImpl
     );
     const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs
+      intervalInMs: options?.updateIntervalInMs,
+      lroResourceLocationConfig: "azure-async-operation"
     });
     await poller.poll();
     return poller;
@@ -221,7 +222,7 @@ export class PrivateEndpointConnectionsImpl
 
   /**
    * Update the state of specified private endpoint connection associated with the container registry.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param privateEndpointConnectionName The name of the private endpoint connection.
    * @param privateEndpointConnection The parameters for creating a private endpoint connection.
@@ -246,7 +247,7 @@ export class PrivateEndpointConnectionsImpl
 
   /**
    * Deletes the specified private endpoint connection associated with the container registry.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param privateEndpointConnectionName The name of the private endpoint connection.
    * @param options The options parameters.
@@ -308,7 +309,8 @@ export class PrivateEndpointConnectionsImpl
     );
     const poller = new LroEngine(lro, {
       resumeFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs
+      intervalInMs: options?.updateIntervalInMs,
+      lroResourceLocationConfig: "location"
     });
     await poller.poll();
     return poller;
@@ -316,7 +318,7 @@ export class PrivateEndpointConnectionsImpl
 
   /**
    * Deletes the specified private endpoint connection associated with the container registry.
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param privateEndpointConnectionName The name of the private endpoint connection.
    * @param options The options parameters.
@@ -338,7 +340,7 @@ export class PrivateEndpointConnectionsImpl
 
   /**
    * ListNext
-   * @param resourceGroupName The name of the resource group to which the container registry belongs.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param registryName The name of the container registry.
    * @param nextLink The nextLink from the previous successful call to the List method.
    * @param options The options parameters.
@@ -424,7 +426,7 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
     Parameters.registryName,
     Parameters.privateEndpointConnectionName
   ],
-  headerParameters: [Parameters.accept, Parameters.contentType],
+  headerParameters: [Parameters.contentType, Parameters.accept],
   mediaType: "json",
   serializer
 };
