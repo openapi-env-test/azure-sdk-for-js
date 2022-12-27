@@ -1209,8 +1209,8 @@ export const Account: coreClient.CompositeMapper = {
           name: "String"
         }
       },
-      hostName: {
-        serializedName: "properties.hostName",
+      hostNameSZ: {
+        serializedName: "properties.hostNameSZ",
         readOnly: true,
         type: {
           name: "String"
