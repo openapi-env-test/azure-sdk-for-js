@@ -518,13 +518,13 @@ export interface Account extends TrackedResource {
    * API host name.
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
-  readonly hostName?: string;
+  readonly hostNameSZ?: string;
   /** Whether or not public network access is allowed for the account. */
   publicNetworkAccess?: PublicNetworkAccess;
   /** List of private endpoint connections associated with the account. */
   privateEndpointConnections?: PrivateEndpointConnection[];
   /** Device Update Sku */
-  sku?: Sku;
+  sku?: SKU;
   /**
    * Device Update account primary and failover location details
    * NOTE: This property will not be serialized. It can only be populated by the server.
