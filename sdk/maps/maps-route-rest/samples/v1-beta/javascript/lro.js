@@ -29,7 +29,7 @@ async function main() {
   /** Or use Azure AD authentication */
   // const credential = new DefaultAzureCredential();
   // const mapsClientId = process.env.MAPS_CLIENT_ID || "";
-  // const client = new MapsRouteClient(credential, mapsClientId);
+  // const client = new MapsRoute(credential, mapsClientId);
 
   const request = createRouteDirectionsBatchRequest([
     {
@@ -67,17 +67,7 @@ async function main() {
   });
 
   const poller = getLongRunningPoller(client, response);
-  /* We can get a partial of the results first */
-  await poller.poll();
-  /** And get the results we have right now */
-  const partialResult = await poller.getResult();
-  while (!partialResult) {
-    console.log("Waiting for the result...");
-    await poller.poll();
-  }
-  logBatchResponse(partialResult);
-
-  /** Or simply wait until the total request is done */
+  /** Wait until the total request is done */
   const finalResult = await poller.pollUntilDone();
   logBatchResponse(finalResult);
 }

@@ -1,6 +1,6 @@
 # Release History
 
-## 3.1.0-beta.2 (Unreleased)
+## 3.1.3 (Unreleased)
 
 ### Features Added
 
@@ -10,11 +10,40 @@
 
 ### Other Changes
 
+## 3.1.2 (2022-12-05)
+
+### Bugs Fixed
+
+- Fixed bug in `ManagedIdentity Credential` where "expiresInSeconds" was taking the absolute timestamp instead of relative expiration time period in seconds.
+### Other Changes
+
+- Enable msal logging based on log level specified by user for Azure SDK.
+- Upgraded version dependencies on msal libraries, since they have additional logging added.
+
+## 3.1.1 (2022-11-18)
+
+### Bugs Fixed
+
+- Fixed bug to update "expiresOnTimestamp" field in Managed Identity to be in seconds and not milliseconds.
+
+## 3.1.0 (2022-11-08)
+
+### Other Changes
+
+- Docs improvements for cross-language alignment
+
+## 3.0.1 (2022-11-07)
+
+### Bugs Fixed
+
+- Fixed bug to enable `additionallyAllowedTenants` to pass through to MSAL Flow.
+
 ## 3.1.0-beta.1 (2022-10-13)
 
 ### Features Added
 
 - Added Token Caching support to Managed Identity Credential
+
 ## 3.0.0 (2022-09-19)
 
 ### Features Added

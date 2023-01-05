@@ -168,7 +168,7 @@
     },
     {
       "filename": "sdk/keyvault/keyvault-keys/review/**/*.md",
-      "words": ["ECHSM", "RSAHSM", "RSNULL", "Rsnull"]
+      "words": ["ECHSM", "OKPHSM", "RSAHSM", "RSNULL", "Rsnull"]
     },
     {
       "filename": "sdk/keyvault/keyvault-certificates/review/**/*.md",
@@ -225,6 +225,10 @@
       "words": ["rpmsg", "xlsb"]
     },
     {
+      "filename": "sdk/eventgrid/eventgrid/review/**/*.md",
+      "words": ["Dicom"]
+    },
+    {
       "filename": "sdk/iot/iot-modelsrepository/review/**/*.md",
       "words": ["Dtmi", "dtmis"]
     },
@@ -269,12 +273,24 @@
       "words": ["bbox", "UTURN", "Hundredkm"]
     },
     {
+      "filename": "sdk/maps/maps-render-rest/review/maps-render.api.md",
+      "words": ["bbox"]
+    },
+    {
+      "filename": "sdk/maps/maps-search-rest/review/maps-search.api.md",
+      "words": ["Neighbourhood", "Xstr"]
+    },
+    {
       "filename": "sdk/apimanagement/api-management-custom-widgets-scaffolder/review/api-management-custom-widgets-scaffolder.api.md",
       "words": ["scaffolder", "APIM"]
     },
     {
       "filename": "sdk/loadtestservice/load-testing-rest/review/load-testing.api.md",
       "words": ["vusers"]
+    },
+    {
+      "filename": "sdk/web-pubsub/web-pubsub-client/review/web-pubsub-client.api.md",
+      "words": ["protobuf"]
     }
   ]
 }
