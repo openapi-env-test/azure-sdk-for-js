@@ -1,6 +1,6 @@
-# Azure AnomalyDetectorRest REST client library for JavaScript
+# Azure AnomalyDetector REST client library for JavaScript
 
-AnomalyDetector Rest Client
+A generated SDK for AnomalyDetectorRest.
 
 **Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/main/documentation/rest-clients.md) to use this library**
 
@@ -23,13 +23,13 @@ Key links:
 
 ### Install the `@azure-rest/ai-anomaly-detector` package
 
-Install the Azure AnomalyDetectorRest REST client REST client library for JavaScript with `npm`:
+Install the Azure AnomalyDetector REST client REST client library for JavaScript with `npm`:
 
 ```bash
 npm install @azure-rest/ai-anomaly-detector
 ```
 
-### Create and authenticate a `AnomalyDetectorRestClient`
+### Create and authenticate a `AnomalyDetectorClient`
 
 To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
 provide an instance of the desired credential type obtained from the

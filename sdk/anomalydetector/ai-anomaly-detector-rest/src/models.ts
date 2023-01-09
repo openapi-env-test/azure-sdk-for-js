@@ -15,17 +15,10 @@ export interface UnivariateDetectionOptions {
    * minutely, secondly, microsecond or none. If granularity is not present, it will
    * be none by default. If granularity is none, the timestamp property in time
    * series point can be absent.
+   *
+   * Possible values: yearly, monthly, weekly, daily, hourly, minutely, secondly, microsecond, none
    */
-  granularity?:
-    | "yearly"
-    | "monthly"
-    | "weekly"
-    | "daily"
-    | "hourly"
-    | "minutely"
-    | "secondly"
-    | "microsecond"
-    | "none";
+  granularity?: string;
   /**
    * Custom Interval is used to set non-standard time interval, for example, if the
    * series is 5 minutes, request can be set as {"granularity":"minutely",
@@ -77,17 +70,10 @@ export interface UnivariateChangePointDetectionOptions {
   /**
    * Can only be one of yearly, monthly, weekly, daily, hourly, minutely or
    * secondly. Granularity is used for verify whether input series is valid.
+   *
+   * Possible values: yearly, monthly, weekly, daily, hourly, minutely, secondly, microsecond, none
    */
-  granularity:
-    | "yearly"
-    | "monthly"
-    | "weekly"
-    | "daily"
-    | "hourly"
-    | "minutely"
-    | "secondly"
-    | "microsecond"
-    | "none";
+  granularity: string;
   /**
    * Custom Interval is used to set non-standard time interval, for example, if the
    * series is 5 minutes, request can be set as {"granularity":"minutely",
@@ -204,8 +190,12 @@ export interface ModelInfo {
   slidingWindow?: number;
   /** An optional field, indicating the manner to align multiple variables. */
   alignPolicy?: AlignPolicy;
-  /** Model status. One of CREATED, RUNNING, READY, and FAILED. */
-  status?: "CREATED" | "RUNNING" | "READY" | "FAILED";
+  /**
+   * Model status. One of CREATED, RUNNING, READY, and FAILED.
+   *
+   * Possible values: CREATED, RUNNING, READY, FAILED
+   */
+  status?: string;
   /** Diagnostics information to help inspect the states of model or variable. */
   diagnosticsInfo?: DiagnosticsInfo;
 }
@@ -215,13 +205,15 @@ export interface AlignPolicy {
   /**
    * An optional field, indicating how to align different variables to the same
    * time-range. Either Inner or Outer.
+   *
+   * Possible values: Inner, Outer
    */
-  alignMode?: "Inner" | "Outer";
+  alignMode?: string;
   /**
    * An optional field, indicating how missing values will be filled. One of
    * Previous, Subsequent, Linear, Zero, Fixed.
    *
-   * Possible values: Previous, Subsequent, Linear, Zero, Fixed
+   * Possible values: Previous, Subsequent, Linear, Zero, Fixed, None
    */
   fillNAMethod?: string;
   /** An optional field. Required when fillNAMethod is Fixed. */

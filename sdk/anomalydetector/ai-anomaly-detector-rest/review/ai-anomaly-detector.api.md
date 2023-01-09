@@ -16,14 +16,14 @@ import { StreamableMethod } from '@azure-rest/core-client';
 
 // @public
 export interface AlignPolicy {
-    alignMode?: "Inner" | "Outer";
+    alignMode?: string;
     fillNAMethod?: string;
     paddingValue?: number;
 }
 
 // @public
 export interface AlignPolicyOutput {
-    alignMode?: "Inner" | "Outer";
+    alignMode?: string;
     fillNAMethod?: string;
     paddingValue?: number;
 }
@@ -36,21 +36,21 @@ export interface AnomalyDetectionModelOutput {
     modelInfo?: ModelInfoOutput;
 }
 
-// @public
-export interface AnomalyDetectorErrorOutput {
-    code?: string;
-    message?: string;
-}
-
 // @public (undocumented)
-export type AnomalyDetectorRestClient = Client & {
+export type AnomalyDetectorClient = Client & {
     path: Routes;
 };
 
 // @public (undocumented)
-export interface AnomalyDetectorRestClientOptions extends ClientOptions {
+export interface AnomalyDetectorClientOptions extends ClientOptions {
     // (undocumented)
     ApiVersion?: string;
+}
+
+// @public
+export interface AnomalyDetectorErrorOutput {
+    code?: string;
+    message?: string;
 }
 
 // @public
@@ -81,7 +81,7 @@ export interface CorrelationChangesOutput {
 }
 
 // @public
-function createClient(Endpoint: string, credentials: KeyCredential, options?: AnomalyDetectorRestClientOptions): AnomalyDetectorRestClient;
+function createClient(Endpoint: string, credentials: KeyCredential, options?: AnomalyDetectorClientOptions): AnomalyDetectorClient;
 export default createClient;
 
 // @public (undocumented)
@@ -470,7 +470,7 @@ export interface ModelInfo {
     endTime: Date | string;
     slidingWindow?: number;
     startTime: Date | string;
-    status?: "CREATED" | "RUNNING" | "READY" | "FAILED";
+    status?: string;
 }
 
 // @public
@@ -484,7 +484,7 @@ export interface ModelInfoOutput {
     readonly errors?: Array<ErrorResponseOutput>;
     slidingWindow?: number;
     startTime: string;
-    status?: "CREATED" | "RUNNING" | "READY" | "FAILED";
+    status?: string;
 }
 
 // @public
@@ -531,7 +531,7 @@ export interface MultivariateBatchDetectionOptionsOutput {
 export interface MultivariateBatchDetectionResultSummaryOutput {
     errors?: Array<ErrorResponseOutput>;
     setupInfo: MultivariateBatchDetectionOptionsOutput;
-    status: "CREATED" | "RUNNING" | "READY" | "FAILED";
+    status: string;
     variableStates?: Array<VariableStateOutput>;
 }
 
@@ -638,7 +638,7 @@ export type TrainMultivariateModelParameters = TrainMultivariateModelBodyParam &
 // @public
 export interface UnivariateChangePointDetectionOptions {
     customInterval?: number;
-    granularity: "yearly" | "monthly" | "weekly" | "daily" | "hourly" | "minutely" | "secondly" | "microsecond" | "none";
+    granularity: string;
     period?: number;
     series: Array<TimeSeriesPoint>;
     stableTrendWindow?: number;
@@ -655,7 +655,7 @@ export interface UnivariateChangePointDetectionResultOutput {
 // @public
 export interface UnivariateDetectionOptions {
     customInterval?: number;
-    granularity?: "yearly" | "monthly" | "weekly" | "daily" | "hourly" | "minutely" | "secondly" | "microsecond" | "none";
+    granularity?: string;
     imputeFixedValue?: number;
     imputeMode?: string;
     maxAnomalyRatio?: number;
