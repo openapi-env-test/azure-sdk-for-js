@@ -1,0 +1,8 @@
+{
+  "commit": "f3ff84e3e2b3f72144b203b0af099492e0c6bad4",
+  "readme": "specification/releaseplannertest/resource-manager/readme.md",
+  "autorest_command": "autorest --version=3.9.3 --typescript --modelerfour.lenient-model-deduplication --azure-arm --head-as-boolean=true --license-header=MICROSOFT_MIT_NO_VERSION --generate-test --typescript-sdks-folder=/mnt/vss/_work/1/s/azure-sdk-for-js ../azure-rest-api-specs/specification/releaseplannertest/resource-manager/readme.md --use=@autorest/typescript@6.0.0-rc.5",
+  "repository_url": "https://github.com/test-repo-billy/azure-rest-api-specs.git",
+  "release_tool": "azure-tools-js-sdk-release-tools@2.6.3",
+  "use": "@autorest/typescript@6.0.0-rc.5"
+}
