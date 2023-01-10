@@ -12,9 +12,7 @@ import { FarmBeatsModels } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
-import { AgriFoodMgmtClient } from "../agriFoodMgmtClient";
-import { PollerLike, PollOperationState, LroEngine } from "@azure/core-lro";
-import { LroImpl } from "../lroImpl";
+import { AzureAgriFoodRPService } from "../azureAgriFoodRPService";
 import {
   FarmBeats,
   FarmBeatsModelsListBySubscriptionNextOptionalParams,
@@ -31,8 +29,6 @@ import {
   FarmBeatsModelsUpdateOptionalParams,
   FarmBeatsModelsUpdateResponse,
   FarmBeatsModelsDeleteOptionalParams,
-  FarmBeatsModelsGetOperationResultOptionalParams,
-  FarmBeatsModelsGetOperationResultResponse,
   FarmBeatsModelsListBySubscriptionNextResponse,
   FarmBeatsModelsListByResourceGroupNextResponse
 } from "../models";
@@ -40,13 +36,13 @@ import {
 /// <reference lib="esnext.asynciterable" />
 /** Class containing FarmBeatsModels operations. */
 export class FarmBeatsModelsImpl implements FarmBeatsModels {
-  private readonly client: AgriFoodMgmtClient;
+  private readonly client: AzureAgriFoodRPService;
 
   /**
    * Initialize a new instance of the class FarmBeatsModels class.
    * @param client Reference to the service client
    */
-  constructor(client: AgriFoodMgmtClient) {
+  constructor(client: AzureAgriFoodRPService) {
     this.client = client;
   }
 
@@ -192,114 +188,40 @@ export class FarmBeatsModelsImpl implements FarmBeatsModels {
 
   /**
    * Create or update FarmBeats resource.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param farmBeatsResourceName FarmBeats resource name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param body FarmBeats resource create or update request object.
    * @param options The options parameters.
    */
   createOrUpdate(
-    resourceGroupName: string,
     farmBeatsResourceName: string,
+    resourceGroupName: string,
     body: FarmBeats,
     options?: FarmBeatsModelsCreateOrUpdateOptionalParams
   ): Promise<FarmBeatsModelsCreateOrUpdateResponse> {
     return this.client.sendOperationRequest(
-      { resourceGroupName, farmBeatsResourceName, body, options },
+      { farmBeatsResourceName, resourceGroupName, body, options },
       createOrUpdateOperationSpec
     );
   }
 
   /**
    * Update a FarmBeats resource.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param farmBeatsResourceName FarmBeats resource name.
+   * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param body Request object.
    * @param options The options parameters.
    */
-  async beginUpdate(
-    resourceGroupName: string,
+  update(
     farmBeatsResourceName: string,
-    body: FarmBeatsUpdateRequestModel,
-    options?: FarmBeatsModelsUpdateOptionalParams
-  ): Promise<
-    PollerLike<
-      PollOperationState<FarmBeatsModelsUpdateResponse>,
-      FarmBeatsModelsUpdateResponse
-    >
-  > {
-    const directSendOperation = async (
-      args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec
-    ): Promise<FarmBeatsModelsUpdateResponse> => {
-      return this.client.sendOperationRequest(args, spec);
-    };
-    const sendOperation = async (
-      args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec
-    ) => {
-      let currentRawResponse:
-        | coreClient.FullOperationResponse
-        | undefined = undefined;
-      const providedCallback = args.options?.onResponse;
-      const callback: coreClient.RawResponseCallback = (
-        rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown
-      ) => {
-        currentRawResponse = rawResponse;
-        providedCallback?.(rawResponse, flatResponse);
-      };
-      const updatedArgs = {
-        ...args,
-        options: {
-          ...args.options,
-          onResponse: callback
-        }
-      };
-      const flatResponse = await directSendOperation(updatedArgs, spec);
-      return {
-        flatResponse,
-        rawResponse: {
-          statusCode: currentRawResponse!.status,
-          body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON()
-        }
-      };
-    };
-
-    const lro = new LroImpl(
-      sendOperation,
-      { resourceGroupName, farmBeatsResourceName, body, options },
-      updateOperationSpec
-    );
-    const poller = new LroEngine(lro, {
-      resumeFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs,
-      lroResourceLocationConfig: "location"
-    });
-    await poller.poll();
-    return poller;
-  }
-
-  /**
-   * Update a FarmBeats resource.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param farmBeatsResourceName FarmBeats resource name.
-   * @param body Request object.
-   * @param options The options parameters.
-   */
-  async beginUpdateAndWait(
     resourceGroupName: string,
-    farmBeatsResourceName: string,
     body: FarmBeatsUpdateRequestModel,
     options?: FarmBeatsModelsUpdateOptionalParams
   ): Promise<FarmBeatsModelsUpdateResponse> {
-    const poller = await this.beginUpdate(
-      resourceGroupName,
-      farmBeatsResourceName,
-      body,
-      options
+    return this.client.sendOperationRequest(
+      { farmBeatsResourceName, resourceGroupName, body, options },
+      updateOperationSpec
     );
-    return poller.pollUntilDone();
   }
 
   /**
@@ -344,25 +266,6 @@ export class FarmBeatsModelsImpl implements FarmBeatsModels {
     return this.client.sendOperationRequest(
       { resourceGroupName, options },
       listByResourceGroupOperationSpec
-    );
-  }
-
-  /**
-   * Get operationResults for a FarmBeats resource.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param farmBeatsResourceName FarmBeats resource name.
-   * @param operationResultsId The operation results id.
-   * @param options The options parameters.
-   */
-  getOperationResult(
-    resourceGroupName: string,
-    farmBeatsResourceName: string,
-    operationResultsId: string,
-    options?: FarmBeatsModelsGetOperationResultOptionalParams
-  ): Promise<FarmBeatsModelsGetOperationResultResponse> {
-    return this.client.sendOperationRequest(
-      { resourceGroupName, farmBeatsResourceName, operationResultsId, options },
-      getOperationResultOperationSpec
     );
   }
 
@@ -416,9 +319,9 @@ const getOperationSpec: coreClient.OperationSpec = {
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId,
+    Parameters.farmBeatsResourceName,
     Parameters.resourceGroupName,
-    Parameters.farmBeatsResourceName
+    Parameters.subscriptionId
   ],
   headerParameters: [Parameters.accept],
   serializer
@@ -442,9 +345,9 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId,
+    Parameters.farmBeatsResourceName,
     Parameters.resourceGroupName,
-    Parameters.farmBeatsResourceName
+    Parameters.subscriptionId
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
   mediaType: "json",
@@ -458,15 +361,6 @@ const updateOperationSpec: coreClient.OperationSpec = {
     200: {
       bodyMapper: Mappers.FarmBeats
     },
-    201: {
-      bodyMapper: Mappers.FarmBeats
-    },
-    202: {
-      bodyMapper: Mappers.FarmBeats
-    },
-    204: {
-      bodyMapper: Mappers.FarmBeats
-    },
     default: {
       bodyMapper: Mappers.ErrorResponse
     }
@@ -475,9 +369,9 @@ const updateOperationSpec: coreClient.OperationSpec = {
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId,
+    Parameters.farmBeatsResourceName,
     Parameters.resourceGroupName,
-    Parameters.farmBeatsResourceName
+    Parameters.subscriptionId
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
   mediaType: "json",
@@ -497,9 +391,9 @@ const deleteOperationSpec: coreClient.OperationSpec = {
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId,
+    Parameters.farmBeatsResourceName,
     Parameters.resourceGroupName,
-    Parameters.farmBeatsResourceName
+    Parameters.subscriptionId
   ],
   headerParameters: [Parameters.accept],
   serializer
@@ -544,31 +438,8 @@ const listByResourceGroupOperationSpec: coreClient.OperationSpec = {
   ],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName
-  ],
-  headerParameters: [Parameters.accept],
-  serializer
-};
-const getOperationResultOperationSpec: coreClient.OperationSpec = {
-  path:
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/operationResults/{operationResultsId}",
-  httpMethod: "GET",
-  responses: {
-    200: {
-      bodyMapper: Mappers.ArmAsyncOperation
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.farmBeatsResourceName,
-    Parameters.operationResultsId
+    Parameters.subscriptionId
   ],
   headerParameters: [Parameters.accept],
   serializer
@@ -584,11 +455,6 @@ const listBySubscriptionNextOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.ErrorResponse
     }
   },
-  queryParameters: [
-    Parameters.apiVersion,
-    Parameters.maxPageSize,
-    Parameters.skipToken
-  ],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
@@ -608,15 +474,10 @@ const listByResourceGroupNextOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.ErrorResponse
     }
   },
-  queryParameters: [
-    Parameters.apiVersion,
-    Parameters.maxPageSize,
-    Parameters.skipToken
-  ],
   urlParameters: [
     Parameters.$host,
-    Parameters.subscriptionId,
     Parameters.resourceGroupName,
+    Parameters.subscriptionId,
     Parameters.nextLink
   ],
   headerParameters: [Parameters.accept],
