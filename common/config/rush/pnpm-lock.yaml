@@ -2843,8 +2843,8 @@ packages:
     hasBin: true
     dev: false
 
-  /autorest/3.6.2:
-    resolution: {integrity: sha512-JRMmAsSG4wplYUkjVOWELidF+P/OG9BjF542aQcbt4Qj85bJ+7EzRCTV09vbf8f4ScOB+I68+9IcskjNTU9UkQ==}
+  /autorest/3.6.3:
+    resolution: {integrity: sha512-j/Axwk9bniifTNtBLYVxfQZGQIGPKljFaCQCBWOiybVar2j3tkHP1btiC4a/t9pAJXY6IaFgWctoPM3G/Puhyg==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     requiresBuild: true
@@ -3673,7 +3673,7 @@ packages:
     dependencies:
       semver: 7.3.8
       shelljs: 0.8.5
-      typescript: 5.0.0-dev.20230103
+      typescript: 5.0.0-dev.20230110
     dev: false
 
   /downlevel-dts/0.7.0:
@@ -6825,6 +6825,12 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: false
 
+  /prettier/2.2.1:
+    resolution: {integrity: sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: false
+
   /prettier/2.8.1:
     resolution: {integrity: sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==}
     engines: {node: '>=10.13.0'}
@@ -8270,8 +8276,8 @@ packages:
     hasBin: true
     dev: false
 
-  /typescript/5.0.0-dev.20230103:
-    resolution: {integrity: sha512-vHf8Y8+op6MsFIDgvNmZhAIAUGVmzFzYCUBysMS6hlxlhSWIh1h5AXAW7WKs4GYr325jwTF/L72NKUYZHSD6Mw==}
+  /typescript/5.0.0-dev.20230110:
+    resolution: {integrity: sha512-0GvdJbYkEHxWSL2XPS/kivYbGZIGmgICZ/xXoY11zv1RRehhH9781v+RpsHI4qsGqxmzOI5VL+o/Y+t7sbwWVA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: false
@@ -8865,16 +8871,17 @@ packages:
     dev: false
 
   file:projects/ai-anomaly-detector.tgz:
-    resolution: {integrity: sha512-el90c/MseN2mcOznP2R9uFUp5XHqt9MTDo6lvSo7mKCTWvVCLgdu0vC5s3WUqcs9A1dUNL+2DcVgDBbfzqvwoA==, tarball: file:projects/ai-anomaly-detector.tgz}
+    resolution: {integrity: sha512-PZ2VSHnRnQPzTIzs81Mg35U4qoeLCe+nk3D8KbzWcoE05OdiW0VFBvaHnPV84tQKV6WUajBhPqr/+aU5c3o5Bg==, tarball: file:projects/ai-anomaly-detector.tgz}
     name: '@rush-temp/ai-anomaly-detector'
     version: 0.0.0
     dependencies:
+      '@azure-rest/core-client': 1.0.0-beta.10
       '@azure/identity': 2.1.0
       '@microsoft/api-extractor': 7.33.7
       '@types/chai': 4.3.4
       '@types/mocha': 7.0.2
       '@types/node': 14.18.36
-      autorest: 3.6.2
+      autorest: 3.6.3
       chai: 4.3.7
       cross-env: 7.0.3
       csv-parse: 5.3.3
@@ -8896,11 +8903,11 @@ packages:
       mocha: 7.2.0
       mocha-junit-reporter: 1.23.3_mocha@7.2.0
       nyc: 15.1.0
-      prettier: 2.8.1
+      prettier: 2.2.1
       rimraf: 3.0.2
       source-map-support: 0.5.21
       tslib: 2.4.1
-      typescript: 4.6.4
+      typescript: 4.8.4
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -9163,7 +9170,7 @@ packages:
       '@microsoft/api-extractor': 7.33.7
       '@types/chai': 4.3.4
       '@types/node': 14.18.36
-      autorest: 3.6.2
+      autorest: 3.6.3
       chai: 4.3.7
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -9696,7 +9703,7 @@ packages:
       '@microsoft/api-extractor': 7.33.7
       '@types/chai': 4.3.4
       '@types/node': 14.18.36
-      autorest: 3.6.2
+      autorest: 3.6.3
       chai: 4.3.7
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -10387,7 +10394,7 @@ packages:
       '@microsoft/api-extractor': 7.33.7
       '@types/chai': 4.3.4
       '@types/node': 14.18.36
-      autorest: 3.6.2
+      autorest: 3.6.3
       chai: 4.3.7
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -10622,7 +10629,7 @@ packages:
       '@microsoft/api-extractor': 7.33.7
       '@types/chai': 4.3.4
       '@types/node': 14.18.36
-      autorest: 3.6.2
+      autorest: 3.6.3
       chai: 4.3.7
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -12816,7 +12823,7 @@ packages:
       '@microsoft/api-extractor': 7.33.7
       '@types/chai': 4.3.4
       '@types/node': 14.18.36
-      autorest: 3.6.2
+      autorest: 3.6.3
       chai: 4.3.7
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -13970,7 +13977,7 @@ packages:
       '@microsoft/api-extractor': 7.33.7
       '@types/chai': 4.3.4
       '@types/node': 14.18.36
-      autorest: 3.6.2
+      autorest: 3.6.3
       chai: 4.3.7
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -15298,7 +15305,7 @@ packages:
       '@types/chai': 4.3.4
       '@types/mocha': 7.0.2
       '@types/node': 14.18.36
-      autorest: 3.6.2
+      autorest: 3.6.3
       chai: 4.3.7
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -15992,7 +15999,7 @@ packages:
       '@types/node': 14.18.36
       '@types/prettier': 2.7.2
       '@types/semver': 7.3.13
-      autorest: 3.6.2
+      autorest: 3.6.3
       builtin-modules: 3.3.0
       chai: 4.3.7
       chai-as-promised: 7.1.1_chai@4.3.7
@@ -16038,7 +16045,7 @@ packages:
       '@microsoft/api-extractor': 7.33.7
       '@types/chai': 4.3.4
       '@types/node': 14.18.36
-      autorest: 3.6.2
+      autorest: 3.6.3
       chai: 4.3.7
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -16854,7 +16861,7 @@ packages:
       '@types/chai': 4.3.4
       '@types/node': 12.20.55
       '@types/uuid': 8.3.4
-      autorest: 3.6.2
+      autorest: 3.6.3
       chai: 4.3.7
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -16960,7 +16967,7 @@ packages:
       '@types/chai': 4.3.4
       '@types/mocha': 7.0.2
       '@types/node': 14.18.36
-      autorest: 3.6.2
+      autorest: 3.6.3
       chai: 4.3.7
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -17004,7 +17011,7 @@ packages:
       '@types/chai': 4.3.4
       '@types/mocha': 7.0.2
       '@types/node': 14.18.36
-      autorest: 3.6.2
+      autorest: 3.6.3
       chai: 4.3.7
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -17048,7 +17055,7 @@ packages:
       '@types/chai': 4.3.4
       '@types/mocha': 7.0.2
       '@types/node': 12.20.55
-      autorest: 3.6.2
+      autorest: 3.6.3
       chai: 4.3.7
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -17139,7 +17146,7 @@ packages:
       '@types/chai': 4.3.4
       '@types/mocha': 7.0.2
       '@types/node': 14.18.36
-      autorest: 3.6.2
+      autorest: 3.6.3
       chai: 4.3.7
       cross-env: 7.0.3
       dotenv: 8.6.0
@@ -19213,7 +19220,7 @@ packages:
     dev: false
 
   file:projects/web-pubsub-client.tgz:
-    resolution: {integrity: sha512-Oc9P1qEG7j1/x5vxElDNAR1HvB4MjTHj49e6G4eZZHSDjCS9EDFNtYg+gauXUYmJe0ESYPLAy4dfz2tdifps2A==, tarball: file:projects/web-pubsub-client.tgz}
+    resolution: {integrity: sha512-+Apad1BfmHLxmvPilgDRLuuW5MS/769gUHJZoNLd6g+CicZnt/no0bsPcSOuXXler5WqeM0kFu7grG0q2MOCzg==, tarball: file:projects/web-pubsub-client.tgz}
     name: '@rush-temp/web-pubsub-client'
     version: 0.0.0
     dependencies:
