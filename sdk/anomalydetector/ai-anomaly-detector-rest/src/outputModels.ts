@@ -145,8 +145,12 @@ export interface MultivariateDetectionResultOutput {
 
 /** Multivariate anomaly detection status. */
 export interface MultivariateBatchDetectionResultSummaryOutput {
-  /** Status of detection results. One of CREATED, RUNNING, READY, and FAILED. */
-  status: "CREATED" | "RUNNING" | "READY" | "FAILED";
+  /**
+   * Status of detection results. One of CREATED, RUNNING, READY, and FAILED.
+   *
+   * Possible values: CREATED, RUNNING, READY, FAILED
+   */
+  status: string;
   /** Error message when detection is failed. */
   errors?: Array<ErrorResponseOutput>;
   /** Variable Status. */
@@ -297,8 +301,12 @@ export interface ModelInfoOutput {
   slidingWindow?: number;
   /** An optional field, indicating the manner to align multiple variables. */
   alignPolicy?: AlignPolicyOutput;
-  /** Model status. One of CREATED, RUNNING, READY, and FAILED. */
-  status?: "CREATED" | "RUNNING" | "READY" | "FAILED";
+  /**
+   * Model status. One of CREATED, RUNNING, READY, and FAILED.
+   *
+   * Possible values: CREATED, RUNNING, READY, FAILED
+   */
+  status?: string;
   /** Error messages when failed to create a model. */
   readonly errors?: Array<ErrorResponseOutput>;
   /** Diagnostics information to help inspect the states of model or variable. */
@@ -310,8 +318,10 @@ export interface AlignPolicyOutput {
   /**
    * An optional field, indicating how to align different variables to the same
    * time-range. Either Inner or Outer.
+   *
+   * Possible values: Inner, Outer
    */
-  alignMode?: "Inner" | "Outer";
+  alignMode?: string;
   /**
    * An optional field, indicating how missing values will be filled. One of
    * Previous, Subsequent, Linear, Zero, Fixed.
