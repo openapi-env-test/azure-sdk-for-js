@@ -584,11 +584,6 @@ const listBySubscriptionNextOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.ErrorResponse
     }
   },
-  queryParameters: [
-    Parameters.apiVersion,
-    Parameters.maxPageSize,
-    Parameters.skipToken
-  ],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
@@ -608,11 +603,6 @@ const listByResourceGroupNextOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.ErrorResponse
     }
   },
-  queryParameters: [
-    Parameters.apiVersion,
-    Parameters.maxPageSize,
-    Parameters.skipToken
-  ],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,

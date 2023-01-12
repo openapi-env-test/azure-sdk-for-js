@@ -1,15 +1,24 @@
 # Release History
+    
+## 1.0.0-beta.5 (2023-01-12)
+    
+**Breaking Changes**
 
-## 1.0.0-beta.5 (Unreleased)
-
-### Features Added
-
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Interface ExtensionsListByFarmBeatsNextOptionalParams no longer has parameter extensionCategories
+  - Interface ExtensionsListByFarmBeatsNextOptionalParams no longer has parameter extensionIds
+  - Interface ExtensionsListByFarmBeatsNextOptionalParams no longer has parameter maxPageSize
+  - Interface ExtensionsListByFarmBeatsNextOptionalParams no longer has parameter skipToken
+  - Interface FarmBeatsExtensionsListNextOptionalParams no longer has parameter extensionCategories
+  - Interface FarmBeatsExtensionsListNextOptionalParams no longer has parameter farmBeatsExtensionIds
+  - Interface FarmBeatsExtensionsListNextOptionalParams no longer has parameter farmBeatsExtensionNames
+  - Interface FarmBeatsExtensionsListNextOptionalParams no longer has parameter maxPageSize
+  - Interface FarmBeatsExtensionsListNextOptionalParams no longer has parameter publisherIds
+  - Interface FarmBeatsModelsListByResourceGroupNextOptionalParams no longer has parameter maxPageSize
+  - Interface FarmBeatsModelsListByResourceGroupNextOptionalParams no longer has parameter skipToken
+  - Interface FarmBeatsModelsListBySubscriptionNextOptionalParams no longer has parameter maxPageSize
+  - Interface FarmBeatsModelsListBySubscriptionNextOptionalParams no longer has parameter skipToken
+    
+    
 ## 1.0.0-beta.4 (2022-11-14)
     
 **Features**

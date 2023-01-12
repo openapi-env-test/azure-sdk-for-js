@@ -370,13 +370,6 @@ const listByFarmBeatsNextOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.ErrorResponse
     }
   },
-  queryParameters: [
-    Parameters.apiVersion,
-    Parameters.extensionIds,
-    Parameters.extensionCategories,
-    Parameters.maxPageSize,
-    Parameters.skipToken
-  ],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,

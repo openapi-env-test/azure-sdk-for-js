@@ -184,14 +184,6 @@ const listNextOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.ErrorResponse
     }
   },
-  queryParameters: [
-    Parameters.apiVersion,
-    Parameters.extensionCategories,
-    Parameters.maxPageSize,
-    Parameters.farmBeatsExtensionIds,
-    Parameters.farmBeatsExtensionNames,
-    Parameters.publisherIds
-  ],
   urlParameters: [Parameters.$host, Parameters.nextLink],
   headerParameters: [Parameters.accept],
   serializer

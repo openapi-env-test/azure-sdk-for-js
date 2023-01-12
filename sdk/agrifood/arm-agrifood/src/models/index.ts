@@ -703,19 +703,7 @@ export type ExtensionsListByFarmBeatsResponse = ExtensionListResponse;
 
 /** Optional parameters. */
 export interface ExtensionsListByFarmBeatsNextOptionalParams
-  extends coreClient.OperationOptions {
-  /** Installed extension ids. */
-  extensionIds?: string[];
-  /** Installed extension categories. */
-  extensionCategories?: string[];
-  /**
-   * Maximum number of items needed (inclusive).
-   * Minimum = 10, Maximum = 1000, Default value = 50.
-   */
-  maxPageSize?: number;
-  /** Skip token for getting next set of results. */
-  skipToken?: string;
-}
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listByFarmBeatsNext operation. */
 export type ExtensionsListByFarmBeatsNextResponse = ExtensionListResponse;
@@ -750,21 +738,7 @@ export type FarmBeatsExtensionsGetResponse = FarmBeatsExtension;
 
 /** Optional parameters. */
 export interface FarmBeatsExtensionsListNextOptionalParams
-  extends coreClient.OperationOptions {
-  /** Extension categories. */
-  extensionCategories?: string[];
-  /**
-   * Maximum number of items needed (inclusive).
-   * Minimum = 10, Maximum = 1000, Default value = 50.
-   */
-  maxPageSize?: number;
-  /** FarmBeatsExtension ids. */
-  farmBeatsExtensionIds?: string[];
-  /** FarmBeats extension names. */
-  farmBeatsExtensionNames?: string[];
-  /** Publisher ids. */
-  publisherIds?: string[];
-}
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listNext operation. */
 export type FarmBeatsExtensionsListNextResponse = FarmBeatsExtensionListResponse;
@@ -838,30 +812,14 @@ export type FarmBeatsModelsGetOperationResultResponse = ArmAsyncOperation;
 
 /** Optional parameters. */
 export interface FarmBeatsModelsListBySubscriptionNextOptionalParams
-  extends coreClient.OperationOptions {
-  /**
-   * Maximum number of items needed (inclusive).
-   * Minimum = 10, Maximum = 1000, Default value = 50.
-   */
-  maxPageSize?: number;
-  /** Skip token for getting next set of results. */
-  skipToken?: string;
-}
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listBySubscriptionNext operation. */
 export type FarmBeatsModelsListBySubscriptionNextResponse = FarmBeatsListResponse;
 
 /** Optional parameters. */
 export interface FarmBeatsModelsListByResourceGroupNextOptionalParams
-  extends coreClient.OperationOptions {
-  /**
-   * Maximum number of items needed (inclusive).
-   * Minimum = 10, Maximum = 1000, Default value = 50.
-   */
-  maxPageSize?: number;
-  /** Continuation token for getting next set of results. */
-  skipToken?: string;
-}
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listByResourceGroupNext operation. */
 export type FarmBeatsModelsListByResourceGroupNextResponse = FarmBeatsListResponse;

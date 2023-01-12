@@ -143,10 +143,6 @@ export type ExtensionsGetResponse = Extension;
 
 // @public
 export interface ExtensionsListByFarmBeatsNextOptionalParams extends coreClient.OperationOptions {
-    extensionCategories?: string[];
-    extensionIds?: string[];
-    maxPageSize?: number;
-    skipToken?: string;
 }
 
 // @public
@@ -215,11 +211,6 @@ export type FarmBeatsExtensionsGetResponse = FarmBeatsExtension;
 
 // @public
 export interface FarmBeatsExtensionsListNextOptionalParams extends coreClient.OperationOptions {
-    extensionCategories?: string[];
-    farmBeatsExtensionIds?: string[];
-    farmBeatsExtensionNames?: string[];
-    maxPageSize?: number;
-    publisherIds?: string[];
 }
 
 // @public
@@ -282,8 +273,6 @@ export type FarmBeatsModelsGetResponse = FarmBeats;
 
 // @public
 export interface FarmBeatsModelsListByResourceGroupNextOptionalParams extends coreClient.OperationOptions {
-    maxPageSize?: number;
-    skipToken?: string;
 }
 
 // @public
@@ -300,8 +289,6 @@ export type FarmBeatsModelsListByResourceGroupResponse = FarmBeatsListResponse;
 
 // @public
 export interface FarmBeatsModelsListBySubscriptionNextOptionalParams extends coreClient.OperationOptions {
-    maxPageSize?: number;
-    skipToken?: string;
 }
 
 // @public
