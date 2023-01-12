@@ -9,5 +9,5 @@
 /// <reference lib="esnext.asynciterable" />
 export { getContinuationToken } from "./pagingHelper";
 export * from "./models";
-export { AgriFoodMgmtClient } from "./agriFoodMgmtClient";
+export { AzureAgriFoodRPService } from "./azureAgriFoodRPService";
 export * from "./operationsInterfaces";

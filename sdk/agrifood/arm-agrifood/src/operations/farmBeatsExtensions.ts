@@ -12,7 +12,7 @@ import { FarmBeatsExtensions } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
-import { AgriFoodMgmtClient } from "../agriFoodMgmtClient";
+import { AzureAgriFoodRPService } from "../azureAgriFoodRPService";
 import {
   FarmBeatsExtension,
   FarmBeatsExtensionsListNextOptionalParams,
@@ -26,13 +26,13 @@ import {
 /// <reference lib="esnext.asynciterable" />
 /** Class containing FarmBeatsExtensions operations. */
 export class FarmBeatsExtensionsImpl implements FarmBeatsExtensions {
-  private readonly client: AgriFoodMgmtClient;
+  private readonly client: AzureAgriFoodRPService;
 
   /**
    * Initialize a new instance of the class FarmBeatsExtensions class.
    * @param client Reference to the service client
    */
-  constructor(client: AgriFoodMgmtClient) {
+  constructor(client: AzureAgriFoodRPService) {
     this.client = client;
   }
 
@@ -184,14 +184,6 @@ const listNextOperationSpec: coreClient.OperationSpec = {
       bodyMapper: Mappers.ErrorResponse
     }
   },
-  queryParameters: [
-    Parameters.apiVersion,
-    Parameters.extensionCategories,
-    Parameters.maxPageSize,
-    Parameters.farmBeatsExtensionIds,
-    Parameters.farmBeatsExtensionNames,
-    Parameters.publisherIds
-  ],
   urlParameters: [Parameters.$host, Parameters.nextLink],
   headerParameters: [Parameters.accept],
   serializer
