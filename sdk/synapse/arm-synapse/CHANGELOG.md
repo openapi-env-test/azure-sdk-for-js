@@ -1,16 +1,6 @@
 # Release History
-
-## 8.1.0-beta.3 (Unreleased)
-
-### Features Added
-
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
-## 8.1.0-beta.2 (2022-12-16)
+    
+## 9.0.0-beta.2 (2023-03-17)
     
 **Features**
 
@@ -101,13 +91,18 @@
   - Added Interface WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettingsListNextOptionalParams
   - Added Interface WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettingsListOptionalParams
   - Added Interface WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettingsUpdateOptionalParams
+  - Added Type Alias ActualState
   - Added Type Alias DedicatedSQLMinimalTlsSettingsName
+  - Added Type Alias DesiredState
   - Added Type Alias WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettingsGetResponse
   - Added Type Alias WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettingsListNextResponse
   - Added Type Alias WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettingsListResponse
   - Added Type Alias WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettingsUpdateResponse
   - Added Enum KnownDedicatedSQLMinimalTlsSettingsName
   - Added function getContinuationToken
+
+**Breaking Changes**
+
   - Interface SqlPoolSchemasListNextOptionalParams no longer has parameter filter
   - Interface SqlPoolSensitivityLabelsListCurrentNextOptionalParams no longer has parameter filter
   - Interface SqlPoolSensitivityLabelsListRecommendedNextOptionalParams no longer has parameter filter
@@ -115,6 +110,10 @@
   - Interface SqlPoolSensitivityLabelsListRecommendedNextOptionalParams no longer has parameter skipToken
   - Interface SqlPoolTableColumnsListByTableNameNextOptionalParams no longer has parameter filter
   - Interface SqlPoolTablesListBySchemaNextOptionalParams no longer has parameter filter
+  - Type of parameter actualState of interface ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentity is changed from ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState to ActualState
+  - Type of parameter desiredState of interface ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentity is changed from ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState to DesiredState
+  - Removed Enum KnownManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState
+  - Removed Enum KnownManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState
     
     
 ## 8.0.0 (2022-01-13)
