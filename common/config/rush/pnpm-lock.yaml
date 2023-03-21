@@ -210,6 +210,7 @@ specifiers:
   '@rush-temp/arm-workloads': file:./projects/arm-workloads.tgz
   '@rush-temp/arm-workspaces': file:./projects/arm-workspaces.tgz
   '@rush-temp/attestation': file:./projects/attestation.tgz
+  '@rush-temp/azure-template-contoso-rest': file:./projects/azure-template-contoso-rest.tgz
   '@rush-temp/communication-alpha-ids': file:./projects/communication-alpha-ids.tgz
   '@rush-temp/communication-chat': file:./projects/communication-chat.tgz
   '@rush-temp/communication-common': file:./projects/communication-common.tgz
@@ -535,6 +536,7 @@ dependencies:
   '@rush-temp/arm-workloads': file:projects/arm-workloads.tgz
   '@rush-temp/arm-workspaces': file:projects/arm-workspaces.tgz
   '@rush-temp/attestation': file:projects/attestation.tgz
+  '@rush-temp/azure-template-contoso-rest': file:projects/azure-template-contoso-rest.tgz
   '@rush-temp/communication-alpha-ids': file:projects/communication-alpha-ids.tgz
   '@rush-temp/communication-chat': file:projects/communication-chat.tgz
   '@rush-temp/communication-common': file:projects/communication-common.tgz
@@ -698,6 +700,7 @@ packages:
   /@azure/ai-form-recognizer/3.1.0-beta.3:
     resolution: {integrity: sha512-+4QtFKNyxAmdqpcYjuAtmWKm/MuOe9kZsbpS9jA9h0YHzngNj5gc67AA4egV9BXOq9x+1phjYTNC/rxiOUr1uQ==}
     engines: {node: '>=8.0.0'}
+    deprecated: Please migrate to a supported (non-beta) version of this package
     dependencies:
       '@azure/core-auth': 1.4.0
       '@azure/core-http': 1.2.6
@@ -3807,7 +3810,7 @@ packages:
     dependencies:
       semver: 7.3.8
       shelljs: 0.8.5
-      typescript: 5.0.0-dev.20230128
+      typescript: 5.1.0-dev.20230321
     dev: false
 
   /downlevel-dts/0.7.0:
@@ -8653,9 +8656,15 @@ packages:
     hasBin: true
     dev: false
 
-  /typescript/5.0.0-dev.20230128:
-    resolution: {integrity: sha512-oos2fAiWy4+bCwSKXn56TsFz0vasZJ0uQR5FxXDUmi9y4+TDxUUZXpIVv3E6RKFz4ee0ndvMOwTjpnb2WE2gpw==}
-    engines: {node: '>=4.2.0'}
+  /typescript/5.0.2:
+    resolution: {integrity: sha512-wVORMBGO/FAs/++blGNeAVdbNKtIh1rbBL2EyQ1+J9lClJ93KiiKe8PmFIVdXhHcyv44SL9oglmfeSsndo0jRw==}
+    engines: {node: '>=12.20'}
+    hasBin: true
+    dev: false
+
+  /typescript/5.1.0-dev.20230321:
+    resolution: {integrity: sha512-GFq3xvjbJImoKgCDJEiB7Bsa1wQdu/9tlb8Qj475ydSraETbCLzy+Ao3cqQ+KWBM6Mqo+0b1rrpe2Gj0DZz2+w==}
+    engines: {node: '>=12.20'}
     hasBin: true
     dev: false
 
@@ -15274,6 +15283,50 @@ packages:
       - utf-8-validate
     dev: false
 
+  file:projects/azure-template-contoso-rest.tgz:
+    resolution: {integrity: sha512-yezx0n3YRlRc0kxMHsTuhBiOKfZDmvNynFxCX924cr6vFx2PE8OGqRdytQxjxexNJJgEgUs+8eMX5Qj+dJAPDg==, tarball: file:projects/azure-template-contoso-rest.tgz}
+    name: '@rush-temp/azure-template-contoso-rest'
+    version: 0.0.0
+    dependencies:
+      '@azure-rest/core-client': 1.0.0-beta.10
+      '@azure/identity': 2.1.0
+      '@microsoft/api-extractor': 7.34.0
+      '@types/chai': 4.3.4
+      '@types/mocha': 7.0.2
+      '@types/node': 14.18.36
+      autorest: 3.6.3
+      chai: 4.3.7
+      cross-env: 7.0.3
+      dotenv: 8.6.0
+      eslint: 8.32.0
+      karma: 6.4.1
+      karma-chrome-launcher: 3.1.1
+      karma-coverage: 2.2.0
+      karma-edge-launcher: 0.4.2_karma@6.4.1
+      karma-env-preprocessor: 0.1.1
+      karma-firefox-launcher: 1.3.0
+      karma-ie-launcher: 1.0.0_karma@6.4.1
+      karma-junit-reporter: 2.0.1_karma@6.4.1
+      karma-mocha: 2.0.1
+      karma-mocha-reporter: 2.2.5_karma@6.4.1
+      karma-source-map-support: 1.4.0
+      karma-sourcemap-loader: 0.3.8
+      mkdirp: 1.0.4
+      mocha: 7.2.0
+      mocha-junit-reporter: 1.23.3_mocha@7.2.0
+      nyc: 15.1.0
+      prettier: 2.2.1
+      rimraf: 3.0.2
+      source-map-support: 0.5.21
+      tslib: 2.5.0
+      typescript: 4.8.4
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
+    dev: false
+
   file:projects/communication-alpha-ids.tgz:
     resolution: {integrity: sha512-eif5k0QD259o2j2UgmVibOaOrMv2RLeQJ920VhIF0ZBFLXABBL2rK4v1gj2bm+X4gnyLKKUMm1QqI+HPYugTvQ==, tarball: file:projects/communication-alpha-ids.tgz}
     name: '@rush-temp/communication-alpha-ids'
@@ -16460,7 +16513,7 @@ packages:
     name: '@rush-temp/dev-tool'
     version: 0.0.0
     dependencies:
-      '@_ts/max': /typescript/4.9.4
+      '@_ts/max': /typescript/5.0.2
       '@_ts/min': /typescript/4.2.4
       '@microsoft/api-extractor': 7.34.0
       '@rollup/plugin-commonjs': 21.1.0_rollup@2.79.1
