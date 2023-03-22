@@ -354,7 +354,7 @@ export class KustoPoolsImpl implements KustoPools {
   }
 
   /**
-   * List all Kusto pools
+   * List all Kusto pools 1
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param workspaceName The name of the workspace.
    * @param options The options parameters.
