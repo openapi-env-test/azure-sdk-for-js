@@ -11,6 +11,9 @@ import { PollerLike } from '@azure/core-lro';
 import { PollOperationState } from '@azure/core-lro';
 
 // @public
+export type ActualState = "Enabling" | "Enabled" | "Disabling" | "Disabled" | "Unknown";
+
+// @public
 export interface AttachedDatabaseConfiguration extends ProxyResource {
     readonly attachedDatabaseNames?: string[];
     databaseName?: string;
@@ -267,6 +270,7 @@ export interface CheckNameResult {
 
 // @public
 export interface ClusterPrincipalAssignment extends ProxyResource {
+    readonly aadObjectId?: string;
     principalId?: string;
     readonly principalName?: string;
     principalType?: PrincipalType;
@@ -369,6 +373,7 @@ export interface DatabaseListResult {
 
 // @public
 export interface DatabasePrincipalAssignment extends ProxyResource {
+    readonly aadObjectId?: string;
     principalId?: string;
     readonly principalName?: string;
     principalType?: PrincipalType;
@@ -576,6 +581,9 @@ export interface DedicatedSQLminimalTlsSettingsPatchInfo {
 
 // @public
 export type DefaultPrincipalsModificationKind = string;
+
+// @public
+export type DesiredState = "Enabled" | "Disabled";
 
 // @public
 export interface DynamicExecutorAllocation {
@@ -1688,21 +1696,6 @@ export enum KnownLanguageExtensionName {
 }
 
 // @public
-export enum KnownManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState {
-    Disabled = "Disabled",
-    Disabling = "Disabling",
-    Enabled = "Enabled",
-    Enabling = "Enabling",
-    Unknown = "Unknown"
-}
-
-// @public
-export enum KnownManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState {
-    Disabled = "Disabled",
-    Enabled = "Enabled"
-}
-
-// @public
 export enum KnownManagedIntegrationRuntimeNodeStatus {
     Available = "Available",
     Recycling = "Recycling",
@@ -2522,15 +2515,9 @@ export interface ManagedIdentitySqlControlSettingsModel extends ProxyResource {
 
 // @public
 export interface ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentity {
-    readonly actualState?: ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState;
-    desiredState?: ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState;
+    readonly actualState?: ActualState;
+    desiredState?: DesiredState;
 }
-
-// @public
-export type ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState = string;
-
-// @public
-export type ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState = string;
 
 // @public
 export interface ManagedIntegrationRuntime extends IntegrationRuntime {
