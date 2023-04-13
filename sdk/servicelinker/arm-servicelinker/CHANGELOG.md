@@ -1,15 +1,12 @@
 # Release History
+    
+## 2.2.0 (2023-04-13)
+    
+**Features**
 
-## 2.1.1 (Unreleased)
-
-### Features Added
-
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Enum KnownClientType has a new value KafkaSpringBoot
+    
+    
 ## 2.1.0 (2022-12-16)
     
 **Features**

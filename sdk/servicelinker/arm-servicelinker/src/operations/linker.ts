@@ -13,8 +13,12 @@ import * as coreClient from "@azure/core-client";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { ServiceLinkerManagementClient } from "../serviceLinkerManagementClient";
-import { PollerLike, PollOperationState, LroEngine } from "@azure/core-lro";
-import { LroImpl } from "../lroImpl";
+import {
+  SimplePollerLike,
+  OperationState,
+  createHttpPoller
+} from "@azure/core-lro";
+import { createLroSpec } from "../lroImpl";
 import {
   LinkerResource,
   LinkerListNextOptionalParams,
@@ -49,7 +53,7 @@ export class LinkerImpl implements Linker {
   }
 
   /**
-   * Returns list of Linkers which connects to the resource.
+   * Returns list of Linkers which connect to the resource.
    * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be
    *                    connected.
    * @param options The options parameters.
@@ -108,7 +112,7 @@ export class LinkerImpl implements Linker {
   }
 
   /**
-   * Returns list of Linkers which connects to the resource.
+   * Returns list of Linkers which connect to the resource.
    * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be
    *                    connected.
    * @param options The options parameters.
@@ -155,8 +159,8 @@ export class LinkerImpl implements Linker {
     parameters: LinkerResource,
     options?: LinkerCreateOrUpdateOptionalParams
   ): Promise<
-    PollerLike<
-      PollOperationState<LinkerCreateOrUpdateResponse>,
+    SimplePollerLike<
+      OperationState<LinkerCreateOrUpdateResponse>,
       LinkerCreateOrUpdateResponse
     >
   > {
@@ -166,7 +170,7 @@ export class LinkerImpl implements Linker {
     ): Promise<LinkerCreateOrUpdateResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
-    const sendOperation = async (
+    const sendOperationFn = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ) => {
@@ -199,15 +203,18 @@ export class LinkerImpl implements Linker {
       };
     };
 
-    const lro = new LroImpl(
-      sendOperation,
-      { resourceUri, linkerName, parameters, options },
-      createOrUpdateOperationSpec
-    );
-    const poller = new LroEngine(lro, {
-      resumeFrom: options?.resumeFrom,
+    const lro = createLroSpec({
+      sendOperationFn,
+      args: { resourceUri, linkerName, parameters, options },
+      spec: createOrUpdateOperationSpec
+    });
+    const poller = await createHttpPoller<
+      LinkerCreateOrUpdateResponse,
+      OperationState<LinkerCreateOrUpdateResponse>
+    >(lro, {
+      restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs,
-      lroResourceLocationConfig: "azure-async-operation"
+      resourceLocationConfig: "azure-async-operation"
     });
     await poller.poll();
     return poller;
@@ -247,14 +254,14 @@ export class LinkerImpl implements Linker {
     resourceUri: string,
     linkerName: string,
     options?: LinkerDeleteOptionalParams
-  ): Promise<PollerLike<PollOperationState<void>, void>> {
+  ): Promise<SimplePollerLike<OperationState<void>, void>> {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ): Promise<void> => {
       return this.client.sendOperationRequest(args, spec);
     };
-    const sendOperation = async (
+    const sendOperationFn = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ) => {
@@ -287,15 +294,15 @@ export class LinkerImpl implements Linker {
       };
     };
 
-    const lro = new LroImpl(
-      sendOperation,
-      { resourceUri, linkerName, options },
-      deleteOperationSpec
-    );
-    const poller = new LroEngine(lro, {
-      resumeFrom: options?.resumeFrom,
+    const lro = createLroSpec({
+      sendOperationFn,
+      args: { resourceUri, linkerName, options },
+      spec: deleteOperationSpec
+    });
+    const poller = await createHttpPoller<void, OperationState<void>>(lro, {
+      restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs,
-      lroResourceLocationConfig: "azure-async-operation"
+      resourceLocationConfig: "azure-async-operation"
     });
     await poller.poll();
     return poller;
@@ -331,7 +338,7 @@ export class LinkerImpl implements Linker {
     parameters: LinkerPatch,
     options?: LinkerUpdateOptionalParams
   ): Promise<
-    PollerLike<PollOperationState<LinkerUpdateResponse>, LinkerUpdateResponse>
+    SimplePollerLike<OperationState<LinkerUpdateResponse>, LinkerUpdateResponse>
   > {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
@@ -339,7 +346,7 @@ export class LinkerImpl implements Linker {
     ): Promise<LinkerUpdateResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
-    const sendOperation = async (
+    const sendOperationFn = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ) => {
@@ -372,15 +379,18 @@ export class LinkerImpl implements Linker {
       };
     };
 
-    const lro = new LroImpl(
-      sendOperation,
-      { resourceUri, linkerName, parameters, options },
-      updateOperationSpec
-    );
-    const poller = new LroEngine(lro, {
-      resumeFrom: options?.resumeFrom,
+    const lro = createLroSpec({
+      sendOperationFn,
+      args: { resourceUri, linkerName, parameters, options },
+      spec: updateOperationSpec
+    });
+    const poller = await createHttpPoller<
+      LinkerUpdateResponse,
+      OperationState<LinkerUpdateResponse>
+    >(lro, {
+      restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs,
-      lroResourceLocationConfig: "azure-async-operation"
+      resourceLocationConfig: "azure-async-operation"
     });
     await poller.poll();
     return poller;
@@ -421,8 +431,8 @@ export class LinkerImpl implements Linker {
     linkerName: string,
     options?: LinkerValidateOptionalParams
   ): Promise<
-    PollerLike<
-      PollOperationState<LinkerValidateResponse>,
+    SimplePollerLike<
+      OperationState<LinkerValidateResponse>,
       LinkerValidateResponse
     >
   > {
@@ -432,7 +442,7 @@ export class LinkerImpl implements Linker {
     ): Promise<LinkerValidateResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
-    const sendOperation = async (
+    const sendOperationFn = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ) => {
@@ -465,15 +475,18 @@ export class LinkerImpl implements Linker {
       };
     };
 
-    const lro = new LroImpl(
-      sendOperation,
-      { resourceUri, linkerName, options },
-      validateOperationSpec
-    );
-    const poller = new LroEngine(lro, {
-      resumeFrom: options?.resumeFrom,
+    const lro = createLroSpec({
+      sendOperationFn,
+      args: { resourceUri, linkerName, options },
+      spec: validateOperationSpec
+    });
+    const poller = await createHttpPoller<
+      LinkerValidateResponse,
+      OperationState<LinkerValidateResponse>
+    >(lro, {
+      restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs,
-      lroResourceLocationConfig: "azure-async-operation"
+      resourceLocationConfig: "azure-async-operation"
     });
     await poller.poll();
     return poller;

@@ -713,6 +713,7 @@ packages:
   /@azure-tools/test-recorder/2.0.0:
     resolution: {integrity: sha512-OTic1OwOk25B8ecdMQ4wgyDaUNMMw0qzO4/0sy9ScPXWLmUFGMlkS0+BOQ2K9t8WCksM/wU+NjUZo/5T4zaG6A==}
     engines: {node: '>=12.0.0'}
+    deprecated: Bug introduced in v2.0.0, fixed in 3.0.0
     dependencies:
       '@azure/core-auth': 1.4.0
       '@azure/core-http': 2.3.1
@@ -733,6 +734,7 @@ packages:
   /@azure/ai-form-recognizer/3.1.0-beta.3:
     resolution: {integrity: sha512-+4QtFKNyxAmdqpcYjuAtmWKm/MuOe9kZsbpS9jA9h0YHzngNj5gc67AA4egV9BXOq9x+1phjYTNC/rxiOUr1uQ==}
     engines: {node: '>=8.0.0'}
+    deprecated: Please migrate to a supported (non-beta) version of this package
     dependencies:
       '@azure/core-auth': 1.4.0
       '@azure/core-http': 1.2.6
@@ -1033,6 +1035,7 @@ packages:
   /@azure/data-tables/12.1.2:
     resolution: {integrity: sha512-eGldbkw9UjzrAXzy28/raKauQEjspG1FAHxWI/kEInkFm9mvs5uR2KGEGlQNYfz6pzcCOrsxHlh+pmWKuIgPSQ==}
     engines: {node: '>=12.0.0'}
+    deprecated: Please upgrade to the latest package version to get important bug fixes
     dependencies:
       '@azure/core-auth': 1.4.0
       '@azure/core-client': 1.7.2
@@ -3910,7 +3913,7 @@ packages:
     dependencies:
       semver: 7.3.8
       shelljs: 0.8.5
-      typescript: 5.1.0-dev.20230322
+      typescript: 5.1.0-dev.20230413
     dev: false
 
   /ecdsa-sig-formatter/1.0.11:
@@ -8760,14 +8763,14 @@ packages:
     hasBin: true
     dev: false
 
-  /typescript/5.0.2:
-    resolution: {integrity: sha512-wVORMBGO/FAs/++blGNeAVdbNKtIh1rbBL2EyQ1+J9lClJ93KiiKe8PmFIVdXhHcyv44SL9oglmfeSsndo0jRw==}
+  /typescript/5.0.4:
+    resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
     engines: {node: '>=12.20'}
     hasBin: true
     dev: false
 
-  /typescript/5.1.0-dev.20230322:
-    resolution: {integrity: sha512-sRsSUZOCpLClaHzhRo1ZsoEnQe6+1FMEQzBzgtxC8f9rklwY5H4TcyKoa9wRpYvvJ34Farr8nEU/Uz+hnruyLw==}
+  /typescript/5.1.0-dev.20230413:
+    resolution: {integrity: sha512-+FsnRiizPqZGzW9HVveiTiotGSso+FhN3eT/l5Hh+sRIKH7b40N7gB4Di0l0ZUw/Q0WGdjn6UPCRVV2yxy1qXw==}
     engines: {node: '>=12.20'}
     hasBin: true
     dev: false
@@ -14704,7 +14707,7 @@ packages:
     dev: false
 
   file:projects/arm-servicelinker.tgz:
-    resolution: {integrity: sha512-XvofobS3x1tEcKXBczyZO9P3Wf0ZVFlXBIwGPxawYAS+4dLcPzIJ+NMeUvxlZ7PCkBZxDDE7Rr5/ub8u27ndCA==, tarball: file:projects/arm-servicelinker.tgz}
+    resolution: {integrity: sha512-vfm7auNi9otzrf0jslrfHf4JlscbBO2Sxv9/2ayeKTA/NcaKx1GAvGDqpFx7DoNsMC61/99/cgm6YZ9KWyOlZQ==, tarball: file:projects/arm-servicelinker.tgz}
     name: '@rush-temp/arm-servicelinker'
     version: 0.0.0
     dependencies:
@@ -14719,7 +14722,7 @@ packages:
       chai: 4.3.7
       cross-env: 7.0.3
       dotenv: 16.0.3
-      mkdirp: 1.0.4
+      mkdirp: 2.1.5
       mocha: 7.2.0
       rimraf: 3.0.2
       rollup: 2.79.1
@@ -16829,7 +16832,7 @@ packages:
     name: '@rush-temp/dev-tool'
     version: 0.0.0
     dependencies:
-      '@_ts/max': /typescript/5.0.2
+      '@_ts/max': /typescript/5.0.4
       '@_ts/min': /typescript/4.2.4
       '@microsoft/api-extractor': 7.34.4_@types+node@14.18.38
       '@rollup/plugin-commonjs': 24.0.1_rollup@2.79.1
