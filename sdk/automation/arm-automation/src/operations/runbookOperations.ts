@@ -13,8 +13,12 @@ import * as coreClient from "@azure/core-client";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { AutomationClient } from "../automationClient";
-import { PollerLike, PollOperationState, LroEngine } from "@azure/core-lro";
-import { LroImpl } from "../lroImpl";
+import {
+  SimplePollerLike,
+  OperationState,
+  createHttpPoller
+} from "@azure/core-lro";
+import { createLroSpec } from "../lroImpl";
 import {
   Runbook,
   RunbookListByAutomationAccountNextOptionalParams,
@@ -146,8 +150,8 @@ export class RunbookOperationsImpl implements RunbookOperations {
     runbookName: string,
     options?: RunbookPublishOptionalParams
   ): Promise<
-    PollerLike<
-      PollOperationState<RunbookPublishResponse>,
+    SimplePollerLike<
+      OperationState<RunbookPublishResponse>,
       RunbookPublishResponse
     >
   > {
@@ -157,7 +161,7 @@ export class RunbookOperationsImpl implements RunbookOperations {
     ): Promise<RunbookPublishResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
-    const sendOperation = async (
+    const sendOperationFn = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ) => {
@@ -190,13 +194,16 @@ export class RunbookOperationsImpl implements RunbookOperations {
       };
     };
 
-    const lro = new LroImpl(
-      sendOperation,
-      { resourceGroupName, automationAccountName, runbookName, options },
-      publishOperationSpec
-    );
-    const poller = new LroEngine(lro, {
-      resumeFrom: options?.resumeFrom,
+    const lro = createLroSpec({
+      sendOperationFn,
+      args: { resourceGroupName, automationAccountName, runbookName, options },
+      spec: publishOperationSpec
+    });
+    const poller = await createHttpPoller<
+      RunbookPublishResponse,
+      OperationState<RunbookPublishResponse>
+    >(lro, {
+      restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs
     });
     await poller.poll();

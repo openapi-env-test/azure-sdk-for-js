@@ -6,7 +6,7 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { PollerLike, PollOperationState } from "@azure/core-lro";
+import { SimplePollerLike, OperationState } from "@azure/core-lro";
 import {
   RunbookDraftGetContentOptionalParams,
   RunbookDraftGetContentResponse,
@@ -48,8 +48,8 @@ export interface RunbookDraftOperations {
     runbookContent: string,
     options?: RunbookDraftReplaceContentOptionalParams
   ): Promise<
-    PollerLike<
-      PollOperationState<RunbookDraftReplaceContentResponse>,
+    SimplePollerLike<
+      OperationState<RunbookDraftReplaceContentResponse>,
       RunbookDraftReplaceContentResponse
     >
   >;

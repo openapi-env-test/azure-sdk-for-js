@@ -9,9 +9,9 @@
 import * as coreAuth from '@azure/core-auth';
 import * as coreClient from '@azure/core-client';
 import * as coreRestPipeline from '@azure/core-rest-pipeline';
+import { OperationState } from '@azure/core-lro';
 import { PagedAsyncIterableIterator } from '@azure/core-paging';
-import { PollerLike } from '@azure/core-lro';
-import { PollOperationState } from '@azure/core-lro';
+import { SimplePollerLike } from '@azure/core-lro';
 
 // @public
 export interface Activity {
@@ -849,7 +849,7 @@ export interface DscCompilationJobListResult {
 
 // @public
 export interface DscCompilationJobOperations {
-    beginCreate(resourceGroupName: string, automationAccountName: string, compilationJobName: string, parameters: DscCompilationJobCreateParameters, options?: DscCompilationJobCreateOptionalParams): Promise<PollerLike<PollOperationState<DscCompilationJobCreateResponse>, DscCompilationJobCreateResponse>>;
+    beginCreate(resourceGroupName: string, automationAccountName: string, compilationJobName: string, parameters: DscCompilationJobCreateParameters, options?: DscCompilationJobCreateOptionalParams): Promise<SimplePollerLike<OperationState<DscCompilationJobCreateResponse>, DscCompilationJobCreateResponse>>;
     beginCreateAndWait(resourceGroupName: string, automationAccountName: string, compilationJobName: string, parameters: DscCompilationJobCreateParameters, options?: DscCompilationJobCreateOptionalParams): Promise<DscCompilationJobCreateResponse>;
     get(resourceGroupName: string, automationAccountName: string, compilationJobName: string, options?: DscCompilationJobGetOptionalParams): Promise<DscCompilationJobGetResponse>;
     getStream(resourceGroupName: string, automationAccountName: string, jobId: string, jobStreamId: string, options?: DscCompilationJobGetStreamOptionalParams): Promise<DscCompilationJobGetStreamResponse>;
@@ -1127,7 +1127,7 @@ export interface DscNodeConfigurationListResult {
 
 // @public
 export interface DscNodeConfigurationOperations {
-    beginCreateOrUpdate(resourceGroupName: string, automationAccountName: string, nodeConfigurationName: string, parameters: DscNodeConfigurationCreateOrUpdateParameters, options?: DscNodeConfigurationCreateOrUpdateOptionalParams): Promise<PollerLike<PollOperationState<void>, void>>;
+    beginCreateOrUpdate(resourceGroupName: string, automationAccountName: string, nodeConfigurationName: string, parameters: DscNodeConfigurationCreateOrUpdateParameters, options?: DscNodeConfigurationCreateOrUpdateOptionalParams): Promise<SimplePollerLike<OperationState<void>, void>>;
     beginCreateOrUpdateAndWait(resourceGroupName: string, automationAccountName: string, nodeConfigurationName: string, parameters: DscNodeConfigurationCreateOrUpdateParameters, options?: DscNodeConfigurationCreateOrUpdateOptionalParams): Promise<void>;
     delete(resourceGroupName: string, automationAccountName: string, nodeConfigurationName: string, options?: DscNodeConfigurationDeleteOptionalParams): Promise<void>;
     get(resourceGroupName: string, automationAccountName: string, nodeConfigurationName: string, options?: DscNodeConfigurationGetOptionalParams): Promise<DscNodeConfigurationGetResponse>;
@@ -2287,9 +2287,9 @@ export interface PrivateEndpointConnectionListResult {
 
 // @public
 export interface PrivateEndpointConnections {
-    beginCreateOrUpdate(resourceGroupName: string, automationAccountName: string, privateEndpointConnectionName: string, parameters: PrivateEndpointConnection, options?: PrivateEndpointConnectionsCreateOrUpdateOptionalParams): Promise<PollerLike<PollOperationState<PrivateEndpointConnectionsCreateOrUpdateResponse>, PrivateEndpointConnectionsCreateOrUpdateResponse>>;
+    beginCreateOrUpdate(resourceGroupName: string, automationAccountName: string, privateEndpointConnectionName: string, parameters: PrivateEndpointConnection, options?: PrivateEndpointConnectionsCreateOrUpdateOptionalParams): Promise<SimplePollerLike<OperationState<PrivateEndpointConnectionsCreateOrUpdateResponse>, PrivateEndpointConnectionsCreateOrUpdateResponse>>;
     beginCreateOrUpdateAndWait(resourceGroupName: string, automationAccountName: string, privateEndpointConnectionName: string, parameters: PrivateEndpointConnection, options?: PrivateEndpointConnectionsCreateOrUpdateOptionalParams): Promise<PrivateEndpointConnectionsCreateOrUpdateResponse>;
-    beginDelete(resourceGroupName: string, automationAccountName: string, privateEndpointConnectionName: string, options?: PrivateEndpointConnectionsDeleteOptionalParams): Promise<PollerLike<PollOperationState<void>, void>>;
+    beginDelete(resourceGroupName: string, automationAccountName: string, privateEndpointConnectionName: string, options?: PrivateEndpointConnectionsDeleteOptionalParams): Promise<SimplePollerLike<OperationState<void>, void>>;
     beginDeleteAndWait(resourceGroupName: string, automationAccountName: string, privateEndpointConnectionName: string, options?: PrivateEndpointConnectionsDeleteOptionalParams): Promise<void>;
     get(resourceGroupName: string, automationAccountName: string, privateEndpointConnectionName: string, options?: PrivateEndpointConnectionsGetOptionalParams): Promise<PrivateEndpointConnectionsGetResponse>;
     listByAutomationAccount(resourceGroupName: string, automationAccountName: string, options?: PrivateEndpointConnectionsListByAutomationAccountOptionalParams): PagedAsyncIterableIterator<PrivateEndpointConnection>;
@@ -2550,7 +2550,7 @@ export type RunbookDraftGetResponse = RunbookDraft;
 
 // @public
 export interface RunbookDraftOperations {
-    beginReplaceContent(resourceGroupName: string, automationAccountName: string, runbookName: string, runbookContent: string, options?: RunbookDraftReplaceContentOptionalParams): Promise<PollerLike<PollOperationState<RunbookDraftReplaceContentResponse>, RunbookDraftReplaceContentResponse>>;
+    beginReplaceContent(resourceGroupName: string, automationAccountName: string, runbookName: string, runbookContent: string, options?: RunbookDraftReplaceContentOptionalParams): Promise<SimplePollerLike<OperationState<RunbookDraftReplaceContentResponse>, RunbookDraftReplaceContentResponse>>;
     beginReplaceContentAndWait(resourceGroupName: string, automationAccountName: string, runbookName: string, runbookContent: string, options?: RunbookDraftReplaceContentOptionalParams): Promise<RunbookDraftReplaceContentResponse>;
     get(resourceGroupName: string, automationAccountName: string, runbookName: string, options?: RunbookDraftGetOptionalParams): Promise<RunbookDraftGetResponse>;
     getContent(resourceGroupName: string, automationAccountName: string, runbookName: string, options?: RunbookDraftGetContentOptionalParams): Promise<RunbookDraftGetContentResponse>;
@@ -2627,7 +2627,7 @@ export interface RunbookListResult {
 
 // @public
 export interface RunbookOperations {
-    beginPublish(resourceGroupName: string, automationAccountName: string, runbookName: string, options?: RunbookPublishOptionalParams): Promise<PollerLike<PollOperationState<RunbookPublishResponse>, RunbookPublishResponse>>;
+    beginPublish(resourceGroupName: string, automationAccountName: string, runbookName: string, options?: RunbookPublishOptionalParams): Promise<SimplePollerLike<OperationState<RunbookPublishResponse>, RunbookPublishResponse>>;
     beginPublishAndWait(resourceGroupName: string, automationAccountName: string, runbookName: string, options?: RunbookPublishOptionalParams): Promise<RunbookPublishResponse>;
     createOrUpdate(resourceGroupName: string, automationAccountName: string, runbookName: string, parameters: RunbookCreateOrUpdateParameters, options?: RunbookCreateOrUpdateOptionalParams): Promise<RunbookCreateOrUpdateResponse>;
     delete(resourceGroupName: string, automationAccountName: string, runbookName: string, options?: RunbookDeleteOptionalParams): Promise<void>;

@@ -11,8 +11,12 @@ import * as coreClient from "@azure/core-client";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { AutomationClient } from "../automationClient";
-import { PollerLike, PollOperationState, LroEngine } from "@azure/core-lro";
-import { LroImpl } from "../lroImpl";
+import {
+  SimplePollerLike,
+  OperationState,
+  createHttpPoller
+} from "@azure/core-lro";
+import { createLroSpec } from "../lroImpl";
 import {
   RunbookDraftGetContentOptionalParams,
   RunbookDraftGetContentResponse,
@@ -70,8 +74,8 @@ export class RunbookDraftOperationsImpl implements RunbookDraftOperations {
     runbookContent: string,
     options?: RunbookDraftReplaceContentOptionalParams
   ): Promise<
-    PollerLike<
-      PollOperationState<RunbookDraftReplaceContentResponse>,
+    SimplePollerLike<
+      OperationState<RunbookDraftReplaceContentResponse>,
       RunbookDraftReplaceContentResponse
     >
   > {
@@ -81,7 +85,7 @@ export class RunbookDraftOperationsImpl implements RunbookDraftOperations {
     ): Promise<RunbookDraftReplaceContentResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
-    const sendOperation = async (
+    const sendOperationFn = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ) => {
@@ -114,19 +118,22 @@ export class RunbookDraftOperationsImpl implements RunbookDraftOperations {
       };
     };
 
-    const lro = new LroImpl(
-      sendOperation,
-      {
+    const lro = createLroSpec({
+      sendOperationFn,
+      args: {
         resourceGroupName,
         automationAccountName,
         runbookName,
         runbookContent,
         options
       },
-      replaceContentOperationSpec
-    );
-    const poller = new LroEngine(lro, {
-      resumeFrom: options?.resumeFrom,
+      spec: replaceContentOperationSpec
+    });
+    const poller = await createHttpPoller<
+      RunbookDraftReplaceContentResponse,
+      OperationState<RunbookDraftReplaceContentResponse>
+    >(lro, {
+      restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs
     });
     await poller.poll();
