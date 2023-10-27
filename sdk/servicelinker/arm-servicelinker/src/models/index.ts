@@ -29,14 +29,6 @@ export type SecretInfoBaseUnion =
   | KeyVaultSecretReferenceSecretInfo
   | KeyVaultSecretUriSecretInfo;
 
-/** The list of Linker. */
-export interface LinkerList {
-  /** The link used to get the next page of Linker list. */
-  nextLink?: string;
-  /** The list of Linkers. */
-  value?: LinkerResource[];
-}
-
 /** The target service properties */
 export interface TargetServiceBase {
   /** Polymorphic discriminator, which specifies the different types this object can be */
@@ -302,6 +294,14 @@ export interface SecretInfoBase {
   secretType: "rawValue" | "keyVaultSecretReference" | "keyVaultSecretUri";
 }
 
+/** The list of Linker. */
+export interface LinkerList {
+  /** The link used to get the next page of Linker list. */
+  nextLink?: string;
+  /** The list of Linkers. */
+  value?: LinkerResource[];
+}
+
 /** The azure resource info when target service type is AzureResource */
 export interface AzureResource extends TargetServiceBase {
   /** Polymorphic discriminator, which specifies the different types this object can be */
@@ -510,7 +510,9 @@ export enum KnownClientType {
   /** Nodejs */
   Nodejs = "nodejs",
   /** SpringBoot */
-  SpringBoot = "springBoot"
+  SpringBoot = "springBoot",
+  /** KafkaSpringBoot */
+  KafkaSpringBoot = "kafka-springBoot"
 }
 
 /**
@@ -527,7 +529,8 @@ export enum KnownClientType {
  * **ruby** \
  * **django** \
  * **nodejs** \
- * **springBoot**
+ * **springBoot** \
+ * **kafka-springBoot**
  */
 export type ClientType = string;
 
@@ -667,12 +670,6 @@ export enum KnownSecretType {
 export type SecretType = string;
 
 /** Optional parameters. */
-export interface LinkerListOptionalParams extends coreClient.OperationOptions {}
-
-/** Contains response data for the list operation. */
-export type LinkerListResponse = LinkerList;
-
-/** Optional parameters. */
 export interface LinkerGetOptionalParams extends coreClient.OperationOptions {}
 
 /** Contains response data for the get operation. */
@@ -729,13 +726,6 @@ export interface LinkerListConfigurationsOptionalParams
 
 /** Contains response data for the listConfigurations operation. */
 export type LinkerListConfigurationsResponse = SourceConfigurationResult;
-
-/** Optional parameters. */
-export interface LinkerListNextOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the listNext operation. */
-export type LinkerListNextResponse = LinkerList;
 
 /** Optional parameters. */
 export interface OperationsListOptionalParams

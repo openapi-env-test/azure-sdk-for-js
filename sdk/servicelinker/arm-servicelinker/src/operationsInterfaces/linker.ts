@@ -6,13 +6,11 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { PagedAsyncIterableIterator } from "@azure/core-paging";
-import { PollerLike, PollOperationState } from "@azure/core-lro";
+import { SimplePollerLike, OperationState } from "@azure/core-lro";
 import {
-  LinkerResource,
-  LinkerListOptionalParams,
   LinkerGetOptionalParams,
   LinkerGetResponse,
+  LinkerResource,
   LinkerCreateOrUpdateOptionalParams,
   LinkerCreateOrUpdateResponse,
   LinkerDeleteOptionalParams,
@@ -25,19 +23,8 @@ import {
   LinkerListConfigurationsResponse
 } from "../models";
 
-/// <reference lib="esnext.asynciterable" />
 /** Interface representing a Linker. */
 export interface Linker {
-  /**
-   * Returns list of Linkers which connects to the resource.
-   * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be
-   *                    connected.
-   * @param options The options parameters.
-   */
-  list(
-    resourceUri: string,
-    options?: LinkerListOptionalParams
-  ): PagedAsyncIterableIterator<LinkerResource>;
   /**
    * Returns Linker resource for a given name.
    * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be
@@ -64,8 +51,8 @@ export interface Linker {
     parameters: LinkerResource,
     options?: LinkerCreateOrUpdateOptionalParams
   ): Promise<
-    PollerLike<
-      PollOperationState<LinkerCreateOrUpdateResponse>,
+    SimplePollerLike<
+      OperationState<LinkerCreateOrUpdateResponse>,
       LinkerCreateOrUpdateResponse
     >
   >;
@@ -94,7 +81,7 @@ export interface Linker {
     resourceUri: string,
     linkerName: string,
     options?: LinkerDeleteOptionalParams
-  ): Promise<PollerLike<PollOperationState<void>, void>>;
+  ): Promise<SimplePollerLike<OperationState<void>, void>>;
   /**
    * Delete a link.
    * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be
@@ -121,7 +108,7 @@ export interface Linker {
     parameters: LinkerPatch,
     options?: LinkerUpdateOptionalParams
   ): Promise<
-    PollerLike<PollOperationState<LinkerUpdateResponse>, LinkerUpdateResponse>
+    SimplePollerLike<OperationState<LinkerUpdateResponse>, LinkerUpdateResponse>
   >;
   /**
    * Operation to update an existing link.
@@ -149,8 +136,8 @@ export interface Linker {
     linkerName: string,
     options?: LinkerValidateOptionalParams
   ): Promise<
-    PollerLike<
-      PollOperationState<LinkerValidateResponse>,
+    SimplePollerLike<
+      OperationState<LinkerValidateResponse>,
       LinkerValidateResponse
     >
   >;

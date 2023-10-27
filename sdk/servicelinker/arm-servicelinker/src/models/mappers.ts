@@ -8,34 +8,6 @@
 
 import * as coreClient from "@azure/core-client";
 
-export const LinkerList: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "LinkerList",
-    modelProperties: {
-      nextLink: {
-        serializedName: "nextLink",
-        nullable: true,
-        type: {
-          name: "String"
-        }
-      },
-      value: {
-        serializedName: "value",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "LinkerResource"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
 export const TargetServiceBase: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -655,6 +627,34 @@ export const SecretInfoBase: coreClient.CompositeMapper = {
         required: true,
         type: {
           name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const LinkerList: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "LinkerList",
+    modelProperties: {
+      nextLink: {
+        serializedName: "nextLink",
+        nullable: true,
+        type: {
+          name: "String"
+        }
+      },
+      value: {
+        serializedName: "value",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "LinkerResource"
+            }
+          }
         }
       }
     }

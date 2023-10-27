@@ -6,22 +6,21 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { PagedAsyncIterableIterator, PageSettings } from "@azure/core-paging";
-import { setContinuationToken } from "../pagingHelper";
 import { Linker } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { ServiceLinkerManagementClient } from "../serviceLinkerManagementClient";
-import { PollerLike, PollOperationState, LroEngine } from "@azure/core-lro";
-import { LroImpl } from "../lroImpl";
 import {
-  LinkerResource,
-  LinkerListNextOptionalParams,
-  LinkerListOptionalParams,
-  LinkerListResponse,
+  SimplePollerLike,
+  OperationState,
+  createHttpPoller
+} from "@azure/core-lro";
+import { createLroSpec } from "../lroImpl";
+import {
   LinkerGetOptionalParams,
   LinkerGetResponse,
+  LinkerResource,
   LinkerCreateOrUpdateOptionalParams,
   LinkerCreateOrUpdateResponse,
   LinkerDeleteOptionalParams,
@@ -31,11 +30,9 @@ import {
   LinkerValidateOptionalParams,
   LinkerValidateResponse,
   LinkerListConfigurationsOptionalParams,
-  LinkerListConfigurationsResponse,
-  LinkerListNextResponse
+  LinkerListConfigurationsResponse
 } from "../models";
 
-/// <reference lib="esnext.asynciterable" />
 /** Class containing Linker operations. */
 export class LinkerImpl implements Linker {
   private readonly client: ServiceLinkerManagementClient;
@@ -46,81 +43,6 @@ export class LinkerImpl implements Linker {
    */
   constructor(client: ServiceLinkerManagementClient) {
     this.client = client;
-  }
-
-  /**
-   * Returns list of Linkers which connects to the resource.
-   * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be
-   *                    connected.
-   * @param options The options parameters.
-   */
-  public list(
-    resourceUri: string,
-    options?: LinkerListOptionalParams
-  ): PagedAsyncIterableIterator<LinkerResource> {
-    const iter = this.listPagingAll(resourceUri, options);
-    return {
-      next() {
-        return iter.next();
-      },
-      [Symbol.asyncIterator]() {
-        return this;
-      },
-      byPage: (settings?: PageSettings) => {
-        if (settings?.maxPageSize) {
-          throw new Error("maxPageSize is not supported by this operation.");
-        }
-        return this.listPagingPage(resourceUri, options, settings);
-      }
-    };
-  }
-
-  private async *listPagingPage(
-    resourceUri: string,
-    options?: LinkerListOptionalParams,
-    settings?: PageSettings
-  ): AsyncIterableIterator<LinkerResource[]> {
-    let result: LinkerListResponse;
-    let continuationToken = settings?.continuationToken;
-    if (!continuationToken) {
-      result = await this._list(resourceUri, options);
-      let page = result.value || [];
-      continuationToken = result.nextLink;
-      setContinuationToken(page, continuationToken);
-      yield page;
-    }
-    while (continuationToken) {
-      result = await this._listNext(resourceUri, continuationToken, options);
-      continuationToken = result.nextLink;
-      let page = result.value || [];
-      setContinuationToken(page, continuationToken);
-      yield page;
-    }
-  }
-
-  private async *listPagingAll(
-    resourceUri: string,
-    options?: LinkerListOptionalParams
-  ): AsyncIterableIterator<LinkerResource> {
-    for await (const page of this.listPagingPage(resourceUri, options)) {
-      yield* page;
-    }
-  }
-
-  /**
-   * Returns list of Linkers which connects to the resource.
-   * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be
-   *                    connected.
-   * @param options The options parameters.
-   */
-  private _list(
-    resourceUri: string,
-    options?: LinkerListOptionalParams
-  ): Promise<LinkerListResponse> {
-    return this.client.sendOperationRequest(
-      { resourceUri, options },
-      listOperationSpec
-    );
   }
 
   /**
@@ -155,8 +77,8 @@ export class LinkerImpl implements Linker {
     parameters: LinkerResource,
     options?: LinkerCreateOrUpdateOptionalParams
   ): Promise<
-    PollerLike<
-      PollOperationState<LinkerCreateOrUpdateResponse>,
+    SimplePollerLike<
+      OperationState<LinkerCreateOrUpdateResponse>,
       LinkerCreateOrUpdateResponse
     >
   > {
@@ -166,7 +88,7 @@ export class LinkerImpl implements Linker {
     ): Promise<LinkerCreateOrUpdateResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
-    const sendOperation = async (
+    const sendOperationFn = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ) => {
@@ -199,15 +121,18 @@ export class LinkerImpl implements Linker {
       };
     };
 
-    const lro = new LroImpl(
-      sendOperation,
-      { resourceUri, linkerName, parameters, options },
-      createOrUpdateOperationSpec
-    );
-    const poller = new LroEngine(lro, {
-      resumeFrom: options?.resumeFrom,
+    const lro = createLroSpec({
+      sendOperationFn,
+      args: { resourceUri, linkerName, parameters, options },
+      spec: createOrUpdateOperationSpec
+    });
+    const poller = await createHttpPoller<
+      LinkerCreateOrUpdateResponse,
+      OperationState<LinkerCreateOrUpdateResponse>
+    >(lro, {
+      restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs,
-      lroResourceLocationConfig: "azure-async-operation"
+      resourceLocationConfig: "azure-async-operation"
     });
     await poller.poll();
     return poller;
@@ -247,14 +172,14 @@ export class LinkerImpl implements Linker {
     resourceUri: string,
     linkerName: string,
     options?: LinkerDeleteOptionalParams
-  ): Promise<PollerLike<PollOperationState<void>, void>> {
+  ): Promise<SimplePollerLike<OperationState<void>, void>> {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ): Promise<void> => {
       return this.client.sendOperationRequest(args, spec);
     };
-    const sendOperation = async (
+    const sendOperationFn = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ) => {
@@ -287,15 +212,15 @@ export class LinkerImpl implements Linker {
       };
     };
 
-    const lro = new LroImpl(
-      sendOperation,
-      { resourceUri, linkerName, options },
-      deleteOperationSpec
-    );
-    const poller = new LroEngine(lro, {
-      resumeFrom: options?.resumeFrom,
+    const lro = createLroSpec({
+      sendOperationFn,
+      args: { resourceUri, linkerName, options },
+      spec: deleteOperationSpec
+    });
+    const poller = await createHttpPoller<void, OperationState<void>>(lro, {
+      restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs,
-      lroResourceLocationConfig: "azure-async-operation"
+      resourceLocationConfig: "azure-async-operation"
     });
     await poller.poll();
     return poller;
@@ -331,7 +256,7 @@ export class LinkerImpl implements Linker {
     parameters: LinkerPatch,
     options?: LinkerUpdateOptionalParams
   ): Promise<
-    PollerLike<PollOperationState<LinkerUpdateResponse>, LinkerUpdateResponse>
+    SimplePollerLike<OperationState<LinkerUpdateResponse>, LinkerUpdateResponse>
   > {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
@@ -339,7 +264,7 @@ export class LinkerImpl implements Linker {
     ): Promise<LinkerUpdateResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
-    const sendOperation = async (
+    const sendOperationFn = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ) => {
@@ -372,15 +297,18 @@ export class LinkerImpl implements Linker {
       };
     };
 
-    const lro = new LroImpl(
-      sendOperation,
-      { resourceUri, linkerName, parameters, options },
-      updateOperationSpec
-    );
-    const poller = new LroEngine(lro, {
-      resumeFrom: options?.resumeFrom,
+    const lro = createLroSpec({
+      sendOperationFn,
+      args: { resourceUri, linkerName, parameters, options },
+      spec: updateOperationSpec
+    });
+    const poller = await createHttpPoller<
+      LinkerUpdateResponse,
+      OperationState<LinkerUpdateResponse>
+    >(lro, {
+      restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs,
-      lroResourceLocationConfig: "azure-async-operation"
+      resourceLocationConfig: "azure-async-operation"
     });
     await poller.poll();
     return poller;
@@ -421,8 +349,8 @@ export class LinkerImpl implements Linker {
     linkerName: string,
     options?: LinkerValidateOptionalParams
   ): Promise<
-    PollerLike<
-      PollOperationState<LinkerValidateResponse>,
+    SimplePollerLike<
+      OperationState<LinkerValidateResponse>,
       LinkerValidateResponse
     >
   > {
@@ -432,7 +360,7 @@ export class LinkerImpl implements Linker {
     ): Promise<LinkerValidateResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
-    const sendOperation = async (
+    const sendOperationFn = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ) => {
@@ -465,15 +393,18 @@ export class LinkerImpl implements Linker {
       };
     };
 
-    const lro = new LroImpl(
-      sendOperation,
-      { resourceUri, linkerName, options },
-      validateOperationSpec
-    );
-    const poller = new LroEngine(lro, {
-      resumeFrom: options?.resumeFrom,
+    const lro = createLroSpec({
+      sendOperationFn,
+      args: { resourceUri, linkerName, options },
+      spec: validateOperationSpec
+    });
+    const poller = await createHttpPoller<
+      LinkerValidateResponse,
+      OperationState<LinkerValidateResponse>
+    >(lro, {
+      restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs,
-      lroResourceLocationConfig: "azure-async-operation"
+      resourceLocationConfig: "azure-async-operation"
     });
     await poller.poll();
     return poller;
@@ -512,44 +443,10 @@ export class LinkerImpl implements Linker {
       listConfigurationsOperationSpec
     );
   }
-
-  /**
-   * ListNext
-   * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be
-   *                    connected.
-   * @param nextLink The nextLink from the previous successful call to the List method.
-   * @param options The options parameters.
-   */
-  private _listNext(
-    resourceUri: string,
-    nextLink: string,
-    options?: LinkerListNextOptionalParams
-  ): Promise<LinkerListNextResponse> {
-    return this.client.sendOperationRequest(
-      { resourceUri, nextLink, options },
-      listNextOperationSpec
-    );
-  }
 }
 // Operation Specifications
 const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const listOperationSpec: coreClient.OperationSpec = {
-  path: "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers",
-  httpMethod: "GET",
-  responses: {
-    200: {
-      bodyMapper: Mappers.LinkerList
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [Parameters.$host, Parameters.resourceUri],
-  headerParameters: [Parameters.accept],
-  serializer
-};
 const getOperationSpec: coreClient.OperationSpec = {
   path: "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}",
   httpMethod: "GET",
@@ -700,25 +597,6 @@ const listConfigurationsOperationSpec: coreClient.OperationSpec = {
     Parameters.$host,
     Parameters.resourceUri,
     Parameters.linkerName
-  ],
-  headerParameters: [Parameters.accept],
-  serializer
-};
-const listNextOperationSpec: coreClient.OperationSpec = {
-  path: "{nextLink}",
-  httpMethod: "GET",
-  responses: {
-    200: {
-      bodyMapper: Mappers.LinkerList
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  urlParameters: [
-    Parameters.$host,
-    Parameters.resourceUri,
-    Parameters.nextLink
   ],
   headerParameters: [Parameters.accept],
   serializer
