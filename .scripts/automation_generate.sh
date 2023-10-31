@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+. ~/.bashrc
 nvm use default
 whereis code-gen-pipeline
 whereis node
