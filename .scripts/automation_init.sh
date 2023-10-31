@@ -7,3 +7,5 @@ nvm install v18.15.0
 nvm use v18.15.0
 npm install -g @microsoft/rush@5.92.0
 npm install -g @azure-tools/js-sdk-release-tools
+whereis code-gen-pipeline
+whereis node
