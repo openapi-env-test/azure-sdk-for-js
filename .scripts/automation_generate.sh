@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-. ~/.bashrc
+cat ~/.bashrc
+echo ">>>>>>>>>>>>>>>"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 nvm use default
 whereis code-gen-pipeline
 whereis node
