@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-cat ~/.bashrc
-. ~/.bashrc
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-nvm use v18.15.0
+nvm use default
 whereis code-gen-pipeline
 whereis node
 node -v
