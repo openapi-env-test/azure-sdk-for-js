@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
-npm install --force -g node@18.14.0
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+nvm install v18.15.0
 npm install -g @microsoft/rush@5.92.0
 npm install -g @azure-tools/js-sdk-release-tools
