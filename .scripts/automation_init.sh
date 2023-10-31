@@ -5,3 +5,4 @@ export NVM_DIR="$HOME/.nvm"
 nvm install v18.15.0
 npm install -g @microsoft/rush@5.92.0
 npm install -g @azure-tools/js-sdk-release-tools
+code-gen-pipeline
