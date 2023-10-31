@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-ls -lh ./
+cat ~/.bashrc
 whereis code-gen-pipeline
 whereis node
 node -v
