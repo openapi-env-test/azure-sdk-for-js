@@ -7,8 +7,6 @@
 import * as coreAuth from '@azure/core-auth';
 import * as coreClient from '@azure/core-client';
 import { PagedAsyncIterableIterator } from '@azure/core-paging';
-import { PollerLike } from '@azure/core-lro';
-import { PollOperationState } from '@azure/core-lro';
 
 // @public
 export type ActionType = string;
@@ -127,6 +125,7 @@ export enum KnownClientType {
     Dotnet = "dotnet",
     Go = "go",
     Java = "java",
+    KafkaSpringBoot = "kafka-springBoot",
     Nodejs = "nodejs",
     None = "none",
     Php = "php",
@@ -179,40 +178,8 @@ export enum KnownVNetSolutionType {
 
 // @public
 export interface Linker {
-    beginCreateOrUpdate(resourceUri: string, linkerName: string, parameters: LinkerResource, options?: LinkerCreateOrUpdateOptionalParams): Promise<PollerLike<PollOperationState<LinkerCreateOrUpdateResponse>, LinkerCreateOrUpdateResponse>>;
-    beginCreateOrUpdateAndWait(resourceUri: string, linkerName: string, parameters: LinkerResource, options?: LinkerCreateOrUpdateOptionalParams): Promise<LinkerCreateOrUpdateResponse>;
-    beginDelete(resourceUri: string, linkerName: string, options?: LinkerDeleteOptionalParams): Promise<PollerLike<PollOperationState<void>, void>>;
-    beginDeleteAndWait(resourceUri: string, linkerName: string, options?: LinkerDeleteOptionalParams): Promise<void>;
-    beginUpdate(resourceUri: string, linkerName: string, parameters: LinkerPatch, options?: LinkerUpdateOptionalParams): Promise<PollerLike<PollOperationState<LinkerUpdateResponse>, LinkerUpdateResponse>>;
-    beginUpdateAndWait(resourceUri: string, linkerName: string, parameters: LinkerPatch, options?: LinkerUpdateOptionalParams): Promise<LinkerUpdateResponse>;
-    beginValidate(resourceUri: string, linkerName: string, options?: LinkerValidateOptionalParams): Promise<PollerLike<PollOperationState<LinkerValidateResponse>, LinkerValidateResponse>>;
-    beginValidateAndWait(resourceUri: string, linkerName: string, options?: LinkerValidateOptionalParams): Promise<LinkerValidateResponse>;
-    get(resourceUri: string, linkerName: string, options?: LinkerGetOptionalParams): Promise<LinkerGetResponse>;
-    list(resourceUri: string, options?: LinkerListOptionalParams): PagedAsyncIterableIterator<LinkerResource>;
     listConfigurations(resourceUri: string, linkerName: string, options?: LinkerListConfigurationsOptionalParams): Promise<LinkerListConfigurationsResponse>;
 }
-
-// @public
-export interface LinkerCreateOrUpdateOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type LinkerCreateOrUpdateResponse = LinkerResource;
-
-// @public
-export interface LinkerDeleteOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export interface LinkerGetOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type LinkerGetResponse = LinkerResource;
 
 // @public
 export interface LinkerList {
@@ -226,20 +193,6 @@ export interface LinkerListConfigurationsOptionalParams extends coreClient.Opera
 
 // @public
 export type LinkerListConfigurationsResponse = SourceConfigurationResult;
-
-// @public
-export interface LinkerListNextOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type LinkerListNextResponse = LinkerList;
-
-// @public
-export interface LinkerListOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type LinkerListResponse = LinkerList;
 
 // @public
 export interface LinkerPatch {
@@ -263,24 +216,6 @@ export interface LinkerResource extends ProxyResource {
     targetService?: TargetServiceBaseUnion;
     vNetSolution?: VNetSolution;
 }
-
-// @public
-export interface LinkerUpdateOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type LinkerUpdateResponse = LinkerResource;
-
-// @public
-export interface LinkerValidateOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type LinkerValidateResponse = ValidateOperationResult;
 
 // @public
 export interface Operation {

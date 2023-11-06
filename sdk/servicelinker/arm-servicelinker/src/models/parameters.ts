@@ -11,10 +11,6 @@ import {
   OperationURLParameter,
   OperationQueryParameter
 } from "@azure/core-client";
-import {
-  LinkerResource as LinkerResourceMapper,
-  LinkerPatch as LinkerPatchMapper
-} from "../models/mappers";
 
 export const accept: OperationParameter = {
   parameterPath: "accept",
@@ -73,28 +69,6 @@ export const linkerName: OperationURLParameter = {
       name: "String"
     }
   }
-};
-
-export const contentType: OperationParameter = {
-  parameterPath: ["options", "contentType"],
-  mapper: {
-    defaultValue: "application/json",
-    isConstant: true,
-    serializedName: "Content-Type",
-    type: {
-      name: "String"
-    }
-  }
-};
-
-export const parameters: OperationParameter = {
-  parameterPath: "parameters",
-  mapper: LinkerResourceMapper
-};
-
-export const parameters1: OperationParameter = {
-  parameterPath: "parameters",
-  mapper: LinkerPatchMapper
 };
 
 export const nextLink: OperationURLParameter = {
