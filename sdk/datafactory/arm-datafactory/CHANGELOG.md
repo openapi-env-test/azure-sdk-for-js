@@ -1,15 +1,71 @@
 # Release History
+    
+## 12.0.0 (2023-11-07)
+    
+**Features**
 
-## 11.1.1 (Unreleased)
+  - Added Interface LakeHouseLinkedService
+  - Added Interface LakeHouseLocation
+  - Added Interface LakeHouseReadSettings
+  - Type of parameter type of interface Credential_2 is changed from "ManagedIdentity" | "ServicePrincipal" to "ServicePrincipal" | "ManagedIdentity"
+  - Type of parameter type of interface DatasetLocation is changed from "AzureBlobStorageLocation" | "AzureBlobFSLocation" | "AzureDataLakeStoreLocation" | "AmazonS3Location" | "FileServerLocation" | "AzureFileStorageLocation" | "AmazonS3CompatibleLocation" | "OracleCloudStorageLocation" | "GoogleCloudStorageLocation" | "FtpServerLocation" | "SftpLocation" | "HttpServerLocation" | "HdfsLocation" to "AzureBlobStorageLocation" | "AzureBlobFSLocation" | "AzureDataLakeStoreLocation" | "AmazonS3Location" | "FileServerLocation" | "AzureFileStorageLocation" | "AmazonS3CompatibleLocation" | "OracleCloudStorageLocation" | "GoogleCloudStorageLocation" | "FtpServerLocation" | "SftpLocation" | "HttpServerLocation" | "HdfsLocation" | "LakeHouseLocation"
+  - Type of parameter type of interface StoreReadSettings is changed from "AzureBlobStorageReadSettings" | "AzureBlobFSReadSettings" | "AzureDataLakeStoreReadSettings" | "AmazonS3ReadSettings" | "FileServerReadSettings" | "AzureFileStorageReadSettings" | "AmazonS3CompatibleReadSettings" | "OracleCloudStorageReadSettings" | "GoogleCloudStorageReadSettings" | "FtpReadSettings" | "SftpReadSettings" | "HttpReadSettings" | "HdfsReadSettings" to "AzureBlobStorageReadSettings" | "AzureBlobFSReadSettings" | "AzureDataLakeStoreReadSettings" | "AmazonS3ReadSettings" | "FileServerReadSettings" | "AzureFileStorageReadSettings" | "AmazonS3CompatibleReadSettings" | "OracleCloudStorageReadSettings" | "GoogleCloudStorageReadSettings" | "FtpReadSettings" | "SftpReadSettings" | "HttpReadSettings" | "HdfsReadSettings" | "LakeHouseReadSettings"
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Removed operation group CredentialOperations
+  - Interface AzureBlobFSLinkedService no longer has parameter sasToken
+  - Interface AzureBlobFSLinkedService no longer has parameter sasUri
+  - Interface AzureBlobStorageLinkedService no longer has parameter authenticationType
+  - Interface AzureBlobStorageLinkedService no longer has parameter containerUri
+  - Interface AzureSynapseArtifactsLinkedService no longer has parameter workspaceResourceId
+  - Interface FactoryRepoConfiguration no longer has parameter disablePublish
+  - Interface IntegrationRuntimeComputeProperties no longer has parameter copyComputeScaleProperties
+  - Interface IntegrationRuntimeComputeProperties no longer has parameter pipelineExternalComputeScaleProperties
+  - Interface ScriptActivity no longer has parameter scriptBlockExecutionTimeout
+  - Interface SynapseSparkJobDefinitionActivity no longer has parameter configurationType
+  - Interface SynapseSparkJobDefinitionActivity no longer has parameter filesV2
+  - Interface SynapseSparkJobDefinitionActivity no longer has parameter pythonCodeReference
+  - Interface SynapseSparkJobDefinitionActivity no longer has parameter scanFolder
+  - Interface SynapseSparkJobDefinitionActivity no longer has parameter sparkConfig
+  - Interface SynapseSparkJobDefinitionActivity no longer has parameter targetSparkConfiguration
+  - Parameter url of interface AzureBlobFSLinkedService is now required
+  - Type of parameter storedProcedureParameters of interface AmazonRdsForSqlServerSource is changed from any to {
+        [propertyName: string]: StoredProcedureParameter;
+    }
+  - Type of parameter storedProcedureParameters of interface AzureSqlSink is changed from any to {
+        [propertyName: string]: StoredProcedureParameter;
+    }
+  - Type of parameter storedProcedureParameters of interface AzureSqlSource is changed from any to {
+        [propertyName: string]: StoredProcedureParameter;
+    }
+  - Type of parameter type of interface LinkedService is changed from "AzureStorage" | "AzureBlobStorage" | "AzureTableStorage" | "AzureSqlDW" | "SqlServer" | "AmazonRdsForSqlServer" | "AzureSqlDatabase" | "AzureSqlMI" | "AzureBatch" | "AzureKeyVault" | "CosmosDb" | "Dynamics" | "DynamicsCrm" | "CommonDataServiceForApps" | "HDInsight" | "FileServer" | "AzureFileStorage" | "AmazonS3Compatible" | "OracleCloudStorage" | "GoogleCloudStorage" | "Oracle" | "AmazonRdsForOracle" | "AzureMySql" | "MySql" | "PostgreSql" | "Sybase" | "Db2" | "Teradata" | "AzureML" | "AzureMLService" | "Odbc" | "Informix" | "MicrosoftAccess" | "Hdfs" | "OData" | "Web" | "Cassandra" | "MongoDb" | "MongoDbAtlas" | "MongoDbV2" | "CosmosDbMongoDbApi" | "AzureDataLakeStore" | "AzureBlobFS" | "Office365" | "Salesforce" | "SalesforceServiceCloud" | "SapCloudForCustomer" | "SapEcc" | "SapOpenHub" | "SapOdp" | "RestService" | "TeamDesk" | "Quickbase" | "Smartsheet" | "Zendesk" | "Dataworld" | "AppFigures" | "Asana" | "Twilio" | "GoogleSheets" | "AmazonS3" | "AmazonRedshift" | "CustomDataSource" | "AzureSearch" | "HttpServer" | "FtpServer" | "Sftp" | "SapBW" | "SapHana" | "AmazonMWS" | "AzurePostgreSql" | "Concur" | "Couchbase" | "Drill" | "Eloqua" | "GoogleBigQuery" | "Greenplum" | "HBase" | "Hive" | "Hubspot" | "Impala" | "Jira" | "Magento" | "MariaDB" | "AzureMariaDB" | "Marketo" | "Paypal" | "Phoenix" | "Presto" | "QuickBooks" | "ServiceNow" | "Shopify" | "Spark" | "Square" | "Xero" | "Zoho" | "Vertica" | "Netezza" | "SalesforceMarketingCloud" | "HDInsightOnDemand" | "AzureDataLakeAnalytics" | "AzureDatabricks" | "AzureDatabricksDeltaLake" | "Responsys" | "DynamicsAX" | "OracleServiceCloud" | "GoogleAdWords" | "SapTable" | "AzureDataExplorer" | "AzureFunction" | "Snowflake" | "SharePointOnlineList" | "AzureSynapseArtifacts" to "AzureStorage" | "AzureBlobStorage" | "AzureTableStorage" | "AzureSqlDW" | "SqlServer" | "AmazonRdsForSqlServer" | "AzureSqlDatabase" | "AzureSqlMI" | "AzureBatch" | "AzureKeyVault" | "CosmosDb" | "Dynamics" | "DynamicsCrm" | "CommonDataServiceForApps" | "HDInsight" | "FileServer" | "AzureFileStorage" | "AmazonS3Compatible" | "OracleCloudStorage" | "GoogleCloudStorage" | "Oracle" | "AmazonRdsForOracle" | "AzureMySql" | "MySql" | "PostgreSql" | "Sybase" | "Db2" | "Teradata" | "AzureML" | "AzureMLService" | "Odbc" | "Informix" | "MicrosoftAccess" | "Hdfs" | "OData" | "Web" | "Cassandra" | "MongoDb" | "MongoDbAtlas" | "MongoDbV2" | "CosmosDbMongoDbApi" | "AzureDataLakeStore" | "AzureBlobFS" | "Office365" | "Salesforce" | "SalesforceServiceCloud" | "SapCloudForCustomer" | "SapEcc" | "SapOpenHub" | "SapOdp" | "RestService" | "TeamDesk" | "Quickbase" | "Smartsheet" | "Zendesk" | "Dataworld" | "AppFigures" | "Asana" | "Twilio" | "AmazonS3" | "AmazonRedshift" | "CustomDataSource" | "AzureSearch" | "HttpServer" | "FtpServer" | "Sftp" | "SapBW" | "SapHana" | "AmazonMWS" | "AzurePostgreSql" | "Concur" | "Couchbase" | "Drill" | "Eloqua" | "GoogleBigQuery" | "Greenplum" | "HBase" | "Hive" | "Hubspot" | "Impala" | "Jira" | "Magento" | "MariaDB" | "AzureMariaDB" | "Marketo" | "Paypal" | "Phoenix" | "Presto" | "QuickBooks" | "ServiceNow" | "Shopify" | "Spark" | "Square" | "Xero" | "Zoho" | "Vertica" | "Netezza" | "SalesforceMarketingCloud" | "HDInsightOnDemand" | "AzureDataLakeAnalytics" | "AzureDatabricks" | "AzureDatabricksDeltaLake" | "Responsys" | "DynamicsAX" | "OracleServiceCloud" | "GoogleAdWords" | "SapTable" | "AzureDataExplorer" | "AzureFunction" | "Snowflake" | "SharePointOnlineList" | "AzureSynapseArtifacts" | "LakeHouse"
+  - Type of parameter storedProcedureParameters of interface SqlMISink is changed from any to {
+        [propertyName: string]: StoredProcedureParameter;
+    }
+  - Type of parameter storedProcedureParameters of interface SqlMISource is changed from any to {
+        [propertyName: string]: StoredProcedureParameter;
+    }
+  - Type of parameter storedProcedureParameters of interface SqlServerSink is changed from any to {
+        [propertyName: string]: StoredProcedureParameter;
+    }
+  - Type of parameter storedProcedureParameters of interface SqlServerSource is changed from any to {
+        [propertyName: string]: StoredProcedureParameter;
+    }
+  - Type of parameter storedProcedureParameters of interface SqlSink is changed from any to {
+        [propertyName: string]: StoredProcedureParameter;
+    }
+  - Type of parameter storedProcedureParameters of interface SqlSource is changed from any to {
+        [propertyName: string]: StoredProcedureParameter;
+    }
+  - Type of parameter numExecutors of interface SynapseSparkJobDefinitionActivity is changed from any to number
+  - Type of parameter referenceName of interface SynapseSparkJobReference is changed from any to string
+  - Class DataFactoryManagementClient no longer has parameter credentialOperations
+  - Removed Enum KnownAzureStorageAuthenticationType
+  - Removed Enum KnownConfigurationType
+  - Removed Enum KnownSparkConfigurationReferenceType
+    
+    
 ## 11.1.0 (2023-03-02)
     
 **Features**
@@ -727,4 +783,4 @@ To understand the detail of the change, please refer to [Changelog](https://aka.
 
 To migrate the existing applications to the latest version, please refer to [Migration Guide](https://aka.ms/js-track2-migration-guide).
 
-To learn more, please refer to our documentation [Quick Start](https://aka.ms/azsdk/js/mgmt/quickstart ).
+To learn more, please refer to our documentation [Quick Start](https://aka.ms/js-track2-quickstart).

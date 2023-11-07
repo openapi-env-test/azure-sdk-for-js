@@ -87,7 +87,6 @@ export type LinkedServiceUnion =
   | AppFiguresLinkedService
   | AsanaLinkedService
   | TwilioLinkedService
-  | GoogleSheetsLinkedService
   | AmazonS3LinkedService
   | AmazonRedshiftLinkedService
   | CustomDataSourceLinkedService
@@ -140,7 +139,8 @@ export type LinkedServiceUnion =
   | AzureFunctionLinkedService
   | SnowflakeLinkedService
   | SharePointOnlineListLinkedService
-  | AzureSynapseArtifactsLinkedService;
+  | AzureSynapseArtifactsLinkedService
+  | LakeHouseLinkedService;
 export type DatasetUnion =
   | Dataset
   | AmazonS3Dataset
@@ -255,14 +255,14 @@ export type DataFlowUnion =
   | MappingDataFlow
   | Flowlet
   | WranglingDataFlow;
-export type CredentialUnion =
-  | Credential
-  | ManagedIdentityCredential
-  | ServicePrincipalCredential;
 export type SecretBaseUnion =
   | SecretBase
   | SecureString
   | AzureKeyVaultSecretReference;
+export type CredentialUnion =
+  | Credential
+  | ServicePrincipalCredential
+  | ManagedIdentityCredential;
 export type DatasetLocationUnion =
   | DatasetLocation
   | AzureBlobStorageLocation
@@ -277,7 +277,8 @@ export type DatasetLocationUnion =
   | FtpServerLocation
   | SftpLocation
   | HttpServerLocation
-  | HdfsLocation;
+  | HdfsLocation
+  | LakeHouseLocation;
 export type DatasetStorageFormatUnion =
   | DatasetStorageFormat
   | TextFormat
@@ -314,7 +315,8 @@ export type StoreReadSettingsUnion =
   | FtpReadSettings
   | SftpReadSettings
   | HttpReadSettings
-  | HdfsReadSettings;
+  | HdfsReadSettings
+  | LakeHouseReadSettings;
 export type StoreWriteSettingsUnion =
   | StoreWriteSettings
   | SftpWriteSettings
@@ -697,8 +699,6 @@ export interface FactoryRepoConfiguration {
   rootFolder: string;
   /** Last commit id. */
   lastCommitId?: string;
-  /** Disable manual publish operation in ADF studio to favor automated publish. */
-  disablePublish?: boolean;
 }
 
 /** Definition of a single parameter for an entity. */
@@ -1306,7 +1306,6 @@ export interface LinkedService {
     | "AppFigures"
     | "Asana"
     | "Twilio"
-    | "GoogleSheets"
     | "AmazonS3"
     | "AmazonRedshift"
     | "CustomDataSource"
@@ -1359,7 +1358,8 @@ export interface LinkedService {
     | "AzureFunction"
     | "Snowflake"
     | "SharePointOnlineList"
-    | "AzureSynapseArtifacts";
+    | "AzureSynapseArtifacts"
+    | "LakeHouse";
   /** Describes unknown properties. The value of an unknown property can be of "any" type. */
   [property: string]: any;
   /** The integration runtime reference. */
@@ -2242,26 +2242,6 @@ export interface ConnectionStateProperties {
   readonly status?: string;
 }
 
-/** A list of credential resources. */
-export interface CredentialListResponse {
-  /** List of credentials. */
-  value: ManagedIdentityCredentialResource[];
-  /** The link to the next page of results, if any remaining results exist. */
-  nextLink?: string;
-}
-
-/** The Azure Data Factory nested object which contains the information and credential which can be used to connect with related store or compute resource. */
-export interface Credential {
-  /** Polymorphic discriminator, which specifies the different types this object can be */
-  type: "ManagedIdentity" | "ServicePrincipal";
-  /** Describes unknown properties. The value of an unknown property can be of "any" type. */
-  [property: string]: any;
-  /** Credential description. */
-  description?: string;
-  /** List of tags that can be used for describing the Credential. */
-  annotations?: any[];
-}
-
 /** A list of linked service resources. */
 export interface PrivateEndpointConnectionListResponse {
   /** List of Private Endpoint Connections. */
@@ -2432,6 +2412,18 @@ export interface CredentialReference {
   referenceName: string;
 }
 
+/** The Azure Data Factory nested object which contains the information and credential which can be used to connect with related store or compute resource. */
+export interface Credential {
+  /** Polymorphic discriminator, which specifies the different types this object can be */
+  type: "ServicePrincipal" | "ManagedIdentity";
+  /** Describes unknown properties. The value of an unknown property can be of "any" type. */
+  [property: string]: any;
+  /** Credential description. */
+  description?: string;
+  /** List of tags that can be used for describing the Credential. */
+  annotations?: any[];
+}
+
 /** A data flow transformation. */
 export interface Transformation {
   /** Transformation name. */
@@ -2462,7 +2454,8 @@ export interface DatasetLocation {
     | "FtpServerLocation"
     | "SftpLocation"
     | "HttpServerLocation"
-    | "HdfsLocation";
+    | "HdfsLocation"
+    | "LakeHouseLocation";
   /** Describes unknown properties. The value of an unknown property can be of "any" type. */
   [property: string]: any;
   /** Specify the folder path of dataset. Type: string (or Expression with resultType string) */
@@ -2532,10 +2525,6 @@ export interface IntegrationRuntimeComputeProperties {
   dataFlowProperties?: IntegrationRuntimeDataFlowProperties;
   /** VNet properties for managed integration runtime. */
   vNetProperties?: IntegrationRuntimeVNetProperties;
-  /** CopyComputeScale properties for managed integration runtime. */
-  copyComputeScaleProperties?: CopyComputeScaleProperties;
-  /** PipelineExternalComputeScale properties for managed integration runtime. */
-  pipelineExternalComputeScaleProperties?: PipelineExternalComputeScaleProperties;
 }
 
 /** Data flow properties for managed integration runtime. */
@@ -2564,24 +2553,6 @@ export interface IntegrationRuntimeVNetProperties {
   publicIPs?: string[];
   /** The ID of subnet, to which this Azure-SSIS integration runtime will be joined. */
   subnetId?: string;
-}
-
-/** CopyComputeScale properties for managed integration runtime. */
-export interface CopyComputeScaleProperties {
-  /** Describes unknown properties. The value of an unknown property can be of "any" type. */
-  [property: string]: any;
-  /** DIU number setting reserved for copy activity execution. Supported values are multiples of 4 in range 4-256. */
-  dataIntegrationUnit?: number;
-  /** Time to live (in minutes) setting of integration runtime which will execute copy activity. */
-  timeToLive?: number;
-}
-
-/** PipelineExternalComputeScale properties for managed integration runtime. */
-export interface PipelineExternalComputeScaleProperties {
-  /** Describes unknown properties. The value of an unknown property can be of "any" type. */
-  [property: string]: any;
-  /** Time to live (in minutes) setting of integration runtime which will execute pipeline and external activity. */
-  timeToLive?: number;
 }
 
 /** SSIS properties for managed integration runtime. */
@@ -2909,7 +2880,8 @@ export interface StoreReadSettings {
     | "FtpReadSettings"
     | "SftpReadSettings"
     | "HttpReadSettings"
-    | "HdfsReadSettings";
+    | "HdfsReadSettings"
+    | "LakeHouseReadSettings";
   /** Describes unknown properties. The value of an unknown property can be of "any" type. */
   [property: string]: any;
   /** The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer). */
@@ -3240,6 +3212,14 @@ export interface SapTablePartitionSettings {
   maxPartitionsNumber?: any;
 }
 
+/** SQL stored procedure parameter. */
+export interface StoredProcedureParameter {
+  /** Stored procedure parameter value. Type: string (or Expression with resultType string). */
+  value?: any;
+  /** Stored procedure parameter type. */
+  type?: StoredProcedureParameterType;
+}
+
 /** The settings that will be leveraged for Sql source partitioning. */
 export interface SqlPartitionSettings {
   /** The name of the column in integer or datetime type that will be used for proceeding partitioning. If not specified, the primary key of the table is auto-detected and used as the partition column. Type: string (or Expression with resultType string). */
@@ -3330,14 +3310,6 @@ export interface ImportSettings {
   type: "AzureDatabricksDeltaLakeImportCommand" | "SnowflakeImportCopyCommand";
   /** Describes unknown properties. The value of an unknown property can be of "any" type. */
   [property: string]: any;
-}
-
-/** SQL stored procedure parameter. */
-export interface StoredProcedureParameter {
-  /** Stored procedure parameter value. Type: string (or Expression with resultType string). */
-  value?: any;
-  /** Stored procedure parameter type. */
-  type?: StoredProcedureParameterType;
 }
 
 /** Specify the name and value of custom metadata item. */
@@ -3656,16 +3628,8 @@ export interface NotebookParameter {
 export interface SynapseSparkJobReference {
   /** Synapse spark job reference type. */
   type: SparkJobReferenceType;
-  /** Reference spark job name. Expression with resultType string. */
-  referenceName: any;
-}
-
-/** Spark configuration reference. */
-export interface SparkConfigurationParametrizationReference {
-  /** Spark configuration reference type. */
-  type: SparkConfigurationReferenceType;
-  /** Reference spark configuration name. Type: string (or Expression with resultType string). */
-  referenceName: any;
+  /** Reference spark job name. */
+  referenceName: string;
 }
 
 /** The workflow trigger recurrence. */
@@ -3883,12 +3847,6 @@ export interface ManagedVirtualNetworkResource extends SubResource {
 export interface ManagedPrivateEndpointResource extends SubResource {
   /** Managed private endpoint properties. */
   properties: ManagedPrivateEndpoint;
-}
-
-/** Credential resource type. */
-export interface ManagedIdentityCredentialResource extends SubResource {
-  /** Managed Identity Credential properties. */
-  properties: ManagedIdentityCredential;
 }
 
 /** Private Endpoint Connection ARM resource. */
@@ -4118,10 +4076,6 @@ export interface AzureBlobStorageLinkedService extends LinkedService {
   encryptedCredential?: string;
   /** The credential reference containing authentication information. */
   credential?: CredentialReference;
-  /** The type used for authentication. Type: string. */
-  authenticationType?: AzureStorageAuthenticationType;
-  /** Container uri of the Azure Blob Storage resource only support for anonymous access. Type: string (or Expression with resultType string). */
-  containerUri?: any;
 }
 
 /** The azure table storage linked service. */
@@ -4883,7 +4837,7 @@ export interface AzureBlobFSLinkedService extends LinkedService {
   /** Polymorphic discriminator, which specifies the different types this object can be */
   type: "AzureBlobFS";
   /** Endpoint for the Azure Data Lake Storage Gen2 service. Type: string (or Expression with resultType string). */
-  url?: any;
+  url: any;
   /** Account key for the Azure Data Lake Storage Gen2 service. Type: string (or Expression with resultType string). */
   accountKey?: any;
   /** The ID of the application used to authenticate against the Azure Data Lake Storage Gen2 account. Type: string (or Expression with resultType string). */
@@ -4902,10 +4856,6 @@ export interface AzureBlobFSLinkedService extends LinkedService {
   servicePrincipalCredentialType?: any;
   /** The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference. */
   servicePrincipalCredential?: SecretBaseUnion;
-  /** SAS URI of the Azure Data Lake Storage Gen2 service. Type: string, SecureString or AzureKeyVaultSecretReference. */
-  sasUri?: any;
-  /** The Azure key vault secret reference of sasToken in sas uri. */
-  sasToken?: SecretBaseUnion;
 }
 
 /** Office365 linked service. */
@@ -5200,16 +5150,6 @@ export interface TwilioLinkedService extends LinkedService {
   userName: any;
   /** The auth token of Twilio service. */
   password: SecretBaseUnion;
-}
-
-/** Linked service for GoogleSheets. */
-export interface GoogleSheetsLinkedService extends LinkedService {
-  /** Polymorphic discriminator, which specifies the different types this object can be */
-  type: "GoogleSheets";
-  /** The api token for the GoogleSheets source. */
-  apiToken: SecretBaseUnion;
-  /** The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string). */
-  encryptedCredential?: any;
 }
 
 /** Linked service for Amazon S3. */
@@ -6381,8 +6321,28 @@ export interface AzureSynapseArtifactsLinkedService extends LinkedService {
   endpoint: any;
   /** Required to specify MSI, if using system assigned managed identity as authentication method. Type: string (or Expression with resultType string). */
   authentication?: any;
-  /** The resource ID of the Synapse workspace. The format should be: /subscriptions/{subscriptionID}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}. Type: string (or Expression with resultType string). */
-  workspaceResourceId?: any;
+}
+
+/** Microsoft Fabric LakeHouse linked service. */
+export interface LakeHouseLinkedService extends LinkedService {
+  /** Polymorphic discriminator, which specifies the different types this object can be */
+  type: "LakeHouse";
+  /** The ID of Microsoft Fabric workspace. Type: string (or Expression with resultType string). */
+  workspaceId?: any;
+  /** The ID of Microsoft Fabric LakeHouse artifact. Type: string (or Expression with resultType string). */
+  artifactId?: any;
+  /** The ID of the application used to authenticate against Microsoft Fabric LakeHouse. Type: string (or Expression with resultType string). */
+  servicePrincipalId?: any;
+  /** The Key of the application used to authenticate against Microsoft Fabric LakeHouse. */
+  servicePrincipalKey?: SecretBaseUnion;
+  /** The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string). */
+  tenant?: any;
+  /** The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string. */
+  encryptedCredential?: string;
+  /** The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string). */
+  servicePrincipalCredentialType?: any;
+  /** The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference. */
+  servicePrincipalCredential?: SecretBaseUnion;
 }
 
 /** A single Amazon Simple Storage Service (S3) object or a set of S3 objects. */
@@ -7590,26 +7550,6 @@ export interface LinkedServiceDebugResource extends SubResourceDebugResource {
   properties: LinkedServiceUnion;
 }
 
-/** Managed identity credential. */
-export interface ManagedIdentityCredential extends Credential {
-  /** Polymorphic discriminator, which specifies the different types this object can be */
-  type: "ManagedIdentity";
-  /** The resource id of user assigned managed identity */
-  resourceId?: string;
-}
-
-/** Service principal credential. */
-export interface ServicePrincipalCredential extends Credential {
-  /** Polymorphic discriminator, which specifies the different types this object can be */
-  type: "ServicePrincipal";
-  /** The app ID of the service principal used to authenticate */
-  servicePrincipalId?: any;
-  /** The key of the service principal used to authenticate. */
-  servicePrincipalKey?: AzureKeyVaultSecretReference;
-  /** The ID of the tenant to which the service principal belongs */
-  tenant?: any;
-}
-
 /** Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls. */
 export interface SecureString extends SecretBase {
   /** Polymorphic discriminator, which specifies the different types this object can be */
@@ -7628,6 +7568,26 @@ export interface AzureKeyVaultSecretReference extends SecretBase {
   secretName: any;
   /** The version of the secret in Azure Key Vault. The default value is the latest version of the secret. Type: string (or Expression with resultType string). */
   secretVersion?: any;
+}
+
+/** Service principal credential. */
+export interface ServicePrincipalCredential extends Credential {
+  /** Polymorphic discriminator, which specifies the different types this object can be */
+  type: "ServicePrincipal";
+  /** The app ID of the service principal used to authenticate */
+  servicePrincipalId?: any;
+  /** The key of the service principal used to authenticate. */
+  servicePrincipalKey?: AzureKeyVaultSecretReference;
+  /** The ID of the tenant to which the service principal belongs */
+  tenant?: any;
+}
+
+/** Managed identity credential. */
+export interface ManagedIdentityCredential extends Credential {
+  /** Polymorphic discriminator, which specifies the different types this object can be */
+  type: "ManagedIdentity";
+  /** The resource id of user assigned managed identity */
+  resourceId?: string;
 }
 
 /** Transformation for data flow source. */
@@ -7742,6 +7702,12 @@ export interface HttpServerLocation extends DatasetLocation {
 export interface HdfsLocation extends DatasetLocation {
   /** Polymorphic discriminator, which specifies the different types this object can be */
   type: "HdfsLocation";
+}
+
+/** The location of Microsoft Fabric LakeHouse Files dataset. */
+export interface LakeHouseLocation extends DatasetLocation {
+  /** Polymorphic discriminator, which specifies the different types this object can be */
+  type: "LakeHouseLocation";
 }
 
 /** The data stored in text format. */
@@ -8216,6 +8182,30 @@ export interface HdfsReadSettings extends StoreReadSettings {
   distcpSettings?: DistcpSettings;
   /** Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean). */
   deleteFilesAfterCompletion?: any;
+}
+
+/** Microsoft Fabric LakeHouse Files read settings. */
+export interface LakeHouseReadSettings extends StoreReadSettings {
+  /** Polymorphic discriminator, which specifies the different types this object can be */
+  type: "LakeHouseReadSettings";
+  /** If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean). */
+  recursive?: any;
+  /** Microsoft Fabric LakeHouse Files wildcardFolderPath. Type: string (or Expression with resultType string). */
+  wildcardFolderPath?: any;
+  /** Microsoft Fabric LakeHouse Files wildcardFileName. Type: string (or Expression with resultType string). */
+  wildcardFileName?: any;
+  /** Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string). */
+  fileListPath?: any;
+  /** Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean). */
+  enablePartitionDiscovery?: any;
+  /** Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string). */
+  partitionRootPath?: any;
+  /** Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean). */
+  deleteFilesAfterCompletion?: any;
+  /** The start of file's modified datetime. Type: string (or Expression with resultType string). */
+  modifiedDatetimeStart?: any;
+  /** The end of file's modified datetime. Type: string (or Expression with resultType string). */
+  modifiedDatetimeEnd?: any;
 }
 
 /** Sftp write settings. */
@@ -8863,7 +8853,7 @@ export interface SnowflakeSource extends CopySource {
   /** Snowflake Sql query. Type: string (or Expression with resultType string). */
   query?: any;
   /** Snowflake export settings. */
-  exportSettings: SnowflakeExportCopyCommand;
+  exportSettings?: SnowflakeExportCopyCommand;
 }
 
 /** A copy activity Azure Databricks Delta Lake source. */
@@ -9069,7 +9059,9 @@ export interface SqlSink extends CopySink {
   /** SQL pre-copy script. Type: string (or Expression with resultType string). */
   preCopyScript?: any;
   /** SQL stored procedure parameters. */
-  storedProcedureParameters?: any;
+  storedProcedureParameters?: {
+    [propertyName: string]: StoredProcedureParameter;
+  };
   /** The stored procedure parameter name of the table type. Type: string (or Expression with resultType string). */
   storedProcedureTableTypeParameterName?: any;
   /** The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string). */
@@ -9093,7 +9085,9 @@ export interface SqlServerSink extends CopySink {
   /** SQL pre-copy script. Type: string (or Expression with resultType string). */
   preCopyScript?: any;
   /** SQL stored procedure parameters. */
-  storedProcedureParameters?: any;
+  storedProcedureParameters?: {
+    [propertyName: string]: StoredProcedureParameter;
+  };
   /** The stored procedure parameter name of the table type. Type: string (or Expression with resultType string). */
   storedProcedureTableTypeParameterName?: any;
   /** The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string). */
@@ -9117,7 +9111,9 @@ export interface AzureSqlSink extends CopySink {
   /** SQL pre-copy script. Type: string (or Expression with resultType string). */
   preCopyScript?: any;
   /** SQL stored procedure parameters. */
-  storedProcedureParameters?: any;
+  storedProcedureParameters?: {
+    [propertyName: string]: StoredProcedureParameter;
+  };
   /** The stored procedure parameter name of the table type. Type: string (or Expression with resultType string). */
   storedProcedureTableTypeParameterName?: any;
   /** The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string). */
@@ -9141,7 +9137,9 @@ export interface SqlMISink extends CopySink {
   /** SQL pre-copy script. Type: string (or Expression with resultType string). */
   preCopyScript?: any;
   /** SQL stored procedure parameters. */
-  storedProcedureParameters?: any;
+  storedProcedureParameters?: {
+    [propertyName: string]: StoredProcedureParameter;
+  };
   /** The stored procedure parameter name of the table type. Type: string (or Expression with resultType string). */
   storedProcedureTableTypeParameterName?: any;
   /** The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string). */
@@ -10020,8 +10018,6 @@ export interface ExecuteDataFlowActivity extends ExecutionActivity {
 export interface ScriptActivity extends ExecutionActivity {
   /** Polymorphic discriminator, which specifies the different types this object can be */
   type: "Script";
-  /** ScriptBlock execution timeout. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])). */
-  scriptBlockExecutionTimeout?: any;
   /** Array of script blocks. Type: array. */
   scripts?: ScriptActivityScriptBlock[];
   /** Log settings of script activity. */
@@ -10058,16 +10054,10 @@ export interface SynapseSparkJobDefinitionActivity extends ExecutionActivity {
   arguments?: any[];
   /** The main file used for the job, which will override the 'file' of the spark job definition you provide. Type: string (or Expression with resultType string). */
   file?: any;
-  /** Scanning subfolders from the root folder of the main definition file, these files will be added as reference files. The folders named 'jars', 'pyFiles', 'files' or 'archives' will be scanned, and the folders name are case sensitive. Type: boolean (or Expression with resultType boolean). */
-  scanFolder?: any;
   /** The fully-qualified identifier or the main class that is in the main definition file, which will override the 'className' of the spark job definition you provide. Type: string (or Expression with resultType string). */
   className?: any;
-  /** (Deprecated. Please use pythonCodeReference and filesV2) Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition you provide. */
+  /** Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition you provide. */
   files?: any[];
-  /** Additional python code files used for reference in the main definition file, which will override the 'pyFiles' of the spark job definition you provide. */
-  pythonCodeReference?: any[];
-  /** Additional files used for reference in the main definition file, which will override the 'jars' and 'files' of the spark job definition you provide. */
-  filesV2?: any[];
   /** The name of the big data pool which will be used to execute the spark batch job, which will override the 'targetBigDataPool' of the spark job definition you provide. */
   targetBigDataPool?: BigDataPoolParametrizationReference;
   /** Number of core and memory to be used for executors allocated in the specified Spark pool for the job, which will be used for overriding 'executorCores' and 'executorMemory' of the spark job definition you provide. Type: string (or Expression with resultType string). */
@@ -10076,14 +10066,8 @@ export interface SynapseSparkJobDefinitionActivity extends ExecutionActivity {
   conf?: any;
   /** Number of core and memory to be used for driver allocated in the specified Spark pool for the job, which will be used for overriding 'driverCores' and 'driverMemory' of the spark job definition you provide. Type: string (or Expression with resultType string). */
   driverSize?: any;
-  /** Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide. Type: integer (or Expression with resultType integer). */
-  numExecutors?: any;
-  /** The type of the spark config. */
-  configurationType?: ConfigurationType;
-  /** The spark configuration of the spark job. */
-  targetSparkConfiguration?: SparkConfigurationParametrizationReference;
-  /** Spark configuration property. */
-  sparkConfig?: { [propertyName: string]: any };
+  /** Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide. */
+  numExecutors?: number;
 }
 
 /** Trigger that creates pipeline runs periodically, on schedule. */
@@ -10319,7 +10303,9 @@ export interface SqlSource extends TabularSource {
   /** Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string). */
   sqlReaderStoredProcedureName?: any;
   /** Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}". */
-  storedProcedureParameters?: any;
+  storedProcedureParameters?: {
+    [propertyName: string]: StoredProcedureParameter;
+  };
   /** Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string). */
   isolationLevel?: any;
   /** The partition mechanism that will be used for Sql read in parallel. Possible values include: "None", "PhysicalPartitionsOfTable", "DynamicRange". */
@@ -10337,7 +10323,9 @@ export interface SqlServerSource extends TabularSource {
   /** Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string). */
   sqlReaderStoredProcedureName?: any;
   /** Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}". */
-  storedProcedureParameters?: any;
+  storedProcedureParameters?: {
+    [propertyName: string]: StoredProcedureParameter;
+  };
   /** Which additional types to produce. */
   produceAdditionalTypes?: any;
   /** The partition mechanism that will be used for Sql read in parallel. Possible values include: "None", "PhysicalPartitionsOfTable", "DynamicRange". */
@@ -10355,7 +10343,9 @@ export interface AmazonRdsForSqlServerSource extends TabularSource {
   /** Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string). */
   sqlReaderStoredProcedureName?: any;
   /** Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}". */
-  storedProcedureParameters?: any;
+  storedProcedureParameters?: {
+    [propertyName: string]: StoredProcedureParameter;
+  };
   /** Which additional types to produce. */
   produceAdditionalTypes?: any;
   /** The partition mechanism that will be used for Sql read in parallel. Possible values include: "None", "PhysicalPartitionsOfTable", "DynamicRange". */
@@ -10373,7 +10363,9 @@ export interface AzureSqlSource extends TabularSource {
   /** Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string). */
   sqlReaderStoredProcedureName?: any;
   /** Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}". */
-  storedProcedureParameters?: any;
+  storedProcedureParameters?: {
+    [propertyName: string]: StoredProcedureParameter;
+  };
   /** Which additional types to produce. */
   produceAdditionalTypes?: any;
   /** The partition mechanism that will be used for Sql read in parallel. Possible values include: "None", "PhysicalPartitionsOfTable", "DynamicRange". */
@@ -10391,7 +10383,9 @@ export interface SqlMISource extends TabularSource {
   /** Name of the stored procedure for a Azure SQL Managed Instance source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string). */
   sqlReaderStoredProcedureName?: any;
   /** Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}". */
-  storedProcedureParameters?: any;
+  storedProcedureParameters?: {
+    [propertyName: string]: StoredProcedureParameter;
+  };
   /** Which additional types to produce. */
   produceAdditionalTypes?: any;
   /** The partition mechanism that will be used for Sql read in parallel. Possible values include: "None", "PhysicalPartitionsOfTable", "DynamicRange". */
@@ -11501,33 +11495,6 @@ export enum KnownIntegrationRuntimeInternalChannelEncryptionMode {
  */
 export type IntegrationRuntimeInternalChannelEncryptionMode = string;
 
-/** Known values of {@link AzureStorageAuthenticationType} that the service accepts. */
-export enum KnownAzureStorageAuthenticationType {
-  /** Anonymous */
-  Anonymous = "Anonymous",
-  /** AccountKey */
-  AccountKey = "AccountKey",
-  /** SasUri */
-  SasUri = "SasUri",
-  /** ServicePrincipal */
-  ServicePrincipal = "ServicePrincipal",
-  /** Msi */
-  Msi = "Msi"
-}
-
-/**
- * Defines values for AzureStorageAuthenticationType. \
- * {@link KnownAzureStorageAuthenticationType} can be used interchangeably with AzureStorageAuthenticationType,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **Anonymous** \
- * **AccountKey** \
- * **SasUri** \
- * **ServicePrincipal** \
- * **Msi**
- */
-export type AzureStorageAuthenticationType = string;
-
 /** Known values of {@link SqlAlwaysEncryptedAkvAuthType} that the service accepts. */
 export enum KnownSqlAlwaysEncryptedAkvAuthType {
   /** ServicePrincipal */
@@ -12149,6 +12116,39 @@ export enum KnownSalesforceSourceReadBehavior {
  */
 export type SalesforceSourceReadBehavior = string;
 
+/** Known values of {@link StoredProcedureParameterType} that the service accepts. */
+export enum KnownStoredProcedureParameterType {
+  /** String */
+  String = "String",
+  /** Int */
+  Int = "Int",
+  /** Int64 */
+  Int64 = "Int64",
+  /** Decimal */
+  Decimal = "Decimal",
+  /** Guid */
+  Guid = "Guid",
+  /** Boolean */
+  Boolean = "Boolean",
+  /** Date */
+  Date = "Date"
+}
+
+/**
+ * Defines values for StoredProcedureParameterType. \
+ * {@link KnownStoredProcedureParameterType} can be used interchangeably with StoredProcedureParameterType,
+ *  this enum contains the known values that the service supports.
+ * ### Known values supported by the service
+ * **String** \
+ * **Int** \
+ * **Int64** \
+ * **Decimal** \
+ * **Guid** \
+ * **Boolean** \
+ * **Date**
+ */
+export type StoredProcedureParameterType = string;
+
 /** Known values of {@link CassandraSourceReadConsistencyLevels} that the service accepts. */
 export enum KnownCassandraSourceReadConsistencyLevels {
   /** ALL */
@@ -12190,39 +12190,6 @@ export enum KnownCassandraSourceReadConsistencyLevels {
  * **LOCAL_SERIAL**
  */
 export type CassandraSourceReadConsistencyLevels = string;
-
-/** Known values of {@link StoredProcedureParameterType} that the service accepts. */
-export enum KnownStoredProcedureParameterType {
-  /** String */
-  String = "String",
-  /** Int */
-  Int = "Int",
-  /** Int64 */
-  Int64 = "Int64",
-  /** Decimal */
-  Decimal = "Decimal",
-  /** Guid */
-  Guid = "Guid",
-  /** Boolean */
-  Boolean = "Boolean",
-  /** Date */
-  Date = "Date"
-}
-
-/**
- * Defines values for StoredProcedureParameterType. \
- * {@link KnownStoredProcedureParameterType} can be used interchangeably with StoredProcedureParameterType,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **String** \
- * **Int** \
- * **Int64** \
- * **Decimal** \
- * **Guid** \
- * **Boolean** \
- * **Date**
- */
-export type StoredProcedureParameterType = string;
 
 /** Known values of {@link SapCloudForCustomerSinkWriteBehavior} that the service accepts. */
 export enum KnownSapCloudForCustomerSinkWriteBehavior {
@@ -12616,42 +12583,6 @@ export enum KnownSparkJobReferenceType {
  * **SparkJobDefinitionReference**
  */
 export type SparkJobReferenceType = string;
-
-/** Known values of {@link ConfigurationType} that the service accepts. */
-export enum KnownConfigurationType {
-  /** Default */
-  Default = "Default",
-  /** Customized */
-  Customized = "Customized",
-  /** Artifact */
-  Artifact = "Artifact"
-}
-
-/**
- * Defines values for ConfigurationType. \
- * {@link KnownConfigurationType} can be used interchangeably with ConfigurationType,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **Default** \
- * **Customized** \
- * **Artifact**
- */
-export type ConfigurationType = string;
-
-/** Known values of {@link SparkConfigurationReferenceType} that the service accepts. */
-export enum KnownSparkConfigurationReferenceType {
-  /** SparkConfigurationReference */
-  SparkConfigurationReference = "SparkConfigurationReference"
-}
-
-/**
- * Defines values for SparkConfigurationReferenceType. \
- * {@link KnownSparkConfigurationReferenceType} can be used interchangeably with SparkConfigurationReferenceType,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **SparkConfigurationReference**
- */
-export type SparkConfigurationReferenceType = string;
 
 /** Known values of {@link RecurrenceFrequency} that the service accepts. */
 export enum KnownRecurrenceFrequency {
@@ -13913,44 +13844,6 @@ export interface ManagedPrivateEndpointsListByFactoryNextOptionalParams
 
 /** Contains response data for the listByFactoryNext operation. */
 export type ManagedPrivateEndpointsListByFactoryNextResponse = ManagedPrivateEndpointListResponse;
-
-/** Optional parameters. */
-export interface CredentialOperationsListByFactoryOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the listByFactory operation. */
-export type CredentialOperationsListByFactoryResponse = CredentialListResponse;
-
-/** Optional parameters. */
-export interface CredentialOperationsCreateOrUpdateOptionalParams
-  extends coreClient.OperationOptions {
-  /** ETag of the credential entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update. */
-  ifMatch?: string;
-}
-
-/** Contains response data for the createOrUpdate operation. */
-export type CredentialOperationsCreateOrUpdateResponse = ManagedIdentityCredentialResource;
-
-/** Optional parameters. */
-export interface CredentialOperationsGetOptionalParams
-  extends coreClient.OperationOptions {
-  /** ETag of the credential entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned. */
-  ifNoneMatch?: string;
-}
-
-/** Contains response data for the get operation. */
-export type CredentialOperationsGetResponse = ManagedIdentityCredentialResource;
-
-/** Optional parameters. */
-export interface CredentialOperationsDeleteOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Optional parameters. */
-export interface CredentialOperationsListByFactoryNextOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the listByFactoryNext operation. */
-export type CredentialOperationsListByFactoryNextResponse = CredentialListResponse;
 
 /** Optional parameters. */
 export interface PrivateEndPointConnectionsListByFactoryOptionalParams

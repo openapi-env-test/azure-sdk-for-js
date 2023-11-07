@@ -23,7 +23,6 @@ export * from "./dataFlows";
 export * from "./dataFlowDebugSession";
 export * from "./managedVirtualNetworks";
 export * from "./managedPrivateEndpoints";
-export * from "./credentialOperations";
 export * from "./privateEndPointConnections";
 export * from "./privateEndpointConnection";
 export * from "./privateLinkResources";
