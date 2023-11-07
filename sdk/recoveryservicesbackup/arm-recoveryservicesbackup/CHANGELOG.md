@@ -1,15 +1,43 @@
 # Release History
+    
+## 12.0.0-beta.1 (2023-11-07)
+    
+**Features**
 
-## 11.0.1 (Unreleased)
+  - Added Interface AzureVmWorkloadSAPHanaHSR
+  - Interface PrivateLinkServiceConnectionState has a new optional parameter actionRequired
 
-### Features Added
+**Breaking Changes**
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Removed operation group DeletedProtectionContainers
+  - Interface AzureFileShareRecoveryPoint no longer has parameter recoveryPointProperties
+  - Interface AzureVmWorkloadProtectableItem no longer has parameter isProtectable
+  - Interface AzureVmWorkloadProtectedItem no longer has parameter nodesList
+  - Interface AzureVmWorkloadSQLAvailabilityGroupProtectableItem no longer has parameter nodesList
+  - Interface AzureWorkloadRecoveryPoint no longer has parameter recoveryPointProperties
+  - Interface BackupResourceVaultConfig no longer has parameter softDeleteRetentionPeriodInDays
+  - Interface BmsrpQueryObject no longer has parameter includeSoftDeletedRP
+  - Interface DistributedNodesInfo no longer has parameter sourceResourceId
+  - Interface GenericRecoveryPoint no longer has parameter recoveryPointProperties
+  - Interface IaasVMRecoveryPoint no longer has parameter isPrivateAccessEnabledOnAnyDisk
+  - Interface IaasVMRecoveryPoint no longer has parameter recoveryPointProperties
+  - Interface IaasVMRecoveryPoint no longer has parameter securityType
+  - Interface IaasVMRestoreRequest no longer has parameter extendedLocation
+  - Interface IaasVMRestoreRequest no longer has parameter securedVMDetails
+  - Interface IaasVMRestoreRequest no longer has parameter targetDiskNetworkAccessSettings
+  - Interface InquiryValidation no longer has parameter protectableItemCount
+  - Interface PrivateEndpointConnection no longer has parameter groupIds
+  - Interface PrivateLinkServiceConnectionState no longer has parameter actionsRequired
+  - Interface ProtectedItem no longer has parameter softDeleteRetentionPeriodInDays
+  - Type of parameter protectableItemType of interface AzureVmWorkloadProtectableItem is changed from "AzureVmWorkloadProtectableItem" | "SAPAseSystem" | "SAPHanaDatabase" | "SAPHanaSystem" | "SAPHanaDBInstance" | "HanaHSRContainer" | "SQLAvailabilityGroupContainer" | "SQLDataBase" | "SQLInstance" to "AzureVmWorkloadProtectableItem" | "SAPAseSystem" | "SAPHanaDatabase" | "SAPHanaSystem" | "SAPHanaDBInstance" | "SAPHanaHSR" | "SQLAvailabilityGroupContainer" | "SQLDataBase" | "SQLInstance"
+  - Type of parameter protectableItemType of interface WorkloadProtectableItem is changed from "AzureFileShare" | "IaaSVMProtectableItem" | "Microsoft.ClassicCompute/virtualMachines" | "Microsoft.Compute/virtualMachines" | "AzureVmWorkloadProtectableItem" | "SAPAseSystem" | "SAPHanaDatabase" | "SAPHanaSystem" | "SAPHanaDBInstance" | "HanaHSRContainer" | "SQLAvailabilityGroupContainer" | "SQLDataBase" | "SQLInstance" to "AzureFileShare" | "IaaSVMProtectableItem" | "Microsoft.ClassicCompute/virtualMachines" | "Microsoft.Compute/virtualMachines" | "AzureVmWorkloadProtectableItem" | "SAPAseSystem" | "SAPHanaDatabase" | "SAPHanaSystem" | "SAPHanaDBInstance" | "SAPHanaHSR" | "SQLAvailabilityGroupContainer" | "SQLDataBase" | "SQLInstance"
+  - Class RecoveryServicesBackupClient no longer has parameter deletedProtectionContainers
+  - Removed Enum KnownVaultSubResourceType
+  - Enum KnownProtectedItemState no longer has value BackupsSuspended
+  - Enum KnownProtectionState no longer has value BackupsSuspended
+  - Enum KnownSoftDeleteFeatureState no longer has value AlwaysON
+    
+    
 ## 11.0.0 (2023-09-01)
     
 **Features**
@@ -323,4 +351,4 @@ To understand the detail of the change, please refer to [Changelog](https://aka.
 
 To migrate the existing applications to the latest version, please refer to [Migration Guide](https://aka.ms/js-track2-migration-guide).
 
-To learn more, please refer to our documentation [Quick Start](https://aka.ms/azsdk/js/mgmt/quickstart ).
+To learn more, please refer to our documentation [Quick Start](https://aka.ms/js-track2-quickstart).

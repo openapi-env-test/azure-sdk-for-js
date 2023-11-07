@@ -50,7 +50,6 @@ export * from "./backupOperationStatuses";
 export * from "./protectionPolicyOperationStatuses";
 export * from "./backupProtectableItems";
 export * from "./backupProtectionContainers";
-export * from "./deletedProtectionContainers";
 export * from "./securityPINs";
 export * from "./recoveryPointsRecommendedForMove";
 export * from "./resourceGuardProxies";

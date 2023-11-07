@@ -750,12 +750,6 @@ export const BackupResourceVaultConfig: coreClient.CompositeMapper = {
           name: "String"
         }
       },
-      softDeleteRetentionPeriodInDays: {
-        serializedName: "softDeleteRetentionPeriodInDays",
-        type: {
-          name: "Number"
-        }
-      },
       resourceGuardOperationRequests: {
         serializedName: "resourceGuardOperationRequests",
         type: {
@@ -834,17 +828,6 @@ export const PrivateEndpointConnection: coreClient.CompositeMapper = {
           className: "PrivateEndpoint"
         }
       },
-      groupIds: {
-        serializedName: "groupIds",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "String"
-            }
-          }
-        }
-      },
       privateLinkServiceConnectionState: {
         serializedName: "privateLinkServiceConnectionState",
         type: {
@@ -888,8 +871,8 @@ export const PrivateLinkServiceConnectionState: coreClient.CompositeMapper = {
           name: "String"
         }
       },
-      actionsRequired: {
-        serializedName: "actionsRequired",
+      actionRequired: {
+        serializedName: "actionRequired",
         type: {
           name: "String"
         }
@@ -1305,12 +1288,6 @@ export const ProtectedItem: coreClient.CompositeMapper = {
         serializedName: "policyName",
         type: {
           name: "String"
-        }
-      },
-      softDeleteRetentionPeriodInDays: {
-        serializedName: "softDeleteRetentionPeriodInDays",
-        type: {
-          name: "Number"
         }
       }
     }
@@ -2379,33 +2356,6 @@ export const AzureFileshareProtectedItemExtendedInfo: coreClient.CompositeMapper
   }
 };
 
-export const RecoveryPointProperties: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "RecoveryPointProperties",
-    modelProperties: {
-      expiryTime: {
-        serializedName: "expiryTime",
-        type: {
-          name: "String"
-        }
-      },
-      ruleName: {
-        serializedName: "ruleName",
-        type: {
-          name: "String"
-        }
-      },
-      isSoftDeleted: {
-        serializedName: "isSoftDeleted",
-        type: {
-          name: "Boolean"
-        }
-      }
-    }
-  }
-};
-
 export const RestoreFileSpecs: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -3017,40 +2967,6 @@ export const AzureVmWorkloadProtectedItemExtendedInfo: coreClient.CompositeMappe
   }
 };
 
-export const DistributedNodesInfo: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "DistributedNodesInfo",
-    modelProperties: {
-      nodeName: {
-        serializedName: "nodeName",
-        type: {
-          name: "String"
-        }
-      },
-      status: {
-        serializedName: "status",
-        type: {
-          name: "String"
-        }
-      },
-      errorDetail: {
-        serializedName: "errorDetail",
-        type: {
-          name: "Composite",
-          className: "ErrorDetail"
-        }
-      },
-      sourceResourceId: {
-        serializedName: "sourceResourceId",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
 export const AzureWorkloadErrorInfo: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -3406,12 +3322,6 @@ export const BmsrpQueryObject: coreClient.CompositeMapper = {
       },
       moveReadyRPOnly: {
         serializedName: "moveReadyRPOnly",
-        type: {
-          name: "Boolean"
-        }
-      },
-      includeSoftDeletedRP: {
-        serializedName: "includeSoftDeletedRP",
         type: {
           name: "Boolean"
         }
@@ -4002,68 +3912,6 @@ export const RecoveryPointDiskConfiguration: coreClient.CompositeMapper = {
               className: "DiskInformation"
             }
           }
-        }
-      }
-    }
-  }
-};
-
-export const ExtendedLocation: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "ExtendedLocation",
-    modelProperties: {
-      name: {
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      type: {
-        serializedName: "type",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const SecuredVMDetails: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "SecuredVMDetails",
-    modelProperties: {
-      securedVMOsDiskEncryptionSetId: {
-        serializedName: "securedVMOsDiskEncryptionSetId",
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
-export const TargetDiskNetworkAccessSettings: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "TargetDiskNetworkAccessSettings",
-    modelProperties: {
-      targetDiskNetworkAccessOption: {
-        serializedName: "targetDiskNetworkAccessOption",
-        type: {
-          name: "Enum",
-          allowedValues: [
-            "SameAsOnSourceDisks",
-            "EnablePrivateAccessForAllDisks",
-            "EnablePublicAccessForAllDisks"
-          ]
-        }
-      },
-      targetDiskAccessId: {
-        serializedName: "targetDiskAccessId",
-        type: {
-          name: "String"
         }
       }
     }
@@ -4731,13 +4579,33 @@ export const InquiryValidation: coreClient.CompositeMapper = {
         type: {
           name: "String"
         }
-      },
-      protectableItemCount: {
-        serializedName: "protectableItemCount",
-        readOnly: true,
+      }
+    }
+  }
+};
+
+export const DistributedNodesInfo: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "DistributedNodesInfo",
+    modelProperties: {
+      nodeName: {
+        serializedName: "nodeName",
         type: {
-          name: "Dictionary",
-          value: { type: { name: "any" } }
+          name: "String"
+        }
+      },
+      status: {
+        serializedName: "status",
+        type: {
+          name: "String"
+        }
+      },
+      errorDetail: {
+        serializedName: "errorDetail",
+        type: {
+          name: "Composite",
+          className: "ErrorDetail"
         }
       }
     }
@@ -6327,18 +6195,6 @@ export const AzureVmWorkloadProtectedItem: coreClient.CompositeMapper = {
             type: { name: "Composite", className: "KPIResourceHealthDetails" }
           }
         }
-      },
-      nodesList: {
-        serializedName: "nodesList",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "DistributedNodesInfo"
-            }
-          }
-        }
       }
     }
   }
@@ -6520,13 +6376,6 @@ export const AzureFileShareRecoveryPoint: coreClient.CompositeMapper = {
         type: {
           name: "Number"
         }
-      },
-      recoveryPointProperties: {
-        serializedName: "recoveryPointProperties",
-        type: {
-          name: "Composite",
-          className: "RecoveryPointProperties"
-        }
       }
     }
   }
@@ -6579,13 +6428,6 @@ export const AzureWorkloadRecoveryPoint: coreClient.CompositeMapper = {
             }
           }
         }
-      },
-      recoveryPointProperties: {
-        serializedName: "recoveryPointProperties",
-        type: {
-          name: "Composite",
-          className: "RecoveryPointProperties"
-        }
       }
     }
   }
@@ -6622,13 +6464,6 @@ export const GenericRecoveryPoint: coreClient.CompositeMapper = {
         serializedName: "recoveryPointAdditionalInfo",
         type: {
           name: "String"
-        }
-      },
-      recoveryPointProperties: {
-        serializedName: "recoveryPointProperties",
-        type: {
-          name: "Composite",
-          className: "RecoveryPointProperties"
         }
       }
     }
@@ -6751,25 +6586,6 @@ export const IaasVMRecoveryPoint: coreClient.CompositeMapper = {
               className: "RecoveryPointMoveReadinessInfo"
             }
           }
-        }
-      },
-      securityType: {
-        serializedName: "securityType",
-        type: {
-          name: "String"
-        }
-      },
-      recoveryPointProperties: {
-        serializedName: "recoveryPointProperties",
-        type: {
-          name: "Composite",
-          className: "RecoveryPointProperties"
-        }
-      },
-      isPrivateAccessEnabledOnAnyDisk: {
-        serializedName: "isPrivateAccessEnabledOnAnyDisk",
-        type: {
-          name: "Boolean"
         }
       }
     }
@@ -7029,27 +6845,6 @@ export const IaasVMRestoreRequest: coreClient.CompositeMapper = {
         type: {
           name: "Composite",
           className: "IdentityBasedRestoreDetails"
-        }
-      },
-      extendedLocation: {
-        serializedName: "extendedLocation",
-        type: {
-          name: "Composite",
-          className: "ExtendedLocation"
-        }
-      },
-      securedVMDetails: {
-        serializedName: "securedVMDetails",
-        type: {
-          name: "Composite",
-          className: "SecuredVMDetails"
-        }
-      },
-      targetDiskNetworkAccessSettings: {
-        serializedName: "targetDiskNetworkAccessSettings",
-        type: {
-          name: "Composite",
-          className: "TargetDiskNetworkAccessSettings"
         }
       }
     }
@@ -8483,12 +8278,6 @@ export const AzureVmWorkloadProtectableItem: coreClient.CompositeMapper = {
           name: "Composite",
           className: "PreBackupValidation"
         }
-      },
-      isProtectable: {
-        serializedName: "isProtectable",
-        type: {
-          name: "Boolean"
-        }
       }
     }
   }
@@ -9227,11 +9016,11 @@ export const AzureVmWorkloadSAPHanaDBInstance: coreClient.CompositeMapper = {
   }
 };
 
-export const AzureVmWorkloadSAPHanaHSRProtectableItem: coreClient.CompositeMapper = {
-  serializedName: "HanaHSRContainer",
+export const AzureVmWorkloadSAPHanaHSR: coreClient.CompositeMapper = {
+  serializedName: "SAPHanaHSR",
   type: {
     name: "Composite",
-    className: "AzureVmWorkloadSAPHanaHSRProtectableItem",
+    className: "AzureVmWorkloadSAPHanaHSR",
     uberParent: "AzureVmWorkloadProtectableItem",
     polymorphicDiscriminator:
       AzureVmWorkloadProtectableItem.type.polymorphicDiscriminator,
@@ -9250,19 +9039,7 @@ export const AzureVmWorkloadSQLAvailabilityGroupProtectableItem: coreClient.Comp
     polymorphicDiscriminator:
       AzureVmWorkloadProtectableItem.type.polymorphicDiscriminator,
     modelProperties: {
-      ...AzureVmWorkloadProtectableItem.type.modelProperties,
-      nodesList: {
-        serializedName: "nodesList",
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "DistributedNodesInfo"
-            }
-          }
-        }
-      }
+      ...AzureVmWorkloadProtectableItem.type.modelProperties
     }
   }
 };
@@ -9603,7 +9380,7 @@ export let discriminators = {
   "AzureVmWorkloadProtectableItem.SAPHanaDatabase": AzureVmWorkloadSAPHanaDatabaseProtectableItem,
   "AzureVmWorkloadProtectableItem.SAPHanaSystem": AzureVmWorkloadSAPHanaSystemProtectableItem,
   "AzureVmWorkloadProtectableItem.SAPHanaDBInstance": AzureVmWorkloadSAPHanaDBInstance,
-  "AzureVmWorkloadProtectableItem.HanaHSRContainer": AzureVmWorkloadSAPHanaHSRProtectableItem,
+  "AzureVmWorkloadProtectableItem.SAPHanaHSR": AzureVmWorkloadSAPHanaHSR,
   "AzureVmWorkloadProtectableItem.SQLAvailabilityGroupContainer": AzureVmWorkloadSQLAvailabilityGroupProtectableItem,
   "AzureVmWorkloadProtectableItem.SQLDataBase": AzureVmWorkloadSQLDatabaseProtectableItem,
   "AzureVmWorkloadProtectableItem.SQLInstance": AzureVmWorkloadSQLInstanceProtectableItem,

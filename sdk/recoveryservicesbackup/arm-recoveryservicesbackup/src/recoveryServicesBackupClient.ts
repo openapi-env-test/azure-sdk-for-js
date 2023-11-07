@@ -65,7 +65,6 @@ import {
   ProtectionPolicyOperationStatusesImpl,
   BackupProtectableItemsImpl,
   BackupProtectionContainersImpl,
-  DeletedProtectionContainersImpl,
   SecurityPINsImpl,
   RecoveryPointsRecommendedForMoveImpl,
   ResourceGuardProxiesImpl,
@@ -116,7 +115,6 @@ import {
   ProtectionPolicyOperationStatuses,
   BackupProtectableItems,
   BackupProtectionContainers,
-  DeletedProtectionContainers,
   SecurityPINs,
   RecoveryPointsRecommendedForMove,
   ResourceGuardProxies,
@@ -168,7 +166,7 @@ export class RecoveryServicesBackupClient extends coreClient.ServiceClient {
       credential: credentials
     };
 
-    const packageDetails = `azsdk-js-arm-recoveryservicesbackup/11.0.1`;
+    const packageDetails = `azsdk-js-arm-recoveryservicesbackup/12.0.0-beta.1`;
     const userAgentPrefix =
       options.userAgentOptions && options.userAgentOptions.userAgentPrefix
         ? `${options.userAgentOptions.userAgentPrefix} ${packageDetails}`
@@ -221,7 +219,7 @@ export class RecoveryServicesBackupClient extends coreClient.ServiceClient {
 
     // Assigning values to Constant parameters
     this.$host = options.$host || "https://management.azure.com";
-    this.apiVersion = options.apiVersion || "2023-04-01";
+    this.apiVersion = options.apiVersion || "2022-06-01-preview";
     this.backupResourceStorageConfigsNonCRR = new BackupResourceStorageConfigsNonCRRImpl(
       this
     );
@@ -288,9 +286,6 @@ export class RecoveryServicesBackupClient extends coreClient.ServiceClient {
     );
     this.backupProtectableItems = new BackupProtectableItemsImpl(this);
     this.backupProtectionContainers = new BackupProtectionContainersImpl(this);
-    this.deletedProtectionContainers = new DeletedProtectionContainersImpl(
-      this
-    );
     this.securityPINs = new SecurityPINsImpl(this);
     this.recoveryPointsRecommendedForMove = new RecoveryPointsRecommendedForMoveImpl(
       this
@@ -688,7 +683,6 @@ export class RecoveryServicesBackupClient extends coreClient.ServiceClient {
   protectionPolicyOperationStatuses: ProtectionPolicyOperationStatuses;
   backupProtectableItems: BackupProtectableItems;
   backupProtectionContainers: BackupProtectionContainers;
-  deletedProtectionContainers: DeletedProtectionContainers;
   securityPINs: SecurityPINs;
   recoveryPointsRecommendedForMove: RecoveryPointsRecommendedForMove;
   resourceGuardProxies: ResourceGuardProxies;

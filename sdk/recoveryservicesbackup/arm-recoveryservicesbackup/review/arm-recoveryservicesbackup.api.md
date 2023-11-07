@@ -85,7 +85,6 @@ export interface AzureFileShareProvisionILRRequest extends ILRRequest {
 export interface AzureFileShareRecoveryPoint extends RecoveryPoint {
     fileShareSnapshotUri?: string;
     objectType: "AzureFileShareRecoveryPoint";
-    recoveryPointProperties?: RecoveryPointProperties;
     recoveryPointSizeInGB?: number;
     recoveryPointTime?: Date;
     recoveryPointType?: string;
@@ -377,18 +376,17 @@ export type AzureVmWorkloadItemUnion = AzureVmWorkloadItem | AzureVmWorkloadSAPA
 export interface AzureVmWorkloadProtectableItem extends WorkloadProtectableItem {
     isAutoProtectable?: boolean;
     isAutoProtected?: boolean;
-    isProtectable?: boolean;
     parentName?: string;
     parentUniqueName?: string;
     prebackupvalidation?: PreBackupValidation;
-    protectableItemType: "AzureVmWorkloadProtectableItem" | "SAPAseSystem" | "SAPHanaDatabase" | "SAPHanaSystem" | "SAPHanaDBInstance" | "HanaHSRContainer" | "SQLAvailabilityGroupContainer" | "SQLDataBase" | "SQLInstance";
+    protectableItemType: "AzureVmWorkloadProtectableItem" | "SAPAseSystem" | "SAPHanaDatabase" | "SAPHanaSystem" | "SAPHanaDBInstance" | "SAPHanaHSR" | "SQLAvailabilityGroupContainer" | "SQLDataBase" | "SQLInstance";
     serverName?: string;
     subinquireditemcount?: number;
     subprotectableitemcount?: number;
 }
 
 // @public (undocumented)
-export type AzureVmWorkloadProtectableItemUnion = AzureVmWorkloadProtectableItem | AzureVmWorkloadSAPAseSystemProtectableItem | AzureVmWorkloadSAPHanaDatabaseProtectableItem | AzureVmWorkloadSAPHanaSystemProtectableItem | AzureVmWorkloadSAPHanaDBInstance | AzureVmWorkloadSAPHanaHSRProtectableItem | AzureVmWorkloadSQLAvailabilityGroupProtectableItem | AzureVmWorkloadSQLDatabaseProtectableItem | AzureVmWorkloadSQLInstanceProtectableItem;
+export type AzureVmWorkloadProtectableItemUnion = AzureVmWorkloadProtectableItem | AzureVmWorkloadSAPAseSystemProtectableItem | AzureVmWorkloadSAPHanaDatabaseProtectableItem | AzureVmWorkloadSAPHanaSystemProtectableItem | AzureVmWorkloadSAPHanaDBInstance | AzureVmWorkloadSAPHanaHSR | AzureVmWorkloadSQLAvailabilityGroupProtectableItem | AzureVmWorkloadSQLDatabaseProtectableItem | AzureVmWorkloadSQLInstanceProtectableItem;
 
 // @public
 export interface AzureVmWorkloadProtectedItem extends ProtectedItem {
@@ -400,7 +398,6 @@ export interface AzureVmWorkloadProtectedItem extends ProtectedItem {
     lastBackupErrorDetail?: ErrorDetail;
     lastBackupStatus?: LastBackupStatus;
     lastBackupTime?: Date;
-    nodesList?: DistributedNodesInfo[];
     parentName?: string;
     parentType?: string;
     protectedItemDataSourceId?: string;
@@ -480,8 +477,8 @@ export interface AzureVmWorkloadSAPHanaDBInstanceProtectedItem extends AzureVmWo
 }
 
 // @public
-export interface AzureVmWorkloadSAPHanaHSRProtectableItem extends AzureVmWorkloadProtectableItem {
-    protectableItemType: "HanaHSRContainer";
+export interface AzureVmWorkloadSAPHanaHSR extends AzureVmWorkloadProtectableItem {
+    protectableItemType: "SAPHanaHSR";
 }
 
 // @public
@@ -496,7 +493,6 @@ export interface AzureVmWorkloadSAPHanaSystemWorkloadItem extends AzureVmWorkloa
 
 // @public
 export interface AzureVmWorkloadSQLAvailabilityGroupProtectableItem extends AzureVmWorkloadProtectableItem {
-    nodesList?: DistributedNodesInfo[];
     protectableItemType: "SQLAvailabilityGroupContainer";
 }
 
@@ -622,7 +618,6 @@ export interface AzureWorkloadRecoveryPoint extends RecoveryPoint {
     recoveryPointMoveReadinessInfo?: {
         [propertyName: string]: RecoveryPointMoveReadinessInfo;
     };
-    recoveryPointProperties?: RecoveryPointProperties;
     recoveryPointTierDetails?: RecoveryPointTierInformationV2[];
     recoveryPointTimeInUTC?: Date;
     type?: RestorePointType;
@@ -1090,7 +1085,6 @@ export interface BackupResourceVaultConfig {
     isSoftDeleteFeatureStateEditable?: boolean;
     resourceGuardOperationRequests?: string[];
     softDeleteFeatureState?: SoftDeleteFeatureState;
-    softDeleteRetentionPeriodInDays?: number;
     storageModelType?: StorageType;
     storageType?: StorageType;
     storageTypeState?: StorageTypeState;
@@ -1284,7 +1278,6 @@ export interface BMSRefreshContainersQueryObject {
 export interface BmsrpQueryObject {
     endDate?: Date;
     extendedInfo?: boolean;
-    includeSoftDeletedRP?: boolean;
     moveReadyRPOnly?: boolean;
     restorePointQueryType?: RestorePointQueryType;
     startDate?: Date;
@@ -1417,26 +1410,6 @@ export type DayOfWeek = "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursda
 // @public
 export type DedupState = string;
 
-// @public
-export interface DeletedProtectionContainers {
-    list(resourceGroupName: string, vaultName: string, options?: DeletedProtectionContainersListOptionalParams): PagedAsyncIterableIterator<ProtectionContainerResource>;
-}
-
-// @public
-export interface DeletedProtectionContainersListNextOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type DeletedProtectionContainersListNextResponse = ProtectionContainerResourceList;
-
-// @public
-export interface DeletedProtectionContainersListOptionalParams extends coreClient.OperationOptions {
-    filter?: string;
-}
-
-// @public
-export type DeletedProtectionContainersListResponse = ProtectionContainerResourceList;
-
 // @public (undocumented)
 export interface DiskExclusionProperties {
     diskLunList?: number[];
@@ -1455,7 +1428,6 @@ export interface DiskInformation {
 export interface DistributedNodesInfo {
     errorDetail?: ErrorDetail;
     nodeName?: string;
-    sourceResourceId?: string;
     status?: string;
 }
 
@@ -1601,12 +1573,6 @@ export interface ExportJobsOperationResultsGetOptionalParams extends coreClient.
 export type ExportJobsOperationResultsGetResponse = OperationResultInfoBaseResource;
 
 // @public
-export interface ExtendedLocation {
-    name?: string;
-    type?: string;
-}
-
-// @public
 export interface ExtendedProperties {
     diskExclusionProperties?: DiskExclusionProperties;
     linuxVmApplicationName?: string;
@@ -1677,7 +1643,6 @@ export interface GenericRecoveryPoint extends RecoveryPoint {
     friendlyName?: string;
     objectType: "GenericRecoveryPoint";
     recoveryPointAdditionalInfo?: string;
-    recoveryPointProperties?: RecoveryPointProperties;
     recoveryPointTime?: Date;
     recoveryPointType?: string;
 }
@@ -1757,7 +1722,6 @@ export type IaaSVMProtectableItemUnion = IaaSVMProtectableItem | AzureIaaSClassi
 export interface IaasVMRecoveryPoint extends RecoveryPoint {
     isInstantIlrSessionActive?: boolean;
     isManagedVirtualMachine?: boolean;
-    isPrivateAccessEnabledOnAnyDisk?: boolean;
     isSourceVMEncrypted?: boolean;
     keyAndSecret?: KeyAndSecretDetails;
     objectType: "IaasVMRecoveryPoint";
@@ -1768,11 +1732,9 @@ export interface IaasVMRecoveryPoint extends RecoveryPoint {
     recoveryPointMoveReadinessInfo?: {
         [propertyName: string]: RecoveryPointMoveReadinessInfo;
     };
-    recoveryPointProperties?: RecoveryPointProperties;
     recoveryPointTierDetails?: RecoveryPointTierInformationV2[];
     recoveryPointTime?: Date;
     recoveryPointType?: string;
-    securityType?: string;
     sourceVMStorageType?: string;
     virtualMachineSize?: string;
     zones?: string[];
@@ -1784,7 +1746,6 @@ export interface IaasVMRestoreRequest extends RestoreRequest {
     createNewCloudService?: boolean;
     diskEncryptionSetId?: string;
     encryptionDetails?: EncryptionDetails;
-    extendedLocation?: ExtendedLocation;
     identityBasedRestoreDetails?: IdentityBasedRestoreDetails;
     identityInfo?: IdentityInfo;
     objectType: "IaasVMRestoreRequest" | "IaasVMRestoreWithRehydrationRequest";
@@ -1794,11 +1755,9 @@ export interface IaasVMRestoreRequest extends RestoreRequest {
     region?: string;
     restoreDiskLunList?: number[];
     restoreWithManagedDisks?: boolean;
-    securedVMDetails?: SecuredVMDetails;
     sourceResourceId?: string;
     storageAccountId?: string;
     subnetId?: string;
-    targetDiskNetworkAccessSettings?: TargetDiskNetworkAccessSettings;
     targetDomainNameId?: string;
     targetResourceGroupId?: string;
     targetVirtualMachineId?: string;
@@ -1857,7 +1816,6 @@ export type InquiryStatus = string;
 export interface InquiryValidation {
     readonly additionalDetail?: string;
     errorDetail?: ErrorDetail;
-    readonly protectableItemCount?: Record<string, unknown>;
     status?: string;
 }
 
@@ -2307,7 +2265,6 @@ export enum KnownProtectedItemHealthStatus {
 
 // @public
 export enum KnownProtectedItemState {
-    BackupsSuspended = "BackupsSuspended",
     Invalid = "Invalid",
     IRPending = "IRPending",
     Protected = "Protected",
@@ -2328,7 +2285,6 @@ export enum KnownProtectionIntentItemType {
 
 // @public
 export enum KnownProtectionState {
-    BackupsSuspended = "BackupsSuspended",
     Invalid = "Invalid",
     IRPending = "IRPending",
     Protected = "Protected",
@@ -2443,7 +2399,6 @@ export enum KnownScheduleRunType {
 
 // @public
 export enum KnownSoftDeleteFeatureState {
-    AlwaysON = "AlwaysON",
     Disabled = "Disabled",
     Enabled = "Enabled",
     Invalid = "Invalid"
@@ -2511,13 +2466,6 @@ export enum KnownValidationStatus {
     Failed = "Failed",
     Invalid = "Invalid",
     Succeeded = "Succeeded"
-}
-
-// @public
-export enum KnownVaultSubResourceType {
-    AzureBackup = "AzureBackup",
-    AzureBackupSecondary = "AzureBackup_secondary",
-    AzureSiteRecovery = "AzureSiteRecovery"
 }
 
 // @public
@@ -2914,7 +2862,6 @@ export interface PrivateEndpoint {
 
 // @public
 export interface PrivateEndpointConnection {
-    groupIds?: VaultSubResourceType[];
     privateEndpoint?: PrivateEndpoint;
     privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
     provisioningState?: ProvisioningState;
@@ -2973,7 +2920,7 @@ export interface PrivateEndpointOperations {
 
 // @public
 export interface PrivateLinkServiceConnectionState {
-    actionsRequired?: string;
+    actionRequired?: string;
     description?: string;
     status?: PrivateEndpointConnectionStatus;
 }
@@ -3040,7 +2987,6 @@ export interface ProtectedItem {
     policyName?: string;
     protectedItemType: "AzureFileShareProtectedItem" | "AzureIaaSVMProtectedItem" | "Microsoft.ClassicCompute/virtualMachines" | "Microsoft.Compute/virtualMachines" | "Microsoft.Sql/servers/databases" | "AzureVmWorkloadProtectedItem" | "AzureVmWorkloadSAPAseDatabase" | "AzureVmWorkloadSAPHanaDatabase" | "AzureVmWorkloadSAPHanaDBInstance" | "AzureVmWorkloadSQLDatabase" | "DPMProtectedItem" | "GenericProtectedItem" | "MabFileFolderProtectedItem";
     resourceGuardOperationRequests?: string[];
-    softDeleteRetentionPeriodInDays?: number;
     sourceResourceId?: string;
     readonly workloadType?: DataSourceType;
 }
@@ -3388,13 +3334,6 @@ export interface RecoveryPointMoveReadinessInfo {
 }
 
 // @public
-export interface RecoveryPointProperties {
-    expiryTime?: string;
-    isSoftDeleted?: boolean;
-    ruleName?: string;
-}
-
-// @public
 export interface RecoveryPointRehydrationInfo {
     rehydrationPriority?: RehydrationPriority;
     rehydrationRetentionDuration?: string;
@@ -3526,8 +3465,6 @@ export class RecoveryServicesBackupClient extends coreClient.ServiceClient {
     beginMoveRecoveryPointAndWait(vaultName: string, resourceGroupName: string, fabricName: string, containerName: string, protectedItemName: string, recoveryPointId: string, parameters: MoveRPAcrossTiersRequest, options?: MoveRecoveryPointOptionalParams): Promise<void>;
     // (undocumented)
     bMSPrepareDataMoveOperationResult: BMSPrepareDataMoveOperationResult;
-    // (undocumented)
-    deletedProtectionContainers: DeletedProtectionContainers;
     // (undocumented)
     exportJobsOperationResults: ExportJobsOperationResults;
     // (undocumented)
@@ -3791,11 +3728,6 @@ export type SchedulePolicyUnion = SchedulePolicy | LogSchedulePolicy | LongTermS
 export type ScheduleRunType = string;
 
 // @public
-export interface SecuredVMDetails {
-    securedVMOsDiskEncryptionSetId?: string;
-}
-
-// @public
 export interface SecurityPinBase {
     resourceGuardOperationRequests?: string[];
 }
@@ -3889,15 +3821,6 @@ export type SupportStatus = string;
 export interface TargetAFSRestoreInfo {
     name?: string;
     targetResourceId?: string;
-}
-
-// @public
-export type TargetDiskNetworkAccessOption = "SameAsOnSourceDisks" | "EnablePrivateAccessForAllDisks" | "EnablePublicAccessForAllDisks";
-
-// @public
-export interface TargetDiskNetworkAccessSettings {
-    targetDiskAccessId?: string;
-    targetDiskNetworkAccessOption?: TargetDiskNetworkAccessOption;
 }
 
 // @public
@@ -4057,9 +3980,6 @@ export interface VaultStorageConfigOperationResultResponse {
 export type VaultStorageConfigOperationResultResponseUnion = VaultStorageConfigOperationResultResponse | PrepareDataMoveResponse;
 
 // @public
-export type VaultSubResourceType = string;
-
-// @public
 export interface WeeklyRetentionFormat {
     daysOfTheWeek?: DayOfWeek[];
     weeksOfTheMonth?: WeekOfMonth[];
@@ -4118,7 +4038,7 @@ export type WorkloadItemUnion = WorkloadItem | AzureVmWorkloadItemUnion;
 export interface WorkloadProtectableItem {
     backupManagementType?: string;
     friendlyName?: string;
-    protectableItemType: "AzureFileShare" | "IaaSVMProtectableItem" | "Microsoft.ClassicCompute/virtualMachines" | "Microsoft.Compute/virtualMachines" | "AzureVmWorkloadProtectableItem" | "SAPAseSystem" | "SAPHanaDatabase" | "SAPHanaSystem" | "SAPHanaDBInstance" | "HanaHSRContainer" | "SQLAvailabilityGroupContainer" | "SQLDataBase" | "SQLInstance";
+    protectableItemType: "AzureFileShare" | "IaaSVMProtectableItem" | "Microsoft.ClassicCompute/virtualMachines" | "Microsoft.Compute/virtualMachines" | "AzureVmWorkloadProtectableItem" | "SAPAseSystem" | "SAPHanaDatabase" | "SAPHanaSystem" | "SAPHanaDBInstance" | "SAPHanaHSR" | "SQLAvailabilityGroupContainer" | "SQLDataBase" | "SQLInstance";
     protectionState?: ProtectionStatus;
     workloadType?: string;
 }

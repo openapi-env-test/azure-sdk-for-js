@@ -168,7 +168,7 @@ export type AzureVmWorkloadProtectableItemUnion =
   | AzureVmWorkloadSAPHanaDatabaseProtectableItem
   | AzureVmWorkloadSAPHanaSystemProtectableItem
   | AzureVmWorkloadSAPHanaDBInstance
-  | AzureVmWorkloadSAPHanaHSRProtectableItem
+  | AzureVmWorkloadSAPHanaHSR
   | AzureVmWorkloadSQLAvailabilityGroupProtectableItem
   | AzureVmWorkloadSQLDatabaseProtectableItem
   | AzureVmWorkloadSQLInstanceProtectableItem;
@@ -490,11 +490,9 @@ export interface BackupResourceVaultConfig {
   enhancedSecurityState?: EnhancedSecurityState;
   /** Soft Delete feature state */
   softDeleteFeatureState?: SoftDeleteFeatureState;
-  /** Soft delete retention period in days */
-  softDeleteRetentionPeriodInDays?: number;
   /** ResourceGuard Operation Requests */
   resourceGuardOperationRequests?: string[];
-  /** This flag is no longer in use. Please use 'softDeleteFeatureState' to set the soft delete state for the vault */
+  /** Is soft delete feature state editable */
   isSoftDeleteFeatureStateEditable?: boolean;
 }
 
@@ -515,8 +513,6 @@ export interface PrivateEndpointConnection {
   provisioningState?: ProvisioningState;
   /** Gets or sets private endpoint associated with the private endpoint connection */
   privateEndpoint?: PrivateEndpoint;
-  /** Group Ids for the Private Endpoint */
-  groupIds?: VaultSubResourceType[];
   /** Gets or sets private link service connection state */
   privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
 }
@@ -534,7 +530,7 @@ export interface PrivateLinkServiceConnectionState {
   /** Gets or sets description */
   description?: string;
   /** Gets or sets actions required */
-  actionsRequired?: string;
+  actionRequired?: string;
 }
 
 /** An error response from the Container Instance service. */
@@ -702,8 +698,6 @@ export interface ProtectedItem {
   isArchiveEnabled?: boolean;
   /** Name of the policy used for protection */
   policyName?: string;
-  /** Soft delete retention period in days */
-  softDeleteRetentionPeriodInDays?: number;
 }
 
 /** Base class for backup copies. Workload-specific backup copies are derived from this class. */
@@ -978,7 +972,7 @@ export interface WorkloadProtectableItem {
     | "SAPHanaDatabase"
     | "SAPHanaSystem"
     | "SAPHanaDBInstance"
-    | "HanaHSRContainer"
+    | "SAPHanaHSR"
     | "SQLAvailabilityGroupContainer"
     | "SQLDataBase"
     | "SQLInstance";
@@ -1099,16 +1093,6 @@ export interface AzureFileshareProtectedItemExtendedInfo {
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly resourceStateSyncTime?: Date;
-}
-
-/** Properties of Recovery Point */
-export interface RecoveryPointProperties {
-  /** Expiry time of Recovery Point in UTC. */
-  expiryTime?: string;
-  /** Rule name tagged on Recovery Point that governs life cycle */
-  ruleName?: string;
-  /** Bool to indicate whether RP is in soft delete state or not */
-  isSoftDeleted?: boolean;
 }
 
 /** Restore file specs like file path, type and target folder path info. */
@@ -1353,21 +1337,6 @@ export interface AzureVmWorkloadProtectedItemExtendedInfo {
   recoveryModel?: string;
 }
 
-/** This is used to represent the various nodes of the distributed container. */
-export interface DistributedNodesInfo {
-  /** Name of the node under a distributed container. */
-  nodeName?: string;
-  /**
-   * Status of this Node.
-   * Failed | Succeeded
-   */
-  status?: string;
-  /** Error Details if the Status is non-success. */
-  errorDetail?: ErrorDetail;
-  /** ARM resource id of the node */
-  sourceResourceId?: string;
-}
-
 /** Azure storage specific error information */
 export interface AzureWorkloadErrorInfo {
   /** Error code. */
@@ -1487,8 +1456,6 @@ export interface BmsrpQueryObject {
   extendedInfo?: boolean;
   /** Whether the RP can be moved to another tier */
   moveReadyRPOnly?: boolean;
-  /** Flag to indicate whether Soft Deleted RPs should be included/excluded from result. */
-  includeSoftDeletedRP?: boolean;
 }
 
 /** Disk information */
@@ -1694,28 +1661,6 @@ export interface RecoveryPointDiskConfiguration {
   includedDiskList?: DiskInformation[];
   /** Information of disks excluded from backup */
   excludedDiskList?: DiskInformation[];
-}
-
-/** The extended location of Recovery point where VM was present. */
-export interface ExtendedLocation {
-  /** Name of the extended location. */
-  name?: string;
-  /** Type of the extended location. Possible values include: 'EdgeZone' */
-  type?: string;
-}
-
-/** Restore request parameters for Secured VMs */
-export interface SecuredVMDetails {
-  /** Gets or Sets Disk Encryption Set Id for Secured VM OS Disk */
-  securedVMOsDiskEncryptionSetId?: string;
-}
-
-/** Specifies target network access settings for disks of VM to be restored. */
-export interface TargetDiskNetworkAccessSettings {
-  /** Network access settings to be used for restored disks */
-  targetDiskNetworkAccessOption?: TargetDiskNetworkAccessOption;
-  /** Gets or sets the ARM resource ID of the target disk access to be used when TargetDiskNetworkAccessOption is set to TargetDiskNetworkAccessOption.UseNew */
-  targetDiskAccessId?: string;
 }
 
 /** Filters to list the jobs. */
@@ -1931,11 +1876,19 @@ export interface InquiryValidation {
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly additionalDetail?: string;
+}
+
+/** This is used to represent the various nodes of the distributed container. */
+export interface DistributedNodesInfo {
+  /** Name of the node under a distributed container. */
+  nodeName?: string;
   /**
-   * Dictionary to store the count of ProtectableItems with key POType.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
+   * Status of this Node.
+   * Failed | Succeeded
    */
-  readonly protectableItemCount?: Record<string, unknown>;
+  status?: string;
+  /** Error Details if the Status is non-success. */
+  errorDetail?: ErrorDetail;
 }
 
 /** Pre-backup validation for Azure VM Workload provider. */
@@ -2519,8 +2472,6 @@ export interface AzureVmWorkloadProtectedItem extends ProtectedItem {
   extendedInfo?: AzureVmWorkloadProtectedItemExtendedInfo;
   /** Health details of different KPIs */
   kpisHealths?: { [propertyName: string]: KPIResourceHealthDetails };
-  /** List of the nodes in case of distributed container. */
-  nodesList?: DistributedNodesInfo[];
 }
 
 /** Additional information on Backup engine specific backup item. */
@@ -2587,8 +2538,6 @@ export interface AzureFileShareRecoveryPoint extends RecoveryPoint {
   fileShareSnapshotUri?: string;
   /** Contains recovery point size */
   recoveryPointSizeInGB?: number;
-  /** Properties of Recovery Point */
-  recoveryPointProperties?: RecoveryPointProperties;
 }
 
 /** Workload specific recovery point, specifically encapsulates full/diff recovery point */
@@ -2611,8 +2560,6 @@ export interface AzureWorkloadRecoveryPoint extends RecoveryPoint {
   recoveryPointMoveReadinessInfo?: {
     [propertyName: string]: RecoveryPointMoveReadinessInfo;
   };
-  /** Properties of Recovery Point */
-  recoveryPointProperties?: RecoveryPointProperties;
 }
 
 /** Generic backup copy. */
@@ -2627,8 +2574,6 @@ export interface GenericRecoveryPoint extends RecoveryPoint {
   recoveryPointTime?: Date;
   /** Additional information associated with this backup copy. */
   recoveryPointAdditionalInfo?: string;
-  /** Properties of Recovery Point */
-  recoveryPointProperties?: RecoveryPointProperties;
 }
 
 /** IaaS VM workload specific backup copy. */
@@ -2667,12 +2612,6 @@ export interface IaasVMRecoveryPoint extends RecoveryPoint {
   recoveryPointMoveReadinessInfo?: {
     [propertyName: string]: RecoveryPointMoveReadinessInfo;
   };
-  /** Security Type of the Disk */
-  securityType?: string;
-  /** Properties of Recovery Point */
-  recoveryPointProperties?: RecoveryPointProperties;
-  /** This flag denotes if any of the disks in the VM are using Private access network setting */
-  isPrivateAccessEnabledOnAnyDisk?: boolean;
 }
 
 /** AzureFileShare Restore Request */
@@ -2787,15 +2726,6 @@ export interface IaasVMRestoreRequest extends RestoreRequest {
   identityInfo?: IdentityInfo;
   /** IaaS VM workload specific restore details for restores using managed identity. */
   identityBasedRestoreDetails?: IdentityBasedRestoreDetails;
-  /**
-   * Target extended location where the VM should be restored,
-   * should be null if restore is to be done in public cloud
-   */
-  extendedLocation?: ExtendedLocation;
-  /** Stores Secured VM Details */
-  securedVMDetails?: SecuredVMDetails;
-  /** Specifies target network access settings for disks of VM to be restored, */
-  targetDiskNetworkAccessSettings?: TargetDiskNetworkAccessSettings;
 }
 
 /** Azure VM (Mercury) workload-specific backup policy. */
@@ -3293,7 +3223,7 @@ export interface AzureVmWorkloadProtectableItem
     | "SAPHanaDatabase"
     | "SAPHanaSystem"
     | "SAPHanaDBInstance"
-    | "HanaHSRContainer"
+    | "SAPHanaHSR"
     | "SQLAvailabilityGroupContainer"
     | "SQLDataBase"
     | "SQLInstance";
@@ -3316,8 +3246,6 @@ export interface AzureVmWorkloadProtectableItem
   subprotectableitemcount?: number;
   /** Pre-backup validation for protectable objects */
   prebackupvalidation?: PreBackupValidation;
-  /** Indicates if item is protectable */
-  isProtectable?: boolean;
 }
 
 /** Azure IaaS VM workload-specific Health Details. */
@@ -3648,11 +3576,11 @@ export interface AzureVmWorkloadSAPHanaDBInstance
   protectableItemType: "SAPHanaDBInstance";
 }
 
-/** Azure VM workload-specific protectable item representing HANA HSR. */
-export interface AzureVmWorkloadSAPHanaHSRProtectableItem
+/** Azure VM workload-specific protectable item representing SAP HANA Dbinstance. */
+export interface AzureVmWorkloadSAPHanaHSR
   extends AzureVmWorkloadProtectableItem {
   /** Polymorphic discriminator, which specifies the different types this object can be */
-  protectableItemType: "HanaHSRContainer";
+  protectableItemType: "SAPHanaHSR";
 }
 
 /** Azure VM workload-specific protectable item representing SQL Availability Group. */
@@ -3660,8 +3588,6 @@ export interface AzureVmWorkloadSQLAvailabilityGroupProtectableItem
   extends AzureVmWorkloadProtectableItem {
   /** Polymorphic discriminator, which specifies the different types this object can be */
   protectableItemType: "SQLAvailabilityGroupContainer";
-  /** List of the nodes in case of distributed container. */
-  nodesList?: DistributedNodesInfo[];
 }
 
 /** Azure VM workload-specific protectable item representing SQL Database. */
@@ -4131,9 +4057,7 @@ export enum KnownSoftDeleteFeatureState {
   /** Enabled */
   Enabled = "Enabled",
   /** Disabled */
-  Disabled = "Disabled",
-  /** AlwaysON */
-  AlwaysON = "AlwaysON"
+  Disabled = "Disabled"
 }
 
 /**
@@ -4143,8 +4067,7 @@ export enum KnownSoftDeleteFeatureState {
  * ### Known values supported by the service
  * **Invalid** \
  * **Enabled** \
- * **Disabled** \
- * **AlwaysON**
+ * **Disabled**
  */
 export type SoftDeleteFeatureState = string;
 
@@ -4249,27 +4172,6 @@ export enum KnownProvisioningState {
  * **Pending**
  */
 export type ProvisioningState = string;
-
-/** Known values of {@link VaultSubResourceType} that the service accepts. */
-export enum KnownVaultSubResourceType {
-  /** AzureBackup */
-  AzureBackup = "AzureBackup",
-  /** AzureBackupSecondary */
-  AzureBackupSecondary = "AzureBackup_secondary",
-  /** AzureSiteRecovery */
-  AzureSiteRecovery = "AzureSiteRecovery"
-}
-
-/**
- * Defines values for VaultSubResourceType. \
- * {@link KnownVaultSubResourceType} can be used interchangeably with VaultSubResourceType,
- *  this enum contains the known values that the service supports.
- * ### Known values supported by the service
- * **AzureBackup** \
- * **AzureBackup_secondary** \
- * **AzureSiteRecovery**
- */
-export type VaultSubResourceType = string;
 
 /** Known values of {@link PrivateEndpointConnectionStatus} that the service accepts. */
 export enum KnownPrivateEndpointConnectionStatus {
@@ -4398,9 +4300,7 @@ export enum KnownProtectionState {
   /** ProtectionStopped */
   ProtectionStopped = "ProtectionStopped",
   /** ProtectionPaused */
-  ProtectionPaused = "ProtectionPaused",
-  /** BackupsSuspended */
-  BackupsSuspended = "BackupsSuspended"
+  ProtectionPaused = "ProtectionPaused"
 }
 
 /**
@@ -4413,8 +4313,7 @@ export enum KnownProtectionState {
  * **Protected** \
  * **ProtectionError** \
  * **ProtectionStopped** \
- * **ProtectionPaused** \
- * **BackupsSuspended**
+ * **ProtectionPaused**
  */
 export type ProtectionState = string;
 
@@ -4728,9 +4627,7 @@ export enum KnownProtectedItemState {
   /** ProtectionStopped */
   ProtectionStopped = "ProtectionStopped",
   /** ProtectionPaused */
-  ProtectionPaused = "ProtectionPaused",
-  /** BackupsSuspended */
-  BackupsSuspended = "BackupsSuspended"
+  ProtectionPaused = "ProtectionPaused"
 }
 
 /**
@@ -4743,8 +4640,7 @@ export enum KnownProtectedItemState {
  * **Protected** \
  * **ProtectionError** \
  * **ProtectionStopped** \
- * **ProtectionPaused** \
- * **BackupsSuspended**
+ * **ProtectionPaused**
  */
 export type ProtectedItemState = string;
 
@@ -5563,11 +5459,6 @@ export type DayOfWeek =
   | "Thursday"
   | "Friday"
   | "Saturday";
-/** Defines values for TargetDiskNetworkAccessOption. */
-export type TargetDiskNetworkAccessOption =
-  | "SameAsOnSourceDisks"
-  | "EnablePrivateAccessForAllDisks"
-  | "EnablePublicAccessForAllDisks";
 /** Defines values for WeekOfMonth. */
 export type WeekOfMonth =
   | "First"
@@ -6188,23 +6079,6 @@ export interface BackupProtectionContainersListNextOptionalParams
 
 /** Contains response data for the listNext operation. */
 export type BackupProtectionContainersListNextResponse = ProtectionContainerResourceList;
-
-/** Optional parameters. */
-export interface DeletedProtectionContainersListOptionalParams
-  extends coreClient.OperationOptions {
-  /** OData filter options. */
-  filter?: string;
-}
-
-/** Contains response data for the list operation. */
-export type DeletedProtectionContainersListResponse = ProtectionContainerResourceList;
-
-/** Optional parameters. */
-export interface DeletedProtectionContainersListNextOptionalParams
-  extends coreClient.OperationOptions {}
-
-/** Contains response data for the listNext operation. */
-export type DeletedProtectionContainersListNextResponse = ProtectionContainerResourceList;
 
 /** Optional parameters. */
 export interface SecurityPINsGetOptionalParams
