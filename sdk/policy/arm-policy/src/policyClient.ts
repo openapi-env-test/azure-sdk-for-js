@@ -46,20 +46,19 @@ export class PolicyClient extends coreClient.ServiceClient {
   );
   constructor(
     credentials: coreAuth.TokenCredential,
-    subscriptionIdOrOptions?: string | PolicyClientOptionalParams,
+    subscriptionIdOrOptions?: PolicyClientOptionalParams | string,
     options?: PolicyClientOptionalParams
   ) {
     if (credentials === undefined) {
       throw new Error("'credentials' cannot be null");
     }
+
     let subscriptionId: string | undefined;
 
-    if (!subscriptionIdOrOptions !== undefined) {
-      if (typeof subscriptionIdOrOptions === "string") {
-        subscriptionId = subscriptionIdOrOptions;
-      } else if (typeof subscriptionIdOrOptions === "object") {
-        options = subscriptionIdOrOptions;
-      }
+    if (typeof subscriptionIdOrOptions === "string") {
+      subscriptionId = subscriptionIdOrOptions;
+    } else if (typeof subscriptionIdOrOptions === "object") {
+      options = subscriptionIdOrOptions;
     }
 
     // Initializing default values for options
