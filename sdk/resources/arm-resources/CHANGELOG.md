@@ -1,15 +1,12 @@
 # Release History
+    
+## 6.0.0 (2023-11-14)
+    
+**Breaking Changes**
 
-## 5.2.1 (Unreleased)
-
-### Features Added
-
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-
+  - Class ResourceManagementClient has a new signature
+    
+    
 ## 5.2.0 (2023-03-13)
     
 **Features**
@@ -63,4 +60,4 @@ To understand the detail of the change, please refer to [Changelog](https://aka.
 
 To migrate the existing applications to the latest version, please refer to [Migration Guide](https://aka.ms/js-track2-migration-guide).
 
-To learn more, please refer to our documentation [Quick Start](https://aka.ms/azsdk/js/mgmt/quickstart ).
+To learn more, please refer to our documentation [Quick Start](https://aka.ms/js-track2-quickstart).
