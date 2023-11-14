@@ -40,35 +40,23 @@ export const $host: OperationURLParameter = {
   skipEncoding: true
 };
 
-export const apiVersion: OperationQueryParameter = {
-  parameterPath: "apiVersion",
+export const subscriptionId: OperationURLParameter = {
+  parameterPath: "subscriptionId",
   mapper: {
-    defaultValue: "2022-12-01",
-    isConstant: true,
-    serializedName: "api-version",
+    serializedName: "subscriptionId",
+    required: true,
     type: {
       name: "String"
     }
   }
 };
 
-export const nextLink: OperationURLParameter = {
-  parameterPath: "nextLink",
+export const apiVersion: OperationQueryParameter = {
+  parameterPath: "apiVersion",
   mapper: {
-    serializedName: "nextLink",
-    required: true,
-    type: {
-      name: "String"
-    }
-  },
-  skipEncoding: true
-};
-
-export const subscriptionId: OperationURLParameter = {
-  parameterPath: "subscriptionId",
-  mapper: {
-    serializedName: "subscriptionId",
-    required: true,
+    defaultValue: "2021-01-01",
+    isConstant: true,
+    serializedName: "api-version",
     type: {
       name: "String"
     }
@@ -100,6 +88,18 @@ export const contentType: OperationParameter = {
 export const parameters: OperationParameter = {
   parameterPath: "parameters",
   mapper: CheckZonePeersRequestMapper
+};
+
+export const nextLink: OperationURLParameter = {
+  parameterPath: "nextLink",
+  mapper: {
+    serializedName: "nextLink",
+    required: true,
+    type: {
+      name: "String"
+    }
+  },
+  skipEncoding: true
 };
 
 export const resourceNameDefinition: OperationParameter = {
