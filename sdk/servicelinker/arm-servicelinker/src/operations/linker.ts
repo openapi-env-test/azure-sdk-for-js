@@ -13,8 +13,12 @@ import * as coreClient from "@azure/core-client";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { ServiceLinkerManagementClient } from "../serviceLinkerManagementClient";
-import { PollerLike, PollOperationState, LroEngine } from "@azure/core-lro";
-import { LroImpl } from "../lroImpl";
+import {
+  SimplePollerLike,
+  OperationState,
+  createHttpPoller
+} from "@azure/core-lro";
+import { createLroSpec } from "../lroImpl";
 import {
   LinkerResource,
   LinkerListNextOptionalParams,
@@ -28,8 +32,6 @@ import {
   LinkerPatch,
   LinkerUpdateOptionalParams,
   LinkerUpdateResponse,
-  LinkerValidateOptionalParams,
-  LinkerValidateResponse,
   LinkerListConfigurationsOptionalParams,
   LinkerListConfigurationsResponse,
   LinkerListNextResponse
@@ -155,8 +157,8 @@ export class LinkerImpl implements Linker {
     parameters: LinkerResource,
     options?: LinkerCreateOrUpdateOptionalParams
   ): Promise<
-    PollerLike<
-      PollOperationState<LinkerCreateOrUpdateResponse>,
+    SimplePollerLike<
+      OperationState<LinkerCreateOrUpdateResponse>,
       LinkerCreateOrUpdateResponse
     >
   > {
@@ -166,7 +168,7 @@ export class LinkerImpl implements Linker {
     ): Promise<LinkerCreateOrUpdateResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
-    const sendOperation = async (
+    const sendOperationFn = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ) => {
@@ -199,15 +201,18 @@ export class LinkerImpl implements Linker {
       };
     };
 
-    const lro = new LroImpl(
-      sendOperation,
-      { resourceUri, linkerName, parameters, options },
-      createOrUpdateOperationSpec
-    );
-    const poller = new LroEngine(lro, {
-      resumeFrom: options?.resumeFrom,
+    const lro = createLroSpec({
+      sendOperationFn,
+      args: { resourceUri, linkerName, parameters, options },
+      spec: createOrUpdateOperationSpec
+    });
+    const poller = await createHttpPoller<
+      LinkerCreateOrUpdateResponse,
+      OperationState<LinkerCreateOrUpdateResponse>
+    >(lro, {
+      restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs,
-      lroResourceLocationConfig: "azure-async-operation"
+      resourceLocationConfig: "azure-async-operation"
     });
     await poller.poll();
     return poller;
@@ -247,14 +252,14 @@ export class LinkerImpl implements Linker {
     resourceUri: string,
     linkerName: string,
     options?: LinkerDeleteOptionalParams
-  ): Promise<PollerLike<PollOperationState<void>, void>> {
+  ): Promise<SimplePollerLike<OperationState<void>, void>> {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ): Promise<void> => {
       return this.client.sendOperationRequest(args, spec);
     };
-    const sendOperation = async (
+    const sendOperationFn = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ) => {
@@ -287,15 +292,15 @@ export class LinkerImpl implements Linker {
       };
     };
 
-    const lro = new LroImpl(
-      sendOperation,
-      { resourceUri, linkerName, options },
-      deleteOperationSpec
-    );
-    const poller = new LroEngine(lro, {
-      resumeFrom: options?.resumeFrom,
+    const lro = createLroSpec({
+      sendOperationFn,
+      args: { resourceUri, linkerName, options },
+      spec: deleteOperationSpec
+    });
+    const poller = await createHttpPoller<void, OperationState<void>>(lro, {
+      restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs,
-      lroResourceLocationConfig: "azure-async-operation"
+      resourceLocationConfig: "azure-async-operation"
     });
     await poller.poll();
     return poller;
@@ -331,7 +336,7 @@ export class LinkerImpl implements Linker {
     parameters: LinkerPatch,
     options?: LinkerUpdateOptionalParams
   ): Promise<
-    PollerLike<PollOperationState<LinkerUpdateResponse>, LinkerUpdateResponse>
+    SimplePollerLike<OperationState<LinkerUpdateResponse>, LinkerUpdateResponse>
   > {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
@@ -339,7 +344,7 @@ export class LinkerImpl implements Linker {
     ): Promise<LinkerUpdateResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
-    const sendOperation = async (
+    const sendOperationFn = async (
       args: coreClient.OperationArguments,
       spec: coreClient.OperationSpec
     ) => {
@@ -372,15 +377,18 @@ export class LinkerImpl implements Linker {
       };
     };
 
-    const lro = new LroImpl(
-      sendOperation,
-      { resourceUri, linkerName, parameters, options },
-      updateOperationSpec
-    );
-    const poller = new LroEngine(lro, {
-      resumeFrom: options?.resumeFrom,
+    const lro = createLroSpec({
+      sendOperationFn,
+      args: { resourceUri, linkerName, parameters, options },
+      spec: updateOperationSpec
+    });
+    const poller = await createHttpPoller<
+      LinkerUpdateResponse,
+      OperationState<LinkerUpdateResponse>
+    >(lro, {
+      restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs,
-      lroResourceLocationConfig: "azure-async-operation"
+      resourceLocationConfig: "azure-async-operation"
     });
     await poller.poll();
     return poller;
@@ -406,92 +414,6 @@ export class LinkerImpl implements Linker {
       parameters,
       options
     );
-    return poller.pollUntilDone();
-  }
-
-  /**
-   * Validate a link.
-   * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be
-   *                    connected.
-   * @param linkerName The name Linker resource.
-   * @param options The options parameters.
-   */
-  async beginValidate(
-    resourceUri: string,
-    linkerName: string,
-    options?: LinkerValidateOptionalParams
-  ): Promise<
-    PollerLike<
-      PollOperationState<LinkerValidateResponse>,
-      LinkerValidateResponse
-    >
-  > {
-    const directSendOperation = async (
-      args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec
-    ): Promise<LinkerValidateResponse> => {
-      return this.client.sendOperationRequest(args, spec);
-    };
-    const sendOperation = async (
-      args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec
-    ) => {
-      let currentRawResponse:
-        | coreClient.FullOperationResponse
-        | undefined = undefined;
-      const providedCallback = args.options?.onResponse;
-      const callback: coreClient.RawResponseCallback = (
-        rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown
-      ) => {
-        currentRawResponse = rawResponse;
-        providedCallback?.(rawResponse, flatResponse);
-      };
-      const updatedArgs = {
-        ...args,
-        options: {
-          ...args.options,
-          onResponse: callback
-        }
-      };
-      const flatResponse = await directSendOperation(updatedArgs, spec);
-      return {
-        flatResponse,
-        rawResponse: {
-          statusCode: currentRawResponse!.status,
-          body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON()
-        }
-      };
-    };
-
-    const lro = new LroImpl(
-      sendOperation,
-      { resourceUri, linkerName, options },
-      validateOperationSpec
-    );
-    const poller = new LroEngine(lro, {
-      resumeFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs,
-      lroResourceLocationConfig: "azure-async-operation"
-    });
-    await poller.poll();
-    return poller;
-  }
-
-  /**
-   * Validate a link.
-   * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be
-   *                    connected.
-   * @param linkerName The name Linker resource.
-   * @param options The options parameters.
-   */
-  async beginValidateAndWait(
-    resourceUri: string,
-    linkerName: string,
-    options?: LinkerValidateOptionalParams
-  ): Promise<LinkerValidateResponse> {
-    const poller = await this.beginValidate(resourceUri, linkerName, options);
     return poller.pollUntilDone();
   }
 
@@ -651,36 +573,6 @@ const updateOperationSpec: coreClient.OperationSpec = {
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
   mediaType: "json",
-  serializer
-};
-const validateOperationSpec: coreClient.OperationSpec = {
-  path:
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}/validateLinker",
-  httpMethod: "POST",
-  responses: {
-    200: {
-      bodyMapper: Mappers.ValidateOperationResult
-    },
-    201: {
-      bodyMapper: Mappers.ValidateOperationResult
-    },
-    202: {
-      bodyMapper: Mappers.ValidateOperationResult
-    },
-    204: {
-      bodyMapper: Mappers.ValidateOperationResult
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse
-    }
-  },
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.resourceUri,
-    Parameters.linkerName
-  ],
-  headerParameters: [Parameters.accept],
   serializer
 };
 const listConfigurationsOperationSpec: coreClient.OperationSpec = {

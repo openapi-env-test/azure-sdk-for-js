@@ -338,134 +338,6 @@ export const LinkerPatch: coreClient.CompositeMapper = {
   }
 };
 
-export const ValidateOperationResult: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "ValidateOperationResult",
-    modelProperties: {
-      resourceId: {
-        serializedName: "resourceId",
-        nullable: true,
-        type: {
-          name: "String"
-        }
-      },
-      status: {
-        serializedName: "status",
-        nullable: true,
-        type: {
-          name: "String"
-        }
-      },
-      linkerName: {
-        serializedName: "properties.linkerName",
-        nullable: true,
-        type: {
-          name: "String"
-        }
-      },
-      isConnectionAvailable: {
-        serializedName: "properties.isConnectionAvailable",
-        nullable: true,
-        type: {
-          name: "Boolean"
-        }
-      },
-      reportStartTimeUtc: {
-        serializedName: "properties.reportStartTimeUtc",
-        nullable: true,
-        type: {
-          name: "DateTime"
-        }
-      },
-      reportEndTimeUtc: {
-        serializedName: "properties.reportEndTimeUtc",
-        nullable: true,
-        type: {
-          name: "DateTime"
-        }
-      },
-      sourceId: {
-        serializedName: "properties.sourceId",
-        nullable: true,
-        type: {
-          name: "String"
-        }
-      },
-      targetId: {
-        serializedName: "properties.targetId",
-        nullable: true,
-        type: {
-          name: "String"
-        }
-      },
-      authType: {
-        serializedName: "properties.authType",
-        nullable: true,
-        type: {
-          name: "String"
-        }
-      },
-      validationDetail: {
-        serializedName: "properties.validationDetail",
-        nullable: true,
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "ValidationResultItem"
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
-export const ValidationResultItem: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "ValidationResultItem",
-    modelProperties: {
-      name: {
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      description: {
-        serializedName: "description",
-        nullable: true,
-        type: {
-          name: "String"
-        }
-      },
-      result: {
-        serializedName: "result",
-        nullable: true,
-        type: {
-          name: "String"
-        }
-      },
-      errorMessage: {
-        serializedName: "errorMessage",
-        nullable: true,
-        type: {
-          name: "String"
-        }
-      },
-      errorCode: {
-        serializedName: "errorCode",
-        nullable: true,
-        type: {
-          name: "String"
-        }
-      }
-    }
-  }
-};
-
 export const SourceConfigurationResult: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -653,6 +525,134 @@ export const SecretInfoBase: coreClient.CompositeMapper = {
       secretType: {
         serializedName: "secretType",
         required: true,
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const ValidateOperationResult: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "ValidateOperationResult",
+    modelProperties: {
+      resourceId: {
+        serializedName: "resourceId",
+        nullable: true,
+        type: {
+          name: "String"
+        }
+      },
+      status: {
+        serializedName: "status",
+        nullable: true,
+        type: {
+          name: "String"
+        }
+      },
+      linkerName: {
+        serializedName: "properties.linkerName",
+        nullable: true,
+        type: {
+          name: "String"
+        }
+      },
+      isConnectionAvailable: {
+        serializedName: "properties.isConnectionAvailable",
+        nullable: true,
+        type: {
+          name: "Boolean"
+        }
+      },
+      reportStartTimeUtc: {
+        serializedName: "properties.reportStartTimeUtc",
+        nullable: true,
+        type: {
+          name: "DateTime"
+        }
+      },
+      reportEndTimeUtc: {
+        serializedName: "properties.reportEndTimeUtc",
+        nullable: true,
+        type: {
+          name: "DateTime"
+        }
+      },
+      sourceId: {
+        serializedName: "properties.sourceId",
+        nullable: true,
+        type: {
+          name: "String"
+        }
+      },
+      targetId: {
+        serializedName: "properties.targetId",
+        nullable: true,
+        type: {
+          name: "String"
+        }
+      },
+      authType: {
+        serializedName: "properties.authType",
+        nullable: true,
+        type: {
+          name: "String"
+        }
+      },
+      validationDetail: {
+        serializedName: "properties.validationDetail",
+        nullable: true,
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "ValidationResultItem"
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const ValidationResultItem: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "ValidationResultItem",
+    modelProperties: {
+      name: {
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      description: {
+        serializedName: "description",
+        nullable: true,
+        type: {
+          name: "String"
+        }
+      },
+      result: {
+        serializedName: "result",
+        nullable: true,
+        type: {
+          name: "String"
+        }
+      },
+      errorMessage: {
+        serializedName: "errorMessage",
+        nullable: true,
+        type: {
+          name: "String"
+        }
+      },
+      errorCode: {
+        serializedName: "errorCode",
+        nullable: true,
         type: {
           name: "String"
         }
