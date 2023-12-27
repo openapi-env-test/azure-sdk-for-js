@@ -36,7 +36,6 @@ export * from "./disks";
 export * from "./diskAccesses";
 export * from "./diskEncryptionSets";
 export * from "./diskRestorePointOperations";
-export * from "./snapshots";
 export * from "./resourceSkus";
 export * from "./galleries";
 export * from "./galleryImages";

@@ -40,7 +40,6 @@ import {
   DiskAccessesImpl,
   DiskEncryptionSetsImpl,
   DiskRestorePointOperationsImpl,
-  SnapshotsImpl,
   ResourceSkusImpl,
   GalleriesImpl,
   GalleryImagesImpl,
@@ -91,7 +90,6 @@ import {
   DiskAccesses,
   DiskEncryptionSets,
   DiskRestorePointOperations,
-  Snapshots,
   ResourceSkus,
   Galleries,
   GalleryImages,
@@ -145,7 +143,7 @@ export class ComputeManagementClient extends coreClient.ServiceClient {
       credential: credentials
     };
 
-    const packageDetails = `azsdk-js-arm-compute/21.2.0`;
+    const packageDetails = `azsdk-js-arm-compute/22.0.0`;
     const userAgentPrefix =
       options.userAgentOptions && options.userAgentOptions.userAgentPrefix
         ? `${options.userAgentOptions.userAgentPrefix} ${packageDetails}`
@@ -240,7 +238,6 @@ export class ComputeManagementClient extends coreClient.ServiceClient {
     this.diskAccesses = new DiskAccessesImpl(this);
     this.diskEncryptionSets = new DiskEncryptionSetsImpl(this);
     this.diskRestorePointOperations = new DiskRestorePointOperationsImpl(this);
-    this.snapshots = new SnapshotsImpl(this);
     this.resourceSkus = new ResourceSkusImpl(this);
     this.galleries = new GalleriesImpl(this);
     this.galleryImages = new GalleryImagesImpl(this);
@@ -295,7 +292,6 @@ export class ComputeManagementClient extends coreClient.ServiceClient {
   diskAccesses: DiskAccesses;
   diskEncryptionSets: DiskEncryptionSets;
   diskRestorePointOperations: DiskRestorePointOperations;
-  snapshots: Snapshots;
   resourceSkus: ResourceSkus;
   galleries: Galleries;
   galleryImages: GalleryImages;
