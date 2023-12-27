@@ -1,7 +1,7 @@
 lockfileVersion: '6.0'
 
 settings:
-  autoInstallPeers: true
+  autoInstallPeers: false
   excludeLinksFromLockfile: false
 
 dependencies:
@@ -1149,6 +1149,21 @@ packages:
       '@azure/core-tracing': 1.0.1
       '@azure/core-util': 1.6.1
       '@azure/logger': 1.0.4
+      tslib: 2.6.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@azure/arm-network@32.2.0:
+    resolution: {integrity: sha512-6QmZ9aGdiz+9u7jPhQEg2zY/Tn8hwJrmjAMuHlWpnqE2kHvSDnKCE3BiNLZsENfi/IeLKBuW0QIdZ5UhbSSA0A==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      '@azure/abort-controller': 1.1.0
+      '@azure/core-auth': 1.5.0
+      '@azure/core-client': 1.7.3
+      '@azure/core-lro': 2.5.4
+      '@azure/core-paging': 1.5.0
+      '@azure/core-rest-pipeline': 1.12.2
       tslib: 2.6.2
     transitivePeerDependencies:
       - supports-color
@@ -3554,6 +3569,13 @@ packages:
     requiresBuild: true
     dev: false
 
+  /autorest@3.7.1:
+    resolution: {integrity: sha512-6q17NtosQZPqBkIOUnaOPedf3PDIBF7Ha1iEGRhTqZF6TG2Q/1E3ID/D+ePIIzZDKvW01p/2pENq/oiBWH9IGQ==}
+    engines: {node: '>=12.0.0'}
+    hasBin: true
+    requiresBuild: true
+    dev: false
+
   /available-typed-arrays@1.0.5:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
     engines: {node: '>= 0.4'}
@@ -4495,7 +4517,7 @@ packages:
     dependencies:
       semver: 7.5.4
       shelljs: 0.8.5
-      typescript: 5.3.0-dev.20231030
+      typescript: 5.4.0-dev.20231227
     dev: false
 
   /eastasianwidth@0.2.0:
@@ -9261,8 +9283,14 @@ packages:
     hasBin: true
     dev: false
 
-  /typescript@5.3.0-dev.20231030:
-    resolution: {integrity: sha512-azWrF0lAiu8cBHNr6yq3RDkU/DtQScvT48ea3Ngq6oXJ/GPO0n96wCFSRQA5UbZlVVf3fAAqsUfvOdohRbrPVg==}
+  /typescript@5.3.3:
+    resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+    dev: false
+
+  /typescript@5.4.0-dev.20231227:
+    resolution: {integrity: sha512-lUTwqlRFd+OYg6urfqgdDBiEs4rUyejfaNeLLE9x77VYwHGPNS+Hg6/UQiXTpHuQIk+aMjxZkBJDDuGbD+SEdA==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: false
@@ -9894,7 +9922,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -9940,7 +9968,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -10170,7 +10198,7 @@ packages:
     dependencies:
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       dotenv: 8.6.0
       eslint: 8.52.0
@@ -10242,7 +10270,7 @@ packages:
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -10334,7 +10362,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -10814,7 +10842,7 @@ packages:
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -11416,10 +11444,11 @@ packages:
     dev: false
 
   file:projects/arm-compute-1.tgz:
-    resolution: {integrity: sha512-GNH6eYlcbf2q/gL3gSeFIrGTeu55MJKUeTHcFvtpwckRU5Gl7M+amBD/C3WcgxE9eiMwGdSh7fnY2u9I3kN1Cg==, tarball: file:projects/arm-compute-1.tgz}
+    resolution: {integrity: sha512-woMseNIuijTLmmueZtuEdz2Aa7lEIIlTbyEtYgfYOG1v1yOP6hLuoUShn2b4HsVqbzef0kdkI5mi5alsIZvHRw==, tarball: file:projects/arm-compute-1.tgz}
     name: '@rush-temp/arm-compute-1'
     version: 0.0.0
     dependencies:
+      '@azure/arm-network': 32.2.0
       '@azure/identity': 3.3.2
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
@@ -11466,15 +11495,16 @@ packages:
     dev: false
 
   file:projects/arm-compute.tgz:
-    resolution: {integrity: sha512-l0ZioJDcuCfgBQvrWRCtT6jnnygpKC4TkWT+M6BqOnOhOdTM8bxGaxmfcXLKUShb4Xd2zZo+FOj+0eimg3MJCw==, tarball: file:projects/arm-compute.tgz}
+    resolution: {integrity: sha512-WdhgZLbrpNn861iEG7vXJSTR1ZYIOUORztuIahvzMqsbPG2xctJK5c4GcrsPWhx4NJ0OJmIHkrYcvEPAE1vS9g==, tarball: file:projects/arm-compute.tgz}
     name: '@rush-temp/arm-compute'
     version: 0.0.0
     dependencies:
+      '@azure/arm-network': 32.2.0
       '@azure/identity': 3.3.2
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -11694,7 +11724,7 @@ packages:
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -12622,10 +12652,11 @@ packages:
     dev: false
 
   file:projects/arm-eventhub.tgz:
-    resolution: {integrity: sha512-MfPrGJfNBWzwigKTkYZc19i+yeMfEcS2Qqv4b12H6wCup7inRqS3dpnGKQ503XzVVwaaYNzqHdCTrYZo27lo6Q==, tarball: file:projects/arm-eventhub.tgz}
+    resolution: {integrity: sha512-TiVt+aIo/m+zkgm2yVlBDY1Xa7Yi08FpUd5fC/KoqHej0XH2w88gi+iQFwuTio34OwhadQqxhwKjhn8H1TEcYA==, tarball: file:projects/arm-eventhub.tgz}
     name: '@rush-temp/arm-eventhub'
     version: 0.0.0
     dependencies:
+      '@azure/arm-network': 32.2.0
       '@azure/identity': 3.3.2
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
@@ -13905,20 +13936,22 @@ packages:
     dev: false
 
   file:projects/arm-network-1.tgz:
-    resolution: {integrity: sha512-k1AJlE2JlD5JBpEeGn4+wPVcHfP5xwEO/wYGWneUym/POypcrsT1bNajpqRfMXgzWByzcIQwSoBh33OoD3tQow==, tarball: file:projects/arm-network-1.tgz}
+    resolution: {integrity: sha512-FWmITS228P24PMyeFCSt2aBdMMQwvcn4HmRWtJaQ9UTZujvrknwj1wX6TvnktiysxyzvSe9rkD8LscEcfxLvDg==, tarball: file:projects/arm-network-1.tgz}
     name: '@rush-temp/arm-network-1'
     version: 0.0.0
     dependencies:
       '@azure/identity': 3.3.2
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
       '@types/node': 18.18.7
       chai: 4.3.10
       cross-env: 7.0.3
       dotenv: 16.3.1
+      esm: 3.2.25
       mkdirp: 2.1.6
       mocha: 10.2.0
-      rimraf: 3.0.2
+      rimraf: 5.0.5
       ts-node: 10.9.1(@types/node@18.18.7)(typescript@5.2.2)
       tslib: 2.6.2
       typescript: 5.2.2
@@ -13963,7 +13996,7 @@ packages:
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -14715,10 +14748,11 @@ packages:
     dev: false
 
   file:projects/arm-rediscache.tgz:
-    resolution: {integrity: sha512-tXv/RXh41XXxV30jK7/85qDP9tzB13GtuDBvAr6RuqLXwgE+MOtPc43LaS/Y3WyUl/bCxBh8AKK/oltopZuYcg==, tarball: file:projects/arm-rediscache.tgz}
+    resolution: {integrity: sha512-3YSXMeycDrKOeUev8QnHwYtkZnvsh6Rw+OZtbNhQs7Exg+eOYmi/ZY8yOx8qaqJ83HzDocPIDHBMq5+oV1nHgw==, tarball: file:projects/arm-rediscache.tgz}
     name: '@rush-temp/arm-rediscache'
     version: 0.0.0
     dependencies:
+      '@azure/arm-network': 32.2.0
       '@azure/identity': 3.3.2
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
@@ -15245,7 +15279,7 @@ packages:
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -16440,7 +16474,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       chai: 4.3.10
       cross-env: 7.0.3
       dotenv: 16.3.1
@@ -17603,7 +17637,7 @@ packages:
     name: '@rush-temp/dev-tool'
     version: 0.0.0
     dependencies:
-      '@_ts/max': /typescript@5.2.2
+      '@_ts/max': /typescript@5.3.3
       '@_ts/min': /typescript@4.2.4
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@rollup/plugin-commonjs': 25.0.7(rollup@3.29.4)
@@ -17669,7 +17703,7 @@ packages:
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -18075,7 +18109,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -18120,7 +18154,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -18623,7 +18657,7 @@ packages:
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
       '@types/uuid': 8.3.4
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -18732,7 +18766,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -18778,7 +18812,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -18824,7 +18858,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -18870,7 +18904,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -19998,7 +20032,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -20043,7 +20077,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -20375,7 +20409,7 @@ packages:
     dev: false
 
   file:projects/storage-blob-changefeed.tgz:
-    resolution: {integrity: sha512-2LtIcl6t12irIaBaBSP/ytxkJA5VSRJ2RUg08UJEi/NVLHhjpx+NQQn/a/ebeAwpa2DefdSkfHRhgh7zn8Qzzg==, tarball: file:projects/storage-blob-changefeed.tgz}
+    resolution: {integrity: sha512-nBVNUHVbjsSyKfoA2uJNvG+jlJEW9Oq12K9Oha1C6GVY1rZhEpcWrkob0RJe/sCDdrMo0MBUnvL7+PkUsvhR8w==, tarball: file:projects/storage-blob-changefeed.tgz}
     name: '@rush-temp/storage-blob-changefeed'
     version: 0.0.0
     dependencies:
