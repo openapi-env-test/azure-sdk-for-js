@@ -8,33 +8,35 @@
 
 import { PagedAsyncIterableIterator, PageSettings } from "@azure/core-paging";
 import { setContinuationToken } from "../pagingHelper";
-import { Pipelines } from "../operationsInterfaces";
+import { ChangeDataCapture } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { DataFactoryManagementClient } from "../dataFactoryManagementClient";
 import {
-  PipelineResource,
-  PipelinesListByFactoryNextOptionalParams,
-  PipelinesListByFactoryOptionalParams,
-  PipelinesListByFactoryResponse,
-  PipelinesCreateOrUpdateOptionalParams,
-  PipelinesCreateOrUpdateResponse,
-  PipelinesGetOptionalParams,
-  PipelinesGetResponse,
-  PipelinesDeleteOptionalParams,
-  PipelinesCreateRunOptionalParams,
-  PipelinesCreateRunResponse,
-  PipelinesListByFactoryNextResponse,
+  ChangeDataCaptureResource,
+  ChangeDataCaptureListByFactoryNextOptionalParams,
+  ChangeDataCaptureListByFactoryOptionalParams,
+  ChangeDataCaptureListByFactoryResponse,
+  ChangeDataCaptureCreateOrUpdateOptionalParams,
+  ChangeDataCaptureCreateOrUpdateResponse,
+  ChangeDataCaptureGetOptionalParams,
+  ChangeDataCaptureGetResponse,
+  ChangeDataCaptureDeleteOptionalParams,
+  ChangeDataCaptureStartOptionalParams,
+  ChangeDataCaptureStopOptionalParams,
+  ChangeDataCaptureStatusOptionalParams,
+  ChangeDataCaptureStatusResponse,
+  ChangeDataCaptureListByFactoryNextResponse,
 } from "../models";
 
 /// <reference lib="esnext.asynciterable" />
-/** Class containing Pipelines operations. */
-export class PipelinesImpl implements Pipelines {
+/** Class containing ChangeDataCapture operations. */
+export class ChangeDataCaptureImpl implements ChangeDataCapture {
   private readonly client: DataFactoryManagementClient;
 
   /**
-   * Initialize a new instance of the class Pipelines class.
+   * Initialize a new instance of the class ChangeDataCapture class.
    * @param client Reference to the service client
    */
   constructor(client: DataFactoryManagementClient) {
@@ -42,7 +44,7 @@ export class PipelinesImpl implements Pipelines {
   }
 
   /**
-   * Lists pipelines.
+   * Lists all resources of type change data capture.
    * @param resourceGroupName The resource group name.
    * @param factoryName The factory name.
    * @param options The options parameters.
@@ -50,8 +52,8 @@ export class PipelinesImpl implements Pipelines {
   public listByFactory(
     resourceGroupName: string,
     factoryName: string,
-    options?: PipelinesListByFactoryOptionalParams,
-  ): PagedAsyncIterableIterator<PipelineResource> {
+    options?: ChangeDataCaptureListByFactoryOptionalParams,
+  ): PagedAsyncIterableIterator<ChangeDataCaptureResource> {
     const iter = this.listByFactoryPagingAll(
       resourceGroupName,
       factoryName,
@@ -81,10 +83,10 @@ export class PipelinesImpl implements Pipelines {
   private async *listByFactoryPagingPage(
     resourceGroupName: string,
     factoryName: string,
-    options?: PipelinesListByFactoryOptionalParams,
+    options?: ChangeDataCaptureListByFactoryOptionalParams,
     settings?: PageSettings,
-  ): AsyncIterableIterator<PipelineResource[]> {
-    let result: PipelinesListByFactoryResponse;
+  ): AsyncIterableIterator<ChangeDataCaptureResource[]> {
+    let result: ChangeDataCaptureListByFactoryResponse;
     let continuationToken = settings?.continuationToken;
     if (!continuationToken) {
       result = await this._listByFactory(
@@ -114,8 +116,8 @@ export class PipelinesImpl implements Pipelines {
   private async *listByFactoryPagingAll(
     resourceGroupName: string,
     factoryName: string,
-    options?: PipelinesListByFactoryOptionalParams,
-  ): AsyncIterableIterator<PipelineResource> {
+    options?: ChangeDataCaptureListByFactoryOptionalParams,
+  ): AsyncIterableIterator<ChangeDataCaptureResource> {
     for await (const page of this.listByFactoryPagingPage(
       resourceGroupName,
       factoryName,
@@ -126,7 +128,7 @@ export class PipelinesImpl implements Pipelines {
   }
 
   /**
-   * Lists pipelines.
+   * Lists all resources of type change data capture.
    * @param resourceGroupName The resource group name.
    * @param factoryName The factory name.
    * @param options The options parameters.
@@ -134,8 +136,8 @@ export class PipelinesImpl implements Pipelines {
   private _listByFactory(
     resourceGroupName: string,
     factoryName: string,
-    options?: PipelinesListByFactoryOptionalParams,
-  ): Promise<PipelinesListByFactoryResponse> {
+    options?: ChangeDataCaptureListByFactoryOptionalParams,
+  ): Promise<ChangeDataCaptureListByFactoryResponse> {
     return this.client.sendOperationRequest(
       { resourceGroupName, factoryName, options },
       listByFactoryOperationSpec,
@@ -143,80 +145,124 @@ export class PipelinesImpl implements Pipelines {
   }
 
   /**
-   * Creates or updates a pipeline.
+   * Creates or updates a change data capture resource.
    * @param resourceGroupName The resource group name.
    * @param factoryName The factory name.
-   * @param pipelineName The pipeline name.
-   * @param pipeline Pipeline resource definition.
+   * @param changeDataCaptureName The change data capture name.
+   * @param changeDataCapture Change data capture resource definition.
    * @param options The options parameters.
    */
   createOrUpdate(
     resourceGroupName: string,
     factoryName: string,
-    pipelineName: string,
-    pipeline: PipelineResource,
-    options?: PipelinesCreateOrUpdateOptionalParams,
-  ): Promise<PipelinesCreateOrUpdateResponse> {
+    changeDataCaptureName: string,
+    changeDataCapture: ChangeDataCaptureResource,
+    options?: ChangeDataCaptureCreateOrUpdateOptionalParams,
+  ): Promise<ChangeDataCaptureCreateOrUpdateResponse> {
     return this.client.sendOperationRequest(
-      { resourceGroupName, factoryName, pipelineName, pipeline, options },
+      {
+        resourceGroupName,
+        factoryName,
+        changeDataCaptureName,
+        changeDataCapture,
+        options,
+      },
       createOrUpdateOperationSpec,
     );
   }
 
   /**
-   * Gets a pipeline.
+   * Gets a change data capture.
    * @param resourceGroupName The resource group name.
    * @param factoryName The factory name.
-   * @param pipelineName The pipeline name.
+   * @param changeDataCaptureName The change data capture name.
    * @param options The options parameters.
    */
   get(
     resourceGroupName: string,
     factoryName: string,
-    pipelineName: string,
-    options?: PipelinesGetOptionalParams,
-  ): Promise<PipelinesGetResponse> {
+    changeDataCaptureName: string,
+    options?: ChangeDataCaptureGetOptionalParams,
+  ): Promise<ChangeDataCaptureGetResponse> {
     return this.client.sendOperationRequest(
-      { resourceGroupName, factoryName, pipelineName, options },
+      { resourceGroupName, factoryName, changeDataCaptureName, options },
       getOperationSpec,
     );
   }
 
   /**
-   * Deletes a pipeline.
+   * Deletes a change data capture.
    * @param resourceGroupName The resource group name.
    * @param factoryName The factory name.
-   * @param pipelineName The pipeline name.
+   * @param changeDataCaptureName The change data capture name.
    * @param options The options parameters.
    */
   delete(
     resourceGroupName: string,
     factoryName: string,
-    pipelineName: string,
-    options?: PipelinesDeleteOptionalParams,
+    changeDataCaptureName: string,
+    options?: ChangeDataCaptureDeleteOptionalParams,
   ): Promise<void> {
     return this.client.sendOperationRequest(
-      { resourceGroupName, factoryName, pipelineName, options },
+      { resourceGroupName, factoryName, changeDataCaptureName, options },
       deleteOperationSpec,
     );
   }
 
   /**
-   * Creates a run of a pipeline.
+   * Starts a change data capture.
    * @param resourceGroupName The resource group name.
    * @param factoryName The factory name.
-   * @param pipelineName The pipeline name.
+   * @param changeDataCaptureName The change data capture name.
    * @param options The options parameters.
    */
-  createRun(
+  start(
     resourceGroupName: string,
     factoryName: string,
-    pipelineName: string,
-    options?: PipelinesCreateRunOptionalParams,
-  ): Promise<PipelinesCreateRunResponse> {
+    changeDataCaptureName: string,
+    options?: ChangeDataCaptureStartOptionalParams,
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      { resourceGroupName, factoryName, pipelineName, options },
-      createRunOperationSpec,
+      { resourceGroupName, factoryName, changeDataCaptureName, options },
+      startOperationSpec,
+    );
+  }
+
+  /**
+   * Stops a change data capture.
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param changeDataCaptureName The change data capture name.
+   * @param options The options parameters.
+   */
+  stop(
+    resourceGroupName: string,
+    factoryName: string,
+    changeDataCaptureName: string,
+    options?: ChangeDataCaptureStopOptionalParams,
+  ): Promise<void> {
+    return this.client.sendOperationRequest(
+      { resourceGroupName, factoryName, changeDataCaptureName, options },
+      stopOperationSpec,
+    );
+  }
+
+  /**
+   * Gets the current status for the change data capture resource.
+   * @param resourceGroupName The resource group name.
+   * @param factoryName The factory name.
+   * @param changeDataCaptureName The change data capture name.
+   * @param options The options parameters.
+   */
+  status(
+    resourceGroupName: string,
+    factoryName: string,
+    changeDataCaptureName: string,
+    options?: ChangeDataCaptureStatusOptionalParams,
+  ): Promise<ChangeDataCaptureStatusResponse> {
+    return this.client.sendOperationRequest(
+      { resourceGroupName, factoryName, changeDataCaptureName, options },
+      statusOperationSpec,
     );
   }
 
@@ -231,8 +277,8 @@ export class PipelinesImpl implements Pipelines {
     resourceGroupName: string,
     factoryName: string,
     nextLink: string,
-    options?: PipelinesListByFactoryNextOptionalParams,
-  ): Promise<PipelinesListByFactoryNextResponse> {
+    options?: ChangeDataCaptureListByFactoryNextOptionalParams,
+  ): Promise<ChangeDataCaptureListByFactoryNextResponse> {
     return this.client.sendOperationRequest(
       { resourceGroupName, factoryName, nextLink, options },
       listByFactoryNextOperationSpec,
@@ -243,11 +289,11 @@ export class PipelinesImpl implements Pipelines {
 const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
 const listByFactoryOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines",
+  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.PipelineListResponse,
+      bodyMapper: Mappers.ChangeDataCaptureListResponse,
     },
     default: {
       bodyMapper: Mappers.CloudError,
@@ -264,24 +310,24 @@ const listByFactoryOperationSpec: coreClient.OperationSpec = {
   serializer,
 };
 const createOrUpdateOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines/{pipelineName}",
+  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}",
   httpMethod: "PUT",
   responses: {
     200: {
-      bodyMapper: Mappers.PipelineResource,
+      bodyMapper: Mappers.ChangeDataCaptureResource,
     },
     default: {
       bodyMapper: Mappers.CloudError,
     },
   },
-  requestBody: Parameters.pipeline,
+  requestBody: Parameters.changeDataCapture,
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.factoryName,
-    Parameters.pipelineName,
+    Parameters.changeDataCaptureName,
   ],
   headerParameters: [
     Parameters.accept,
@@ -292,13 +338,12 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
   serializer,
 };
 const getOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines/{pipelineName}",
+  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.PipelineResource,
+      bodyMapper: Mappers.ChangeDataCaptureResource,
     },
-    304: {},
     default: {
       bodyMapper: Mappers.CloudError,
     },
@@ -309,13 +354,13 @@ const getOperationSpec: coreClient.OperationSpec = {
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.factoryName,
-    Parameters.pipelineName,
+    Parameters.changeDataCaptureName,
   ],
   headerParameters: [Parameters.accept, Parameters.ifNoneMatch],
   serializer,
 };
 const deleteOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines/{pipelineName}",
+  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}",
   httpMethod: "DELETE",
   responses: {
     200: {},
@@ -330,39 +375,71 @@ const deleteOperationSpec: coreClient.OperationSpec = {
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.factoryName,
-    Parameters.pipelineName,
+    Parameters.changeDataCaptureName,
   ],
   headerParameters: [Parameters.accept],
   serializer,
 };
-const createRunOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines/{pipelineName}/createRun",
+const startOperationSpec: coreClient.OperationSpec = {
+  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}/start",
   httpMethod: "POST",
   responses: {
-    200: {
-      bodyMapper: Mappers.CreateRunResponse,
-    },
+    200: {},
     default: {
       bodyMapper: Mappers.CloudError,
     },
   },
-  requestBody: Parameters.parameters,
-  queryParameters: [
-    Parameters.apiVersion,
-    Parameters.referencePipelineRunId,
-    Parameters.isRecovery,
-    Parameters.startActivityName,
-    Parameters.startFromFailure,
-  ],
+  queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.factoryName,
-    Parameters.pipelineName,
+    Parameters.changeDataCaptureName,
   ],
-  headerParameters: [Parameters.accept, Parameters.contentType],
-  mediaType: "json",
+  headerParameters: [Parameters.accept],
+  serializer,
+};
+const stopOperationSpec: coreClient.OperationSpec = {
+  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}/stop",
+  httpMethod: "POST",
+  responses: {
+    200: {},
+    default: {
+      bodyMapper: Mappers.CloudError,
+    },
+  },
+  queryParameters: [Parameters.apiVersion],
+  urlParameters: [
+    Parameters.$host,
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName,
+    Parameters.factoryName,
+    Parameters.changeDataCaptureName,
+  ],
+  headerParameters: [Parameters.accept],
+  serializer,
+};
+const statusOperationSpec: coreClient.OperationSpec = {
+  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}/status",
+  httpMethod: "GET",
+  responses: {
+    200: {
+      bodyMapper: { type: { name: "String" } },
+    },
+    default: {
+      bodyMapper: Mappers.CloudError,
+    },
+  },
+  queryParameters: [Parameters.apiVersion],
+  urlParameters: [
+    Parameters.$host,
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName,
+    Parameters.factoryName,
+    Parameters.changeDataCaptureName,
+  ],
+  headerParameters: [Parameters.accept],
   serializer,
 };
 const listByFactoryNextOperationSpec: coreClient.OperationSpec = {
@@ -370,7 +447,7 @@ const listByFactoryNextOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.PipelineListResponse,
+      bodyMapper: Mappers.ChangeDataCaptureListResponse,
     },
     default: {
       bodyMapper: Mappers.CloudError,

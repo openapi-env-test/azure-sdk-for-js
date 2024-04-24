@@ -6,7 +6,6 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-export * from "./operations";
 export * from "./factories";
 export * from "./exposureControl";
 export * from "./integrationRuntimes";
@@ -28,3 +27,4 @@ export * from "./privateEndPointConnections";
 export * from "./privateEndpointConnection";
 export * from "./privateLinkResources";
 export * from "./globalParameters";
+export * from "./changeDataCapture";

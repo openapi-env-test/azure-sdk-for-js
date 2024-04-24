@@ -11,11 +11,10 @@ import * as coreRestPipeline from "@azure/core-rest-pipeline";
 import {
   PipelineRequest,
   PipelineResponse,
-  SendRequest
+  SendRequest,
 } from "@azure/core-rest-pipeline";
 import * as coreAuth from "@azure/core-auth";
 import {
-  OperationsImpl,
   FactoriesImpl,
   ExposureControlImpl,
   IntegrationRuntimesImpl,
@@ -36,10 +35,10 @@ import {
   PrivateEndPointConnectionsImpl,
   PrivateEndpointConnectionImpl,
   PrivateLinkResourcesImpl,
-  GlobalParametersImpl
+  GlobalParametersImpl,
+  ChangeDataCaptureImpl,
 } from "./operations";
 import {
-  Operations,
   Factories,
   ExposureControl,
   IntegrationRuntimes,
@@ -60,14 +59,15 @@ import {
   PrivateEndPointConnections,
   PrivateEndpointConnection,
   PrivateLinkResources,
-  GlobalParameters
+  GlobalParameters,
+  ChangeDataCapture,
 } from "./operationsInterfaces";
 import { DataFactoryManagementClientOptionalParams } from "./models";
 
 export class DataFactoryManagementClient extends coreClient.ServiceClient {
   $host: string;
-  apiVersion: string;
   subscriptionId: string;
+  apiVersion: string;
 
   /**
    * Initializes a new instance of the DataFactoryManagementClient class.
@@ -78,7 +78,7 @@ export class DataFactoryManagementClient extends coreClient.ServiceClient {
   constructor(
     credentials: coreAuth.TokenCredential,
     subscriptionId: string,
-    options?: DataFactoryManagementClientOptionalParams
+    options?: DataFactoryManagementClientOptionalParams,
   ) {
     if (credentials === undefined) {
       throw new Error("'credentials' cannot be null");
@@ -93,10 +93,10 @@ export class DataFactoryManagementClient extends coreClient.ServiceClient {
     }
     const defaults: DataFactoryManagementClientOptionalParams = {
       requestContentType: "application/json; charset=utf-8",
-      credential: credentials
+      credential: credentials,
     };
 
-    const packageDetails = `azsdk-js-arm-datafactory/11.1.1`;
+    const packageDetails = `azsdk-js-arm-datafactory/15.0.0`;
     const userAgentPrefix =
       options.userAgentOptions && options.userAgentOptions.userAgentPrefix
         ? `${options.userAgentOptions.userAgentPrefix} ${packageDetails}`
@@ -106,20 +106,21 @@ export class DataFactoryManagementClient extends coreClient.ServiceClient {
       ...defaults,
       ...options,
       userAgentOptions: {
-        userAgentPrefix
+        userAgentPrefix,
       },
       endpoint:
-        options.endpoint ?? options.baseUri ?? "https://management.azure.com"
+        options.endpoint ?? options.baseUri ?? "https://management.azure.com",
     };
     super(optionsWithDefaults);
 
     let bearerTokenAuthenticationPolicyFound: boolean = false;
     if (options?.pipeline && options.pipeline.getOrderedPolicies().length > 0) {
-      const pipelinePolicies: coreRestPipeline.PipelinePolicy[] = options.pipeline.getOrderedPolicies();
+      const pipelinePolicies: coreRestPipeline.PipelinePolicy[] =
+        options.pipeline.getOrderedPolicies();
       bearerTokenAuthenticationPolicyFound = pipelinePolicies.some(
         (pipelinePolicy) =>
           pipelinePolicy.name ===
-          coreRestPipeline.bearerTokenAuthenticationPolicyName
+          coreRestPipeline.bearerTokenAuthenticationPolicyName,
       );
     }
     if (
@@ -129,7 +130,7 @@ export class DataFactoryManagementClient extends coreClient.ServiceClient {
       !bearerTokenAuthenticationPolicyFound
     ) {
       this.pipeline.removePolicy({
-        name: coreRestPipeline.bearerTokenAuthenticationPolicyName
+        name: coreRestPipeline.bearerTokenAuthenticationPolicyName,
       });
       this.pipeline.addPolicy(
         coreRestPipeline.bearerTokenAuthenticationPolicy({
@@ -139,9 +140,9 @@ export class DataFactoryManagementClient extends coreClient.ServiceClient {
             `${optionsWithDefaults.endpoint}/.default`,
           challengeCallbacks: {
             authorizeRequestOnChallenge:
-              coreClient.authorizeRequestOnClaimChallenge
-          }
-        })
+              coreClient.authorizeRequestOnClaimChallenge,
+          },
+        }),
       );
     }
     // Parameter assignments
@@ -150,13 +151,11 @@ export class DataFactoryManagementClient extends coreClient.ServiceClient {
     // Assigning values to Constant parameters
     this.$host = options.$host || "https://management.azure.com";
     this.apiVersion = options.apiVersion || "2018-06-01";
-    this.operations = new OperationsImpl(this);
     this.factories = new FactoriesImpl(this);
     this.exposureControl = new ExposureControlImpl(this);
     this.integrationRuntimes = new IntegrationRuntimesImpl(this);
-    this.integrationRuntimeObjectMetadata = new IntegrationRuntimeObjectMetadataImpl(
-      this
-    );
+    this.integrationRuntimeObjectMetadata =
+      new IntegrationRuntimeObjectMetadataImpl(this);
     this.integrationRuntimeNodes = new IntegrationRuntimeNodesImpl(this);
     this.linkedServices = new LinkedServicesImpl(this);
     this.datasets = new DatasetsImpl(this);
@@ -174,6 +173,7 @@ export class DataFactoryManagementClient extends coreClient.ServiceClient {
     this.privateEndpointConnection = new PrivateEndpointConnectionImpl(this);
     this.privateLinkResources = new PrivateLinkResourcesImpl(this);
     this.globalParameters = new GlobalParametersImpl(this);
+    this.changeDataCapture = new ChangeDataCaptureImpl(this);
     this.addCustomApiVersionPolicy(options.apiVersion);
   }
 
@@ -186,7 +186,7 @@ export class DataFactoryManagementClient extends coreClient.ServiceClient {
       name: "CustomApiVersionPolicy",
       async sendRequest(
         request: PipelineRequest,
-        next: SendRequest
+        next: SendRequest,
       ): Promise<PipelineResponse> {
         const param = request.url.split("?");
         if (param.length > 1) {
@@ -200,12 +200,11 @@ export class DataFactoryManagementClient extends coreClient.ServiceClient {
           request.url = param[0] + "?" + newParams.join("&");
         }
         return next(request);
-      }
+      },
     };
     this.pipeline.addPolicy(apiVersionPolicy);
   }
 
-  operations: Operations;
   factories: Factories;
   exposureControl: ExposureControl;
   integrationRuntimes: IntegrationRuntimes;
@@ -227,4 +226,5 @@ export class DataFactoryManagementClient extends coreClient.ServiceClient {
   privateEndpointConnection: PrivateEndpointConnection;
   privateLinkResources: PrivateLinkResources;
   globalParameters: GlobalParameters;
+  changeDataCapture: ChangeDataCapture;
 }
