@@ -8,16 +8,20 @@
     "initScript": {
       "path": "sh .scripts/automation_init.sh",
       "stderr": {
-        "showInComment": ".*ERROR.*"
+        "showInComment": "npm notice Changelog",
+        "scriptError": "Computing checksum with sha256sum",
+        "scriptWarning": " WARN deprecated readdir-scoped-modules"
+      },
+      "stdout": {
+        "showInComment": "see /usr/share/doc/bash/examples/startup-files",
+        "scriptError": "Downloading and installing node v18.15.0",
+        "scriptWarning": "shopt -s checkwinsize"
       }
     }
   },
   "generateOptions": {
     "generateScript": {
-      "path": "sh .scripts/automation_generate.sh",
-      "stderr": {
-        "showInComment": ".*ERROR.*"
-      }
+      "path": "sh .scripts/automation_generate.sh"
     },
     "parseGenerateOutput": true
   },
