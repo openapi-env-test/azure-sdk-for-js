@@ -8,10 +8,7 @@
     "initScript": {
       "path": "sh .scripts/automation_init.sh",
       "stderr": {
-        "showInComment": true
-      },
-      "stdout": {
-        "showInComment": true
+        "showInComment": ".*ERROR.*"
       }
     }
   },
@@ -19,10 +16,7 @@
     "generateScript": {
       "path": "sh .scripts/automation_generate.sh",
       "stderr": {
-        "showInComment": true
-      },
-      "stdout": {
-        "showInComment": "[automation_generate.sh]"
+        "showInComment": ".*ERROR.*"
       }
     },
     "parseGenerateOutput": true
