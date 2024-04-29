@@ -11,7 +11,8 @@
         "showInComment": false
       },      
       "stdout": {
-        "showInComment": false
+        "showInComment": false,
+        "scriptError": "Downloading and installing"
       }
     }
   },
