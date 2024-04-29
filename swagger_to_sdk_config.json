@@ -19,10 +19,8 @@
     "generateScript": {
       "path": "sh .scripts/automation_generate.sh",
       "stderr": {
-        "showInComment": false
       },      
       "stdout": {
-        "showInComment": "npm notice package: @azure/core-lro",
         "scriptError": "Executing command"
       }
     },
