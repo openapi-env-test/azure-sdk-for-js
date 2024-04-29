@@ -11,8 +11,7 @@
         "showInComment": false
       },      
       "stdout": {
-        "showInComment": false,
-        "scriptError": "Downloading and installing"
+        "showInComment": false
       }
     }
   },
@@ -23,7 +22,8 @@
         "showInComment": false
       },      
       "stdout": {
-        "showInComment": false
+        "showInComment": "npm notice package: @azure/core-lro",
+        "scriptError": "Executing command"
       }
     },
     "parseGenerateOutput": true
