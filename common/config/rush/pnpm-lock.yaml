@@ -1,7 +1,7 @@
 lockfileVersion: '6.0'
 
 settings:
-  autoInstallPeers: true
+  autoInstallPeers: false
   excludeLinksFromLockfile: false
 
 dependencies:
@@ -854,6 +854,9 @@ dependencies:
   '@rush-temp/health-insights-clinicalmatching':
     specifier: file:./projects/health-insights-clinicalmatching.tgz
     version: file:projects/health-insights-clinicalmatching.tgz
+  '@rush-temp/health-insights-radiologyinsights':
+    specifier: file:./projects/health-insights-radiologyinsights.tgz
+    version: file:projects/health-insights-radiologyinsights.tgz
   '@rush-temp/identity':
     specifier: file:./projects/identity.tgz
     version: file:projects/identity.tgz
@@ -1981,12 +1984,42 @@ packages:
       lodash: 4.17.21
     dev: false
 
+  /@microsoft/api-extractor-model@7.28.2(@types/node@16.18.80):
+    resolution: {integrity: sha512-vkojrM2fo3q4n4oPh4uUZdjJ2DxQ2+RnDQL/xhTWSRUNPF6P4QyrvY357HBxbnltKcYu+nNNolVqc6TIGQ73Ig==}
+    dependencies:
+      '@microsoft/tsdoc': 0.14.2
+      '@microsoft/tsdoc-config': 0.16.2
+      '@rushstack/node-core-library': 3.61.0(@types/node@16.18.80)
+    transitivePeerDependencies:
+      - '@types/node'
+    dev: false
+
   /@microsoft/api-extractor-model@7.28.2(@types/node@18.18.7):
     resolution: {integrity: sha512-vkojrM2fo3q4n4oPh4uUZdjJ2DxQ2+RnDQL/xhTWSRUNPF6P4QyrvY357HBxbnltKcYu+nNNolVqc6TIGQ73Ig==}
     dependencies:
       '@microsoft/tsdoc': 0.14.2
       '@microsoft/tsdoc-config': 0.16.2
       '@rushstack/node-core-library': 3.61.0(@types/node@18.18.7)
+    transitivePeerDependencies:
+      - '@types/node'
+    dev: false
+
+  /@microsoft/api-extractor@7.38.0(@types/node@16.18.80):
+    resolution: {integrity: sha512-e1LhZYnfw+JEebuY2bzhw0imDCl1nwjSThTrQqBXl40hrVo6xm3j/1EpUr89QyzgjqmAwek2ZkIVZbrhaR+cqg==}
+    hasBin: true
+    dependencies:
+      '@microsoft/api-extractor-model': 7.28.2(@types/node@16.18.80)
+      '@microsoft/tsdoc': 0.14.2
+      '@microsoft/tsdoc-config': 0.16.2
+      '@rushstack/node-core-library': 3.61.0(@types/node@16.18.80)
+      '@rushstack/rig-package': 0.5.1
+      '@rushstack/ts-command-line': 4.16.1
+      colors: 1.2.5
+      lodash: 4.17.21
+      resolve: 1.22.8
+      semver: 7.5.4
+      source-map: 0.6.1
+      typescript: 5.0.4
     transitivePeerDependencies:
       - '@types/node'
     dev: false
@@ -2674,6 +2707,24 @@ packages:
       rollup: 3.29.4
     dev: false
 
+  /@rushstack/node-core-library@3.61.0(@types/node@16.18.80):
+    resolution: {integrity: sha512-tdOjdErme+/YOu4gPed3sFS72GhtWCgNV9oDsHDnoLY5oDfwjKUc9Z+JOZZ37uAxcm/OCahDHfuu2ugqrfWAVQ==}
+    peerDependencies:
+      '@types/node': '*'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+    dependencies:
+      '@types/node': 16.18.80
+      colors: 1.2.5
+      fs-extra: 7.0.1
+      import-lazy: 4.0.0
+      jju: 1.4.0
+      resolve: 1.22.8
+      semver: 7.5.4
+      z-schema: 5.0.5
+    dev: false
+
   /@rushstack/node-core-library@3.61.0(@types/node@18.18.7):
     resolution: {integrity: sha512-tdOjdErme+/YOu4gPed3sFS72GhtWCgNV9oDsHDnoLY5oDfwjKUc9Z+JOZZ37uAxcm/OCahDHfuu2ugqrfWAVQ==}
     peerDependencies:
@@ -2979,6 +3030,10 @@ packages:
     dependencies:
       '@types/node': 18.18.7
       form-data: 4.0.0
+    dev: false
+
+  /@types/node@16.18.80:
+    resolution: {integrity: sha512-vFxJ1Iyl7A0+xB0uW1r1v504yItKZLdqg/VZELUZ4H02U0bXAgBisSQ8Erf0DMruNFz9ggoiEv6T8Ll9bTg8Jw==}
     dev: false
 
   /@types/node@18.18.7:
@@ -3549,6 +3604,13 @@ packages:
 
   /autorest@3.6.3:
     resolution: {integrity: sha512-j/Axwk9bniifTNtBLYVxfQZGQIGPKljFaCQCBWOiybVar2j3tkHP1btiC4a/t9pAJXY6IaFgWctoPM3G/Puhyg==}
+    engines: {node: '>=12.0.0'}
+    hasBin: true
+    requiresBuild: true
+    dev: false
+
+  /autorest@3.7.1:
+    resolution: {integrity: sha512-6q17NtosQZPqBkIOUnaOPedf3PDIBF7Ha1iEGRhTqZF6TG2Q/1E3ID/D+ePIIzZDKvW01p/2pENq/oiBWH9IGQ==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     requiresBuild: true
@@ -4495,7 +4557,7 @@ packages:
     dependencies:
       semver: 7.5.4
       shelljs: 0.8.5
-      typescript: 5.3.0-dev.20231030
+      typescript: 5.4.0-dev.20240209
     dev: false
 
   /eastasianwidth@0.2.0:
@@ -9057,6 +9119,37 @@ packages:
       code-block-writer: 12.0.0
     dev: false
 
+  /ts-node@10.9.1(@types/node@16.18.80)(typescript@5.0.4):
+    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.9
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.4
+      '@types/node': 16.18.80
+      acorn: 8.11.2
+      acorn-walk: 8.3.0
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 5.0.4
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    dev: false
+
   /ts-node@10.9.1(@types/node@18.18.7)(typescript@5.0.4):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
@@ -9261,8 +9354,14 @@ packages:
     hasBin: true
     dev: false
 
-  /typescript@5.3.0-dev.20231030:
-    resolution: {integrity: sha512-azWrF0lAiu8cBHNr6yq3RDkU/DtQScvT48ea3Ngq6oXJ/GPO0n96wCFSRQA5UbZlVVf3fAAqsUfvOdohRbrPVg==}
+  /typescript@5.3.3:
+    resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+    dev: false
+
+  /typescript@5.4.0-dev.20240209:
+    resolution: {integrity: sha512-qhstJB8bOkf9hDabhxluOD3J94iUqsQZtTcia/T8ymwqh2ziTXx9z9OQg3sxJOcUEVVxwAxKybCiwLM2HxwPwg==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: false
@@ -9894,7 +9993,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -9940,7 +10039,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -10170,7 +10269,7 @@ packages:
     dependencies:
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       dotenv: 8.6.0
       eslint: 8.52.0
@@ -10242,7 +10341,7 @@ packages:
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -10334,7 +10433,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -10814,7 +10913,7 @@ packages:
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -11474,7 +11573,7 @@ packages:
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -11694,7 +11793,7 @@ packages:
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -13963,7 +14062,7 @@ packages:
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -15245,7 +15344,7 @@ packages:
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -16440,7 +16539,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       chai: 4.3.10
       cross-env: 7.0.3
       dotenv: 16.3.1
@@ -17603,7 +17702,7 @@ packages:
     name: '@rush-temp/dev-tool'
     version: 0.0.0
     dependencies:
-      '@_ts/max': /typescript@5.2.2
+      '@_ts/max': /typescript@5.3.3
       '@_ts/min': /typescript@4.2.4
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@rollup/plugin-commonjs': 25.0.7(rollup@3.29.4)
@@ -17669,7 +17768,7 @@ packages:
       '@microsoft/api-extractor': 7.38.0(@types/node@18.18.7)
       '@types/chai': 4.3.9
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -18075,7 +18174,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -18120,7 +18219,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -18146,6 +18245,51 @@ packages:
       ts-node: 10.9.1(@types/node@18.18.7)(typescript@5.2.2)
       tslib: 2.6.2
       typescript: 5.2.2
+    transitivePeerDependencies:
+      - '@swc/core'
+      - '@swc/wasm'
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
+    dev: false
+
+  file:projects/health-insights-radiologyinsights.tgz:
+    resolution: {integrity: sha512-2XgljGgCxerI6uKKzf5GamBFpTqVB1qLOjCUfbYjuQzr6wEJ7Rkb7K0H7JvzL4FpbaDQSEMGHTqh4Qp+BS/n7w==, tarball: file:projects/health-insights-radiologyinsights.tgz}
+    name: '@rush-temp/health-insights-radiologyinsights'
+    version: 0.0.0
+    dependencies:
+      '@azure/identity': 3.3.2
+      '@microsoft/api-extractor': 7.38.0(@types/node@16.18.80)
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@types/node': 16.18.80
+      autorest: 3.7.1
+      chai: 4.3.10
+      cross-env: 7.0.3
+      dotenv: 16.3.1
+      eslint: 8.52.0
+      esm: 3.2.25
+      karma: 6.4.2(debug@4.3.4)
+      karma-chrome-launcher: 3.2.0
+      karma-coverage: 2.2.1
+      karma-env-preprocessor: 0.1.1
+      karma-firefox-launcher: 2.1.2
+      karma-junit-reporter: 2.0.1(karma@6.4.2)
+      karma-mocha: 2.0.1
+      karma-mocha-reporter: 2.2.5(karma@6.4.2)
+      karma-source-map-support: 1.4.0
+      karma-sourcemap-loader: 0.4.0
+      mkdirp: 2.1.6
+      mocha: 10.2.0
+      mocha-junit-reporter: 1.23.3(mocha@10.2.0)
+      nyc: 15.1.0
+      prettier: 2.8.8
+      rimraf: 5.0.5
+      source-map-support: 0.5.21
+      ts-node: 10.9.1(@types/node@16.18.80)(typescript@5.0.4)
+      tslib: 2.6.2
+      typescript: 5.0.4
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
@@ -18623,7 +18767,7 @@ packages:
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
       '@types/uuid': 8.3.4
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -18732,7 +18876,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -18778,7 +18922,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -18824,7 +18968,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -18870,7 +19014,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -19998,7 +20142,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -20043,7 +20187,7 @@ packages:
       '@types/chai': 4.3.9
       '@types/mocha': 10.0.3
       '@types/node': 18.18.7
-      autorest: 3.6.3
+      autorest: 3.7.1
       c8: 8.0.1
       chai: 4.3.10
       cross-env: 7.0.3
@@ -20375,7 +20519,7 @@ packages:
     dev: false
 
   file:projects/storage-blob-changefeed.tgz:
-    resolution: {integrity: sha512-2LtIcl6t12irIaBaBSP/ytxkJA5VSRJ2RUg08UJEi/NVLHhjpx+NQQn/a/ebeAwpa2DefdSkfHRhgh7zn8Qzzg==, tarball: file:projects/storage-blob-changefeed.tgz}
+    resolution: {integrity: sha512-nBVNUHVbjsSyKfoA2uJNvG+jlJEW9Oq12K9Oha1C6GVY1rZhEpcWrkob0RJe/sCDdrMo0MBUnvL7+PkUsvhR8w==, tarball: file:projects/storage-blob-changefeed.tgz}
     name: '@rush-temp/storage-blob-changefeed'
     version: 0.0.0
     dependencies:
